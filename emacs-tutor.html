@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>PART 1 - THE BASICS</title>
-<!-- 2014-06-14 T7 06:33 -->
+<!-- 2014-06-14 T7 06:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -338,7 +338,7 @@ My personal tour (with plugins from Emacs):
 </li>
 
 <li>Autocompletion: Pay attention to the completion candidates when
-<code>#include &lt;linux/printk.h&gt;</code> presents and not present
+<code>include &lt;linux/printk.h&gt;</code> presents and not present
 
 
 <div class="figure">
@@ -1574,7 +1574,7 @@ your cursor is in that buffer:
 
 
 <div class="figure">
-<p><a href="static/c-x-3.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/c-x-3.gif" alt="c-x-3.gif" /></a>
+<p><a href="static/c-x-3.gif"><img src="static/c-x-3.gif" alt="c-x-3.gif" /></a>
 </p>
 </div>
 </li>
@@ -2212,31 +2212,19 @@ summary information about the buffer shown in the window.
 The text displayed in the mode line has the following format:
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<div class="center">
+<p>
+<code>cs:ch-fr     |  buf |  pos line | (major minor)</code>
+</p>
+</div>
 
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">cs:ch-fr</td>
-<td class="left">buf</td>
-<td class="left">pos line</td>
-<td class="left">(major minor)</td>
-</tr>
-</tbody>
-</table>
+<p>
+For example, a modeline looks like this:
+</p>
 
 
 <div class="figure">
-<p><a href="modeline.jpg"><img src="modeline.jpg" alt="modeline.jpg" /></a>
+<p><a href="static/modeline.jpg"><img src="static/modeline.jpg" alt="modeline.jpg" /></a>
 </p>
 </div>
 
@@ -2736,7 +2724,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 </tbody>
 <tbody>
 <tr>
-<td class="left">C-x 4 m</td>
+<td class="left"><code>C-x 4 m</code></td>
 <td class="left"><b>compose-mail-other-window</b></td>
 </tr>
 
@@ -3037,12 +3025,7 @@ C-f</b> variant.
 <tbody>
 <tr>
 <td class="left"><code>#</code></td>
-<td class="left">flag all auto-save files (files whose names start and end with</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">‘#’).</td>
+<td class="left">flag all auto-save files (files whose names start and end with ‘#’).</td>
 </tr>
 </tbody>
 <tbody>
@@ -3104,12 +3087,7 @@ C-f</b> variant.
 <tbody>
 <tr>
 <td class="left"><code>C-o</code></td>
-<td class="left">Open file at point in another window, but does not select</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">that window.</td>
+<td class="left">Open file at point in another window, but does not select that window.</td>
 </tr>
 </tbody>
 <tbody>
@@ -3121,12 +3099,7 @@ C-f</b> variant.
 <tbody>
 <tr>
 <td class="left"><code>^</code></td>
-<td class="left">open parent directory and create another Dired buffer of the</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">parent directory</td>
+<td class="left">open parent directory and create another Dired buffer of parent directory</td>
 </tr>
 </tbody>
 </table>
