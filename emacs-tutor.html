@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>PART 1 - THE BASICS</title>
-<!-- 2014-06-14 T7 01:34 -->
+<!-- 2014-06-14 T7 06:33 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -1504,23 +1504,11 @@ download and unpackage it at <code>~/Downloads/emacs-24.3</code>.
 </li>
 
 <li><b>C-x C-f</b>, navigate to <code>emacs-24.3/lisp/</code> and open all Lisp files:
-<code>*.el</code>.
-
-
-<div class="figure">
-<p><a href="static/open-el-files.gif"><img src="static/open-el-files.gif" alt="open-el-files.gif" /></a>
-</p>
-</div>
+<code>*.el</code>. If you use <b>Ido</b>, remember to <b>C-f</b> before type into the prompt
 </li>
 
 <li><b>C-x C-f</b>, navigate to <code>emacs-24.3/src/</code> and open all C files:
-<code>*.c</code>.
-
-
-<div class="figure">
-<p><a href="static/open-c-files.gif"><img src="static/open-c-files.gif" alt="open-c-files.gif" /></a>
-</p>
-</div>
+<code>*.c</code>. 
 </li>
 
 <li>Open <b>ibuffer</b> by <b>C-x C-b</b>. You see a huge list of buffers.
@@ -1534,8 +1522,8 @@ Now the fun begins.
 <ul class="org-ul">
 <li>Suppose that you want to work with C code. <b>/ m</b> and enter a major
 mode to select buffers that belong to this major mode. Prefix <b>/</b> in
-<b>ibuffer</b> groups filtering commands. <b>TAB</b> to see
-a list of major modes:
+<b>ibuffer</b> groups filtering commands. <b>TAB</b> to see a list of major
+modes: 
 
 
 <div class="figure">
@@ -1554,7 +1542,7 @@ executing any filtering commands.
 </li>
 
 <li>Up to this point, the filtering is still applied. Press <b>/ /</b> to
-remove filtering and return the full buffer list.
+remove previous filter and return the full buffer list.
 </li>
 
 <li>Let's create another group based filtering. <b>/ m</b> and enter
@@ -1563,13 +1551,12 @@ name. Now, every time you open files that their buffers satisfy the
 filtering criteria, the buffers are put into appropriate groups.
 </li>
 
-<li>To open a buffer, <b>o</b> or <b>C-o</b>. <b>o</b> opens a
-buffer and switch the cursor to it. <b>C-o</b> leaves the cursor on the
-buffer list. Let's open a buffer with <b>o</b> and <b>C-o</b>. To switch back
-to the other buffer, do <b>C-x o</b>. <b>C-x o</b> executes <b>other-window</b>
-command, which cycles among the opening buffers (technically the
-buffers are in Emacs "windows", and you are cycling "windows", but
-we will get to that later).
+<li>To open a buffer, <b>o</b> or <b>C-o</b>. <b>o</b> opens a buffer and switch the
+cursor to it. <b>C-o</b> leaves the cursor on the buffer list. Let's open
+a buffer with <b>o</b> and <b>C-o</b>. To switch back to the other buffer, do
+<b>C-x o</b>. <b>C-x o</b> executes <code>other-window</code> command, which cycles among
+the opening buffers (technically the buffers are in Emacs "windows",
+and you are cycling "windows", but we will get to that later).
 </li>
 
 <li>Either using <b>C-o</b> or <b>o</b> creates another buffer below, leaving
