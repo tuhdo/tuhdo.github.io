@@ -1,0 +1,3704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>PART 1 - THE BASICS</title>
+<!-- 2014-06-14 T7 00:06 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu, Do Hoang" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="./static/worg.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">PART 1 - THE BASICS</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Why Emacs?</a></li>
+<li><a href="#sec-2">Why this guide?</a></li>
+<li><a href="#sec-3">A bit of history</a></li>
+<li><a href="#sec-4">"I don't want a complicated "editor", I want something simple like Notepad(++)"</a></li>
+<li><a href="#sec-5">Installation</a>
+<ul>
+<li><a href="#sec-5-1">Linux:</a></li>
+<li><a href="#sec-5-2">Windows:</a></li>
+<li><a href="#sec-5-3">Mac OS X:</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">Important thing to do before using Emacs: Swap Control and Capslock</a>
+<ul>
+<li><a href="#sec-6-1">Windows</a></li>
+<li><a href="#sec-6-2">Linux</a></li>
+<li><a href="#sec-6-3">Mac OS X</a></li>
+</ul>
+</li>
+<li><a href="#sec-7">Demo: Browse the Linux kernel source code like a pro</a>
+<ul>
+<li><a href="#sec-7-1">Setup</a></li>
+<li><a href="#sec-7-2">Browsing the kernel source tree</a></li>
+</ul>
+</li>
+<li><a href="#sec-8">Concepts</a>
+<ul>
+<li><a href="#sec-8-1">Emacs Key Notation</a></li>
+<li><a href="#sec-8-2">Command</a></li>
+<li><a href="#sec-8-3">Opening files</a></li>
+<li><a href="#sec-8-4">Ido mode</a></li>
+<li><a href="#sec-8-5">Buffer</a></li>
+<li><a href="#sec-8-6">Major mode</a></li>
+<li><a href="#sec-8-7">Minor mode</a></li>
+<li><a href="#sec-8-8">Basic buffer managements</a></li>
+<li><a href="#sec-8-9">Point</a></li>
+<li><a href="#sec-8-10">Basic motion commands</a></li>
+<li><a href="#sec-8-11">Basic editing commands</a></li>
+<li><a href="#sec-8-12">Kill ring</a></li>
+<li><a href="#sec-8-13">Mark and region</a></li>
+<li><a href="#sec-8-14">Mark ring</a></li>
+<li><a href="#sec-8-15">Global mark ring</a></li>
+<li><a href="#sec-8-16">Undo/redo</a></li>
+<li><a href="#sec-8-17">Interactive search with i-search</a></li>
+<li><a href="#sec-8-18">Modeline</a></li>
+<li><a href="#sec-8-19">Minibuffer</a></li>
+<li><a href="#sec-8-20">Echo area</a></li>
+<li><a href="#sec-8-21">Frames</a></li>
+<li><a href="#sec-8-22">Window</a></li>
+<li><a href="#sec-8-23">Prefix Arguments</a></li>
+<li><a href="#sec-8-24">Basic file management with Dired</a>
+<ul>
+<li><a href="#sec-8-24-1">Enter Dired</a></li>
+<li><a href="#sec-8-24-2">Navigation</a></li>
+<li><a href="#sec-8-24-3">Create files</a></li>
+<li><a href="#sec-8-24-4">Deleting files</a></li>
+<li><a href="#sec-8-24-5">Visit files</a></li>
+<li><a href="#sec-8-24-6">File Marking</a></li>
+<li><a href="#sec-8-24-7">Execute shell commands in Dired</a></li>
+<li><a href="#sec-8-24-8">Operating on files</a></li>
+<li><a href="#sec-8-24-9">Compare files</a></li>
+<li><a href="#sec-8-24-10">Subdirectories</a></li>
+</ul>
+</li>
+<li><a href="#sec-8-25">Version Control</a></li>
+<li><a href="#sec-8-26">Shell</a></li>
+<li><a href="#sec-8-27">Ask for help - from Emacs</a>
+<ul>
+<li><a href="#sec-8-27-1">Built-in help system</a></li>
+<li><a href="#sec-8-27-2">Info</a></li>
+<li><a href="#sec-8-27-3">Man</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-9">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><a id="ID-76607dbd-b97c-43dd-975b-3236192408b6"></a>Why Emacs?</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Emacs allows you to do much more than just editing. Emacs is no mere
+editor like others, either in terminal or in GUI. Emacs is a
+development <b>platform</b>. Emacs is a <b>virtual machine</b> that interprets
+its own <a href="http://www.emacswiki.org/emacs-ja/ByteCodeEngineering">bytecode</a>.
+</p>
+
+<p>
+You can write all sorts of programs in Emacs to add more features
+using its own language - Emacs Lisp - in an <b>easy</b> way. With the
+extensibility, Emacs can do many things: an editor, a file manager, an
+email client, a news reader, a shell&#x2026; 
+</p>
+
+<p>
+You can think of Emacs as an enhanced interpreter and evaluate any
+valid Emacs Lisp code anywhere in Emacs, as long as the code is
+visible on your screen. To illustrate my point, here is an example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">hello</span> ()
+  (interactive)
+  (message <span style="color: #70c0b1;">"Hello World"</span>))
+</pre>
+</div>
+
+<p>
+You can paste that code snippet <b>anywhere</b> - yes,*anywhere* - in Emacs
+and tell Emacs to execute that code. If the code snippet has valid
+syntax, Emacs executes successfully and you will have command to print
+"Hello World" at the bottom of screen.
+</p>
+
+<p>
+A great advantage of this approach is, if you want to change
+behaviours of Emacs, you write some Emacs Lisp code and execute and
+see immediate results, right inside Emacs. Emacs is beyond an
+editor. Emacs is a platform that disguises itself as an editor.
+</p>
+
+<p>
+In practice, Emacs also offers many editing interfaces: built-in
+Emacs, <a href="http://ergoemacs.github.io/ergoemacs-mode/gradual-adoption.html">Ergoemacs</a> and <a href="https://gitorious.org/evil/pages/Home">Evil</a> - or Vim inside Emacs - key bindings. Emacs
+has internal tools and interfaces to external tools for many
+programming languages. Learning Emacs means you can use the same
+editor for different languages. Otherwise, you will have to learn
+different editor when you learn a random language.
+</p>
+
+<p>
+Take yourself an Emacs <a href="http://www.gnu.org/software/emacs/tour/">tour</a> from the official Emacs homepage.
+</p>
+
+<p>
+My personal tour (with plugins from Emacs):
+</p>
+
+<ul class="org-ul">
+<li>Programming:
+<ul class="org-ul">
+<li>Jump to any header file:
+
+
+<div class="figure">
+<p><a href="static/jump_headers.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/jump_headers.gif" alt="jump_headers.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Autocompletion: Pay attention to the completion candidates when
+<code>#include &lt;linux/printk.h&gt;</code> presents and not present
+
+
+<div class="figure">
+<p><a href="static/programming2.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/auto_complete.gif" alt="auto_complete.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Showing function arguments:
+
+
+<div class="figure">
+<p><a href="static/funct_args.jpeg"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/funct_args.jpeg" alt="funct_args.jpeg" /></a>
+</p>
+</div>
+</li>
+
+<li>Quickly comment multiple lines:
+
+
+<div class="figure">
+<p><a href="static/comment.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/comment.gif" alt="comment.gif" /></a>
+</p>
+</div>
+</li>
+</ul>
+</li>
+
+<li>Diff between current editting file and latest file revision:
+
+
+<div class="figure">
+<p><a href="static/vc-diff.jpg"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/vc-diff.jpg" alt="vc-diff.jpg" /></a>
+</p>
+</div>
+</li>
+
+<li>Magit: From unstage -&gt; stage -&gt; commit -&gt; push
+
+
+<div class="figure">
+<p><a href="static/magit.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/magit.gif" alt="magit.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Live Grep:
+
+
+<div class="figure">
+<p><a href="static/live_grep.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/live_grep.gif" alt="live_grep.gif" /></a>
+</p>
+</div>
+
+<p>
+<a id="helm_projectile"></a>
+</p>
+</li>
+<li>Quickly select any file in a directory under a Version Control
+System, for example, Linux kernel:
+
+
+<div class="figure">
+<p><a href="static/helm_projectile.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/helm_projectile.gif" alt="helm_projectile.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Quickly select any file/directory in previous working session:
+
+
+<div class="figure">
+<p><a href="static/helm-buffer-list.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/helm-buffer-list.gif" alt="helm-buffer-list.gif" /></a>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><a id="ID-6cbf58f3-6986-4c27-8e04-f25c8bec778a"></a>Why this guide?</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+I want to help you get used to Emacs in a relative short amount of
+time, probably around a week. While the Emacs manual are excellent,
+going through and master them all takes months, and not many you need
+to learn as a beginner such as recursive edit. After you finish this
+guide, it provides a good starting point to start using the official
+Emacs manual.
+</p>
+
+<p>
+GNU Emacs tour above would be a nice tutorial, only if it isn't made
+for demonstration.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><a id="ID-c8f88c3a-ecad-433d-931b-2cca8a4f62ac"></a>A bit of history</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The current version is Emacs 23, with the upcoming Emacs 24 is on the
+way at the point of writing this.
+</p>
+
+<p>
+Quote from GNU Emacs homepage:
+</p>
+
+<blockquote>
+<p>
+For those curious about Emacs history: Emacs was originally
+implemented in 1976 on the MIT AI Lab's Incompatible Timesharing
+System (ITS), as a collection of TECO macros. The name “Emacs” was
+originally chosen as an abbreviation of “Editor MACroS”. This version
+of Emacs, GNU Emacs, was originally written in 1984. For more
+information, see the 1981 paper by Richard Stallman, describing the
+design of the original Emacs and the lessons to be learned from it,
+and a transcript of his 2002 speech at the International Lisp
+Conference, My Lisp Experiences and the Development of GNU Emacs. Here
+is the cover of the original Emacs Manual for ITS; the cover of the
+original Emacs Manual for Twenex; and (the only cartoon RMS has ever
+drawn) the Self-Documenting Extensible Editor.   
+</p>
+</blockquote>
+
+<p>
+Ever heard of a computing system called <b>Lisp Macine</b>? I bet many of
+you don't. Me, too, until I started using Emacs and gradually learning
+enough to know such thing ever exist. This old article is an
+interesting read: <a href="http://emacs.wordpress.com/2007/01/14/the-ghost-in-the-lisp-machine/">The Ghost in the Lisp Machine</a>
+</p>
+
+<blockquote>
+<p>
+A friend of mine uses to say that Emacs fills our yearning for a Lisp
+Machine. I tend to agree with him: Emacs is not just an editor, but a
+full integrated environment where you can perform virtually any
+imaginable task; and, most importantly, the inner workings of the
+system are open to you to explore and extend. Using, for extra fun,
+Lisp. No, i don’t think that Elisp is the nicest Lisp incarnation
+around, but is far better than, say, C, and i still prefer it to other
+scripting languages. Moreover, the awesome range of libraries at your
+disposal makes up for many of the deficiencies in the language. 
+</p>
+
+<p>
+Living in Emacs is addictive. Imagine an operating system where you
+can switch from writing code to browsing the web or chatting without
+leaving a consistent environment, with the same set of commands and
+shortcuts. Imagine a set of integrated applications where data is
+seamlessly shared, where any single functionality can be tweaked,
+extended and adapted to your particular needs. Where everything is
+easily scriptable. Imagine, in addition, that the environment provides
+powerful and complete interactive self-documentation facilities with
+which the user can find out what is available. I have yet to find an
+operating system providing such an integrated environment. Not even
+Mac OS X, where AppleScript support is often lacking and system
+services are underused. 
+</p>
+
+<p>
+Of course, the key ingredient here is Emacs’ extensibility. Far from
+being an afterthought or simply one of its features, extensibility is
+the central aspect of Emacs’ architecture. Actually, the whole point
+of this post is to recommend you reading Richard Stallman’s 1981 essay
+EMACS: The Extensible, Customizable Display Editor, which explains
+much better than I could the strong points of Emacs design, i.e.,
+those traits that make Emacs more, much more, than just an
+editor. From the horse’s mouth: 
+</p>
+
+
+<p>
+<i>Extensibility means that the user can add new editing commands or
+change old ones to fit his editing needs, while he is</i>
+<i>editing. EMACS is written in a modular fashion, composed of many
+separate and independent functions. The user extends EMACS by</i>
+<i>adding or replacing functions, writing their definitions in the
+same language that was used to write the original EMACS system. We</i>
+<i>will explain below why this is the only method of extension which
+is practical in use: others are theoretically equally good but</i>
+<i>discourage use, or discourage nontrivial use</i>.
+</p>
+
+<p>
+[&#x2026;]
+</p>
+
+<p>
+<i>User customization helps in another, subtler way, by making the
+whole user community into a breeding and testing ground for new</i>
+<i>ideas. Users think of small changes, try them, and give them to
+other users–if an idea becomes popular, it can be incorporated</i>
+<i>into the core system. When we poll users on suggested changes,
+they can respond on the basis of actual experience rather than</i>
+<i>thought experiments.</i>
+</p>
+
+<p>
+The article goes on explaining the organization of the Emacs system,
+how it depends on its interpreter, Elisp’s main features and how
+built-in self-documentation is provided. Also interesting is the list
+of related systems at the end of the essay: Lisp machines, LOGO,
+MacLisp and Smalltalk. We’re definitely in good company! 
+</p>
+</blockquote>
+
+<p>
+Emacs is a miniature of a Lisp Machine. You can have a tour in <a href="http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html">Lisp
+Machine online museum</a>.
+</p>
+
+<p>
+You will learn how to extend Emacs with various packages built
+from Emacs community. That's a good start. To truly able to extend
+Emacs, you should learn Elisp and feel the joy. However, with the
+current packages available, if you don't like to extend the editor and
+just using it, leverage the existing package system also suffices for
+many use cases (such as browsing C/C++ source code like Linux kernel).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><a id="ID-45226aea-d1af-4853-8be9-5dc1ee962973"></a>"I don't want a complicated "editor", I want something simple like Notepad(++)"</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Well, that's your choice. But I suggest that why manually write code
+is harmful.
+</p>
+
+<p>
+If you are a programmer, you should try to automate thing as much as
+possible. One way of doing this is using a good editor that automates
+many menial and tedious tasks. For example, one of the thing that
+annoys me is using the command <b>cd</b> to change into a deep directory
+path like this:
+</p>
+
+<p>
+<code>/path/to/a/very/long/long/long/long/long/long/..../directory/</code>
+</p>
+
+<p>
+A solution to this problem in terminal is the tool <a href="https://github.com/clvv/fasd">fasd</a>, that allow
+your to jump to visited directories with a few keystrokes. In Emacs,
+if you have a directory under a version control system, you can
+immedately jump to any file you want quickly, even if it is 20 levels 
+deep (as demonstrated at the beginning).
+</p>
+
+<p>
+Or when you want to comments many lines of code but the language you
+are writing only has single line comment. In many editors, you have to
+comment line by line tediously. In Emacs, you can simply highlight the
+lines and press a shortcut for inserting comments.
+</p>
+
+<p>
+Many people think that writing program manually is much cooler than
+other "amateurs" that use fancy "Integrated Development Environment". I used
+to think like that too, because working in Linux environment requires
+me to understand the underlying mechanism, such as building software using
+Makefile in C/C++, automate with shell script&#x2026; And this is already
+considered "user friendly", as opposed to click the nice little play
+button in typical IDE. However, I was wrong. While working with such
+tools allow me to understand what's going on, I do not need to type in
+code manually to understand it. If you get what a for loop does,
+typing it character by character is tedious and interrupt your thinkings.
+</p>
+
+
+<p>
+Doing it manually won't make you smarter, because when you actually
+type, you  already have something in your head. Typing is just a
+reflection of your thoughts into the editor. You need to finish typing
+as fast as possible, because the quicker you finish, the quicker you
+can get back to your thinking. Only thoughts matter, and there's no
+value in manually typing the same things thousands of times. I must
+say, <code>Cut</code>, <code>Copy</code> and <code>Paste</code> are really great ideas and great
+automation tools because of their simplicity.
+</p>
+
+<p>
+In many cases, your job requires you to use an esoteric in-house
+programming language and you don't like it. Having an editor to help
+you finish the tasks as soon as possible is a way to make yourself
+happier.
+</p>
+
+<p>
+Typing too much can also lead to RSI. If you manually type code too
+much, it harms your fingers. At least if you use a handsaw instead of
+a circular saw, you do some physical exercises in the process. 
+</p>
+
+<p>
+If your editor helps you to generate code snippets without 
+typing it, you should use it. For example, instead of typing for
+loop by hands, many editors allow you to insert for loop template
+and allow you to cycle through editable fields in the inserted
+template. Emacs has this too!
+</p>
+
+<p>
+In Sum:
+</p>
+
+<ul class="org-ul">
+<li>Manually typing does not make you smarter. Not in any form.
+</li>
+<li>Manually typing does not make you better with programming.
+</li>
+<li>Manually typing or do other things (navigate file system, remember
+changes you made to your files&#x2026;) wastes your time, if automating is
+possible. Automate as much as you can.
+</li>
+<li>Good editors help you automate boring tasks.
+</li>
+<li>Typing too much potentially leads to RSI.
+</li>
+</ul>
+
+<p>
+Your time and memory wasting for manually do tasks, you could have
+save it for something more interesting.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><a id="ID-3ca43124-6e45-4ef6-a23e-628207936155"></a>Installation</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><a id="ID-8acc1c68-72e7-4116-8afd-2265dda008d2"></a>Linux:</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+With GUI:
+</p>
+<ul class="org-ul">
+<li>Download <a href="http://www.gnu.org/software/emacs/">Emacs</a>; or if you prefer latest Emacs, get it from source:
+
+<p>
+<code>git clone http://repo.or.cz/r/emacs.git</code>
+</p>
+</li>
+
+<li>If you download from the homepage, unpackage: 
+</li>
+</ul>
+<p>
+<code>tar xvf emacs-*.tar.gz</code>
+</p>
+<ul class="org-ul">
+<li>cd emacs-&lt;version&gt;*
+</li>
+<li>./configure &#x2013;with-x-tookit=gtk3 [&#x2013;prefix=/path/to/install<sub>dir</sub>]
+</li>
+<li>make
+</li>
+<li>sudo make install
+</li>
+</ul>
+
+<p>
+If ./configure tells you the dependencies missing, you should install
+it. Recommended dependency: libtiff, libgiff, libjpeg, libpng, libxml2
+for viewing and browsing web inside Emacs. You have to use gtk3 to be
+able to use external fonts.
+</p>
+
+<p>
+Using in Terminal only:
+</p>
+
+<ul class="org-ul">
+<li>Download and unpackage as above
+</li>
+<li>./configure &#x2013;without-x [&#x2013;prefix=/path/to/install<sub>dir</sub>]
+</li>
+<li>make
+</li>
+<li>sudo make install
+</li>
+</ul>
+
+<p>
+If you don't like to compile Emacs yourself, install from the package
+manager of your Linux distribution. 
+</p>
+
+<p>
+After installation is done, as these to your <b>.bashrc</b> or <b>.zshrc</b>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell-script"><span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">e</span>=<span style="color: #70c0b1;">'emacsclient -t'</span>
+<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">ec</span>=<span style="color: #70c0b1;">'emacsclient -c'</span>
+<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vim</span>=<span style="color: #70c0b1;">'emacsclient -t'</span>
+<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vi</span>=<span style="color: #70c0b1;">'emacsclient -t'</span>
+</pre>
+</div>
+
+<p>
+Before using those aliases, remember to start the Emacs server:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell-script">emacs --daemon
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><a id="ID-301e3dcb-a00d-4b20-a5a8-f2b0946c56d1"></a>Windows:</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+You can either download it on GNU Emacs homepage or better, download a
+64 bit version: <a href="http://semantic.supelec.fr/popineau/programming-emacs.html">http://semantic.supelec.fr/popineau/programming-emacs.html</a>.
+</p>
+
+<p>
+After that, unpackage it in <b>C:\Program Files\</b> and create a shortcut
+to "C:\Program Files\Emacs\bin\emacsclientw.exe" on desktop.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><a id="ID-f86712b7-d138-4ad3-aef0-494a744c3b34"></a>Mac OS X:</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Download compiled Emacs for Mac OS X: <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Important thing to do before using Emacs: Swap Control and Capslock</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><a id="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d"></a>Windows</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Follow this guide: <a href="http://www.kodiva.com/post/swapping-caps-lock-and-control-keys">Swapping Capslock and Control keys</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><a id="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301"></a>Linux</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Put this in your shell init file (.bashrc, .zshrc&#x2026;):
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell-script">/usr/bin/setxkbmap -option <span style="color: #70c0b1;">"ctrl:swapcaps"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><a id="ID-dc1f00fd-29a6-45e0-8398-211418cba728"></a>Mac OS X</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Follow this answer on StackOverflow: <a href="http://stackoverflow.com/a/162907/496700">Emacs on Mac OS X Leopard key
+bindings</a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><a id="ID-1a530e6f-85a0-4fff-ac23-14463f358436"></a>Demo: Browse the Linux kernel source code like a pro</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><a id="ID-c22e3814-8f4c-48e0-b0d7-6beac6a2260e"></a>Setup</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+If you are impatient, you can immediately use Emacs to do practical
+thing like jumping around a big source tree like Linux kernel. 
+However,this is just a demo. You can browse the Linux source 
+tree in this section and learn quite a bit about Emacs, but you can do
+much more if you actually follow my manual.
+</p>
+
+<p>
+First, start Emacs, and press <b>C-x b</b> and switch to <code>*scratch*</code> buffer. A
+buffer is an editing area; an editing area may or may not has a file
+behind it (i.e. A buffer for holding a shell). I will explain more
+about this later.
+</p>
+
+<p>
+Paste the following code into the <code>*scratch*</code> buffer:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">package</span>)
+(add-to-list 'package-archives
+             '(<span style="color: #70c0b1;">"melpa"</span> . <span style="color: #70c0b1;">"http://melpa.milkbox.net/packages/"</span>) t)
+</pre>
+</div>
+
+<p>
+The above code you see is called Emacs Lisp. Emacs Lisp is a
+programming language that belongs to the Lisp family of languages,
+used for extending Emacs. <code>*scratch*</code> is where you experiment with
+Emacs Lisp code.
+</p>
+
+<p>
+Then, press <code>M-x</code>, and type <code>eval-buffer</code>. You can also type <code>eval-b</code>
+and press <b>TAB</b>. In Emacs, <code>M-</code> means <code>Meta</code>, which is the <code>Alt</code> key in
+and <code>C-</code> means the <code>Control</code> key regular computer keyboard.
+</p>
+
+<p>
+<code>M-x</code> again, and type <code>list-package</code>. Wait a few seconds and you will
+see of list of plugins for Emacs. In Emacs, a plugin is called a
+<code>package</code>. Press <b>C-s</b>, and type <code>ggtags</code> and press <b>C-s</b> again. Your
+cursor will move to the package <code>ggtags</code>. Be sure to select one from
+<code>melpa</code>; you should see a column written <code>*melpa</code> and select the row
+that has <code>melpa</code> in it. Press <b>Enter</b> to stay at that position. As you
+see, <b>C-s</b> is used for searching text inside a buffer.
+</p>
+
+<p>
+On the <code>ggtags</code> entry, press <b>i</b> key, which stands for <code>install</code>. Then
+press <b>x</b> to execute the installation. Emacs will ask you to confirm
+the installation. Type <code>yes</code> and press <b>Enter</b> key. Wait for Emacs to
+finish its installation.
+</p>
+
+<p>
+After installation is done, close the status buffer by pressing <b>C-x
+1</b>, switch back to <code>*scratch*</code> buffer by <b>C-x b</b>. Paste the following
+code:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(add-hook 'c-mode-common-hook
+          (<span style="color: #b9ca4a;">lambda</span> ()
+            (<span style="color: #b9ca4a;">when</span> (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode <span style="color: #7aa6da;">1</span>))))
+
+(eval-after-load <span style="color: #70c0b1;">"ggtags"</span>
+  '(<span style="color: #b9ca4a;">progn</span>
+     (define-key ggtags-navigation-mode-map (kbd <span style="color: #70c0b1;">"C-c s"</span>) 'ggtags-navigation-isearch-forward)))
+</pre>
+</div>
+
+<p>
+You may worry that you have to write Emacs Lisp every time you install
+something. Don't worry. Most package authors provide code snippets to
+setup their package properly. All you need to do is copy and
+paste. The above code is taken from <code>ggtags</code> homepage at <a href="https://github.com/leoliu/ggtags#config">configuration
+section</a>. The configuration is meant to activate <code>ggtags</code> only in a few
+programming modes. 
+</p>
+
+<p>
+That's it. Now you can browse kernel easy and fast in Emacs
+(instant result display).
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><a id="ID-879d6e18-4162-43f6-b5e8-39fa5b5266c7"></a>Browsing the kernel source tree</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+You can enjoy exploring the kernel source tree by following these steps:
+</p>
+
+<ul class="org-ul">
+<li>Clone the kernel source: <code>git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ~/linux</code>
+</li>
+<li><b>C-x d</b> and navigate to <code>~/linux</code>, then press <b>Enter</b>.
+
+
+<div class="figure">
+<p><a href="static/linux-dir.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/linux-dir.gif" alt="linux-dir.gif" /></a>
+</p>
+</div>
+
+<p>
+Then, turn on ggtags: <code>M-x ggtags-mode</code>
+</p>
+</li>
+
+<li>Emacs has a file explorer, as you've seen above, called <code>Dired</code>,
+short for <code>(Dir)ectory (Ed)it</code>.
+</li>
+
+<li>Before start browsing the kernel, you need to create a database for
+quick searching. Press <code>M-x</code>, type <code>ggtags-create-tags</code>. It asks for
+a directory; since you're in the root directory of Linux already,
+press <b>Enter</b>; <code>ggtags</code> asks whether you use <code>ctags</code> (which is
+another tag generating program, works with more languages but has
+less features). Type <code>no</code>, press <b>Enter</b> and wait for <code>ggtags</code> to
+generate the database.
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/ggtags-create-tags.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/ggtags-create-tags.gif" alt="ggtags-create-tags.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>After the tag database is done generating, a message at the bottom of
+your Emacs prints a message <code>GTAGS generated in ~/linux</code>. Now you
+can start going anywhere in Linux source tree in an instant instead
+of spending hours to grep!
+</li>
+
+<li>Let's find a file in Linux. Every C program, whether large or small
+must have a <code>main()</code> function, and a file containing the
+function. Let's find out where the <code>main()</code> of Linux kernel is.
+</li>
+
+<li><code>M-x</code>, type <code>ggtags-find-file</code>. A prompt ask for a file to find. You
+can also invoke <code>ggtags-find-file</code> with <code>C-c M-f</code>.
+</li>
+
+<li>Enter <code>main.c</code> to the prompt and press <b>Enter</b>.
+</li>
+<li>You will see a list of <code>main.c</code> files below in various directory:
+
+
+<div class="figure">
+<p><a href="static/candidates.jpg"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/candidates.jpg" alt="candidates.jpg" /></a>
+</p>
+</div>
+
+<p>
+You can visit each file by pressing <b>M-n</b> (<b>n</b> means <i>next</i>) to go
+down or <b>M-p</b> to  up (<b>p</b> means <i>previous</i>).
+</p>
+
+<p>
+Press <b>C-c s</b>; a prompt appear waiting for something to search; type
+<code>init/main.c</code>.
+</p>
+</li>
+
+<li>Finally you get into the correct file. This is where Linux
+starts after the bootloader stage.
+</li>
+
+<li>Now, you see a lot of names in this file: variable names, function
+names&#x2026; Now, you want to find where all of these names are defined
+and where they are used. Let's scroll down a bit, either with <b>Page
+Down</b> key or scrolling with the mouse or search for it. If you want
+to search, press <b>C-s</b> and type <b>kernel<sub>init</sub></b> and press <b>C-s</b>
+repeatedly. <b>C-s</b> is available everywhere in Emacs. <b>C-c s</b> is just
+available in <b>ggtags</b>. You see a function declaration like this:
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #b9ca4a;">static</span> <span style="color: #7aa6da;">int</span> <span style="color: #e78c45;">kernel_init</span>(<span style="color: #7aa6da;">void</span> *);
+</pre>
+</div>
+
+<p>
+If you want to go back to where you were, press <b>M-*</b> (of
+<b>M-Shift-8</b>) brings you back to the previous place where you
+jumped.
+</p>
+
+<p>
+This is the whole process of finding the file:
+</p>
+
+
+<div class="figure">
+<p><a href="static/ggtags-find-file.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/ggtags-find-file.gif" alt="ggtags-find-file.gif" /></a>
+</p>
+</div>
+
+<p>
+You can find definitions or references of a tag easily. Now, let's
+go back to the declaration <code>static int kernel_init(void *);</code>
+again. Move your cursor on <code>kernel_init</code>. 
+</p>
+
+<p>
+Press <b>M-.</b> jumps to its definition. <b>M-.</b> again jumps to its
+references, where the function is called. <b>M-.</b> again jumps to the
+definition again. Basically, if the current view is definition,
+pressing <b>M-.</b> switches to references and vice verse. Usually, you
+will also see a list of candidates similar to the one you saw using
+<code>ggtags-find-file</code> above. Use <b>M-n</b> or <b>M-p</b> to select next/previous
+match.
+</p>
+
+<p>
+If you want to jump to a C header file, for example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #c397d8;">#include</span> <span style="color: #70c0b1;">&lt;linux/kernel.h&gt;</span>
+</pre>
+</div>
+
+<p>
+Move your cursor onto that line and press <b>M-.</b>.
+</p>
+
+<p>
+Again, you can search for candidates using <b>C-c s</b>.
+</p>
+
+<p>
+After navigating for a while, you may have jumped to many places. To
+view the history of where you were, press <b>C-c M-h</b>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/ggtags-view-tag-history.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/ggtags-view-tag-history.gif" alt="ggtags-view-tag-history.gif" /></a>
+</p>
+</div>
+
+<p>
+If you want to have a list of all the tags you visited, press <b>C-c
+M-/</b>. The different between this command and the above command is
+that, <b>C-c M-h</b> stores the places in files you visited, while <b>C-c
+M-/</b> stores the tag operations you performed. After press <b>C-c M-/</b>,
+if you   select an entry in the result list, it displays the result
+list of   the tag in the selected entry, along with your match
+candidate you selected in the past: 
+</p>
+
+
+<div class="figure">
+<p><a href="static/ggtags-rerun.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/ggtags-rerun.gif" alt="ggtags-rerun.gif" /></a>
+</p>
+</div>
+
+<p>
+If you create, edit or delete a source file in your project, upon
+saving <code>ggtags</code> automatically updates the database of your
+project. How convenient!
+</p>
+
+<p>
+That's it for <b>basic</b> navigation. Yes, it's just the basic. This is
+just the tip of the ice berg. In Emacs, you have a toolchain called
+<a href="http://cedet.sourceforge.net/">CEDET</a>, short for <code>Collection of Emacs Development Environment
+  Tools</code>, offers features such as highlighting, project, smart jump,
+context-sensitive completion, symbol references, code generation&#x2026;
+And Emacs included CEDET by default from Emacs 23.2. CEDET is also a
+language framework for language writer to create such tools within
+Emacs for their languages, but currently the best supported language
+in CEDET is C/C++.
+</p>
+
+<p>
+<code>ggtags</code> solves your navigation need, but does not offer the above
+features.  However, with <code>ggtags</code> alone, it's far enough for your
+C/C++ projects, thanks to GNU Global for working nicely on large
+source tree like the Linux kernel.. After all, many people writes
+C/C++ source code on bare minimum editor and waste a lot of time for
+doing things manually instead of focusing on their problems.
+</p>
+
+<p>
+After this demo, are you convinced now? If you want to harness the
+power of Emacs even further, you need to learn Emacs properly.
+</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><a id="ID-dc9722bb-91fb-4f38-b701-ffd3fb84d4c7"></a>Concepts</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><a id="ID-c428fffd-3636-43e4-916e-9bc67c48db4e"></a>Emacs Key Notation</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Taken from here: <a href="http://www.emacswiki.org/emacs/EmacsKeyNotation">EmacsWiki</a>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Prefix</th>
+<th scope="col" class="left">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-</code></td>
+<td class="left">(press and hold) the Control key</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>M-</code></td>
+<td class="left">the Meta key (the Alt key, on most keyboards)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>S-</code></td>
+<td class="left">the Shift key (e.g.‘S-TAB’ means Shift Tab)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>DEL</code></td>
+<td class="left">the Backspace key (not the Delete key)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>RET</code></td>
+<td class="left">the Return or Enter key</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>SPC</code></td>
+<td class="left">the Space bar key</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>ESC</code></td>
+<td class="left">the Escape key</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>TAB</code></td>
+<td class="left">the TAB key</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+A notation such as <b>C-M-x</b> (or, equivalently, <b>M-C-x</b>) means press and
+hold both Control and Meta (Alt) keys while hitting the <b>x</b> key.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+In Emacs, behind every user interaction is a function. You press a key
+to insert a character, Emacs runs self-insert-command. There are two
+types of functions in Emacs:
+</p>
+
+<ul class="org-ul">
+<li><b>Normal functions</b>: These functions are like functions in other
+</li>
+</ul>
+<p>
+programming languages, and are used for implementing features in
+Emacs. Users do not need to care about these functions, unless they
+want to change the implementations.
+</p>
+
+<ul class="org-ul">
+<li><b>Commands</b>: Interactive function provides to editor users.
+</li>
+</ul>
+
+<p>
+From now on, I won't say something like "Press <b>M-x</b>" anymore. For
+example, if I say "<b>C-x C-f</b> your files", you should replace <b>C-x C-f</b>
+with its command like this in your head: "<b>find-file</b> your files". All
+commands use verbs, I think, so don't worry. Try to recall the command
+from the key binding; it will help you get used to Emacs quicker. If
+you see <code>M-x command</code>, which means you need to <b>M-x</b> and type that
+<b>command</b>. 
+</p>
+
+<p>
+<b>M-x</b> itself is bound to <b>execute-extended-command</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><a id="ID-cdb163ad-eb98-46af-83b5-d9ad1803a0d1"></a>Opening files</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Let's learn one especially handy command. <b>M-x</b>, type into the prompt
+<code>find-</code>, then press <b>TAB</b>. You will see Emacs offers you a list of
+possible commands with prefix <code>find-</code>. Select the command <code>find-file</code>,
+either by clicking on it in the list; or keep typing a few more
+characters, and pressing <b>TAB</b> until the command is completed. After
+<code>find-file</code> is in your prompt, press <b>RET</b>.
+</p>
+
+<p>
+You can use <b>wildcard expression</b> to select more than one file. For
+example, if your directory contains these file:
+</p>
+
+<ul class="org-ul">
+<li><code>file_a_1.c</code>
+</li>
+<li><code>file_a_2.c</code>
+</li>
+<li><code>file_a_3.c</code>
+</li>
+<li><code>file_b_1.c</code>
+</li>
+<li><code>file_b_1.h</code>
+</li>
+<li><code>file_b_2.c</code>
+</li>
+</ul>
+
+<p>
+Then in <b>find-file</b> prompt, you can open all file with extension <code>.c</code>
+like this: <code>file*.c</code>. Or if you only want to select file with character
+<code>a</code> in it: <code>*a*.c</code>. Of if you only want to select file with <code>1</code> and
+extension <code>.c.</code> in it: <code>*1.c</code>. Basically, wildcard expression <code>*</code>
+accepts anything, bounded by a specific characters next to it.
+</p>
+
+<p>
+During the exercise, if there's something happens, for example, you
+press the wrong keys and Emacs is behaving weird, just press <b>C-g</b>.
+</p>
+
+<p>
+<b>C-g</b> executes the command <code>keyboard-quit</code>, which cancels anything
+Emacs is executing. <code>M-x keyboard-quit</code>, you will see
+this command there. 
+</p>
+
+<p>
+The command you have just executed is for browsing and opening files
+in Emacs, similar to <code>Open With</code> in regular editors, except instead of
+navigating with the mouse, you navigate with keyboard which is much
+faster.
+</p>
+
+<p>
+If you use <code>find-file</code> to navigate to an existing file in a deep
+directory and press <b>RET</b>, it opens that file. Otherwise, if the file
+does not exist and you press <b>RET</b>, you create a new file. Woot, two
+features in a single command, so convenient. If you intend to open a
+file at first, but then realizing that you want to create a file
+there, <code>Open With</code> doesn't allow you to do that. You have to navigate
+all the way there with typical <b>New File</b> feature in regular editors.
+</p>
+
+<p>
+Another interesting command in Emacs, that is
+<code>find-file-at-point</code>. What this function does is that if you have a
+path to a directory or file, inside a string and under your cursor, 
+<code>M-x ffap</code> opens that directory or file directly!
+</p>
+
+<p>
+&#x2026;[insert screnshot]&#x2026;
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><a id="ID-a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7"></a>Ido mode</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Emacs has an interesting feature called <b>Ido</b>, shorts for
+<b>Interactively Do Things</b>. In essence, <b>Ido</b> is a superior interface
+for interactively select things in Emacs compare to plain prompt. 
+</p>
+
+<p>
+To activate <b>Ido</b>, <code>M-x ido-mode</code>. Let's open a file with <b>C-x
+C-f</b>. Do you find this: 
+</p>
+
+
+<div class="figure">
+<p><a href="static/find-file-normal.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/find-file-normal.gif" alt="find-file-normal.gif" /></a>
+</p>
+</div>
+
+<p>
+Or this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/find-file-ido.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/find-file-ido.gif" alt="find-file-ido.gif" /></a>
+</p>
+</div>
+
+<p>
+Which is better?
+</p>
+
+<p>
+Once enabled, Ido is used for most commands that requires you select
+something from a list.
+</p>
+
+<p>
+A few things to note for when using <b>Ido</b>: 
+</p>
+
+<ul class="org-ul">
+<li>If you want to use wildcard expression, you have to temporary revert
+to ordinary <code>find-file</code> via <b>C-f</b>.
+</li>
+
+<li>If you want to select the current directory, <b>C-d</b>.
+</li>
+
+<li>You select a directory in <code>find-file</code> prompt by pressing <b>RET</b>, not
+<b>TAB</b> like ordinary <code>find-file</code>.
+</li>
+</ul>
+
+<p>
+Regardless, an alternative interface for completion and narrowing
+exists, arguably more powerful, but you have to install 3rd party
+package. The package is called Helm. However, let's stick with <b>Ido</b>
+through the rest of this manual.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-5" class="outline-3">
+<h3 id="sec-8-5"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+Buffer is where you edit your file content. Buffer holds content
+of a file temporarily. Anything you write into the buffer won't make
+it into file until you explicitly save it with <code>save-buffer</code>
+command. <b>C-x C-s</b> executes the command <code>save-buffer</code>, so you can <b>C-x
+C-s</b> your files. You can also execute this from <b>M-x</b>.
+</p>
+
+<p>
+In the above section, I said that your cursor is in your file,
+well, actually your cursor is not in a file but a buffer. From now on,
+keep file and buffer two separate and distinct concepts. When I say
+file, I refer to physical file and when I say buffer, I refer to the
+temporary content of the file that is being displayed.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>: Practice <b>C-x b</b> to get used to it.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-6" class="outline-3">
+<h3 id="sec-8-6"><a id="ID-2d67567c-985d-49af-83d1-f36ebda0e20c"></a>Major mode</h3>
+<div class="outline-text-3" id="text-8-6">
+<p>
+Major modes provide specialized facilities for working on a particular
+file type, such as syntax highlighting for a programming language. 
+Major modes are mutually exclusive; each buffer has one and only one
+major mode at any time.
+</p>
+
+<p>
+Emacs is bundled with many major modes for editing source code in
+different languages: C, C++, Java, Lisp, bash, asm&#x2026; For example,
+when opening a file with <code>.c</code> extension, Emacs automatically
+recognizes it's a C file and select C major mode to highlight the
+buffer properly.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-7" class="outline-3">
+<h3 id="sec-8-7"><a id="ID-9e9200cb-9205-4931-8795-b9c9e00f95f2"></a>Minor mode</h3>
+<div class="outline-text-3" id="text-8-7">
+<p>
+Minor modes are optional features which you can turn on or off, not
+necessarily specific to a type of file or buffer. For example, Auto
+Fill mode is a minor mode in which <b>SPC</b> breaks lines between words
+as you type. Minor modes are independent of one another, and of the
+selected major mode.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-8" class="outline-3">
+<h3 id="sec-8-8"><a id="ID-520961cd-e999-4730-a208-dfa8db1c5fa3"></a>Basic buffer managements</h3>
+<div class="outline-text-3" id="text-8-8">
+<p>
+So, you learn how to open file and create buffer of that file. 
+In other editors, you got something called "tabs". Every time you open a
+file, you get a file tab for selecting an "opening file" (which is called
+buffer in Emacs). It quickly becomes a nuisance once you have lots of
+file tabs. If you use multi-row support for file tabs, it eats up your
+editing space.
+</p>
+
+<p>
+How do you switch between opening buffers? <b>C-x b</b> opens a prompt to
+enter a buffer name. You can <b>TAB</b> to complete the buffer name similar
+to how you complete file names in <b>C-x C-f</b>.
+</p>
+
+<p>
+After you open a file, and if your cursor is in that buffer, <b>C-x C-f</b>
+prompts the current directory, so you can open another file within
+this directory. For example, buffer A is from <code>~/dir1/</code> and buffer B
+is in <code>~/dir2/</code>, if your cursor is in buffer A, <b>C-x C-f</b> starts in
+<code>~/dir1/</code>; if your cursor is in buffer B, <b>C-x C-f</b> starts in <code>~/dir2/</code>.
+</p>
+
+<p>
+In an Emacs sessions, you may have a lot of buffers, including
+non-file buffers such as shell buffers, email buffers&#x2026; How do you
+manage buffers when it's getting large? <b>C-x C-b</b> executes
+<code>list-buffers</code>, provide you a list of buffer in which you can
+search. However, <code>list-buffers</code> is a simple command for buffer
+management. Emacs also provides <code>ibuffer</code>, which is a superior
+alternative. You will surely want to use <code>ibuffer</code>, but first let's
+replace <code>list-buffers</code> with <code>ibuffer</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #70c0b1;">"C-x C-b"</span>) 'ibuffer)
+</pre>
+</div>
+
+<p>
+Let's play with <b>ibuffer</b>.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<ul class="org-ul">
+<li>First, open many files with different extension. Emacs source you
+used for installation is an great practice target. If you use a
+built binary, <a href="http://ftp.gnu.org/gnu/emacs/emacs-24.3.tar.gz">download it</a> and unpackage. Let's assume you
+download and unpackage it at <code>~/Downloads/emacs-24.3</code>.
+</li>
+
+<li><b>C-x C-f</b>, navigate to <code>emacs-24.3/lisp/</code> and open all Lisp files:
+<code>*.el</code>.
+
+
+<div class="figure">
+<p><a href="static/open-el-files.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/open-el-files.gif" alt="open-el-files.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-x C-f</b>, navigate to <code>emacs-24.3/src/</code> and open all C files:
+<code>*.c</code>.
+
+
+<div class="figure">
+<p><a href="static/open-c-files.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/open-c-files.gif" alt="open-c-files.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Open <b>ibuffer</b> by <b>C-x C-b</b>. You see a huge list of buffers.
+</li>
+</ul>
+
+<p>
+Now the fun begins.
+</p>
+
+<ul class="org-ul">
+<li>Suppose that you want to work with C code. <b>/ m</b> and enter a major
+mode to select buffers that belong to this major mode. Prefix <b>/</b> in
+<b>ibuffer</b> groups filtering commands. <b>TAB</b> to see
+a list of major modes:
+
+
+<div class="figure">
+<p><a href="static/ibuffer-filter-major.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/ibuffer-filter-major.gif" alt="ibuffer-filter-major.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Enter <code>c-mode</code>.
+</li>
+
+<li>Only C buffers remain. But you open buffers in two major modes:
+<code>c-mode</code> and <code>emacs-lisp-mode</code>. You can create each group for one by 
+pressing <b>/ g</b>, and give the group a name. Only execute <b>/ g</b> after
+executing any filtering commands.
+</li>
+
+<li>Up to this point, the filtering is still applied. Press <b>/ /</b> to
+remove filtering and return the full buffer list.
+</li>
+
+<li>Let's create another group based filtering. <b>/ m</b> and enter
+<code>emacs-lisp-mode</code>. Create another group with <b>/ g</b> and give it a
+name. Now, every time you open files that their buffers satisfy the
+filtering criteria, the buffers are put into appropriate groups.
+</li>
+
+<li>To open a buffer, <b>o</b> or <b>C-o</b>. <b>o</b> opens a
+buffer and switch the cursor to it. <b>C-o</b> leaves the cursor on the
+buffer list. Let's open a buffer with <b>o</b> and <b>C-o</b>. To switch back
+to the other buffer, do <b>C-x o</b>. <b>C-x o</b> executes <b>other-window</b>
+command, which cycles among the opening buffers (technically the
+buffers are in Emacs "windows", and you are cycling "windows", but
+we will get to that later).
+</li>
+
+<li>Either using <b>C-o</b> or <b>o</b> creates another buffer below, leaving
+you two horizontal buffers. You probably don't like the layout because you
+have a big screen. If you use <b>o</b>, <b>C-x o</b> to switch back to the
+list and <b>C-x 1</b> to close other buffer. If you have multiple buffers
+opened, <b>C-x 1</b> closes all others and leave the active buffer (the
+one with cursor, which is our buffer list) remains. To close an
+active buffer, <b>C-x 0</b>.
+</li>
+
+<li><b>C-x 3</b> to create a vertical buffer to the right. It creates an exact
+duplicate of the active buffer. Now, <b>o</b> on any C buffer again, and
+your cursor is in that buffer:
+
+
+<div class="figure">
+<p><a href="static/c-x-3.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/c-x-3.gif" alt="c-x-3.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>Edit something in the buffer. Switch back to <code>ibuffer</code> and press
+<b>g</b>, which runs the command <code>ibuffer-update</code> to refresh the
+list. You will see an asterisk on the left of your just edited
+buffer. It indicates that buffer has been modified.
+</li>
+
+<li>You can also mark a buffer by pressing <b>m</b> on multiple entries to
+perform various operations:
+
+<ul class="org-ul">
+<li><b>view</b>: press <b>A</b> to view the marked buffers
+</li>
+
+<li><b>save</b>: press <b>S</b> to save the marked buffers
+</li>
+
+<li><b>close</b>: press <b>D</b> to close the marked buffers
+</li>
+
+<li><b>revert</b>: press <b>V</b> to discard changes to the marked buffers
+</li>
+</ul>
+<p>
+To unmark a buffer, press <b>u</b> on the marked entries.
+</p>
+</li>
+
+<li>Another way to open the buffer: <b>e</b> (<i>enter</i>), <b>f</b> (<i>find</i>) or <b>RET</b>
+to bury and replace the list with selected buffer. Switch back to
+the list using <b>C-x C-b</b> again.
+</li>
+</ul>
+
+<p>
+To sum up, I will list the key bindings your used in this section
+along with other useful key bindings:
+</p>
+
+<ul class="org-ul">
+<li><b>C-x C-b</b> to open <code>ibuffer</code>.
+</li>
+<li><b>o</b> or <b>C-o</b> to open a buffer at current cursor.
+</li>
+<li><b>e</b>, <b>f</b> or <b>RET</b> bury the buffer list and replace it with the
+buffer content.
+</li>
+<li><b>=</b> to compare the current buffer content with its file.
+</li>
+
+<li>Filtering commands:
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Bindings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>/ m</code></td>
+<td class="left">Add a filter by a major mode</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ n</code></td>
+<td class="left">Add a filter by buffer name.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ c</code></td>
+<td class="left">Add a filter by buffer content.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ f</code></td>
+<td class="left">Add a filter by filename</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ &gt;</code></td>
+<td class="left">Add a filter by buffer size</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ &lt;</code></td>
+<td class="left">Add a filter by buffer size</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ /</code></td>
+<td class="left">Remove all filters in effect9</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Filter group commands:
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Bindings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>/ g</code></td>
+<td class="left">Create a filter group from filters</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>TAB</code></td>
+<td class="left">Move to next filter group</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>M-p</code></td>
+<td class="left">Move to previous filter group</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ \</code></td>
+<td class="left">Remove all active filter groups</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ S</code></td>
+<td class="left">Save the current groups with a name</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ R</code></td>
+<td class="left">Restore previously saved groups</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>/ X</code></td>
+<td class="left">Delete previously saved groups</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Sorting commands:
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Bindings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">=,=</td>
+<td class="left">Rotate between sorting modes</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>s I</code></td>
+<td class="left">Reverse current sorting order</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>s a</code></td>
+<td class="left">Sort buffers by alphabet</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>s f</code></td>
+<td class="left">Sort buffers by filename</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>s v</code></td>
+<td class="left">Sort buffers by last viewing time</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>s s</code></td>
+<td class="left">Sort buffers by size</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>s m</code></td>
+<td class="left">Sort buffers by major modes</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+To quit <code>ibuffer</code>, press <b>q</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-9" class="outline-3">
+<h3 id="sec-8-9"><a id="ID-07FB6443-922D-4B66-AF40-58347F16700C"></a>Point</h3>
+<div class="outline-text-3" id="text-8-9">
+<p>
+Point is your current cursor position. From now on, instead of saying
+"current cursor", I say "point".
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-10" class="outline-3">
+<h3 id="sec-8-10"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h3>
+<div class="outline-text-3" id="text-8-10">
+<p>
+These key bindings are also used by popular shells such as <b>bash</b> or
+<b>zsh</b>. I highly recommended you to master these key bindings.
+</p>
+
+<ul class="org-ul">
+<li>Move forward one char: <b>C-f</b> (f stands for <b>forward</b>)
+</li>
+<li>Move backward one char: <b>C-b</b> (b stands for <b>backward</b>)
+</li>
+<li>Move upward one line: <b>C-p</b> (p stands for <b>previous</b>)
+</li>
+<li>Move downward one line: <b>C-n</b> (n stands for <b>next</b>)
+</li>
+</ul>
+
+<p>
+The above operations can also be done with arrow keys. if you don't
+like the above key bindings, the arrow keys offers equivalent features.
+</p>
+
+<ul class="org-ul">
+<li>Move to beginning of line: <b>C-a</b>
+</li>
+<li>Move to end of line: <b>C-e</b>
+</li>
+<li>Move forward one word, <b>M-f</b>.
+</li>
+<li>Move backward one word, <b>M-b</b>.
+</li>
+</ul>
+
+<p>
+These key bindings are in Emacs only:
+</p>
+
+<ul class="org-ul">
+<li>Scroll forward one screen: <b>C-v</b>, <b>page down</b>
+</li>
+<li>Scroll backward one screen: <b>M-v</b>, <b>page up</b>
+</li>
+<li>Move to the beginning of a sentence: <b>M-a</b>
+</li>
+<li>Move to the end of a sentence: <b>M-e</b>
+</li>
+<li>Recenter a screen: <b>M-l</b>
+</li>
+<li>Reposition point to the top, middle and bottom of the current
+screen: <b>M-r</b>
+</li>
+<li>Move to top of the buffer: <b>M-&lt;</b>
+</li>
+<li>Move to end of the buffer: <b>M-&gt;</b>
+</li>
+<li>Move to the nth character: <b>M-g c</b> (c stands for <code>character</code>)
+</li>
+<li>Move to the nth line: <b>M-g l</b> (l stands for <code>line</code>)
+</li>
+</ul>
+
+<p>
+Recenter means making the current line point is on the center of
+your screen.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>: execute the above commands using the key bindings at
+least 10 times or until you remember. practice on your buffer in the
+previous section.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-11" class="outline-3">
+<h3 id="sec-8-11"><a id="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7"></a>Basic editing commands</h3>
+<div class="outline-text-3" id="text-8-11">
+<p>
+In Emacs, <code>kill</code> means <code>Cut</code> in other editors. these key bindings also
+work under the terminal.
+</p>
+
+<ul class="org-ul">
+<li>Kill a character at the point: <b>C-d</b>
+</li>
+<li>Kill forward to the end of a word from current point: <b>M-d</b>
+</li>
+<li>Kill backward to the beginning of a word from the current point:
+<b>M-DEL</b>
+</li>
+<li>Kill all spaces at point: <b>M-\</b>
+</li>
+<li>Kill all spaces except one at point: <b>M-SPC</b>
+</li>
+<li>Kill to the end of line: <b>C-k</b>
+</li>
+<li>Kill a sentence: <b>M-k</b>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8-12" class="outline-3">
+<h3 id="sec-8-12"><a id="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0"></a>Kill ring</h3>
+<div class="outline-text-3" id="text-8-12">
+<p>
+Kill ring is the list of previously killed content. you can insert the
+most recently killed element by <b>C-y</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-13" class="outline-3">
+<h3 id="sec-8-13"><a id="ID-01EA0EFF-2A5F-4E68-8A29-A9DB8A0DB2EA"></a>Mark and region</h3>
+<div class="outline-text-3" id="text-8-13">
+<p>
+Mark is a record of a position in a buffer. It's like when reading a
+book, you record various places in a book and these records are called
+bookmarks. It is similar, except it is buffer mark in Emacs (Emacs also
+has bookmark, but we will discuss later).
+</p>
+
+<p>
+When you set mark between two points in a buffer, the text between two
+points are highlighted. we call the highlighted text a region.
+When the region is highlighted, we say the region is active;
+to deactivate a region, press <b>C-g</b> or move point around, just
+like in other text editors.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<ul class="org-ul">
+<li>Place a mark in buffer with <b>C-SPC C-SPC</b>. Let's call this mark <b>A</b>.
+</li>
+
+<li>Move to another place in the buffer, place another mark with <b>C-SPC
+C-SPC</b>. this is mark <b>B</b>.
+</li>
+
+<li>Move to another place and <b>C-SPC C-SPC</b> again. This is mark <b>C</b>.
+</li>
+
+<li>Now press <b>C-u C-SPC</b>. You can see point goes back to mark
+<b>B</b>.
+</li>
+
+<li><b>C-u C-SPC</b> again. Point goes back to mark <b>A</b>.
+</li>
+
+<li><b>C-u C-SPC</b> again. Point goes back to mark <b>C</b>.
+</li>
+
+<li>Let's create a region: <b>C-SPC</b>, then move point forward. What
+happened?
+</li>
+
+<li>The highlighted area is called a region. You can perform editing
+commands on the region:
+<ul class="org-ul">
+<li><b>C-w</b> to kill the region
+</li>
+<li><b>M-w</b> to copy the region
+</li>
+<li><b>C-y</b> to yank (equivalent to paste) the region.
+</li>
+</ul>
+</li>
+
+<li>Let's copy or kill a region; you should select a big region. Now
+yank (paste) it elsewhere. After yanking, you notice point is
+not at the original location anymore. If you want to return to the
+where you yanked, <b>C-u C-SPC</b> or <b>C-x C-x</b>.
+
+<p>
+When you yank, you create a mark at point before the new content is
+inserted. After the content is inserted, point moves according to
+the size of the content. In general, most Emacs commands that create
+sudden displacement push marks, so you can go back to previous
+locations without having to tediously scroll the whole buffer.
+</p>
+
+<p>
+<b>C-x C-x</b> executes the command <code>exchange-point-and-mark</code>, which
+exchanges the current point and the mark created when you yank. Try
+and see. When this command is executed, region bounded by the mark
+and point is activated.  Using <b>C-x C-x</b> is really
+convenient. Instead of highlighting line by line for <code>Copy</code> or
+<code>Kill</code>, you can do this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-x-c-x.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/c-x-c-x.gif" alt="c-x-c-x.gif" /></a>
+</p>
+</div>
+
+<p>
+Remember when you have to highlight a big region and for some
+reason, you lose the highlighting and have to do it all over
+again. <b>C-x C-x</b> saves you from that tedium.
+</p>
+
+<p>
+<b>C-u C-SPC</b> simply returns you to previous mark location inserted
+when you <b>C-y</b>. This command won't activate region.
+</p>
+
+<p>
+Practice until you get used to these two commands.
+</p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8-14" class="outline-3">
+<h3 id="sec-8-14"><a id="ID-025E9CF4-B70C-41FA-A51D-AE3E2391227D"></a>Mark ring</h3>
+<div class="outline-text-3" id="text-8-14">
+<p>
+Emacs stores buffer marks in a list, that's why you are able to cycle
+through various marks in the exercise above. You can cycle through the
+list to jump to a mark, or with extension packages, you can have a
+list and interactively select it. <b>Helm</b> is an excellent example of
+such extension. We will discuss more on extension packages later.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-15" class="outline-3">
+<h3 id="sec-8-15"><a id="ID-4B4B71A3-80F4-4716-80FB-FA0270B88357"></a>Global mark ring</h3>
+<div class="outline-text-3" id="text-8-15">
+<p>
+Mark ring is local to each buffer. If you switch to another buffer,
+you have a new local mark ring.
+</p>
+
+<p>
+Global mark ring is like mark ring, but they persist across
+buffers. Each time you set a mark, that mark is set in global mark
+ring in addition to the buffer's mark ring.
+</p>
+
+<p>
+You cycle the global mark ring by <b>C-x C-SPC</b>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-16" class="outline-3">
+<h3 id="sec-8-16"><a id="ID-709F26BC-3A20-47C1-93C6-264C00CD5C89"></a>Undo/redo</h3>
+<div class="outline-text-3" id="text-8-16">
+<p>
+To undo: <b>C-/</b> or <b>C-x u</b>
+</p>
+
+<p>
+To redo, it's quite tricky to do because you have to understand how
+undo in emacs works. When you edit, emacs tracks changes in your
+current editing file. For example, you insert the following line in
+your file:
+</p>
+
+<p>
+aaa
+bbb
+ccc
+</p>
+
+<p>
+Then Emacs tracks the history like this:
+</p>
+
+<ul class="org-ul">
+<li>insert: "aaa"
+</li>
+<li>insert: "bbb"
+</li>
+<li>insert: "ccc"
+</li>
+</ul>
+
+<p>
+Now, execute undo twice. Your file becomes:
+</p>
+
+<p>
+aaa
+</p>
+
+<p>
+The history of the file changes:
+</p>
+
+<ul class="org-ul">
+<li>insert: "aaa"
+</li>
+<li>insert: "bbb"
+</li>
+<li>insert: "ccc"
+</li>
+<li>undo insert: "ccc"
+</li>
+<li>undo insert: "bbb"
+</li>
+</ul>
+
+<p>
+How do insert back <b>bbb</b> and <b>ccc</b>. By undo your previous undos! ook
+closely at the above change history again. You see that Emacs keeps
+track your recent undo actions. execute some motion command, i.e
+<b>C-f</b>, then try <b>C-/</b> twice and see what happens.
+</p>
+
+<p>
+Great, you get your old content, <b>bbb</b> and <b>ccc</b> back. That is because
+you have just undoed the latest "undo insert: &#x2026;" entries in the file
+history.
+</p>
+
+<p>
+When you was execute a series of undoing, <i>without any other commands in
+between</i>, Emacs keeps reverting to the older content. The series of
+<b>undo insert: &#x2026;</b> got inserted into your file history when you break the
+undo series with other commands.
+</p>
+
+<p>
+Again, two features in one command, but a bit confusing this time.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>: Practice undoing/redoing until you get used to.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-17" class="outline-3">
+<h3 id="sec-8-17"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Interactive search with i-search</h3>
+<div class="outline-text-3" id="text-8-17">
+<p>
+So, you want to look for something in the buffer? <b>C-s</b> invokes
+<code>isearch-forward</code>, allows you to look forward from the current point
+for something. After <b>C-s</b>, you are prompt to enter the content to
+search for. Enter the content, and press <b>C-s</b> repeatedly to travel
+through the matches forward.
+</p>
+
+<p>
+Similarly, <b>C-r</b> invokes <code>isearch-backward</code>, allows you to look
+backward from the current point. Press <b>C-r</b> repeatedly to travel
+through the matches backward.
+</p>
+
+<p>
+<code>isearch</code> can be invoked from any valid buffer. You can perform
+<code>isearch</code> on <code>ibuffer</code>.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>: 
+</p>
+
+<p>
+<b>C-s</b>, then type the search content and repeatedly press <b>C-s</b>. After
+repeated a few times, press <b>C-r</b> repeatedly. What happened?
+</p>
+
+<p>
+You can invoke <b>C-r</b> within <b>C-s</b> and vice verse.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-18" class="outline-3">
+<h3 id="sec-8-18"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
+<div class="outline-text-3" id="text-8-18">
+<p>
+The mode line is the empty area below the buffer. It has useful
+summary information about the buffer shown in the window.
+</p>
+
+<p>
+The text displayed in the mode line has the following format:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">cs:ch-fr</td>
+<td class="left">buf</td>
+<td class="left">pos line</td>
+<td class="left">(major minor)</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="figure">
+<p><a href="modeline.jpg"><img src="file:///home/tuhdo/org-data/emacs-tutor/modeline.jpg" alt="modeline.jpg" /></a>
+</p>
+</div>
+
+<p>
+<code>cs</code> describes the character set of the text in the buffer. Do you see
+the character <b>U</b> in the picture? It's short for UTF-8.
+</p>
+
+<p>
+<code>ch</code> describes editing state of current buffer:
+</p>
+
+<ul class="org-ul">
+<li>This shows two dashes (‘&#x2013;’) if the buffer displayed in the window
+has the same contents as the corresponding file on the disk; i.e.,
+if the buffer is “unmodified”. 
+</li>
+<li>If the buffer is modified, it shows two stars (‘**’). For a
+read-only buffer, it shows ‘%*’ if the buffer is modified, and ‘%%’
+otherwise. You can see that in the picture, the buffer is modified.
+</li>
+</ul>
+
+<p>
+<b>fr</b> gives the selected frame name. A frame is a Emacs window in your
+OS. For example, these are two Emacs frames: 
+</p>
+
+
+<div class="figure">
+<p><a href="static/frames-gui.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/frames-gui.gif" alt="frames-gui.gif" /></a>
+</p>
+</div>
+
+<p>
+If you are using the GUI version of Emacs, it will always be a
+dash. However, if you use Emacs in terminal, you cannot have multiple
+frame window like the above screenshot. Instead, Emacs creates
+<i>virtual frames</i> with names like F1, F2&#x2026;, Fn like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/frames-term.gif"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/frames-term.gif" alt="frames-term.gif" /></a>
+</p>
+</div>
+
+<p>
+<code>buf</code> is buffer name. Buffer name is usually file name; but they can
+have different names.
+</p>
+
+<p>
+<code>pos</code> is display the current position of your viewing screen. If your
+viewing screen starts from the first line, it displays as <code>Top</code>. If
+you viewing screen contains the last line of your buffer, it displays
+as <code>Bottom</code>. Otherwise, it displays <b>%</b> position, i.e. 20% means you
+viewing screen is 20% away from the top.
+</p>
+
+<p>
+<code>line</code> displays the current line number.
+</p>
+
+<p>
+<code>major</code> displays the current major mode.
+</p>
+
+<p>
+<code>minor</code> displays the current minor mode.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-19" class="outline-3">
+<h3 id="sec-8-19"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
+<div class="outline-text-3" id="text-8-19">
+<p>
+<code>Minibuffer</code> is the small area at the bottom of your Emacs screen.
+</p>
+
+<p>
+The <code>Minibuffer</code> is where Emacs commands read complicated arguments,
+such as file names, buffer names, Emacs command names, or Lisp
+expressions. When you execute <code>find-file</code>, it asks for your file from the
+<code>Minibuffer</code>, which is one of <code>find-file</code> required argument. Remeber I
+said earlier that in Emacs, everything is a function. <code>find-file</code> is a
+command, in other words, it's an interactive function. As a function,
+it also takes arguments. <code>Minibuffer</code> is where users can feed arguments
+to the interactive functions.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-20" class="outline-3">
+<h3 id="sec-8-20"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
+<div class="outline-text-3" id="text-8-20">
+<p>
+<code>Minibuffer</code> can be used for output as well. The echo area is used for
+displaying messages made with the message primitive, and for echoing
+keystrokes.
+</p>
+
+<p>
+Both <code>Minibuffer</code> and <code>Echo Area</code>, although serve different purposes,
+share the same physical space. You should not be confused between the two.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-21" class="outline-3">
+<h3 id="sec-8-21"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
+<div class="outline-text-3" id="text-8-21">
+<p>
+An application window in operating system is called a <b>Frame</b> in
+Emacs. So, you execute <b>Emacs</b> from the command line and open Emacs,
+that's a frame that contains your Emacs session. Emacs can have
+multiple frames to hold different parts of Emacs, such as a separate
+frame to hold the minibuffer. 
+</p>
+
+<p>
+Personally, I only use a single frame. However, frames can be useful
+if you want to organize buffers into different groups.  For example,
+each frame can be a project: frames F1 holds buffers related to my C
+programming projects, frames F2 holds buffers related to customizing
+Emacs, frame F3 holds buffers related to emails and reading, 
+newsgroups&#x2026; 
+</p>
+
+<p>
+As stated earlier, multiple frames under the terminal have names
+F1, F2 &#x2026;. Fn for each frame. 
+</p>
+
+<p>
+These are the key bindings for manipulating frames:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 C-f</code></td>
+<td class="left"><b>find-file-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open file in a different frame</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 f</code></td>
+<td class="left"><b>find-file-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Same as <b>C-x 5 C-f</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 C-o</code></td>
+<td class="left"><b>display-buffer-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open buffer in a different frame and move point there</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 .</code></td>
+<td class="left"><b>find-tag-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Find tag at point in a different frame</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 0</code></td>
+<td class="left"><b>delete-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Delete the current frame point is in</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 1</code></td>
+<td class="left"><b>delete-other-frames</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Delete other frames except the one with point</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 2</code></td>
+<td class="left"><b>make-frame-command</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Create a frame</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 b</code></td>
+<td class="left"><b>switch-to-buffer-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Same as <b>C-x 5 C-o</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 d</code></td>
+<td class="left"><b>dired-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open a Dired buffer in another frame</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 m</code></td>
+<td class="left"><b>compose-mail-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open another frame for composing email</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 o</code></td>
+<td class="left"><b>other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Cycle through available frames</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 5 r</code></td>
+<td class="left"><b>find-file-read-only-other-frame</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open file for read only in another frame</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-22" class="outline-3">
+<h3 id="sec-8-22"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
+<div class="outline-text-3" id="text-8-22">
+<p>
+Unlike other editors, Emacs can split your frame area into multiple smaller
+areas. Each such area is called a <code>window</code>. You can divide a frame
+into as many windows as you want and each window can have anything in
+it, i.e. your current editting buffer, file management buffer, help
+buffer, a shell&#x2026; Basically anything that Emacs can display. Let's try them out:
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<p>
+<b>C-x 2</b> to split the current window into two horizontal windows. After
+splitting, you will have the exact duplicate of your current editing
+<b>*buffer. *C-x 2</b> is bound to <code>split-window-below</code>.
+</p>
+
+<p>
+<b>C-x 3</b> to split your current window into two vertical windows. After
+splitting, you will have the exact duplicate of your current editing
+buffer. <b>C-x 3</b> is bound to <code>split-window-right</code>.
+</p>
+
+<p>
+Now, after you execute the two commands above, you will have three
+windows: two above and one below. So, what can you do the windows you
+created? As I said earlier, you can put anything there.
+</p>
+
+<p>
+To navigate through the windows, <b>C-x o</b> which executes the command
+<code>other-window</code>. Try cycle around the windows a few times to get used
+to it.
+</p>
+
+<p>
+<b>C-x 0</b> closes the window with point. Try it.
+</p>
+
+<p>
+<b>C-x 1</b> closes all other windows except the current selected
+one. Create another window, then try <b>C-x 1</b>.
+</p>
+
+<p>
+<b>C-x 4</b> is a common prefix for opening things in other buffer. Things
+here can be files, shell, or a tree explorer. Here are standard <b>C-x
+4</b> bindings:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 C-f</code></td>
+<td class="left"><b>find-file-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Just like <b>find-file</b> discussed earlier, except open file</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">in new window. If the current frame only has one window,</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">a new window is created.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 C-o</code></td>
+<td class="left"><b>display-buffer</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Select a buffer from buffer list and display it in another</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">window but not move point to that window.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 .</code></td>
+<td class="left"><b>find-tag-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open the tag at point in another window (more on this later)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 0</code></td>
+<td class="left"><b>kill-buffer-and-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Just like <b>C-x 0</b> but kill the buffer in that window as well.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 a</code></td>
+<td class="left"><b>add-change-log-entry-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open another buffer and allow you to record the change of</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">the current editing file. These days, you use version control</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">system to manage file changes,and Emacs does this better.</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Probably this feature exists when thing like Git does not exist.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 b</code></td>
+<td class="left"><b>switch-to-buffer-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open a selected buffer in another window and move point to</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">that window.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 c</code></td>
+<td class="left"><b>clone-indirect-buffer-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Clone the current buffer in another window and give it a</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">different buffer name.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 d</code></td>
+<td class="left"><b>dired-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open a <b>dired</b> buffer in another window. <b>Dired</b> is a built-int</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">file manager in Emacs. We will discuss later.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 f</code></td>
+<td class="left"><b>find-file-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Same as <b>C-x 4 C-f</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">C-x 4 m</td>
+<td class="left"><b>compose-mail-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Write mail in other window. You can write email and send it</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">directly from Emacs.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 r</code></td>
+<td class="left"><b>find-file-read-only-other-window</b></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Similar to <b>find-file-other-window</b>, but open for read-only.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+That's quite a long table, eh? If you forget, you can either:
+</p>
+
+<ul class="org-ul">
+<li>Visit my manual again :)
+</li>
+
+<li>Or much faster, access it directly from Emacs with it amazing help
+system. So, if you want to know all key bindings to prefix <b>C-x 4</b>,
+just <b>C-x 4</b> and then <b>C-h</b>. If you enter a prefix key and enter
+<b>C-h</b> after it, it will list all of the key bindings and commands
+start with that prefix. This is really nice, compare to other
+editors that hide all this information deep within layers of menus.
+</li>
+</ul>
+
+<p>
+Help system will be discussed in later section.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-23" class="outline-3">
+<h3 id="sec-8-23"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
+<div class="outline-text-3" id="text-8-23">
+<p>
+In Emacs, behind anything is a function. Function can accept
+argument. You can also pass arguments into Emacs commands to modify
+its behaviours. However, you don't have to write code that calls
+a function with its arguments and then compile or evaluate it. You can
+pass arguments interactively.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<p>
+Earlier, you learn motion commands such as <b>C-f</b>, <b>C-b</b>, <b>C-p</b> and
+<b>C-n</b>", remember? But, you can only move forward 1 character with
+<b>C-f</b>, move backward 1 character with <b>C-b</b>, 1 line upward with <b>C-p</b>
+and 1 line downward with <b>C-n</b>.
+</p>
+
+<p>
+Now, try <b>C-4</b> before any of those commands. See anything different?
+Great, instead of executing the commands once (i.e. Move forward 1
+character &#x2026;), you repeat the commands 4 times (i.e. Move forward 4
+characters&#x2026;).
+</p>
+
+<p>
+Many of commands allow repeating a command many times with prefix
+arguments. 
+</p>
+
+<p>
+You can even pass negative prefix arguments. Try executing the above
+commands with <b>C&#x2013;4</b>, that's right, <b>Control</b> and <b>-4</b> (minus 4). You
+see that you also execute the commands 4 times, but in <i>reverse</i>. That
+is, with <b>C-f</b>, instead of moving forward 4 characters, you move
+backward 4 times. You might wonder, what does it differ from <b>C-4
+C-b</b>? You are right, it is the same. But, many commands do not have
+their reversed versions, so negative argument is always useful in
+those circumstances.
+</p>
+
+<p>
+Now, try executing <b>C-u 4 C-f</b>. You will see it does the same thing as
+<b>C-4 C-f</b>. Again, why do we need <b>C-u</b>? It is because in terminal, you
+can not use <b>Control</b> with digit keys. <b>C-u</b> tells Emacs that you are
+about to enter a numeric argument, and it will be ready to accept the
+input. It's just a different way to do thing. 
+</p>
+
+<p>
+If you do not supply any prefix argument, such as you directly execute
+<b>C-u C-f</b>, then the numeric argument is default to <b>4</b>. Try <b>C-u
+C-f</b>, and see that it moves 4 characters forward. Try it a few times
+to get used to.
+</p>
+
+<p>
+If you execute <b>C-u</b> consecutively, the numeric argument is power
+of 4. If you press <b>C-u</b>, the result argument is 4<sup>1</sup>; <b>C-u C-u</b>, the
+result is <b>4<sup>2</sup></b>, which is <b>16</b>; <b>C-u C-u C-u</b>, the result is <b>4<sup>3</sup></b>, or
+<b>64</b>. I know it's hard to calculate when you the power is large, but
+there is a plugin that display this calculate and display these
+numbers. That plugin is Helm, but I will discuss later in part 2.
+</p>
+
+<p>
+Why number 4 for <b>C-u</b>? I don't know.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-24" class="outline-3">
+<h3 id="sec-8-24"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
+<div class="outline-text-3" id="text-8-24">
+<p>
+Emacs has a built-in one called Dired, short for
+<code>(*Dir*)ectory (*Ed*)itor</code>.
+</p>
+
+<p>
+This section is a shorten version of Dired in GNU Emacs Manual. After
+you read and practice these commands, read the <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html">Dired Manual</a> if possible.
+</p>
+</div>
+
+<div id="outline-container-sec-8-24-1" class="outline-4">
+<h4 id="sec-8-24-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
+<div class="outline-text-4" id="text-8-24-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x d</code></td>
+<td class="left">Select directory of your choice and start Dired in that directory</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 d</code></td>
+<td class="left">Select directory of your choice and start Dired in another windows.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x C-j</code></td>
+<td class="left">Enter Dired <i>at the current directory</i> of active buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x 4 C-j</code></td>
+<td class="left">Enter Dired <i>at the current directory</i>, in another window.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x C-f</code></td>
+<td class="left">Select a directory to enter Dired</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b><span class="underline">Exercise</span></b>: Execute the above commands at least once to get used to
+it. What command do you like the most?
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-24-2" class="outline-4">
+<h4 id="sec-8-24-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
+<div class="outline-text-4" id="text-8-24-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>n</code></td>
+<td class="left">Fove to next entry below point.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>p</code></td>
+<td class="left">Fove to previous entry above point.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-s</code></td>
+<td class="left">Find text using Isearch; useful for searching entries in Dired</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+You can supply prefix arguments for these commands. i.e. <code>4 n</code> moves
+to the entry which is 4 lines below.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>: Execute the above commands, with and without prefix argument.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-24-3" class="outline-4">
+<h4 id="sec-8-24-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
+<div class="outline-text-4" id="text-8-24-3">
+<p>
+To create a new file in Dired, you use the same <b>C-x C-f</b> and <b>C-x 4
+C-f</b> variant.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>+</code></td>
+<td class="left">prompts for a directory name and create one after <b>RET</b>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-4" class="outline-4">
+<h4 id="sec-8-24-4"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
+<div class="outline-text-4" id="text-8-24-4">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>d</code></td>
+<td class="left">flags file for deletion.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>u</code></td>
+<td class="left">remove flagged files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>#</code></td>
+<td class="left">flag all auto-save files (files whose names start and end with</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">‘#’).</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>~</code></td>
+<td class="left">flag all backup files</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>% &amp;*</code></td>
+<td class="left">flag for deletion all files that match <code>dired-garbage-files-regexp</code>.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>% d</code></td>
+<td class="left">flag files which matches a regexp.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>x</code></td>
+<td class="left">confirm and delete flagged files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-5" class="outline-4">
+<h4 id="sec-8-24-5"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
+<div class="outline-text-4" id="text-8-24-5">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>f</code> or <code>e</code> or <code>RET</code></td>
+<td class="left">Open current file at point.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>o</code></td>
+<td class="left">Open file at point in another window.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-o</code></td>
+<td class="left">Open file at point in another window, but does not select</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">that window.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>v</code></td>
+<td class="left">open file for read only.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>^</code></td>
+<td class="left">open parent directory and create another Dired buffer of the</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">parent directory</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-6" class="outline-4">
+<h4 id="sec-8-24-6"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
+<div class="outline-text-4" id="text-8-24-6">
+<p>
+You flag files for deleting. You mark files for everything else
+(i.e. copy, move, link files&#x2026;). There are many marking commands for
+specialized file types. Except for <b>m</b>, <b>% m</b> and <b>% g</b>, all marking
+commands have prefix <b>\*</b>. I will list the most useful one; you can
+look up the other marking commands in <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Marks-vs-Flags.html#Marks-vs-Flags">Dired Manual</a>.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>m</code></td>
+<td class="left">mark the entry at point. You can mark more than one, either</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">downward or upward with prefix argument.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>% m</code></td>
+<td class="left">mark all files whose names match supplied regexp.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>% g</code></td>
+<td class="left">match all files whose contents match the supplied</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">regexp. This is the same as using <b>Grep</b>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-7" class="outline-4">
+<h4 id="sec-8-24-7"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
+<div class="outline-text-4" id="text-8-24-7">
+<p>
+Just like using a shell, you can execute command at current directory
+in Dired too. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>!</code></td>
+<td class="left">execute a command on selected file or files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>&amp;</code></td>
+<td class="left">execute a command on selected file or files asynchronously.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-8" class="outline-4">
+<h4 id="sec-8-24-8"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
+<div class="outline-text-4" id="text-8-24-8">
+<p>
+These commands use uppercase character. If you see an uppercase
+character for a command, it means <b>S-&lt;character&gt;</b>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C</code></td>
+<td class="left">Prompt for a location to copy the file at point (if no file</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">is marked) or marked files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>R</code></td>
+<td class="left">Prompt for a location to rename or move file at point (if no</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">file is marked) or marked files. This is the same as <code>mv</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">command in shell.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>H</code></td>
+<td class="left">Prompt for a location to create a hard link.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C</code></td>
+<td class="left">Prompt for a location to create a symbolic link.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>M</code></td>
+<td class="left">Change permission bits of file at point or marked files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>O</code></td>
+<td class="left">Change owner of file at point or marked files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-9" class="outline-4">
+<h4 id="sec-8-24-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
+<div class="outline-text-4" id="text-8-24-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>=</b></td>
+<td class="left">compares the file at point with another file supplied by user from</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">a file prompt in the minibuffer.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-24-10" class="outline-4">
+<h4 id="sec-8-24-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
+<div class="outline-text-4" id="text-8-24-10">
+<p>
+This is an excising feature in Dired. In other file explorers, you get
+a tree for browsing your directory. If you have a deep directory
+structure, it will quickly become a nuisance.
+</p>
+
+<p>
+Dired allows user to insert the content of a directory just below the
+current directory. You can search for file names with <b>C-s</b> easily in
+both directories. You can insert as many subdirectories as you want.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-25" class="outline-3">
+<h3 id="sec-8-25"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
+<div class="outline-text-3" id="text-8-25">
+<p>
+This section is taken directly from <a href="http://www.gnu.org/software/emacs/tour/">GNU Emacs Tour</a>, with
+improvements.
+</p>
+
+<p>
+Emacs helps you manipulate and edit files stored in version
+control. Emacs supports CVS, Subversion, bzr, git, hg, and other
+systems, but it offers a uniform interface, called VC, regardless of
+the version control system you are using. The nice thing with a
+unified interface is that even if you don't have much knowledge about
+some version control system (VCS), you can still work with that VCS
+quickly, without burden of learning all the little details of a
+particular VCS.
+</p>
+
+<p>
+Emacs automatically detects when a file you're editing is under
+version control, and displays something like this in the mode line:
+CVS-1.14 to indicate the version control system in use, and the
+current version.
+</p>
+
+<p>
+<code>M-x vc-next-action</code> or <b>C-x v v</b> commits the current file (prompting you
+for a log message) if you've modified it. (Under version control
+systems that require locking, this command also acquires a lock for
+you.)
+</p>
+
+<p>
+VC provides other commands for version control-related tasks:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x v =</code></td>
+<td class="left">Displays a diff showing the changes you've made to the current</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x v ~</code></td>
+<td class="left">Prompts you for a version number and shows you that version of the</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">current file in another window.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x v g</code></td>
+<td class="left">Displays an annotated version of the file showing, for each line,</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">the commit where that line was last changed and by whom. On any</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">line you can press L to view the log message for that commit or D</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">to view the associated diff.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x v l</code></td>
+<td class="left">Displays a log of previous changes to the file. When point is</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">on a particular log entry, you can press d to view the diff</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">associated with that change or f to view that version of the file.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x v u</code></td>
+<td class="left">Revert working copies of the selected fileset to their repository</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">contents. This asks for confirmation if the buffer contents are not</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">identical to the working revision (except for keyword expansion).</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+You can list more operations with <b>C-x v C-h</b>.
+</p>
+
+<p>
+If you use git, a more specialized package exsits dedicated
+to Git only: <a href="https://github.com/magit/magit">Magit</a>, offer much better features than the general
+interface that Emacs provides, except for some features, such as 
+<b>C-x v =</b>, <b>C-x v ~</b> and <b>C-x v u</b> .
+</p>
+
+<p>
+The prefix key bindings for all VC related commands are <b>C-x v</b>. The
+above are just a few commands that I found most useful and used
+frequently, even when I use <a href="https://github.com/magit/magit">Magit</a>.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+Let's practice this nice Emacs feature.
+</p>
+
+<ul class="org-ul">
+<li>First, download a random Git repository.
+</li>
+<li>Open any file in the repository.
+</li>
+<li>Edit that file and save. Do it in various places, so we have many
+hunks.
+</li>
+<li><b>C-x v =</b> to know precise what changes you made.
+</li>
+<li><b>C-x v g</b> to view who changes what line on what commit.
+</li>
+<li><b>C-x v ~</b>, select a commit. After selecting, the version of that
+revision will be displayed in another buffer.
+</li>
+<li><b>C-x v u</b> to revert the buffer back to its original state, after you
+done playing with it.
+</li>
+<li>Rinse and repeat until it becomes part of your workflow.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8-26" class="outline-3">
+<h3 id="sec-8-26"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
+<div class="outline-text-3" id="text-8-26">
+<p>
+In Emacs, you have 3 types of shell commands: <code>shell</code>, <code>term</code> and
+<code>eshell</code>.
+</p>
+
+<p>
+I will just quote a very good answer on StackExchange: 
+</p>
+
+<blockquote>
+<p>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell-Mode.html">shell</a> is the oldest of these 3 choices. It uses Emacs's comint-mode to
+run a subshell (e.g. bash). In this mode, you're using Emacs to edit a
+command line. The subprocess doesn't see any input until you press
+Enter. Emacs is acting like a dumb terminal. It does support color
+codes, but not things like moving the cursor around, so you can't run
+curses-based applications. 
+</p>
+
+<p>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Term-Mode.html">term</a> is a terminal emulator written in Emacs Lisp. In this mode, the
+keys you press are sent directly to the subprocess; you're using
+whatever line editing capabilities the shell presents, not Emacs's. It
+also allows you to run programs that use advanced terminal
+capabilities like cursor movement (e.g. you could run nano or less
+inside Emacs). 
+</p>
+
+<p>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/eshell/index.html">eshell</a> is a shell implemented directly in Emacs Lisp. You're not
+running bash or any other shell as a subprocess. As a result, the
+syntax is not quite the same as bash or sh. It allows things like
+redirecting the output of a process directly to an Emacs buffer (try
+echo hello &gt;#&lt;buffer results&gt;). 
+</p>
+</blockquote>
+
+<p>
+<a href="http://unix.stackexchange.com/questions/104325/what-is-the-difference-between-shell-eshell-and-term-in-emacs">What is the difference between shell, eshell, and term in Emacs?</a>
+</p>
+
+<p>
+I suggest you to use eshell, since you can use any Emacs commands
+within Eshell as well. However, in Eshell, to send an interrupt
+signal, instead of <code>Ctrl+C</code>, you need to press twice: <code>Ctrl+C
+Ctrl+C</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-27" class="outline-3">
+<h3 id="sec-8-27"><a id="ID-02fde8b1-2053-4793-8711-d5664fbe3a29"></a>Ask for help - from Emacs</h3>
+<div class="outline-text-3" id="text-8-27">
+</div>
+<div id="outline-container-sec-8-27-1" class="outline-4">
+<h4 id="sec-8-27-1"><a id="ID-47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927"></a>Built-in help system</h4>
+<div class="outline-text-4" id="text-8-27-1">
+<p>
+I will describe some most useful commands based on my experience. I
+will not list all, so you have to rely on Emacs to get your
+information:
+</p>
+
+<p>
+<b>C-h m</b> runs =describe-mode to see all the key bindings
+and documentations of current major mode and minor modes of a buffer:
+</p>
+
+<p>
+<b>C-h w</b> runs <code>where-is</code> to get which keystrokes invoke a given command.
+</p>
+
+<p>
+<b>C-h c</b> runs <code>describe-key-briefly</code> to find out what command is
+bound to a key. For example, after <b>C-h c</b>, run <b>C-x C-f</b> gives
+you <b>find-files</b>.
+</p>
+
+<p>
+<b>C-h k</b> runs <code>describe-key</code> to find out what command is bound to a
+key, along with the documentation of the command. Use this if you want
+to know how to use a command.
+</p>
+
+<p>
+<b>C-h e</b> runs <code>view-echo-area-messages</code>, allow you to see the
+logging of echo area messages.
+</p>
+
+<p>
+<b>C-h v</b> runs <code>describe-variable</code>, and ask you for a variable; you can
+<b>TAB</b> to complete a variable. This command is important, because aside
+from describing a variable, it allows you to customize the behaviours 
+of Emacs and 3rd party packages.
+</p>
+
+<p>
+<b>C-h C-h</b> runs <b>help-for-help</b>. Use this command if you want to see
+other help commands.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-27-2" class="outline-4">
+<h4 id="sec-8-27-2"><a id="ID-c40810fc-9af0-4b13-8fd2-db999d3e9859"></a>Info</h4>
+<div class="outline-text-4" id="text-8-27-2">
+<p>
+<code>M-x info</code> or <b>C-h i</b> to see all the Info manual in Emacs. If you 
+want to learn more about Emacs, after reading my series of manuals,
+the official Emacs manual in Info. 
+</p>
+
+<p>
+<code>M-x info-emacs-manual</code> or, <b>C-h r</b>, or <b>&lt;f1&gt; r</b> to see manual section
+for Emacs. 
+</p>
+
+<p>
+Use Info often whenever you need to learn something in Emacs. Use it
+early to create a good habit of reading documentation, and this is
+beneficial not only for Emacs.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-27-3" class="outline-4">
+<h4 id="sec-8-27-3"><a id="ID-6edee0b5-213a-4fd4-9c40-041206b86a52"></a>Man</h4>
+<div class="outline-text-4" id="text-8-27-3">
+<p>
+You can view man pages with two commands:
+</p>
+
+<ul class="org-ul">
+<li><code>M-x man</code>: Get a UNIX manual page and put it in a buffer. 
+</li>
+<li><code>M-x woman</code>: Browse UN*X man page for TOPIC (Without using external
+Man program). It means, you can view man page without having the
+<code>man</code> program installed, while the <code>man</code> command above invokes
+external <code>man</code> program.
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><a id="ID-c17a142e-f9a8-4584-989a-e629e3bcd303"></a>Conclusion</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+That's it. Now you can start using Emacs for many things, from editing
+source code to manage files and read documentations. I hope you find
+my manual useful for helping you get the hang of Emacs in as soon as
+possible, and I am really help if you do.
+</p>
+
+<p>
+Remeber, this is just the tip of the iceberg. There are more things
+Emacs is capable of. If you like, follow my other Emacs manuals on
+specific topics.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<a href="index.html">Other posts</a>
+</div>
+</body>
+</html>
