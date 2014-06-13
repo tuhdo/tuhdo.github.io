@@ -991,3 +991,15 @@ blockquote span {
     background-repeat: no-repeat;
     background-position: bottom right;
 }
+
+b {
+    font-weight: bold;
+}
+
+i {
+    font-weight: italic;
+}
+
+u {
+    font-weight: underline;
+}
