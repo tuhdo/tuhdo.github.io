@@ -961,10 +961,7 @@ content: "*** "
 } /* END OF @media screen */
 /* Code Samples */
 pre {
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -o-pre-wrap;
-    background: 	#FFFFDD;
+    background: 	#FFFFEE;
 }
 #content #pre-stylish code {
     display: block;
