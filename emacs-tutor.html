@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Tutorial (PART 1) - THE BASICS</title>
-<!-- 2014-06-15 CN 22:45 -->
+<!-- 2014-06-16 T2 00:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -240,11 +240,11 @@ for the JavaScript code in this tag.
 <li><a href="#sec-8-25-1">Enter Dired</a></li>
 <li><a href="#sec-8-25-2">Navigation</a></li>
 <li><a href="#sec-8-25-3">Create files</a></li>
-<li><a href="#sec-8-25-4">Deleting files</a></li>
-<li><a href="#sec-8-25-5">Visit files</a></li>
-<li><a href="#sec-8-25-6">File Marking</a></li>
-<li><a href="#sec-8-25-7">Execute shell commands in Dired</a></li>
-<li><a href="#sec-8-25-8">Operating on files</a></li>
+<li><a href="#sec-8-25-4">Visit files</a></li>
+<li><a href="#sec-8-25-5">File Marking</a></li>
+<li><a href="#sec-8-25-6">Operating on files</a></li>
+<li><a href="#sec-8-25-7">Deleting files</a></li>
+<li><a href="#sec-8-25-8">Execute shell commands in Dired</a></li>
 <li><a href="#sec-8-25-9">Compare files</a></li>
 <li><a href="#sec-8-25-10">Subdirectories</a></li>
 </ul>
@@ -321,7 +321,7 @@ different editor when you learn a random language.
 </p>
 
 <p>
-Take yourself an Emacs <a href="http://www.gnu.org/software/emacs/tour/">tour</a> from the official Emacs homepage.
+Have a <a href="http://www.gnu.org/software/emacs/tour/">tour</a> from the official Emacs homepage.
 </p>
 
 <p>
@@ -2529,6 +2529,8 @@ the input again with:
 </li>
 <li><b>M-n</b> moves to the next input in minibuffer history.
 </li>
+<li><b>M-r</b> searches for an input that matches the supplied regexp.
+</li>
 </ul>
 
 <p>
@@ -3156,13 +3158,13 @@ it. What command do you like the most?
 <tbody>
 <tr>
 <td class="left"><code>n</code></td>
-<td class="left">Fove to next entry below point.</td>
+<td class="left">Move to next entry below point.</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
 <td class="left"><code>p</code></td>
-<td class="left">Fove to previous entry above point.</td>
+<td class="left">Move to previous entry above point.</td>
 </tr>
 </tbody>
 <tbody>
@@ -3190,6 +3192,7 @@ to the entry which is 4 lines below.
 To create a new file in Dired, you use the same <b>C-x C-f</b> and <b>C-x 4
 C-f</b> variant.
 </p>
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3207,77 +3210,34 @@ C-f</b> variant.
 <tbody>
 <tr>
 <td class="left"><code>+</code></td>
-<td class="left">prompts for a directory name and create one after <b>RET</b>.</td>
+<td class="left">Prompts for a directory name and create one after <b>RET</b>.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x C-f</code></td>
+<td class="left">Creat a new find. This is your regular <code>find-file</code>.</td>
 </tr>
 </tbody>
 </table>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<ul class="org-ul">
+<li>Create a new directory called "dired<sub>practice</sub>" or a name of your
+choice.
+</li>
+<li>Create a new file of your choice.
+</li>
+</ul>
 </div>
 </div>
+
 <div id="outline-container-sec-8-25-4" class="outline-4">
-<h4 id="sec-8-25-4"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
+<h4 id="sec-8-25-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
 <div class="outline-text-4" id="text-8-25-4">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Key</th>
-<th scope="col" class="left">Binding</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left"><code>d</code></td>
-<td class="left">flags file for deletion.</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>u</code></td>
-<td class="left">remove flagged files.</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>#</code></td>
-<td class="left">flag all auto-save files (files whose names start and end with ‘#’).</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>~</code></td>
-<td class="left">flag all backup files</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>% &amp;*</code></td>
-<td class="left">flag for deletion all files that match <code>dired-garbage-files-regexp</code>.</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>% d</code></td>
-<td class="left">flag files which matches a regexp.</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>x</code></td>
-<td class="left">confirm and delete flagged files.</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="outline-container-sec-8-25-5" class="outline-4">
-<h4 id="sec-8-25-5"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
-<div class="outline-text-4" id="text-8-25-5">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3323,11 +3283,86 @@ C-f</b> variant.
 </tr>
 </tbody>
 </table>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+<ul class="org-ul">
+<li>Assume you are in your newly created directory in previous section.
+</li>
+<li>Go up to the parent directory using <code>^</code>.
+</li>
+<li>Open another directory. You will enter that directory, and a new
+buffer is created for listing the content of that directory.
+</li>
+<li>Go up to the parent directory using <code>^</code>.
+</li>
+<li>Repeat opening and go up parent directory a few times.
+</li>
+<li><b>C-x b</b> and <b>TAB</b>. You will see a bunch of opened directory through
+your filesystem navigation. Whenever you open a file or directory,
+using Dired or other methods, you have a buffer of that directory.
+
+<p>
+At this point, you may feel annoyed that Dired open too many buffers
+and it will goes out of control at some point. Worry not! That's why
+you have <code>ibuffer</code>.
+</p>
+</li>
+
+<li><code>M-x ibuffer</code> or <code>C-x C-b</code> if you already replace <code>list-buffers</code>.
+</li>
+<li><code>/ m</code> and select <code>dired-mode</code>. <code>/ g</code> and name the group <code>Dired</code> and
+you have a separate grouop for managing directories. No more
+cluttered view with other buffers. You can stop worrying now.
+
+
+<div class="figure">
+<p><a href="static/ibuffer-dired-group.gif"><img src="static/ibuffer-dired-group.gif" alt="ibuffer-dired-group.gif" /></a>
+</p>
+</div>
+
+<p>
+If you  want to enter directory you visisted, open <code>ibuffer</code> and
+look for it. This is efficient for a complex directory tree. For
+example, if you have to constantly work with these many directories:
+</p>
+
+<ul class="org-ul">
+<li><code>directory_root/dir1/dir2/dir3/dir4/</code>
+</li>
+<li><code>directory_root/dir2/dir2/dir3/dir4/</code>
+</li>
+<li><code>directory_root/dir5/dir6/dir7/dir8/</code>
+</li>
+<li>&#x2026;.
+</li>
+</ul>
+<p>
+The layouts of top two directories are common when you have to
+create patches. Working in normal file manager like File Explorer in
+Window, you only one directory view. Going back and forth is tedious
+and inefficient, and you have to remember differnt directory
+paths. To make it easy, you have to open multiple File Explorer
+manually. Under the terminal, you have to create symbolic links for
+those directories to save you time. However, you still have to
+manage the links manually, like delete when they are not used, or
+update when directory the links pointing to are moved.
+</p>
+
+<p>
+Emacs does it all for you, <i>automatically</i>. With this feature, you
+can freely navigate the filesytem without having to remember the
+working directory to get back later, because You can easily go back
+to it quick and easy.
+</p>
+</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-sec-8-25-6" class="outline-4">
-<h4 id="sec-8-25-6"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
-<div class="outline-text-4" id="text-8-25-6">
+<div id="outline-container-sec-8-25-5" class="outline-4">
+<h4 id="sec-8-25-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
+<div class="outline-text-4" id="text-8-25-5">
 <p>
 You flag files for deleting. You mark files for everything else
 (i.e. copy, move, link files&#x2026;). There are many marking commands for
@@ -3379,48 +3414,16 @@ look up the other marking commands in <a href="https://www.gnu.org/software/emac
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div id="outline-container-sec-8-25-7" class="outline-4">
-<h4 id="sec-8-25-7"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
-<div class="outline-text-4" id="text-8-25-7">
+
 <p>
-Just like using a shell, you can execute command at current directory
-in Dired too. 
+<b><span class="underline">Exercise</span></b>: Practice the listed marking commands. Keep a few marked
+files/directories for the next section.
 </p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="left">Key</th>
-<th scope="col" class="left">Binding</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="left"><code>!</code></td>
-<td class="left">execute a command on selected file or files.</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>&amp;</code></td>
-<td class="left">execute a command on selected file or files asynchronously.</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
-<div id="outline-container-sec-8-25-8" class="outline-4">
-<h4 id="sec-8-25-8"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
-<div class="outline-text-4" id="text-8-25-8">
+<div id="outline-container-sec-8-25-6" class="outline-4">
+<h4 id="sec-8-25-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
+<div class="outline-text-4" id="text-8-25-6">
 <p>
 These commands use uppercase character. If you see an uppercase
 character for a command, it means <b>S-&lt;character&gt;</b>.
@@ -3485,10 +3488,136 @@ character for a command, it means <b>S-&lt;character&gt;</b>.
 <td class="left">Change permission bits of file at point or marked files.</td>
 </tr>
 </tbody>
+</table>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+<ul class="org-ul">
+<li>Create a new directory at the current directory.
+</li>
+<li>Assume that your still keep the marked file in the above section;
+<code>C</code> and prompt for the directory you have created. <b>RET</b> to confirm
+copying.
+</li>
+<li>If you want to move marked files/directories, use <code>R</code>. If you want
+to rename, mark only a single file/directory and put a new name in
+the rename prompt.
+</li>
+<li>Enter the directory you have just copied the files.
+</li>
+<li>Move your cursor on a file and <code>H</code> to create a hard link. A prompt
+ask for destionation and the link name. Create a link at the current
+location with different name from the original file.
+</li>
+<li>Move your cursor on a file and <code>S</code> to create a symolic link. A prompt
+ask for destionation and the link name. Create a link at the current
+location with different name from the original file.
+</li>
+<li>Move your cursor on either the hardlink or symlink you created and
+<code>M</code> and change the bit permission; set it to something like <code>000</code>.
+</li>
+<li>After that, press <code>g</code> to refresh the Dired buffer. Look at the
+original files the links point to, you will see the permission
+attributes are cleared and you won't be able to access those files.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-8-25-7" class="outline-4">
+<h4 id="sec-8-25-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
+<div class="outline-text-4" id="text-8-25-7">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="left"><code>O</code></td>
-<td class="left">Change owner of file at point or marked files.</td>
+<td class="left"><code>d</code></td>
+<td class="left">flags file for deletion.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>u</code></td>
+<td class="left">remove flagged files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>#</code></td>
+<td class="left">flag all auto-save files (files whose names start and end with ‘#’).</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>~</code></td>
+<td class="left">flag all backup files</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>% &amp;*</code></td>
+<td class="left">flag for deletion all files that match <code>dired-garbage-files-regexp</code>.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>% d</code></td>
+<td class="left">flag files which matches a regexp.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>x</code></td>
+<td class="left">confirm and delete flagged files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-sec-8-25-8" class="outline-4">
+<h4 id="sec-8-25-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
+<div class="outline-text-4" id="text-8-25-8">
+<p>
+Just like using a shell, you can execute command at current directory
+in Dired too. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>!</code></td>
+<td class="left">execute a command on selected file or files.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>&amp;</code></td>
+<td class="left">execute a command on selected file or files asynchronously.</td>
 </tr>
 </tbody>
 </table>
