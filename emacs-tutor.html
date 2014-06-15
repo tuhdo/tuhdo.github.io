@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Tutorial (PART 1) - THE BASICS</title>
-<!-- 2014-06-15 CN 16:02 -->
+<!-- 2014-06-15 CN 22:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -713,6 +713,11 @@ With GUI:
 <li>Add prefix and path to where you want to install. This is useful if
 you work on remote server without root access: <code>./configure
   --with-x-tookit=gtk3 [--prefix=/path/to/dir]</code>
+
+<p>
+You should use GTKx 3, so you will be able to use true type fonts
+such as Inconsolata for better Emacs experience.
+</p>
 </li>
 <li><code>make</code>
 </li>
@@ -753,10 +758,10 @@ After installation is done, as these to your <b>.bashrc</b> or <b>.zshrc</b>:
 
 <div class="org-src-container">
 
-<pre class="src src-shell-script"><span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">e</span>=<span style="color: #70c0b1;">'emacsclient -t'</span>
-<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">ec</span>=<span style="color: #70c0b1;">'emacsclient -c'</span>
-<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vim</span>=<span style="color: #70c0b1;">'emacsclient -t'</span>
-<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vi</span>=<span style="color: #70c0b1;">'emacsclient -t'</span>
+<pre class="src src-shell-script"><span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">e</span>=<span style="color: #70c0b1;">'emacs'</span>
+<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">ec</span>=<span style="color: #70c0b1;">'emacs'</span>
+<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vim</span>=<span style="color: #70c0b1;">'emacs'</span>
+<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vi</span>=<span style="color: #70c0b1;">'emacs'</span>
 </pre>
 </div>
 
@@ -3879,7 +3884,7 @@ Finally, thanks to <a href="http://orgmode.org/worg/">Worg</a> for this awesome 
 </div>
 <div id="postamble" class="status">
 
-<a href="index.html">Other posts</a>
+<a href="archive.html">Other posts</a>
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
