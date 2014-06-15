@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>PART 1 - THE BASICS</title>
-<!-- 2014-06-15 CN 15:25 -->
+<!-- 2014-06-15 CN 15:35 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -702,19 +702,21 @@ save it for something more interesting.
 <p>
 With GUI:
 </p>
+
 <ul class="org-ul">
 <li>Download <a href="http://www.gnu.org/software/emacs/">Emacs</a>; or if you prefer latest Emacs, get it from source: <code>git clone http://repo.or.cz/r/emacs.git</code>
 </li>
-
-<li>If you download from the homepage, unpackage: tar xvf emacs-*.tar.gz
+<li>If you download from the homepage, unpackage: <code>tar xvf emacs-*.tar.gz</code>
 </li>
-<li>cd emacs-&lt;version&gt;*
+<li><code>cd emacs-&lt;version&gt;*</code>
 </li>
-<li>./configure &#x2013;with-x-tookit=gtk3 [&#x2013;prefix=/path/to/dir]
+<li>Add prefix and path to where you want to install. This is useful if
+you work on remote server without root access: <code>./configure
+  --with-x-tookit=gtk3 [--prefix=/path/to/dir]</code>
 </li>
-<li>make
+<li><code>make</code>
 </li>
-<li>sudo make install
+<li><code>sudo make install</code>
 </li>
 </ul>
 
@@ -730,13 +732,13 @@ Using in Terminal only:
 </p>
 
 <ul class="org-ul">
-<li>Download and unpackage as above
+<li>Download and unpackage as above.
 </li>
-<li>./configure &#x2013;without-x [&#x2013;prefix=/path/to/dir]
+<li><code>./configure --without-x [--prefix=/path/to/dir]</code>
 </li>
-<li>make
+<li><code>make</code>
 </li>
-<li>sudo make install
+<li><code>sudo make install</code>
 </li>
 </ul>
 
@@ -2457,7 +2459,8 @@ OS. For example, these are two Emacs frames:
 If you are using the GUI version of Emacs, it will always be a
 dash. However, if you use Emacs in terminal, you cannot have multiple
 frame window like the above screenshot. Instead, Emacs creates
-<i>virtual frames</i> with names like F1, F2&#x2026;, Fn like this:
+<i>virtual frames</i> with names like F1, F2&#x2026;, Fn like this (notice my
+mouse pointer):
 </p>
 
 
