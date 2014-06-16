@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-16 T2 21:50 -->
+<!-- 2014-06-17 T3 00:38 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -654,13 +654,14 @@ So you can start Emacs as fast as vim!
 <h3 id="sec-5-2"><a id="ID-301e3dcb-a00d-4b20-a5a8-f2b0946c56d1"></a>Windows:</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
-You can either download it on GNU Emacs homepage or better, download a
-64 bit version: <a href="http://semantic.supelec.fr/popineau/programming-emacs.html">http://semantic.supelec.fr/popineau/programming-emacs.html</a>.
+You can either download it on GNU Emacs homepage or better, download
+the latest 64 bit version:
+<a href="http://semantic.supelec.fr/popineau/programming-emacs.html">http://semantic.supelec.fr/popineau/programming-emacs.html</a>.
 </p>
 
 <p>
-After that, unpackage it in <b>C:\Program Files\</b> and create a shortcut
-to "C:\Program Files\Emacs\bin\emacsclientw.exe" on desktop.
+After that, unpackage it in <code>C:\Program Files\</code> and create a shortcut
+to <code>C:\Program Files\Emacs\bin\emacsclientw.exe</code> on desktop.
 </p>
 </div>
 </div>
@@ -808,12 +809,14 @@ you learn Emacs properly.
 First, you have to install <a href="http://www.gnu.org/software/global/global.html">GNU Global</a>.
 </p>
 
-
 <ul class="org-ul">
-<li><b>Linux</b>: Click <a href="http://www.gnu.org/software/global/download.html">here</a> and download the latest stable GNU
-Global. Then change to the directory where you have just downloaded
-and follow these steps:
+<li><b><span class="underline">Linux</span></b>:
 
+<p>
+Click <a href="http://www.gnu.org/software/global/download.html">here</a> and download the latest stable GNU Global. Then change to
+the directory where you have just downloaded and follow these
+steps:
+</p>
 <ul class="org-ul">
 <li><code>tar xvf global-&lt;version&gt;.tar.gz</code>
 </li>
@@ -829,9 +832,48 @@ and follow these steps:
 </li>
 </ul>
 </li>
-<li><b>Windows</b>: Click <a href="http://www.gnu.org/software/global/download.html">here</a> and click <a href="http://global.adoxa.vze.com/">DOS and Windows 32 version</a> to download.
+
+<li><b><span class="underline">Windows</span></b>:
+
+<p>
+Click <a href="http://www.gnu.org/software/global/download.html">here</a> and click "DOS and Windows 32 version" to download the
+binary archive.
+</p>
+
+<p>
+After your download the archive, create a directory <b>C:\root</b> and
+unzip the package into that folder:
+</p>
+
+
+<div class="figure">
+<p><a href="static/gnu-global-dir-struct.jpg"><img src="static/gnu-global-dir-struct.jpg" alt="gnu-global-dir-struct.jpg" /></a>
+</p>
+</div>
+
+<p>
+Right click on <b>Computer</b> -&gt; <b>Properties</b> -&gt; <b>Advanced System Settings</b> -&gt;
+<b>Environment Variables</b>.
+</p>
+
+<p>
+If PATH variable does not exist, click New. Then in "Variable Name",
+enter <code>PATH</code>; in "Variable Value", enter <code>C:\root\bin</code>. From now on,
+if you use ggtags, Emacs knows where to find GNU Global
+programs. <code>$PATH</code> is the variable where Emacs search for executable
+programs. If you want more executable programs, add more path to $PATH
+variable. Each path is separated by <code>;</code> like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/path-variable-windows.jpg"><img src="static/path-variable-windows.jpg" alt="path-variable-windows.jpg" /></a>
+</p>
+</div>
 </li>
-<li><b>Mac OSX</b>: Mac OSX version is distributed by <a href="http://www.macports.org/">MacPorts</a>.
+
+<li><b><span class="underline">Mac OSX</span></b>:
+Mac OSX version is distributed by <a href="http://www.macports.org/">MacPorts</a>.
 </li>
 </ul>
 
@@ -1812,7 +1854,7 @@ directory of buffer of that entry.
 </thead>
 <tbody>
 <tr>
-<td class="left">,</td>
+<td class="left"><code>,</code></td>
 <td class="left">Rotate between sorting modes</td>
 </tr>
 </tbody>
