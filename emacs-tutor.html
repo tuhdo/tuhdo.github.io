@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Tutorial (PART 1) - THE BASICS</title>
-<!-- 2014-06-16 Mon 14:07 -->
+<!-- 2014-06-16 T2 20:52 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -179,17 +179,6 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="preamble" class="status">
-
-<!-- hitwebcounter Code START -->
-<a href="http://www.hitwebcounter.com/" target="_blank">
-<img src="http://hitwebcounter.com/counter/counter.php?page=5730770&style=0036&nbdigits=6&type=page&initCount=100" title="" Alt=""   border="0" >
-</a><br/>
-<!-- hitwebcounter.com --><a href="http://www.hitwebcounter.com/countersiteservices.php" title="Invisible Stats"
-target="_blank" style="font-family: Geneva, Arial, Helvetica, sans-serif;
-font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Stats</em>
-</a>
-</div>
 <div id="content">
 <h1 class="title">Emacs Mini Tutorial (PART 1) - THE BASICS</h1>
 <div id="table-of-contents">
@@ -207,17 +196,19 @@ font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Sta
 <li><a href="#sec-5-3">Mac OS X:</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">Important thing to do before using Emacs: Swap Control and Capslock</a>
+<li><a href="#sec-6">Swap Control and Capslock</a>
 <ul>
 <li><a href="#sec-6-1">Windows</a></li>
 <li><a href="#sec-6-2">Linux</a></li>
 <li><a href="#sec-6-3">Mac OS X</a></li>
+<li><a href="#sec-6-4">If you don't like to swap Capslock and Control&#x2026;</a></li>
 </ul>
 </li>
 <li><a href="#sec-7">Demo: Browse the Linux kernel source code like a pro</a>
 <ul>
-<li><a href="#sec-7-1">Setup</a></li>
-<li><a href="#sec-7-2">Browsing the kernel source tree</a></li>
+<li><a href="#sec-7-1">A few things to know before we start</a></li>
+<li><a href="#sec-7-2">Setup</a></li>
+<li><a href="#sec-7-3">Browsing the kernel source tree</a></li>
 </ul>
 </li>
 <li><a href="#sec-8">Concepts</a>
@@ -273,6 +264,12 @@ font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Sta
 </ul>
 </li>
 <li><a href="#sec-9">Conclusion</a></li>
+<li><a href="#sec-10">Appendix</a>
+<ul>
+<li><a href="#sec-10-1">Why Emacs? (Extended)</a></li>
+<li><a href="#sec-10-2">More on Emacs history</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -280,56 +277,7 @@ font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Sta
 <h2 id="sec-1"><a id="ID-76607dbd-b97c-43dd-975b-3236192408b6"></a>Why Emacs?</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Emacs allows you to do much more than just editing. Emacs is no mere
-editor like others, either in terminal or in GUI. Emacs is a
-development <b>platform</b>. Emacs is a <b>virtual machine</b> that interprets
-its own <a href="http://www.emacswiki.org/emacs-ja/ByteCodeEngineering">bytecode</a>.
-</p>
-
-<p>
-You can write all sorts of programs in Emacs to add more features
-using its own language - Emacs Lisp - in an <b>easy</b> way. With the
-extensibility, Emacs can do many things: an editor, a file manager, an
-email client, a news reader, a shell&#x2026; 
-</p>
-
-<p>
-You can think of Emacs as an enhanced interpreter and evaluate any
-valid Emacs Lisp code anywhere in Emacs, as long as the code is
-visible on your screen. To illustrate my point, here is an example:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">hello</span> ()
-  (interactive)
-  (message <span style="color: #70c0b1;">"Hello World"</span>))
-</pre>
-</div>
-
-<p>
-You can paste that code snippet <b>anywhere</b> - yes,*anywhere* - in Emacs
-and tell Emacs to execute that code. If the code snippet has valid
-syntax, Emacs executes successfully and you will have command to print
-"Hello World" at the bottom of screen.
-</p>
-
-<p>
-A great advantage of this approach is, if you want to change
-behaviours of Emacs, you write some Emacs Lisp code and execute and
-see immediate results, right inside Emacs. Emacs is beyond an
-editor. Emacs is a programming platform that has an editor. Don't be
-confuse Emacs with other <i>real editors</i>, which can <b>only be used for
-editing</b>.
-</p>
-
-<p>
-In practice, Emacs also offers many editing interfaces: built-in
-Emacs, <a href="http://ergoemacs.github.io/ergoemacs-mode/gradual-adoption.html">Ergoemacs</a> and <a href="https://gitorious.org/evil/pages/Home">Evil</a> - or Vim inside Emacs - key bindings. Emacs
-has internal tools and interfaces to external tools for many
-programming languages. Learning Emacs means you can use the same
-editor for different languages. Otherwise, you will have to learn
-different editor when you learn a random language.
+Basically, you can do many things aside from editing.
 </p>
 
 <p>
@@ -508,102 +456,6 @@ original Emacs Manual for Twenex; and (the only cartoon RMS has ever
 drawn) the Self-Documenting Extensible Editor.   
 </p>
 </blockquote>
-
-<p>
-Ever heard of a computing system called <b>Lisp Machine</b>? I bet many of
-you don't. Me, too, until I started using Emacs and gradually learning
-enough to know such thing ever exist. This old article is an
-interesting read: <a href="http://emacs.wordpress.com/2007/01/14/the-ghost-in-the-lisp-machine/">The Ghost in the Lisp Machine</a>
-</p>
-
-<blockquote>
-<p>
-A friend of mine used to say that Emacs fills our yearning for a Lisp
-Machine. I tend to agree with him: Emacs is not just an editor, but a
-full integrated environment where you can perform virtually any
-imaginable task; and, most importantly, the inner workings of the
-system are open to you to explore and extend. Using, for extra fun,
-Lisp. No, i don’t think that Elisp is the nicest Lisp incarnation
-around, but is far better than, say, C, and i still prefer it to other
-scripting languages. Moreover, the awesome range of libraries at your
-disposal makes up for many of the deficiencies in the language. 
-</p>
-
-<p>
-Living in Emacs is addictive. Imagine an operating system where you
-can switch from writing code to browsing the web or chatting without
-leaving a consistent environment, with the same set of commands and
-shortcuts. Imagine a set of integrated applications where data is
-seamlessly shared, where any single functionality can be tweaked,
-extended and adapted to your particular needs. Where everything is
-easily scriptable. Imagine, in addition, that the environment provides
-powerful and complete interactive self-documentation facilities with
-which the user can find out what is available. I have yet to find an
-operating system providing such an integrated environment. Not even
-Mac OS X, where AppleScript support is often lacking and system
-services are underused. 
-</p>
-
-<p>
-Of course, the key ingredient here is Emacs’ extensibility. Far from
-being an afterthought or simply one of its features, extensibility is
-the central aspect of Emacs’ architecture. Actually, the whole point
-of this post is to recommend you reading Richard Stallman’s 1981 essay
-EMACS: The Extensible, Customizable Display Editor, which explains
-much better than I could the strong points of Emacs design, i.e.,
-those traits that make Emacs more, much more, than just an
-editor. From the horse’s mouth: 
-</p>
-
-
-<p>
-<i>Extensibility means that the user can add new editing commands or
-change old ones to fit his editing needs, while he is</i>
-<i>editing. EMACS is written in a modular fashion, composed of many
-separate and independent functions. The user extends EMACS by</i>
-<i>adding or replacing functions, writing their definitions in the
-same language that was used to write the original EMACS system. We</i>
-<i>will explain below why this is the only method of extension which
-is practical in use: others are theoretically equally good but</i>
-<i>discourage use, or discourage nontrivial use</i>.
-</p>
-
-<p>
-[&#x2026;]
-</p>
-
-<p>
-<i>User customization helps in another, subtler way, by making the
-whole user community into a breeding and testing ground for new</i>
-<i>ideas. Users think of small changes, try them, and give them to
-other users–if an idea becomes popular, it can be incorporated</i>
-<i>into the core system. When we poll users on suggested changes,
-they can respond on the basis of actual experience rather than</i>
-<i>thought experiments.</i>
-</p>
-
-<p>
-The article goes on explaining the organization of the Emacs system,
-how it depends on its interpreter, Elisp’s main features and how
-built-in self-documentation is provided. Also interesting is the list
-of related systems at the end of the essay: Lisp machines, LOGO,
-MacLisp and Smalltalk. We’re definitely in good company! 
-</p>
-</blockquote>
-
-<p>
-Emacs is a miniature of a Lisp Machine. You can have a tour in <a href="http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html">Lisp
-Machine online museum</a>.
-</p>
-
-<p>
-You will learn how to extend Emacs with various packages built
-from Emacs community. That's a good start. To truly able to extend
-Emacs, you should learn Elisp and feel the joy. However, with the
-current packages available, if you don't like to extend the editor and
-just using it, leverage the existing package system also suffices for
-many use cases (such as browsing C/C++ source code like Linux kernel).
-</p>
 </div>
 </div>
 <div id="outline-container-sec-4" class="outline-2">
@@ -773,27 +625,18 @@ manager of your Linux distribution.
 </p>
 
 <p>
-After installation is done, as these to your <b>.bashrc</b> or <b>.zshrc</b>:
+After installation is done, at this line to your <b>.bashrc</b> or <b>.zshrc</b>:
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-shell-script"><span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">e</span>=<span style="color: #70c0b1;">'emacs -nw'</span>
-<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">ec</span>=<span style="color: #70c0b1;">'emacs'</span>
-<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vim</span>=<span style="color: #70c0b1;">'emacs -nw'</span>
-<span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">vi</span>=<span style="color: #70c0b1;">'emacs -nw'</span>
+<pre class="src src-shell-script"><span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">em</span>=<span style="color: #70c0b1;">'emacs'</span>
 </pre>
 </div>
 
 <p>
-Before using those aliases, remember to start the Emacs server:
+So you can start Emacs as fast as vim!
 </p>
-
-<div class="org-src-container">
-
-<pre class="src src-shell-script">emacs --daemon
-</pre>
-</div>
 </div>
 </div>
 <div id="outline-container-sec-5-2" class="outline-3">
@@ -810,7 +653,6 @@ to "C:\Program Files\Emacs\bin\emacsclientw.exe" on desktop.
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-5-3" class="outline-3">
 <h3 id="sec-5-3"><a id="ID-f86712b7-d138-4ad3-aef0-494a744c3b34"></a>Mac OS X:</h3>
 <div class="outline-text-3" id="text-5-3">
@@ -821,9 +663,24 @@ Download compiled Emacs for Mac OS X: <a href="http://emacsformacosx.com/">http:
 </div>
 </div>
 <div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Important thing to do before using Emacs: Swap Control and Capslock</h2>
+<h2 id="sec-6"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Swap Control and Capslock</h2>
 <div class="outline-text-2" id="text-6">
+<p>
+Swapping Control and Capslock, in general, not required to make the
+best out of Emacs, if you at least use regular key PC keyboard or
+better. However, it is not nice at all on a laptop keyboard. If you
+use a laptop keyboard for writing code, I strongly recommended to swap
+Control and Capslock for better Emacs experience.
+</p>
+
+<p>
+Swapping Control and Caplocks will not only benefit for using Emacs,
+it is beneficial in general, as Control is a much more frequently used
+key than Capslocks. Popular shells like Bash or Zsh use Control a lot
+for quick cursor movement.
+</p>
 </div>
+
 <div id="outline-container-sec-6-1" class="outline-3">
 <h3 id="sec-6-1"><a id="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d"></a>Windows</h3>
 <div class="outline-text-3" id="text-6-1">
@@ -845,6 +702,11 @@ Put this in your shell init file (.bashrc, .zshrc&#x2026;):
 <pre class="src src-shell-script">/usr/bin/setxkbmap -option <span style="color: #70c0b1;">"ctrl:swapcaps"</span>
 </pre>
 </div>
+
+<p>
+If you use Ubuntu, follow this guide: <a href="http://askubuntu.com/a/412622/13847">Swap caps lock and ctrl in
+ubuntu 13.10</a>.
+</p>
 </div>
 </div>
 
@@ -857,20 +719,78 @@ bindings</a>
 </p>
 </div>
 </div>
+
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><a id="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d"></a>If you don't like to swap Capslock and Control&#x2026;</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+You can use your Palm to press Control in standard PC keyboard.
+</p>
+</div>
+</div>
 </div>
 <div id="outline-container-sec-7" class="outline-2">
 <h2 id="sec-7"><a id="ID-1a530e6f-85a0-4fff-ac23-14463f358436"></a>Demo: Browse the Linux kernel source code like a pro</h2>
 <div class="outline-text-2" id="text-7">
 </div>
 <div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><a id="ID-c22e3814-8f4c-48e0-b0d7-6beac6a2260e"></a>Setup</h3>
+<h3 id="sec-7-1"><a id="ID-de0509ca-e6de-4a0a-92ef-b7f18a492252"></a>A few things to know before we start</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
-If you are impatient, you can immediately use Emacs to do practical
-thing like jumping around a big source tree like Linux kernel. 
-However,this is just a demo. You can browse the Linux source 
-tree in this section and learn quite a bit about Emacs, but you can do
-much more if you actually follow my manual.
+You will learn quite a bit about Emacs in this section, enough for
+following the demo.
+</p>
+
+<p>
+In Emacs, <code>M-</code> means <code>Meta</code>, which is the <code>Alt</code> key and <code>C-</code> means the
+<code>Control</code> key in regular computer keyboard. From now on, when I say
+<code>M-x command</code>, it means you press <code>M-x</code> and type <code>command</code> in.
+</p>
+
+<p>
+When I say <b>C-x b</b>, it means you hold <b>Control</b> and <b>x</b> keys together,
+then release and press <b>b</b> key. <b>C-x b</b> allows to switch between Emacs
+buffers. Buffer is where you edit your file if it is associated with a file, or
+for displaying text in Emacs if not.
+</p>
+
+<p>
+Emacs Lisp is the language for you to customize and extends
+Emacs. Emacs Lisp belongs the the Lisp family of languages. Lisp has a
+long history since 1959. At this stage, you don't need to know about
+Emacs Lisp.
+</p>
+
+<p>
+<code>*sratch*</code> buffer is a buffer where you experiment with Emacs Lisp
+code.
+</p>
+
+<p>
+If your Emacs screen is dividied into smaller screens like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/multiple-windows.gif"><img src="static/multiple-windows.gif" alt="multiple-windows.gif" /></a>
+</p>
+</div>
+
+<p>
+Do you notice the blinking cursor on the top left screen? If you press
+<b>C-x 1</b>, Emacs will bury other two screens and make the screen with
+blinking cursor a whole.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2"><a id="ID-c22e3814-8f4c-48e0-b0d7-6beac6a2260e"></a>Setup</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+You have learnt quite a bit about Emacs. Now, you can immediately use
+Emacs to do practical thing like jumping around a big source tree like
+Linux kernel.  However, this is just a demo. You can do much more if
+you learn Emacs properly.
 </p>
 
 <p>
@@ -924,32 +844,22 @@ Paste the following code into the <code>*scratch*</code> buffer:
 </div>
 
 <p>
-The above code you see is called Emacs Lisp. Emacs Lisp is a
-programming language that belongs to the Lisp family of languages,
-used for extending Emacs. <code>*scratch*</code> is where you experiment with
-Emacs Lisp code.
+The above code you see is Emacs Lisp.
 </p>
 
 <p>
-In Emacs, <code>M-</code> means <code>Meta</code>, which is the <code>Alt</code> key and <code>C-</code> means the
-<code>Control</code> key in regular computer keyboard. From now on, when I say
-<code>M-x command</code>, it means you press <code>M-x</code> and type <code>command</code> in. 
+Then, <code>M-x eval-buffer</code> and press <b>RET</b>.
 </p>
 
 <p>
-Back to our demo, <code>M-x eval-buffer</code>. You can also type <code>eval-b</code>
-and press <b>TAB</b>. 
-</p>
-
-<p>
-After the <code>*scratch*</code> buffer is evaluated, <code>M-x list-package</code>. 
-Wait a few seconds and you will see of list of plugins for Emacs. In
-Emacs, a plugin is called a <code>package</code>. Press <b>C-s</b>, and type <code>ggtags</code>
-and press <b>C-s</b> again. Your cursor will move to the package
-<code>ggtags</code>. Be sure to select one from <code>melpa</code>; you should see a column
-written <code>*melpa</code> and select the row that has <code>melpa</code> in it. Press
-<b>Enter</b> to stay at that position. As you see, <b>C-s</b> is used for
-searching text inside a buffer.
+After runs <code>eval-buffer</code>, the whole <code>*scratch*</code> buffer is
+processed. Then, <code>M-x list-package</code>. Wait a few seconds and you will
+see of list of plugins for Emacs. In Emacs, a plugin is called a
+<code>package</code>. Press <b>C-s</b>, and type <code>ggtags</code> and press <b>C-s</b> again. Your
+cursor will move to the package <code>ggtags</code>. Be sure to select one from
+<code>melpa</code>; you should see a column written <code>*melpa</code> and select the row
+that has <code>melpa</code> in it. Press <b>Enter</b> to stay at that position. As you
+see, <b>C-s</b> is used for searching text inside a buffer.
 </p>
 
 <p>
@@ -961,7 +871,7 @@ finish its installation.
 
 <p>
 After installation is done, close the status buffer by pressing <b>C-x
-1</b> (explain later), switch back to <code>*scratch*</code> buffer by <b>C-x
+1</b>, switch back to <code>*scratch*</code> buffer by <b>C-x
 b</b>. Paste the following code:
 </p>
 
@@ -989,9 +899,9 @@ That's it. Now you can browse kernel easy and fast in Emacs
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><a id="ID-879d6e18-4162-43f6-b5e8-39fa5b5266c7"></a>Browsing the kernel source tree</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3"><a id="ID-879d6e18-4162-43f6-b5e8-39fa5b5266c7"></a>Browsing the kernel source tree</h3>
+<div class="outline-text-3" id="text-7-3">
 <p>
 You can enjoy exploring the kernel source tree by following these steps:
 </p>
@@ -3401,18 +3311,6 @@ you read and practice these commands, read the <a href="https://www.gnu.org/soft
 </tbody>
 <tbody>
 <tr>
-<td class="left"><code>C-x C-j</code></td>
-<td class="left">Enter Dired <i>at the current directory</i> of active buffer</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><code>C-x 4 C-j</code></td>
-<td class="left">Enter Dired <i>at the current directory</i>, in another window.</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
 <td class="left"><code>C-x C-f</code></td>
 <td class="left">Select a directory to enter Dired</td>
 </tr>
@@ -3955,6 +3853,22 @@ Dired allows user to insert the content of a directory just below the
 current directory. You can search for file names with <b>C-s</b> easily in
 both directories. You can insert as many subdirectories as you want.
 </p>
+
+<p>
+Move point on a directory in Dired and press <b>i</b>. You will see another
+directory insert below:
+</p>
+
+
+<div class="figure">
+<p><a href="static/dired-subdir.gif"><img src="static/dired-subdir.gif" alt="dired-subdir.gif" /></a>
+</p>
+</div>
+
+<p>
+This is really efficient when you work on several related directories in
+a project frequently.
+</p>
 </div>
 </div>
 </div>
@@ -4295,6 +4209,161 @@ specific topics.
 <p>
 Finally, thanks to <a href="http://orgmode.org/worg/">Worg</a> for this awesome CSS.
 </p>
+</div>
+</div>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><a id="ID-06e5b4a9-130f-447a-b735-1fcc70262fb2"></a>Appendix</h2>
+<div class="outline-text-2" id="text-10">
+</div>
+<div id="outline-container-sec-10-1" class="outline-3">
+<h3 id="sec-10-1"><a id="ID-b135c9e2-a68c-4461-a711-a92016eeb034"></a>Why Emacs? (Extended)</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+Emacs allows you to do much more than just editing. Emacs is no mere
+editor like others, either in terminal or in GUI. Emacs is a
+development <b>platform</b>. Emacs is a <b>virtual machine</b> that interprets
+its own <a href="http://www.emacswiki.org/emacs-ja/ByteCodeEngineering">bytecode</a>.
+</p>
+
+<p>
+You can write all sorts of programs in Emacs to add more features
+using its own language - Emacs Lisp - in an <b>easy</b> way. With the
+extensibility, Emacs can do many things: an editor, a file manager, an
+email client, a news reader, a shell&#x2026;
+</p>
+
+<p>
+You can think of Emacs as an enhanced interpreter and evaluate any
+valid Emacs Lisp code anywhere in Emacs, as long as the code is
+visible on your screen. To illustrate my point, here is an example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">hello</span> ()
+  (interactive)
+  (message <span style="color: #70c0b1;">"Hello World"</span>))
+</pre>
+</div>
+
+<p>
+You can paste that code snippet <b>anywhere</b> - yes,*anywhere* - in Emacs
+and tell Emacs to execute that code. If the code snippet has valid
+syntax, Emacs executes successfully and you will have command to print
+"Hello World" at the bottom of screen.
+</p>
+
+<p>
+A great advantage of this approach is, if you want to change
+behaviours of Emacs, you write some Emacs Lisp code and execute and
+see immediate results, right inside Emacs. Emacs is beyond an
+editor. Emacs is a programming platform that has an editor. Don't be
+confuse Emacs with other <i>real editors</i>, which can <b>only be used for
+editing</b>.
+</p>
+
+<p>
+In practice, Emacs also offers many editing interfaces: built-in
+Emacs, <a href="http://ergoemacs.github.io/ergoemacs-mode/gradual-adoption.html">Ergoemacs</a> and <a href="https://gitorious.org/evil/pages/Home">Evil</a> - or Vim inside Emacs - key bindings. Emacs
+has internal tools and interfaces to external tools for many
+programming languages. Learning Emacs means you can use the same
+editor for different languages. Otherwise, you will have to learn
+different editor when you learn a random language.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-10-2" class="outline-3">
+<h3 id="sec-10-2"><a id="ID-b8c9ecfe-46d0-4169-8e58-9270aa72a9a5"></a>More on Emacs history</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+Ever heard of a computing system called <b>Lisp Machine</b>? I bet many of
+you don't. Me, too, until I started using Emacs and gradually learning
+enough to know such thing ever exist. This old article is an
+interesting read: <a href="http://emacs.wordpress.com/2007/01/14/the-ghost-in-the-lisp-machine/">The Ghost in the Lisp Machine</a>
+</p>
+
+<blockquote>
+<p>
+A friend of mine used to say that Emacs fills our yearning for a Lisp
+Machine. I tend to agree with him: Emacs is not just an editor, but a
+full integrated environment where you can perform virtually any
+imaginable task; and, most importantly, the inner workings of the
+system are open to you to explore and extend. Using, for extra fun,
+Lisp. No, i don’t think that Elisp is the nicest Lisp incarnation
+around, but is far better than, say, C, and i still prefer it to other
+scripting languages. Moreover, the awesome range of libraries at your
+disposal makes up for many of the deficiencies in the language.
+</p>
+
+<p>
+Living in Emacs is addictive. Imagine an operating system where you
+can switch from writing code to browsing the web or chatting without
+leaving a consistent environment, with the same set of commands and
+shortcuts. Imagine a set of integrated applications where data is
+seamlessly shared, where any single functionality can be tweaked,
+extended and adapted to your particular needs. Where everything is
+easily scriptable. Imagine, in addition, that the environment provides
+powerful and complete interactive self-documentation facilities with
+which the user can find out what is available. I have yet to find an
+operating system providing such an integrated environment. Not even
+Mac OS X, where AppleScript support is often lacking and system
+services are underused.
+</p>
+
+<p>
+Of course, the key ingredient here is Emacs’ extensibility. Far from
+being an afterthought or simply one of its features, extensibility is
+the central aspect of Emacs’ architecture. Actually, the whole point
+of this post is to recommend you reading Richard Stallman’s 1981 essay
+EMACS: The Extensible, Customizable Display Editor, which explains
+much better than I could the strong points of Emacs design, i.e.,
+those traits that make Emacs more, much more, than just an
+editor. From the horse’s mouth:
+</p>
+
+
+<p>
+<i>Extensibility means that the user can add new editing commands or
+change old ones to fit his editing needs, while he is</i>
+<i>editing. EMACS is written in a modular fashion, composed of many
+separate and independent functions. The user extends EMACS by</i>
+<i>adding or replacing functions, writing their definitions in the
+same language that was used to write the original EMACS system. We</i>
+<i>will explain below why this is the only method of extension which
+is practical in use: others are theoretically equally good but</i>
+<i>discourage use, or discourage nontrivial use</i>.
+</p>
+
+<p>
+[&#x2026;]
+</p>
+
+<p>
+<i>User customization helps in another, subtler way, by making the
+whole user community into a breeding and testing ground for new</i>
+<i>ideas. Users think of small changes, try them, and give them to
+other users–if an idea becomes popular, it can be incorporated</i>
+<i>into the core system. When we poll users on suggested changes,
+they can respond on the basis of actual experience rather than</i>
+<i>thought experiments.</i>
+</p>
+
+<p>
+The article goes on explaining the organization of the Emacs system,
+how it depends on its interpreter, Elisp’s main features and how
+built-in self-documentation is provided. Also interesting is the list
+of related systems at the end of the essay: Lisp machines, LOGO,
+MacLisp and Smalltalk. We’re definitely in good company!
+</p>
+</blockquote>
+
+<p>
+Emacs is a miniature of a Lisp Machine. You can have a tour in <a href="http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html">Lisp
+Machine online museum</a>.
+</p>
+</div>
 </div>
 </div>
 </div>
