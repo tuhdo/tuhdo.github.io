@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Tutorial (PART 1) - THE BASICS</title>
-<!-- 2014-06-16 Mon 12:59 -->
+<!-- 2014-06-16 Mon 13:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -874,7 +874,38 @@ much more if you actually follow my manual.
 </p>
 
 <p>
-First, start Emacs, and press <b>C-x b</b> and switch to <code>*scratch*</code> buffer. A
+First, you have to install <a href="http://www.gnu.org/software/global/global.html">GNU Global</a>.
+</p>
+
+
+<ul class="org-ul">
+<li><b>Linux</b>: Click <a href="http://www.gnu.org/software/global/download.html">here</a> and download the latest stable GNU
+Global. Then change to the directory where you have just downloaded
+and follow these steps:
+
+<ul class="org-ul">
+<li><code>tar xvf global-&lt;version&gt;.tar.gz</code>
+</li>
+<li><code>cd global-&lt;version&gt;/</code>
+</li>
+<li>If you have <a href="http://ctags.sourceforge.net/">ctags</a> installed, add the option
+<code>--with-exuberant-ctags</code> and supply the installed path: <code>./configure
+    [--with-exuberant-ctags=/usr/local/bin/ctags]</code>
+</li>
+<li><code>make</code>
+</li>
+<li><code>sudo make install</code>
+</li>
+</ul>
+</li>
+<li><b>Windows</b>: Click <a href="http://www.gnu.org/software/global/download.html">here</a> and click <a href="http://global.adoxa.vze.com/">DOS and Windows 32 version</a> to download.
+</li>
+<li><b>Mac OSX</b>: Mac OSX version is distributed by <a href="http://www.macports.org/">MacPorts</a>.
+</li>
+</ul>
+
+<p>
+Then, start Emacs, and press <b>C-x b</b> and switch to <code>*scratch*</code> buffer. A
 buffer is an editing area; an editing area may or may not has a file
 behind it (i.e. A buffer for holding a shell). I will explain more
 about this later.
