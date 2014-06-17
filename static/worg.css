@@ -5,7 +5,7 @@
     html {
         margin: 0;
         font: 300 .9em/1.6em "Droid Serif", Cambria, Georgia, "DejaVu Serif", serif;
-        background-image: url(http://orgmode.org/img/org-mode-unicorn-logo-worg.png);
+        /* background-image: url(http://orgmode.org/img/org-mode-unicorn-logo-worg.png); */
         background-attachment: fixed;
         background-position: right bottom;
         background-repeat: no-repeat;
