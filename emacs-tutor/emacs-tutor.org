@@ -128,7 +128,7 @@ original Emacs Manual for Twenex; and (the only cartoon RMS has ever
 drawn) the Self-Documenting Extensible Editor.   
 #+END_QUOTE
 
-* "I don't want a complicated "editor", I want something simple like Notepad(++)"
+* "I don't want a complicated editor, I want something simple like Notepad(++)"
 :PROPERTIES:
 :ID:       45226aea-d1af-4853-8be9-5dc1ee962973
 :END:
