@@ -105,7 +105,7 @@ tutorial, only if it isn't made for demonstration.
 :PROPERTIES:
 :ID:       c8f88c3a-ecad-433d-931b-2cca8a4f62ac
 :END:
-The current version is Emacs 23, with the upcoming Emacs 24 is on the
+The current version is Emacs 24.3, with the upcoming Emacs 24.4 is on the
 way at the point of writing this.
 
 Quote from GNU Emacs homepage:
