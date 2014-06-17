@@ -10,10 +10,10 @@ think. If you want more details, read the [[*Appendix][Appendix]].
 
 Have a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
 
-My personal tour - *with added 3rd party plugins* - from Emacs. Don't
-worry if your Emacs does not look like the screenshots. You can have
-something like mine and even better, but for now you need to get a
-solid foundation. The screenshots are just for show.
+My personal tour, *with added 3rd party plugins*. Don't worry if your
+Emacs does not look like the screenshots. You can have something like
+mine and even better, but for now you need to get a solid
+foundation. The screenshots are just for show.
 
 - Programming:
   - Jump to any header file:
