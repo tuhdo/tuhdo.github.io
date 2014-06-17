@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-17 Tue 14:48 -->
+<!-- 2014-06-17 Tue 18:52 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -225,53 +225,53 @@ font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Sta
 <li><a href="#sec-8">Concepts</a>
 <ul>
 <li><a href="#sec-8-1">Emacs Key Notation</a></li>
-<li><a href="#sec-8-2">Command</a></li>
-<li><a href="#sec-8-3">Point</a></li>
-<li><a href="#sec-8-4">Opening files</a></li>
-<li><a href="#sec-8-5">Ido mode</a></li>
-<li><a href="#sec-8-6">Buffer</a></li>
-<li><a href="#sec-8-7">Major mode</a></li>
-<li><a href="#sec-8-8">Minor mode</a></li>
-<li><a href="#sec-8-9">Basic buffer managements</a></li>
-<li><a href="#sec-8-10">Save file locations across Emacs sessions</a></li>
-<li><a href="#sec-8-11">Basic motion commands</a></li>
-<li><a href="#sec-8-12">Basic editing commands</a></li>
-<li><a href="#sec-8-13">Kill ring</a></li>
-<li><a href="#sec-8-14">Mark and region</a></li>
-<li><a href="#sec-8-15">Mark ring</a></li>
-<li><a href="#sec-8-16">Global mark ring</a></li>
-<li><a href="#sec-8-17">Undo/redo</a></li>
-<li><a href="#sec-8-18">Incremental search</a></li>
-<li><a href="#sec-8-19">Query replace</a></li>
-<li><a href="#sec-8-20">Modeline</a></li>
-<li><a href="#sec-8-21">Minibuffer</a></li>
-<li><a href="#sec-8-22">Echo area</a></li>
-<li><a href="#sec-8-23">Frames</a></li>
-<li><a href="#sec-8-24">Window</a></li>
-<li><a href="#sec-8-25">Prefix Arguments</a></li>
-<li><a href="#sec-8-26">Basic file management with Dired</a>
+<li><a href="#sec-8-2">Ask for help - from Emacs</a>
 <ul>
-<li><a href="#sec-8-26-1">Enter Dired</a></li>
-<li><a href="#sec-8-26-2">Navigation</a></li>
-<li><a href="#sec-8-26-3">Create files</a></li>
-<li><a href="#sec-8-26-4">Visit files</a></li>
-<li><a href="#sec-8-26-5">File Marking</a></li>
-<li><a href="#sec-8-26-6">Operating on files</a></li>
-<li><a href="#sec-8-26-7">Deleting files</a></li>
-<li><a href="#sec-8-26-8">Execute shell commands in Dired</a></li>
-<li><a href="#sec-8-26-9">Compare files</a></li>
-<li><a href="#sec-8-26-10">Subdirectories</a></li>
+<li><a href="#sec-8-2-1">Built-in help system</a></li>
+<li><a href="#sec-8-2-2">Info</a></li>
+<li><a href="#sec-8-2-3">Man</a></li>
 </ul>
 </li>
-<li><a href="#sec-8-27">Version Control</a></li>
-<li><a href="#sec-8-28">Shell</a></li>
-<li><a href="#sec-8-29">Ask for help - from Emacs</a>
+<li><a href="#sec-8-3">Command</a></li>
+<li><a href="#sec-8-4">Point</a></li>
+<li><a href="#sec-8-5">Opening files</a></li>
+<li><a href="#sec-8-6">Ido mode</a></li>
+<li><a href="#sec-8-7">Buffer</a></li>
+<li><a href="#sec-8-8">Major mode</a></li>
+<li><a href="#sec-8-9">Minor mode</a></li>
+<li><a href="#sec-8-10">Basic buffer managements</a></li>
+<li><a href="#sec-8-11">Save file locations across Emacs sessions</a></li>
+<li><a href="#sec-8-12">Basic motion commands</a></li>
+<li><a href="#sec-8-13">Basic editing commands</a></li>
+<li><a href="#sec-8-14">Kill ring</a></li>
+<li><a href="#sec-8-15">Mark and region</a></li>
+<li><a href="#sec-8-16">Mark ring</a></li>
+<li><a href="#sec-8-17">Global mark ring</a></li>
+<li><a href="#sec-8-18">Undo/redo</a></li>
+<li><a href="#sec-8-19">Incremental search</a></li>
+<li><a href="#sec-8-20">Query replace</a></li>
+<li><a href="#sec-8-21">Modeline</a></li>
+<li><a href="#sec-8-22">Minibuffer</a></li>
+<li><a href="#sec-8-23">Echo area</a></li>
+<li><a href="#sec-8-24">Frames</a></li>
+<li><a href="#sec-8-25">Window</a></li>
+<li><a href="#sec-8-26">Prefix Arguments</a></li>
+<li><a href="#sec-8-27">Basic file management with Dired</a>
 <ul>
-<li><a href="#sec-8-29-1">Built-in help system</a></li>
-<li><a href="#sec-8-29-2">Info</a></li>
-<li><a href="#sec-8-29-3">Man</a></li>
+<li><a href="#sec-8-27-1">Enter Dired</a></li>
+<li><a href="#sec-8-27-2">Navigation</a></li>
+<li><a href="#sec-8-27-3">Create files</a></li>
+<li><a href="#sec-8-27-4">Visit files</a></li>
+<li><a href="#sec-8-27-5">File Marking</a></li>
+<li><a href="#sec-8-27-6">Operating on files</a></li>
+<li><a href="#sec-8-27-7">Deleting files</a></li>
+<li><a href="#sec-8-27-8">Execute shell commands in Dired</a></li>
+<li><a href="#sec-8-27-9">Compare files</a></li>
+<li><a href="#sec-8-27-10">Subdirectories</a></li>
 </ul>
 </li>
+<li><a href="#sec-8-28">Version Control</a></li>
+<li><a href="#sec-8-29">Shell</a></li>
 </ul>
 </li>
 <li><a href="#sec-9">Conclusion</a></li>
@@ -1311,8 +1311,100 @@ prefix <b>C-x r</b>.
 </div>
 </div>
 <div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
+<h3 id="sec-8-2"><a id="ID-02fde8b1-2053-4793-8711-d5664fbe3a29"></a>Ask for help - from Emacs</h3>
 <div class="outline-text-3" id="text-8-2">
+</div>
+<div id="outline-container-sec-8-2-1" class="outline-4">
+<h4 id="sec-8-2-1"><a id="ID-47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927"></a>Built-in help system</h4>
+<div class="outline-text-4" id="text-8-2-1">
+<p>
+I will describe some most useful commands based on my experience. I
+will not list all, so you have to rely on Emacs to get your
+information:
+</p>
+
+<p>
+<b>C-h m</b> runs =describe-mode to see all the key bindings
+and documentations of current major mode and minor modes of a buffer:
+</p>
+
+<p>
+<b>C-h w</b> runs <code>where-is</code> to get which keystrokes invoke a given command.
+</p>
+
+<p>
+<b>C-h c</b> runs <code>describe-key-briefly</code> to find out what command is
+bound to a key. For example, after <b>C-h c</b>, run <b>C-x C-f</b> gives
+you <b>find-files</b>.
+</p>
+
+<p>
+<b>C-h k</b> runs <code>describe-key</code> to find out what command is bound to a
+key, along with the documentation of the command. Use this if you want
+to know how to use a command.
+</p>
+
+<p>
+<b>C-h e</b> runs <code>view-echo-area-messages</code>, allow you to see the
+logging of echo area messages.
+</p>
+
+<p>
+<b>C-h v</b> runs <code>describe-variable</code>, and ask you for a variable; you can
+<b>TAB</b> to complete a variable. This command is important, because aside
+from describing a variable, it allows you to customize the behaviours
+of Emacs and 3rd party packages. But for now, you don't need it.
+</p>
+
+<p>
+<b>C-h C-h</b> runs <b>help-for-help</b>. Use this command if you want to see
+other help commands.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-2-2" class="outline-4">
+<h4 id="sec-8-2-2"><a id="ID-c40810fc-9af0-4b13-8fd2-db999d3e9859"></a>Info</h4>
+<div class="outline-text-4" id="text-8-2-2">
+<p>
+<code>M-x info</code> or <b>C-h i</b> to see all the Info manual in Emacs. If you
+want to learn more about Emacs, after reading my series of manuals,
+the official Emacs manual in Info.
+</p>
+
+<p>
+<code>M-x info-emacs-manual</code> or, <b>C-h r</b>, or <b>&lt;f1&gt; r</b> to see manual section
+for Emacs.
+</p>
+
+<p>
+Use Info often whenever you need to learn something in Emacs. Use it
+early to create a good habit of reading documentation, and this is
+beneficial not only for Emacs.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-2-3" class="outline-4">
+<h4 id="sec-8-2-3"><a id="ID-6edee0b5-213a-4fd4-9c40-041206b86a52"></a>Man</h4>
+<div class="outline-text-4" id="text-8-2-3">
+<p>
+You can view man pages with two commands:
+</p>
+
+<ul class="org-ul">
+<li><code>M-x man</code>: Get a UNIX manual page and put it in a buffer.
+</li>
+<li><code>M-x woman</code>: Browse UN*X man page for TOPIC (Without using external
+Man program). It means, you can view man page without having the
+<code>man</code> program installed, while the <code>man</code> command above invokes
+external <code>man</code> program.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-8-3" class="outline-3">
+<h3 id="sec-8-3"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
+<div class="outline-text-3" id="text-8-3">
 <p>
 In Emacs, behind every user interaction is a function. You press a key
 to insert a character, Emacs runs self-insert-command. There are two
@@ -1321,15 +1413,11 @@ types of functions in Emacs:
 
 <ul class="org-ul">
 <li><b>Normal functions</b>: These functions are like functions in other
-</li>
-</ul>
-<p>
 programming languages, and are used for implementing features in
-Emacs. Users do not need to care about these functions, unless they
-want to change the implementations.
-</p>
+Emacs. Users do not need to care about these functions, unless
+they want to change the implementations.
+</li>
 
-<ul class="org-ul">
 <li><b>Commands</b>: Interactive function provides to editor users.
 </li>
 </ul>
@@ -1350,18 +1438,18 @@ you see <code>M-x command</code>, which means you need to <b>M-x</b> and type th
 </div>
 </div>
 
-<div id="outline-container-sec-8-3" class="outline-3">
-<h3 id="sec-8-3"><a id="ID-07FB6443-922D-4B66-AF40-58347F16700C"></a>Point</h3>
-<div class="outline-text-3" id="text-8-3">
+<div id="outline-container-sec-8-4" class="outline-3">
+<h3 id="sec-8-4"><a id="ID-07FB6443-922D-4B66-AF40-58347F16700C"></a>Point</h3>
+<div class="outline-text-3" id="text-8-4">
 <p>
 Point is your current cursor position. From now on, instead of saying
 "current cursor", I say "point".
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-4" class="outline-3">
-<h3 id="sec-8-4"><a id="ID-cdb163ad-eb98-46af-83b5-d9ad1803a0d1"></a>Opening files</h3>
-<div class="outline-text-3" id="text-8-4">
+<div id="outline-container-sec-8-5" class="outline-3">
+<h3 id="sec-8-5"><a id="ID-cdb163ad-eb98-46af-83b5-d9ad1803a0d1"></a>Opening files</h3>
+<div class="outline-text-3" id="text-8-5">
 <p>
 Let's learn one especially handy command. <code>M-x find-</code>, then press
 <b>TAB</b>. You will see Emacs offers you a list of possible commands with
@@ -1448,9 +1536,9 @@ prompt.
 </div>
 </div>
 
-<div id="outline-container-sec-8-5" class="outline-3">
-<h3 id="sec-8-5"><a id="ID-a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7"></a>Ido mode</h3>
-<div class="outline-text-3" id="text-8-5">
+<div id="outline-container-sec-8-6" class="outline-3">
+<h3 id="sec-8-6"><a id="ID-a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7"></a>Ido mode</h3>
+<div class="outline-text-3" id="text-8-6">
 <p>
 Emacs has an interesting feature called <b>Ido</b>, shorts for
 <b>Interactively Do Things</b>. In essence, <b>Ido</b> is a superior interface
@@ -1512,9 +1600,9 @@ through the rest of this manual.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-6" class="outline-3">
-<h3 id="sec-8-6"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer</h3>
-<div class="outline-text-3" id="text-8-6">
+<div id="outline-container-sec-8-7" class="outline-3">
+<h3 id="sec-8-7"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer</h3>
+<div class="outline-text-3" id="text-8-7">
 <p>
 Buffer is where you edit your file content. Buffer holds content
 of a file temporarily. Anything you write into the buffer won't make
@@ -1603,9 +1691,9 @@ directory to see if it works properly.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-7" class="outline-3">
-<h3 id="sec-8-7"><a id="ID-2d67567c-985d-49af-83d1-f36ebda0e20c"></a>Major mode</h3>
-<div class="outline-text-3" id="text-8-7">
+<div id="outline-container-sec-8-8" class="outline-3">
+<h3 id="sec-8-8"><a id="ID-2d67567c-985d-49af-83d1-f36ebda0e20c"></a>Major mode</h3>
+<div class="outline-text-3" id="text-8-8">
 <p>
 Major modes provide specialized facilities for working on a particular
 file type, such as syntax highlighting for a programming language. 
@@ -1622,9 +1710,9 @@ buffer properly.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-8" class="outline-3">
-<h3 id="sec-8-8"><a id="ID-9e9200cb-9205-4931-8795-b9c9e00f95f2"></a>Minor mode</h3>
-<div class="outline-text-3" id="text-8-8">
+<div id="outline-container-sec-8-9" class="outline-3">
+<h3 id="sec-8-9"><a id="ID-9e9200cb-9205-4931-8795-b9c9e00f95f2"></a>Minor mode</h3>
+<div class="outline-text-3" id="text-8-9">
 <p>
 Minor modes are optional features which you can turn on or off, not
 necessarily specific to a type of file or buffer. For example, Auto
@@ -1634,9 +1722,9 @@ selected major mode.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-9" class="outline-3">
-<h3 id="sec-8-9"><a id="ID-520961cd-e999-4730-a208-dfa8db1c5fa3"></a>Basic buffer managements</h3>
-<div class="outline-text-3" id="text-8-9">
+<div id="outline-container-sec-8-10" class="outline-3">
+<h3 id="sec-8-10"><a id="ID-520961cd-e999-4730-a208-dfa8db1c5fa3"></a>Basic buffer managements</h3>
+<div class="outline-text-3" id="text-8-10">
 <p>
 So, you learn how to open file and create buffer of that file. 
 In other editors, you got something called "tabs". Every time you open a
@@ -2018,9 +2106,9 @@ To quit <code>ibuffer</code>, press <b>q</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-10" class="outline-3">
-<h3 id="sec-8-10"><a id="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7"></a>Save file locations across Emacs sessions</h3>
-<div class="outline-text-3" id="text-8-10">
+<div id="outline-container-sec-8-11" class="outline-3">
+<h3 id="sec-8-11"><a id="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7"></a>Save file locations across Emacs sessions</h3>
+<div class="outline-text-3" id="text-8-11">
 <p>
 When you read books, you usually cannot read all at once and place a
 bookmark to go back to continue reading later. Emacs allows you to
@@ -2232,9 +2320,9 @@ A few useful key bindings when in <code>bookmark-bmenu-list</code>:
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-11" class="outline-3">
-<h3 id="sec-8-11"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h3>
-<div class="outline-text-3" id="text-8-11">
+<div id="outline-container-sec-8-12" class="outline-3">
+<h3 id="sec-8-12"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h3>
+<div class="outline-text-3" id="text-8-12">
 <p>
 These key bindings are also used by popular shells such as <b>bash</b> or
 <b>zsh</b>. I highly recommended you to master these key bindings.
@@ -2307,9 +2395,9 @@ commands on any buffer.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-12" class="outline-3">
-<h3 id="sec-8-12"><a id="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7"></a>Basic editing commands</h3>
-<div class="outline-text-3" id="text-8-12">
+<div id="outline-container-sec-8-13" class="outline-3">
+<h3 id="sec-8-13"><a id="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7"></a>Basic editing commands</h3>
+<div class="outline-text-3" id="text-8-13">
 <p>
 In Emacs, <code>kill</code> means <code>Cut</code> in other editors. these key bindings also
 work under the terminal.
@@ -2334,18 +2422,18 @@ work under the terminal.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-13" class="outline-3">
-<h3 id="sec-8-13"><a id="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0"></a>Kill ring</h3>
-<div class="outline-text-3" id="text-8-13">
+<div id="outline-container-sec-8-14" class="outline-3">
+<h3 id="sec-8-14"><a id="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0"></a>Kill ring</h3>
+<div class="outline-text-3" id="text-8-14">
 <p>
 Kill ring is the list of previously killed content. You can insert the
 most recently killed element by <b>C-y</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-14" class="outline-3">
-<h3 id="sec-8-14"><a id="ID-01EA0EFF-2A5F-4E68-8A29-A9DB8A0DB2EA"></a>Mark and region</h3>
-<div class="outline-text-3" id="text-8-14">
+<div id="outline-container-sec-8-15" class="outline-3">
+<h3 id="sec-8-15"><a id="ID-01EA0EFF-2A5F-4E68-8A29-A9DB8A0DB2EA"></a>Mark and region</h3>
+<div class="outline-text-3" id="text-8-15">
 <p>
 Mark is a record of a position in a buffer. It's like when reading a
 book, you record various places in a book and these records are called
@@ -2449,9 +2537,9 @@ Practice until you get used to these two commands.
 </div>
 </div>
 
-<div id="outline-container-sec-8-15" class="outline-3">
-<h3 id="sec-8-15"><a id="ID-025E9CF4-B70C-41FA-A51D-AE3E2391227D"></a>Mark ring</h3>
-<div class="outline-text-3" id="text-8-15">
+<div id="outline-container-sec-8-16" class="outline-3">
+<h3 id="sec-8-16"><a id="ID-025E9CF4-B70C-41FA-A51D-AE3E2391227D"></a>Mark ring</h3>
+<div class="outline-text-3" id="text-8-16">
 <p>
 Emacs stores buffer marks in a list, that's why you are able to cycle
 through various marks in the exercise above. You can cycle through the
@@ -2461,9 +2549,9 @@ such extension. We will discuss more on extension packages later.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-16" class="outline-3">
-<h3 id="sec-8-16"><a id="ID-4B4B71A3-80F4-4716-80FB-FA0270B88357"></a>Global mark ring</h3>
-<div class="outline-text-3" id="text-8-16">
+<div id="outline-container-sec-8-17" class="outline-3">
+<h3 id="sec-8-17"><a id="ID-4B4B71A3-80F4-4716-80FB-FA0270B88357"></a>Global mark ring</h3>
+<div class="outline-text-3" id="text-8-17">
 <p>
 Mark ring is local to each buffer. If you switch to another buffer,
 you have a new local mark ring.
@@ -2480,9 +2568,9 @@ You cycle the global mark ring by <b>C-x C-SPC</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-17" class="outline-3">
-<h3 id="sec-8-17"><a id="ID-709F26BC-3A20-47C1-93C6-264C00CD5C89"></a>Undo/redo</h3>
-<div class="outline-text-3" id="text-8-17">
+<div id="outline-container-sec-8-18" class="outline-3">
+<h3 id="sec-8-18"><a id="ID-709F26BC-3A20-47C1-93C6-264C00CD5C89"></a>Undo/redo</h3>
+<div class="outline-text-3" id="text-8-18">
 <p>
 To undo: <b>C-/</b> or <b>C-x u</b>
 </p>
@@ -2567,9 +2655,9 @@ Again, two features in one command, but a bit confusing this time.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-18" class="outline-3">
-<h3 id="sec-8-18"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h3>
-<div class="outline-text-3" id="text-8-18">
+<div id="outline-container-sec-8-19" class="outline-3">
+<h3 id="sec-8-19"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h3>
+<div class="outline-text-3" id="text-8-19">
 <p>
 So, you want to look for something in the buffer? <b>C-s</b> invokes
 <code>isearch-forward</code>, allows you to look forward from the current point
@@ -2733,9 +2821,9 @@ are bound to <b>M-g</b> prefix key:
 </table>
 </div>
 </div>
-<div id="outline-container-sec-8-19" class="outline-3">
-<h3 id="sec-8-19"><a id="ID-4145517f-b864-47f3-bc8b-63509a59d26c"></a>Query replace</h3>
-<div class="outline-text-3" id="text-8-19">
+<div id="outline-container-sec-8-20" class="outline-3">
+<h3 id="sec-8-20"><a id="ID-4145517f-b864-47f3-bc8b-63509a59d26c"></a>Query replace</h3>
+<div class="outline-text-3" id="text-8-20">
 <p>
 To replace something, <b>M-%</b> to execute <b>query-replace</b>. <b>M-%</b> asks you
 two inputs:
@@ -2758,9 +2846,9 @@ want to replace all, press <b>!</b> instead of answer yes or no.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-20" class="outline-3">
-<h3 id="sec-8-20"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
-<div class="outline-text-3" id="text-8-20">
+<div id="outline-container-sec-8-21" class="outline-3">
+<h3 id="sec-8-21"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
+<div class="outline-text-3" id="text-8-21">
 <p>
 The mode line is the empty area below the buffer. It has useful
 summary information about the buffer shown in the window.
@@ -2867,9 +2955,9 @@ viewing screen is 20% away from the top.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-21" class="outline-3">
-<h3 id="sec-8-21"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
-<div class="outline-text-3" id="text-8-21">
+<div id="outline-container-sec-8-22" class="outline-3">
+<h3 id="sec-8-22"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
+<div class="outline-text-3" id="text-8-22">
 <p>
 <code>Minibuffer</code> is the small area at the bottom of your Emacs screen.
 </p>
@@ -2906,9 +2994,9 @@ already used <b>M-p</b> and <b>M-n</b> to get old inputs in Isearch.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-22" class="outline-3">
-<h3 id="sec-8-22"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
-<div class="outline-text-3" id="text-8-22">
+<div id="outline-container-sec-8-23" class="outline-3">
+<h3 id="sec-8-23"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
+<div class="outline-text-3" id="text-8-23">
 <p>
 <code>Minibuffer</code> can be used for output as well. The echo area is used for
 displaying messages made with the message primitive, and for echoing
@@ -2921,9 +3009,9 @@ share the same physical space. You should not be confused between the two.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-23" class="outline-3">
-<h3 id="sec-8-23"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
-<div class="outline-text-3" id="text-8-23">
+<div id="outline-container-sec-8-24" class="outline-3">
+<h3 id="sec-8-24"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
+<div class="outline-text-3" id="text-8-24">
 <p>
 An application window in operating system is called a <b>Frame</b> in
 Emacs. So, you execute <b>Emacs</b> from the command line and open Emacs,
@@ -3099,9 +3187,9 @@ These are the key bindings for manipulating frames:
 </table>
 </div>
 </div>
-<div id="outline-container-sec-8-24" class="outline-3">
-<h3 id="sec-8-24"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
-<div class="outline-text-3" id="text-8-24">
+<div id="outline-container-sec-8-25" class="outline-3">
+<h3 id="sec-8-25"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
+<div class="outline-text-3" id="text-8-25">
 <p>
 Unlike other editors, Emacs can split your frame area into multiple smaller
 areas. Each such area is called a <code>window</code>. You can divide a frame
@@ -3362,9 +3450,9 @@ Help system will be discussed in later section.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-25" class="outline-3">
-<h3 id="sec-8-25"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
-<div class="outline-text-3" id="text-8-25">
+<div id="outline-container-sec-8-26" class="outline-3">
+<h3 id="sec-8-26"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
+<div class="outline-text-3" id="text-8-26">
 <p>
 In Emacs, behind anything is a function. Function can accept
 argument. You can also pass arguments into Emacs commands to modify
@@ -3436,9 +3524,9 @@ Why number 4 for <b>C-u</b>? I don't know.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-26" class="outline-3">
-<h3 id="sec-8-26"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
-<div class="outline-text-3" id="text-8-26">
+<div id="outline-container-sec-8-27" class="outline-3">
+<h3 id="sec-8-27"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
+<div class="outline-text-3" id="text-8-27">
 <p>
 Emacs has a built-in one called Dired, short for
 <code>(Dir)ectory (Ed)itor</code>.
@@ -3450,9 +3538,9 @@ you read and practice these commands, read the <a href="https://www.gnu.org/soft
 </p>
 </div>
 
-<div id="outline-container-sec-8-26-1" class="outline-4">
-<h4 id="sec-8-26-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
-<div class="outline-text-4" id="text-8-26-1">
+<div id="outline-container-sec-8-27-1" class="outline-4">
+<h4 id="sec-8-27-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
+<div class="outline-text-4" id="text-8-27-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3493,9 +3581,9 @@ it. What command do you like the most?
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-26-2" class="outline-4">
-<h4 id="sec-8-26-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
-<div class="outline-text-4" id="text-8-26-2">
+<div id="outline-container-sec-8-27-2" class="outline-4">
+<h4 id="sec-8-27-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
+<div class="outline-text-4" id="text-8-27-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3540,9 +3628,9 @@ to the entry which is 4 lines below.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-26-3" class="outline-4">
-<h4 id="sec-8-26-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
-<div class="outline-text-4" id="text-8-26-3">
+<div id="outline-container-sec-8-27-3" class="outline-4">
+<h4 id="sec-8-27-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
+<div class="outline-text-4" id="text-8-27-3">
 <p>
 To create a new file in Dired, you use the same <b>C-x C-f</b> and <b>C-x 4
 C-f</b> variant.
@@ -3590,9 +3678,9 @@ choice.
 </div>
 </div>
 
-<div id="outline-container-sec-8-26-4" class="outline-4">
-<h4 id="sec-8-26-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
-<div class="outline-text-4" id="text-8-26-4">
+<div id="outline-container-sec-8-27-4" class="outline-4">
+<h4 id="sec-8-27-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
+<div class="outline-text-4" id="text-8-27-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3715,9 +3803,9 @@ to it quick and easy.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-26-5" class="outline-4">
-<h4 id="sec-8-26-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
-<div class="outline-text-4" id="text-8-26-5">
+<div id="outline-container-sec-8-27-5" class="outline-4">
+<h4 id="sec-8-27-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
+<div class="outline-text-4" id="text-8-27-5">
 <p>
 You flag files for deleting. You mark files for everything else
 (i.e. copy, move, link files&#x2026;). There are many marking commands for
@@ -3776,9 +3864,9 @@ files/directories for the next section.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-8-26-6" class="outline-4">
-<h4 id="sec-8-26-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
-<div class="outline-text-4" id="text-8-26-6">
+<div id="outline-container-sec-8-27-6" class="outline-4">
+<h4 id="sec-8-27-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
+<div class="outline-text-4" id="text-8-27-6">
 <p>
 These commands use uppercase character. If you see an uppercase
 character for a command, it means <b>S-&lt;character&gt;</b>.
@@ -3879,9 +3967,9 @@ attributes are cleared and you won't be able to access those files.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-26-7" class="outline-4">
-<h4 id="sec-8-26-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
-<div class="outline-text-4" id="text-8-26-7">
+<div id="outline-container-sec-8-27-7" class="outline-4">
+<h4 id="sec-8-27-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
+<div class="outline-text-4" id="text-8-27-7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3941,9 +4029,9 @@ attributes are cleared and you won't be able to access those files.
 </table>
 </div>
 </div>
-<div id="outline-container-sec-8-26-8" class="outline-4">
-<h4 id="sec-8-26-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
-<div class="outline-text-4" id="text-8-26-8">
+<div id="outline-container-sec-8-27-8" class="outline-4">
+<h4 id="sec-8-27-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
+<div class="outline-text-4" id="text-8-27-8">
 <p>
 Just like using a shell, you can execute command at current directory
 in Dired too. 
@@ -3978,9 +4066,9 @@ in Dired too.
 </table>
 </div>
 </div>
-<div id="outline-container-sec-8-26-9" class="outline-4">
-<h4 id="sec-8-26-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
-<div class="outline-text-4" id="text-8-26-9">
+<div id="outline-container-sec-8-27-9" class="outline-4">
+<h4 id="sec-8-27-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
+<div class="outline-text-4" id="text-8-27-9">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -4009,9 +4097,9 @@ in Dired too.
 </table>
 </div>
 </div>
-<div id="outline-container-sec-8-26-10" class="outline-4">
-<h4 id="sec-8-26-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
-<div class="outline-text-4" id="text-8-26-10">
+<div id="outline-container-sec-8-27-10" class="outline-4">
+<h4 id="sec-8-27-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
+<div class="outline-text-4" id="text-8-27-10">
 <p>
 This is an excising feature in Dired. In other file explorers, you get
 a tree for browsing your directory. If you have a deep directory
@@ -4042,9 +4130,9 @@ a project frequently.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-8-27" class="outline-3">
-<h3 id="sec-8-27"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
-<div class="outline-text-3" id="text-8-27">
+<div id="outline-container-sec-8-28" class="outline-3">
+<h3 id="sec-8-28"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
+<div class="outline-text-3" id="text-8-28">
 <p>
 This section is taken directly from <a href="http://www.gnu.org/software/emacs/tour/">GNU Emacs Tour</a>, with
 improvements.
@@ -4215,9 +4303,9 @@ done playing with it.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-8-28" class="outline-3">
-<h3 id="sec-8-28"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
-<div class="outline-text-3" id="text-8-28">
+<div id="outline-container-sec-8-29" class="outline-3">
+<h3 id="sec-8-29"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
+<div class="outline-text-3" id="text-8-29">
 <p>
 In Emacs, you have 3 types of shell commands: <code>shell</code>, <code>term</code> and
 <code>eshell</code>.
@@ -4265,98 +4353,6 @@ within Eshell as well. However, in Eshell, to send an interrupt
 signal, instead of <code>Ctrl+C</code>, you need to press twice: <code>Ctrl+C
 Ctrl+C</code>.
 </p>
-</div>
-</div>
-<div id="outline-container-sec-8-29" class="outline-3">
-<h3 id="sec-8-29"><a id="ID-02fde8b1-2053-4793-8711-d5664fbe3a29"></a>Ask for help - from Emacs</h3>
-<div class="outline-text-3" id="text-8-29">
-</div>
-<div id="outline-container-sec-8-29-1" class="outline-4">
-<h4 id="sec-8-29-1"><a id="ID-47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927"></a>Built-in help system</h4>
-<div class="outline-text-4" id="text-8-29-1">
-<p>
-I will describe some most useful commands based on my experience. I
-will not list all, so you have to rely on Emacs to get your
-information:
-</p>
-
-<p>
-<b>C-h m</b> runs =describe-mode to see all the key bindings
-and documentations of current major mode and minor modes of a buffer:
-</p>
-
-<p>
-<b>C-h w</b> runs <code>where-is</code> to get which keystrokes invoke a given command.
-</p>
-
-<p>
-<b>C-h c</b> runs <code>describe-key-briefly</code> to find out what command is
-bound to a key. For example, after <b>C-h c</b>, run <b>C-x C-f</b> gives
-you <b>find-files</b>.
-</p>
-
-<p>
-<b>C-h k</b> runs <code>describe-key</code> to find out what command is bound to a
-key, along with the documentation of the command. Use this if you want
-to know how to use a command.
-</p>
-
-<p>
-<b>C-h e</b> runs <code>view-echo-area-messages</code>, allow you to see the
-logging of echo area messages.
-</p>
-
-<p>
-<b>C-h v</b> runs <code>describe-variable</code>, and ask you for a variable; you can
-<b>TAB</b> to complete a variable. This command is important, because aside
-from describing a variable, it allows you to customize the behaviours 
-of Emacs and 3rd party packages.
-</p>
-
-<p>
-<b>C-h C-h</b> runs <b>help-for-help</b>. Use this command if you want to see
-other help commands.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-8-29-2" class="outline-4">
-<h4 id="sec-8-29-2"><a id="ID-c40810fc-9af0-4b13-8fd2-db999d3e9859"></a>Info</h4>
-<div class="outline-text-4" id="text-8-29-2">
-<p>
-<code>M-x info</code> or <b>C-h i</b> to see all the Info manual in Emacs. If you 
-want to learn more about Emacs, after reading my series of manuals,
-the official Emacs manual in Info. 
-</p>
-
-<p>
-<code>M-x info-emacs-manual</code> or, <b>C-h r</b>, or <b>&lt;f1&gt; r</b> to see manual section
-for Emacs. 
-</p>
-
-<p>
-Use Info often whenever you need to learn something in Emacs. Use it
-early to create a good habit of reading documentation, and this is
-beneficial not only for Emacs.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-8-29-3" class="outline-4">
-<h4 id="sec-8-29-3"><a id="ID-6edee0b5-213a-4fd4-9c40-041206b86a52"></a>Man</h4>
-<div class="outline-text-4" id="text-8-29-3">
-<p>
-You can view man pages with two commands:
-</p>
-
-<ul class="org-ul">
-<li><code>M-x man</code>: Get a UNIX manual page and put it in a buffer. 
-</li>
-<li><code>M-x woman</code>: Browse UN*X man page for TOPIC (Without using external
-Man program). It means, you can view man page without having the
-<code>man</code> program installed, while the <code>man</code> command above invokes
-external <code>man</code> program.
-</li>
-</ul>
-</div>
 </div>
 </div>
 </div>

@@ -631,6 +631,69 @@ features in Emacs. However, you forget a specific key binding for a
 command in those features. *C-x r C-h* list all key bindings that have
 prefix *C-x r*.
 
+** Ask for help - from Emacs
+:PROPERTIES:
+:ID:       02fde8b1-2053-4793-8711-d5664fbe3a29
+:END:
+*** Built-in help system
+:PROPERTIES:
+:ID:       47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927
+:END:
+I will describe some most useful commands based on my experience. I
+will not list all, so you have to rely on Emacs to get your
+information:
+
+*C-h m* runs =describe-mode to see all the key bindings
+and documentations of current major mode and minor modes of a buffer:
+
+*C-h w* runs =where-is= to get which keystrokes invoke a given command.
+
+*C-h c* runs =describe-key-briefly= to find out what command is
+bound to a key. For example, after *C-h c*, run *C-x C-f* gives
+you *find-files*.
+
+*C-h k* runs =describe-key= to find out what command is bound to a
+key, along with the documentation of the command. Use this if you want
+to know how to use a command.
+
+*C-h e* runs =view-echo-area-messages=, allow you to see the
+logging of echo area messages.
+
+*C-h v* runs =describe-variable=, and ask you for a variable; you can
+*TAB* to complete a variable. This command is important, because aside
+from describing a variable, it allows you to customize the behaviours
+of Emacs and 3rd party packages. But for now, you don't need it.
+
+*C-h C-h* runs *help-for-help*. Use this command if you want to see
+other help commands.
+
+*** Info
+:PROPERTIES:
+:ID:       c40810fc-9af0-4b13-8fd2-db999d3e9859
+:END:
+=M-x info= or *C-h i* to see all the Info manual in Emacs. If you
+want to learn more about Emacs, after reading my series of manuals,
+the official Emacs manual in Info.
+
+=M-x info-emacs-manual= or, *C-h r*, or *<f1> r* to see manual section
+for Emacs.
+
+Use Info often whenever you need to learn something in Emacs. Use it
+early to create a good habit of reading documentation, and this is
+beneficial not only for Emacs.
+
+*** Man
+:PROPERTIES:
+:ID:       6edee0b5-213a-4fd4-9c40-041206b86a52
+:END:
+You can view man pages with two commands:
+
+- =M-x man=: Get a UNIX manual page and put it in a buffer.
+- =M-x woman=: Browse UN*X man page for TOPIC (Without using external
+  Man program). It means, you can view man page without having the
+  =man= program installed, while the =man= command above invokes
+  external =man= program.
+
 ** Command
 :PROPERTIES:
 :ID:       4bb52c4a-1d30-42e0-999b-b18d8831997e
@@ -640,9 +703,9 @@ to insert a character, Emacs runs self-insert-command. There are two
 types of functions in Emacs:
 
     - *Normal functions*: These functions are like functions in other
-    programming languages, and are used for implementing features in
-    Emacs. Users do not need to care about these functions, unless they
-    want to change the implementations.
+      programming languages, and are used for implementing features in
+      Emacs. Users do not need to care about these functions, unless
+      they want to change the implementations.
 
     - *Commands*: Interactive function provides to editor users.
 
@@ -2090,69 +2153,6 @@ I suggest you to use eshell, since you can use any Emacs commands
 within Eshell as well. However, in Eshell, to send an interrupt
 signal, instead of =Ctrl+C=, you need to press twice: =Ctrl+C
 Ctrl+C=.
-
-** Ask for help - from Emacs
-:PROPERTIES:
-:ID:       02fde8b1-2053-4793-8711-d5664fbe3a29
-:END:
-*** Built-in help system
-:PROPERTIES:
-:ID:       47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927
-:END:
-I will describe some most useful commands based on my experience. I
-will not list all, so you have to rely on Emacs to get your
-information:
-
-*C-h m* runs =describe-mode to see all the key bindings
-and documentations of current major mode and minor modes of a buffer:
-
-*C-h w* runs =where-is= to get which keystrokes invoke a given command.
-
-*C-h c* runs =describe-key-briefly= to find out what command is
-bound to a key. For example, after *C-h c*, run *C-x C-f* gives
-you *find-files*.
-
-*C-h k* runs =describe-key= to find out what command is bound to a
-key, along with the documentation of the command. Use this if you want
-to know how to use a command.
-
-*C-h e* runs =view-echo-area-messages=, allow you to see the
-logging of echo area messages.
-
-*C-h v* runs =describe-variable=, and ask you for a variable; you can
-*TAB* to complete a variable. This command is important, because aside
-from describing a variable, it allows you to customize the behaviours 
-of Emacs and 3rd party packages.
-
-*C-h C-h* runs *help-for-help*. Use this command if you want to see
-other help commands.
-
-*** Info
-:PROPERTIES:
-:ID:       c40810fc-9af0-4b13-8fd2-db999d3e9859
-:END:
-=M-x info= or *C-h i* to see all the Info manual in Emacs. If you 
-want to learn more about Emacs, after reading my series of manuals,
-the official Emacs manual in Info. 
-
-=M-x info-emacs-manual= or, *C-h r*, or *<f1> r* to see manual section
-for Emacs. 
-
-Use Info often whenever you need to learn something in Emacs. Use it
-early to create a good habit of reading documentation, and this is
-beneficial not only for Emacs.
-
-*** Man
-:PROPERTIES:
-:ID:       6edee0b5-213a-4fd4-9c40-041206b86a52
-:END:
-You can view man pages with two commands:
-
-- =M-x man=: Get a UNIX manual page and put it in a buffer. 
-- =M-x woman=: Browse UN*X man page for TOPIC (Without using external
-  Man program). It means, you can view man page without having the
-  =man= program installed, while the =man= command above invokes
-  external =man= program.
 
 * Conclusion
 :PROPERTIES:
