@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-17 Tue 18:57 -->
+<!-- 2014-06-17 T3 22:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -240,7 +240,7 @@ font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Sta
 <li><a href="#sec-8-8">Major mode</a></li>
 <li><a href="#sec-8-9">Minor mode</a></li>
 <li><a href="#sec-8-10">Basic buffer managements</a></li>
-<li><a href="#sec-8-11">Save file locations across Emacs sessions</a></li>
+<li><a href="#sec-8-11">Bookmark: save locations across Emacs sessions with</a></li>
 <li><a href="#sec-8-12">Basic motion commands</a></li>
 <li><a href="#sec-8-13">Basic editing commands</a></li>
 <li><a href="#sec-8-14">Kill ring</a></li>
@@ -363,7 +363,7 @@ My personal tour (with plugins from Emacs):
 
 
 <div class="figure">
-<p><a href="static/gdb-many-windows2.png"><img src="file:///home/xtuudoo/org-data/emacs-tutor/static/gdb-many-windows2.png" alt="gdb-many-windows2.png" /></a>
+<p><a href="static/gdb-many-windows2.png"><img src="file:///home/tuhdo/org-data/emacs-tutor/static/gdb-many-windows2.png" alt="gdb-many-windows2.png" /></a>
 </p>
 </div>
 </div>
@@ -797,7 +797,8 @@ In Emacs, <code>M-</code> means <code>Meta</code>, which is the <code>Alt</code>
 When I say <b>C-x b</b>, it means you hold <b>Control</b> and <b>x</b> keys together,
 then release and press <b>b</b> key. <b>C-x b</b> allows to switch between Emacs
 buffers. Buffer is where you edit your file if it is associated with a
-file, or for displaying text in Emacs if not.
+file, or for displaying text in Emacs if not. If you want to close a
+buffer. <b>C-x k</b> to kill the buffer.
 </p>
 
 <p>
@@ -1202,7 +1203,8 @@ doing things manually instead of focusing on their problems.
 
 <p>
 After this demo, are you convinced now? If you want to harness the
-power of Emacs even further, you need to learn Emacs properly.
+power of Emacs even further, you need to learn Emacs
+properly. Finally, close everything you don't need with <b>C-x k</b>
 </p>
 </li>
 </ul>
@@ -1612,8 +1614,14 @@ C-s</b> your files. You can also execute this from <code>M-x*</code>
 </p>
 
 <p>
-To save a buffer as other file ("Save As" in other editors), execute
-<b>C-x C-w</b>.
+To save a buffer as other file ("Save As" in other editors), <b>C-x
+C-w</b>, which runs the commands <code>write-file</code>.
+</p>
+
+<p>
+To kill a buffer, <b>C-x k</b>. If you want to kill the current buffer,
+<b>RET</b> immediately. Otherwise, type into the prompt the buffer name you
+want to kill.
 </p>
 
 <p>
@@ -1625,7 +1633,11 @@ temporary content of the file that is being displayed.
 </p>
 
 <p>
-<b><span class="underline">Exercise</span></b>: Practice <b>C-x b</b> to get used to it.
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<p>
+Practice <b>C-x b</b> to get used to it.
 </p>
 
 <p>
@@ -1689,6 +1701,70 @@ if <b>melpa</b> is available. Try <b>M-.</b> in any source file in your linux ke
 directory to see if it works properly.
 </li>
 </ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+
+<tr>
+<th scope="col" class="left"><code>C-x C-s</code></th>
+<th scope="col" class="left"><b>Command</b> <code>save-buffer</code></th>
+</tr>
+
+<tr>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">Save the buffer at point</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x C-w</code></td>
+<td class="left"><b>Command</b>: <code>write-file</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Save the buffer to a different file</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x b</code></td>
+<td class="left"><b>Command</b>: <code>switch-to-buffer</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Switch to a different buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x k</code></td>
+<td class="left"><b>Command</b>: <code>kill-buffer</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Kill a buffer. <b>RET</b> to kill the</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">currently  active one</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="outline-container-sec-8-8" class="outline-3">
@@ -2107,7 +2183,7 @@ To quit <code>ibuffer</code>, press <b>q</b>.
 </div>
 </div>
 <div id="outline-container-sec-8-11" class="outline-3">
-<h3 id="sec-8-11"><a id="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7"></a>Save file locations across Emacs sessions</h3>
+<h3 id="sec-8-11"><a id="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7"></a>Bookmark: save locations across Emacs sessions with</h3>
 <div class="outline-text-3" id="text-8-11">
 <p>
 When you read books, you usually cannot read all at once and place a
@@ -2187,8 +2263,19 @@ buffers. If you want to preserve the bookmarks across Emacs sessions,
 
 <p>
 If you understand how to manage buffers, managing bookmarks is the
-same, with differnt but similar key bindings.
+same, with differnt but similar key bindings. Finally, not only you
+can bookmark buffers that are associated with files, you can bookmark
+non-files buffers too:
 </p>
+
+<ul class="org-ul">
+<li><code>Dired</code> buffers
+</li>
+<li>Info buffers
+</li>
+<li>Man pages
+</li>
+</ul>
 
 <p>
 A few useful key bindings when in <code>bookmark-bmenu-list</code>:
@@ -2313,7 +2400,11 @@ A few useful key bindings when in <code>bookmark-bmenu-list</code>:
 </p>
 
 <ul class="org-ul">
-<li>Open files and create a few bookmarks. <b>C-x r b</b> to switch between them.
+<li>Open files and create a few bookmarks. <b>C-x r b</b> to switch between
+them.
+</li>
+<li><b>C-h i</b> to open Info. Pick a node and enter as deep as you
+want. Then bookmark and kill current Info buffer.
 </li>
 <li><b>C-x r l</b> to open the bookmark list and practice the key bindings in the table.
 </li>
@@ -2745,7 +2836,7 @@ are bound to <b>M-g</b> prefix key:
 <tbody>
 <tr>
 <td class="left"><code>M-s .</code></td>
-<td class="left"><b>isearch-forward-symbol-at-point</b></td>
+<td class="left"><b>Command</b>: <code>isearch-forward-symbol-at-point</code></td>
 </tr>
 
 <tr>
@@ -2761,7 +2852,7 @@ are bound to <b>M-g</b> prefix key:
 <tbody>
 <tr>
 <td class="left"><code>M-s o</code></td>
-<td class="left"><b>occur</b></td>
+<td class="left"><b>Command</b>: <code>occur</code></td>
 </tr>
 
 <tr>
@@ -2772,7 +2863,7 @@ are bound to <b>M-g</b> prefix key:
 <tbody>
 <tr>
 <td class="left"><code>M-s h .</code></td>
-<td class="left"><b>highlight-symbol-at-point</b></td>
+<td class="left"><b>Command</b>: <code>highlight-symbol-at-point</code></td>
 </tr>
 
 <tr>
@@ -2783,7 +2874,7 @@ are bound to <b>M-g</b> prefix key:
 <tbody>
 <tr>
 <td class="left"><code>M-s h l</code></td>
-<td class="left"><b>highlight-lines-matching-regexp</b></td>
+<td class="left"><b>Command</b>: <code>highlight-lines-matching-regexp</code></td>
 </tr>
 
 <tr>
@@ -2794,7 +2885,7 @@ are bound to <b>M-g</b> prefix key:
 <tbody>
 <tr>
 <td class="left"><code>M-s h r</code></td>
-<td class="left"><b>highlight-regexp</b></td>
+<td class="left"><b>Command</b>: <code>highlight-regexp</code></td>
 </tr>
 
 <tr>
@@ -2805,7 +2896,7 @@ are bound to <b>M-g</b> prefix key:
 <tbody>
 <tr>
 <td class="left"><code>M-s h u</code></td>
-<td class="left"><b>unhighlight-regexp</b></td>
+<td class="left"><b>Command</b>: <code>unhighlight-regexp</code></td>
 </tr>
 
 <tr>
@@ -3055,7 +3146,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 C-f</code></td>
-<td class="left"><b>find-file-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>find-file-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3066,7 +3157,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 f</code></td>
-<td class="left"><b>find-file-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>find-file-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3077,7 +3168,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 C-o</code></td>
-<td class="left"><b>display-buffer-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>display-buffer-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3088,7 +3179,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 .</code></td>
-<td class="left"><b>find-tag-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>find-tag-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3099,7 +3190,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 0</code></td>
-<td class="left"><b>delete-frame</b></td>
+<td class="left"><b>Command</b>: <code>delete-frame</code></td>
 </tr>
 
 <tr>
@@ -3110,7 +3201,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 1</code></td>
-<td class="left"><b>delete-other-frames</b></td>
+<td class="left"><b>Command</b>: <code>delete-other-frames</code></td>
 </tr>
 
 <tr>
@@ -3121,7 +3212,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 2</code></td>
-<td class="left"><b>make-frame-command</b></td>
+<td class="left"><b>Command</b>: <code>make-frame-command</code></td>
 </tr>
 
 <tr>
@@ -3132,7 +3223,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 b</code></td>
-<td class="left"><b>switch-to-buffer-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>switch-to-buffer-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3143,7 +3234,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 d</code></td>
-<td class="left"><b>dired-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>dired-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3154,7 +3245,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 m</code></td>
-<td class="left"><b>compose-mail-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>compose-mail-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3165,7 +3256,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 o</code></td>
-<td class="left"><b>other-frame</b></td>
+<td class="left"><b>Command</b>: <code>other-frame</code></td>
 </tr>
 
 <tr>
@@ -3176,7 +3267,7 @@ These are the key bindings for manipulating frames:
 <tbody>
 <tr>
 <td class="left"><code>C-x 5 r</code></td>
-<td class="left"><b>find-file-read-only-other-frame</b></td>
+<td class="left"><b>Command</b>: <code>find-file-read-only-other-frame</code></td>
 </tr>
 
 <tr>
@@ -3258,7 +3349,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 C-f</code></td>
-<td class="left"><b>find-file-other-window</b></td>
+<td class="left"><b>Command</b>: <code>find-file-other-window</code></td>
 </tr>
 
 <tr>
@@ -3279,7 +3370,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 C-o</code></td>
-<td class="left"><b>display-buffer</b></td>
+<td class="left"><b>Command</b>: <code>display-buffer</code></td>
 </tr>
 
 <tr>
@@ -3295,7 +3386,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 .</code></td>
-<td class="left"><b>find-tag-other-window</b></td>
+<td class="left"><b>Command</b>: <code>find-tag-other-window</code></td>
 </tr>
 
 <tr>
@@ -3306,7 +3397,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 0</code></td>
-<td class="left"><b>kill-buffer-and-window</b></td>
+<td class="left"><b>Command</b>: <code>kill-buffer-and-window</code></td>
 </tr>
 
 <tr>
@@ -3317,7 +3408,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 a</code></td>
-<td class="left"><b>add-change-log-entry-other-window</b></td>
+<td class="left"><b>Command</b>: <code>add-change-log-entry-other-window</code></td>
 </tr>
 
 <tr>
@@ -3343,7 +3434,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 b</code></td>
-<td class="left"><b>switch-to-buffer-other-window</b></td>
+<td class="left"><b>Command</b>: <code>switch-to-buffer-other-window</code></td>
 </tr>
 
 <tr>
@@ -3359,7 +3450,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 c</code></td>
-<td class="left"><b>clone-indirect-buffer-other-window</b></td>
+<td class="left"><b>Command</b>: <code>clone-indirect-buffer-other-window</code></td>
 </tr>
 
 <tr>
@@ -3375,7 +3466,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 d</code></td>
-<td class="left"><b>dired-other-window</b></td>
+<td class="left"><b>Command</b>: <code>dired-other-window</code></td>
 </tr>
 
 <tr>
@@ -3391,7 +3482,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 f</code></td>
-<td class="left"><b>find-file-other-window</b></td>
+<td class="left"><b>Command</b>: <code>find-file-other-window</code></td>
 </tr>
 
 <tr>
@@ -3402,7 +3493,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 m</code></td>
-<td class="left"><b>compose-mail-other-window</b></td>
+<td class="left"><b>Command</b>: <code>compose-mail-other-window</code></td>
 </tr>
 
 <tr>
@@ -3418,7 +3509,7 @@ here can be files, shell, or a tree explorer. Here are standard <b>C-x
 <tbody>
 <tr>
 <td class="left"><code>C-x 4 r</code></td>
-<td class="left"><b>find-file-read-only-other-window</b></td>
+<td class="left"><b>Command</b>: <code>find-file-read-only-other-window</code></td>
 </tr>
 
 <tr>
@@ -4184,28 +4275,38 @@ VC provides other commands for version control-related tasks:
 <tbody>
 <tr>
 <td class="left"><code>C-x v =</code></td>
-<td class="left">Displays a diff showing the changes you've made to the current</td>
+<td class="left"><b>Command</b>: <code>vc-diff</code></td>
 </tr>
 
 <tr>
 <td class="left">&#xa0;</td>
-<td class="left">files.</td>
+<td class="left">Displays a diff showing the changes you've made to the current files.</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
 <td class="left"><code>C-x v ~</code></td>
-<td class="left">Prompts you for a version number and shows you that version of the</td>
+<td class="left"><b>Commmand</b>: <code>vc-revision-other-window</code></td>
 </tr>
 
 <tr>
 <td class="left">&#xa0;</td>
-<td class="left">current file in another window.</td>
+<td class="left">Prompts you for a version number and shows you that version of the current</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">file in another window.</td>
 </tr>
 </tbody>
 <tbody>
 <tr>
 <td class="left"><code>C-x v g</code></td>
+<td class="left"><b>Command</b>: <code>vc-annotate</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
 <td class="left">Displays an annotated version of the file showing, for each line,</td>
 </tr>
 
@@ -4227,6 +4328,11 @@ VC provides other commands for version control-related tasks:
 <tbody>
 <tr>
 <td class="left"><code>C-x v l</code></td>
+<td class="left"><b>Command</b>: <code>vc-print-log</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
 <td class="left">Displays a log of previous changes to the file. When point is</td>
 </tr>
 
@@ -4243,6 +4349,11 @@ VC provides other commands for version control-related tasks:
 <tbody>
 <tr>
 <td class="left"><code>C-x v u</code></td>
+<td class="left"><b>Command</b>: <code>vc-revert</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
 <td class="left">Revert working copies of the selected fileset to their repository</td>
 </tr>
 

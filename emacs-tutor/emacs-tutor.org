@@ -324,7 +324,8 @@ In Emacs, =M-= means =Meta=, which is the =Alt= key and =C-= means the
 When I say *C-x b*, it means you hold *Control* and *x* keys together,
 then release and press *b* key. *C-x b* allows to switch between Emacs
 buffers. Buffer is where you edit your file if it is associated with a
-file, or for displaying text in Emacs if not.
+file, or for displaying text in Emacs if not. If you want to close a
+buffer. *C-x k* to kill the buffer.
 
 Emacs Lisp is the language for you to customize and extends
 Emacs. Emacs Lisp belongs the the Lisp family of languages. Lisp has a
@@ -583,7 +584,8 @@ You can enjoy exploring the kernel source tree by following these steps:
   doing things manually instead of focusing on their problems.
 
   After this demo, are you convinced now? If you want to harness the
-  power of Emacs even further, you need to learn Emacs properly.
+  power of Emacs even further, you need to learn Emacs
+  properly. Finally, close everything you don't need with *C-x k*
 
 * Concepts
 :PROPERTIES:
@@ -829,8 +831,12 @@ it into file until you explicitly save it with =save-buffer=
 command. *C-x C-s* executes the command =save-buffer=, so you can *C-x
 C-s* your files. You can also execute this from =M-x*=
 
-To save a buffer as other file ("Save As" in other editors), execute
-*C-x C-w*.
+To save a buffer as other file ("Save As" in other editors), *C-x
+C-w*, which runs the commands =write-file=.
+
+To kill a buffer, *C-x k*. If you want to kill the current buffer,
+*RET* immediately. Otherwise, type into the prompt the buffer name you
+want to kill.
 
 In the above section, I said that point is in your file,
 well, actually point is not in a file but a buffer. From now on,
@@ -838,7 +844,9 @@ keep file and buffer two separate and distinct concepts. When I say
 file, I refer to physical file and when I say buffer, I refer to the
 temporary content of the file that is being displayed.
 
-*_Exercise_*: Practice *C-x b* to get used to it.
+*_Exercise_*:
+
+Practice *C-x b* to get used to it.
 
 *_Exercise_*:
 
@@ -881,6 +889,21 @@ The steps:
 - Restart Emacs and test if it is effective. Try =list-package= to see
   if *melpa* is available. Try *M-.* in any source file in your linux kernel
   directory to see if it works properly.
+
+| Key       | Binding                             |
+| =C-x C-s= | *Command* =save-buffer=             |
+|           | Save the buffer at point            |
+|-----------+-------------------------------------|
+| =C-x C-w= | *Command*: =write-file=             |
+|           | Save the buffer to a different file |
+|-----------+-------------------------------------|
+| =C-x b=   | *Command*: =switch-to-buffer=       |
+|           | Switch to a different buffer        |
+|-----------+-------------------------------------|
+| =C-x k=   | *Command*: =kill-buffer=            |
+|           | Kill a buffer. *RET* to kill the    |
+|           | currently  active one               |
+|-----------+-------------------------------------|
 
 ** Major mode
 :PROPERTIES:
@@ -1096,7 +1119,7 @@ directory of buffer of that entry.
 
 To quit =ibuffer=, press *q*.
 
-** Save file locations across Emacs sessions
+** Bookmark: save locations across Emacs sessions with
 :PROPERTIES:
 :ID:       801bd37d-dd77-4d3d-9925-4980cabaefd7
 :END:
@@ -1128,7 +1151,13 @@ buffers. If you want to preserve the bookmarks across Emacs sessions,
 *C-x r l* to open the bookmark list and press *s* to save the list to file.
 
 If you understand how to manage buffers, managing bookmarks is the
-same, with differnt but similar key bindings.
+same, with differnt but similar key bindings. Finally, not only you
+can bookmark buffers that are associated with files, you can bookmark
+non-files buffers too:
+
+- =Dired= buffers
+- Info buffers
+- Man pages
 
 A few useful key bindings when in =bookmark-bmenu-list=:
 
@@ -1167,7 +1196,10 @@ A few useful key bindings when in =bookmark-bmenu-list=:
 
 *_Exercise_*:
 
-- Open files and create a few bookmarks. *C-x r b* to switch between them.
+- Open files and create a few bookmarks. *C-x r b* to switch between
+  them.
+- *C-h i* to open Info. Pick a node and enter as deep as you
+  want. Then bookmark and kill current Info buffer.
 - *C-x r l* to open the bookmark list and practice the key bindings in the table.
 
 ** Basic motion commands
@@ -1423,28 +1455,28 @@ You can select the old input to search again.
 Now you get the basics of Isearch, it has more useful commands that
 are bound to *M-g* prefix key:
 
-| Key       | Binding                                  |
-|-----------+------------------------------------------|
-| =M-s .=   | *isearch-forward-symbol-at-point*        |
-|           | Feed the symbol at point to *C-s*        |
-|           | perform search                           |
-|-----------+------------------------------------------|
-| =M-s o=   | *occur*                                  |
-|           | Run =occur=                              |
-|-----------+------------------------------------------|
-| =M-s h .= | *highlight-symbol-at-point*              |
-|           | Highlight the symbol at point            |
-|-----------+------------------------------------------|
-| =M-s h l= | *highlight-lines-matching-regexp*        |
-|           | Highlight lines that match input regexp  |
-|-----------+------------------------------------------|
-| =M-s h r= | *highlight-regexp*                       |
-|           | Highlight according to regexp            |
-|-----------+------------------------------------------|
-| =M-s h u= | *unhighlight-regexp*                     |
-|           | Turn off highlighting strings that match |
-|           | regexp.                                  |
-|-----------+------------------------------------------|
+| Key       | Binding                                      |
+|-----------+----------------------------------------------|
+| =M-s .=   | *Command*: =isearch-forward-symbol-at-point= |
+|           | Feed the symbol at point to *C-s*            |
+|           | perform search                               |
+|-----------+----------------------------------------------|
+| =M-s o=   | *Command*: =occur=                           |
+|           | Run =occur=                                  |
+|-----------+----------------------------------------------|
+| =M-s h .= | *Command*: =highlight-symbol-at-point=       |
+|           | Highlight the symbol at point                |
+|-----------+----------------------------------------------|
+| =M-s h l= | *Command*: =highlight-lines-matching-regexp= |
+|           | Highlight lines that match input regexp      |
+|-----------+----------------------------------------------|
+| =M-s h r= | *Command*: =highlight-regexp=                |
+|           | Highlight according to regexp                |
+|-----------+----------------------------------------------|
+| =M-s h u= | *Command*: =unhighlight-regexp=              |
+|           | Turn off highlighting strings that match     |
+|           | regexp.                                      |
+|-----------+----------------------------------------------|
 
 ** Query replace
 :PROPERTIES:
@@ -1588,40 +1620,40 @@ These are the key bindings for manipulating frames:
 
 | Key         | Binding                                               |
 |-------------+-------------------------------------------------------|
-| =C-x 5 C-f= | *find-file-other-frame*                               |
+| =C-x 5 C-f= | *Command*: =find-file-other-frame=                    |
 |             | Open file in a different frame                        |
 |-------------+-------------------------------------------------------|
-| =C-x 5 f=   | *find-file-other-frame*                               |
+| =C-x 5 f=   | *Command*: =find-file-other-frame=                    |
 |             | Same as *C-x 5 C-f*                                   |
 |-------------+-------------------------------------------------------|
-| =C-x 5 C-o= | *display-buffer-other-frame*                          |
+| =C-x 5 C-o= | *Command*: =display-buffer-other-frame=               |
 |             | Open buffer in a different frame and move point there |
 |-------------+-------------------------------------------------------|
-| =C-x 5 .=   | *find-tag-other-frame*                                |
+| =C-x 5 .=   | *Command*: =find-tag-other-frame=                     |
 |             | Find tag at point in a different frame                |
 |-------------+-------------------------------------------------------|
-| =C-x 5 0=   | *delete-frame*                                        |
+| =C-x 5 0=   | *Command*: =delete-frame=                             |
 |             | Delete the current frame point is in                  |
 |-------------+-------------------------------------------------------|
-| =C-x 5 1=   | *delete-other-frames*                                 |
+| =C-x 5 1=   | *Command*: =delete-other-frames=                      |
 |             | Delete other frames except the one at point       |
 |-------------+-------------------------------------------------------|
-| =C-x 5 2=   | *make-frame-command*                                  |
+| =C-x 5 2=   | *Command*: =make-frame-command=                       |
 |             | Create a frame                                        |
 |-------------+-------------------------------------------------------|
-| =C-x 5 b=   | *switch-to-buffer-other-frame*                        |
+| =C-x 5 b=   | *Command*: =switch-to-buffer-other-frame=             |
 |             | Same as *C-x 5 C-o*                                   |
 |-------------+-------------------------------------------------------|
-| =C-x 5 d=   | *dired-other-frame*                                   |
+| =C-x 5 d=   | *Command*: =dired-other-frame=                        |
 |             | Open a Dired buffer in another frame                  |
 |-------------+-------------------------------------------------------|
-| =C-x 5 m=   | *compose-mail-other-frame*                            |
+| =C-x 5 m=   | *Command*: =compose-mail-other-frame=                 |
 |             | Open another frame for composing email                |
 |-------------+-------------------------------------------------------|
-| =C-x 5 o=   | *other-frame*                                         |
+| =C-x 5 o=   | *Command*: =other-frame=                              |
 |             | Cycle through available frames                        |
 |-------------+-------------------------------------------------------|
-| =C-x 5 r=   | *find-file-read-only-other-frame*                     |
+| =C-x 5 r=   | *Command*: =find-file-read-only-other-frame=          |
 |             | Open file for read only in another frame              |
 |-------------+-------------------------------------------------------|
 
@@ -1665,47 +1697,47 @@ here can be files, shell, or a tree explorer. Here are standard *C-x
 |-------------+------------------------------------------------------------------|
 | Key         | Binding                                                  |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 C-f= | *find-file-other-window*                                         |
+| =C-x 4 C-f= | *Command*: =find-file-other-window=                              |
 |             | Just like *find-file* discussed earlier, except open file        |
 |             | in new window. If the current frame only has one window,         |
 |             | a new window is created.                                         |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 C-o= | *display-buffer*                                                 |
+| =C-x 4 C-o= | *Command*: =display-buffer=                                      |
 |             | Select a buffer from buffer list and display it in another       |
 |             | window but not move point to that window.                        |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 .=   | *find-tag-other-window*                                          |
+| =C-x 4 .=   | *Command*: =find-tag-other-window=                               |
 |             | Open the tag at point in another window (more on this later)     |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 0=   | *kill-buffer-and-window*                                         |
+| =C-x 4 0=   | *Command*: =kill-buffer-and-window=                              |
 |             | Just like *C-x 0* but kill the buffer in that window as well.    |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 a=   | *add-change-log-entry-other-window*                              |
+| =C-x 4 a=   | *Command*: =add-change-log-entry-other-window=                   |
 |             | Open another buffer and allow you to record the change of        |
 |             | the current editing file. These days, you use version control    |
 |             | system to manage file changes,and Emacs does this better.        |
 |             | Probably this feature exists when thing like Git does not exist. |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 b=   | *switch-to-buffer-other-window*                                  |
+| =C-x 4 b=   | *Command*: =switch-to-buffer-other-window=                       |
 |             | Open a selected buffer in another window and move point to       |
 |             | that window.                                                     |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 c=   | *clone-indirect-buffer-other-window*                             |
+| =C-x 4 c=   | *Command*: =clone-indirect-buffer-other-window=                  |
 |             | Clone the current buffer in another window and give it a         |
 |             | different buffer name.                                           |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 d=   | *dired-other-window*                                             |
+| =C-x 4 d=   | *Command*: =dired-other-window=                                  |
 |             | Open a *dired* buffer in another window. *Dired* is a built-int  |
 |             | file manager in Emacs. We will discuss later.                    |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 f=   | *find-file-other-window*                                         |
+| =C-x 4 f=   | *Command*: =find-file-other-window=                              |
 |             | Same as *C-x 4 C-f*                                              |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 m=   | *compose-mail-other-window*                                      |
+| =C-x 4 m=   | *Command*: =compose-mail-other-window=                           |
 |             | Write mail in other window. You can write email and send it      |
 |             | directly from Emacs.                                             |
 |-------------+------------------------------------------------------------------|
-| =C-x 4 r=   | *find-file-read-only-other-window*                               |
+| =C-x 4 r=   | *Command*: =find-file-read-only-other-window=                    |
 |             | Similar to *find-file-other-window*, but open for read-only.     |
 |-------------+------------------------------------------------------------------|
 
@@ -2068,27 +2100,31 @@ you.)
 
 VC provides other commands for version control-related tasks:
 
-| Key       | Binding                                                             |
-|-----------+---------------------------------------------------------------------|
-| =C-x v == | Displays a diff showing the changes you've made to the current      |
-|           | files.                                                              |
-|-----------+---------------------------------------------------------------------|
-| =C-x v ~= | Prompts you for a version number and shows you that version of the  |
-|           | current file in another window.                                     |
-|-----------+---------------------------------------------------------------------|
-| =C-x v g= | Displays an annotated version of the file showing, for each line,   |
-|           | the commit where that line was last changed and by whom. On any     |
-|           | line you can press L to view the log message for that commit or D   |
-|           | to view the associated diff.                                        |
-|-----------+---------------------------------------------------------------------|
-| =C-x v l= | Displays a log of previous changes to the file. When point is       |
-|           | on a particular log entry, you can press d to view the diff         |
-|           | associated with that change or f to view that version of the file.  |
-|-----------+---------------------------------------------------------------------|
-| =C-x v u= | Revert working copies of the selected fileset to their repository   |
-|           | contents. This asks for confirmation if the buffer contents are not |
-|           | identical to the working revision (except for keyword expansion).   |
-|-----------+---------------------------------------------------------------------|
+| Key       | Binding                                                                    |
+|-----------+----------------------------------------------------------------------------|
+| =C-x v == | *Command*: =vc-diff=                                                       |
+|           | Displays a diff showing the changes you've made to the current files.      |
+|-----------+----------------------------------------------------------------------------|
+| =C-x v ~= | *Commmand*: =vc-revision-other-window=                                     |
+|           | Prompts you for a version number and shows you that version of the current |
+|           | file in another window.                                                    |
+|-----------+----------------------------------------------------------------------------|
+| =C-x v g= | *Command*: =vc-annotate=                                                   |
+|           | Displays an annotated version of the file showing, for each line,          |
+|           | the commit where that line was last changed and by whom. On any            |
+|           | line you can press L to view the log message for that commit or D          |
+|           | to view the associated diff.                                               |
+|-----------+----------------------------------------------------------------------------|
+| =C-x v l= | *Command*: =vc-print-log=                                                  |
+|           | Displays a log of previous changes to the file. When point is              |
+|           | on a particular log entry, you can press d to view the diff                |
+|           | associated with that change or f to view that version of the file.         |
+|-----------+----------------------------------------------------------------------------|
+| =C-x v u= | *Command*: =vc-revert=                                                              |
+|           | Revert working copies of the selected fileset to their repository          |
+|           | contents. This asks for confirmation if the buffer contents are not        |
+|           | identical to the working revision (except for keyword expansion).          |
+|-----------+----------------------------------------------------------------------------|
 
 You can list more operations with *C-x v C-h*.
 
