@@ -1104,7 +1104,7 @@ directory of buffer of that entry.
 |-------+-----------------------------------|
 | =,=   | Rotate between sorting modes      |
 |-------+-----------------------------------|
-| =s I= | Reverse current sorting order     |
+| =s i= | Reverse current sorting order     |
 |-------+-----------------------------------|
 | =s a= | Sort buffers by alphabet          |
 |-------+-----------------------------------|
@@ -1129,15 +1129,15 @@ bookmark too.
 
 | Key       | Binding                                                                       |
 |-----------+-------------------------------------------------------------------------------|
-| =C-x r m= | =bookmark-set=                                                                |
+| =C-x r m= | *Command*: =bookmark-set=                                                     |
 |           | Set bookmark at point. After executing the command, a prompt asks for a name. |
 |           | Enter the name and *RET*.                                                     |
 |-----------+-------------------------------------------------------------------------------|
-| =C-x r b= | =bookmark-jump=                                                               |
+| =C-x r b= | *Command*: =bookmark-jump=                                                    |
 |           | Jump to a saved bookmark, specified by user. *TAB* for getting bookmark list. |
 |           |                                                                               |
 |-----------+-------------------------------------------------------------------------------|
-| =C-x r l= | =bookmark-bmenu-list=                                                         |
+| =C-x r l= | *Command*: =bookmark-bmenu-list=                                              |
 |           | Open the list of all bookmarks.                                               |
 |-----------+-------------------------------------------------------------------------------|
 
