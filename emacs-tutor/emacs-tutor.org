@@ -1880,7 +1880,7 @@ I suggest you to use eshell, since you can use any Emacs commands
 within Eshell as well. However, in Eshell, to send an interrupt
 signal, instead of =Ctrl+C=, you need to press twice: =Ctrl+C
 Ctrl+C=.
-* Project: Browsing Linux kernel code like a pro
+* Project: Browsing Linux kernel source code like a pro
 :PROPERTIES:
 :ID:       1a530e6f-85a0-4fff-ac23-14463f358436
 :END:
