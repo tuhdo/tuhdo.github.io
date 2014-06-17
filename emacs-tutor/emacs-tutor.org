@@ -10,7 +10,7 @@ think. If you want more details, read the [[*Appendix][Appendix]].
 
 Have a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
 
-My personal tour (with plugins from Emacs):
+My personal tour (with *plugins* from Emacs):
 
 - Programming:
   - Jump to any header file:
