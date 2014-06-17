@@ -891,7 +891,7 @@ The steps:
   directory to see if it works properly.
 
 | Key       | Binding                             |
-| =C-x C-s= | *Command* =save-buffer=             |
+| =C-x C-s= | *Command*: =save-buffer=            |
 |           | Save the buffer at point            |
 |-----------+-------------------------------------|
 | =C-x C-w= | *Command*: =write-file=             |
