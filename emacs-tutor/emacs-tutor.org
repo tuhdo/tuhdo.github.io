@@ -13,7 +13,9 @@ Have a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs
 My personal tour, *with added 3rd party plugins*. Don't worry if your
 Emacs does not look like the screenshots. You can have something like
 mine and even better, but for now you need to get a solid
-foundation. The screenshots are just for show.
+foundation. The screenshots are just for show. Even though, after
+going through this guide, you will be able to browse Linux kernel
+source tree with ease.
 
 - Programming:
   - Jump to any header file:
@@ -308,288 +310,6 @@ bindings]]
 :ID:       cefa92ca-8234-44bf-9ae5-66dc76aadd0d
 :END:
 You can use your Palm to press Control in standard PC keyboard.
-
-* Demo: Browse the Linux kernel source code like a pro
-:PROPERTIES:
-:ID:       1a530e6f-85a0-4fff-ac23-14463f358436
-:END:
-** A few things to know before we start
-:PROPERTIES:
-:ID:       de0509ca-e6de-4a0a-92ef-b7f18a492252
-:END:
-You will learn quite a bit about Emacs in this section, enough for
-following the demo.
-
-In Emacs, =M-= means =Meta=, which is the =Alt= key and =C-= means the
-=Control= key in regular computer keyboard. From now on, when I say
-=M-x command=, it means you press =M-x= and type =command= in.
-
-When I say *C-x b*, it means you hold *Control* and *x* keys together,
-then release and press *b* key. *C-x b* allows to switch between Emacs
-buffers. Buffer is where you edit your file if it is associated with a
-file, or for displaying text in Emacs if not. If you want to close a
-buffer. *C-x k* to kill the buffer.
-
-Emacs Lisp is the language for you to customize and extends
-Emacs. Emacs Lisp belongs the the Lisp family of languages. Lisp has a
-long history since 1959. At this stage, you don't need to know about
-Emacs Lisp.
-
-=*sratch*= buffer is a buffer where you experiment with Emacs Lisp
-code.
-
-In Emacs, to copy, you can highlight the text with mouse and *M-w*; to
-paste, *C-y*. You can also paste text from external programs, too.
-
-If your Emacs screen is dividied into smaller screens like this:
-
-[[file:static/multiple-windows.gif][file:static/multiple-windows.gif]]
-
-Do you notice the blinking cursor on the top left screen? If you press
-*C-x 1*, Emacs will bury other two screens and make the screen with
-blinking cursor a whole.
-
-During the demo, if you press weird key sequence and got stuck, press
-*C-g* to quit the partially typed key sequence. You will see "Quit"
-message at the bottom of your Emacs.
-
-** Setup
-:PROPERTIES:
-:ID:       c22e3814-8f4c-48e0-b0d7-6beac6a2260e
-:END:
-
-You have learnt quite a bit about Emacs. Now, you can immediately use
-Emacs to do practical thing like jumping around a big source tree like
-Linux kernel.  However, this is just a demo. You can do much more if
-you learn Emacs properly.
-
-First, you have to install [[http://www.gnu.org/software/global/global.html][GNU Global]].
-
-- *_Linux_*:
-
-  Click [[http://www.gnu.org/software/global/download.html][here]] and download the latest stable GNU Global. Then change to
-  the directory where you have just downloaded and follow these
-  steps:
-  - =tar xvf global-<version>.tar.gz=
-  - =cd global-<version>/=
-  - If you have [[http://ctags.sourceforge.net/][ctags]] installed, add the option
-    =--with-exuberant-ctags= and supply the installed path: =./configure
-    [--with-exuberant-ctags=/usr/local/bin/ctags]=
-  - =make=
-  - =sudo make install=
-
-- *_Windows_*:
-
-  Click [[http://www.gnu.org/software/global/download.html][here]] and click "DOS and Windows 32 version" to download the
-  binary archive.
-
-  After your download the archive, create a directory *C:\root* and
-  unzip the package into that folder:
-
-  [[file:static/gnu-global-dir-struct.jpg][file:static/gnu-global-dir-struct.jpg]]
-
-  Right click on *Computer* -> *Properties* -> *Advanced System Settings* ->
-  *Environment Variables*.
-
-  If PATH variable does not exist, click New. Then in "Variable Name",
-  enter =PATH=; in "Variable Value", enter =C:\root\bin=. From now on,
-  if you use ggtags, Emacs knows where to find GNU Global
-  programs. =$PATH= is the variable where Emacs search for executable
-  programs. If you want more executable programs, add more path to $PATH
-  variable. Each path is separated by =;= like this:
-
-  [[file:static/path-variable-windows.jpg][file:static/path-variable-windows.jpg]]
-
-- *_Mac OSX_*:
-  Mac OSX version is distributed by [[http://www.macports.org/][MacPorts]].
-
-Then, start Emacs, and press *C-x b* and switch to =*scratch*= buffer. A
-buffer is an editing area; an editing area may or may not has a file
-behind it (i.e. A buffer for holding a shell). I will explain more
-about this later.
-
-Paste the following code into the =*scratch*= buffer:
-
-#+begin_src emacs-lisp
-  (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t)
-#+end_src
-
-The above code you see is Emacs Lisp.
-
-Then, =M-x eval-buffer= and press *RET*.
-
-After runs =eval-buffer=, the whole =*scratch*= buffer is
-processed. Then, =M-x list-package=. Wait a few seconds and you will
-see of list of plugins for Emacs. In Emacs, a plugin is called a
-=package=. Press *C-s*, and type =ggtags= and press *C-s* again. Your
-cursor will move to the package =ggtags=. Be sure to select one from
-=melpa=; you should see a column written =*melpa= and select the row
-that has =melpa= in it. Press *Enter* to stay at that position. As you
-see, *C-s* is used for searching text inside a buffer.
-
-On the =ggtags= entry, press *i* key, which stands for =install=. Then
-press *x* to execute the installation. Emacs will ask you to confirm
-the installation. Type =yes= and press *Enter*. Wait for Emacs to
-finish its installation.
-
-After installation is done, close the status buffer by pressing *C-x
-1*, switch back to =*scratch*= buffer by *C-x
-b*. Paste the following code using *C-y*:
-
-#+begin_src emacs-lisp
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
-#+end_src
-
-You may worry that you have to write Emacs Lisp every time you install
-something. Don't worry. Most package authors provide code snippets to
-setup their package properly. All you need to do is copy and
-paste. The above code is taken from =ggtags= homepage at [[https://github.com/leoliu/ggtags#config][configuration
-section]]. The configuration is meant to activate =ggtags= only in a few
-programming modes. 
-
-That's it. Now you can browse kernel easy and fast in Emacs
-(instant result display).
-
-** Browsing the kernel source tree
-:PROPERTIES:
-:ID:       879d6e18-4162-43f6-b5e8-39fa5b5266c7
-:END:
-You can enjoy exploring the kernel source tree by following these steps:
-
-- Clone the kernel source: =git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ~/linux=
-- *C-x d* and navigate to =~/linux=, then press *Enter*.
-
-  [[file:static/linux-dir.gif][file:static/linux-dir.gif]]
-
-  Then, turn on ggtags: =M-x ggtags-mode= .
-
-- Emacs has a file explorer, as you've seen above, called =Dired=,
-  short for =(Dir)ectory (Ed)it=.
-
-- Before start browsing the kernel, you need to create a database for
-  quick searching. Press =M-x=, type =ggtags-create-tags=. It asks for
-  a directory; since you're in the root directory of Linux already,
-  press *Enter*; =ggtags= asks whether you use =ctags= (which is
-  another tag generating program, works with more languages but has
-  less features). Type =no=, press *Enter* and wait for =ggtags= to
-  generate the database.
-
-[[file:static/ggtags-create-tags.gif][file:static/ggtags-create-tags.gif]]
-
-- After the tag database is done generating, a message at the bottom of
-  your Emacs prints a message =GTAGS generated in ~/linux=. Now you
-  can start going anywhere in Linux source tree in an instant instead
-  of spending hours to grep!
-
-- Let's find a file in Linux. Every C program, whether large or small
-  must have a ~main()~ function, and a file containing the
-  function. Let's find out where the ~main()~ of Linux kernel is.
-
-- =M-x=, type =ggtags-find-file=. *C-c M-f* also executes
-  =ggtags-find-file=. A prompt ask for a file to find. You can also
-  invoke =ggtags-find-file= with =C-c M-f=.
-
-- Enter =main.c= to the prompt and press *Enter*.
-- You will see a list of =main.c= files below in various directory:
-
-  [[file:static/candidates.jpg][file:static/candidates.jpg]]
-
-  You can visit each file by pressing *M-n* (*n* means /next/) to go
-  down or *M-p* to  up (*p* means /previous/).
-
-  Press *M-s s*. A prompt appears waiting for something to search; type
-  =init/main.c=. As you type, the candidate buffer got highlighted gradually.
-
-- Finally you get into the correct file. This is where Linux
-  starts after the bootloader stage.
-
-- Now, you see a lot of names in this file: variable names, function
-  names... Now, you want to find where all of these names are defined
-  and where they are used. Let's scroll down a bit, either with *Page
-  Down* key or scrolling with the mouse or search for it. If you want
-  to search, press *C-s* and type =kernel_init= and press *C-s*
-  repeatedly. *C-s* is available everywhere in Emacs. *M-s s* is just
-  available in *ggtags*. You see a function declaration like this:
-
-  #+begin_src c
-    static int kernel_init(void *);
-  #+end_src
-
-  This is the whole process of finding the file:
-
-  [[file:static/ggtags-find-file.gif][file:static/ggtags-find-file.gif]]
-
-  You can find definitions or references of a tag easily. Now, let's
-  go back to the declaration ~static int kernel_init(void *);~
-  again. Move your cursor on =kernel_init=. 
-
-  Press *M-.* jumps to its definition. *M-.* again jumps to its
-  references, where the function is called. *M-.* again jumps to the
-  definition again. Basically, if the current view is definition,
-  pressing *M-.* switches to references and vice verse. Usually, you
-  will also see a list of candidates similar to the one you saw using
-  =ggtags-find-file= above. Use *M-n* or *M-p* to select next/previous
-  match.
-
-  If you want to go back to where you were, press *M-** (or
-  *M-Shift-8*) brings you back to the previous place where you
-  jumped.
-
-  If you want to jump to a C header file, for example:
-
-  #+begin_src c
-    #include <linux/kernel.h>
-  #+end_src
-  
-  Move your cursor onto that line and press *M-.*.
-
-  Again, you can search for candidates using *M-s s*.
-
-  After navigating for a while, you may have jumped to many places. To
-  view the history of where you were, press *C-c M-h*:
-
-  [[file:static/ggtags-view-tag-history.gif][file:static/ggtags-view-tag-history.gif]]
-
-  If you want to have a list of all the tags you visited, press *C-c
-  M-/*. The different between this command and the above command is
-  that, *C-c M-h* stores the places in files you visited, while *C-c
-  M-/* stores the tag operations you performed. After press *C-c M-/*,
-  if you   select an entry in the result list, it displays the result
-  list of   the tag in the selected entry, along with your match
-  candidate you selected in the past: 
-
-  [[file:static/ggtags-rerun.gif][file:static/ggtags-rerun.gif]]
-
-  If you create, edit or delete a source file in your project, upon
-  saving =ggtags= automatically updates the database of your
-  project. How convenient!
-
-  That's it for *basic* navigation. Yes, it's just the basic. This is
-  just the tip of the ice berg. In Emacs, you have a toolchain called
-  [[http://cedet.sourceforge.net/][CEDET]], short for =Collection of Emacs Development Environment
-  Tools=, offers features such as highlighting, project, smart jump,
-  context-sensitive completion, symbol references, code generation...
-  And Emacs included CEDET by default from Emacs 23.2. CEDET is also a
-  language framework for language writer to create such tools within
-  Emacs for their languages, but currently the best supported language
-  in CEDET is C/C++.
-
-  =ggtags= solves your navigation need, but does not offer the above
-  features.  However, with =ggtags= alone, it's far enough for your
-  C/C++ projects, thanks to GNU Global for working nicely on large
-  source tree like the Linux kernel.. After all, many people writes
-  C/C++ source code on bare minimum editor and waste a lot of time for
-  doing things manually instead of focusing on their problems.
-
-  After this demo, are you convinced now? If you want to harness the
-  power of Emacs even further, you need to learn Emacs
-  properly. Finally, close everything you don't need with *C-x k*
-
 * Concepts
 :PROPERTIES:
 :ID:       dc9722bb-91fb-4f38-b701-ffd3fb84d4c7
@@ -847,51 +567,8 @@ keep file and buffer two separate and distinct concepts. When I say
 file, I refer to physical file and when I say buffer, I refer to the
 temporary content of the file that is being displayed.
 
-*_Exercise_*:
+*_Exercise_*: Practice *C-x b* to get used to it.
 
-Practice *C-x b* to get used to it.
-
-*_Exercise_*:
-
-Now you know how to open and save files, it's time to save your Emacs
-configuration you have been used in =*scratch*= buffer. If you tried
-the Linux kernel browsing demo, you have these configurations:
-
-#+begin_src emacs-lisp
-  (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
-
-
-  (add-hook 'dired-mode-hook 'ggtags-mode)
-#+end_src
-
-To let Emacs automatically loads those configuration, save it to
-either of these three files:
-
-=~/.emacs=
-=~/.emacs.d/init.el=
-=~/.emacs.d/init=
-
-You should use =~/.emacs.d/init.el= because you can upload your
-=~/.emacs.d= along with =init.el= on GitHub or Bitbucket, and it's
-more organized since Emacs saves many things under =~/.emacs.d/=.
-
-The steps:
-
-- Create a new file =~/.emacs.d/init.el= with *C-x C-f*. After this,
-  the buffer is created for this new file.
-- *M-w* (copy) the above code snippet from =*scratch*= buffer and
-  *C-y* (paste) into the =init.el= buffer.
-- *C-x C-s* to save the buffer into file.
-- Restart Emacs and test if it is effective. Try =list-package= to see
-  if *melpa* is available. Try *M-.* in any source file in your linux kernel
-  directory to see if it works properly.
 
 | Key       | Binding                             |
 | =C-x C-s= | *Command*: =save-buffer=            |
@@ -2203,7 +1880,299 @@ I suggest you to use eshell, since you can use any Emacs commands
 within Eshell as well. However, in Eshell, to send an interrupt
 signal, instead of =Ctrl+C=, you need to press twice: =Ctrl+C
 Ctrl+C=.
+* Project: Browsing Linux kernel code like a pro
+:PROPERTIES:
+:ID:       1a530e6f-85a0-4fff-ac23-14463f358436
+:END:
+** Setup
+:PROPERTIES:
+:ID:       c22e3814-8f4c-48e0-b0d7-6beac6a2260e
+:END:
 
+You have learnt quite a bit about Emacs. Now, you can immediately use
+Emacs to do practical thing like jumping around a big source tree like
+Linux kernel.  However, this is just a demo. You can do much more if
+you learn Emacs properly.
+
+First, you have to install [[http://www.gnu.org/software/global/global.html][GNU Global]].
+
+- *_Linux_*:
+
+  Click [[http://www.gnu.org/software/global/download.html][here]] and download the latest stable GNU Global. Then change to
+  the directory where you have just downloaded and follow these
+  steps:
+  - =tar xvf global-<version>.tar.gz=
+  - =cd global-<version>/=
+  - If you have [[http://ctags.sourceforge.net/][ctags]] installed, add the option
+    =--with-exuberant-ctags= and supply the installed path: =./configure
+    [--with-exuberant-ctags=/usr/local/bin/ctags]=
+  - =make=
+  - =sudo make install=
+
+- *_Windows_*:
+
+  Click [[http://www.gnu.org/software/global/download.html][here]] and click "DOS and Windows 32 version" to download the
+  binary archive.
+
+  After your download the archive, create a directory *C:\root* and
+  unzip the package into that folder:
+
+  [[file:static/gnu-global-dir-struct.jpg][file:static/gnu-global-dir-struct.jpg]]
+
+  Right click on *Computer* -> *Properties* -> *Advanced System Settings* ->
+  *Environment Variables*.
+
+  If PATH variable does not exist, click New. Then in "Variable Name",
+  enter =PATH=; in "Variable Value", enter =C:\root\bin=. From now on,
+  if you use ggtags, Emacs knows where to find GNU Global
+  programs. =$PATH= is the variable where Emacs search for executable
+  programs. If you want more executable programs, add more path to $PATH
+  variable. Each path is separated by =;= like this:
+
+  [[file:static/path-variable-windows.jpg][file:static/path-variable-windows.jpg]]
+
+- *_Mac OSX_*:
+  Mac OSX version is distributed by [[http://www.macports.org/][MacPorts]].
+
+Then, start Emacs, and press *C-x b* and switch to =*scratch*= buffer. A
+buffer is an editing area; an editing area may or may not has a file
+behind it (i.e. A buffer for holding a shell). I will explain more
+about this later.
+
+Paste the following code into the =*scratch*= buffer:
+
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+#+end_src
+
+The above code you see is Emacs Lisp.
+
+Then, =M-x eval-buffer= and press *RET*.
+
+After runs =eval-buffer=, the whole =*scratch*= buffer is
+processed. Then, =M-x list-package=. Wait a few seconds and you will
+see of list of plugins for Emacs. In Emacs, a plugin is called a
+=package=. Press *C-s*, and type =ggtags= and press *C-s* again. Your
+cursor will move to the package =ggtags=. Be sure to select one from
+=melpa=; you should see a column written =*melpa= and select the row
+that has =melpa= in it. Press *Enter* to stay at that position. As you
+see, *C-s* is used for searching text inside a buffer.
+
+On the =ggtags= entry, press *i* key, which stands for =install=. Then
+press *x* to execute the installation. Emacs will ask you to confirm
+the installation. Type =yes= and press *Enter*. Wait for Emacs to
+finish its installation.
+
+After installation is done, close the status buffer by pressing *C-x
+1*, switch back to =*scratch*= buffer by *C-x
+b*. Paste the following code using *C-y*:
+
+#+begin_src emacs-lisp
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+                (ggtags-mode 1))))
+#+end_src
+
+You may worry that you have to write Emacs Lisp every time you install
+something. Don't worry. Most package authors provide code snippets to
+setup their package properly. All you need to do is copy and
+paste. The above code is taken from =ggtags= homepage at [[https://github.com/leoliu/ggtags#config][configuration
+section]]. The configuration is meant to activate =ggtags= only in a few
+programming modes.
+
+That's it. Now you can browse kernel easy and fast in Emacs
+(instant result display).
+
+** Browsing the kernel source tree
+:PROPERTIES:
+:ID:       879d6e18-4162-43f6-b5e8-39fa5b5266c7
+:END:
+You can enjoy exploring the kernel source tree by following these steps:
+
+- Clone the kernel source: =git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ~/linux=
+- *C-x d* and navigate to =~/linux=, then press *Enter*.
+
+  [[file:static/linux-dir.gif][file:static/linux-dir.gif]]
+
+  Then, turn on ggtags: =M-x ggtags-mode= .
+
+- Emacs has a file explorer, as you've seen above, called =Dired=,
+  short for =(Dir)ectory (Ed)it=.
+
+- Before start browsing the kernel, you need to create a database for
+  quick searching. Press =M-x=, type =ggtags-create-tags=. It asks for
+  a directory; since you're in the root directory of Linux already,
+  press *Enter*; =ggtags= asks whether you use =ctags= (which is
+  another tag generating program, works with more languages but has
+  less features). Type =no=, press *Enter* and wait for =ggtags= to
+  generate the database.
+
+[[file:static/ggtags-create-tags.gif][file:static/ggtags-create-tags.gif]]
+
+- After the tag database is done generating, a message at the bottom of
+  your Emacs prints a message =GTAGS generated in ~/linux=. Now you
+  can start going anywhere in Linux source tree in an instant instead
+  of spending hours to grep!
+
+- Let's find a file in Linux. Every C program, whether large or small
+  must have a ~main()~ function, and a file containing the
+  function. Let's find out where the ~main()~ of Linux kernel is.
+
+- =M-x=, type =ggtags-find-file=. *C-c M-f* also executes
+  =ggtags-find-file=. A prompt ask for a file to find. You can also
+  invoke =ggtags-find-file= with =C-c M-f=.
+
+- Enter =main.c= to the prompt and press *Enter*.
+- You will see a list of =main.c= files below in various directory:
+
+  [[file:static/candidates.jpg][file:static/candidates.jpg]]
+
+  You can visit each file by pressing *M-n* (*n* means /next/) to go
+  down or *M-p* to  up (*p* means /previous/).
+
+  Press *M-s s*. A prompt appears waiting for something to search; type
+  =init/main.c=. As you type, the candidate buffer got highlighted gradually.
+
+- Finally you get into the correct file. This is where Linux
+  starts after the bootloader stage.
+
+- Now, you see a lot of names in this file: variable names, function
+  names... Now, you want to find where all of these names are defined
+  and where they are used. Let's scroll down a bit, either with *Page
+  Down* key or scrolling with the mouse or search for it. If you want
+  to search, press *C-s* and type =kernel_init= and press *C-s*
+  repeatedly. *C-s* is available everywhere in Emacs. *M-s s* is just
+  available in *ggtags*. You see a function declaration like this:
+
+  #+begin_src c
+    static int kernel_init(void *);
+  #+end_src
+
+  This is the whole process of finding the file:
+
+  [[file:static/ggtags-find-file.gif][file:static/ggtags-find-file.gif]]
+
+  You can find definitions or references of a tag easily. Now, let's
+  go back to the declaration ~static int kernel_init(void *);~
+  again. Move your cursor on =kernel_init=.
+
+  Press *M-.* jumps to its definition. *M-.* again jumps to its
+  references, where the function is called. *M-.* again jumps to the
+  definition again. Basically, if the current view is definition,
+  pressing *M-.* switches to references and vice verse. Usually, you
+  will also see a list of candidates similar to the one you saw using
+  =ggtags-find-file= above. Use *M-n* or *M-p* to select next/previous
+  match.
+
+  If you want to go back to where you were, press *M-** (or
+  *M-Shift-8*) brings you back to the previous place where you
+  jumped.
+
+  If you want to jump to a C header file, for example:
+
+  #+begin_src c
+    #include <linux/kernel.h>
+  #+end_src
+
+  Move your cursor onto that line and press *M-.*.
+
+  Again, you can search for candidates using *M-s s*.
+
+  After navigating for a while, you may have jumped to many places. To
+  view the history of where you were, press *C-c M-h*:
+
+  [[file:static/ggtags-view-tag-history.gif][file:static/ggtags-view-tag-history.gif]]
+
+  If you want to have a list of all the tags you visited, press *C-c
+  M-/*. The different between this command and the above command is
+  that, *C-c M-h* stores the places in files you visited, while *C-c
+  M-/* stores the tag operations you performed. After press *C-c M-/*,
+  if you   select an entry in the result list, it displays the result
+  list of   the tag in the selected entry, along with your match
+  candidate you selected in the past:
+
+  [[file:static/ggtags-rerun.gif][file:static/ggtags-rerun.gif]]
+
+  If you create, edit or delete a source file in your project, upon
+  saving =ggtags= automatically updates the database of your
+  project. How convenient!
+
+  That's it for *basic* navigation. Yes, it's just the basic. This is
+  just the tip of the ice berg. In Emacs, you have a toolchain called
+  [[http://cedet.sourceforge.net/][CEDET]], short for =Collection of Emacs Development Environment
+  Tools=, offers features such as highlighting, project, smart jump,
+  context-sensitive completion, symbol references, code generation...
+  And Emacs included CEDET by default from Emacs 23.2. CEDET is also a
+  language framework for language writer to create such tools within
+  Emacs for their languages, but currently the best supported language
+  in CEDET is C/C++.
+
+  =ggtags= solves your navigation need, but does not offer the above
+  features.  However, with =ggtags= alone, it's far enough for your
+  C/C++ projects, thanks to GNU Global for working nicely on large
+  source tree like the Linux kernel.. After all, many people writes
+  C/C++ source code on bare minimum editor and waste a lot of time for
+  doing things manually instead of focusing on their problems.
+
+  After this demo, are you convinced now? If you want to harness the
+  power of Emacs even further, you need to learn Emacs
+  properly. Finally, close everything you don't need with *C-x k*
+
+* Extending Emacs Primer
+:PROPERTIES:
+:ID:       b6f5eaff-b912-4e00-9835-a3127632b019
+:END:
+To let Emacs automatically loads those configuration, save it to
+either of these three files:
+
+=~/.emacs=
+=~/.emacs.d/init.el=
+=~/.emacs.d/init=
+
+Now you know how to open and save files, it's time to save your Emacs
+configuration you have been used in =*scratch*= buffer. After you finish
+the Linux kernel browsing project, you have these configurations:
+
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+                (ggtags-mode 1))))
+
+
+  (add-hook 'dired-mode-hook 'ggtags-mode)
+#+end_src
+
+If you like Ido, put the following configuration inside your
+=init.el=:
+
+#+begin_src emacs-lisp
+  (setq ido-enable-flex-matching t)
+  (setq ido-everywhere t)
+  (ido-mode 1)
+#+end_src
+
+You should use =~/.emacs.d/init.el= because you can upload your
+=~/.emacs.d= along with =init.el= on GitHub or Bitbucket, and it's
+more organized since Emacs saves many things under =~/.emacs.d/=.
+
+The steps:
+
+- Create a new file =~/.emacs.d/init.el= with *C-x C-f*. After this,
+  the buffer is created for this new file.
+- *M-w* (copy) the above code snippet from =*scratch*= buffer and
+  *C-y* (paste) into the =init.el= buffer.
+- *C-x C-s* to save the buffer into file.
+- Restart Emacs and test if it is effective. Try =list-package= to see
+  if *melpa* is available. Try *M-.* in any source file in your linux kernel
+  directory to see if it works properly.
 * Conclusion
 :PROPERTIES:
 :ID:       c17a142e-f9a8-4584-989a-e629e3bcd303
