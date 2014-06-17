@@ -1,0 +1,70 @@
+@import "/css/emacs.css";
+body {
+    font-size: 87.5%;
+    font-family: 'Bitstream Vera Sans Mono', Monaco, 'Lucida Console', Courier, monospace;
+    background-color: #fff;
+    color: #333;
+    margin: auto;
+    width: 90%;
+}
+
+.header, .footer, .sister, .rc, div.history {
+    font-family: 'Lucida Grande', Arial, Helvetica, sans-serif;
+    font-size: 87.5%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+h2 {
+    padding: 2em 0 .25em 0;
+    font-size: 1.25em;
+    border-bottom: 1px solid black;
+}
+
+h3 h4 h5 h6 {
+    padding: 1em 0 .25em 0;
+    font-size: 1em;
+}
+
+div.toc {
+    padding: 0;
+}
+
+div.toc h2 {
+    padding: 0.5em;
+    text-align: center;
+    border: none;
+}
+
+h3 {
+    font-style: normal;
+}
+
+/* Classy block quote taken from here: http://css-tricks.com/examples/Blockquotes/*/
+blockquote {
+  font: 14px/20px italic Times, serif;
+  padding: 8px;
+  background-color: #faebbc;
+  border-top: 1px solid #e1cc89;
+  border-bottom: 1px solid #e1cc89;
+  margin: 5px;
+  background-image: url(images/openquote1.gif);
+  background-position: top left;
+  background-repeat: no-repeat;
+  text-indent: 23px;
+  }
+  blockquote span {
+     display: block;
+     background-image: url(images/closequote1.gif);
+     background-repeat: no-repeat;
+     background-position: bottom right;
+   }
+
+  table {
+      margin-left:auto; 
+      margin-right:auto;
+  }
+  
+/* th.left   { text-align: left;   } */
