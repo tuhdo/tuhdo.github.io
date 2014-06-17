@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-17 Tue 14:36 -->
+<!-- 2014-06-17 Tue 14:48 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -1052,8 +1052,9 @@ must have a <code>main()</code> function, and a file containing the
 function. Let's find out where the <code>main()</code> of Linux kernel is.
 </li>
 
-<li><code>M-x</code>, type <code>ggtags-find-file</code>. A prompt ask for a file to find. You
-can also invoke <code>ggtags-find-file</code> with <code>C-c M-f</code>.
+<li><code>M-x</code>, type <code>ggtags-find-file</code>. <b>C-c M-f</b> also executes
+<code>ggtags-find-file</code>. A prompt ask for a file to find. You can also
+invoke <code>ggtags-find-file</code> with <code>C-c M-f</code>.
 </li>
 
 <li>Enter <code>main.c</code> to the prompt and press <b>Enter</b>.
@@ -1085,7 +1086,7 @@ starts after the bootloader stage.
 names&#x2026; Now, you want to find where all of these names are defined
 and where they are used. Let's scroll down a bit, either with <b>Page
 Down</b> key or scrolling with the mouse or search for it. If you want
-to search, press <b>C-s</b> and type <b>kernel<sub>init</sub></b> and press <b>C-s</b>
+to search, press <b>C-s</b> and type <code>kernel_init</code> and press <b>C-s</b>
 repeatedly. <b>C-s</b> is available everywhere in Emacs. <b>M-s s</b> is just
 available in <b>ggtags</b>. You see a function declaration like this:
 
@@ -1094,12 +1095,6 @@ available in <b>ggtags</b>. You see a function declaration like this:
 <pre class="src src-c"><span style="color: #b9ca4a;">static</span> <span style="color: #7aa6da;">int</span> <span style="color: #e78c45;">kernel_init</span>(<span style="color: #7aa6da;">void</span> *);
 </pre>
 </div>
-
-<p>
-If you want to go back to where you were, press <b>M-*</b> (or
-<b>M-Shift-8</b>) brings you back to the previous place where you
-jumped.
-</p>
 
 <p>
 This is the whole process of finding the file:
@@ -1125,6 +1120,12 @@ pressing <b>M-.</b> switches to references and vice verse. Usually, you
 will also see a list of candidates similar to the one you saw using
 <code>ggtags-find-file</code> above. Use <b>M-n</b> or <b>M-p</b> to select next/previous
 match.
+</p>
+
+<p>
+If you want to go back to where you were, press <b>M-*</b> (or
+<b>M-Shift-8</b>) brings you back to the previous place where you
+jumped.
 </p>
 
 <p>
