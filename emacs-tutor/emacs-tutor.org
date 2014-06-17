@@ -2072,6 +2072,17 @@ directory insert below:
 This is really efficient when you work on several related directories in
 a project frequently.
 
+*_Exercise_*:
+
+- Open a directory with subdirectories inside it.
+- Insert subdirectories with *i*.
+- Remember Bookmark? You can save Dired buffers with Bookmark for
+  later access. *C-x r m* and save the current Dired buffer with subdirectories.
+- Kill the current Dired buffer with subdirectories.
+- Open the Dired buffer via the bookmark list *C-x r l*. You will see
+  that not only your Dired buffer is fully restored, but your
+  subdirectories too.
+
 ** Version Control
 :PROPERTIES:
 :ID:       112710a7-779a-434c-ad23-e6a9a27aae82
