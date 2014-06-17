@@ -41,7 +41,7 @@ My personal tour (with plugins from Emacs):
     (screenshot from this website:
     https://wiki.kldp.org/wiki.php/EmacsGDBQuickNote)
 
-    [[file:static/gdb-many-windows2.png][file:~/org-data/emacs-tutor/static/gdb-many-windows2.png]]
+    [[file:static/gdb-many-windows2.png][file:static/gdb-many-windows2.png]]
     #+END_CENTER
 
 - Diff between current editting file and latest file revision:
