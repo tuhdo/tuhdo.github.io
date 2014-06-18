@@ -356,6 +356,10 @@ features in Emacs. However, you forget a specific key binding for a
 command in those features. *C-x r C-h* list all key bindings that have
 prefix *C-x r*.
 
+Finally ,*C-g* executes the command =keyboard-quit=, which cancels anything
+Emacs is executing. If you press any key sequence wrongly, *C-g* to
+cancel that incorrectly pressed key sequence and start again.
+
 ** Ask for help - from Emacs
 :PROPERTIES:
 :ID:       02fde8b1-2053-4793-8711-d5664fbe3a29
@@ -479,10 +483,6 @@ accepts anything, bounded by a specific characters next to it.
 
 During the exercise, if there's something happens, for example, you
 press the wrong keys and Emacs is behaving weird, just press *C-g*.
-
-*C-g* executes the command =keyboard-quit=, which cancels anything
-Emacs is executing. =M-x keyboard-quit=, you will see
-this command there. 
 
 The command you have just executed is for browsing and opening files
 in Emacs, similar to =Open With= in regular editors, except instead of
@@ -1088,8 +1088,13 @@ undo series with other commands.
 Again, two features in one command, but a bit confusing this time.
 
 *_Exercise_*: Practice undoing/redoing until you get used to.
-
-** Incremental search
+** Search for text
+:PROPERTIES:
+:ID:       ca3e54c5-fbc6-457f-b82e-55fe59cc3ef9
+:END:
+Content search is an essential feature in every editor. Emacs has many
+built-in tools for this problem.
+*** Incremental search
 :PROPERTIES:
 :ID:       84B3D9CC-C246-4D3C-9022-49CB47813094
 :END:
@@ -1125,12 +1130,12 @@ world" *C-w* feeds "ello" into current *C-s* prompt.
 *C-w* again feeds " world" into current prompt to become "ello world"
 and so on.
 
-*C-g* and *C-s* again.
+*C-g*, then *C-s* again. You can select the old input to search again with:
 
-*M-p* moves to the previous input.
-*M-n* moves to the next input.
+- *M-p* moves to the previous input.
+- *M-n* moves to the next input.
 
-You can select the old input to search again.
+If you want to search with regexp, *C-u C-s*.
 
 Now you get the basics of Isearch, it has more useful commands that
 are bound to *M-g* prefix key:
@@ -1158,7 +1163,83 @@ are bound to *M-g* prefix key:
 |           | regexp.                                      |
 |-----------+----------------------------------------------|
 
-** Query replace
+*** Occur
+:PROPERTIES:
+:ID:       e49a59d6-efab-401c-9164-0ae45806e719
+:END:
+Command =occur= lists all line that match a string or a regexp and
+display the search result in a buffer named =*Occur*=. =occur= is
+useful in situation where you have a large number of matches and need
+a better tool to manage rather than going back and forth with
+Isearch. For example, you have a match around line 1000, but you are
+currently at line 500. In between the two lines are many other
+matches. You cannot use Isearch to jump through them all. This is
+where =*Occur*= is handy. =*Occur*= is also useful for queyr and
+replace a sting with another, and allow you to verify that you did
+indeed replace the correct string.
+
+To invoke =occur=, run =M-s o=; if you =M-s o= in Isearch prompt,
+=occur= will get the text currently using. Quite convenient. You can
+use *M-g n* and *M-g p* to go to next/previous matches, or using the
+mouse to scroll. If you feel *M-g p* and *M-g n* to go back and forth
+is annoying, you can repeat it using *C-x z* which runs =repeat=:
+
+- *M-g n* to go to next match.
+- *C-x z* to repeat previous command.
+- From now on, keep pressing *z* to repeat previous command until your
+  press a different character.
+
+Demo, notice how the inactive cursor at the =*Occur*= buffer moves as point in
+my main buffer moves:
+
+[[file:static/occur.gif][file:static/occur.gif]]
+
+You can operate directly on occur buffer. In =*Occur*= buffer, use
+*C-p* and *C-n* to go to previous and next entries. Press *o* jumps to
+the match at point and switch point to buffer that contains the
+match; *C-o* to open the match at point but not switching buffer. If
+you want to edit the matches, press *e* to enter =occur-edit-mode=;
+after that, you can edit anywhere in the =*Occur*= buffer and see your
+changes updated as you type on the other buffer. You can do any
+editing commands when in =occur-edit-mode=, such as commands for query
+replace in previous section to replace all matches.
+
+Demo:
+
+[[file:static/occur-edit.gif][file:static/occur-edit.gif]]
+
+Here are key bindings in =occur=:
+
+| Key       | Binding                             |
+|-----------+-------------------------------------|
+| =C-n=     | Go to next line                     |
+|-----------+-------------------------------------|
+| =C-p=     | Go to previoius line                |
+|-----------+-------------------------------------|
+| =<=       | Go to beginning of buffer           |
+|-----------+-------------------------------------|
+| =>=       | Go to end of buffer                 |
+|-----------+-------------------------------------|
+| =e=       | Edit current =*Occur*= buffer       |
+|-----------+-------------------------------------|
+| =C-c C-c= | When finish with editing, =C-c C-c= |
+|           | to exit editing mode                |
+|-----------+-------------------------------------|
+| =g=       | If your searching file is updated,  |
+|           | press =g= refreshes the =*Occur*=   |
+|           | buffer to reflect the changes       |
+|-----------+-------------------------------------|
+| =o=       | Jump to the match and switch point  |
+|-----------+-------------------------------------|
+| =C-o=     | Jump to the match but point remain  |
+|           | on =*Occur*=                        |
+|-----------+-------------------------------------|
+
+If you want to have this table (and more key bindings), in =*Occur*=
+buffer runs *C-h m* or press *h*. Finally, press *q* to quit =*Occur*=
+buffer.
+
+*** Query replace
 :PROPERTIES:
 :ID:       4145517f-b864-47f3-bc8b-63509a59d26c
 :END:
@@ -1172,6 +1253,26 @@ Supply the inputs and *RET*.
 
 Emacs will asks your confirmation to replace a matched string. If you
 want to replace all, press *!* instead of answer yes or no.
+
+If you want to query and replace with regexp, *C-M-%*. *Tip*: this
+command is a bit hard to press; to make it easy, use both of your
+hands: 
+
+- It can be that left hand presses *%* (or *S-5*) and right hand presses
+  *C-M-*.
+- It can be that right hand presses *C-* first, then left hand presses
+  *M-%*.
+
+*** Multi-occur
+:PROPERTIES:
+:ID:       49674610-411e-4345-a954-f333bced3969
+:END:
+It is the same as =occur= except it asks user for multiple buffers. 
+
+- =multi-occur= asks for buffers to search. You enter buffer by buffer
+  until you give it empty input.
+- =multi-occur-in-matching-buffers= requires a regexp, and it searches
+  for occurences in buffers that match the regexp.
 
 ** Modeline
 :PROPERTIES:
@@ -1762,6 +1863,18 @@ a project frequently.
 - Open the Dired buffer via the bookmark list *C-x r l*. You will see
   that not only your Dired buffer is fully restored, but your
   subdirectories too.
+
+** Registers
+:PROPERTIES:
+:ID:       d4060b6d-0cc9-41bc-976e-d33b56b0df6b
+:END:
+When I first heard registers in Emacs, it scared me. I thought "Wow,
+what is this "register" thingie? Am I going to work directly with CPU
+registers? As it turned out, despite the name "Register", it's not
+something that complicated to understand. 
+
+In EMacs, register is for quick access to things. Things can be
+a file location, a number, a window layout (yes, you can save window layout!)
 
 ** Version Control
 :PROPERTIES:
