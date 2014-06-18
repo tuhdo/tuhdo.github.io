@@ -1459,8 +1459,9 @@ splitting, you will have the exact duplicate of your current editing
 buffer. *C-x 3* is bound to =split-window-right=.
 
 Now, after you execute the two commands above, you will have three
-windows: two above and one below. So, what can you do the windows you
-created? As I said earlier, you can put anything there.
+windows: two above and one below. Each window can hold a buffer. With
+the above two commands ,you can create arbitrary window layout. In
+Emacs, a window layout is called a window configuration.
 
 To navigate through the windows, *C-x o* which executes the command
 =other-window=. Try cycle around the windows a few times to get used
@@ -1868,13 +1869,38 @@ a project frequently.
 :PROPERTIES:
 :ID:       d4060b6d-0cc9-41bc-976e-d33b56b0df6b
 :END:
-When I first heard registers in Emacs, it scared me. I thought "Wow,
-what is this "register" thingie? Am I going to work directly with CPU
-registers? As it turned out, despite the name "Register", it's not
-something that complicated to understand. 
+When I first heard about registers in Emacs, it scared me. I thought
+"Wow, what is this "register" thingie? Am I going to work directly
+with CPU registers? As it turned out, despite the name "Register",
+it's not something that complicated to understand. Although, Emacs register
+is simlar to CPU register in the sense that it allows quicly access of
+temporal data.
 
-In EMacs, register is for quick access to things. Things can be
-a file location, a number, a window layout (yes, you can save window layout!)
+Each register has a name that consists of a single character, which we
+will denote by /r/; /r/ can be a letter (such as ‘a’) or a number (such as
+‘1’); case matters, so register ‘a’ is not the same as register ‘A’.
+
+In Emacs, registers are for quick access to things. Things can be a
+position, a piece of text, a rectangle, a number, a file name, or a
+window configuratoin (yes, you can save how Emacs organizes its screen
+and restore later!). However, the most useful ones, in my experience,
+are window configuration, file names and numbers. For these others, I
+will list key bindings if you want to try them out, but I will explain
+why they are not really useful anymore.
+
+*** Save window configuration
+:PROPERTIES:
+:ID:       840ff6ae-1f2b-4796-9f7f-7cd5db33d879
+:END:
+
+*** Save file names
+:PROPERTIES:
+:ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
+:END:
+*** Save number
+:PROPERTIES:
+:ID:       f29d0a43-32ad-40f9-866d-e09dea8388cc
+:END:
 
 ** Version Control
 :PROPERTIES:
