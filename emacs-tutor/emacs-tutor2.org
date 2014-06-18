@@ -158,7 +158,7 @@ programming envrionment, so don't skip it.
 :PROPERTIES:
 :ID:       a679e943-4e65-4e6c-8c83-51f6e765c1df
 :END:
-** 
+** Changing Emacs appearance
 :PROPERTIES:
 :ID:       7ae2a18d-ca91-4198-8661-2917d3b6656f
 :END:
