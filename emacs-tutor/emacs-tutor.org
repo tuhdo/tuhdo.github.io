@@ -1,3 +1,4 @@
+#+INFOJS_OPT: view:folding
 #+TITLE: Emacs Mini Manual (PART 1) - THE BASICS
 * Why Emacs?
 :PROPERTIES:
@@ -939,13 +940,55 @@ work under the terminal.
 - Kill to the end of line: *C-k*
 - Kill a sentence: *M-k*
 
+When you kill something, the killed content is put into the Kill Ring.
+
 ** Kill ring
 :PROPERTIES:
 :ID:       7F7CD162-4C59-43D8-B445-ECB28D042CC0
 :END:
 
-Kill ring is the list of previously killed content. You can insert the
+Kill ring is the list of previously killed contents. You can insert the
 most recently killed element by *C-y*.
+
+If you supply a number, using *C-<number>* - *<number>* can be any
+number - before you *C-y*, to paste the nth entry in the kill
+ring. The most recent entry is 1st entry. *C-1 C-y* is the same as
+*C-y*; *C-2 C-y* is the 2nd most recent entry, make that entry the
+haed of the list and so on...
+
+Let's play with the kill ring for a while. Open a buffer and insert
+these lines:
+
+#+BEGIN_QUOTE
+aaa
+bbb
+ccc
+#+END_QUOTE
+
+- Kill the three lines with *C-k*, from top to bottom.
+
+- *C-y* or *C-1 C-y*, you will see =ccc= got inserted.
+
+- *C-2 C-y*, you will see =bbb= got inserted; *C-y* again, you will
+  see =bbb= got inserted again. =bbb= now becomes head of the list. 
+
+- *C-2 C-y*, you will see =aaa= got inserted; *C-y* again, you will
+  see =aaa= got inserted again. =aaa= now bedcomes head of the list.
+
+- Insert the 3 lines and kill all again.
+
+- *C-3 C-y*, you will see =aaa= got inserted; * again, you will
+  see =aaa= got inserted again. =aaa= now bedcomes head of the list
+
+- ... and so on ...
+
+*C-<number>* is called prefix argument. Basically it's for altering
+the behaviour of you command. You will learn about prefix
+argument in later section.
+
+You may wonder, what happens if the kill ring getting really large?
+That's right. It's a problem, and that's when the 3rd party plugins
+shine.
 
 ** Mark and region
 :PROPERTIES:
@@ -1871,7 +1914,7 @@ a project frequently.
 :END:
 When I first heard about registers in Emacs, it scared me. I thought
 "Wow, what is this "register" thingie? Am I going to work directly
-with CPU registers? As it turned out, despite the name "Register",
+with CPU registers?" As it turned out, despite the name "Register",
 it's not something that complicated to understand. Although, Emacs register
 is simlar to CPU register in the sense that it allows quicly access of
 temporal data.
@@ -1884,9 +1927,15 @@ In Emacs, registers are for quick access to things. Things can be a
 position, a piece of text, a rectangle, a number, a file name, or a
 window configuratoin (yes, you can save how Emacs organizes its screen
 and restore later!). However, the most useful ones, in my experience,
-are window configuration, text region and number. For these others, I
-will list key bindings if you want to try them out, but I will explain
-why they are not really useful anymore.
+are window configuration,text region, as they are easy to use and use
+frequently.
+
+Saving differnt types of objects has diffent key bindings, but to jump
+to a register, you use a single command *C-x r j REG*; *REG* is a
+register of your choice.
+
+The prefix key for register commands is *C-x r*. If you forget the key
+bindings, *C-x r C-h* to get the list of key bindings.
 
 *** Save window configuration
 :PROPERTIES:
@@ -1910,22 +1959,88 @@ window configuration having four windows displaying four buffers, and
 another one having two Dired buffers for your project. You can switch
 between them easiler. 
 
-Demo:
-
-
+#+BEGIN_CENTER
 
 | Key           | Binding                                                                      |
 |---------------+------------------------------------------------------------------------------|
-| =C-x r w Reg= | Save the window configuration of current frame into register *Reg*           |
+| =C-x r w REG= | *Command*: =window-configuration-to-register=                                |
+|               | Save the window configuration of current frame into register *REG*           |
 |---------------+------------------------------------------------------------------------------|
-| =C-x r f Reg= | Save the state of all frames, including all their windows, in register *Reg* |
+| =C-x r f REG= | *Command*: =frame-configuration-to-register=                                 |
+|               | Save the state of all frames, including all their windows, in register *REG* |
+|---------------+------------------------------------------------------------------------------|
+| =C-x r j REG= | *Command*: =jump-to-register=                                                |
+|               | Jump to a register *REG*.                                                    |
 |---------------+------------------------------------------------------------------------------|
 
- 
+*REG* can be a letter (such as ‘a’) or a number (such as ‘1’); case
+ matters, so register ‘a’ is not the same as register ‘A’.
+#+END_CENTER
+
+_Demo_: In this demo, I saved two windows configurations in two
+registers *a* and *b*, using *C-x r w*. Register *a* stores the Dired
+buffer that contains two project directories. Then, I open two files
+in the two directories, create another smaller window and open another
+file. Then, suddenly I want to go back to my project roots. It's then 
+when I execute *C-x r j*, get a promp, enter *a* and Emacs switches
+back the Dired buffer. Then, I switch back to the files I was editing
+with *C-x r j*, get a prompt, enter *b*.
+
+[[file:static/register-windows.gif][file:static/register-windows.gif]]
+
 *** Save text
 :PROPERTIES:
 :ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
 :END:
+You can also save a region in registers. 
+
+#+BEGIN_CENTER
+
+| Key           | Bind                            |
+|---------------+---------------------------------|
+| =C-x r s Reg= | *Command*: =copy-to-register=   |
+|               | Copy region into register *REG* |
+|---------------+---------------------------------|
+| =C-x r Reg=   | *Command*: =insert-register=    |
+|               | Insert text from register *REG* |
+|---------------+---------------------------------|
+| =C-x r j REG= | *Command*: =jump-to-register=   |
+|               | Jump to a register *REG*.       |
+|---------------+---------------------------------|
+
+*REG* can be a letter (such as ‘a’) or a number (such as ‘1’); case
+ matters, so register ‘a’ is not the same as register ‘A’.
+#+END_CENTER
+
+You may wonder, what's the point of storing text into register? Haven't
+you got a kill ring? Here are the reasons:
+
+- As you already know, insert past contents from the kill ring makes
+  the chosen content the head entry. This is inconvenient, and this is
+  when registers are handy for storing many pieces of text without
+  affect the kill ring. For example, you read a manual (man page or
+  info page), and you want to remember many keywords and paste it
+  somewhre later. Registers can help you with this use case.
+
+- You can also use register to save many code template. For example,
+  you can save a for loop template into register *f*, if template into
+  register *i*, function definition into register *F*... This is
+  really handy when you are learning a new language and keep
+  forgetting syntax all the time. 
+
+  For example, this C++11 code snippet would be hard to remember if
+  you are new:
+
+  #+begin_src c++
+    auto it = find_if (vertices.begin(), vertices.end(), [&v_idx] (const Vertex& o) -> bool {
+            return o.id == v_idx;
+        });
+  #+end_src
+
+  Save it to a register, insert and modify it to fit my current need
+  until I remeber it. Much faster than go back to previous source
+  location to look up again, and would be time consuming if your
+  source code is large.
 
 ** Version Control
 :PROPERTIES:
