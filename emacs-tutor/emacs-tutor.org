@@ -957,13 +957,15 @@ ring. The most recent entry is 1st entry. *C-1 C-y* is the same as
 haed of the list and so on...
 
 Let's play with the kill ring for a while. Open a buffer and insert
-these lines:
+these 3 lines:
 
-#+BEGIN_QUOTE
-aaa
-bbb
-ccc
-#+END_QUOTE
+#+BEGIN_HTML
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aaa <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bbb <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ccc
+#+END_HTML
+
+Then:
 
 - Kill the three lines with *C-k*, from top to bottom.
 
@@ -1092,11 +1094,13 @@ undo in emacs works. When you edit, emacs tracks changes in your
 current editing file. For example, you insert the following line in
 your file:
 
-aaa
-bbb
-ccc
+ #+BEGIN_HTML
+ aaa <br />
+ bbb <br />
+ ccc
+ #+END_HTML
 
-Then Emacs tracks the history like this:
+Then, Emacs tracks the history like this:
 
 - insert: "aaa"
 - insert: "bbb"

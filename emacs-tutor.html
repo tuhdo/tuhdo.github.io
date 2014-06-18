@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-18 T4 23:45 -->
+<!-- 2014-06-19 T5 00:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -2123,16 +2123,16 @@ haed of the list and so on&#x2026;
 
 <p>
 Let's play with the kill ring for a while. Open a buffer and insert
-these lines:
+these 3 lines:
 </p>
 
-<blockquote>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aaa <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bbb <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ccc
+
 <p>
-aaa
-bbb
-ccc
+Then:
 </p>
-</blockquote>
 
 <ul class="org-ul">
 <li>Kill the three lines with <b>C-k</b>, from top to bottom.
@@ -2324,14 +2324,12 @@ current editing file. For example, you insert the following line in
 your file:
 </p>
 
-<p>
-aaa
-bbb
+aaa <br />
+bbb <br />
 ccc
-</p>
 
 <p>
-Then Emacs tracks the history like this:
+Then, Emacs tracks the history like this:
 </p>
 
 <ul class="org-ul">
