@@ -1884,7 +1884,7 @@ In Emacs, registers are for quick access to things. Things can be a
 position, a piece of text, a rectangle, a number, a file name, or a
 window configuratoin (yes, you can save how Emacs organizes its screen
 and restore later!). However, the most useful ones, in my experience,
-are window configuration, file names and numbers. For these others, I
+are window configuration, text region and number. For these others, I
 will list key bindings if you want to try them out, but I will explain
 why they are not really useful anymore.
 
@@ -1911,14 +1911,20 @@ another one having two Dired buffers for your project. You can switch
 between them easiler. 
 
 Demo:
+
+
+
+| Key           | Binding                                                                      |
+|---------------+------------------------------------------------------------------------------|
+| =C-x r w Reg= | Save the window configuration of current frame into register *Reg*           |
+|---------------+------------------------------------------------------------------------------|
+| =C-x r f Reg= | Save the state of all frames, including all their windows, in register *Reg* |
+|---------------+------------------------------------------------------------------------------|
+
  
-*** Save file names
+*** Save text
 :PROPERTIES:
 :ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
-:END:
-*** Save number
-:PROPERTIES:
-:ID:       f29d0a43-32ad-40f9-866d-e09dea8388cc
 :END:
 
 ** Version Control
