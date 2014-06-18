@@ -1328,9 +1328,10 @@ The text displayed in the mode line has the following format:
 
 #+BEGIN_CENTER
 ~cs:ch-fr     |  buf |  pos line | (major minor)~
-#+END_CENTER
 
 For example, a modeline looks like this:
+#+END_CENTER
+
 
 [[file:static/modeline.jpg][file:static/modeline.jpg]]
 
@@ -1959,8 +1960,6 @@ window configuration having four windows displaying four buffers, and
 another one having two Dired buffers for your project. You can switch
 between them easiler. 
 
-#+BEGIN_CENTER
-
 | Key           | Binding                                                                      |
 |---------------+------------------------------------------------------------------------------|
 | =C-x r w REG= | *Command*: =window-configuration-to-register=                                |
@@ -1975,7 +1974,6 @@ between them easiler.
 
 *REG* can be a letter (such as ‘a’) or a number (such as ‘1’); case
  matters, so register ‘a’ is not the same as register ‘A’.
-#+END_CENTER
 
 _Demo_: In this demo, I saved two windows configurations in two
 registers *a* and *b*, using *C-x r w*. Register *a* stores the Dired
@@ -1986,6 +1984,8 @@ when I execute *C-x r j*, get a promp, enter *a* and Emacs switches
 back the Dired buffer. Then, I switch back to the files I was editing
 with *C-x r j*, get a prompt, enter *b*.
 
+The demo starts with two Dired buffers side by side.
+
 [[file:static/register-windows.gif][file:static/register-windows.gif]]
 
 *** Save text
@@ -1993,8 +1993,6 @@ with *C-x r j*, get a prompt, enter *b*.
 :ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
 :END:
 You can also save a region in registers. 
-
-#+BEGIN_CENTER
 
 | Key           | Bind                            |
 |---------------+---------------------------------|
@@ -2010,7 +2008,6 @@ You can also save a region in registers.
 
 *REG* can be a letter (such as ‘a’) or a number (such as ‘1’); case
  matters, so register ‘a’ is not the same as register ‘A’.
-#+END_CENTER
 
 You may wonder, what's the point of storing text into register? Haven't
 you got a kill ring? Here are the reasons:

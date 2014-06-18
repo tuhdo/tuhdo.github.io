@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-18 T4 00:06 -->
+<!-- 2014-06-18 T4 23:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -89,6 +89,77 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" href="./static/worg.css">
+<script type="text/javascript" src="http://orgmode.org/org-info.js">
+/**
+ *
+ * @source: http://orgmode.org/org-info.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/org-info.js.
+ *
+ * Copyright (C) 2012-2013 Free Software Foundation, Inc.
+ *
+ *
+ * The JavaScript code in this tag is free software: you can
+ * redistribute it and/or modify it under the terms of the GNU
+ * General Public License (GNU GPL) as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option)
+ * any later version.  The code is distributed WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+ *
+ * As additional permission under GNU GPL version 3 section 7, you
+ * may distribute non-source (e.g., minimized or compacted) forms of
+ * that code without the copy of the GNU GPL normally required by
+ * section 4, provided you include this license notice and a URL
+ * through which recipients can access the Corresponding Source.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/org-info.js.
+ *
+ */
+</script>
+
+<script type="text/javascript">
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+
+<!--/*--><![CDATA[/*><!--*/
+org_html_manager.set("TOC_DEPTH", "3");
+org_html_manager.set("LINK_HOME", "");
+org_html_manager.set("LINK_UP", "");
+org_html_manager.set("LOCAL_TOC", "1");
+org_html_manager.set("VIEW_BUTTONS", "0");
+org_html_manager.set("MOUSE_HINT", "underline");
+org_html_manager.set("FIXED_TOC", "0");
+org_html_manager.set("TOC", "1");
+org_html_manager.set("VIEW", "folding");
+org_html_manager.setup();  // activate after the parameters are set
+/*]]>*///-->
+</script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -241,26 +312,38 @@ font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Sta
 <li><a href="#sec-7-16">Mark ring</a></li>
 <li><a href="#sec-7-17">Global mark ring</a></li>
 <li><a href="#sec-7-18">Undo/redo</a></li>
-<li><a href="#sec-7-19">Incremental search</a></li>
-<li><a href="#sec-7-20">Query replace</a></li>
-<li><a href="#sec-7-21">Modeline</a></li>
-<li><a href="#sec-7-22">Minibuffer</a></li>
-<li><a href="#sec-7-23">Echo area</a></li>
-<li><a href="#sec-7-24">Frames</a></li>
-<li><a href="#sec-7-25">Window</a></li>
-<li><a href="#sec-7-26">Prefix Arguments</a></li>
-<li><a href="#sec-7-27">Basic file management with Dired</a>
+<li><a href="#sec-7-19">Search for text</a>
 <ul>
-<li><a href="#sec-7-27-1">Enter Dired</a></li>
-<li><a href="#sec-7-27-2">Navigation</a></li>
-<li><a href="#sec-7-27-3">Create files</a></li>
-<li><a href="#sec-7-27-4">Visit files</a></li>
-<li><a href="#sec-7-27-5">File Marking</a></li>
-<li><a href="#sec-7-27-6">Operating on files</a></li>
-<li><a href="#sec-7-27-7">Deleting files</a></li>
-<li><a href="#sec-7-27-8">Execute shell commands in Dired</a></li>
-<li><a href="#sec-7-27-9">Compare files</a></li>
-<li><a href="#sec-7-27-10">Subdirectories</a></li>
+<li><a href="#sec-7-19-1">Incremental search</a></li>
+<li><a href="#sec-7-19-2">Occur</a></li>
+<li><a href="#sec-7-19-3">Query replace</a></li>
+<li><a href="#sec-7-19-4">Multi-occur</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-20">Modeline</a></li>
+<li><a href="#sec-7-21">Minibuffer</a></li>
+<li><a href="#sec-7-22">Echo area</a></li>
+<li><a href="#sec-7-23">Frames</a></li>
+<li><a href="#sec-7-24">Window</a></li>
+<li><a href="#sec-7-25">Prefix Arguments</a></li>
+<li><a href="#sec-7-26">Basic file management with Dired</a>
+<ul>
+<li><a href="#sec-7-26-1">Enter Dired</a></li>
+<li><a href="#sec-7-26-2">Navigation</a></li>
+<li><a href="#sec-7-26-3">Create files</a></li>
+<li><a href="#sec-7-26-4">Visit files</a></li>
+<li><a href="#sec-7-26-5">File Marking</a></li>
+<li><a href="#sec-7-26-6">Operating on files</a></li>
+<li><a href="#sec-7-26-7">Deleting files</a></li>
+<li><a href="#sec-7-26-8">Execute shell commands in Dired</a></li>
+<li><a href="#sec-7-26-9">Compare files</a></li>
+<li><a href="#sec-7-26-10">Subdirectories</a></li>
+</ul>
+</li>
+<li><a href="#sec-7-27">Registers</a>
+<ul>
+<li><a href="#sec-7-27-1">Save window configuration</a></li>
+<li><a href="#sec-7-27-2">Save text</a></li>
 </ul>
 </li>
 <li><a href="#sec-7-28">Version Control</a></li>
@@ -880,6 +963,12 @@ features in Emacs. However, you forget a specific key binding for a
 command in those features. <b>C-x r C-h</b> list all key bindings that have
 prefix <b>C-x r</b>.
 </p>
+
+<p>
+Finally ,*C-g* executes the command <code>keyboard-quit</code>, which cancels anything
+Emacs is executing. If you press any key sequence wrongly, <b>C-g</b> to
+cancel that incorrectly pressed key sequence and start again.
+</p>
 </div>
 </div>
 <div id="outline-container-sec-7-2" class="outline-3">
@@ -1062,12 +1151,6 @@ accepts anything, bounded by a specific characters next to it.
 <p>
 During the exercise, if there's something happens, for example, you
 press the wrong keys and Emacs is behaving weird, just press <b>C-g</b>.
-</p>
-
-<p>
-<b>C-g</b> executes the command <code>keyboard-quit</code>, which cancels anything
-Emacs is executing. <code>M-x keyboard-quit</code>, you will see
-this command there. 
 </p>
 
 <p>
@@ -2016,14 +2099,77 @@ work under the terminal.
 <li>Kill a sentence: <b>M-k</b>
 </li>
 </ul>
+
+<p>
+When you kill something, the killed content is put into the Kill Ring.
+</p>
 </div>
 </div>
 <div id="outline-container-sec-7-14" class="outline-3">
 <h3 id="sec-7-14"><a id="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0"></a>Kill ring</h3>
 <div class="outline-text-3" id="text-7-14">
 <p>
-Kill ring is the list of previously killed content. You can insert the
+Kill ring is the list of previously killed contents. You can insert the
 most recently killed element by <b>C-y</b>.
+</p>
+
+<p>
+If you supply a number, using <b>C-&lt;number&gt;</b> - <b>&lt;number&gt;</b> can be any
+number - before you <b>C-y</b>, to paste the nth entry in the kill
+ring. The most recent entry is 1st entry. <b>C-1 C-y</b> is the same as
+<b>C-y</b>; <b>C-2 C-y</b> is the 2nd most recent entry, make that entry the
+haed of the list and so on&#x2026;
+</p>
+
+<p>
+Let's play with the kill ring for a while. Open a buffer and insert
+these lines:
+</p>
+
+<blockquote>
+<p>
+aaa
+bbb
+ccc
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>Kill the three lines with <b>C-k</b>, from top to bottom.
+</li>
+
+<li><b>C-y</b> or <b>C-1 C-y</b>, you will see <code>ccc</code> got inserted.
+</li>
+
+<li><b>C-2 C-y</b>, you will see <code>bbb</code> got inserted; <b>C-y</b> again, you will
+see <code>bbb</code> got inserted again. <code>bbb</code> now becomes head of the list. 
+</li>
+
+<li><b>C-2 C-y</b>, you will see <code>aaa</code> got inserted; <b>C-y</b> again, you will
+see <code>aaa</code> got inserted again. <code>aaa</code> now bedcomes head of the list.
+</li>
+
+<li>Insert the 3 lines and kill all again.
+</li>
+
+<li><b>C-3 C-y</b>, you will see <code>aaa</code> got inserted; * again, you will
+see <code>aaa</code> got inserted again. <code>aaa</code> now bedcomes head of the list
+</li>
+
+<li>&#x2026; and so on &#x2026;
+</li>
+</ul>
+
+<p>
+<b>C-&lt;number&gt;</b> is called prefix argument. Basically it's for altering
+the behaviour of you command. You will learn about prefix
+argument in later section.
+</p>
+
+<p>
+You may wonder, what happens if the kill ring getting really large?
+That's right. It's a problem, and that's when the 3rd party plugins
+shine.
 </p>
 </div>
 </div>
@@ -2251,9 +2397,18 @@ Again, two features in one command, but a bit confusing this time.
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-7-19" class="outline-3">
-<h3 id="sec-7-19"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h3>
+<h3 id="sec-7-19"><a id="ID-ca3e54c5-fbc6-457f-b82e-55fe59cc3ef9"></a>Search for text</h3>
 <div class="outline-text-3" id="text-7-19">
+<p>
+Content search is an essential feature in every editor. Emacs has many
+built-in tools for this problem.
+</p>
+</div>
+<div id="outline-container-sec-7-19-1" class="outline-4">
+<h4 id="sec-7-19-1"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h4>
+<div class="outline-text-4" id="text-7-19-1">
 <p>
 So, you want to look for something in the buffer? <b>C-s</b> invokes
 <code>isearch-forward</code>, allows you to look forward from the current point
@@ -2307,16 +2462,18 @@ and so on.
 </p>
 
 <p>
-<b>C-g</b> and <b>C-s</b> again.
+<b>C-g</b>, then <b>C-s</b> again. You can select the old input to search again with:
 </p>
 
-<p>
-<b>M-p</b> moves to the previous input.
-<b>M-n</b> moves to the next input.
-</p>
+<ul class="org-ul">
+<li><b>M-p</b> moves to the previous input.
+</li>
+<li><b>M-n</b> moves to the next input.
+</li>
+</ul>
 
 <p>
-You can select the old input to search again.
+If you want to search with regexp, <b>C-u C-s</b>.
 </p>
 
 <p>
@@ -2417,9 +2574,177 @@ are bound to <b>M-g</b> prefix key:
 </table>
 </div>
 </div>
-<div id="outline-container-sec-7-20" class="outline-3">
-<h3 id="sec-7-20"><a id="ID-4145517f-b864-47f3-bc8b-63509a59d26c"></a>Query replace</h3>
-<div class="outline-text-3" id="text-7-20">
+<div id="outline-container-sec-7-19-2" class="outline-4">
+<h4 id="sec-7-19-2"><a id="ID-e49a59d6-efab-401c-9164-0ae45806e719"></a>Occur</h4>
+<div class="outline-text-4" id="text-7-19-2">
+<p>
+Command <code>occur</code> lists all line that match a string or a regexp and
+display the search result in a buffer named <code>*Occur*</code>. <code>occur</code> is
+useful in situation where you have a large number of matches and need
+a better tool to manage rather than going back and forth with
+Isearch. For example, you have a match around line 1000, but you are
+currently at line 500. In between the two lines are many other
+matches. You cannot use Isearch to jump through them all. This is
+where <code>*Occur*</code> is handy. <code>*Occur*</code> is also useful for queyr and
+replace a sting with another, and allow you to verify that you did
+indeed replace the correct string.
+</p>
+
+<p>
+To invoke <code>occur</code>, run <code>M-s o</code>; if you <code>M-s o</code> in Isearch prompt,
+<code>occur</code> will get the text currently using. Quite convenient. You can
+use <b>M-g n</b> and <b>M-g p</b> to go to next/previous matches, or using the
+mouse to scroll. If you feel <b>M-g p</b> and <b>M-g n</b> to go back and forth
+is annoying, you can repeat it using <b>C-x z</b> which runs <code>repeat</code>:
+</p>
+
+<ul class="org-ul">
+<li><b>M-g n</b> to go to next match.
+</li>
+<li><b>C-x z</b> to repeat previous command.
+</li>
+<li>From now on, keep pressing <b>z</b> to repeat previous command until your
+press a different character.
+</li>
+</ul>
+
+<p>
+Demo, notice how the inactive cursor at the <code>*Occur*</code> buffer moves as point in
+my main buffer moves:
+</p>
+
+
+<div class="figure">
+<p><a href="static/occur.gif"><img src="static/occur.gif" alt="occur.gif" /></a>
+</p>
+</div>
+
+<p>
+You can operate directly on occur buffer. In <code>*Occur*</code> buffer, use
+<b>C-p</b> and <b>C-n</b> to go to previous and next entries. Press <b>o</b> jumps to
+the match at point and switch point to buffer that contains the
+match; <b>C-o</b> to open the match at point but not switching buffer. If
+you want to edit the matches, press <b>e</b> to enter <code>occur-edit-mode</code>;
+after that, you can edit anywhere in the <code>*Occur*</code> buffer and see your
+changes updated as you type on the other buffer. You can do any
+editing commands when in <code>occur-edit-mode</code>, such as commands for query
+replace in previous section to replace all matches.
+</p>
+
+<p>
+Demo:
+</p>
+
+
+<div class="figure">
+<p><a href="static/occur-edit.gif"><img src="static/occur-edit.gif" alt="occur-edit.gif" /></a>
+</p>
+</div>
+
+<p>
+Here are key bindings in <code>occur</code>:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-n</code></td>
+<td class="left">Go to next line</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-p</code></td>
+<td class="left">Go to previoius line</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>&lt;</code></td>
+<td class="left">Go to beginning of buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>&gt;</code></td>
+<td class="left">Go to end of buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>e</code></td>
+<td class="left">Edit current <code>*Occur*</code> buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-c C-c</code></td>
+<td class="left">When finish with editing, <code>C-c C-c</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">to exit editing mode</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>g</code></td>
+<td class="left">If your searching file is updated,</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">press <code>g</code> refreshes the <code>*Occur*</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">buffer to reflect the changes</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>o</code></td>
+<td class="left">Jump to the match and switch point</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-o</code></td>
+<td class="left">Jump to the match but point remain</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">on <code>*Occur*</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+If you want to have this table (and more key bindings), in <code>*Occur*</code>
+buffer runs <b>C-h m</b> or press <b>h</b>. Finally, press <b>q</b> to quit <code>*Occur*</code>
+buffer.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-7-19-3" class="outline-4">
+<h4 id="sec-7-19-3"><a id="ID-4145517f-b864-47f3-bc8b-63509a59d26c"></a>Query replace</h4>
+<div class="outline-text-4" id="text-7-19-3">
 <p>
 To replace something, <b>M-%</b> to execute <b>query-replace</b>. <b>M-%</b> asks you
 two inputs:
@@ -2440,11 +2765,44 @@ Supply the inputs and <b>RET</b>.
 Emacs will asks your confirmation to replace a matched string. If you
 want to replace all, press <b>!</b> instead of answer yes or no.
 </p>
+
+<p>
+If you want to query and replace with regexp, <b>C-M-%</b>. <b>Tip</b>: this
+command is a bit hard to press; to make it easy, use both of your
+hands: 
+</p>
+
+<ul class="org-ul">
+<li>It can be that left hand presses <b>%</b> (or <b>S-5</b>) and right hand presses
+<b>C-M-</b>.
+</li>
+<li>It can be that right hand presses <b>C-</b> first, then left hand presses
+<b>M-%</b>.
+</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-sec-7-21" class="outline-3">
-<h3 id="sec-7-21"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
-<div class="outline-text-3" id="text-7-21">
+<div id="outline-container-sec-7-19-4" class="outline-4">
+<h4 id="sec-7-19-4"><a id="ID-49674610-411e-4345-a954-f333bced3969"></a>Multi-occur</h4>
+<div class="outline-text-4" id="text-7-19-4">
+<p>
+It is the same as <code>occur</code> except it asks user for multiple buffers. 
+</p>
+
+<ul class="org-ul">
+<li><code>multi-occur</code> asks for buffers to search. You enter buffer by buffer
+until you give it empty input.
+</li>
+<li><code>multi-occur-in-matching-buffers</code> requires a regexp, and it searches
+for occurences in buffers that match the regexp.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-20" class="outline-3">
+<h3 id="sec-7-20"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
+<div class="outline-text-3" id="text-7-20">
 <p>
 The mode line is the empty area below the buffer. It has useful
 summary information about the buffer shown in the window.
@@ -2458,11 +2816,12 @@ The text displayed in the mode line has the following format:
 <p>
 <code>cs:ch-fr     |  buf |  pos line | (major minor)</code>
 </p>
-</div>
 
 <p>
 For example, a modeline looks like this:
 </p>
+</div>
+
 
 
 <div class="figure">
@@ -2551,9 +2910,9 @@ viewing screen is 20% away from the top.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-22" class="outline-3">
-<h3 id="sec-7-22"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
-<div class="outline-text-3" id="text-7-22">
+<div id="outline-container-sec-7-21" class="outline-3">
+<h3 id="sec-7-21"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
+<div class="outline-text-3" id="text-7-21">
 <p>
 <code>Minibuffer</code> is the small area at the bottom of your Emacs screen.
 </p>
@@ -2590,9 +2949,9 @@ already used <b>M-p</b> and <b>M-n</b> to get old inputs in Isearch.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-23" class="outline-3">
-<h3 id="sec-7-23"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
-<div class="outline-text-3" id="text-7-23">
+<div id="outline-container-sec-7-22" class="outline-3">
+<h3 id="sec-7-22"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
+<div class="outline-text-3" id="text-7-22">
 <p>
 <code>Minibuffer</code> can be used for output as well. The echo area is used for
 displaying messages made with the message primitive, and for echoing
@@ -2605,9 +2964,9 @@ share the same physical space. You should not be confused between the two.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-24" class="outline-3">
-<h3 id="sec-7-24"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
-<div class="outline-text-3" id="text-7-24">
+<div id="outline-container-sec-7-23" class="outline-3">
+<h3 id="sec-7-23"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
+<div class="outline-text-3" id="text-7-23">
 <p>
 An application window in operating system is called a <b>Frame</b> in
 Emacs. So, you execute <b>Emacs</b> from the command line and open Emacs,
@@ -2783,9 +3142,9 @@ These are the key bindings for manipulating frames:
 </table>
 </div>
 </div>
-<div id="outline-container-sec-7-25" class="outline-3">
-<h3 id="sec-7-25"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
-<div class="outline-text-3" id="text-7-25">
+<div id="outline-container-sec-7-24" class="outline-3">
+<h3 id="sec-7-24"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
+<div class="outline-text-3" id="text-7-24">
 <p>
 Unlike other editors, Emacs can split your frame area into multiple smaller
 areas. Each such area is called a <code>window</code>. You can divide a frame
@@ -2812,8 +3171,9 @@ buffer. <b>C-x 3</b> is bound to <code>split-window-right</code>.
 
 <p>
 Now, after you execute the two commands above, you will have three
-windows: two above and one below. So, what can you do the windows you
-created? As I said earlier, you can put anything there.
+windows: two above and one below. Each window can hold a buffer. With
+the above two commands ,you can create arbitrary window layout. In
+Emacs, a window layout is called a window configuration.
 </p>
 
 <p>
@@ -3046,9 +3406,9 @@ Help system will be discussed in later section.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-26" class="outline-3">
-<h3 id="sec-7-26"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
-<div class="outline-text-3" id="text-7-26">
+<div id="outline-container-sec-7-25" class="outline-3">
+<h3 id="sec-7-25"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
+<div class="outline-text-3" id="text-7-25">
 <p>
 In Emacs, behind anything is a function. Function can accept
 argument. You can also pass arguments into Emacs commands to modify
@@ -3120,9 +3480,9 @@ Why number 4 for <b>C-u</b>? I don't know.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-27" class="outline-3">
-<h3 id="sec-7-27"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
-<div class="outline-text-3" id="text-7-27">
+<div id="outline-container-sec-7-26" class="outline-3">
+<h3 id="sec-7-26"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
+<div class="outline-text-3" id="text-7-26">
 <p>
 Emacs has a built-in one called Dired, short for
 <code>(Dir)ectory (Ed)itor</code>.
@@ -3134,9 +3494,9 @@ you read and practice these commands, read the <a href="https://www.gnu.org/soft
 </p>
 </div>
 
-<div id="outline-container-sec-7-27-1" class="outline-4">
-<h4 id="sec-7-27-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
-<div class="outline-text-4" id="text-7-27-1">
+<div id="outline-container-sec-7-26-1" class="outline-4">
+<h4 id="sec-7-26-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
+<div class="outline-text-4" id="text-7-26-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3177,9 +3537,9 @@ it. What command do you like the most?
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-27-2" class="outline-4">
-<h4 id="sec-7-27-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
-<div class="outline-text-4" id="text-7-27-2">
+<div id="outline-container-sec-7-26-2" class="outline-4">
+<h4 id="sec-7-26-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
+<div class="outline-text-4" id="text-7-26-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3224,9 +3584,9 @@ to the entry which is 4 lines below.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-27-3" class="outline-4">
-<h4 id="sec-7-27-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
-<div class="outline-text-4" id="text-7-27-3">
+<div id="outline-container-sec-7-26-3" class="outline-4">
+<h4 id="sec-7-26-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
+<div class="outline-text-4" id="text-7-26-3">
 <p>
 To create a new file in Dired, you use the same <b>C-x C-f</b> and <b>C-x 4
 C-f</b> variant.
@@ -3274,9 +3634,9 @@ choice.
 </div>
 </div>
 
-<div id="outline-container-sec-7-27-4" class="outline-4">
-<h4 id="sec-7-27-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
-<div class="outline-text-4" id="text-7-27-4">
+<div id="outline-container-sec-7-26-4" class="outline-4">
+<h4 id="sec-7-26-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
+<div class="outline-text-4" id="text-7-26-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3399,9 +3759,9 @@ to it quick and easy.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-7-27-5" class="outline-4">
-<h4 id="sec-7-27-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
-<div class="outline-text-4" id="text-7-27-5">
+<div id="outline-container-sec-7-26-5" class="outline-4">
+<h4 id="sec-7-26-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
+<div class="outline-text-4" id="text-7-26-5">
 <p>
 You flag files for deleting. You mark files for everything else
 (i.e. copy, move, link files&#x2026;). There are many marking commands for
@@ -3460,9 +3820,9 @@ files/directories for the next section.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-7-27-6" class="outline-4">
-<h4 id="sec-7-27-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
-<div class="outline-text-4" id="text-7-27-6">
+<div id="outline-container-sec-7-26-6" class="outline-4">
+<h4 id="sec-7-26-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
+<div class="outline-text-4" id="text-7-26-6">
 <p>
 These commands use uppercase character. If you see an uppercase
 character for a command, it means <b>S-&lt;character&gt;</b>.
@@ -3563,9 +3923,9 @@ attributes are cleared and you won't be able to access those files.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-7-27-7" class="outline-4">
-<h4 id="sec-7-27-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
-<div class="outline-text-4" id="text-7-27-7">
+<div id="outline-container-sec-7-26-7" class="outline-4">
+<h4 id="sec-7-26-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
+<div class="outline-text-4" id="text-7-26-7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3625,9 +3985,9 @@ attributes are cleared and you won't be able to access those files.
 </table>
 </div>
 </div>
-<div id="outline-container-sec-7-27-8" class="outline-4">
-<h4 id="sec-7-27-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
-<div class="outline-text-4" id="text-7-27-8">
+<div id="outline-container-sec-7-26-8" class="outline-4">
+<h4 id="sec-7-26-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
+<div class="outline-text-4" id="text-7-26-8">
 <p>
 Just like using a shell, you can execute command at current directory
 in Dired too. 
@@ -3662,9 +4022,9 @@ in Dired too.
 </table>
 </div>
 </div>
-<div id="outline-container-sec-7-27-9" class="outline-4">
-<h4 id="sec-7-27-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
-<div class="outline-text-4" id="text-7-27-9">
+<div id="outline-container-sec-7-26-9" class="outline-4">
+<h4 id="sec-7-26-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
+<div class="outline-text-4" id="text-7-26-9">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3693,9 +4053,9 @@ in Dired too.
 </table>
 </div>
 </div>
-<div id="outline-container-sec-7-27-10" class="outline-4">
-<h4 id="sec-7-27-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
-<div class="outline-text-4" id="text-7-27-10">
+<div id="outline-container-sec-7-26-10" class="outline-4">
+<h4 id="sec-7-26-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
+<div class="outline-text-4" id="text-7-26-10">
 <p>
 This is an excising feature in Dired. In other file explorers, you get
 a tree for browsing your directory. If you have a deep directory
@@ -3741,6 +4101,253 @@ later access. <b>C-x r m</b> and save the current Dired buffer with subdirectori
 <li>Open the Dired buffer via the bookmark list <b>C-x r l</b>. You will see
 that not only your Dired buffer is fully restored, but your
 subdirectories too.
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-27" class="outline-3">
+<h3 id="sec-7-27"><a id="ID-d4060b6d-0cc9-41bc-976e-d33b56b0df6b"></a>Registers</h3>
+<div class="outline-text-3" id="text-7-27">
+<p>
+When I first heard about registers in Emacs, it scared me. I thought
+"Wow, what is this "register" thingie? Am I going to work directly
+with CPU registers?" As it turned out, despite the name "Register",
+it's not something that complicated to understand. Although, Emacs register
+is simlar to CPU register in the sense that it allows quicly access of
+temporal data.
+</p>
+
+<p>
+Each register has a name that consists of a single character, which we
+will denote by <i>r</i>; <i>r</i> can be a letter (such as ‘a’) or a number (such as
+‘1’); case matters, so register ‘a’ is not the same as register ‘A’.
+</p>
+
+<p>
+In Emacs, registers are for quick access to things. Things can be a
+position, a piece of text, a rectangle, a number, a file name, or a
+window configuratoin (yes, you can save how Emacs organizes its screen
+and restore later!). However, the most useful ones, in my experience,
+are window configuration,text region, as they are easy to use and use
+frequently.
+</p>
+
+<p>
+Saving differnt types of objects has diffent key bindings, but to jump
+to a register, you use a single command <b>C-x r j REG</b>; <b>REG</b> is a
+register of your choice.
+</p>
+
+<p>
+The prefix key for register commands is <b>C-x r</b>. If you forget the key
+bindings, <b>C-x r C-h</b> to get the list of key bindings.
+</p>
+</div>
+
+<div id="outline-container-sec-7-27-1" class="outline-4">
+<h4 id="sec-7-27-1"><a id="ID-840ff6ae-1f2b-4796-9f7f-7cd5db33d879"></a>Save window configuration</h4>
+<div class="outline-text-4" id="text-7-27-1">
+<p>
+One of the best of use of register. It simly saves your window
+configuration at the moment and restore the layout later. 
+</p>
+
+<p>
+For example, you are viewing four source code buffers, but want to
+open two Dired buffers side by side to for managing files, so you
+close two windows and switch the other two windows to Dired
+buffers. But this makes you lose the perfect layout you are having,
+and later it would be tedious to restore one by one to finally
+recreate the original layout you were working with. Then, later, you
+have to do something, you have to break your window configuration, you
+have to manually restore your window configuration again, and have to
+remeber exactly which buffers you were working with.
+</p>
+
+<p>
+To free you from this burden, register is the answer. You can save a
+window configuration having four windows displaying four buffers, and
+another one having two Dired buffers for your project. You can switch
+between them easiler. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x r w REG</code></td>
+<td class="left"><b>Command</b>: <code>window-configuration-to-register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Save the window configuration of current frame into register <b>REG</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x r f REG</code></td>
+<td class="left"><b>Command</b>: <code>frame-configuration-to-register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Save the state of all frames, including all their windows, in register <b>REG</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x r j REG</code></td>
+<td class="left"><b>Command</b>: <code>jump-to-register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Jump to a register <b>REG</b>.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>REG</b> can be a letter (such as ‘a’) or a number (such as ‘1’); case
+ matters, so register ‘a’ is not the same as register ‘A’.
+</p>
+
+<p>
+<span class="underline">Demo</span>: In this demo, I saved two windows configurations in two
+registers <b>a</b> and <b>b</b>, using <b>C-x r w</b>. Register <b>a</b> stores the Dired
+buffer that contains two project directories. Then, I open two files
+in the two directories, create another smaller window and open another
+file. Then, suddenly I want to go back to my project roots. It's then 
+when I execute <b>C-x r j</b>, get a promp, enter <b>a</b> and Emacs switches
+back the Dired buffer. Then, I switch back to the files I was editing
+with <b>C-x r j</b>, get a prompt, enter <b>b</b>.
+</p>
+
+<p>
+The demo starts with two Dired buffers side by side.
+</p>
+
+
+<div class="figure">
+<p><a href="static/register-windows.gif"><img src="static/register-windows.gif" alt="register-windows.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-27-2" class="outline-4">
+<h4 id="sec-7-27-2"><a id="ID-cf4d74d8-e13e-4238-a5ff-9de0f006b6c5"></a>Save text</h4>
+<div class="outline-text-4" id="text-7-27-2">
+<p>
+You can also save a region in registers. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Bind</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-x r s Reg</code></td>
+<td class="left"><b>Command</b>: <code>copy-to-register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Copy region into register <b>REG</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x r Reg</code></td>
+<td class="left"><b>Command</b>: <code>insert-register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Insert text from register <b>REG</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x r j REG</code></td>
+<td class="left"><b>Command</b>: <code>jump-to-register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Jump to a register <b>REG</b>.</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<b>REG</b> can be a letter (such as ‘a’) or a number (such as ‘1’); case
+ matters, so register ‘a’ is not the same as register ‘A’.
+</p>
+
+<p>
+You may wonder, what's the point of storing text into register? Haven't
+you got a kill ring? Here are the reasons:
+</p>
+
+<ul class="org-ul">
+<li>As you already know, insert past contents from the kill ring makes
+the chosen content the head entry. This is inconvenient, and this is
+when registers are handy for storing many pieces of text without
+affect the kill ring. For example, you read a manual (man page or
+info page), and you want to remember many keywords and paste it
+somewhre later. Registers can help you with this use case.
+</li>
+
+<li>You can also use register to save many code template. For example,
+you can save a for loop template into register <b>f</b>, if template into
+register <b>i</b>, function definition into register <b>F</b>&#x2026; This is
+really handy when you are learning a new language and keep
+forgetting syntax all the time. 
+
+<p>
+For example, this C++11 code snippet would be hard to remember if
+you are new:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c++"><span style="color: #b9ca4a;">auto</span> <span style="color: #7aa6da;">it</span> = find_if (vertices.begin(), vertices.end(), [&amp;v_idx] (<span style="color: #b9ca4a;">const</span> <span style="color: #7aa6da;">Vertex</span>&amp; <span style="color: #e7c547;">o</span>) -&gt; <span style="color: #7aa6da;">bool</span> {
+        <span style="color: #b9ca4a;">return</span> o.id == v_idx;
+    });
+</pre>
+</div>
+
+<p>
+Save it to a register, insert and modify it to fit my current need
+until I remeber it. Much faster than go back to previous source
+location to look up again, and would be time consuming if your
+source code is large.
+</p>
 </li>
 </ul>
 </div>
