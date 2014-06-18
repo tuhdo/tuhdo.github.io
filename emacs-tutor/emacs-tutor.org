@@ -1892,7 +1892,26 @@ why they are not really useful anymore.
 :PROPERTIES:
 :ID:       840ff6ae-1f2b-4796-9f7f-7cd5db33d879
 :END:
+One of the best of use of register. It simly saves your window
+configuration at the moment and restore the layout later. 
 
+For example, you are viewing four source code buffers, but want to
+open two Dired buffers side by side to for managing files, so you
+close two windows and switch the other two windows to Dired
+buffers. But this makes you lose the perfect layout you are having,
+and later it would be tedious to restore one by one to finally
+recreate the original layout you were working with. Then, later, you
+have to do something, you have to break your window configuration, you
+have to manually restore your window configuration again, and have to
+remeber exactly which buffers you were working with.
+
+To free you from this burden, register is the answer. You can save a
+window configuration having four windows displaying four buffers, and
+another one having two Dired buffers for your project. You can switch
+between them easiler. 
+
+Demo:
+ 
 *** Save file names
 :PROPERTIES:
 :ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
