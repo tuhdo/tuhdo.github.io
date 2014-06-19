@@ -14,56 +14,99 @@
 Lisp has a long history. Lisp was designed by computer scientist [[http://en.wikipedia.org/wiki/John_McCarthy_%2528computer_scientist%2529][John
 McCarthy]]. Lisp first appeared in 1958 and Lisp is still with us up to
 this day with various dialects: Common Lispn, newLisp, Emacs Lisp, Racket,
-Clojure... Lisp is short for *LIS*t *P*rocessing.
+Clojure... Lisp is short for (LIS)t (P)*rocessing.
 
 You can read the history of Lisp upto 1979 of Lisp, written by John
 McCarthy: [[http://www-formal.stanford.edu/jmc/history/lisp/lisp.html][History of Lisp]].
 
 Another good read about Lisp history, written by Paul Graham: [[http://www.paulgraham.com/lisphistory.html][Lisp
 History]].
-** Basic syntax and semantic
+** Basic syntax and semantic - and why you should learn Lisp
 :PROPERTIES:
 :ID:       9a30dadd-d95e-49a9-8690-b6b633d9083d
 :END:
-Lisp syntax is minimal and simple. At its core, you only need these
-two syntax constructs to use any Lisp:
+In this section, I will introduce to you why language like Lisp exists
+and what sets it from other languages, along with basic syntax and
+semantic. For deeper learning into Emacs Lisp, many tutorials exist
+and you can search easily. But before all of that, I want you to
+understand what Lisp differs from others, and what you can get in Lisp
+that you cannot get in others; otherwise, it's just learning a
+different ways of doing things in a different language. Lisp syntax is
+minimal and simple. At its core, you only need to remember these
+syntax constructs to use any Lisp: 
 
-- Data: 
-  #+begin_src emacs-lisp
-    ’(...)
-  #+end_src
+- Data:
+  - Atomic, or Atom: It is the same as primitives in other languages, meaning the
+  most basic construct and indivisble.
+  - Non-atomic: There's a reason Lisp is called (LIS)t
+    (P)rocessing. In other languages, list is just another data type;
+    but in Lisp, because of Lisp syntax, list is really 
+    special. Basically, this is a list: 
+
+	#+begin_src emacs-lisp
+      ’(...)
+    #+end_src
+    
+    A list can hold data, both atomic and non-atomic. That means, a
+    list can hold a smaller list inside it along with atomic data.
 
 - Code:
   #+begin_src emacs-lisp
     (...)
   #+end_src
+  
+  What is the difference between code and data? That's right, a single
+  quote =’=. Without the quote =’=, we are creating code for computer
+  to execute. With the quote =’=, we are creating data - a list that
+  contains elements in   it - similar to List data structure in Java
+  or C++ to hold data.
 
-What is the difference between code and data? That's right, a single
-quote =’=. Without the quote =’=, we are creating code. With the quote
-=’=, we are creating data - a list that contains elements in it - similar
-to List data structure in Java or C++. Both code and data in Lisp can
-be represented using the same format, that is, a pair of parentheses
-with items in it: =(...)=. The syntax =(...)= is also called a *Lisp
-form*. Because of this property, it makes Lisp so powerful: code can
-be data, data can be code. It is a reson why Lisp contains a lot of
+_Examples_:
+
+#+BEGIN_QUOTE
+- ~’(1 2 3 4)~ is a list that holds 4 numbers from 1 to 4.
+
+- ~’("aa" "bb" "cc" "dd")~ is a list that holds 4 strings.
+
+- ~’(if a b c)~ is a list that hold 4 /symbol/ =if=, =a=, =b= and =c=.
+
+- ~(if a b c)~ is an =if= expression that executes =if..then..else=
+  logic in common programming languages. Expressions like =if= are
+  called *special form*.
+
+- ~’(+ 1 2 3)~ is a list consists of 4 elements =+=, =1=, =2= and =3=.
+
+- ~(+ 1 2 3)~ is a function call to function =+=.
+#+END_QUOTE
+
+Both code and data in Lisp can be represented using the same format: a
+pair of parentheses with items in it: =(...)=. The syntax =(...)= is
+also called a *Lisp form*. This peculiar property is called
+*homoiconicity*, and languages that have this property is called
+*homoiconic languages*. It makes Lisp so powerful: code can be data,
+data can be code. It is a reason why Lisp contains a lot of
 parentheses.
 
-- Minimal and simple syntax: =’(...)= for creating data and =(...)=
-  for creating code. Actually, =’(...)= is just a syntactic sugar for
-  =(quote ...)=. In the end, Lisp only has one syntax: a pair of
-  parentheses and items in it. With this syntax, many things are easy
-  to do in Lisp, such as generating code as data and execute it
-  later, both in compile time and runtime.
+Lisp has 3 types of forms:
 
-  For example, this is typical =if..then..else=:
+- Special form: 
+- Function form
+- Macro form
 
-  #+begin_src c
-    if (condition) {
-        ...statements...
-    } else {
-        ...statements...
-    }
-  #+end_src
+It's worth to repeat again:  =’(...)= for creating data and =(...)=
+for creating code; you hold things in =’(...)= and you process things
+in =(...)=. Easy to remember, right? 
+
+
+, Let, this is typical =if..then..else=:
+
+#+begin_src c
+  if (condition) {
+      ...statements...
+  } else {
+      ...statements...
+  }
+#+end_src
 
 How do you change its syntax? For example, how can we change it to
 Python =if...then...else= like this and write our customized version
@@ -89,35 +132,21 @@ be enclosed within a Lisp form like this:
       ...statements...)
 #+end_src
 
-
 Lisp still has syntax, but it is minimal; for that reason, it can
 adapt to any type of syntax the programmers can imagine. Notice the
-single quote =’=, signaling that the entire form is data, and to be
-processed to create appropriate code. 
+single quote =’=, signaling that the entire form is data, and need to
+be processed to create appropriate code when feed into some processing
+function. Now you see why Lisp code has a lot of parentheses.
 
-Lisp has 3 types of forms:
+In reality, =’(...)= is just a syntactic sugar for =(quote ...)=. In the
+end, Lisp only has one syntax: a pair of parentheses and items in
+it. With this syntax, many things are easy to do in Lisp, such as
+generating code as data and execute it later, both in compile time and
+runtime. You won't find any language with such a minimal syntax and
+unifomity, yet so expressive.
 
-- Special form
-- Function form
-- Macro form
-
-_Examples_:
-
-- ~’(1 2 3 4)~ is a list that holds 4 numbers from 1 to 4.
-
-- ~’("aa" "bb" "cc" "dd")~ is a list that holds 4 strings.
-
-- ~’(if a b c)~ is a list that hold 4 /symbol/ =if=, =a=, =b= and =c=.
-
-- ~(if a b c)~ is an =if= expression that executes =if..then..else=
-  logic in common programming languages. Expressions like =if= are
-  called *special form*.
-
-- ~’(+ 1 2 3)~ is a list consists of 4 elements =+=, =1=, =2= and =3=.
-
-- ~(+ 1 2 3)~ is a function call to function =+=.
-
-Since we use Emacs, we learn Emacs Lisp. 
+Since we use Emacs, the Lisp dialect we are going to learn is Emacs
+Lisp.
 ** Commonly used functions and patterns for configuration
 :PROPERTIES:
 :ID:       e54be9d4-bce0-428e-94be-c137bdc0de11
