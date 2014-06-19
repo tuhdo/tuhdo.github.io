@@ -26,20 +26,96 @@ History]].
 :ID:       9a30dadd-d95e-49a9-8690-b6b633d9083d
 :END:
 Lisp syntax is minimal and simple. At its core, you only need these
-two constructs to use any Lisp:
+two syntax constructs to use any Lisp:
 
 - Data: 
   #+begin_src emacs-lisp
-    '(if a b c)
+    ’(...)
   #+end_src
 
 - Code:
   #+begin_src emacs-lisp
-    (if a b c)
+    (...)
   #+end_src
 
 What is the difference between code and data? That's right, a single
-quote '.
+quote =’=. Without the quote =’=, we are creating code. With the quote
+=’=, we are creating data - a list that contains elements in it - similar
+to List data structure in Java or C++. Both code and data in Lisp can
+be represented using the same format, that is, a pair of parentheses
+with items in it: =(...)=. The syntax =(...)= is also called a *Lisp
+form*. Because of this property, it makes Lisp so powerful: code can
+be data, data can be code. It is a reson why Lisp contains a lot of
+parentheses.
+
+- Minimal and simple syntax: =’(...)= for creating data and =(...)=
+  for creating code. Actually, =’(...)= is just a syntactic sugar for
+  =(quote ...)=. In the end, Lisp only has one syntax: a pair of
+  parentheses and items in it. With this syntax, many things are easy
+  to do in Lisp, such as generating code as data and execute it
+  later, both in compile time and runtime.
+
+  For example, this is typical =if..then..else=:
+
+  #+begin_src c
+    if (condition) {
+        ...statements...
+    } else {
+        ...statements...
+    }
+  #+end_src
+
+How do you change its syntax? For example, how can we change it to
+Python =if...then...else= like this and write our customized version
+in C:
+
+#+begin_src python
+  if condition:
+      ...statements...
+  else:
+      ...statements...
+#+end_src
+
+The answer is, impossible, even with C Macro, because C macro still
+requires you to put arguments inside a pair of parentheses. With Lisp,
+this is entirely possible, except one minor thing: the syntax must be
+treated as data, meaning the entire Python =if= construct above must
+be enclosed within a Lisp form like this:
+
+#+begin_src emacs-lisp
+  '(if condition:
+      ...statements
+    else:
+      ...statements...)
+#+end_src
+
+
+Lisp still has syntax, but it is minimal; for that reason, it can
+adapt to any type of syntax the programmers can imagine. Notice the
+single quote =’=, signaling that the entire form is data, and to be
+processed to create appropriate code. 
+
+Lisp has 3 types of forms:
+
+- Special form
+- Function form
+- Macro form
+
+_Examples_:
+
+- ~’(1 2 3 4)~ is a list that holds 4 numbers from 1 to 4.
+
+- ~’("aa" "bb" "cc" "dd")~ is a list that holds 4 strings.
+
+- ~’(if a b c)~ is a list that hold 4 /symbol/ =if=, =a=, =b= and =c=.
+
+- ~(if a b c)~ is an =if= expression that executes =if..then..else=
+  logic in common programming languages. Expressions like =if= are
+  called *special form*.
+
+- ~’(+ 1 2 3)~ is a list consists of 4 elements =+=, =1=, =2= and =3=.
+
+- ~(+ 1 2 3)~ is a function call to function =+=.
 
 Since we use Emacs, we learn Emacs Lisp. 
 ** Commonly used functions and patterns for configuration
@@ -72,7 +148,7 @@ programming envrionment, so don't skip it.
 
 Don't be intimidated if you see many packages down there. Adding
 packages and see it extends your Emacs is fun and addictive, like 
-playing video games. 
+playing video games.
 ** Changing Emacs defaults
 :PROPERTIES:
 :ID:       43326747-04db-461c-9f5b-cb0831c983ac
