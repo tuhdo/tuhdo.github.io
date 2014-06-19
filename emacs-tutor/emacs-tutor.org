@@ -2001,7 +2001,7 @@ when I execute *C-x r j*, get a promp, enter *a* and Emacs switches
 back the Dired buffer. Then, I switch back to the files I was editing
 with *C-x r j*, get a prompt, enter *b*.
 
-The demo starts with two Dired buffers side by side.
+The demo starts when you see at the bottom a prompt with "Eval: START".
 
 [[file:static/register-windows.gif][file:static/register-windows.gif]]
 
