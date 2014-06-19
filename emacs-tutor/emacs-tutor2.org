@@ -11,10 +11,37 @@
 :PROPERTIES:
 :ID:       71c4974f-42b4-4a29-93bd-b823688ea024
 :END:
+Lisp has a long history. Lisp was designed by computer scientist [[http://en.wikipedia.org/wiki/John_McCarthy_%2528computer_scientist%2529][John
+McCarthy]]. Lisp first appeared in 1958 and Lisp is still with us up to
+this day with various dialects: Common Lispn, newLisp, Emacs Lisp, Racket,
+Clojure... Lisp is short for *LIS*t *P*rocessing.
+
+You can read the history of Lisp upto 1979 of Lisp, written by John
+McCarthy: [[http://www-formal.stanford.edu/jmc/history/lisp/lisp.html][History of Lisp]].
+
+Another good read about Lisp history, written by Paul Graham: [[http://www.paulgraham.com/lisphistory.html][Lisp
+History]].
 ** Basic syntax and semantic
 :PROPERTIES:
 :ID:       9a30dadd-d95e-49a9-8690-b6b633d9083d
 :END:
+Lisp syntax is minimal and simple. At its core, you only need these
+two constructs to use any Lisp:
+
+- Data: 
+  #+begin_src emacs-lisp
+    '(if a b c)
+  #+end_src
+
+- Code:
+  #+begin_src emacs-lisp
+    (if a b c)
+  #+end_src
+
+What is the difference between code and data? That's right, a single
+quote '.
+
+Since we use Emacs, we learn Emacs Lisp. 
 ** Commonly used functions and patterns for configuration
 :PROPERTIES:
 :ID:       e54be9d4-bce0-428e-94be-c137bdc0de11

@@ -315,6 +315,23 @@ You can use your Palm to press Control in standard PC keyboard.
 :PROPERTIES:
 :ID:       dc9722bb-91fb-4f38-b701-ffd3fb84d4c7
 :END:
+** Command
+:PROPERTIES:
+:ID:       4bb52c4a-1d30-42e0-999b-b18d8831997e
+:END:
+In Emacs, behind every user interaction is a function. You press a key
+to insert a character, Emacs runs =self-insert-command=. There are two
+types of functions in Emacs:
+
+    - *Normal functions*: These functions are like functions in other
+      programming languages, and are used for implementing features in
+      Emacs. Users do not need to care about these functions, unless
+      they want to change the implementations.
+
+    - *Commands*: Interactive function provides to editor users.
+
+*M-x* itself is bound to =execute-extended-command=.
+
 ** Emacs Key Notation
 :PROPERTIES:
 :ID:       c428fffd-3636-43e4-916e-9bc67c48db4e
@@ -341,25 +358,41 @@ Taken from here: [[http://www.emacswiki.org/emacs/EmacsKeyNotation][EmacsWiki]]
 |--------+-----------------------------------------------|
 
 A notation such as *C-M-x* (or, equivalently, *M-C-x*) means press and
-hold both Control and Meta (Alt) keys while hitting the *x* key.
+hold both Control and Meta (Alt) keys while hitting the *x* key. From
+now on, I won't say something like "Press *M-x*" anymore. For example,
+if I say "*C-x C-f* your files", you should replace *C-x C-f* with its
+command like this in your head: "=find-file= your files". All commands
+use verbs, I think, so don't worry. Try to recall the command from the
+key binding; it will help you get used to Emacs quicker. One exception
+though, I only say "press *key*" if *key* is a single character on the
+keyboard.
+
+If you see =M-x command=, which means you need to *M-x* and type that
+*command*.
 
 A prefix key is a part of a full key binding. For example, a full key
 binding is *C-x r l* to run the command =bookmark-bmenu-list=, then
 *C-x* or *C-x r* are its prefixes. Note that key sequence such as
-*C-x* or *M-x* is considered a single character.
-
-Knowing prefix key is handy. If you forget the key bindings of
-something, but remember its prefix, you can press the prefix key and
-press *C-h* to get a list of commands with that prefix.
+*C-x* or *M-x* is considered a single character. Knowing prefix key is
+handy. If you forget the key bindings of something, but remember its
+prefix, you can press the prefix key and  *C-h* to get a list of
+commands with that prefix.
 
 For example, *C-x r* is the prefix for /register/ and /bookmark/
-features in Emacs. However, you forget a specific key binding for a
+commands in Emacs. However, you forget a specific key binding for a
 command in those features. *C-x r C-h* list all key bindings that have
 prefix *C-x r*.
 
 Finally ,*C-g* executes the command =keyboard-quit=, which cancels anything
 Emacs is executing. If you press any key sequence wrongly, *C-g* to
 cancel that incorrectly pressed key sequence and start again.
+
+As you gradually learn Emacs, you will see the key bindings are really
+systematically organized and mnemonic. Whenever you see key bindings
+end with *n* and *p*, it usually means *next* and *previous*; *o*
+means *open*; *h* means *help*; *C-h* is standard prefix for help
+commands; key bindings such as *o* and *C-o* are frequently used in
+many built-in tools such as /Dired/, /Ibuffer/, /Occur/...
 
 ** Ask for help - from Emacs
 :PROPERTIES:
@@ -374,7 +407,7 @@ will not list all, so you have to rely on Emacs to get your
 information:
 
 *C-h m* runs =describe-mode= to see all the key bindings
-and documentations of current major mode and minor modes of a buffer:
+and documentations of current major mode and minor modes of a buffer.
 
 *C-h w* runs =where-is= to get which keystrokes invoke a given command.
 
@@ -395,7 +428,11 @@ from describing a variable, it allows you to customize the behaviours
 of Emacs and 3rd party packages. But for now, you don't need it.
 
 *C-h C-h* runs *help-for-help*. Use this command if you want to see
-other help commands.
+list of available help commands. Remember, if you partially remember a
+key binding, just press as much as you can remember and then press
+*C-h*, Emacs will list avaiable commands for that prefix. Prefix *C-h*
+is no exception. *C-h C-h* simply returns all key bindings and
+commands of prefix *C-h*.
 
 *** Info
 :PROPERTIES:
@@ -424,30 +461,6 @@ You can view man pages with two commands:
   =man= program installed, while the =man= command above invokes
   external =man= program.
 
-** Command
-:PROPERTIES:
-:ID:       4bb52c4a-1d30-42e0-999b-b18d8831997e
-:END:
-In Emacs, behind every user interaction is a function. You press a key
-to insert a character, Emacs runs self-insert-command. There are two
-types of functions in Emacs:
-
-    - *Normal functions*: These functions are like functions in other
-      programming languages, and are used for implementing features in
-      Emacs. Users do not need to care about these functions, unless
-      they want to change the implementations.
-
-    - *Commands*: Interactive function provides to editor users.
-
-From now on, I won't say something like "Press *M-x*" anymore. For
-example, if I say "*C-x C-f* your files", you should replace *C-x C-f*
-with its command like this in your head: "*find-file* your files". All
-commands use verbs, I think, so don't worry. Try to recall the command
-from the key binding; it will help you get used to Emacs quicker. If
-you see =M-x command=, which means you need to *M-x* and type that
-*command*. 
-
-*M-x* itself is bound to *execute-extended-command*.
 ** Point
 :PROPERTIES:
 :ID:       07FB6443-922D-4B66-AF40-58347F16700C
