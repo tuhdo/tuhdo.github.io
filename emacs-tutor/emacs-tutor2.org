@@ -7,6 +7,10 @@
 :PROPERTIES:
 :ID:       267fa5b6-b998-42c6-8ec0-382035284873
 :END:
+In this section, you only need to read and understand. It's important
+that you understand the core ideas. After you finish the sub-sections
+of this section, we will play with Emacs Lisp code for customizing
+Emacs, and it's really fun to see your Emacs "evolves" gradually.
 ** A bit of history
 :PROPERTIES:
 :ID:       71c4974f-42b4-4a29-93bd-b823688ea024
@@ -56,49 +60,49 @@ syntax constructs to use any Lisp:
   #+end_src
   
   What is the difference between code and data? That's right, a single
-  quote =’=. Without the quote =’=, we are creating code for computer
-  to execute. With the quote =’=, we are creating data - a list that
-  contains elements in   it - similar to List data structure in Java
-  or C++ to hold data.
+  quote =’=. Without the quote =’=, we are creating *a list* that holds
+  code for computer to execute. With the quote =’=, we are creating *a
+  list* that holds data, similar to List data structure in Java or C++
+  to hold data.
 
 _Examples_:
 
-#+BEGIN_QUOTE
-- ~’(1 2 3 4)~ is a list that holds 4 numbers from 1 to 4.
+#+begin_src emacs-lisp
+  ’(1 2 3 4)~ ;;is a list that holds 4 numbers from 1 to 4
 
-- ~’("aa" "bb" "cc" "dd")~ is a list that holds 4 strings.
+  ’("aa" "bb" "cc" "dd")~ ;;is a list that holds 4 strings
 
-- ~’(if a b c)~ is a list that hold 4 /symbol/ =if=, =a=, =b= and =c=.
+  ’(if a b c) ;;  a list that hold 4 /symbol/ =if=, =a=, =b= and =c=
 
-- ~(if a b c)~ is an =if= expression that executes =if..then..else=
-  logic in common programming languages. Expressions like =if= are
-  called *special form*.
+  (if a b c) ;; is an =if= expression that executes =if..then..else=
+             ;; logic in common programming languages. Expressions like =if= are
+             ;; called *special form*
 
-- ~’(+ 1 2 3)~ is a list consists of 4 elements =+=, =1=, =2= and =3=.
+  ’(+ 1 2 3) ;; is a list consists of 4 elements =+=, =1=, =2= and =3=
 
-- ~(+ 1 2 3)~ is a function call to function =+=.
-#+END_QUOTE
+  (+ 1 2 3)  ;; is a function call to function =+=
+#+end_src
 
 Both code and data in Lisp can be represented using the same format: a
-pair of parentheses with items in it: =(...)=. The syntax =(...)= is
-also called a *Lisp form*. This peculiar property is called
-*homoiconicity*, and languages that have this property is called
-*homoiconic languages*. It makes Lisp so powerful: code can be data,
-data can be code. It is a reason why Lisp contains a lot of
-parentheses.
+pair of parentheses with items in it: =(...)=; and it is called a
+list. This peculiar property is called *homoiconicity*, and languages
+that have this property is called *homoiconic languages*. It makes
+Lisp so powerful: code can be data, data can be code. It is a reason
+why Lisp contains a lot of parentheses.
 
-Lisp has 3 types of forms:
-
-- Special form: 
-- Function form
-- Macro form
+Both code and data are represented as a list underlying, but to
+distinguish between list that holds data and list that holds code,
+list that holds data is usually referred as list while list that holds
+code is *Lisp form*. But remember, code and data are lists, and
+because of the single representation for both code and data, list is
+more special in Lisp than in other languages.
 
 It's worth to repeat again:  =’(...)= for creating data and =(...)=
 for creating code; you hold things in =’(...)= and you process things
 in =(...)=. Easy to remember, right? 
 
-
-, Let, this is typical =if..then..else=:
+You may think: "Cool, so what difference can homoiconity make? Let's
+look at an example; this is typical =if..then..else=:
 
 #+begin_src c
   if (condition) {
@@ -119,7 +123,7 @@ in C:
       ...statements...
 #+end_src
 
-The answer is, impossible, even with C Macro, because C macro still
+The answer is, it's impossible, even with C Macro, because C macro still
 requires you to put arguments inside a pair of parentheses. With Lisp,
 this is entirely possible, except one minor thing: the syntax must be
 treated as data, meaning the entire Python =if= construct above must
@@ -137,6 +141,51 @@ adapt to any type of syntax the programmers can imagine. Notice the
 single quote =’=, signaling that the entire form is data, and need to
 be processed to create appropriate code when feed into some processing
 function. Now you see why Lisp code has a lot of parentheses.
+
+Lisp forms are code, but are classified into 3 types:
+
+- *Function form*:
+  Function form is the most common form. Function form is equivalent
+  to a function call in other languages. If the first element in the
+  list is a function that exists, that function will be called along
+  with its arguments. The remaining elements in the list are function
+  arguments. All arguments are evaluated before the function is called. 
+
+  Example:
+
+  The list ~(+ 1 (+ 2 3) (* 3 4) (/ 4 2))~ is a function call to
+  function =+=. Nearly everything in Lisp is a function, even
+  arithmetic operators like =+=, =-=, =*=, =/=.  Before the outer most
+  list is processed, the inner ones will be processed first. =(+ 2 3)=
+  becomes 5, =(* 3 4)= becomes 12, =(/ 4 2)= becomes 2; all these
+  three values will then replace its list in the original function
+  call to make it become: ~(+ 1 5 12 2)~, and finally function =+= is
+  called to produce the final result 20.
+
+- *Special form*:
+  Special form is form that has special evaluation rules or special
+  syntax or both. For example, this is =if..then..else= in Lisp:
+
+  #+begin_src emacs-lisp
+    (if condition
+        ...do something if true...
+      ...do something if false...)
+  #+end_src
+
+  Let's consider the behaviour of =if=, not just in Lisp but in any
+  language: if condition is true, then do something if true, else do
+  something if false. For this reason, =if= cannot be a function call
+  because then, =condition=, =true= and =false= are all evaluated and
+  passed into if, while we want first check =condition=, then depend
+  on the outcome of =condition=, we select a true or false branch.
+
+  Most of forms in Lisp are functions, except special cases such as
+  =if=, =and=, =or=... that cannot follow the evaluation rule of a
+  function. They need their own rules that do not exist in other
+  forms. That's why they are special.
+
+- *Macro form*:
+  Macro form is used for creating new language construct.
 
 In reality, =’(...)= is just a syntactic sugar for =(quote ...)=. In the
 end, Lisp only has one syntax: a pair of parentheses and items in
@@ -178,6 +227,15 @@ programming envrionment, so don't skip it.
 Don't be intimidated if you see many packages down there. Adding
 packages and see it extends your Emacs is fun and addictive, like 
 playing video games.
+** Create a better Lisp programming environment
+:PROPERTIES:
+:ID:       0c0ff7e1-884a-4802-b1b6-0dcda58a5ebc
+:END:
+To learn a language, you have to learn these things:
+- Syntax and semantic
+- Idiomatic ways of using the languages
+- Common libraries
+- Tools: This is what we will do in this section.
 ** Changing Emacs defaults
 :PROPERTIES:
 :ID:       43326747-04db-461c-9f5b-cb0831c983ac
