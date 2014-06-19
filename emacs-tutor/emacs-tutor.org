@@ -373,7 +373,7 @@ I will describe some most useful commands based on my experience. I
 will not list all, so you have to rely on Emacs to get your
 information:
 
-*C-h m* runs =describe-mode to see all the key bindings
+*C-h m* runs =describe-mode= to see all the key bindings
 and documentations of current major mode and minor modes of a buffer:
 
 *C-h w* runs =where-is= to get which keystrokes invoke a given command.
