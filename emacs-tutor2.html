@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER</title>
-<!-- 2014-06-20 T6 22:56 -->
+<!-- 2014-06-20 T6 23:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -295,19 +295,19 @@ to hold data.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">&#8217;(<span style="color: #7aa6da;">1</span> <span style="color: #7aa6da;">2</span> <span style="color: #7aa6da;">3</span> <span style="color: #7aa6da;">4</span>)~ <span style="color: #969896; font-style: italic;">;;</span><span style="color: #969896; font-style: italic;">is a list that holds 4 numbers from 1 to 4</span>
+<pre class="src src-emacs-lisp">&#8217;(<span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span> <span style="color: #008b8b;">4</span>)~ <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 numbers from 1 to 4</span>
 
-&#8217;(<span style="color: #70c0b1;">"aa"</span> <span style="color: #70c0b1;">"bb"</span> <span style="color: #70c0b1;">"cc"</span> <span style="color: #70c0b1;">"dd"</span>)~ <span style="color: #969896; font-style: italic;">;;</span><span style="color: #969896; font-style: italic;">is a list that holds 4 strings</span>
+&#8217;(<span style="color: #8b2252;">"aa"</span> <span style="color: #8b2252;">"bb"</span> <span style="color: #8b2252;">"cc"</span> <span style="color: #8b2252;">"dd"</span>)~ <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 strings</span>
 
-&#8217;(<span style="color: #b9ca4a;">if</span> a b c) <span style="color: #969896; font-style: italic;">;;  </span><span style="color: #969896; font-style: italic;">a list that hold 4 /symbol/ =if=, =a=, =b= and =c=</span>
+&#8217;(<span style="color: #a020f0;">if</span> a b c) <span style="color: #b22222;">;;  </span><span style="color: #b22222;">a list that hold 4 /symbol/ =if=, =a=, =b= and =c=</span>
 
-(<span style="color: #b9ca4a;">if</span> a b c) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">is an =if= expression that executes =if..then..else=</span>
-           <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">logic in common programming languages. Expressions like =if= are</span>
-           <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">called *special form*</span>
+(<span style="color: #a020f0;">if</span> a b c) <span style="color: #b22222;">;; </span><span style="color: #b22222;">is an =if= expression that executes =if..then..else=</span>
+           <span style="color: #b22222;">;; </span><span style="color: #b22222;">logic in common programming languages. Expressions like =if= are</span>
+           <span style="color: #b22222;">;; </span><span style="color: #b22222;">called *special form*</span>
 
-&#8217;(+ <span style="color: #7aa6da;">1</span> <span style="color: #7aa6da;">2</span> <span style="color: #7aa6da;">3</span>) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">is a list consists of 4 elements =+=, =1=, =2= and =3=</span>
+&#8217;(+ <span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">is a list consists of 4 elements =+=, =1=, =2= and =3=</span>
 
-(+ <span style="color: #7aa6da;">1</span> <span style="color: #7aa6da;">2</span> <span style="color: #7aa6da;">3</span>)  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">is a function call to function =+=</span>
+(+ <span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span>)  <span style="color: #b22222;">;; </span><span style="color: #b22222;">is a function call to function =+=</span>
 </pre>
 </div>
 
@@ -342,9 +342,9 @@ look at an example; this is typical <code>if..then..else</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #b9ca4a;">if</span> (condition) {
+<pre class="src src-c"><span style="color: #a020f0;">if</span> (condition) {
     ...statements...
-} <span style="color: #b9ca4a;">else</span> {
+} <span style="color: #a020f0;">else</span> {
     ...statements...
 }
 </pre>
@@ -358,9 +358,9 @@ in C:
 
 <div class="org-src-container">
 
-<pre class="src src-python"><span style="color: #b9ca4a;">if</span> condition:
+<pre class="src src-python"><span style="color: #a020f0;">if</span> condition:
     ...statements...
-<span style="color: #b9ca4a;">else</span>:
+<span style="color: #a020f0;">else</span>:
     ...statements...
 </pre>
 </div>
@@ -376,7 +376,7 @@ be enclosed within a Lisp form like this:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">'(<span style="color: #b9ca4a;">if</span> condition:
+<pre class="src src-emacs-lisp">'(<span style="color: #a020f0;">if</span> condition:
     ...statements
   else:
     ...statements...)
@@ -425,7 +425,7 @@ both. For example, this is <code>if..then..else</code> in Lisp:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> condition
     ...do something if true...
   ...do something if false...)
 </pre>
@@ -459,7 +459,7 @@ like this:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">'(<span style="color: #b9ca4a;">if</span> condition:
+<pre class="src src-emacs-lisp">'(<span style="color: #a020f0;">if</span> condition:
      ...statements...
   else:
      ...statements...)
@@ -475,7 +475,7 @@ Lisp:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition:
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> condition:
      ...statements...
  else:
      ...statements...)
@@ -489,7 +489,7 @@ first transform to a valid Lisp form:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> condition
      ...statements...
      ...statements...)
 </pre>
@@ -537,7 +537,7 @@ in Tcl, you have to write like this to make it valid
 </p>
 <div class="org-src-container">
 
-<pre class="src src-tcl"><span style="color: #b9ca4a;">for</span> {<span style="color: #c397d8;">set</span> i <span style="color: #7aa6da;">0</span>} {$<span style="color: #e7c547;">i</span> &lt; $<span style="color: #e7c547;">n</span>} {<span style="color: #c397d8;">incr</span> i} {
+<pre class="src src-tcl"><span style="color: #a020f0;">for</span> {<span style="color: #483d8b;">set</span> i <span style="color: #008b8b;">0</span>} {$<span style="color: #a0522d;">i</span> &lt; $<span style="color: #a0522d;">n</span>} {<span style="color: #483d8b;">incr</span> i} {
     ...do something...
 }
 </pre>
@@ -551,8 +551,8 @@ context, you must not insert dollar before:
 
 <div class="org-src-container">
 
-<pre class="src src-tcl"><span style="color: #c397d8;">array</span> <span style="color: #c397d8;">set</span> <span style="color: #e7c547;">balloon</span> {color red}
-<span style="color: #c397d8;">array</span> get balloon
+<pre class="src src-tcl"><span style="color: #483d8b;">array</span> <span style="color: #483d8b;">set</span> <span style="color: #a0522d;">balloon</span> {color red}
+<span style="color: #483d8b;">array</span> get balloon
 </pre>
 </div>
 

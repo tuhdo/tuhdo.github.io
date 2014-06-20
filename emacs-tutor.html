@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-20 T6 21:43 -->
+<!-- 2014-06-20 T6 23:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -775,7 +775,7 @@ After installation is done, at this line to your <b>.bashrc</b> or <b>.zshrc</b>
 
 <div class="org-src-container">
 
-<pre class="src src-shell-script"><span style="color: #c397d8;">alias</span> <span style="color: #e7c547;">em</span>=<span style="color: #70c0b1;">'emacs'</span>
+<pre class="src src-shell-script"><span style="color: #483d8b;">alias</span> <span style="color: #a0522d;">em</span>=<span style="color: #8b2252;">'emacs'</span>
 </pre>
 </div>
 
@@ -845,7 +845,7 @@ Put this in your shell init file (.bashrc, .zshrc&#x2026;):
 
 <div class="org-src-container">
 
-<pre class="src src-shell-script">/usr/bin/setxkbmap -option <span style="color: #70c0b1;">"ctrl:swapcaps"</span>
+<pre class="src src-shell-script">/usr/bin/setxkbmap -option <span style="color: #8b2252;">"ctrl:swapcaps"</span>
 </pre>
 </div>
 
@@ -1448,7 +1448,7 @@ replace <code>list-buffers</code> with <code>ibuffer</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #70c0b1;">"C-x C-b"</span>) 'ibuffer)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-x C-b"</span>) 'ibuffer)
 </pre>
 </div>
 
@@ -4387,8 +4387,8 @@ you are new:
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #b9ca4a;">auto</span> <span style="color: #7aa6da;">it</span> = find_if (vertices.begin(), vertices.end(), [&amp;v_idx] (<span style="color: #b9ca4a;">const</span> <span style="color: #7aa6da;">Vertex</span>&amp; <span style="color: #e7c547;">o</span>) -&gt; <span style="color: #7aa6da;">bool</span> {
-        <span style="color: #b9ca4a;">return</span> o.id == v_idx;
+<pre class="src src-c++"><span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = find_if (vertices.begin(), vertices.end(), [&amp;v_idx] (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #a0522d;">o</span>) -&gt; <span style="color: #228b22;">bool</span> {
+        <span style="color: #a020f0;">return</span> o.id == v_idx;
     });
 </pre>
 </div>
@@ -4750,9 +4750,9 @@ Paste the following code into the <code>*scratch*</code> buffer:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">package</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span>)
 (add-to-list 'package-archives
-             '(<span style="color: #70c0b1;">"melpa"</span> . <span style="color: #70c0b1;">"http://melpa.milkbox.net/packages/"</span>) t)
+             '(<span style="color: #8b2252;">"melpa"</span> . <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span>) t)
 </pre>
 </div>
 
@@ -4791,9 +4791,9 @@ b</b>. Paste the following code using <b>C-y</b>:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(add-hook 'c-mode-common-hook
-          (<span style="color: #b9ca4a;">lambda</span> ()
-            (<span style="color: #b9ca4a;">when</span> (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-              (ggtags-mode <span style="color: #7aa6da;">1</span>))))
+          (<span style="color: #a020f0;">lambda</span> ()
+            (<span style="color: #a020f0;">when</span> (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode <span style="color: #008b8b;">1</span>))))
 </pre>
 </div>
 
@@ -4907,7 +4907,7 @@ available in <b>ggtags</b>. You see a function declaration like this:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #b9ca4a;">static</span> <span style="color: #7aa6da;">int</span> <span style="color: #e78c45;">kernel_init</span>(<span style="color: #7aa6da;">void</span> *);
+<pre class="src src-c"><span style="color: #a020f0;">static</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">kernel_init</span>(<span style="color: #228b22;">void</span> *);
 </pre>
 </div>
 
@@ -4949,7 +4949,7 @@ If you want to jump to a C header file, for example:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #c397d8;">#include</span> <span style="color: #70c0b1;">&lt;linux/kernel.h&gt;</span>
+<pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;linux/kernel.h&gt;</span>
 </pre>
 </div>
 
@@ -5047,14 +5047,14 @@ the Linux kernel browsing project, you have these configurations:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">package</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span>)
 (add-to-list 'package-archives
-             '(<span style="color: #70c0b1;">"melpa"</span> . <span style="color: #70c0b1;">"http://melpa.milkbox.net/packages/"</span>) t)
+             '(<span style="color: #8b2252;">"melpa"</span> . <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span>) t)
 
 (add-hook 'c-mode-common-hook
-          (<span style="color: #b9ca4a;">lambda</span> ()
-            (<span style="color: #b9ca4a;">when</span> (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-              (ggtags-mode <span style="color: #7aa6da;">1</span>))))
+          (<span style="color: #a020f0;">lambda</span> ()
+            (<span style="color: #a020f0;">when</span> (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode <span style="color: #008b8b;">1</span>))))
 
 
 (add-hook 'dired-mode-hook 'ggtags-mode)
@@ -5070,7 +5070,7 @@ If you like Ido, put the following configuration inside your
 
 <pre class="src src-emacs-lisp">(setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(ido-mode <span style="color: #7aa6da;">1</span>)
+(ido-mode <span style="color: #008b8b;">1</span>)
 </pre>
 </div>
 
@@ -5152,9 +5152,9 @@ visible on your screen. To illustrate my point, here is an example:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">hello</span> ()
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">hello</span> ()
   (interactive)
-  (message <span style="color: #70c0b1;">"Hello World"</span>))
+  (message <span style="color: #8b2252;">"Hello World"</span>))
 </pre>
 </div>
 
