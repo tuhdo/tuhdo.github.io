@@ -18,6 +18,12 @@ foundation. The screenshots are just for show. Even though, after
 going through this guide, you will be able to browse Linux kernel
 source tree with ease.
 
+- Performance: Editing a 39MB C source file with no problem. But
+  well, if your project use really large source file like that, if
+  your favourite editors crash, it's not their fault.
+
+  [[file:static/performance.gif][file:static/performance.gif]]
+
 - Programming:
   - Jump to any header file:
     
