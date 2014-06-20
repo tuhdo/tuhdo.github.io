@@ -1528,7 +1528,13 @@ To navigate through the windows, *C-x o* which executes the command
 =other-window=. Try cycle around the windows a few times to get used
 to it.
 
-*C-x 0* closes the window point. Try it.
+In Emacs, =<next>= is the *PageDown* key =<prior>= is the *PageUp*
+key. *M-<next>* runs =scroll-other-window= and scroll the other
+window forward; *M-<prior>* runs =scroll-other-window-down= and scroll
+the other window backward. Other window is the window that you visit
+when *C-x o*.
+
+*C-x 0* closes the window at point.
 
 *C-x 1* closes all other windows except the current selected
 one. Create another window, then try *C-x 1*.
@@ -1538,7 +1544,7 @@ here can be files, shell, or a tree explorer. Here are standard *C-x
 4* bindings:
 
 |-------------+------------------------------------------------------------------|
-| Key         | Binding                                                  |
+| Key         | Binding                                                          |
 |-------------+------------------------------------------------------------------|
 | =C-x 4 C-f= | *Command*: =find-file-other-window=                              |
 |             | Just like *find-file* discussed earlier, except open file        |
@@ -1582,6 +1588,12 @@ here can be files, shell, or a tree explorer. Here are standard *C-x
 |-------------+------------------------------------------------------------------|
 | =C-x 4 r=   | *Command*: =find-file-read-only-other-window=                    |
 |             | Similar to *find-file-other-window*, but open for read-only.     |
+|-------------+------------------------------------------------------------------|
+| =M-<next>=  | *Command*: =scroll-other-window=                                 |
+|             | Scroll other window forward.                                     |
+|-------------+------------------------------------------------------------------|
+| =M-<prior>= | *Command*: =scroll-other-window-down=                            |
+|             | Scroll the other window backward.                                |
 |-------------+------------------------------------------------------------------|
 
 That's quite a long table, eh? If you forget, you can either:
