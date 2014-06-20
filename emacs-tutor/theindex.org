@@ -1,4 +1,0 @@
-#+TITLE: Index
-
-#+INCLUDE: "theindex.inc"
-
