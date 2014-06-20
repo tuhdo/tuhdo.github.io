@@ -1,4 +1,5 @@
 #+TITLE: Archive
 
+   + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - LISP PRIMER]]
    + [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - THE BASICS]]
    + [[file:theindex.org][Index]]

@@ -1,9 +1,5 @@
-#+TITLE: Emacs Mini Manual (PART 2) - EXTENDING EMACS PRIMER
-* Why extend Emacs?
-:PROPERTIES:
-:ID:       84576135-507c-41ad-b122-2dd498235ecf
-:END:
-* Just enough Emacs Lisp (and Lisp in general)
+#+TITLE: Emacs Mini Manual (PART 2) - LISP PRIMER
+* Introduction - and why you should learn Lisp
 :PROPERTIES:
 :ID:       267fa5b6-b998-42c6-8ec0-382035284873
 :END:
@@ -11,6 +7,25 @@ In this section, you only need to read and understand. It's important
 that you understand the core ideas. After you finish the sub-sections
 of this section, we will play with Emacs Lisp code for customizing
 Emacs, and it's really fun to see your Emacs "evolves" gradually.
+
+My primary Lisp education were the two courses on [[https://www.coursera.org/][Coursera]]:
+- [[https://www.coursera.org/course/proglang][Programming Languages]]
+- [[https://www.coursera.org/course/programdesign][Introduction to Systematic Program Design - Part 1]]
+- and miscellaneous Emacs Lisp code I learned during customizing
+  Emacs.
+I am not an Emacs Lisp expert to create my own extension yet, but
+enough to create something like the "tour" in Part 1, or better.
+
+In this chapter, I will introduce to you why language like Lisp exists
+and what sets it from other languages, along with basic syntax and
+semantic. For deeper learning into Emacs Lisp, many tutorials exist
+and you can search easily on the internet. But before all of that, I
+want you to understand what and why Lisp differs from others, and why
+should you use Lisp; otherwise, it's just learning a different ways of
+doing things in a different language and won't motivate you to take
+Lisp serious because the mentality of "just another programming
+language".
+
 ** A bit of history
 :PROPERTIES:
 :ID:       71c4974f-42b4-4a29-93bd-b823688ea024
@@ -18,30 +33,25 @@ Emacs, and it's really fun to see your Emacs "evolves" gradually.
 Lisp has a long history. Lisp was designed by computer scientist [[http://en.wikipedia.org/wiki/John_McCarthy_%2528computer_scientist%2529][John
 McCarthy]]. Lisp first appeared in 1958 and Lisp is still with us up to
 this day with various dialects: Common Lispn, newLisp, Emacs Lisp, Racket,
-Clojure... Lisp is short for (LIS)t (P)*rocessing.
+Clojure... Lisp is short for (*LIS*)t (*P*)rocessing.
 
-You can read the history of Lisp upto 1979 of Lisp, written by John
-McCarthy: [[http://www-formal.stanford.edu/jmc/history/lisp/lisp.html][History of Lisp]].
+You can read the history of Lisp uptil 1979 of Lisp, written by John
+McCarthy, the creator of Lisp: [[http://www-formal.stanford.edu/jmc/history/lisp/lisp.html][History of Lisp]].
 
 Another good read about Lisp history, written by Paul Graham: [[http://www.paulgraham.com/lisphistory.html][Lisp
 History]].
-** Basic syntax and semantic - and why you should learn Lisp
+** Basic syntax and semantic
 :PROPERTIES:
 :ID:       9a30dadd-d95e-49a9-8690-b6b633d9083d
 :END:
-In this section, I will introduce to you why language like Lisp exists
-and what sets it from other languages, along with basic syntax and
-semantic. For deeper learning into Emacs Lisp, many tutorials exist
-and you can search easily. But before all of that, I want you to
-understand what Lisp differs from others, and what you can get in Lisp
-that you cannot get in others; otherwise, it's just learning a
-different ways of doing things in a different language. Lisp syntax is
-minimal and simple. At its core, you only need to remember these
-syntax constructs to use any Lisp: 
+Lisp syntax is minimal and simple. At its core, you only need to
+remember these syntax constructs to use any Lisp:
 
 - Data:
+
   - Atomic, or Atom: It is the same as primitives in other languages, meaning the
-  most basic construct and indivisble.
+  most basic construct and indivisible.
+
   - Non-atomic: There's a reason Lisp is called (LIS)t
     (P)rocessing. In other languages, list is just another data type;
     but in Lisp, because of Lisp syntax, list is really 
@@ -54,7 +64,7 @@ syntax constructs to use any Lisp:
     A list can hold data, both atomic and non-atomic. That means, a
     list can hold a smaller list inside it along with atomic data.
 
-- Code:
+- Code: If you want to run code to be executed, here is the syntax:
   #+begin_src emacs-lisp
     (...)
   #+end_src
@@ -87,12 +97,12 @@ Both code and data in Lisp can be represented using the same format: a
 pair of parentheses with items in it: =(...)=; and it is called a
 list. This peculiar property is called *homoiconicity*, and languages
 that have this property is called *homoiconic languages*. It makes
-Lisp so powerful: code can be data, data can be code. It is a reason
+Lisp so powerful: *code can be data, data can be code*. It is a reason
 why Lisp contains a lot of parentheses.
 
 Both code and data are represented as a list underlying, but to
 distinguish between list that holds data and list that holds code,
-list that holds data is usually referred as list while list that holds
+list that holds data is referred simply as list; while list that holds
 code is *Lisp form*. But remember, code and data are lists, and
 because of the single representation for both code and data, list is
 more special in Lisp than in other languages.
@@ -101,7 +111,7 @@ It's worth to repeat again:  =’(...)= for creating data and =(...)=
 for creating code; you hold things in =’(...)= and you process things
 in =(...)=. Easy to remember, right? 
 
-You may think: "Cool, so what difference can homoiconity make? Let's
+You may think: "Cool, so what difference can homoiconity make?" Let's
 look at an example; this is typical =if..then..else=:
 
 #+begin_src c
@@ -124,7 +134,8 @@ in C:
 #+end_src
 
 The answer is, it's impossible, even with C Macro, because C macro still
-requires you to put arguments inside a pair of parentheses. With Lisp,
+requires you to put arguments inside a pair of parentheses, and you
+cannot redefine built-in keywords in C and most languages. With Lisp,
 this is entirely possible, except one minor thing: the syntax must be
 treated as data, meaning the entire Python =if= construct above must
 be enclosed within a Lisp form like this:
@@ -138,11 +149,11 @@ be enclosed within a Lisp form like this:
 
 Lisp still has syntax, but it is minimal; for that reason, it can
 adapt to any type of syntax the programmers can imagine. Notice the
-single quote =’=, signaling that the entire form is data, and need to
+single quote =’=, signalling that the entire form is data, and need to
 be processed to create appropriate code when feed into some processing
 function. Now you see why Lisp code has a lot of parentheses.
 
-Lisp forms are code, but are classified into 3 types:
+Lisp forms are classified into 3 types:
 
 - *Function form*:
   Function form is the most common form. Function form is equivalent
@@ -151,7 +162,7 @@ Lisp forms are code, but are classified into 3 types:
   with its arguments. The remaining elements in the list are function
   arguments. All arguments are evaluated before the function is called. 
 
-  Example:
+  _Example_:
 
   The list ~(+ 1 (+ 2 3) (* 3 4) (/ 4 2))~ is a function call to
   function =+=. Nearly everything in Lisp is a function, even
@@ -163,8 +174,8 @@ Lisp forms are code, but are classified into 3 types:
   called to produce the final result 20.
 
 - *Special form*:
-  Special form is form that has special evaluation rules or special
-  syntax or both. For example, this is =if..then..else= in Lisp:
+  Special form has special evaluation rules or special syntax or
+  both. For example, this is =if..then..else= in Lisp:
 
   #+begin_src emacs-lisp
     (if condition
@@ -173,304 +184,131 @@ Lisp forms are code, but are classified into 3 types:
   #+end_src
 
   Let's consider the behaviour of =if=, not just in Lisp but in any
-  language: if condition is true, then do something if true, else do
-  something if false. For this reason, =if= cannot be a function call
-  because then, =condition=, =true= and =false= are all evaluated and
-  passed into if, while we want first check =condition=, then depend
-  on the outcome of =condition=, we select a true or false branch.
+  language: if condition is true, then do something, else do something
+  if false. For this reason, =if= cannot be a function call because
+  =condition=, =true= and =false= are all evaluated and passed into
+  if, while we want first check =condition=, then depend on the
+  outcome of =condition=, we select a true or false branch.
 
-  Most of forms in Lisp are functions, except special cases such as
+  Most forms in Lisp are functions, except special cases such as
   =if=, =and=, =or=... that cannot follow the evaluation rule of a
   function. They need their own rules that do not exist in other
   forms. That's why they are special.
 
 - *Macro form*:
-  Macro form is used for creating new language construct.
+  Macro form is a function, but different: When you call a macro, the
+  macro function generated regular Lisp code; the generated code then
+  is executed. Macro is what makes Lisp so special: it allows Lisp to
+  have any syntax anyone wishes for. The Python syntax enclosed in a
+  Lisp form you saw earlier is an example. But now, instead of having
+  to quote, you won't have to with a macro form. Instead of writing
+  like this:
 
-In reality, =’(...)= is just a syntactic sugar for =(quote ...)=. In the
-end, Lisp only has one syntax: a pair of parentheses and items in
-it. With this syntax, many things are easy to do in Lisp, such as
-generating code as data and execute it later, both in compile time and
-runtime. You won't find any language with such a minimal syntax and
-unifomity, yet so expressive.
+  #+begin_src emacs-lisp
+    '(if condition:
+         ...statements...
+      else:
+         ...statements...)
+  #+end_src
 
-Since we use Emacs, the Lisp dialect we are going to learn is Emacs
-Lisp.
-** Commonly used functions and patterns for configuration
-:PROPERTIES:
-:ID:       e54be9d4-bce0-428e-94be-c137bdc0de11
-:END:
-** Configuration collector
-:PROPERTIES:
-:ID:       31381170-81ba-413a-8b3e-b701bd62c30c
-:END:
-* Let's supercharge Emacs
-:PROPERTIES:
-:ID:       8d44370b-5ab7-40fc-9a72-1ef9dc66ffd2
-:END:
-Throughout this section I will help you to extend Emacs with packages
-that improves general Emacs features, such as Info, Dired, buffer
-management... I will introduce you popular packages out there, but I
-cannot present you all. The purpose of this guide is to help you get
-really comfortable to Emacs package system, so you can extend Emacs
-with packages from other people easily to fit your need. Extending
-Emacs on your own is a differnt story, and is beyond the scope of this
-guide.
+You can remove the quote =’= and treat your Python syntax as part of
+Lisp:
 
-I will introduce packages specialized for programming in Part 3: how
-to setup programming environment for popular languages (C/C++, Lisp,
-Python, Ruby...). In this part of the mini manual series, I only
-introduce general packages for extending Emacs in various aspects. And
-you are going to need some of these packages to setup your specialized 
-programming envrionment, so don't skip it.
+  #+begin_src emacs-lisp
+    (if condition:
+         ...statements...
+     else:
+         ...statements...)
+  #+end_src
 
-Don't be intimidated if you see many packages down there. Adding
-packages and see it extends your Emacs is fun and addictive, like 
-playing video games.
-** Create a better Lisp programming environment
-:PROPERTIES:
-:ID:       0c0ff7e1-884a-4802-b1b6-0dcda58a5ebc
-:END:
-To learn a language, you have to learn these things:
-- Syntax and semantic
-- Idiomatic ways of using the languages
-- Common libraries
-- Tools: This is what we will do in this section.
-** Changing Emacs defaults
-:PROPERTIES:
-:ID:       43326747-04db-461c-9f5b-cb0831c983ac
-:END:
-** Extend built-in functionality
-:PROPERTIES:
-:ID:       f7f5027d-65aa-4e1c-9c8f-d069297a207e
-:END:
-*** Built-in: linum
-:PROPERTIES:
-:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
-:END:
-*** Built-in: hippie-expand
-:PROPERTIES:
-:ID:       859c8664-d9ca-4e99-acb4-eeb8c83b0e63
-:END:
-*** Package: Bookmark+
-:PROPERTIES:
-:ID:       94fd590f-69df-413b-9295-c3e4f1e4fdff
-:END:
-**** What it is
-:PROPERTIES:
-:ID:       4ab6651b-8718-4c59-a572-d1d1417d2473
-:END:
-**** Why use it
-:PROPERTIES:
-:ID:       136c517e-5924-49e2-b142-294a6c6527fe
-:END:
-**** How to use it
-:PROPERTIES:
-:ID:       bc1633cc-ca67-45a5-916d-9346fd2480a8
-:END:
-*** Package: Dired+
-:PROPERTIES:
-:ID:       ea310056-18e7-40bd-8b19-9e55651200c5
-:END:
-**** What it is
-:PROPERTIES:
-:ID:       e2c568e5-144c-4040-ad15-ecd68d757d35
-:END:
-**** Why use it
-:PROPERTIES:
-:ID:       904eae93-47e6-4b94-abf0-fa44663d0353
-:END:
-**** How to use it
-:PROPERTIES:
-:ID:       c2fa9621-6745-4f85-8f9f-ab1381e47e52
-:END:
-*** Package: Info+
-:PROPERTIES:
-:ID:       a35ad15e-e4ff-4af9-a3dc-e3fd5e9951af
-:END:
-**** What it is
-:PROPERTIES:
-:ID:       0896be46-99c0-437f-b24c-2091b1620c86
-:END:
-**** Why use it
-:PROPERTIES:
-:ID:       cf4eab9e-e17b-4ba1-9e8f-d7490e339325
-:END:
-**** How to use it
-:PROPERTIES:
-:ID:       13809e81-db9e-447e-8b97-6fc623bea7f8
-:END:
-*** Package: recentf-ext
-:PROPERTIES:
-:ID:       8013594a-f2f3-477c-820c-caf1354ac23d
-:END:
-*** Package: ibuffer-git
-:PROPERTIES:
-:ID:       094b65d3-8969-4603-9ce8-2930c1927b95
-:END:
-*** Package: ibuffer-vc
-:PROPERTIES:
-:ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
-:END:
-*** Package: diff-hl
-:PROPERTIES:
-:ID:       c9b81950-e0e4-4e47-9708-7341f0323c00
-:END:
-*** Package: nyan-mode
-:PROPERTIES:
-:ID:       77911eb8-f448-475a-a8fb-1546f7b43629
-:END:
-*** Package: undo-tree
-:PROPERTIES:
-:ID:       e4e1faa4-3fa4-4424-943b-94b626da982e
-:END:
-*** Package: vlf
-:PROPERTIES:
-:ID:       68236f8b-960e-46a9-841f-71196a77e4fd
-:END:
-*** Package: zop-to-char
-:PROPERTIES:
-:ID:       f90bffce-3532-4eb1-9102-a49abf077e25
-:END:
-*** Package: ztree
-:PROPERTIES:
-:ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
-:END:
-** Editing packages
-:PROPERTIES:
-:ID:       f16285fa-858d-4404-b9d7-09dd106a3d2e
-:END:
-*** Concept
-:PROPERTIES:
-:ID:       da7a179d-00c5-4cfe-a0b4-2f844c13442b
-:END:
-*** Tour
-:PROPERTIES:
-:ID:       f71919f0-8115-4c35-bd0b-25c38137c67d
-:END:
-*** Built-in: electric-pair
-:PROPERTIES:
-:ID:       b7eeebb4-0bff-47dd-941c-bd90aa4494e2
-:END:
-*** Built-in: electric-indent
-:PROPERTIES:
-:ID:       4a450617-328d-47df-b65f-41c66b91b6e7
-:END:
-*** Package: Autopair
-:PROPERTIES:
-:ID:       74568884-f788-4362-9d30-10b92cac96a6
-:END:
-*** Package: Paredit
-:PROPERTIES:
-:ID:       9428f315-7a9e-400f-86e3-a0935b288539
-:END:
-*** Package: Smartparens
-:PROPERTIES:
-:ID:       e1aa419e-6a1e-49ae-976c-b4a771f027e2
-:END:
-*** Package: ace-jump-mode
-:PROPERTIES:
-:ID:       55d22377-21b5-4ed1-be80-adde3400ea84
-:END:
-*** Package: discover-my-major
-:PROPERTIES:
-:ID:       92ff6c99-10a8-4779-a293-48b3c36c16bb
-:END:
-*** Package: easy-kill
-:PROPERTIES:
-:ID:       2d0dc98b-3e5c-403e-9cc4-3dd8934c69cd
-:END:
-*** Package: pretty-lambdada
-:PROPERTIES:
-:ID:       9bdee173-eea2-4ffe-9da5-51abcba85d66
-:END:
-*** Package: rainbow-mode
-:PROPERTIES:
-:ID:       2f37c16a-307a-4683-adf5-31a64c0817d5
-:END:
-*** Package: rawinbow-delimiter
-:PROPERTIES:
-:ID:       4ea22f1a-a72e-4ee9-b54f-88d866f25666
-:END:
-*** Optional Package: golden-ratio
-:PROPERTIES:
-:ID:       55499f58-b666-477d-9e81-99cb92464b7f
-:END:
-** Autocompletion packages
-:PROPERTIES:
-:ID:       b0c2f77e-1520-4672-a9d3-cbfab0c49422
-:END:
-*** Concept
-:PROPERTIES:
-:ID:       c02546c0-172f-4caa-94e5-485e5ff8b18c
-:END:
-*** Tour
-:PROPERTIES:
-:ID:       e6d14e8e-2b42-4fbd-91c8-4173c0179dc9
-:END:
-*** Emacs built-in
-:PROPERTIES:
-:ID:       d59d2adf-d9aa-41a1-9788-cf7c91f16cb0
-:END:
-*** Package: Autocomplete
-:PROPERTIES:
-:ID:       ac8a1bfd-778e-4f6f-ad55-234529a19045
-:END:
-*** Package: Company
-:PROPERTIES:
-:ID:       8744f14e-3db0-4737-8889-937106a4745e
-:END:
-*** Package: Helm
-:PROPERTIES:
-:ID:       a679e943-4e65-4e6c-8c83-51f6e765c1df
-:END:
-** Project Management packages
-:PROPERTIES:
-:ID:       4a23e0f7-2bd4-49ec-9f1a-21dfd0adfd61
-:END:
-*** Package: projectile
-:PROPERTIES:
-:ID:       58c88918-1344-491f-afb4-fd150ab87dcb
-:END:
-** A package on a league of its own: Helm
-:PROPERTIES:
-:ID:       77079c91-23c1-453f-8573-98cd78a78033
-:END:
-*** What it is
-:PROPERTIES:
-:ID:       389cfbe8-ae92-47f0-84a5-44819d59bad9
-:END:
-*** Why use it
-:PROPERTIES:
-:ID:       808b9b9b-87ce-4c91-b999-884bcd3bac75
-:END:
-*** How to use it
-:PROPERTIES:
-:ID:       d48e324b-ac5a-426f-88d8-540c6d86f5de
-:END:
-*** Package: helm-ls-git
-:PROPERTIES:
-:ID:       790ab1dd-fe07-4b01-bb03-742586e3f6a1
-:END:
-*** Package: helm-desbinds
-:PROPERTIES:
-:ID:       46a860a4-4a29-4199-9069-29dd0cc043ea
-:END:
-*** Package: helm-projectile
-:PROPERTIES:
-:ID:       7b823d0a-212d-4277-ace2-bc317e196206
-:END:
+The Python code above is a macro form. Upon calling, the macro will
+first transform to a valid Lisp form:
 
-*** Package: helm-projectile
-:PROPERTIES:
-:ID:       2edc33a7-ba0c-4b71-8057-2e6cacbadf08
-:END:
+  #+begin_src emacs-lisp
+    (if condition
+         ...statements...
+         ...statements...)
+  #+end_src
 
-** Changing Emacs appearance
+Then the transformed code is executed. You can have C for loop, Python if,
+Java class...mix up in Lisp if you want. Thanks to the minimal Lisp syntax,
+Lisp macro is able to do all of this. Without it, you cannot bend Lisp
+to your needs.
+
+In reality, =’(...)= is just a syntactic sugar for special form
+=(quote ...)=. In the end, Lisp only has one syntax: a pair of
+parentheses and items in it. With this syntax, many things are easy to
+do in Lisp, such as generating code as data and execute it later, both
+in compile time and runtime. In the end, the only thing that exists in
+Lisp is a pair of parentheses, with things in in it: =(...)=. This is
+the only syntax, along with the semantics that depends on conext: /a
+function form/, /a special form/ or /a macro form/. That's all you
+need to remember for using any Lisp.
+
+* Syntax error
 :PROPERTIES:
-:ID:       7ae2a18d-ca91-4198-8661-2917d3b6656f
+:ID:       f81bda6e-00ea-47ee-8250-308ec8109f47
 :END:
-* More Emacs Lisp resources
+Lisp syntax is simple: it's just a pair of parentheses, with things in
+in it: =(...)=. If you encounter syntax errors, it belongs to these
+two cases:
+** Unbalanced parentheses: 
 :PROPERTIES:
-:ID:       71d59853-4e9e-41d5-a0c7-56000cb01fc3
+:ID:       64829a4d-b80d-4bac-9941-f45367d7edc3
 :END:
+Do you miss an opening or closing parentheses, or do you insert
+unnecessary parentheses? Incorrect usage of parentheses is the only
+syntax error you get when writing Lisp program. In other languages,
+you have to remember many syntax rules. For example, to write a =for=
+in Tcl, you have to write like this to make it valid
+#+begin_src tcl
+  for {set i 0} {$i < $n} {incr i} {
+      ...do something...
+  }
+#+end_src
+I kept forgetting all the times when I first used it because I get
+used to C style for loop. In Tcl, to use some variables, you have to
+put a dollar sign =$= before the variable names. Howver, in some
+context, you must not insert dollar before:
+
+#+begin_src tcl
+  array set balloon {color red}
+  array get balloon
+#+end_src
+
+=balloon= is an array variable, but to use it you must not insert dollar
+sign before. It's annoying to remember trivial details like this.
+
+** Mini-language syntax error:
+:PROPERTIES:
+:ID:       e98cbd6b-60c8-447e-bf1d-e567b4d200c9
+:END:
+If you create a mini language, then you must follow its syntax
+rules. In this case, you get syntax errors like regular languages
+if you code is not correct according to syntax rules. However, if you
+are a beginner, you won't have to worry about macro and mini-languages
+at this stage. 
+* Conclusion
+:PROPERTIES:
+:ID:       125d8641-5327-4169-94c5-969e06d4bf69
+:END:
+You won't find any language with such a minimal syntax and unifomity,
+yet so expressive, since you can choose any language syntax that you
+want to solve your problems in. Some languages also have *homoiconic*
+property, but instead of using just a pair of parentheses, they use
+more complex syntax constructs. Some languages are simple (still not
+as much as Lisp), but are not *homoiconic*. The only syntax you write
+in Lisp, again, just a pair of parentheses, with things in
+in it: =(...)=. Because of syntax like this, Lisp requires you to
+careful match the parentheses. Or you can let Emacs does it for you.
+
+Learning any language has something in common:
+
+- Learn syntax and semantic.
+- Learn idiomatic ways of using the language.
+- Learn commonly used libraries.
+- Learn common development tools used with the language.
+
+We already covered the first. I will show you how to use common
+functions for configuration, and setup a programming environment for
+any Lisp in the next chapter.

@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Emacs Mini Manual (PART 2) - LISP PRIMER</title>
+<!-- 2014-06-20 Fri 18:03 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu, Do Hoang" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="./static/worg.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+
+<!-- hitwebcounter Code START -->
+<a href="http://www.hitwebcounter.com/" target="_blank">
+<img src="http://hitwebcounter.com/counter/counter.php?page=5730770&style=0036&nbdigits=6&type=page&initCount=100" title="" Alt=""   border="0" >
+</a><br/>
+<!-- hitwebcounter.com --><a href="http://www.hitwebcounter.com/countersiteservices.php" title="Invisible Stats"
+target="_blank" style="font-family: Geneva, Arial, Helvetica, sans-serif;
+font-size: 10px; color: #908C86; text-decoration: underline ;"><em>Invisible Stats</em>
+</a>
+</div>
+<div id="content">
+<h1 class="title">Emacs Mini Manual (PART 2) - LISP PRIMER</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Introduction - and why you should learn Lisp</a>
+<ul>
+<li><a href="#sec-1-1">A bit of history</a></li>
+<li><a href="#sec-1-2">Basic syntax and semantic</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Syntax error</a>
+<ul>
+<li><a href="#sec-2-1">Unbalanced parentheses:</a></li>
+<li><a href="#sec-2-2">Mini-language syntax error:</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Conclusion</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><a id="ID-267fa5b6-b998-42c6-8ec0-382035284873"></a>Introduction - and why you should learn Lisp</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+In this section, you only need to read and understand. It's important
+that you understand the core ideas. After you finish the sub-sections
+of this section, we will play with Emacs Lisp code for customizing
+Emacs, and it's really fun to see your Emacs "evolves" gradually.
+</p>
+
+<p>
+My primary Lisp education were the two courses on <a href="https://www.coursera.org/">Coursera</a>:
+</p>
+<ul class="org-ul">
+<li><a href="https://www.coursera.org/course/proglang">Programming Languages</a>
+</li>
+<li><a href="https://www.coursera.org/course/programdesign">Introduction to Systematic Program Design - Part 1</a>
+</li>
+<li>and miscellaneous Emacs Lisp code I learned during customizing
+Emacs.
+</li>
+</ul>
+<p>
+I am not an Emacs Lisp expert to create my own extension yet, but
+enough to create something like the "tour" in Part 1, or better.
+</p>
+
+<p>
+In this chapter, I will introduce to you why language like Lisp exists
+and what sets it from other languages, along with basic syntax and
+semantic. For deeper learning into Emacs Lisp, many tutorials exist
+and you can search easily on the internet. But before all of that, I
+want you to understand what and why Lisp differs from others, and why
+should you use Lisp; otherwise, it's just learning a different ways of
+doing things in a different language and won't motivate you to take
+Lisp serious because the mentality of "just another programming
+language".
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><a id="ID-71c4974f-42b4-4a29-93bd-b823688ea024"></a>A bit of history</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Lisp has a long history. Lisp was designed by computer scientist <a href="http://en.wikipedia.org/wiki/John_McCarthy_%28computer_scientist%29">John
+McCarthy</a>. Lisp first appeared in 1958 and Lisp is still with us up to
+this day with various dialects: Common Lispn, newLisp, Emacs Lisp, Racket,
+Clojure&#x2026; Lisp is short for (<b>LIS</b>)t (<b>P</b>)rocessing.
+</p>
+
+<p>
+You can read the history of Lisp uptil 1979 of Lisp, written by John
+McCarthy, the creator of Lisp: <a href="http://www-formal.stanford.edu/jmc/history/lisp/lisp.html">History of Lisp</a>.
+</p>
+
+<p>
+Another good read about Lisp history, written by Paul Graham: <a href="http://www.paulgraham.com/lisphistory.html">Lisp
+History</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Lisp syntax is minimal and simple. At its core, you only need to
+remember these syntax constructs to use any Lisp:
+</p>
+
+<ul class="org-ul">
+<li>Data:
+
+<ul class="org-ul">
+<li>Atomic, or Atom: It is the same as primitives in other languages, meaning the
+</li>
+</ul>
+<p>
+most basic construct and indivisible.
+</p>
+
+<ul class="org-ul">
+<li>Non-atomic: There's a reason Lisp is called (LIS)t
+(P)rocessing. In other languages, list is just another data type;
+but in Lisp, because of Lisp syntax, list is really 
+special. Basically, this is a list: 
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">&#8217;(...)
+</pre>
+</div>
+
+<p>
+A list can hold data, both atomic and non-atomic. That means, a
+list can hold a smaller list inside it along with atomic data.
+</p>
+</li>
+</ul>
+</li>
+
+<li>Code: If you want to run code to be executed, here is the syntax:
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(...)
+</pre>
+</div>
+
+<p>
+What is the difference between code and data? That's right, a single
+quote <code>’</code>. Without the quote <code>’</code>, we are creating <b>a list</b> that holds
+code for computer to execute. With the quote <code>’</code>, we are creating <b>a
+list</b> that holds data, similar to List data structure in Java or C++
+to hold data.
+</p>
+</li>
+</ul>
+
+<p>
+<span class="underline">Examples</span>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">&#8217;(<span style="color: #7aa6da;">1</span> <span style="color: #7aa6da;">2</span> <span style="color: #7aa6da;">3</span> <span style="color: #7aa6da;">4</span>)~ <span style="color: #969896; font-style: italic;">;;</span><span style="color: #969896; font-style: italic;">is a list that holds 4 numbers from 1 to 4</span>
+
+&#8217;(<span style="color: #70c0b1;">"aa"</span> <span style="color: #70c0b1;">"bb"</span> <span style="color: #70c0b1;">"cc"</span> <span style="color: #70c0b1;">"dd"</span>)~ <span style="color: #969896; font-style: italic;">;;</span><span style="color: #969896; font-style: italic;">is a list that holds 4 strings</span>
+
+&#8217;(<span style="color: #b9ca4a;">if</span> a b c) <span style="color: #969896; font-style: italic;">;;  </span><span style="color: #969896; font-style: italic;">a list that hold 4 /symbol/ =if=, =a=, =b= and =c=</span>
+
+(<span style="color: #b9ca4a;">if</span> a b c) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">is an =if= expression that executes =if..then..else=</span>
+           <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">logic in common programming languages. Expressions like =if= are</span>
+           <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">called *special form*</span>
+
+&#8217;(+ <span style="color: #7aa6da;">1</span> <span style="color: #7aa6da;">2</span> <span style="color: #7aa6da;">3</span>) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">is a list consists of 4 elements =+=, =1=, =2= and =3=</span>
+
+(+ <span style="color: #7aa6da;">1</span> <span style="color: #7aa6da;">2</span> <span style="color: #7aa6da;">3</span>)  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">is a function call to function =+=</span>
+</pre>
+</div>
+
+<p>
+Both code and data in Lisp can be represented using the same format: a
+pair of parentheses with items in it: <code>(...)</code>; and it is called a
+list. This peculiar property is called <b>homoiconicity</b>, and languages
+that have this property is called <b>homoiconic languages</b>. It makes
+Lisp so powerful: <b>code can be data, data can be code</b>. It is a reason
+why Lisp contains a lot of parentheses.
+</p>
+
+<p>
+Both code and data are represented as a list underlying, but to
+distinguish between list that holds data and list that holds code,
+list that holds data is referred simply as list; while list that holds
+code is <b>Lisp form</b>. But remember, code and data are lists, and
+because of the single representation for both code and data, list is
+more special in Lisp than in other languages.
+</p>
+
+<p>
+It's worth to repeat again:  <code>’(...)</code> for creating data and <code>(...)</code>
+for creating code; you hold things in <code>’(...)</code> and you process things
+in <code>(...)</code>. Easy to remember, right? 
+</p>
+
+<p>
+You may think: "Cool, so what difference can homoiconity make?" Let's
+look at an example; this is typical <code>if..then..else</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #b9ca4a;">if</span> (condition) {
+    ...statements...
+} <span style="color: #b9ca4a;">else</span> {
+    ...statements...
+}
+</pre>
+</div>
+
+<p>
+How do you change its syntax? For example, how can we change it to
+Python <code>if...then...else</code> like this and write our customized version
+in C:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="color: #b9ca4a;">if</span> condition:
+    ...statements...
+<span style="color: #b9ca4a;">else</span>:
+    ...statements...
+</pre>
+</div>
+
+<p>
+The answer is, it's impossible, even with C Macro, because C macro still
+requires you to put arguments inside a pair of parentheses, and you
+cannot redefine built-in keywords in C and most languages. With Lisp,
+this is entirely possible, except one minor thing: the syntax must be
+treated as data, meaning the entire Python <code>if</code> construct above must
+be enclosed within a Lisp form like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">'(<span style="color: #b9ca4a;">if</span> condition:
+    ...statements
+  else:
+    ...statements...)
+</pre>
+</div>
+
+<p>
+Lisp still has syntax, but it is minimal; for that reason, it can
+adapt to any type of syntax the programmers can imagine. Notice the
+single quote <code>’</code>, signalling that the entire form is data, and need to
+be processed to create appropriate code when feed into some processing
+function. Now you see why Lisp code has a lot of parentheses.
+</p>
+
+<p>
+Lisp forms are classified into 3 types:
+</p>
+
+<ul class="org-ul">
+<li><b>Function form</b>:
+Function form is the most common form. Function form is equivalent
+to a function call in other languages. If the first element in the
+list is a function that exists, that function will be called along
+with its arguments. The remaining elements in the list are function
+arguments. All arguments are evaluated before the function is called. 
+
+<p>
+<span class="underline">Example</span>:
+</p>
+
+<p>
+The list <code>(+ 1 (+ 2 3) (* 3 4) (/ 4 2))</code> is a function call to
+function <code>+</code>. Nearly everything in Lisp is a function, even
+arithmetic operators like <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>.  Before the outer most
+list is processed, the inner ones will be processed first. <code>(+ 2 3)</code>
+becomes 5, <code>(* 3 4)</code> becomes 12, <code>(/ 4 2)</code> becomes 2; all these
+three values will then replace its list in the original function
+call to make it become: <code>(+ 1 5 12 2)</code>, and finally function <code>+</code> is
+called to produce the final result 20.
+</p>
+</li>
+
+<li><b>Special form</b>:
+Special form has special evaluation rules or special syntax or
+both. For example, this is <code>if..then..else</code> in Lisp:
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition
+    ...do something if true...
+  ...do something if false...)
+</pre>
+</div>
+
+<p>
+Let's consider the behaviour of <code>if</code>, not just in Lisp but in any
+language: if condition is true, then do something, else do something
+if false. For this reason, <code>if</code> cannot be a function call because
+<code>condition</code>, <code>true</code> and <code>false</code> are all evaluated and passed into
+if, while we want first check <code>condition</code>, then depend on the
+outcome of <code>condition</code>, we select a true or false branch.
+</p>
+
+<p>
+Most forms in Lisp are functions, except special cases such as
+<code>if</code>, <code>and</code>, <code>or</code>&#x2026; that cannot follow the evaluation rule of a
+function. They need their own rules that do not exist in other
+forms. That's why they are special.
+</p>
+</li>
+
+<li><b>Macro form</b>:
+Macro form is a function, but different: When you call a macro, the
+macro function generated regular Lisp code; the generated code then
+is executed. Macro is what makes Lisp so special: it allows Lisp to
+have any syntax anyone wishes for. The Python syntax enclosed in a
+Lisp form you saw earlier is an example. But now, instead of having
+to quote, you won't have to with a macro form. Instead of writing
+like this:
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">'(<span style="color: #b9ca4a;">if</span> condition:
+     ...statements...
+  else:
+     ...statements...)
+</pre>
+</div>
+</li>
+</ul>
+
+<p>
+You can remove the quote <code>’</code> and treat your Python syntax as part of
+Lisp:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition:
+     ...statements...
+ else:
+     ...statements...)
+</pre>
+</div>
+
+<p>
+The Python code above is a macro form. Upon calling, the macro will
+first transform to a valid Lisp form:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition
+     ...statements...
+     ...statements...)
+</pre>
+</div>
+
+<p>
+Then the transformed code is executed. You can have C for loop, Python if,
+Java class&#x2026;mix up in Lisp if you want. Thanks to the minimal Lisp syntax,
+Lisp macro is able to do all of this. Without it, you cannot bend Lisp
+to your needs.
+</p>
+
+<p>
+In reality, <code>’(...)</code> is just a syntactic sugar for special form
+<code>(quote ...)</code>. In the end, Lisp only has one syntax: a pair of
+parentheses and items in it. With this syntax, many things are easy to
+do in Lisp, such as generating code as data and execute it later, both
+in compile time and runtime. In the end, the only thing that exists in
+Lisp is a pair of parentheses, with things in in it: <code>(...)</code>. This is
+the only syntax, along with the semantics that depends on conext: <i>a
+function form</i>, <i>a special form</i> or <i>a macro form</i>. That's all you
+need to remember for using any Lisp.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><a id="ID-f81bda6e-00ea-47ee-8250-308ec8109f47"></a>Syntax error</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Lisp syntax is simple: it's just a pair of parentheses, with things in
+in it: <code>(...)</code>. If you encounter syntax errors, it belongs to these
+two cases:
+</p>
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><a id="ID-64829a4d-b80d-4bac-9941-f45367d7edc3"></a>Unbalanced parentheses:</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Do you miss an opening or closing parentheses, or do you insert
+unnecessary parentheses? Incorrect usage of parentheses is the only
+syntax error you get when writing Lisp program. In other languages,
+you have to remember many syntax rules. For example, to write a <code>for</code>
+in Tcl, you have to write like this to make it valid
+</p>
+<div class="org-src-container">
+
+<pre class="src src-tcl"><span style="color: #b9ca4a;">for</span> {<span style="color: #c397d8;">set</span> i <span style="color: #7aa6da;">0</span>} {$<span style="color: #e7c547;">i</span> &lt; $<span style="color: #e7c547;">n</span>} {<span style="color: #c397d8;">incr</span> i} {
+    ...do something...
+}
+</pre>
+</div>
+<p>
+I kept forgetting all the times when I first used it because I get
+used to C style for loop. In Tcl, to use some variables, you have to
+put a dollar sign <code>$</code> before the variable names. Howver, in some
+context, you must not insert dollar before:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-tcl"><span style="color: #c397d8;">array</span> <span style="color: #c397d8;">set</span> <span style="color: #e7c547;">balloon</span> {color red}
+<span style="color: #c397d8;">array</span> get balloon
+</pre>
+</div>
+
+<p>
+<code>balloon</code> is an array variable, but to use it you must not insert dollar
+sign before. It's annoying to remember trivial details like this.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><a id="ID-e98cbd6b-60c8-447e-bf1d-e567b4d200c9"></a>Mini-language syntax error:</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+If you create a mini language, then you must follow its syntax
+rules. In this case, you get syntax errors like regular languages
+if you code is not correct according to syntax rules. However, if you
+are a beginner, you won't have to worry about macro and mini-languages
+at this stage. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><a id="ID-125d8641-5327-4169-94c5-969e06d4bf69"></a>Conclusion</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+You won't find any language with such a minimal syntax and unifomity,
+yet so expressive, since you can choose any language syntax that you
+want to solve your problems in. Some languages also have <b>homoiconic</b>
+property, but instead of using just a pair of parentheses, they use
+more complex syntax constructs. Some languages are simple (still not
+as much as Lisp), but are not <b>homoiconic</b>. The only syntax you write
+in Lisp, again, just a pair of parentheses, with things in
+in it: <code>(...)</code>. Because of syntax like this, Lisp requires you to
+careful match the parentheses. Or you can let Emacs does it for you.
+</p>
+
+<p>
+Learning any language has something in common:
+</p>
+
+<ul class="org-ul">
+<li>Learn syntax and semantic.
+</li>
+<li>Learn idiomatic ways of using the language.
+</li>
+<li>Learn commonly used libraries.
+</li>
+<li>Learn common development tools used with the language.
+</li>
+</ul>
+
+<p>
+We already covered the first. I will show you how to use common
+functions for configuration, and setup a programming environment for
+any Lisp in the next chapter.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+
+<a href="archive.html">Other posts</a>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>
