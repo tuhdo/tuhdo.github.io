@@ -596,6 +596,7 @@ temporary content of the file that is being displayed.
 
 
 | Key       | Binding                             |
+|-----------+-------------------------------------|
 | =C-x C-s= | *Command*: =save-buffer=            |
 |           | Save the buffer at point            |
 |-----------+-------------------------------------|
