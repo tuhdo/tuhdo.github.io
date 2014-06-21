@@ -483,7 +483,8 @@ Let's learn one especially handy command. =M-x find-=, then press
 prefix =find-=. Select the command =find-file=, either by clicking on
 it in the list; or keep typing a few more characters, and pressing
 *TAB* until the command is completed. After =find-file= is in your
-prompt, press *RET*.
+prompt, press *RET*. For quickly running =file-file=, you can use key
+binding *C-x C-f*.
 
 You can use *wildcard expression* to select more than one file. For
 example, if your directory contains these file:
