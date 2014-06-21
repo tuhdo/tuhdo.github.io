@@ -1,4 +1,4 @@
-#+TITLE: Emacs Mini Manual (PART 2) - LISP PRIMER
+#+TITLE: Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER
 * Introduction - and why you should learn Lisp
 :PROPERTIES:
 :ID:       267fa5b6-b998-42c6-8ec0-382035284873
@@ -40,6 +40,8 @@ McCarthy, the creator of Lisp: [[http://www-formal.stanford.edu/jmc/history/lisp
 
 Another good read about Lisp history, written by Paul Graham: [[http://www.paulgraham.com/lisphistory.html][Lisp
 History]].
+
+[[http://www.lispworks.com/success-stories/index.html][Success Stories]].
 ** Basic syntax and semantic
 :PROPERTIES:
 :ID:       9a30dadd-d95e-49a9-8690-b6b633d9083d
@@ -287,7 +289,8 @@ If you create a mini language, then you must follow its syntax
 rules. In this case, you get syntax errors like regular languages
 if you code is not correct according to syntax rules. However, if you
 are a beginner, you won't have to worry about macro and mini-languages
-at this stage. 
+at this stage.
+
 * Conclusion
 :PROPERTIES:
 :ID:       125d8641-5327-4169-94c5-969e06d4bf69
