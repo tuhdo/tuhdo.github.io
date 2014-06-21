@@ -124,9 +124,9 @@ look at an example; this is typical =if..then..else=:
   }
 #+end_src
 
-How do you change its syntax? For example, how can we change it to
-Python =if...then...else= like this and write our customized version
-in C:
+How do you change its syntax? For example, you prefer Python
+=if..then..else= syntax, how can we change C =if..then..else= to
+Python =if...then...else= and write our customized version in C:
 
 #+begin_src python
   if condition:
@@ -135,10 +135,10 @@ in C:
       ...statements...
 #+end_src
 
-The answer is, it's impossible, even with C Macro, because C macro still
-requires you to put arguments inside a pair of parentheses, and you
-cannot redefine built-in keywords in C and most languages. With Lisp,
-this is entirely possible, except one minor thing: the syntax must be
+The answer is, it's impossible, even with C macro and you cannot redefine
+built-in keywords in C - as well as in most languages - with your
+programs can still be compiled and behave correctly. With Lisp, this
+is entirely possible, except one minor thing: the code must be
 treated as data, meaning the entire Python =if= construct above must
 be enclosed within a Lisp form like this:
 
@@ -149,11 +149,25 @@ be enclosed within a Lisp form like this:
       ...statements...)
 #+end_src
 
-Lisp still has syntax, but it is minimal; for that reason, it can
-adapt to any type of syntax the programmers can imagine. Notice the
-single quote =’=, signalling that the entire form is data, and need to
-be processed to create appropriate code when feed into some processing
-function. Now you see why Lisp code has a lot of parentheses.
+Lisp still has syntax, but minimal: a pair of parentheses, with things in
+in it: =(...)=. For that reason, it can adapt to any type of syntax
+programmers can imagine. Notice the single quote =’=, signalling that
+the entire form is data, and need to be processed to create
+appropriate code when feed into some processing function. The only
+syntax that Lisp cannot have, is the one without parentheses. However,
+with parentheses, you can have any language you want inside it, which
+do you prefer?
+
+Now you see why Lisp code has a lot of parentheses. This is how
+*homoiconicity* differs. Without being able to treat code as data, you
+cannot bend the language to your own will (well, unless you implement
+your own language from scratch). Because Lisp's minimal syntax, you
+can create your own language for expressing your own ideas. Using your
+own language means you can use your own terms, your own rules, to
+write your solutions instead of someone imposes a particular style of
+language on you, tell you how to do it even if you prefer another
+style. This is why Lisp is so expressive: minimal syntax and follow
+the will of programmer.
 
 Lisp forms are classified into 3 types:
 

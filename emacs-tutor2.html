@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-22 CN 00:42 -->
+<!-- 2014-06-22 CN 02:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -362,9 +362,9 @@ look at an example; this is typical <code>if..then..else</code>:
 </div>
 
 <p>
-How do you change its syntax? For example, how can we change it to
-Python <code>if...then...else</code> like this and write our customized version
-in C:
+How do you change its syntax? For example, you prefer Python
+<code>if..then..else</code> syntax, how can we change C <code>if..then..else</code> to
+Python <code>if...then...else</code> and write our customized version in C:
 </p>
 
 <div class="org-src-container">
@@ -377,10 +377,10 @@ in C:
 </div>
 
 <p>
-The answer is, it's impossible, even with C Macro, because C macro still
-requires you to put arguments inside a pair of parentheses, and you
-cannot redefine built-in keywords in C and most languages. With Lisp,
-this is entirely possible, except one minor thing: the syntax must be
+The answer is, it's impossible, even with C macro and you cannot redefine
+built-in keywords in C - as well as in most languages - with your
+programs can still be compiled and behave correctly. With Lisp, this
+is entirely possible, except one minor thing: the code must be
 treated as data, meaning the entire Python <code>if</code> construct above must
 be enclosed within a Lisp form like this:
 </p>
@@ -395,11 +395,27 @@ be enclosed within a Lisp form like this:
 </div>
 
 <p>
-Lisp still has syntax, but it is minimal; for that reason, it can
-adapt to any type of syntax the programmers can imagine. Notice the
-single quote <code>’</code>, signalling that the entire form is data, and need to
-be processed to create appropriate code when feed into some processing
-function. Now you see why Lisp code has a lot of parentheses.
+Lisp still has syntax, but minimal: a pair of parentheses, with things in
+in it: <code>(...)</code>. For that reason, it can adapt to any type of syntax
+programmers can imagine. Notice the single quote <code>’</code>, signalling that
+the entire form is data, and need to be processed to create
+appropriate code when feed into some processing function. The only
+syntax that Lisp cannot have, is the one without parentheses. However,
+with parentheses, you can have any language you want inside it, which
+do you prefer?
+</p>
+
+<p>
+Now you see why Lisp code has a lot of parentheses. This is how
+<b>homoiconicity</b> differs. Without being able to treat code as data, you
+cannot bend the language to your own will (well, unless you implement
+your own language from scratch). Because Lisp's minimal syntax, you
+can create your own language for expressing your own ideas. Using your
+own language means you can use your own terms, your own rules, to
+write your solutions instead of someone imposes a particular style of
+language on you, tell you how to do it even if you prefer another
+style. This is why Lisp is so expressive: minimal syntax and follow
+the will of programmer.
 </p>
 
 <p>
