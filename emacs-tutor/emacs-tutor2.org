@@ -90,9 +90,9 @@ _Examples_:
              ;; logic in common programming languages. Expressions like if are
              ;; called *special form*
 
-  ’(+ 1 2 3) ;; is a list consists of 4 elements +, 1, 2 and 3
+  ’(+ 1 2 3) ;; is a list consists of 4 elements: +, 1, 2 and 3
 
-   (+ 1 2 3)  ;; is a function call to function +
+   (+ 1 2 3)  ;; is a function call to function "+" (yes, "+" is a function)
 #+end_src
 
 Both code and data in Lisp can be represented using the same format: a
