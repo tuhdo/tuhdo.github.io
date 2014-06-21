@@ -555,7 +555,11 @@ A few things to note for when using *Ido*:
 - If you want to use wildcard expression, you have to temporary revert
   to ordinary =find-file= via *C-f*.
 
-- If you want to select the current directory, *C-d*.
+- If you want to select the current directory, *C-d*. This invokes
+  *Dired* file manager to open the directory and list the files in
+  current directory. You will learn Dired in later section. For now,
+  if you open the directory, close the current listing by *C-x k* and
+  press *RET*.
 
 - You select a directory in =find-file= prompt by pressing *RET*, not
   *TAB* like ordinary =find-file=.
