@@ -1,4 +1,4 @@
 #+TITLE: Table of Content
 
-   + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER]]
    + [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - THE BASICS]]
+   + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER]]
