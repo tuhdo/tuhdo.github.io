@@ -56,13 +56,13 @@ remember these syntax constructs to use any Lisp:
 
   - Non-atomic: There's a reason Lisp is called (LIS)t
     (P)rocessing. In other languages, list is just another data type;
-    but in Lisp, because of Lisp syntax, list is really 
-    special. Basically, this is a list: 
+    but in Lisp, because of Lisp syntax, list is really
+    special. Basically, this is a list:
 
 	#+begin_src emacs-lisp
       ’(...)
     #+end_src
-    
+
     A list can hold data, both atomic and non-atomic. That means, a
     list can hold a smaller list inside it along with atomic data.
 
@@ -70,7 +70,7 @@ remember these syntax constructs to use any Lisp:
   #+begin_src emacs-lisp
     (...)
   #+end_src
-  
+
   What is the difference between code and data? That's right, a single
   quote =’=. Without the quote =’=, we are creating *a list* that holds
   code for computer to execute. With the quote =’=, we are creating *a
@@ -162,7 +162,7 @@ Lisp forms are classified into 3 types:
   to a function call in other languages. If the first element in the
   list is a function that exists, that function will be called along
   with its arguments. The remaining elements in the list are function
-  arguments. All arguments are evaluated before the function is called. 
+  arguments. All arguments are evaluated before the function is called.
 
   _Example_:
 
@@ -254,7 +254,7 @@ need to remember for using any Lisp.
 Lisp syntax is simple: it's just a pair of parentheses, with things in
 in it: =(...)=. If you encounter syntax errors, it belongs to these
 two cases:
-** Unbalanced parentheses: 
+** Unbalanced parentheses:
 :PROPERTIES:
 :ID:       64829a4d-b80d-4bac-9941-f45367d7edc3
 :END:
@@ -290,6 +290,61 @@ rules. In this case, you get syntax errors like regular languages
 if you code is not correct according to syntax rules. However, if you
 are a beginner, you won't have to worry about macro and mini-languages
 at this stage.
+* Semantic error
+:PROPERTIES:
+:ID:       a36aca24-f1ba-4371-8e5e-12d545337e78
+:END:
+You might wonder, parentheses cannot be the only source of
+errors. What would happen when incorrect number of arguments passed
+into a function? Or non-existent variables, incorrect variable types,
+array index out of range...? These errors are called *semantic
+errors*. It has nothing to do with how statements are constructed.
+
+For example, this is syntax error:
+
+#+begin_src c
+  #include <stdio.h>
+
+  int main (int argc, const char* argv[]) {
+      if argc == 1 { exit(1) }
+      printf("Hello world")
+  }
+#+end_src
+
+In the above example, I made two syntax errors:
+
+- the condition in =if= statement is not surrounded by a pair of
+  parentheses. =if= statement in C requires this generic form:
+
+#+begin_src c
+  if (expression) {
+      ...statements separated by semicolon...
+  }
+#+end_src
+
+- missed a simicolon =;= at the end of =printf= statement.
+
+In contrast, this is semantic error:
+
+#+begin_src c
+  void add(int a, int b) {
+      return a + b;
+  }
+
+  void main(int argc, const char* argv[]) {
+      int a = 1;
+
+      add(a);
+      add(a,b);
+  }
+#+end_src
+
+The calls to =add= are syntactically correct, but used incorrectly:
+the first call to add requires one more argument; the second call to
+add contains non-existent variable.
+
+As in other languages, Lisp treats these errors as semantic errors,
+since syntax errors in Lisp have only to do with parentheses.
 
 * Conclusion
 :PROPERTIES:
