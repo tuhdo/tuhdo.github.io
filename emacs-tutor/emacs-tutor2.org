@@ -44,8 +44,8 @@ remember these syntax constructs to use any Lisp:
 
 - Data:
 
-  - Atomic, or Atom: It is the same as primitives in other languages, meaning the
-  most basic construct and indivisible.
+  - Atomic, or Atom: It is the same as primitives in other languages,
+    meaning the most basic construct and indivisible.
 
   - Non-atomic: There's a reason Lisp is called (*LIS*)t
     (*P*)rocessing. In other languages, list is just another data type;
