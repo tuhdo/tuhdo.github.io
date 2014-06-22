@@ -32,16 +32,17 @@ language".
 :END:
 Lisp has a long history. Lisp was designed by computer scientist [[http://en.wikipedia.org/wiki/John_McCarthy_%2528computer_scientist%2529][John
 McCarthy]]. Lisp first appeared in 1958 and Lisp is still with us up to
-this day with various dialects: Common Lispn, newLisp, Emacs Lisp, Racket,
+this day with various dialects: Common Lisp, newLisp, Emacs Lisp, Racket,
 Clojure... Lisp is short for (*LIS*)t (*P*)rocessing.
 
-You can read the history of Lisp uptil 1979 of Lisp, written by John
+You can read the history of Lisp until 1979 of Lisp, written by John
 McCarthy, the creator of Lisp: [[http://www-formal.stanford.edu/jmc/history/lisp/lisp.html][History of Lisp]].
 
 Another good read about Lisp history, written by Paul Graham: [[http://www.paulgraham.com/lisphistory.html][Lisp
 History]].
 
 [[http://www.lispworks.com/success-stories/index.html][Success Stories]].
+
 ** Basic syntax and semantic
 :PROPERTIES:
 :ID:       9a30dadd-d95e-49a9-8690-b6b633d9083d
@@ -54,8 +55,8 @@ remember these syntax constructs to use any Lisp:
   - Atomic, or Atom: It is the same as primitives in other languages, meaning the
   most basic construct and indivisible.
 
-  - Non-atomic: There's a reason Lisp is called (LIS)t
-    (P)rocessing. In other languages, list is just another data type;
+  - Non-atomic: There's a reason Lisp is called (*LIS*)t
+    (*P*)rocessing. In other languages, list is just another data type;
     but in Lisp, because of Lisp syntax, list is really
     special. Basically, this is a list:
 
@@ -257,7 +258,7 @@ parentheses and items in it. With this syntax, many things are easy to
 do in Lisp, such as generating code as data and execute it later, both
 in compile time and runtime. In the end, the only thing that exists in
 Lisp is a pair of parentheses, with things in in it: =(...)=. This is
-the only syntax, along with the semantics that depends on conext: /a
+the only syntax, along with the semantics that depends on context: /a
 function form/, /a special form/ or /a macro form/. That's all you
 need to remember for using any Lisp.
 
@@ -336,7 +337,7 @@ In the above example, I made two syntax errors:
   }
 #+end_src
 
-- missed a simicolon =;= at the end of =printf= statement.
+- missed a semicolon =;= at the end of =printf= statement.
 
 In contrast, this is semantic error:
 
@@ -359,6 +360,78 @@ add contains non-existent variable.
 
 As in other languages, Lisp treats these errors as semantic errors,
 since syntax errors in Lisp have only to do with parentheses.
+
+* Lisp Machine
+:PROPERTIES:
+:ID:       b82bfb73-1af9-48d1-9565-0b8541e27487
+:END:
+It would be a mistake when mention about history of Lisp without
+mention about the Lisp Machine, a computing system that is built to
+run Lisp natively. In a Lisp Machine, the Operating System, device
+drivers and applications are written using a single language:
+Lisp. Such a thing is possible because the computer has a built-in
+hardware garbage collector, as opposed to the software implementations
+in garbage collected languages today.
+
+[[http://www.andromeda.com/people/ddyer/lisp/][A Brief History of Lisp Machines]]
+
+#+BEGIN_QUOTE
+*Why Lisp?*  Everyone "knows" that lisp was the language of choice for
+Artificial Intelligence research, but a big part of AI research is
+about paradigms for representing knowledge, expressing algorithms,
+man-machine communication, and machine-to-machine communication:  In
+short, how to use computers in general.  Lisp, as the default AI
+language, was also an important research vehicle for new computer
+languages, networking, display technology and so on.
+
+*Why Lisp Machines?*  The standard platform for Lisp before Lisp
+machines was a timeshared PDP-10, but it was well known that one Lisp
+program could turn a timeshared KL-10  into unusable sludge for
+everyone else.   It became technically feasible to build cheaper
+hardware that would run lisp better than on timeshared computers.  The
+technological push was definitely from the top down; to run big,
+resource hungry lisp programs more cheaply.  Lisp machines were not
+"personal" out of some desire make life pleasant for programmers, but
+simply because lisp would use 100% of whatever resources it had
+available. All code on these systems was written in Lisp simply
+because that was the easiest and most cost effective way to provide an
+operating system on this new hardware.
+
+*Why two different kinds?*  Quite a few groups with different goals were
+building high priced, high powered workstations at about the same
+time. All were capitalizing on Moore's law and the emerging consensus
+that bitmapped displays, windows,  mice, and networks were effective
+paradigms.   The C/Unix community spawned Sun, Apollo, and Silicon
+Graphics.  The Pascal Community spawned the PERQ.   There were two
+major branches in the Lisp family tree, Interlisp and Maclisp, so it
+should be no surprise that there were two main family branches in Lisp
+machines.
+
+Today, all this hardware and software are commercially extinct, but
+many features that were commercialized by lispms are present in every
+PC.
+#+END_QUOTE
+
+_Futher resources_:
+
+[[http://en.wikipedia.org/wiki/Genera_%2528operating_system%2529][Lisp OS: Genera]]: The OS is written entirely in Lisp, both the
+Operating System and the high-level applications.
+
+[[http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/development-environment/index.html][The Lisp Machine Software Development Environment]]
+
+[[http://smbx.org/][Symbolic Lisp Machine Museum]]
+
+[[http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html][Symbolics Lisp Machine Museum provided by Ralf Möller]]
+
+[[http://www.loper-os.org/?p%3D932][Kalman Reti, the Last Symbolics Developer, Speaks of Lisp Machines]]
+
+[[http://www.loper-os.org/?p%3D52][Secrets of the Symbolics Console: Part 1]]
+
+[[http://www.loper-os.org/?p%3D53][Secrets of the Symbolics Console: Part 2]]
+
+[[http://fare.tunes.org/LispM.html][A few things I know about LISP Machines]]
+
+[[http://dspace.mit.edu/handle/1721.1/5718][MIT's CADR machine]]
 
 * Conclusion
 :PROPERTIES:

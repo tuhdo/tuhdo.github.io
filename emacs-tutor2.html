@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-22 CN 02:09 -->
+<!-- 2014-06-22 CN 14:10 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -174,7 +174,8 @@ alt="hit counter"></a></div></noscript>
 </ul>
 </li>
 <li><a href="#sec-3">Semantic error</a></li>
-<li><a href="#sec-4">Conclusion</a></li>
+<li><a href="#sec-4">Lisp Machine</a></li>
+<li><a href="#sec-5">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -224,12 +225,12 @@ language".
 <p>
 Lisp has a long history. Lisp was designed by computer scientist <a href="http://en.wikipedia.org/wiki/John_McCarthy_%28computer_scientist%29">John
 McCarthy</a>. Lisp first appeared in 1958 and Lisp is still with us up to
-this day with various dialects: Common Lispn, newLisp, Emacs Lisp, Racket,
+this day with various dialects: Common Lisp, newLisp, Emacs Lisp, Racket,
 Clojure&#x2026; Lisp is short for (<b>LIS</b>)t (<b>P</b>)rocessing.
 </p>
 
 <p>
-You can read the history of Lisp uptil 1979 of Lisp, written by John
+You can read the history of Lisp until 1979 of Lisp, written by John
 McCarthy, the creator of Lisp: <a href="http://www-formal.stanford.edu/jmc/history/lisp/lisp.html">History of Lisp</a>.
 </p>
 
@@ -243,7 +244,6 @@ History</a>.
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-1-2" class="outline-3">
 <h3 id="sec-1-2"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
 <div class="outline-text-3" id="text-1-2">
@@ -264,8 +264,8 @@ most basic construct and indivisible.
 </p>
 
 <ul class="org-ul">
-<li>Non-atomic: There's a reason Lisp is called (LIS)t
-(P)rocessing. In other languages, list is just another data type;
+<li>Non-atomic: There's a reason Lisp is called (<b>LIS</b>)t
+(<b>P</b>)rocessing. In other languages, list is just another data type;
 but in Lisp, because of Lisp syntax, list is really
 special. Basically, this is a list:
 
@@ -536,7 +536,7 @@ parentheses and items in it. With this syntax, many things are easy to
 do in Lisp, such as generating code as data and execute it later, both
 in compile time and runtime. In the end, the only thing that exists in
 Lisp is a pair of parentheses, with things in in it: <code>(...)</code>. This is
-the only syntax, along with the semantics that depends on conext: <i>a
+the only syntax, along with the semantics that depends on context: <i>a
 function form</i>, <i>a special form</i> or <i>a macro form</i>. That's all you
 need to remember for using any Lisp.
 </p>
@@ -648,7 +648,7 @@ parentheses. <code>if</code> statement in C requires this generic form:
 </div>
 
 <ul class="org-ul">
-<li>missed a simicolon <code>;</code> at the end of <code>printf</code> statement.
+<li>missed a semicolon <code>;</code> at the end of <code>printf</code> statement.
 </li>
 </ul>
 
@@ -684,8 +684,112 @@ since syntax errors in Lisp have only to do with parentheses.
 </div>
 </div>
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-125d8641-5327-4169-94c5-969e06d4bf69"></a>Conclusion</h2>
+<h2 id="sec-4"><a id="ID-b82bfb73-1af9-48d1-9565-0b8541e27487"></a>Lisp Machine</h2>
 <div class="outline-text-2" id="text-4">
+<p>
+It would be a mistake when mention about history of Lisp without
+mention about the Lisp Machine, a computing system that is built to
+run Lisp natively. In a Lisp Machine, the Operating System, device
+drivers and applications are written using a single language:
+Lisp. Such a thing is possible because the computer has a built-in
+hardware garbage collector, as opposed to the software implementations
+in garbage collected languages today.
+</p>
+
+<p>
+<a href="http://www.andromeda.com/people/ddyer/lisp/">A Brief History of Lisp Machines</a>
+</p>
+
+<blockquote>
+<p>
+<b>Why Lisp?</b>  Everyone "knows" that lisp was the language of choice for
+Artificial Intelligence research, but a big part of AI research is
+about paradigms for representing knowledge, expressing algorithms,
+man-machine communication, and machine-to-machine communication:  In
+short, how to use computers in general.  Lisp, as the default AI
+language, was also an important research vehicle for new computer
+languages, networking, display technology and so on.
+</p>
+
+<p>
+<b>Why Lisp Machines?</b>  The standard platform for Lisp before Lisp
+machines was a timeshared PDP-10, but it was well known that one Lisp
+program could turn a timeshared KL-10  into unusable sludge for
+everyone else.   It became technically feasible to build cheaper
+hardware that would run lisp better than on timeshared computers.  The
+technological push was definitely from the top down; to run big,
+resource hungry lisp programs more cheaply.  Lisp machines were not
+"personal" out of some desire make life pleasant for programmers, but
+simply because lisp would use 100% of whatever resources it had
+available. All code on these systems was written in Lisp simply
+because that was the easiest and most cost effective way to provide an
+operating system on this new hardware.
+</p>
+
+<p>
+<b>Why two different kinds?</b>  Quite a few groups with different goals were
+building high priced, high powered workstations at about the same
+time. All were capitalizing on Moore's law and the emerging consensus
+that bitmapped displays, windows,  mice, and networks were effective
+paradigms.   The C/Unix community spawned Sun, Apollo, and Silicon
+Graphics.  The Pascal Community spawned the PERQ.   There were two
+major branches in the Lisp family tree, Interlisp and Maclisp, so it
+should be no surprise that there were two main family branches in Lisp
+machines.
+</p>
+
+<p>
+Today, all this hardware and software are commercially extinct, but
+many features that were commercialized by lispms are present in every
+PC.
+</p>
+</blockquote>
+
+<p>
+<span class="underline">Futher resources</span>:
+</p>
+
+<p>
+<a href="http://en.wikipedia.org/wiki/Genera_%28operating_system%29">Lisp OS: Genera</a>: The OS is written entirely in Lisp, both the
+Operating System and the high-level applications.
+</p>
+
+<p>
+<a href="http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/development-environment/index.html">The Lisp Machine Software Development Environment</a>
+</p>
+
+<p>
+<a href="http://smbx.org/">Symbolic Lisp Machine Museum</a>
+</p>
+
+<p>
+<a href="http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html">Symbolics Lisp Machine Museum provided by Ralf Möller</a>
+</p>
+
+<p>
+<a href="http://www.loper-os.org/?p=932">Kalman Reti, the Last Symbolics Developer, Speaks of Lisp Machines</a>
+</p>
+
+<p>
+<a href="http://www.loper-os.org/?p=52">Secrets of the Symbolics Console: Part 1</a>
+</p>
+
+<p>
+<a href="http://www.loper-os.org/?p=53">Secrets of the Symbolics Console: Part 2</a>
+</p>
+
+<p>
+<a href="http://fare.tunes.org/LispM.html">A few things I know about LISP Machines</a>
+</p>
+
+<p>
+<a href="http://dspace.mit.edu/handle/1721.1/5718">MIT's CADR machine</a>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><a id="ID-125d8641-5327-4169-94c5-969e06d4bf69"></a>Conclusion</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 You won't find any language with such a minimal syntax and unifomity,
 yet so expressive, since you can choose any language syntax that you
