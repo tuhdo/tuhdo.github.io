@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-22 CN 14:10 -->
+<!-- 2014-06-22 CN 15:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -396,13 +396,13 @@ be enclosed within a Lisp form like this:
 
 <p>
 Lisp still has syntax, but minimal: a pair of parentheses, with things in
-in it: <code>(...)</code>. For that reason, it can adapt to any type of syntax
-programmers can imagine. Notice the single quote <code>’</code>, signalling that
-the entire form is data, and need to be processed to create
-appropriate code when feed into some processing function. The only
-syntax that Lisp cannot have, is the one without parentheses. However,
-with parentheses, you can have any language you want inside it, which
-do you prefer?
+in it: <code>(...)</code>, along with the syntax for primitives. For that reason,
+it can adapt to any type of syntax programmers can imagine. Notice the
+single quote <code>’</code>, signalling that the entire form is data, and need to
+be processed to create appropriate code when feed into some processing
+function. The only syntax that Lisp cannot have, is the one without
+parentheses. However, with parentheses, you can have any language you
+want inside it, which do you prefer?
 </p>
 
 <p>
@@ -532,13 +532,14 @@ to your needs.
 <p>
 In reality, <code>’(...)</code> is just a syntactic sugar for special form
 <code>(quote ...)</code>. In the end, Lisp only has one syntax: a pair of
-parentheses and items in it. With this syntax, many things are easy to
-do in Lisp, such as generating code as data and execute it later, both
-in compile time and runtime. In the end, the only thing that exists in
-Lisp is a pair of parentheses, with things in in it: <code>(...)</code>. This is
-the only syntax, along with the semantics that depends on context: <i>a
-function form</i>, <i>a special form</i> or <i>a macro form</i>. That's all you
-need to remember for using any Lisp.
+parentheses and items in it, along with syntax for primitives (number,
+string, boolean&#x2026;). With Lisp syntax, many things are easy to do in
+Lisp, such as generating code as data and execute it later, both in
+compile time and runtime. In the end, aside from the primitives, the
+only thing that exists in Lisp is a pair of parentheses, with things
+in in it: <code>(...)</code>. This is the only syntax, along with the semantics
+that depends on context: <i>a function form</i>, <i>a special form</i> or <i>a
+macro form</i>. That's all you need to remember for using any Lisp.
 </p>
 </div>
 </div>

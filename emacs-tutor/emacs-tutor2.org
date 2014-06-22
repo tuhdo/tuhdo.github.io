@@ -151,13 +151,13 @@ be enclosed within a Lisp form like this:
 #+end_src
 
 Lisp still has syntax, but minimal: a pair of parentheses, with things in
-in it: =(...)=. For that reason, it can adapt to any type of syntax
-programmers can imagine. Notice the single quote =’=, signalling that
-the entire form is data, and need to be processed to create
-appropriate code when feed into some processing function. The only
-syntax that Lisp cannot have, is the one without parentheses. However,
-with parentheses, you can have any language you want inside it, which
-do you prefer?
+in it: =(...)=, along with the syntax for primitives. For that reason,
+it can adapt to any type of syntax programmers can imagine. Notice the
+single quote =’=, signalling that the entire form is data, and need to
+be processed to create appropriate code when feed into some processing
+function. The only syntax that Lisp cannot have, is the one without
+parentheses. However, with parentheses, you can have any language you
+want inside it, which do you prefer?
 
 Now you see why Lisp code has a lot of parentheses. This is how
 *homoiconicity* differs. Without being able to treat code as data, you
@@ -254,13 +254,14 @@ to your needs.
 
 In reality, =’(...)= is just a syntactic sugar for special form
 =(quote ...)=. In the end, Lisp only has one syntax: a pair of
-parentheses and items in it. With this syntax, many things are easy to
-do in Lisp, such as generating code as data and execute it later, both
-in compile time and runtime. In the end, the only thing that exists in
-Lisp is a pair of parentheses, with things in in it: =(...)=. This is
-the only syntax, along with the semantics that depends on context: /a
-function form/, /a special form/ or /a macro form/. That's all you
-need to remember for using any Lisp.
+parentheses and items in it, along with syntax for primitives (number,
+string, boolean...). With Lisp syntax, many things are easy to do in
+Lisp, such as generating code as data and execute it later, both in
+compile time and runtime. In the end, aside from the primitives, the
+only thing that exists in Lisp is a pair of parentheses, with things
+in in it: =(...)=. This is the only syntax, along with the semantics
+that depends on context: /a function form/, /a special form/ or /a
+macro form/. That's all you need to remember for using any Lisp.
 
 * Syntax error
 :PROPERTIES:
