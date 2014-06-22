@@ -8,14 +8,6 @@ that you understand the core ideas. After you finish the sub-sections
 of this section, we will play with Emacs Lisp code for customizing
 Emacs, and it's really fun to see your Emacs "evolves" gradually.
 
-My primary Lisp education were the two courses on [[https://www.coursera.org/][Coursera]]:
-- [[https://www.coursera.org/course/proglang][Programming Languages]]
-- [[https://www.coursera.org/course/programdesign][Introduction to Systematic Program Design - Part 1]]
-- and miscellaneous Emacs Lisp code I learned during customizing
-  Emacs.
-I am not an Emacs Lisp expert to create my own extension yet, but
-enough to create something like the "tour" in Part 1, or better.
-
 In this chapter, I will introduce to you why language like Lisp exists
 and what sets it from other languages, along with basic syntax and
 semantic. For deeper learning into Emacs Lisp, many tutorials exist
