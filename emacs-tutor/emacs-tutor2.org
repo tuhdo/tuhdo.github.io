@@ -3,10 +3,19 @@
 :PROPERTIES:
 :ID:       267fa5b6-b998-42c6-8ec0-382035284873
 :END:
-In this section, you only need to read and understand. It's important
-that you understand the core ideas. After you finish the sub-sections
-of this section, we will play with Emacs Lisp code for customizing
-Emacs, and it's really fun to see your Emacs "evolves" gradually.
+In this section, you can try out code by =M-x ielm=, then paste code
+into the Emacs Lisp interpreter. It's important that you understand
+the core ideas. After you finish the sub-sections of this section, we
+will play with Emacs Lisp code for customizing Emacs, and it's really
+fun to see your Emacs "evolves" gradually.
+
+** Before we start
+:PROPERTIES:
+:ID:       24b6798b-24de-45dc-94ce-cd2dddf55255
+:END:
+Please be aware that although I intentionally emphasize the importance
+of parentheses, but *I don't mean Lisp is all about parentheses*. I
+just want to clear beginner's confusion with parentheses.
 
 In this chapter, I will introduce to you why language like Lisp exists
 and what sets it from other languages, along with basic syntax and
@@ -17,7 +26,6 @@ should you use Lisp; otherwise, it's just learning a different ways of
 doing things in a different language and won't motivate you to take
 Lisp serious because the mentality of "just another programming
 language".
-
 ** A bit of history
 :PROPERTIES:
 :ID:       71c4974f-42b4-4a29-93bd-b823688ea024
@@ -42,33 +50,72 @@ History]].
 Lisp syntax is minimal and simple. At its core, you only need to
 remember these syntax constructs to use any Lisp:
 
-- Data:
+1. Data:
 
-  - Atomic, or Atom: It is the same as primitives in other languages,
-    meaning the most basic construct and indivisible.
+   - Atomic-data, or *Atom*: It is the same as primitives in other
+     languages, meaning the most basic construct and indivisible. Atoms
+     include following basic types, you should try in IELM:
 
-  - Non-atomic: There's a reason Lisp is called (*LIS*)t
-    (*P*)rocessing. In other languages, list is just another data type;
-    but in Lisp, because of Lisp syntax, list is really
-    special. Basically, this is a list:
+     + Number: integer like 1, 2, 3... or floating point numbers like
+       1.5, 3.14...
 
-	#+begin_src emacs-lisp
-      ’(...)
-    #+end_src
+     + String: strings like "a", "string", "this is a string"... Is
+       also an atom. String is immutable.
 
-    A list can hold data, both atomic and non-atomic. That means, a
-    list can hold a smaller list inside it along with atomic data.
+     + =NIL= or =()=: NIL means =null= in other languages. =()= means
+       empty list, which is equivalent to =NIL=. When using with a true
+       or false test, usch as an if statement, =NIL= or the empty list
+       =()= means the value =false=; all other non-empty values in Lisp
+       are true.
 
-- Code: If you want to run code to be executed, here is the syntax:
-  #+begin_src emacs-lisp
-    (...)
-  #+end_src
+     + Symbol: A symbol is an object with a name. You can think of
+       symbol as pointer or reference in other language. Each symbol
+       has 4 components:
 
-  What is the difference between code and data? That's right, a single
-  quote =’=. Without the quote =’=, we are creating *a list* that holds
-  code for computer to execute. With the quote =’=, we are creating *a
-  list* that holds data, similar to List data structure in Java or C++
-  to hold data.
+       * Print name: symbol's name as string
+
+       * Value: value of symbol as variable
+
+       * Function: symbol's function definition. A symbol can be both a
+         variable and a function
+
+       * Property-list: list of key-value pairs. You don't need to care
+         much at this stage.
+
+       Example: the variable =buffer-file-name= is both a variable and
+       a function. You can check by using =symbol-value= and
+       =symbol-function= functions:
+
+       #+begin_src emacs-lisp
+       (symbol-value 'buffer-file-name) ;; check the value of buffer-file-name; if you try it in IELM,
+       ;; the value is NIL because the buffer is not associated with any file
+
+       (symbol-function 'buffer-file-name) ;; return the function buffer-file-name; 
+       ;; IELM should display something like this: #<subr buffer-file-name>
+       #+end_src
+
+   - Non-atomic: There's a reason Lisp is called (*LIS*)t
+     (*P*)rocessing. In other languages, list is just another data type;
+     but in Lisp, because of Lisp syntax, list is really
+     special. Basically, this is a list:
+
+	 #+begin_src emacs-lisp
+       ’(...)
+     #+end_src
+
+     A list can hold data, both atomic and non-atomic. That means, a
+     list can hold a smaller list inside it along with atomic data.
+
+2. Code: If you want to run code to be executed, here is the syntax:
+   #+begin_src emacs-lisp
+     (...)
+   #+end_src
+
+   What is the difference between code and data? That's right, a single
+   quote =’=. Without the quote =’=, we are creating *a list* that holds
+   code for computer to execute. With the quote =’=, we are creating *a
+   list* that holds data, similar to List data structure in Java or C++
+   to hold data.
 
 _Examples_:
 
@@ -76,6 +123,8 @@ _Examples_:
   ’(1 2 3 4) ;;is a list that holds 4 numbers from 1 to 4
 
   ’("aa" "bb" "cc" "dd") ;;is a list that holds 4 strings: "aa", "bb", "cc", "dd"
+
+   '() ;; an empty list, which is also an atom
 
   ’(if a b c) ;;  a list that hold 4 symbol: if, a, b and c
 
@@ -243,15 +292,22 @@ Lisp macro is able to do all of this. Without it, you cannot bend Lisp
 to your needs.
 
 In reality, =’(...)= is just a syntactic sugar for special form
-=(quote ...)=. In the end, Lisp only has one syntax: a pair of
-parentheses and items in it, along with syntax for primitives (number,
-string, boolean...). With Lisp syntax, many things are easy to do in
-Lisp, such as generating code as data and execute it later, both in
-compile time and runtime. In the end, aside from the primitives, the
-only thing that exists in Lisp is a pair of parentheses, with things
-in in it: =(...)=. This is the only syntax, along with the semantics
-that depends on context: /a function form/, /a special form/ or /a
-macro form/. That's all you need to remember for using any Lisp.
+=(quote ...)=. In the end, aside from the atoms, Lisp only has one
+syntax: a pair of parentheses and items in it, along with syntax for
+primitives (number, string, boolean...). With Lisp syntax, many things
+are easy to do in Lisp, such as generating code as data and execute it
+later, both in compile time and runtime. In the end, aside from the
+primitives, the only thing that exists in Lisp is a pair of
+parentheses, with things in in it: =(...)=. This is the only syntax,
+along with the semantics that depends on context: /a function form/,
+/a special form/ or /a macro form/. That's all you need to remember
+for using any Lisp.
+
+If you are still not convinced with the parentheses, perhaps seasoned
+Lispers can:
+
+- [[http://symbo1ics.com/blog/?p%3D275][Lisp has too many parentheses…]]
+- The above article is inspired by [[https://groups.google.com/forum/#!msg/comp.lang.lisp/Nvdio3taI0Q/bn_VqLTaxG4J][this Usenet post]], which is worth reading.
 
 * Syntax error
 :PROPERTIES:

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-23 T2 00:20 -->
+<!-- 2014-06-23 T2 01:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -163,8 +163,9 @@ alt="hit counter"></a></div></noscript>
 <ul>
 <li><a href="#sec-1">Introduction - and why you should learn Lisp</a>
 <ul>
-<li><a href="#sec-1-1">A bit of history</a></li>
-<li><a href="#sec-1-2">Basic syntax and semantic</a></li>
+<li><a href="#sec-1-1">Before we start</a></li>
+<li><a href="#sec-1-2">A bit of history</a></li>
+<li><a href="#sec-1-3">Basic syntax and semantic</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">Syntax error</a>
@@ -183,10 +184,21 @@ alt="hit counter"></a></div></noscript>
 <h2 id="sec-1"><a id="ID-267fa5b6-b998-42c6-8ec0-382035284873"></a>Introduction - and why you should learn Lisp</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-In this section, you only need to read and understand. It's important
-that you understand the core ideas. After you finish the sub-sections
-of this section, we will play with Emacs Lisp code for customizing
-Emacs, and it's really fun to see your Emacs "evolves" gradually.
+In this section, you can try out code by <code>M-x ielm</code>, then paste code
+into the Emacs Lisp interpreter. It's important that you understand
+the core ideas. After you finish the sub-sections of this section, we
+will play with Emacs Lisp code for customizing Emacs, and it's really
+fun to see your Emacs "evolves" gradually.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><a id="ID-24b6798b-24de-45dc-94ce-cd2dddf55255"></a>Before we start</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Please be aware that although I intentionally emphasize the importance
+of parentheses, but <b>I don't mean Lisp is all about parentheses</b>. I
+just want to clear beginner's confusion with parentheses.
 </p>
 
 <p>
@@ -201,10 +213,11 @@ Lisp serious because the mentality of "just another programming
 language".
 </p>
 </div>
+</div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><a id="ID-71c4974f-42b4-4a29-93bd-b823688ea024"></a>A bit of history</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><a id="ID-71c4974f-42b4-4a29-93bd-b823688ea024"></a>A bit of history</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 Lisp has a long history. Lisp was designed by computer scientist <a href="http://en.wikipedia.org/wiki/John_McCarthy_%28computer_scientist%29">John
 McCarthy</a>. Lisp first appeared in 1958 and Lisp is still with us up to
@@ -227,20 +240,74 @@ History</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 Lisp syntax is minimal and simple. At its core, you only need to
 remember these syntax constructs to use any Lisp:
 </p>
 
-<ul class="org-ul">
+<ol class="org-ol">
 <li>Data:
 
 <ul class="org-ul">
-<li>Atomic, or Atom: It is the same as primitives in other languages,
-meaning the most basic construct and indivisible.
+<li>Atomic-data, or <b>Atom</b>: It is the same as primitives in other
+languages, meaning the most basic construct and indivisible. Atoms
+include following basic types, you should try in IELM:
+
+<ul class="org-ul">
+<li>Number: integer like 1, 2, 3&#x2026; or floating point numbers like
+1.5, 3.14&#x2026;
+</li>
+
+<li>String: strings like "a", "string", "this is a string"&#x2026; Is
+also an atom. String is immutable.
+</li>
+
+<li><code>NIL</code> or <code>()</code>: NIL means <code>null</code> in other languages. <code>()</code> means
+empty list, which is equivalent to <code>NIL</code>. When using with a true
+or false test, usch as an if statement, <code>NIL</code> or the empty list
+<code>()</code> means the value <code>false</code>; all other non-empty values in Lisp
+are true.
+</li>
+
+<li>Symbol: A symbol is an object with a name. You can think of
+symbol as pointer or reference in other language. Each symbol
+has 4 components:
+
+<ul class="org-ul">
+<li>Print name: symbol's name as string
+</li>
+
+<li>Value: value of symbol as variable
+</li>
+
+<li>Function: symbol's function definition. A symbol can be both a
+variable and a function
+</li>
+
+<li>Property-list: list of key-value pairs. You don't need to care
+much at this stage.
+</li>
+</ul>
+<p>
+Example: the variable <code>buffer-file-name</code> is both a variable and
+a function. You can check by using <code>symbol-value</code> and
+<code>symbol-function</code> functions:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(symbol-value 'buffer-file-name) <span style="color: #b22222;">;; </span><span style="color: #b22222;">check the value of buffer-file-name; if you try it in IELM,</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">the value is NIL because the buffer is not associated with any file</span>
+
+(symbol-function 'buffer-file-name) <span style="color: #b22222;">;; </span><span style="color: #b22222;">return the function buffer-file-name; </span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">IELM should display something like this: #&lt;subr buffer-file-name&gt;</span>
+</pre>
+</div>
+</li>
+</ul>
 </li>
 
 <li>Non-atomic: There's a reason Lisp is called (<b>LIS</b>)t
@@ -277,7 +344,7 @@ list</b> that holds data, similar to List data structure in Java or C++
 to hold data.
 </p>
 </li>
-</ul>
+</ol>
 
 <p>
 <span class="underline">Examples</span>:
@@ -288,6 +355,8 @@ to hold data.
 <pre class="src src-emacs-lisp">&#8217;(<span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span> <span style="color: #008b8b;">4</span>) <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 numbers from 1 to 4</span>
 
 &#8217;(<span style="color: #8b2252;">"aa"</span> <span style="color: #8b2252;">"bb"</span> <span style="color: #8b2252;">"cc"</span> <span style="color: #8b2252;">"dd"</span>) <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 strings: "aa", "bb", "cc", "dd"</span>
+
+ '() <span style="color: #b22222;">;; </span><span style="color: #b22222;">an empty list, which is also an atom</span>
 
 &#8217;(<span style="color: #a020f0;">if</span> a b c) <span style="color: #b22222;">;;  </span><span style="color: #b22222;">a list that hold 4 symbol: if, a, b and c</span>
 
@@ -508,16 +577,29 @@ to your needs.
 
 <p>
 In reality, <code>’(...)</code> is just a syntactic sugar for special form
-<code>(quote ...)</code>. In the end, Lisp only has one syntax: a pair of
-parentheses and items in it, along with syntax for primitives (number,
-string, boolean&#x2026;). With Lisp syntax, many things are easy to do in
-Lisp, such as generating code as data and execute it later, both in
-compile time and runtime. In the end, aside from the primitives, the
-only thing that exists in Lisp is a pair of parentheses, with things
-in in it: <code>(...)</code>. This is the only syntax, along with the semantics
-that depends on context: <i>a function form</i>, <i>a special form</i> or <i>a
-macro form</i>. That's all you need to remember for using any Lisp.
+<code>(quote ...)</code>. In the end, aside from the atoms, Lisp only has one
+syntax: a pair of parentheses and items in it, along with syntax for
+primitives (number, string, boolean&#x2026;). With Lisp syntax, many things
+are easy to do in Lisp, such as generating code as data and execute it
+later, both in compile time and runtime. In the end, aside from the
+primitives, the only thing that exists in Lisp is a pair of
+parentheses, with things in in it: <code>(...)</code>. This is the only syntax,
+along with the semantics that depends on context: <i>a function form</i>,
+<i>a special form</i> or <i>a macro form</i>. That's all you need to remember
+for using any Lisp.
 </p>
+
+<p>
+If you are still not convinced with the parentheses, perhaps seasoned
+Lispers can:
+</p>
+
+<ul class="org-ul">
+<li><a href="http://symbo1ics.com/blog/?p=275">Lisp has too many parentheses…</a>
+</li>
+<li>The above article is inspired by <a href="https://groups.google.com/forum/#!msg/comp.lang.lisp/Nvdio3taI0Q/bn_VqLTaxG4J">this Usenet post</a>, which is worth reading.
+</li>
+</ul>
 </div>
 </div>
 </div>
