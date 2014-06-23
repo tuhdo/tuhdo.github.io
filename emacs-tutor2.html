@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-23 T2 01:30 -->
+<!-- 2014-06-23 Mon 10:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -166,6 +166,7 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-1-1">Before we start</a></li>
 <li><a href="#sec-1-2">A bit of history</a></li>
 <li><a href="#sec-1-3">Basic syntax and semantic</a></li>
+<li><a href="#sec-1-4">Beyond parentheses</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">Syntax error</a>
@@ -602,7 +603,39 @@ Lispers can:
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><a id="ID-e06ce975-464b-495e-8c40-88f62656a70a"></a>Beyond parentheses</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+You may ask, can you to create syntax without parentheses in Lisp? Of
+course, you can create entirely new syntax to extend Lisp without
+being enclosed inside the parentheses of Lisp, using reader
+macro. The difference between reader macro and macro:
+</p>
+
+<ul class="org-ul">
+<li>A reader macro transforms raw text into valid Lisp objects. Reader
+macro is a special type of macro that allows you to transform
+non-Lisp code into Lisp code.
+</li>
+<li>A regular macro transforms Lisp's list into valid Lisp code.
+</li>
+</ul>
+
+<p>
+For example, you can remove the parentheses with the Python
+<code>if..then..else</code> using a reader macro and use a non-parentheses Python
+<code>if..then..else</code> validly in your program. Using a regular macro, you
+have to keep the parentheses to make it a valid Lisp object: a list of
+symbols, then that list will be transformed at compile time. Lisp
+macro is advanced topic, and should really master the basics before
+getting to it.
+</p>
 </div>
+</div>
+</div>
+
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2"><a id="ID-f81bda6e-00ea-47ee-8250-308ec8109f47"></a>Syntax error</h2>
 <div class="outline-text-2" id="text-2">

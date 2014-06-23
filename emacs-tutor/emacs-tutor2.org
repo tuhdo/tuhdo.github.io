@@ -308,7 +308,27 @@ Lispers can:
 
 - [[http://symbo1ics.com/blog/?p%3D275][Lisp has too many parentheses…]]
 - The above article is inspired by [[https://groups.google.com/forum/#!msg/comp.lang.lisp/Nvdio3taI0Q/bn_VqLTaxG4J][this Usenet post]], which is worth reading.
+** Beyond parentheses
+:PROPERTIES:
+:ID:       e06ce975-464b-495e-8c40-88f62656a70a
+:END:
+You may ask, can you to create syntax without parentheses in Lisp? Of
+course, you can create entirely new syntax to extend Lisp without
+being enclosed inside the parentheses of Lisp, using reader
+macro. The difference between reader macro and macro:
 
+- A reader macro transforms raw text into valid Lisp objects. Reader
+  macro is a special type of macro that allows you to transform
+  non-Lisp code into Lisp code.
+- A regular macro transforms Lisp's list into valid Lisp code.
+
+For example, you can remove the parentheses with the Python
+=if..then..else= using a reader macro and use a non-parentheses Python
+=if..then..else= validly in your program. Using a regular macro, you
+have to keep the parentheses to make it a valid Lisp object: a list of
+symbols, then that list will be transformed at compile time. Lisp
+macro is advanced topic, and should really master the basics before
+getting to it.
 * Syntax error
 :PROPERTIES:
 :ID:       f81bda6e-00ea-47ee-8250-308ec8109f47
