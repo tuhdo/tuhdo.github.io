@@ -1,0 +1,543 @@
+#+TITLE: Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS
+* Whny customize and extend Emacs?
+:PROPERTIES:
+:ID:       84576135-507c-41ad-b122-2dd498235ecf
+:END:
+Emacs comes with a default settings. Some interesting features are
+disabled and hidden, i.e. Ibuffer, Semantic, electric
+modes... Probably to make it more user friendly to new users and
+behave more like "normal" editors, i.e. Normal users do not expect
+automatic pairing of punctuation marks like parentheses, brackets,
+curly brackets...
+
+Because the nature of Emacs is an extensible system, people write
+extensions to improve Emacs and share with others. The extensions
+improve various aspects of Emacs: Improve and add editing features,
+integrate 3rd party tools, add programming languages supports, change
+Emacs appearance... Without the ability to extend, Emacs will just be
+another obscure editor with some useful features but cannot meet the
+demands of people, because different people have different needs, and
+Emacs maintainers cannot provide them all and integrate all into
+Emacs. With the extensibility, people can bend Emacs the way they
+want, much like Lisp.
+
+Unlike other editors which encourage users to stay with the default as
+much as they can, Emacs encourages users to customize and extend Emacs
+as much as they can.
+* Just enough Emacs Lisp (and Lisp in general)
+:PROPERTIES:
+:ID:       267fa5b6-b998-42c6-8ec0-382035284873
+:END:
+In this section, you only need to read and understand. It's important
+that you understand the core ideas. After you finish the sub-sections
+of this section, we will play with Emacs Lisp code for customizing
+Emacs, and it's really fun to see your Emacs "evolves" gradually.
+** Commonly used functions and patterns for configuration
+:PROPERTIES:
+:ID:       e54be9d4-bce0-428e-94be-c137bdc0de11
+:END:
+In this section, I will list the basic usage of popular functions that
+are used to configure Emacs. If you want to understand more, *C-h
+f* and enter name of the function. All of the quoted function
+descriptions are taken from *C-h f*. If you forget what a function
+does and how to use it, *C-h f* to find out. Really, you should get
+used to getting help from Emacs.
+
+- Function: =(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)=
+
+  *_Example_*: 
+
+  #+begin_src emacs-lisp
+    (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
+    (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
+    (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
+  #+end_src
+
+  *_Comment_*:
+   
+  *_Built-in description_*:
+   
+  #+BEGIN_QUOTE
+  Execute a file of Lisp code named FILE.
+  First try FILE with `.elc' appended, then try with `.el', then try
+  FILE unmodified (the exact suffixes in the exact order are determined
+  by `load-suffixes').  Environment variable references in FILE are
+  replaced with their values by calling `substitute-in-file-name'. This
+  function searches the directories in `load-path'. 
+   
+  ....(*C-h f* for more information)...
+  #+END_QUOTE
+
+- Function: =(global-set-key /KEY/ /COMMAND/)=
+
+  *_Example_*:
+   
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-x C-b") 'ibuffer) ;; bind "C-x C-b" to ibuffer command
+    (global-set-key "\C-x\C-b" 'ibuffer)  ;; bind "C-x C-b to ibuffer command, but modifier 
+                                          ;; keys must be escaped with the backslash
+    (global-set-key [?\C-x?\C-b] 'ibuffer) ;; use vector instead of a string
+  #+end_src
+   
+  I recommend you to use =(kbd ...)= function because we can write key
+  bindings using our familiar key notations without adding unnecessary
+  characters. Vector is array in other languags. Vector was used for
+  mapping function keys, such as =[left]=, =[right]=, =[up]=, =[down]=,
+  =[f1]...[f12]=. But now, you can also map function keys in =(kbd
+  ...)= function using angle brackets:
+   
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "<f3>") 'kmacro-start-macro-or-insert-counter)0
+  #+end_src
+   
+  Here are common function keys: 
+   
+  | Key                                              | Description                                        |
+  |--------------------------------------------------+----------------------------------------------------|
+  | =left, up, right, down=                          | Cursor arrow keys                                  |
+  |--------------------------------------------------+----------------------------------------------------|
+  | =begin, end, home, next, prior=                  | Other cursor repositioning keys                    |
+  |                                                  | =prior= means =PageUp=                             |
+  |                                                  | =next= means =PageDOwn=                            |
+  |--------------------------------------------------+----------------------------------------------------|
+  | =select, print, execute, backtab=                | Miscellaneous keys                                 |
+  | =insert, undo, redo, clearline=                  | =backtab= means =S-TAB= or =C-iso-tab=             |
+  | =insertline, deleteline, insertchar, deletechar= |                                                    |
+  |--------------------------------------------------+----------------------------------------------------|
+  | =f1, f2, ... F35=                                | Numbered function keys on top of your keyboard     |
+  |--------------------------------------------------+----------------------------------------------------|
+  | =kp-add, kp-subtract, kp-multiply, kp-divide=    | Keypad keys (to the right of the regular keyboard) |
+  | =kp-backtab, kp-space, kp-tab, kp-enter=         | , with names or punctuation.                       |
+  | =kp-separator, kp-decimal, kp-equal=             |                                                    |
+  |                                                  |                                                    |
+  | =kp-0, kp-1, ... kp-9=                           | Keypad keys with digits.                           |
+  |                                                  |                                                    |
+  | =kp-f1, kp-f2, kp-f3, kp-f4=                     | Keypad PF keys.                                    |
+  |--------------------------------------------------+----------------------------------------------------|
+   
+  *_Built-in description_*:
+   
+  #+BEGIN_QUOTE
+  Give /KEY/ a global binding as /COMMAND/.
+  /COMMAND/ is the command definition to use; usually it is
+  a symbol naming an interactively-callable function.
+  /KEY/ is a key sequence; noninteractively, it is a string or vector
+  of characters or event types, and non-ASCII characters with codes
+  above 127 (such as ISO Latin-1) can be included if you use a vector.
+   
+  Note that if /KEY/ has a local binding in the current buffer,
+  that local binding will continue to shadow any global binding
+  that you make with this function.
+  #+END_QUOTE
+   
+- Function: =(global-unset-key /KEY/)=
+  *_Example_*:
+
+  #+begin_src emacs-lisp
+    (global-unset-key (kbd "C-x b"))
+    (global-set-key (kbd "C-x b a") 'switch-to-buffer)
+    (global-set-key (kbd "C-x b b") 'ibuffer)
+  #+end_src
+  
+  *_Comment_*: A function to unset a key in global keymap. It's useful
+  if you want to turn a key binding into a prefix key. For example,
+  =C-x m= binding is =compose-mail=. But for example, you want to bind
+  =C-x b a= to =switch-to-buffer= and =C-x b b= to =ibuffer=, two commands of your
+  choice (this is just an example; you should use these bindings). To
+  do that, first you have to unset =C-x m=; only then, you will be
+  able to bind the keys. Otherwise, Emacs won't allow because
+  prefix key =C-x b= is alreay used to something else. Try the above
+  example with *C-x e*. To get your old bindings back, execute this
+  snippet:
+
+  #+begin_src emacs-lisp
+    (global-unset-key (kbd "C-x b a"))
+    (global-unset-key (kbd "C-x b b"))
+    (global-set-key (kbd "C-x b") 'switch-to-buffer)
+  #+end_src
+
+  *_Built-in description_*:
+  #+BEGIN_QUOTE
+  (global-unset-key /KEY)
+
+  Remove global binding of /KEY/.
+  /KEY/ is a string or vector representing a sequence of keystrokes.
+  #+END_QUOTE
+
+- Function: =(define-key /KEYMAP/ /KEY/ /DEF/)=
+  
+  *_Example_*:
+  
+
+** Configuration collector
+:PROPERTIES:
+:ID:       31381170-81ba-413a-8b3e-b701bd62c30c
+:END:
+
+* Useful built-in key bindings for navigating pairs
+:PROPERTIES:
+:ID:       1a1248d4-2a59-4c80-a5c5-e471adc40c8f
+:END:
+
+| Key         | Binding                                  |
+|-------------+------------------------------------------|
+| =C-M-f=     | *Command*: =forward-sexp=                |
+|             | Move forward over a balanced expression  |
+|             | ...[screenshot]...                       |
+|-------------+------------------------------------------|
+| =C-M-b=     | *Command*: =backward-sexp=               |
+|             | Move backward over a balanced expression |
+|             | ...[screenshot]...                       |
+|-------------+------------------------------------------|
+| =C-M-k=     | *Command*: =kill-sexp=                   |
+|             | Kill balanced expression forward         |
+|             | ...[screenshot]...                       |
+|-------------+------------------------------------------|
+| =C-M-t=     | *Command*: =transpose-sexps=             |
+|             | Transpose expressions                    |
+|             | ...[screenshot]...                       |
+|-------------+------------------------------------------|
+| =C-M-<SPC>= | *Command*: =mark-sexp=                   |
+| =C-M-@=     | Put mark after following expression      |
+|             | ...[screenshot]...                       |
+|-------------+------------------------------------------|
+
+* Let's supercharge Emacs
+:PROPERTIES:
+:ID:       8d44370b-5ab7-40fc-9a72-1ef9dc66ffd2
+:END:
+Throughout this section I will help you to extend Emacs with packages
+that improves general Emacs features, such as Info, Dired, buffer
+management... I will introduce you popular packages out there, but I
+cannot present you all. The purpose of this guide is to help you get
+really comfortable to Emacs package system, so you can extend Emacs
+with packages from other people easily to fit your need. Extending
+Emacs on your own is a differnt story, and is beyond the scope of this
+guide.
+
+I will introduce packages specialized for programming in Part 3: how
+to setup programming environment for popular languages (C/C++, Lisp,
+Python, Ruby...). In this part of the mini manual series, I only
+introduce general packages for extending Emacs in various aspects. And
+you are going to need some of these packages to setup your specialized 
+programming envrionment, so don't skip it.
+
+Don't be intimidated if you see many packages down there. Adding
+packages and see it extends your Emacs is fun and addictive, like 
+playing video games.
+
+To remind you, Emacs always loads one of the three of the following
+files when it starts:
+
+- ~/.emacs
+- ~/.emacs.d/init
+- ~/.emacs.d/init.el
+
+To apply a setting, move point to the end of a Lisp expression and
+*C-x C-e*, which runs =eval-last-sexp=.
+
+When you want to complete function names in Emacs Lisp: *C-M-i*,
+which runs =completion-at-point=. It will display a list of possible
+candidates available in Emacs. 
+
+If you want to quickly complete something, you can *M-/*, which runs
+=dabbrev-expand=.
+
+** Changing Emacs defaults
+:PROPERTIES:
+:ID:       43326747-04db-461c-9f5b-cb0831c983ac
+:END:
+
+- Function: =(setq [ /SYM/ /VAL/ ]...)=
+
+  *_Comment_*: A really fundamental function for customizing Emacs
+  settings. 
+
+  *_Built-in descriptions_*:
+  #+BEGIN_QUOTE
+  Set each /SYM/ to the value of its /VAL/.
+  The symbols /SYM/ are variables; they are literal (not evaluated).
+  The values /VAL/ are expressions; they are evaluated.
+  Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
+  The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
+  each VAL can use the new value of variables set earlier in the `_setq_'.
+  The return value of the `_setq_' form is the value of the last /VAL/.
+  #+END_QUOTE
+
+  Let's use =setq= to change Emacs the way we want. You should type in
+  the snippet below and use the completion key bindings until you get
+  used to it.
+
+  #+begin_src emacs-lisp
+    ;; you can set a value to one variablea
+    (setq gc-cons-threshold 50000000)       ;; only activate garbage collection every 50MB to improve performance
+    (setq                                   ;; or you can set multiple values to multiple variables
+     inhibit-startup-message t
+     kill-ring-max 5000                     ;; increase kill ring up to 5000 entries before it pops the oldest one out
+     mark-ring-max 5000                     ;; increase kill ring up to 5000 entries before it pops the oldest one out
+     require-final-newline t                ;; auto add newline at the end of file
+     column-number-mode t                   ;; show the column number
+     default-major-mode 'text-mode          ;; use text mode per default
+     mouse-yank-at-point t                  ;; middle click with the mouse yanks at point
+     history-length 250                     ;; default is 30
+     locale-coding-system 'utf-8            ;; utf-8 is default
+     tab-always-indent 'complete            ;; try to complete before identing
+     tab-width 4
+     confirm-nonexistent-file-or-buffer nil ;; don't ask to create a buffer
+     vc-follow-symlinks t                   ;; follow symlinks automatically
+     recentf-max-saved-items 5000           ;; same up to 5000 recent files
+     indicate-buffer-boundaries 'left       ;fringe markers
+     split-height-threshold 110             ;more readily split horziontally
+     enable-recursive-minibuffers t
+     custom-unlispify-menu-entries nil      ;M-x customize should not cripple menu entries
+     custom-unlispify-tag-names nil         ;M-x customize should not cripple tags
+     show-paren-delay 0
+     view-read-only t
+     )
+  #+end_src
+  
+Another way to change a setting is using *C-h v*, which runs
+=describe-variable= that describes a variable and allow customization
+if possible.
+
+You wonder, there are so many variables to set. How do you know which
+to which? Luckily, you don't have to manually guess which variable to
+set. Emacs has a command for setting Emacs internally, with a nice
+organization of settings, rather than randomly set a variable that you
+randomly found. =M-x customize= to open a window for customizing Emacs.
+
+** Extend built-in functionality
+:PROPERTIES:
+:ID:       f7f5027d-65aa-4e1c-9c8f-d069297a207e
+:END:
+*** Built-in: linum
+:PROPERTIES:
+:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
+:END:
+*** Built-in: hippie-expand
+:PROPERTIES:
+:ID:       859c8664-d9ca-4e99-acb4-eeb8c83b0e63
+:END:
+*** Package: Bookmark+
+:PROPERTIES:
+:ID:       94fd590f-69df-413b-9295-c3e4f1e4fdff
+:END:
+**** What it is
+:PROPERTIES:
+:ID:       4ab6651b-8718-4c59-a572-d1d1417d2473
+:END:
+**** Why use it
+:PROPERTIES:
+:ID:       136c517e-5924-49e2-b142-294a6c6527fe
+:END:
+**** How to use it
+:PROPERTIES:
+:ID:       bc1633cc-ca67-45a5-916d-9346fd2480a8
+:END:
+*** Package: Dired+
+:PROPERTIES:
+:ID:       ea310056-18e7-40bd-8b19-9e55651200c5
+:END:
+**** What it is
+:PROPERTIES:
+:ID:       e2c568e5-144c-4040-ad15-ecd68d757d35
+:END:
+**** Why use it
+:PROPERTIES:
+:ID:       904eae93-47e6-4b94-abf0-fa44663d0353
+:END:
+**** How to use it
+:PROPERTIES:
+:ID:       c2fa9621-6745-4f85-8f9f-ab1381e47e52
+:END:
+*** Package: Info+
+:PROPERTIES:
+:ID:       a35ad15e-e4ff-4af9-a3dc-e3fd5e9951af
+:END:
+**** What it is
+:PROPERTIES:
+:ID:       0896be46-99c0-437f-b24c-2091b1620c86
+:END:
+**** Why use it
+:PROPERTIES:
+:ID:       cf4eab9e-e17b-4ba1-9e8f-d7490e339325
+:END:
+**** How to use it
+:PROPERTIES:
+:ID:       13809e81-db9e-447e-8b97-6fc623bea7f8
+:END:
+*** Package: recentf-ext
+:PROPERTIES:
+:ID:       8013594a-f2f3-477c-820c-caf1354ac23d
+:END:
+*** Package: ibuffer-git
+:PROPERTIES:
+:ID:       094b65d3-8969-4603-9ce8-2930c1927b95
+:END:
+*** Package: ibuffer-vc
+:PROPERTIES:
+:ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
+:END:
+*** Package: diff-hl
+:PROPERTIES:
+:ID:       c9b81950-e0e4-4e47-9708-7341f0323c00
+:END:
+*** Package: nyan-mode
+:PROPERTIES:
+:ID:       77911eb8-f448-475a-a8fb-1546f7b43629
+:END:
+*** Package: undo-tree
+:PROPERTIES:
+:ID:       e4e1faa4-3fa4-4424-943b-94b626da982e
+:END:
+*** Package: vlf
+:PROPERTIES:
+:ID:       68236f8b-960e-46a9-841f-71196a77e4fd
+:END:
+*** Package: zop-to-char
+:PROPERTIES:
+:ID:       f90bffce-3532-4eb1-9102-a49abf077e25
+:END:
+*** Package: ztree
+:PROPERTIES:
+:ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
+:END:
+** Editing packages
+:PROPERTIES:
+:ID:       f16285fa-858d-4404-b9d7-09dd106a3d2e
+:END:
+*** Concept
+:PROPERTIES:
+:ID:       da7a179d-00c5-4cfe-a0b4-2f844c13442b
+:END:
+*** Tour
+:PROPERTIES:
+:ID:       f71919f0-8115-4c35-bd0b-25c38137c67d
+:END:
+*** Built-in: electric-pair
+:PROPERTIES:
+:ID:       b7eeebb4-0bff-47dd-941c-bd90aa4494e2
+:END:
+*** Built-in: electric-indent
+:PROPERTIES:
+:ID:       4a450617-328d-47df-b65f-41c66b91b6e7
+:END:
+*** Package: Autopair
+:PROPERTIES:
+:ID:       74568884-f788-4362-9d30-10b92cac96a6
+:END:
+*** Package: Paredit
+:PROPERTIES:
+:ID:       9428f315-7a9e-400f-86e3-a0935b288539
+:END:
+*** Package: Smartparens
+:PROPERTIES:
+:ID:       e1aa419e-6a1e-49ae-976c-b4a771f027e2
+:END:
+*** Package: ace-jump-mode
+:PROPERTIES:
+:ID:       55d22377-21b5-4ed1-be80-adde3400ea84
+:END:
+*** Package: discover-my-major
+:PROPERTIES:
+:ID:       92ff6c99-10a8-4779-a293-48b3c36c16bb
+:END:
+*** Package: easy-kill
+:PROPERTIES:
+:ID:       2d0dc98b-3e5c-403e-9cc4-3dd8934c69cd
+:END:
+*** Package: pretty-lambdada
+:PROPERTIES:
+:ID:       9bdee173-eea2-4ffe-9da5-51abcba85d66
+:END:
+*** Package: rainbow-mode
+:PROPERTIES:
+:ID:       2f37c16a-307a-4683-adf5-31a64c0817d5
+:END:
+*** Package: rawinbow-delimiter
+:PROPERTIES:
+:ID:       4ea22f1a-a72e-4ee9-b54f-88d866f25666
+:END:
+*** Optional Package: golden-ratio
+:PROPERTIES:
+:ID:       55499f58-b666-477d-9e81-99cb92464b7f
+:END:
+** Autocompletion packages
+:PROPERTIES:
+:ID:       b0c2f77e-1520-4672-a9d3-cbfab0c49422
+:END:
+*** Concept
+:PROPERTIES:
+:ID:       c02546c0-172f-4caa-94e5-485e5ff8b18c
+:END:
+*** Tour
+:PROPERTIES:
+:ID:       e6d14e8e-2b42-4fbd-91c8-4173c0179dc9
+:END:
+*** Emacs built-in
+:PROPERTIES:
+:ID:       d59d2adf-d9aa-41a1-9788-cf7c91f16cb0
+:END:
+*** Package: Autocomplete
+:PROPERTIES:
+:ID:       ac8a1bfd-778e-4f6f-ad55-234529a19045
+:END:
+*** Package: Company
+:PROPERTIES:
+:ID:       8744f14e-3db0-4737-8889-937106a4745e
+:END:
+*** Package: Helm
+:PROPERTIES:
+:ID:       a679e943-4e65-4e6c-8c83-51f6e765c1df
+:END:
+** Project Management packages
+:PROPERTIES:
+:ID:       4a23e0f7-2bd4-49ec-9f1a-21dfd0adfd61
+:END:
+*** Package: projectile
+:PROPERTIES:
+:ID:       58c88918-1344-491f-afb4-fd150ab87dcb
+:END:
+** A package on a league of its own: Helm
+:PROPERTIES:
+:ID:       77079c91-23c1-453f-8573-98cd78a78033
+:END:
+*** What it is
+:PROPERTIES:
+:ID:       389cfbe8-ae92-47f0-84a5-44819d59bad9
+:END:
+*** Why use it
+:PROPERTIES:
+:ID:       808b9b9b-87ce-4c91-b999-884bcd3bac75
+:END:
+*** How to use it
+:PROPERTIES:
+:ID:       d48e324b-ac5a-426f-88d8-540c6d86f5de
+:END:
+*** Package: helm-ls-git
+:PROPERTIES:
+:ID:       790ab1dd-fe07-4b01-bb03-742586e3f6a1
+:END:
+*** Package: helm-desbinds
+:PROPERTIES:
+:ID:       46a860a4-4a29-4199-9069-29dd0cc043ea
+:END:
+*** Package: helm-projectile
+:PROPERTIES:
+:ID:       7b823d0a-212d-4277-ace2-bc317e196206
+:END:
+
+*** Package: helm-projectile
+:PROPERTIES:
+:ID:       2edc33a7-ba0c-4b71-8057-2e6cacbadf08
+:END:
+
+** Changing Emacs appearance
+:PROPERTIES:
+:ID:       7ae2a18d-ca91-4198-8661-2917d3b6656f
+:END:
+
+* More Emacs Lisp resources
+:PROPERTIES:
+:ID:       71d59853-4e9e-41d5-a0c7-56000cb01fc3
+:END:
