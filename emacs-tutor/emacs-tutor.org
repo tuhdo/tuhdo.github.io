@@ -670,7 +670,8 @@ replace =list-buffers= with =ibuffer=:
   (global-set-key (kbd "C-x C-b") 'ibuffer)
 #+end_src
 
-Remember to save into =~/.emacs.d/init.el=.
+Remember to save into =*scratch*= buffer and then =M-x eval-buffer=
+for the setup to take effect.
 
 Let's play with *ibuffer*.
 
