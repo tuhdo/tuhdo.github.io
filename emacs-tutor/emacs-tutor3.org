@@ -243,11 +243,14 @@ candidates available in Emacs.
 If you want to quickly complete something, you can *M-/*, which runs
 =dabbrev-expand=.
 
-** Changing Emacs defaults
+** How to use Emacs package manager
 :PROPERTIES:
-:ID:       43326747-04db-461c-9f5b-cb0831c983ac
+:ID:       d0b0f0d6-3662-4be3-84e7-342735015170
 :END:
-
+** setup-general.el
+:PROPERTIES:
+:ID:       2f850290-6962-49f0-aea6-d735aa8bfbd9
+:END:
 - Function: =(setq [ /SYM/ /VAL/ ]...)=
 
   *_Comment_*: A really fundamental function for customizing Emacs
@@ -305,71 +308,16 @@ to which? Luckily, you don't have to manually guess which variable to
 set. Emacs has a command for setting Emacs internally, with a nice
 organization of settings, rather than randomly set a variable that you
 randomly found. =M-x customize= to open a window for customizing Emacs.
+*** Built-in: recentf
+:PROPERTIES:
+:ID:       9daec59b-8c5e-4712-955d-be3b3414ad83
+:END:
 
-** Extend built-in functionality
-:PROPERTIES:
-:ID:       f7f5027d-65aa-4e1c-9c8f-d069297a207e
-:END:
-*** Built-in: linum
-:PROPERTIES:
-:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
-:END:
-*** Built-in: hippie-expand
-:PROPERTIES:
-:ID:       859c8664-d9ca-4e99-acb4-eeb8c83b0e63
-:END:
-*** Package: Bookmark+
-:PROPERTIES:
-:ID:       94fd590f-69df-413b-9295-c3e4f1e4fdff
-:END:
-**** What it is
-:PROPERTIES:
-:ID:       4ab6651b-8718-4c59-a572-d1d1417d2473
-:END:
-**** Why use it
-:PROPERTIES:
-:ID:       136c517e-5924-49e2-b142-294a6c6527fe
-:END:
-**** How to use it
-:PROPERTIES:
-:ID:       bc1633cc-ca67-45a5-916d-9346fd2480a8
-:END:
-*** Package: Dired+
-:PROPERTIES:
-:ID:       ea310056-18e7-40bd-8b19-9e55651200c5
-:END:
-**** What it is
-:PROPERTIES:
-:ID:       e2c568e5-144c-4040-ad15-ecd68d757d35
-:END:
-**** Why use it
-:PROPERTIES:
-:ID:       904eae93-47e6-4b94-abf0-fa44663d0353
-:END:
-**** How to use it
-:PROPERTIES:
-:ID:       c2fa9621-6745-4f85-8f9f-ab1381e47e52
-:END:
-*** Package: Info+
-:PROPERTIES:
-:ID:       a35ad15e-e4ff-4af9-a3dc-e3fd5e9951af
-:END:
-**** What it is
-:PROPERTIES:
-:ID:       0896be46-99c0-437f-b24c-2091b1620c86
-:END:
-**** Why use it
-:PROPERTIES:
-:ID:       cf4eab9e-e17b-4ba1-9e8f-d7490e339325
-:END:
-**** How to use it
-:PROPERTIES:
-:ID:       13809e81-db9e-447e-8b97-6fc623bea7f8
-:END:
 *** Package: recentf-ext
 :PROPERTIES:
 :ID:       8013594a-f2f3-477c-820c-caf1354ac23d
 :END:
+
 *** Package: ibuffer-git
 :PROPERTIES:
 :ID:       094b65d3-8969-4603-9ce8-2930c1927b95
@@ -378,77 +326,88 @@ randomly found. =M-x customize= to open a window for customizing Emacs.
 :PROPERTIES:
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
-*** Package: diff-hl
-:PROPERTIES:
-:ID:       c9b81950-e0e4-4e47-9708-7341f0323c00
-:END:
-*** Package: nyan-mode
-:PROPERTIES:
-:ID:       77911eb8-f448-475a-a8fb-1546f7b43629
-:END:
-*** Package: undo-tree
-:PROPERTIES:
-:ID:       e4e1faa4-3fa4-4424-943b-94b626da982e
-:END:
-*** Package: vlf
-:PROPERTIES:
-:ID:       68236f8b-960e-46a9-841f-71196a77e4fd
-:END:
-*** Package: zop-to-char
-:PROPERTIES:
-:ID:       f90bffce-3532-4eb1-9102-a49abf077e25
-:END:
 *** Package: ztree
 :PROPERTIES:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
 :END:
-** Editing packages
+
+** setup-ui.el
 :PROPERTIES:
-:ID:       f16285fa-858d-4404-b9d7-09dd106a3d2e
+:ID:       0c54618f-8c80-4f47-9cb7-a7003fab46ab
 :END:
-*** Concept
+
+*** Chagning Emacs apperance
 :PROPERTIES:
-:ID:       da7a179d-00c5-4cfe-a0b4-2f844c13442b
+:ID:       25197681-292e-47d4-89ff-53658862068b
 :END:
-*** Tour
+** setup-editor.el
 :PROPERTIES:
-:ID:       f71919f0-8115-4c35-bd0b-25c38137c67d
+:ID:       f3eab381-cb88-4e5a-8ff1-24cdb454a744
 :END:
-*** Built-in: electric-pair
+
+*** Enable built-ins
 :PROPERTIES:
-:ID:       b7eeebb4-0bff-47dd-941c-bd90aa4494e2
+:ID:       0de2d016-c00f-4ea3-b3d4-e1f743713d4a
 :END:
-*** Built-in: electric-indent
+
+*** Built-in: linum
 :PROPERTIES:
-:ID:       4a450617-328d-47df-b65f-41c66b91b6e7
+:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
 :END:
-*** Package: Autopair
+
+*** Built-in: electric-indent-mode
 :PROPERTIES:
-:ID:       74568884-f788-4362-9d30-10b92cac96a6
+:ID:       d24019dc-6950-479a-a22c-f015a5143b05
 :END:
-*** Package: Paredit
+*** Built-in: whitespace-mode
 :PROPERTIES:
-:ID:       9428f315-7a9e-400f-86e3-a0935b288539
+:ID:       8ae7f455-0457-46f0-86ff-f3b8d3658ff0
 :END:
-*** Package: Smartparens
+*** Package: clean-aindent-mode
 :PROPERTIES:
-:ID:       e1aa419e-6a1e-49ae-976c-b4a771f027e2
+:ID:       f15a2012-97ad-4de7-b7b3-f0cb94dfd9d2
 :END:
+*** Package: smartparens-mode
+:PROPERTIES:
+:ID:       4a1b2e00-b23b-4104-b60d-4e44465b858a
+:END:
+
+**** Alternatives
+:PROPERTIES:
+:ID:       4f255ca3-8ad9-4316-a30a-6305c5715377
+:END:
+
 *** Package: ace-jump-mode
 :PROPERTIES:
-:ID:       55d22377-21b5-4ed1-be80-adde3400ea84
+:ID:       8c648eca-d6fe-411f-913f-479de76c138a
 :END:
-*** Package: discover-my-major
+*** Package: diff-hl
 :PROPERTIES:
-:ID:       92ff6c99-10a8-4779-a293-48b3c36c16bb
+:ID:       c308752e-4f95-4409-8921-1e905aa73884
+:END:
+*** Package: expand-region
+:PROPERTIES:
+:ID:       6c217940-9a70-4654-8b55-38a3f99e12d3
 :END:
 *** Package: easy-kill
 :PROPERTIES:
 :ID:       2d0dc98b-3e5c-403e-9cc4-3dd8934c69cd
 :END:
+*** Package: highlight-symbol
+:PROPERTIES:
+:ID:       c8c4279b-263c-4b7c-b370-ff465a357e92
+:END:
+*** Package: multiselect
+:PROPERTIES:
+:ID:       684f1185-fc42-42d2-8b26-f9e972f3fb83
+:END:
 *** Package: pretty-lambdada
 :PROPERTIES:
 :ID:       9bdee173-eea2-4ffe-9da5-51abcba85d66
+:END:
+*** Package: hippie-expand
+:PROPERTIES:
+:ID:       d308b663-9560-4c44-800f-e91757228590
 :END:
 *** Package: rainbow-mode
 :PROPERTIES:
@@ -458,61 +417,75 @@ randomly found. =M-x customize= to open a window for customizing Emacs.
 :PROPERTIES:
 :ID:       4ea22f1a-a72e-4ee9-b54f-88d866f25666
 :END:
-*** Optional Package: golden-ratio
+*** Package: yasnippet
+:PROPERTIES:
+:ID:       ea795154-fe90-4c00-9874-6b24a36430f0
+:END:
+*** Package: vlf
+:PROPERTIES:
+:ID:       175b96e7-c986-407a-b3d1-98c0a417e5de
+:END:
+*** Package: zop-to-char
+:PROPERTIES:
+:ID:       699984dc-fff2-4ded-82d2-a8131ab2e801
+:END:
+*** Package: undo-tree
+:PROPERTIES:
+:ID:       e4e1faa4-3fa4-4424-943b-94b626da982e
+:END:
+
+*** Package: nyan-mode
+:PROPERTIES:
+:ID:       77911eb8-f448-475a-a8fb-1546f7b43629
+:END:
+
+** setup-ido.el
+:PROPERTIES:
+:ID:       de428bfd-de8d-4b53-ae08-1b7fd53ff1cb
+:END:
+** setup-info.el
+:PROPERTIES:
+:ID:       c94fdf0a-e6ac-49f9-b1cb-611fc9ea4753
+:END:
+
+** setup-dired.el
+:PROPERTIES:
+:ID:       fc2536d4-734f-4887-ad82-fd7d1ad52c06
+:END:
+
+** setup-bookmark
+:PROPERTIES:
+:ID:       5bde4b05-c051-42a2-bc14-8490728f11fa
+:END:
+** setup-windows.el
+:PROPERTIES:
+:ID:       738556d6-e56f-464b-87f6-e1d7878f7d5e
+:END:
+*** Built-in: winner-mode
+:PROPERTIES:
+:ID:       d90e7bb7-2470-4bae-a184-9c41009098a1
+:END:
+*** Package: golden-ratio
 :PROPERTIES:
 :ID:       55499f58-b666-477d-9e81-99cb92464b7f
 :END:
-** Autocompletion packages
+
+** setup-projectile.el
 :PROPERTIES:
-:ID:       b0c2f77e-1520-4672-a9d3-cbfab0c49422
+:ID:       024e5f66-8aaa-4fff-a5bf-27468b9548c3
 :END:
-*** Concept
+** setup-eshell.el
 :PROPERTIES:
-:ID:       c02546c0-172f-4caa-94e5-485e5ff8b18c
+:ID:       b5869f1c-54df-43e5-8eef-d557ef9fdfca
 :END:
-*** Tour
+
+** setup-company.el
 :PROPERTIES:
-:ID:       e6d14e8e-2b42-4fbd-91c8-4173c0179dc9
+:ID:       dcf6c7ae-406a-4436-b09e-b1b5c7b554e2
 :END:
-*** Emacs built-in
+** setup-helm.el
 :PROPERTIES:
-:ID:       d59d2adf-d9aa-41a1-9788-cf7c91f16cb0
-:END:
-*** Package: Autocomplete
-:PROPERTIES:
-:ID:       ac8a1bfd-778e-4f6f-ad55-234529a19045
-:END:
-*** Package: Company
-:PROPERTIES:
-:ID:       8744f14e-3db0-4737-8889-937106a4745e
-:END:
-*** Package: Helm
-:PROPERTIES:
-:ID:       a679e943-4e65-4e6c-8c83-51f6e765c1df
-:END:
-** Project Management packages
-:PROPERTIES:
-:ID:       4a23e0f7-2bd4-49ec-9f1a-21dfd0adfd61
-:END:
-*** Package: projectile
-:PROPERTIES:
-:ID:       58c88918-1344-491f-afb4-fd150ab87dcb
-:END:
-** A package on a league of its own: Helm
-:PROPERTIES:
-:ID:       77079c91-23c1-453f-8573-98cd78a78033
-:END:
-*** What it is
-:PROPERTIES:
-:ID:       389cfbe8-ae92-47f0-84a5-44819d59bad9
-:END:
-*** Why use it
-:PROPERTIES:
-:ID:       808b9b9b-87ce-4c91-b999-884bcd3bac75
-:END:
-*** How to use it
-:PROPERTIES:
-:ID:       d48e324b-ac5a-426f-88d8-540c6d86f5de
+:ID:       a0fbf5d8-af3f-4fd8-a7f4-fff006a49fa8
 :END:
 *** Package: helm-ls-git
 :PROPERTIES:
@@ -527,14 +500,18 @@ randomly found. =M-x customize= to open a window for customizing Emacs.
 :ID:       7b823d0a-212d-4277-ace2-bc317e196206
 :END:
 
-*** Package: helm-projectile
+** setup-helps.el
 :PROPERTIES:
-:ID:       2edc33a7-ba0c-4b71-8057-2e6cacbadf08
+:ID:       bf450c25-178f-4ab7-b4c9-4bd3475e375b
+:END:
+*** Package: discover-my-major
+:PROPERTIES:
+:ID:       92ff6c99-10a8-4779-a293-48b3c36c16bb
 :END:
 
-** Changing Emacs appearance
+** Extend built-in functionality
 :PROPERTIES:
-:ID:       7ae2a18d-ca91-4198-8661-2917d3b6656f
+:ID:       f7f5027d-65aa-4e1c-9c8f-d069297a207e
 :END:
 
 * More Emacs Lisp resources
