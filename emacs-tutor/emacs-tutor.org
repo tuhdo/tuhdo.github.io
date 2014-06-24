@@ -968,6 +968,26 @@ work under the terminal.
 
 When you kill something, the killed content is put into the Kill Ring.
 
+** Dynamic Abbreviations
+:PROPERTIES:
+:ID:       8232e425-1aec-4a4a-85de-900faa19a8b1
+:END:
+Dynamic Abbreviations are a completion feature in Emacs, but work for
+text and is context-independent. After you type a word once, if you
+type that word again, you can type it partially and *M-/* to complete
+it. If your type a prefix that has many candidates, *M-/* cycles the
+candidates. This is a really cool feature and you ougt to try it.
+
+*_Exercise_*:
+
+- Type "thisIsaVeryVeryVeryVeryLongWord" into a buffer of your choice.
+- Add newline or whitespace.
+- Type "thisIs" and *M-/*. Great, Emacs automatically completes for you.
+- Type "random" into your buffer and *M-/*. You will see Emacs
+  tell your that no dynamic abbreviations found.
+- Type "randomWord" and add a whitespace. Now, type "random" and *M-/*
+  again. Emacs can now hapily complete "random" for you. Remember that
+  to let Emacs remember your words, you have to type a complete word.
 ** Kill ring
 :PROPERTIES:
 :ID:       7F7CD162-4C59-43D8-B445-ECB28D042CC0
