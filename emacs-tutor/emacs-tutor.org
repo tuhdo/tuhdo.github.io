@@ -2101,6 +2101,68 @@ you got a kill ring? Here are the reasons:
   location to look up again, and would be time consuming if your
   source code is large.
 
+** Macro
+:PROPERTIES:
+:ID:       7a1827f6-3bcf-4ff4-92a3-44bf0aae9ab9
+:END:
+Macro records your actions in Emacs and play back later.
+
+| Key             | Binding               |
+|-----------------+-----------------------|
+| =f3= or =C-x (= | Start recording macro |
+|-----------------+-----------------------|
+| =f4= or =C-x )= | Stop recording macro  |
+|-----------------+-----------------------|
+| =C-x e= or =f4= | Playback macro        |
+|-----------------+-----------------------|
+
+Personally, I use =f3= and =f4= for recording/playback, so I don't
+have to press many keys. To repeat a macro many times, use prefix
+argument. For example, =C-u 10 <f4>= executes a macro 10 times.
+
+*_Exercise_*:
+
+Copy these lines into a buffer of your choice:
+
+#+BEGIN_HTML
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+#+END_HTML
+
+Now, you want to separate each line into different groups, each group
+contains their own character, line this:
+
+#+BEGIN_HTML
+aaaaa bbbbbbb cccccc dddddd
+#+END_HTML
+
+In many editors, you have have to do it manually. In Emacs, you don't
+have to repeat yourself, using macro. Follow these steps:
+
+- Place point at the beginning of the first line.
+- Press *<f3>*.
+- *C-f* to the beginning of each character group and add whitespace.
+- Return to the beginning of next line. Press *<f4>* to finish recording.
+- Continuously press *<f4>* and see Emacs playbacks the whole action
+  sequence you've just recorded.
+- If you want to repeat more than 1 time, using prefix argument. If
+  you want to repeat until the end of file, use prefix argument 0:
+  *C-u 9 <f4>*.
+
+[[file:static/macro.gif][file:static/macro.gif]]
+
 ** Version Control
 :PROPERTIES:
 :ID:       112710a7-779a-434c-ad23-e6a9a27aae82

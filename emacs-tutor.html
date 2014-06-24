@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-24 Tue 09:57 -->
+<!-- 2014-06-24 Tue 13:22 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -354,8 +354,9 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-7-28-2">Save text</a></li>
 </ul>
 </li>
-<li><a href="#sec-7-29">Version Control</a></li>
-<li><a href="#sec-7-30">Shell</a></li>
+<li><a href="#sec-7-29">Macro</a></li>
+<li><a href="#sec-7-30">Version Control</a></li>
+<li><a href="#sec-7-31">Shell</a></li>
 </ul>
 </li>
 <li><a href="#sec-8">Project: Browsing Linux kernel source code like a pro</a>
@@ -4452,8 +4453,115 @@ source code is large.
 </div>
 </div>
 <div id="outline-container-sec-7-29" class="outline-3">
-<h3 id="sec-7-29"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
+<h3 id="sec-7-29"><a id="ID-7a1827f6-3bcf-4ff4-92a3-44bf0aae9ab9"></a>Macro</h3>
 <div class="outline-text-3" id="text-7-29">
+<p>
+Macro records your actions in Emacs and play back later. 
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>f3</code> or <code>C-x (</code></td>
+<td class="left">Start recording macro</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>f4</code> or <code>C-x )</code></td>
+<td class="left">Stop recording macro</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><code>C-x e</code> or <code>f4</code></td>
+<td class="left">Playback macro</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Personally, I use <code>f3</code> and <code>f4</code> for recording/playback, so I don't
+have to press many keys. To repeat a macro many times, use prefix
+argument. For example, <code>C-u 10 &lt;f4&gt;</code> executes a macro 10 times.
+</p>
+
+<p>
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<p>
+Copy these lines into a buffer of your choice:
+</p>
+
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+aaaaabbbbbbbccccccdddddd <br >
+
+<p>
+Now, you want to separate each line into different groups, each group
+contains their own character, line this:
+</p>
+
+aaaaa bbbbbbb cccccc dddddd
+
+<p>
+In many editors, you have have to do it manually. In Emacs, you don't
+have to repeat yourself, using macro. Follow these steps:
+</p>
+
+<ul class="org-ul">
+<li>Place point at the beginning of the first line.
+</li>
+<li>Press <b>&lt;f3&gt;</b>.
+</li>
+<li><b>C-f</b> to the beginning of each character group and add whitespace.
+</li>
+<li>Return to the beginning of next line. Press <b>&lt;f4&gt;</b> to finish recording.
+</li>
+<li>Continuously press <b>&lt;f4&gt;</b> and see Emacs playbacks the whole action
+sequence you've just recorded.
+</li>
+<li>If you want to repeat more than 1 time, using prefix argument. If
+you want to repeat until the end of file, use prefix argument 0:
+<b>C-u 9 &lt;f4&gt;</b>.
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/macro.gif"><img src="static/macro.gif" alt="macro.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-7-30" class="outline-3">
+<h3 id="sec-7-30"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
+<div class="outline-text-3" id="text-7-30">
 <p>
 This section is taken directly from <a href="http://www.gnu.org/software/emacs/tour/">GNU Emacs Tour</a>, with
 improvements.
@@ -4644,9 +4752,9 @@ done playing with it.
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-7-30" class="outline-3">
-<h3 id="sec-7-30"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
-<div class="outline-text-3" id="text-7-30">
+<div id="outline-container-sec-7-31" class="outline-3">
+<h3 id="sec-7-31"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
+<div class="outline-text-3" id="text-7-31">
 <p>
 In Emacs, you have 3 types of shell commands: <code>shell</code>, <code>term</code> and
 <code>eshell</code>.
