@@ -2159,7 +2159,7 @@ have to repeat yourself, using macro. Follow these steps:
   sequence you've just recorded.
 - If you want to repeat more than 1 time, using prefix argument. If
   you want to repeat until the end of file, use prefix argument 0:
-  *C-u 9 <f4>*.
+  *C-u 0 <f4>*.
 
 [[file:static/macro.gif][file:static/macro.gif]]
 
