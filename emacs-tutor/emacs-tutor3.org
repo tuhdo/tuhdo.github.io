@@ -445,7 +445,9 @@ two possibilities:
   *setup-<sub-group>.el*, and load from the file of parent group. For
   example, *Files* -> *Dired* sub-group contains many sub-groups
   inside it. You should create a *setup-dired.el* and load it from
-  *setup-files.el*.
+  *setup-files.el*. However, if you only need a few options for
+  a few inner sub-groups, then don't create a file because it's not
+  worth it. 
 
 *_Exercise_*: 
 
@@ -455,9 +457,15 @@ two possibilities:
   each file, noting which group this file belongs to. For example:
 
   #+begin_src emacs-lisp
+    ;;
     ;; Group: Editing
+    ;;
   #+end_src
 
+** setup-convenience.el
+:PROPERTIES:
+:ID:       4bafac9e-880e-4278-90dc-60e29b325b2b
+:END:
 ** setup-editing.el
 :PROPERTIES:
 :ID:       2f850290-6962-49f0-aea6-d735aa8bfbd9
@@ -468,33 +476,59 @@ two possibilities:
   used to it.
 
   #+begin_src emacs-lisp
+    ;;
+    ;; MAIN GROUP: Editing
+    ;;
+
+    ;;
+    ;; GROUP: Editing -> Editing Basics
+    ;;
+
     ;; you can set a value to one variablea
-    (setq gc-cons-threshold 50000000)       ;; only activate garbage collection every 50MB to improve performance
-    (setq                                   ;; or you can set multiple values to multiple variables
-     inhibit-startup-message t
-     kill-ring-max 5000                     ;; increase kill ring up to 5000 entries before it pops the oldest one out
-     mark-ring-max 5000                     ;; increase kill ring up to 5000 entries before it pops the oldest one out
-     require-final-newline t                ;; auto add newline at the end of file
-     column-number-mode t                   ;; show the column number
-     default-major-mode 'text-mode          ;; use text mode per default
-     mouse-yank-at-point t                  ;; middle click with the mouse yanks at point
-     history-length 250                     ;; default is 30
-     locale-coding-system 'utf-8            ;; utf-8 is default
-     tab-always-indent 'complete            ;; try to complete before identing
-     tab-width 4
-     confirm-nonexistent-file-or-buffer nil ;; don't ask to create a buffer
-     vc-follow-symlinks t                   ;; follow symlinks automatically
-     recentf-max-saved-items 5000           ;; same up to 5000 recent files
-     indicate-buffer-boundaries 'left       ;fringe markers
-     split-height-threshold 110             ;more readily split horziontally
-     enable-recursive-minibuffers t
-     custom-unlispify-menu-entries nil      ;M-x customize should not cripple menu entries
-     custom-unlispify-tag-names nil         ;M-x customize should not cripple tags
-     show-paren-delay 0
-     view-read-only t
-     )
+    (setq
+     global-mark-ring-max 5000
+     mark-ring-max 5000
+     mode-require-final-newline t
+     tab-width 4)
+
+    (delete-selection-mode)
+
+    ;;
+    ;; Group: Editing -> Electricity
+    ;;
+
+    ;; you can see these variables Eletricity group. However, these variables
+    ;; are not for setting because setting them have no effect. You have to activate
+    ;; command of the same name. If some variables are required to be activated through
+    ;; commands, the description of those variables explicitly say so.
+    (electricity-indent-mode) ;; activate automatic indent when press RET
+    (electric-pair-mode) ;; activate automatic paring
+
+    ;; an example of association list, also an example of how to write a character
+    ;; add more pairs if you want
+    (setq electric-pair-pairs '(( ?\< . ?\>)))
+
+    ;;
+    ;; Group: Editing -> Killing
+    ;;
+    (setq
+     kill-ring-max 5000 ;; increase kill-ring capacity
+     kill-whole-line t) ;; if NIL, kill whole line and move the next line up
+
+    ;;
+    ;; Group: Editing -> Matching
+    ;;
+
+    ;; some variable automatically becomes buffer-local when set outside Custom
+    ;; such as case-fold-search. To make your value of choice default, use setq-default
+    ;; FIXME: Move this note to the beginning later
+
+    ;;
+    ;; Group: Editing -> Matching -> Paren Showing
+    ;; As you can see, I only use a single option in the inner sub-group
+    ;; It's not worth to create a file
+    (show-paren-mode)
   #+end_src
- 
 
 *** Built-in: recentf
 :PROPERTIES:
@@ -519,6 +553,10 @@ two possibilities:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
 :END:
 
+** setup-development.el
+:PROPERTIES:
+:ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
+:END:
 ** setup-ui.el
 :PROPERTIES:
 :ID:       0c54618f-8c80-4f47-9cb7-a7003fab46ab
