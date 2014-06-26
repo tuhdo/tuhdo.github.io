@@ -269,99 +269,7 @@ have to install the packages later. Install these packages:
 - undo-tree
 - yasnippet
 
-** Function: =(setq [ /SYM/ /VAL/ ]...)=
-:PROPERTIES:
-:ID:       3da16e32-a1d6-4b47-916b-3d845a06067e
-:END:
-  *_Comment_*: A really fundamental function for customizing Emacs
-  settings. An Emacs setting is really just a variable. Emacs has GUI
-  for changing setting, but =setq= a variable is also equivalent.
-
-  *_Example_*:
-  #+begin_src emacs-lisp
-    (setq global-mark-ring-max 50000)
-  #+end_src
-
-  *_Built-in descriptions_*:
-  #+BEGIN_QUOTE
-  Set each /SYM/ to the value of its /VAL/.
-  The symbols /SYM/ are variables; they are literal (not evaluated).
-  The values /VAL/ are expressions; they are evaluated.
-  Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
-  The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
-  each VAL can use the new value of variables set earlier in the `_setq_'.
-  The return value of the `_setq_' form is the value of the last /VAL/.
-  #+END_QUOTE
-
-** Function: =(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)=
-:PROPERTIES:
-:ID:       525cbba2-a7dd-46aa-8215-bfb52502a4ac
-:END:
-  *_Comment_*: This function allows you to load a file. /FILE/ is the
-  filepath. Do you notice =&optional= keyword? When you see this
-  keyword, it means everything after =&optional= is, optional. The
-  parameters /NOERROR/, /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not
-  required to be passed into the function if you don't need. However,
-  if you want to pass an argument into the place of one a parameter,
-  you must also pass arguments to all the parameters to the left of
-  your chosen parameter. For example, if you want to pass an argument
-  into /NOSUFFIX/, you are *required* to pass arguments into
-  /NOERROR/, /NOMESSAGE/ first. You are safe to ignore everything
-  after your chosen parameter, and in our example, it's /MUST-SUFFIX/.
-
-  *_Example_*: 
-
-  #+begin_src emacs-lisp
-    (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
-    (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
-    (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
-  #+end_src
-   
-  *_Built-in description_*:
-   
-  #+BEGIN_QUOTE
-  Execute a file of Lisp code named FILE.
-  First try FILE with `.elc' appended, then try with `.el', then try
-  FILE unmodified (the exact suffixes in the exact order are determined
-  by `load-suffixes').  Environment variable references in FILE are
-  replaced with their values by calling `substitute-in-file-name'. This
-  function searches the directories in `load-path'. 
-   
-  ....(*C-h f* for more information)...
-  #+END_QUOTE
-
-** Function: =(require /FEATURE/ &optional /FILENAME/ /NOERROR/)=
-:PROPERTIES:
-:ID:       dffde709-1810-4253-861a-8e058608a88c
-:END:
-*_Comment_*: If you install a package from =M-x list-packages=, to
-load that package, use =(require 'installed-package)=.
-
-*_Example_*: For example, you installed package =volatile-highlights=,
-to load it:
-
-#+begin_src emacs-lisp
-  (require 'volatile-highlights)
-#+end_src
-
-
-*_Built-in description_*:
-
-#+BEGIN_QUOTE
-If feature /FEATURE/ is not loaded, load it from /FILENAME/.
-If /FEATURE/ is not a member of the list `features', then the feature
-is not loaded; so load the file /FILENAME/.
-If /FILENAME/ is omitted, the printname of /FEATURE/ is used as the file name,
-and `load' will try to load this name appended with the suffix `.elc' or
-`.el', in that order.  The name without appended suffix will not be used.
-See `get-load-suffixes' for the complete list of suffixes.
-If the optional third argument /NOERROR/ is non-nil,
-then return nil if the file is not found instead of signaling an error.
-Normally the return value is /FEATURE/.
-The normal messages at start and end of loading /FILENAME/ are suppressed.
-#+END_QUOTE
-
-** How to Customize Emacs
+** Customize Emacs
 :PROPERTIES:
 :ID:       b72e8ff3-8924-4cbb-99e5-fa24d70d09fe
 :END:
@@ -379,8 +287,8 @@ Emacs:
 ...[screenshol]...
 
 You will see various categories for customizing Emacs. These
-categories are called *groups* in Emacs. Let's try setting something
-in Emacs: 
+categories are called *Customization Groups* in Emacs. Let's try
+setting something in Emacs: 
 
 - Go to *Editing* -> *Editing Basics* -> move point to "Global
 Mark ring Max: ".
@@ -512,14 +420,143 @@ two possibilities:
 
   #+begin_src emacs-lisp
     ;;
-    ;; Group: Editing
+    ;; GROUP: Editing
     ;;
   #+end_src
 
-** setup-convenience.el
+** Function: =(setq [ /SYM/ /VAL/ ]...)=
 :PROPERTIES:
-:ID:       4bafac9e-880e-4278-90dc-60e29b325b2b
+:ID:       3da16e32-a1d6-4b47-916b-3d845a06067e
 :END:
+  *_Comment_*: A really fundamental function for customizing Emacs
+  settings. An Emacs setting is really just a variable. Emacs has GUI
+  for changing setting, but =setq= a variable is also equivalent.
+
+  *_Example_*:
+  #+begin_src emacs-lisp
+    (setq global-mark-ring-max 50000)
+  #+end_src
+
+  *_Built-in descriptions_*:
+  #+BEGIN_QUOTE
+  Set each /SYM/ to the value of its /VAL/.
+  The symbols /SYM/ are variables; they are literal (not evaluated).
+  The values /VAL/ are expressions; they are evaluated.
+  Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
+  The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
+  each VAL can use the new value of variables set earlier in the `_setq_'.
+  The return value of the `_setq_' form is the value of the last /VAL/.
+  #+END_QUOTE
+
+** Function: =(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)=
+:PROPERTIES:
+:ID:       525cbba2-a7dd-46aa-8215-bfb52502a4ac
+:END:
+  *_Comment_*: This function allows you to load a file. /FILE/ is the
+  filepath. Do you notice =&optional= keyword? When you see this
+  keyword, it means everything after =&optional= is, optional. The
+  parameters /NOERROR/, /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not
+  required to be passed into the function if you don't need. However,
+  if you want to pass an argument into the place of one a parameter,
+  you must also pass arguments to all the parameters to the left of
+  your chosen parameter. For example, if you want to pass an argument
+  into /NOSUFFIX/, you are *required* to pass arguments into
+  /NOERROR/, /NOMESSAGE/ first. You are safe to ignore everything
+  after your chosen parameter, and in our example, it's /MUST-SUFFIX/.
+
+  *_Example_*: 
+
+  #+begin_src emacs-lisp
+    (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
+    (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
+    (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
+  #+end_src
+   
+  *_Built-in description_*:
+   
+  #+BEGIN_QUOTE
+  Execute a file of Lisp code named FILE.
+  First try FILE with `.elc' appended, then try with `.el', then try
+  FILE unmodified (the exact suffixes in the exact order are determined
+  by `load-suffixes').  Environment variable references in FILE are
+  replaced with their values by calling `substitute-in-file-name'. This
+  function searches the directories in `load-path'. 
+   
+  ....(*C-h f* for more information)...
+  #+END_QUOTE
+
+** Function: =(require /FEATURE/ &optional /FILENAME/ /NOERROR/)=
+:PROPERTIES:
+:ID:       dffde709-1810-4253-861a-8e058608a88c
+:END:
+*_Comment_*: If you install a package from =M-x list-packages=, to
+load that package, use =(require 'installed-package)=.
+
+*_Example_*: For example, you installed package =volatile-highlights=,
+to load it:
+
+#+begin_src emacs-lisp
+  (require 'volatile-highlights)
+#+end_src
+
+
+*_Built-in description_*:
+
+#+BEGIN_QUOTE
+If feature /FEATURE/ is not loaded, load it from /FILENAME/.
+If /FEATURE/ is not a member of the list `features', then the feature
+is not loaded; so load the file /FILENAME/.
+If /FILENAME/ is omitted, the printname of /FEATURE/ is used as the file name,
+and `load' will try to load this name appended with the suffix `.elc' or
+`.el', in that order.  The name without appended suffix will not be used.
+See `get-load-suffixes' for the complete list of suffixes.
+If the optional third argument /NOERROR/ is non-nil,
+then return nil if the file is not found instead of signaling an error.
+Normally the return value is /FEATURE/.
+The normal messages at start and end of loading /FILENAME/ are suppressed.
+#+END_QUOTE
+
+** Macro: =(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)=
+:PROPERTIES:
+:ID:       d8631984-db16-4ce6-89f4-f68b8edfc3f4
+:END:
+*_Comment_*: defun is a macro that allows you to define a function,
+like any other language. A function is a collection of expressions to
+be executed. The return value is the last expression.
+
+*_Example_*:
+
+- Create a normal function (Cannot be called from =M-x=):
+
+#+begin_src emacs-lisp
+  (defun demo (number string)
+    (message "Print a number: %d, a string: %s" number string))
+#+end_src
+
+- Create a command (Can be called from =M-x=):
+#+begin_src emacs-lisp
+  (defun demo (number string)
+    (interactive)
+    (message "Print a number: %d, a string: %s" number string))
+#+end_src
+
+*_Built-in description_*:
+#+BEGIN_QUOTE
+Define /NAME/ as a function.
+The definition is (lambda /ARGLIST/ [/DOCSTRING/] /BODY/...).
+See also the function `interactive'.
+/DECL/ is a declaration, optional, of the form (declare /DECLS...) where
+/DECLS/ is a list of elements of the form (/PROP/ . /VALUES/).  These are
+interpreted according to `defun-declarations-alist'.
+The return value is undefined.
+#+END_QUOTE
+*** Special form: =(interactive &optional /ARGS/)=
+:PROPERTIES:
+:ID:       852f9233-a00c-4736-a627-f85d0fc1fb16
+:END:
+
+
+
 ** setup-editing.el
 :PROPERTIES:
 :ID:       2f850290-6962-49f0-aea6-d735aa8bfbd9
@@ -548,7 +585,7 @@ two possibilities:
     (delete-selection-mode)
 
     ;;
-    ;; Group: Editing -> Electricity
+    ;; GROUP: Editing -> Electricity
     ;;
 
     ;; you can see these variables Eletricity group. However, these variables
@@ -563,14 +600,14 @@ two possibilities:
     (setq electric-pair-pairs '(( ?\< . ?\>)))
 
     ;;
-    ;; Group: Editing -> Killing
+    ;; GROUP: Editing -> Killing
     ;;
     (setq
      kill-ring-max 5000 ;; increase kill-ring capacity
      kill-whole-line t) ;; if NIL, kill whole line and move the next line up
 
     ;;
-    ;; Group: Editing -> Matching
+    ;; GROUP: Editing -> Matching
     ;;
 
     ;; some variable automatically becomes buffer-local when set outside Custom
@@ -578,11 +615,84 @@ two possibilities:
     ;; FIXME: Move this note to the beginning later
 
     ;;
-    ;; Group: Editing -> Matching -> Paren Showing
+    ;; GROUP: Editing -> Matching -> Paren Showing
     ;; As you can see, I only use a single option in the inner sub-group
     ;; It's not worth to create a file
     (show-paren-mode)
   #+end_src
+*** Customize built-in functions
+:PROPERTIES:
+:ID:       a46d3a98-d481-41a3-8b15-50eb98c2e4ac
+:END:
+Sometimes, we want to adjust or improve the behaviours of some
+commands in certain contexts. Consider this situataion: *C-a*, whicn
+runs =move-beginning-of-line=, always move to the beginning of
+line. However, sometimes we don't always to move to the beginning of 
+line, but move to the first non-whitespace character of that line.
+
+#+begin_src emacs-lisp
+  (defun prelude-move-beginning-of-line (arg)
+    "Move point back to indentation of beginning of line.
+
+  Move point to the first non-whitespace character on this line.
+  If point is already there, move to the beginning of the line.
+  Effectively toggle between the first non-whitespace character and
+  the beginning of the line.
+
+  If ARG is not nil or 1, move forward ARG - 1 lines first. If
+  point reaches the beginning or end of the buffer, stop there."
+    (interactive "^p")
+    (setq arg (or arg 1))
+
+    ;; Move lines first
+    (when (/= arg 1)
+      (let ((line-move-visual nil))
+        (forward-line (1- arg))))
+
+    (let ((orig-point (point)))
+      (back-to-indentation)
+      (when (= orig-point (point))
+        (move-beginning-of-line 1))))
+
+  (global-set-key (kbd "C-a") 'prelude-move-beginning-of-line)
+#+end_src
+
+The code is taken from this article: [[http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/][Smarter Navigation to the
+Beginning of a Line]].
+
+#+begin_src emacs-lisp
+  (defadvice kill-ring-save (before slick-copy activate compile)
+    "When called interactively with no active region, copy a single
+  line instead."
+    (interactive
+     (if mark-active (list (region-beginning) (region-end))
+       (message "Copied line")
+       (list (line-beginning-position)
+             (line-beginning-position 2)))))
+
+  (defadvice kill-region (before slick-cut activate compile)
+    "When called interactively with no active region, kill a single
+    line instead."
+    (interactive
+     (if mark-active (list (region-beginning) (region-end))
+       (list (line-beginning-position)
+             (line-beginning-position 2)))))
+
+  ;; kill a line, including whitespace characters until next non-whiepsace character
+  ;; of next line
+  (defadvice kill-line (before check-position activate)
+    (if (member major-mode
+                '(emacs-lisp-mode scheme-mode lisp-mode
+                                  c-mode c++-mode objc-mode
+                                  latex-mode plain-tex-mode))
+        (if (and (eolp) (not (bolp)))
+            (progn (forward-char 1)
+                   (just-one-space 0)
+                   (backward-char 1)))))
+
+#+end_src
+
+
 *** Package: =volatile-highlights=
 :PROPERTIES:
 :ID:       f8441653-b68d-4c18-8eb4-28ceff5739fc
@@ -648,6 +758,14 @@ editors. =undo-tree= can even provide a diff between two different states. Highl
 install it. After finish installing, add this code snippet to activate
 the package:
 
+#+begin_src emacs-lisp
+  (require 'undo-tree)
+  (global-undo-tree-mode)
+#+end_src
+
+From now on, your undo (*C-/*) behaves just like normal editor. To
+redo, *C-_*.
+
 *** Package: =yasnippet=
 :PROPERTIES:
 :ID:       bb1ea352-f9ea-47fe-bb3e-5727e542c481
@@ -661,41 +779,175 @@ inspired from TextMate's syntax, you can even import most TextMate
 templates to YASnippet.
 
 *_Installation_*:
-=M-x list-packages= and select *undo-tree* package, then
+=M-x list-packages= and select *yasnippet* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
 
-*** Package: =easy-kill=
-:PROPERTIES:
-:ID:       94a3178c-1b9d-4e4a-a5b5-8cc37b3c60ba
-:END:
+#+begin_src emacs-lisp
+  (require 'yasnippet)
+  (yas-global-mode 1)
+#+end_src
 
 *** Package: =expand-region=
 :PROPERTIES:
 :ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
 :END:
+[[https://github.com/magnars/expand-region.el][Homepage]]
 
+*_Features_*:
+=expand-region= allows you to select text objects incrementally. 
+
+..[screenshot]...
+
+*_Installation_*:
+=M-x list-packages= and select *expand-region* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  (require 'expand-region)
+  (global-set-key (kbd "M-m") 'er/expand-region)
+#+end_src
+
+I bind =er/expand-regin= to *M-m*, because the functionality is
+included from the amended =beginning-of-line= we did above.
+
+** Function: =(add-hook /HOOK/ /FUNCTION/ &optional /APPEND/ /LOCAL/)=
+:PROPERTIES:
+:ID:       b8a5ed88-f7b6-40b1-917d-1d7bbbca4213
+:END:
+*_Comment_*: A *hook* is a Lisp variable which holds a list of
+functions, to be called on some well-defined occasion. (This is called
+running the hook. You can search for hook using *C-h v* and enter
+=-hook= suffix then *TAB*. Or you can find hooks in *Customization Groups*.
+
+*_Example_*:
+
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'linum-mode)
+#+end_src
+
+After you add the function =linum-mode= - which activates line number
+on the left margin of your Emacs - then every time you enter a
+=prog-mode=, which is the root all programming major modes derive
+from. A programming mode can be =c-mode=, =asm-mode=,
+=emacs-lisp-mode=, =java-mode=...
+
+*_Built-in description_*:
+#+BEGIN_QUOTE
+Add to the value of HOOK the function /FUNCTION/.
+/FUNCTION/ is not added if already present.
+/FUNCTION/ is added (if necessary) at the beginning of the hook list
+unless the optional argument /APPEND/ is non-nil, in which case
+/FUNCTION/ is added at the end.
+
+The optional fourth argument, /LOCAL/, if non-nil, says to modify
+the hook's buffer-local value rather than its global value.
+This makes the hook buffer-local, and it makes t a member of the
+buffer-local value.  That acts as a flag to run the hook
+functions of the global value as well as in the local value.
+
+/HOOK/ should be a symbol, and /FUNCTION/ may be any valid function.  If
+/HOOK/ is void, it is first set to nil.  If /HOOK/'s value is a single
+function, it is changed to a list of functions.
+#+END_QUOTE
 ** setup-convenience.el
 :PROPERTIES:
 :ID:       87f1578a-478c-48c3-afe4-a44ced18506d
 :END:
-*** Built-in: linum
-:PROPERTIES:
-:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
-:END:
+Here is my sample customization:
 
-*** Built-in: whitespace-mode
-:PROPERTIES:
-:ID:       8ae7f455-0457-46f0-86ff-f3b8d3658ff0
-:END:
-*** Package: ibuffer-git
-:PROPERTIES:
-:ID:       094b65d3-8969-4603-9ce8-2930c1927b95
-:END:
+#+begin_src emacs-lisp
+  ;;
+  ;; MAIN GROUP: Convenience
+  ;;
+
+  ;; GROUP: Convenience -> Revert
+
+  ;; update any change made on file to the current buffer
+  (global-auto-revert-mode)
+
+  ;; GROUP: Convenience -> Hippe Expand
+  ;; hippie-expand is a better version of dabbrev-expand.
+  ;; While dabbrev-expand searches for words you already types, in current;; buffers and other buffers, hippie-expand includes more sources,
+  ;; such as filenames, klll ring...
+  (global-set-key (kbd "M-/") 'hippie-expand) ;; replace dabbrev-expand
+  (setq
+   hippie-expand-try-functions-list
+   '(try-expand-dabbrev ;; Try to expand word "dynamically", searching the current buffer.
+     try-expand-dabbrev-all-buffers ;; Try to expand word "dynamically", searching all other buffers.
+     try-expand-dabbrev-from-kill ;; Try to expand word "dynamically", searching the kill ring.
+     try-complete-file-name-partially ;; Try to complete text as a file name, as many characters as unique.
+     try-complete-file-name ;; Try to complete text as a file name.
+     try-expand-all-abbrevs ;; Try to expand word before point according to all abbrev tables.
+     try-expand-list ;; Try to complete the current line to an entire line in the buffer.
+     try-expand-line ;; Try to complete the current line to an entire line in the buffer.
+     try-complete-lisp-symbol-partially ;; Try to complete as an Emacs Lisp symbol, as many characters as unique.
+     try-complete-lisp-symbol) ;; Try to complete word as an Emacs Lisp symbol.
+   )
+
+  ;; GROUP: Convenience -> HL Line
+  (global-hl-line-mode)
+
+  ;; GROUP: Convenience -> Ibuffer
+  (setq ibuffer-use-other-window t) ;; always display ibuffer in another window
+
+  ;; GROUP: Convenience -> Linum
+  (add-hook 'prog-mode-hook 'linum-mode) ;; enable linum only in programming modes
+
+  ;; GROUP: Convenience -> Whitespace
+
+  ;; whenever you create useless whitespace, the whitespace is highlighted
+  (add-hook 'prog-mode-hook (lambda () (interactive) (setq show-trailing-whitespace 1)))
+
+  ;; activate whitespace-mode to view all whitespace characters
+  (global-set-key (kbd "C-c w") 'whitespace-mode)
+
+  ;; GROUP: Convenience -> Windmove
+
+  ;; easier window navigation
+  (windmove-default-keybindings)
+#+end_src
+
 *** Package: ibuffer-vc
 :PROPERTIES:
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
+...[add homepage]...
+*_Features_*:
+
+- Group your buffers by their parent vc root directory
+- See the VC status of the associated files
+- Sort buffers by their VC status
+
+...[screenshot on homepage]...
+
+*_Installation*:
+=M-x list-packages= and select *ibuffer-vc* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-vc-set-filter-groups-by-vc-root)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic))))
+
+  (setq ibuffer-formats
+        '((mark modified read-only vc-status-mini " "
+                (name 18 18 :left :elide)
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " "
+                (vc-status 16 16 :left)
+                " "
+                filename-and-process)))
+#+end_src
+
+
 ** setup-development.el
 :PROPERTIES:
 :ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
