@@ -261,12 +261,26 @@ of packages.
 
 That's that.
 
+*_Exercise_*: Let's install a few packages in advance, so you won't
+have to install the packages later. Install these packages:
+
+- volatile-highlights
+- clean-aindent-mode
+- undo-tree
+- yasnippet
+
 ** Function: =(setq [ /SYM/ /VAL/ ]...)=
 :PROPERTIES:
 :ID:       3da16e32-a1d6-4b47-916b-3d845a06067e
 :END:
   *_Comment_*: A really fundamental function for customizing Emacs
-  settings. Usually, a variable is an Emacs setting.
+  settings. An Emacs setting is really just a variable. Emacs has GUI
+  for changing setting, but =setq= a variable is also equivalent.
+
+  *_Example_*:
+  #+begin_src emacs-lisp
+    (setq global-mark-ring-max 50000)
+  #+end_src
 
   *_Built-in descriptions_*:
   #+BEGIN_QUOTE
@@ -283,6 +297,17 @@ That's that.
 :PROPERTIES:
 :ID:       525cbba2-a7dd-46aa-8215-bfb52502a4ac
 :END:
+  *_Comment_*: This function allows you to load a file. /FILE/ is the
+  filepath. Do you notice =&optional= keyword? When you see this
+  keyword, it means everything after =&optional= is, optional. The
+  parameters /NOERROR/, /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not
+  required to be passed into the function if you don't need. However,
+  if you want to pass an argument into the place of one a parameter,
+  you must also pass arguments to all the parameters to the left of
+  your chosen parameter. For example, if you want to pass an argument
+  into /NOSUFFIX/, you are *required* to pass arguments into
+  /NOERROR/, /NOMESSAGE/ first. You are safe to ignore everything
+  after your chosen parameter, and in our example, it's /MUST-SUFFIX/.
 
   *_Example_*: 
 
@@ -291,8 +316,6 @@ That's that.
     (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
     (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
   #+end_src
-
-  *_Comment_*:
    
   *_Built-in description_*:
    
@@ -306,6 +329,37 @@ That's that.
    
   ....(*C-h f* for more information)...
   #+END_QUOTE
+
+** Function: =(require /FEATURE/ &optional /FILENAME/ /NOERROR/)=
+:PROPERTIES:
+:ID:       dffde709-1810-4253-861a-8e058608a88c
+:END:
+*_Comment_*: If you install a package from =M-x list-packages=, to
+load that package, use =(require 'installed-package)=.
+
+*_Example_*: For example, you installed package =volatile-highlights=,
+to load it:
+
+#+begin_src emacs-lisp
+  (require 'volatile-highlights)
+#+end_src
+
+
+*_Built-in description_*:
+
+#+BEGIN_QUOTE
+If feature /FEATURE/ is not loaded, load it from /FILENAME/.
+If /FEATURE/ is not a member of the list `features', then the feature
+is not loaded; so load the file /FILENAME/.
+If /FILENAME/ is omitted, the printname of /FEATURE/ is used as the file name,
+and `load' will try to load this name appended with the suffix `.elc' or
+`.el', in that order.  The name without appended suffix will not be used.
+See `get-load-suffixes' for the complete list of suffixes.
+If the optional third argument /NOERROR/ is non-nil,
+then return nil if the file is not found instead of signaling an error.
+Normally the return value is /FEATURE/.
+The normal messages at start and end of loading /FILENAME/ are suppressed.
+#+END_QUOTE
 
 ** How to Customize Emacs
 :PROPERTIES:
@@ -501,7 +555,7 @@ two possibilities:
     ;; are not for setting because setting them have no effect. You have to activate
     ;; command of the same name. If some variables are required to be activated through
     ;; commands, the description of those variables explicitly say so.
-    (electricity-indent-mode) ;; activate automatic indent when press RET
+    (electric-indent-mode) ;; activate automatic indent when press RET
     (electric-pair-mode) ;; activate automatic paring
 
     ;; an example of association list, also an example of how to write a character
@@ -529,17 +583,111 @@ two possibilities:
     ;; It's not worth to create a file
     (show-paren-mode)
   #+end_src
-
-*** Built-in: recentf
+*** Package: =volatile-highlights=
 :PROPERTIES:
-:ID:       9daec59b-8c5e-4712-955d-be3b3414ad83
+:ID:       f8441653-b68d-4c18-8eb4-28ceff5739fc
+:END:
+*_Features_*:
+
+VolatileHighlights highlights changes to the buffer caused by commands
+such as ‘undo’, ‘yank’/’yank-pop’, etc. The highlight disappears at
+the next command. The highlighting gives useful visual feedback for
+what your operation actually changed in the buffer.
+
+*_Installation_*:
+
+=M-x list-packages= and select *volatile-highlights* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  (require 'volatile-highlights)
+  (volatile-highlights-mode t)
+#+end_src
+
+*** Package: =clean-aindent-mode=
+:PROPERTIES:
+:ID:       49958ce7-6af0-47ac-b309-6ea75833f0e1
+:END:
+[[https://github.com/pmarinov/clean-aindent-mode][Homepage]]
+
+*_Features_*:
+
+When you press *RET* to create a newline and got indented by
+=eletric-indent-mode=, you have appropriate whitespace for
+indenting. But, if you leave the line blank and move to the next line,
+the whitespace becomes useless. This package helps clean up unused
+whitespace.
+
+View this [[http://www.emacswiki.org/emacs/CleanAutoIndent][Emacswiki page]] for more details.
+
+*_Installation_*:
+=M-x list-packages= and select *clean-aindent-mode* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  (require 'clean-aindent-mode)
+#+end_src
+
+*** Package: =undo-tree=
+:PROPERTIES:
+:ID:       03030916-bb5c-4966-8fa1-68807b60bec2
+:END:
+*_Features:_*
+*_Features_*: 
+
+=undo-tree= allows you to visual the whole history of your editing in
+a tree. It also provides regular undo/redo behaviours in other
+editors. =undo-tree= can even provide a diff between two different states. Highly recommended. 
+
+...[screenshot]...
+
+*_Installation_*:
+=M-x list-packages= and select *undo-tree* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+*** Package: =yasnippet=
+:PROPERTIES:
+:ID:       bb1ea352-f9ea-47fe-bb3e-5727e542c481
+:END:
+*_Features_*:
+YASnippet is a template system for Emacs. It allows you to type an
+abbreviation and automatically expand it into function
+templates. Bundled language templates include: C, C++, C#, Perl,
+Python, Ruby, SQL, LaTeX, HTML, CSS and more. The snippet syntax is
+inspired from TextMate's syntax, you can even import most TextMate
+templates to YASnippet.
+
+*_Installation_*:
+=M-x list-packages= and select *undo-tree* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+*** Package: =easy-kill=
+:PROPERTIES:
+:ID:       94a3178c-1b9d-4e4a-a5b5-8cc37b3c60ba
 :END:
 
-*** Package: recentf-ext
+*** Package: =expand-region=
 :PROPERTIES:
-:ID:       8013594a-f2f3-477c-820c-caf1354ac23d
+:ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
 :END:
 
+** setup-convenience.el
+:PROPERTIES:
+:ID:       87f1578a-478c-48c3-afe4-a44ced18506d
+:END:
+*** Built-in: linum
+:PROPERTIES:
+:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
+:END:
+
+*** Built-in: whitespace-mode
+:PROPERTIES:
+:ID:       8ae7f455-0457-46f0-86ff-f3b8d3658ff0
+:END:
 *** Package: ibuffer-git
 :PROPERTIES:
 :ID:       094b65d3-8969-4603-9ce8-2930c1927b95
@@ -548,15 +696,34 @@ two possibilities:
 :PROPERTIES:
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
+** setup-development.el
+:PROPERTIES:
+:ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
+:END:
+
+** setup-files.el
+:PROPERTIES:
+:ID:       a98a61ac-177b-4e5a-8096-03945a4406a9
+:END:
+*** Built-in: recentf
+:PROPERTIES:
+:ID:       9daec59b-8c5e-4712-955d-be3b3414ad83
+:END:
+*** Package: recentf-ext
+:PROPERTIES:
+:ID:       8013594a-f2f3-477c-820c-caf1354ac23d
+:END:
+
+*** setup-dired.el
+:PROPERTIES:
+:ID:       fc2536d4-734f-4887-ad82-fd7d1ad52c06
+:END:
 *** Package: ztree
 :PROPERTIES:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
 :END:
 
-** setup-development.el
-:PROPERTIES:
-:ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
-:END:
+
 ** setup-ui.el
 :PROPERTIES:
 :ID:       0c54618f-8c80-4f47-9cb7-a7003fab46ab
@@ -571,24 +738,6 @@ two possibilities:
 :ID:       f3eab381-cb88-4e5a-8ff1-24cdb454a744
 :END:
 
-*** Enable built-ins
-:PROPERTIES:
-:ID:       0de2d016-c00f-4ea3-b3d4-e1f743713d4a
-:END:
-
-*** Built-in: linum
-:PROPERTIES:
-:ID:       0e4a2f8e-fc8d-418c-b25f-c6edecb018da
-:END:
-
-*** Built-in: electric-indent-mode
-:PROPERTIES:
-:ID:       d24019dc-6950-479a-a22c-f015a5143b05
-:END:
-*** Built-in: whitespace-mode
-:PROPERTIES:
-:ID:       8ae7f455-0457-46f0-86ff-f3b8d3658ff0
-:END:
 *** Package: clean-aindent-mode
 :PROPERTIES:
 :ID:       f15a2012-97ad-4de7-b7b3-f0cb94dfd9d2
@@ -672,11 +821,6 @@ two possibilities:
 ** setup-info.el
 :PROPERTIES:
 :ID:       c94fdf0a-e6ac-49f9-b1cb-611fc9ea4753
-:END:
-
-** setup-dired.el
-:PROPERTIES:
-:ID:       fc2536d4-734f-4887-ad82-fd7d1ad52c06
 :END:
 
 ** setup-bookmark
