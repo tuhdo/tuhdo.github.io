@@ -95,8 +95,8 @@ remember these syntax constructs to use any Lisp:
        #+end_src
 
    - Non-atomic: There's a reason Lisp is called (*LIS*)t
-     (*P*)rocessing. In other languages, list is just another data type;
-     but in Lisp, because of Lisp syntax, list is really
+     (*P*)rocessing. In other languages, list is just another data
+     type; but in Lisp, because of Lisp syntax, list is really
      special. Basically, this is a list:
 
 	 #+begin_src emacs-lisp
@@ -104,7 +104,8 @@ remember these syntax constructs to use any Lisp:
      #+end_src
 
      A list can hold data, both atomic and non-atomic. That means, a
-     list can hold a smaller list inside it along with atomic data.
+     list can hold a smaller list inside it along with atomic
+     data. List elements are separated by whitespace.
 
 2. Code: If you want to run code to be executed, here is the syntax:
    #+begin_src emacs-lisp
@@ -177,9 +178,7 @@ Python =if...then...else= and write our customized version in C:
       ...statements...
 #+end_src
 
-The answer is, it's impossible, even with C macro and you cannot redefine
-built-in keywords in C - as well as in most languages - with your
-programs can still be compiled and behave correctly. With Lisp, this
+The answer is, it's impossible, even with C macro. With Lisp, this
 is entirely possible, except one minor thing: the code must be
 treated as data, meaning the entire Python =if= construct above must
 be enclosed within a Lisp form like this:
@@ -300,8 +299,8 @@ later, both in compile time and runtime. In the end, aside from the
 primitives, the only thing that exists in Lisp is a pair of
 parentheses, with things in in it: =(...)=. This is the only syntax,
 along with the semantics that depends on context: /a function form/,
-/a special form/ or /a macro form/. That's all you need to remember
-for using any Lisp.
+/a special form/ or /a macro form/; the first item in a form is going
+to get executed. That's all you need to remember for using any Lisp.
 
 If you are still not convinced with the parentheses, perhaps seasoned
 Lispers can:

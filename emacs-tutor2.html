@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-23 Mon 10:55 -->
+<!-- 2014-06-26 Thu 12:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -312,8 +312,8 @@ a function. You can check by using <code>symbol-value</code> and
 </li>
 
 <li>Non-atomic: There's a reason Lisp is called (<b>LIS</b>)t
-(<b>P</b>)rocessing. In other languages, list is just another data type;
-but in Lisp, because of Lisp syntax, list is really
+(<b>P</b>)rocessing. In other languages, list is just another data
+type; but in Lisp, because of Lisp syntax, list is really
 special. Basically, this is a list:
 
 <div class="org-src-container">
@@ -324,7 +324,8 @@ special. Basically, this is a list:
 
 <p>
 A list can hold data, both atomic and non-atomic. That means, a
-list can hold a smaller list inside it along with atomic data.
+list can hold a smaller list inside it along with atomic
+data. List elements are separated by whitespace.
 </p>
 </li>
 </ul>
@@ -426,9 +427,7 @@ Python <code>if...then...else</code> and write our customized version in C:
 </div>
 
 <p>
-The answer is, it's impossible, even with C macro and you cannot redefine
-built-in keywords in C - as well as in most languages - with your
-programs can still be compiled and behave correctly. With Lisp, this
+The answer is, it's impossible, even with C macro. With Lisp, this
 is entirely possible, except one minor thing: the code must be
 treated as data, meaning the entire Python <code>if</code> construct above must
 be enclosed within a Lisp form like this:
@@ -586,8 +585,8 @@ later, both in compile time and runtime. In the end, aside from the
 primitives, the only thing that exists in Lisp is a pair of
 parentheses, with things in in it: <code>(...)</code>. This is the only syntax,
 along with the semantics that depends on context: <i>a function form</i>,
-<i>a special form</i> or <i>a macro form</i>. That's all you need to remember
-for using any Lisp.
+<i>a special form</i> or <i>a macro form</i>; the first item in a form is going
+to get executed. That's all you need to remember for using any Lisp.
 </p>
 
 <p>
