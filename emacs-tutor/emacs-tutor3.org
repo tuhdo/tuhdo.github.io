@@ -947,12 +947,6 @@ package:
                 filename-and-process)))
 #+end_src
 
-
-** setup-development.el
-:PROPERTIES:
-:ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
-:END:
-
 ** setup-files.el
 :PROPERTIES:
 :ID:       a98a61ac-177b-4e5a-8096-03945a4406a9
@@ -961,18 +955,124 @@ package:
 :PROPERTIES:
 :ID:       9daec59b-8c5e-4712-955d-be3b3414ad83
 :END:
+My sample customization:
+
+#+begin_src emacs-lisp
+  ;,----
+  ;| MAIN GROUP: Files
+  ;`----
+
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Files                      ;;
+   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   large-file-warning-threshold 100000000 ;; size in bytes
+   )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Files -> Back up            ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defvar backup-directory "~/.backups")
+  (if (not (file-exists-p backup-directory))
+      (make-directory backup-directory t))
+  (setq
+   make-backup-files t        ; backup a file the first time it is saved
+   backup-directory-alist '((".*" . backup-directory)) ; save backup files in ~/.backups
+   backup-by-copying t     ; copy the current file into backup directory
+   version-control t   ; version numbers for backup files
+   delete-old-versions t   ; delete unnecessary versions
+   kept-old-versions 6     ; oldest versions to keep when a new numbered backup is made (default: 2)
+   kept-new-versions 9 ; newest versions to keep when a new numbered backup is made (default: 2)
+   auto-save-default t ; auto-save every buffer that visits a file
+   auto-save-timeout 20 ; number of seconds idle time before auto-save (default: 30)
+   auto-save-interval 200 ; number of keystrokes between auto-saves (default: 300)
+   )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Files -> Dired              ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   dired-dwim-target t            ; if another Dired buffer is visibpple in another window, use that directory as target for Rename/Copy
+   dired-recursive-copies 'always         ; "always" means no asking
+   dired-recursive-deletes 'top           ; "top" means ask once for top level directory
+   dired-listing-switches "-lha"          ; human-readable listing
+   )
+
+  ;; automatically refresh dired buffer on changes
+  (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Files -> Dired -> Wdired    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   wdired-allow-to-change-permissions t   ; allow to edit permission bits
+   wdired-allow-to-redirect-links     ; allow to edit symlinks
+   )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Files -> Recentf            ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (recentf-mode)
+  (setq
+   recentf-max-menu-items 30
+   recentf-max-saved-items 5000
+   )
+
+#+end_src
+
 *** Package: recentf-ext
 :PROPERTIES:
 :ID:       8013594a-f2f3-477c-820c-caf1354ac23d
 :END:
+*_Features_*:
 
-*** setup-dired.el
-:PROPERTIES:
-:ID:       fc2536d4-734f-4887-ad82-fd7d1ad52c06
-:END:
+Extension of `recentf' package.
+
+- `dired' buffers can be handled.
+- Switching to file buffer considers it as most recent file.
+
+*_Installation_*:
+
+=M-x list-packages= and select *recentf-ext* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  (require 'recentf-ext)
+#+end_src
+
 *** Package: ztree
 :PROPERTIES:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
+:END:
+*_Features_*:
+
+Ztree is a project dedicated to implementation of several text-tree
+applications inside Emacs. It consists of 2 subprojects: ztree-diff
+and ztree-dir(the basis of ztree-diff).
+
+- ztree-diff: Perform diff on two directories. Really handy when you
+  want to create a big patch between two directories.
+...[screenshot]...
+- ztree-dir: a simple tree explorer.
+...[screenshot]...
+
+*_Installation_*:
+=M-x list-packages= and select *ztree* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  (require 'ztree-diff)
+  (require 'ztree-dir)
+#+end_src
+
+*_Group_*: It has no group, but since it is related to files, we
+consider it in "files" group.
+
+** setup-development.el
+:PROPERTIES:
+:ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
 :END:
 
 
