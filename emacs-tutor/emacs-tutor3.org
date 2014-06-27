@@ -268,6 +268,7 @@ have to install the packages later. Install these packages:
 - clean-aindent-mode
 - undo-tree
 - yasnippet
+- rebox2
 
 ** Customize Emacs
 :PROPERTIES:
@@ -516,6 +517,46 @@ Normally the return value is /FEATURE/.
 The normal messages at start and end of loading /FILENAME/ are suppressed.
 #+END_QUOTE
 
+** Function: =(add-hook /HOOK/ /FUNCTION/ &optional /APPEND/ /LOCAL/)=
+:PROPERTIES:
+:ID:       b8a5ed88-f7b6-40b1-917d-1d7bbbca4213
+:END:
+*_Comment_*: A *hook* is a Lisp variable which holds a list of
+functions, to be called on some well-defined occasion. (This is called
+running the hook. You can search for hook using *C-h v* and enter
+=-hook= suffix then *TAB*. Or you can find hooks in *Customization Groups*.
+
+*_Example_*:
+
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'linum-mode)
+#+end_src
+
+After you add the function =linum-mode= - which activates line number
+on the left margin of your Emacs - then every time you enter a
+=prog-mode=, which is the root all programming major modes derive
+from. A programming mode can be =c-mode=, =asm-mode=,
+=emacs-lisp-mode=, =java-mode=...
+
+*_Built-in description_*:
+#+BEGIN_QUOTE
+Add to the value of HOOK the function /FUNCTION/.
+/FUNCTION/ is not added if already present.
+/FUNCTION/ is added (if necessary) at the beginning of the hook list
+unless the optional argument /APPEND/ is non-nil, in which case
+/FUNCTION/ is added at the end.
+
+The optional fourth argument, /LOCAL/, if non-nil, says to modify
+the hook's buffer-local value rather than its global value.
+This makes the hook buffer-local, and it makes t a member of the
+buffer-local value.  That acts as a flag to run the hook
+functions of the global value as well as in the local value.
+
+/HOOK/ should be a symbol, and /FUNCTION/ may be any valid function.  If
+/HOOK/ is void, it is first set to nil.  If /HOOK/'s value is a single
+function, it is changed to a list of functions.
+#+END_QUOTE
+
 ** Macro: =(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)=
 :PROPERTIES:
 :ID:       d8631984-db16-4ce6-89f4-f68b8edfc3f4
@@ -567,13 +608,13 @@ The return value is undefined.
   used to it.
 
   #+begin_src emacs-lisp
-    ;;
-    ;; MAIN GROUP: Editing
-    ;;
+    ;,--------------------------------------
+    ;| MAIN GROUP: Editing
+    ;`--------------------------------------
 
-    ;;
-    ;; GROUP: Editing -> Editing Basics
-    ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; GROUP: Editing -> Editing Basics   ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ;; you can set a value to one variablea
     (setq
@@ -584,10 +625,10 @@ The return value is undefined.
 
     (delete-selection-mode)
 
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; GROUP: Editing -> Electricity      ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;
-    ;; GROUP: Editing -> Electricity
-    ;;
-
     ;; you can see these variables Eletricity group. However, these variables
     ;; are not for setting because setting them have no effect. You have to activate
     ;; command of the same name. If some variables are required to be activated through
@@ -597,18 +638,19 @@ The return value is undefined.
 
     ;; an example of association list, also an example of how to write a character
     ;; add more pairs if you want
-    (setq electric-pair-pairs '(( ?\< . ?\>)))
+    ;; (setq electric-pair-pairs '(( ?\< . ?\>)))
 
-    ;;
-    ;; GROUP: Editing -> Killing
-    ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; GROUP: Editing -> Killing          ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     (setq
      kill-ring-max 5000 ;; increase kill-ring capacity
-     kill-whole-line t) ;; if NIL, kill whole line and move the next line up
+     kill-whole-line t  ;; if NIL, kill whole line and move the next line up
+     )
 
-    ;;
-    ;; GROUP: Editing -> Matching
-    ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; GROUP: Editing -> Matching         ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     ;; some variable automatically becomes buffer-local when set outside Custom
     ;; such as case-fold-search. To make your value of choice default, use setq-default
@@ -618,6 +660,7 @@ The return value is undefined.
     ;; GROUP: Editing -> Matching -> Paren Showing
     ;; As you can see, I only use a single option in the inner sub-group
     ;; It's not worth to create a file
+    (setq show-paren-delay 0)
     (show-paren-mode)
   #+end_src
 *** Customize built-in functions
@@ -711,6 +754,11 @@ install it. After finish installing, add this code snippet to activate
 the package:
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: volatile-highlights          ;;
+  ;;                                       ;;
+  ;; GROUP: Editing -> Volatile Highlights ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'volatile-highlights)
   (volatile-highlights-mode t)
 #+end_src
@@ -737,6 +785,11 @@ install it. After finish installing, add this code snippet to activate
 the package:
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: clean-aindent-mode               ;;
+  ;;                                           ;;
+  ;; GROUP: Editing -> Indent -> Clean Aindent ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'clean-aindent-mode)
 #+end_src
 
@@ -759,12 +812,17 @@ install it. After finish installing, add this code snippet to activate
 the package:
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: undo-tree                  ;;
+  ;;                                     ;;
+  ;; GROUP: Editing -> Undo -> Undo Tree ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'undo-tree)
   (global-undo-tree-mode)
 #+end_src
 
 From now on, your undo (*C-/*) behaves just like normal editor. To
-redo, *C-_*.
+redo, *C-_*. To open the undo tree, *C-x u*.
 
 *** Package: =yasnippet=
 :PROPERTIES:
@@ -784,73 +842,15 @@ install it. After finish installing, add this code snippet to activate
 the package:
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: yasnippet                 ;;
+  ;;                                    ;;
+  ;; GROUP: Editing -> Yasnippet        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'yasnippet)
   (yas-global-mode 1)
 #+end_src
 
-*** Package: =expand-region=
-:PROPERTIES:
-:ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
-:END:
-[[https://github.com/magnars/expand-region.el][Homepage]]
-
-*_Features_*:
-=expand-region= allows you to select text objects incrementally. 
-
-..[screenshot]...
-
-*_Installation_*:
-=M-x list-packages= and select *expand-region* package, then
-install it. After finish installing, add this code snippet to activate
-the package:
-
-#+begin_src emacs-lisp
-  (require 'expand-region)
-  (global-set-key (kbd "M-m") 'er/expand-region)
-#+end_src
-
-I bind =er/expand-regin= to *M-m*, because the functionality is
-included from the amended =beginning-of-line= we did above.
-
-** Function: =(add-hook /HOOK/ /FUNCTION/ &optional /APPEND/ /LOCAL/)=
-:PROPERTIES:
-:ID:       b8a5ed88-f7b6-40b1-917d-1d7bbbca4213
-:END:
-*_Comment_*: A *hook* is a Lisp variable which holds a list of
-functions, to be called on some well-defined occasion. (This is called
-running the hook. You can search for hook using *C-h v* and enter
-=-hook= suffix then *TAB*. Or you can find hooks in *Customization Groups*.
-
-*_Example_*:
-
-#+begin_src emacs-lisp
-  (add-hook 'prog-mode-hook 'linum-mode)
-#+end_src
-
-After you add the function =linum-mode= - which activates line number
-on the left margin of your Emacs - then every time you enter a
-=prog-mode=, which is the root all programming major modes derive
-from. A programming mode can be =c-mode=, =asm-mode=,
-=emacs-lisp-mode=, =java-mode=...
-
-*_Built-in description_*:
-#+BEGIN_QUOTE
-Add to the value of HOOK the function /FUNCTION/.
-/FUNCTION/ is not added if already present.
-/FUNCTION/ is added (if necessary) at the beginning of the hook list
-unless the optional argument /APPEND/ is non-nil, in which case
-/FUNCTION/ is added at the end.
-
-The optional fourth argument, /LOCAL/, if non-nil, says to modify
-the hook's buffer-local value rather than its global value.
-This makes the hook buffer-local, and it makes t a member of the
-buffer-local value.  That acts as a flag to run the hook
-functions of the global value as well as in the local value.
-
-/HOOK/ should be a symbol, and /FUNCTION/ may be any valid function.  If
-/HOOK/ is void, it is first set to nil.  If /HOOK/'s value is a single
-function, it is changed to a list of functions.
-#+END_QUOTE
 ** setup-convenience.el
 :PROPERTIES:
 :ID:       87f1578a-478c-48c3-afe4-a44ced18506d
@@ -909,7 +909,214 @@ Here is my sample customization:
   (windmove-default-keybindings)
 #+end_src
 
-*** Package: ibuffer-vc
+*** Package: =helm=
+:PROPERTIES:
+:ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
+:END:
+*_Homepage_*:
+*_Installation_*:
+*_Features_*:
+
+=M-x list-packages= and select *helm* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: helm                      ;;
+  ;;                                    ;;
+  ;; GROUP: Convenience -> Helm         ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'helm)
+  (require 'helm-config)
+  (require 'helm-eshell)
+  (require 'helm-files)
+  (require 'wgrep-helm)
+
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
+
+  (eval-after-load 'helm-grep
+    '(progn
+       (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
+       (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
+       (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)))
+
+  (setq helm-google-suggest-use-curl-p t
+                                          ;helm-kill-ring-threshold 1
+        ;; helm-raise-command "wmctrl -xa %s"
+        helm-scroll-amount 4
+        helm-quick-update t
+        helm-idle-delay 0.01
+        helm-input-idle-delay 0.01
+                                          ;helm-completion-window-scroll-margin 0
+                                          ;helm-display-source-at-screen-top nil
+        helm-ff-search-library-in-sexp t
+                                          ;helm-kill-ring-max-lines-number 5
+        ;; helm-default-external-file-browser "thunar"
+        ;; helm-pdfgrep-default-read-command "evince --page-label=%p '%f'"
+                                          ;helm-ff-transformer-show-only-basename t
+        ;; helm-ff-auto-update-initial-value t
+        ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
+        ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
+        ;; helm-reuse-last-window-split-state t
+                                          ;helm-split-window-default-side 'other
+                                          ;helm-split-window-in-side-p nil
+        ;; helm-always-two-windows t
+                                          ;helm-persistent-action-use-special-display t
+        helm-buffers-favorite-modes (append helm-buffers-favorite-modes
+                                            '(picture-mode artist-mode))
+        helm-ls-git-status-command 'magit-status
+                                          ;helm-never-delay-on-input nil
+        helm-candidate-number-limit 200
+        helm-M-x-requires-pattern 0
+        ;; helm-dabbrev-cycle-thresold 5
+        ;; helm-surfraw-duckduckgo-url "https://duckduckgo.com/?q=%s&ke=-1&kf=fw&kl=fr-fr&kr=b&k1=-1&k4=-1"
+        helm-boring-file-regexp-list '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$")
+                                          ;helm-mode-handle-completion-in-region t
+                                          ;helm-moccur-always-search-in-current t
+                                          ;helm-tramp-verbose 6
+                                          ;helm-ff-file-name-history-use-recentf t
+                                          ;helm-follow-mode-persistent t
+        helm-move-to-line-cycle-in-source t
+        ido-use-virtual-buffers t ; Needed in helm-buffers-list
+        helm-tramp-verbose 6
+        helm-buffers-fuzzy-matching t
+        )
+
+  (define-key helm-map (kbd "C-x 2") 'helm-select-2nd-action)
+  (define-key helm-map (kbd "C-x 3") 'helm-select-3rd-action)
+  (define-key helm-map (kbd "C-x 4") 'helm-select-4rd-action)
+
+  ;; (global-set-key (kbd "M-x") 'helm-M-x)
+  ;; (global-set-key (kbd "C-x b") 'helm-mini)
+
+  ;; (global-set-key (kbd "C-c f") 'helm-recentf)
+
+  ;; (add-hook 'eshell-mode-hook
+  ;;           #'(lambda ()
+  ;;               (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
+
+  ;; (setq helm-display-function
+  ;;       (lambda (buf)
+  ;;         (split-window-horizontally)
+  ;;         (other-window 1)
+  ;;         (switch-to-buffer buf)))
+
+  ;;; Debugging
+  ;;
+  ;;
+  (defun helm-debug-toggle ()
+    (interactive)
+    (setq helm-debug (not helm-debug))
+    (message "Helm Debug is now %s"
+             (if helm-debug "Enabled" "Disabled")))
+
+  (defun helm-ff-candidates-lisp-p (candidate)
+    (cl-loop for cand in (helm-marked-candidates)
+             always (string-match "\.el$" cand)))
+
+  ;; Add magit to `helm-source-ls-git'
+  ;; (helm-add-action-to-source
+  ;;  "Magit status"
+  ;;  #'(lambda (_candidate)
+  ;;      (with-helm-buffer (magit-status helm-default-directory)))
+  ;;  helm-source-ls-git 1)
+
+
+  ;;; Save current position to mark ring
+  ;;
+  ;; (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
+
+  ;; (require 'helm-ack)
+  ;; (setq helm-c-ack-auto-set-filetype nil)
+  ;; (setq helm-c-ack-insert-at-point'symbol)
+
+  ;; (require 'helm-ag)
+  ;; (setq helm-ag-insert-at-point 'symbol)
+  ;; (setq helm-ag-source-type 'file-line)
+
+  ;; (require 'helm-flycheck) ;; Not necessary if using ELPA package
+
+  ;; (require 'helm-swoop)
+
+  ;; (require 'helm-descbinds)
+  ;; (helm-descbinds-mode)
+
+
+  ;;; Enable helm-gtags-mode
+  ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  ;; (add-hook 'asm-mode-hook 'helm-gtags-mode)
+
+  ;; customize
+  ;; (custom-set-variables
+  ;;  '(helm-gtags-path-style 'relative)
+  ;;  '(helm-gtags-ignore-case t)
+  ;;  '(helm-gtags-auto-update t))
+
+  ;; key bindings
+  ;; (eval-after-load "helm-gtags"
+  ;;   '(progn
+  ;;      (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
+  ;;      (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
+  ;;      (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
+  ;;      (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
+  ;;      (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+  ;;      (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+  ;;      (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
+
+  ;; Save buffer when helm-multi-swoop-edit complete
+  (setq helm-multi-swoop-edit-save t)
+
+  ;; If this value is t, split window inside the current window
+  (setq helm-swoop-split-with-multiple-windows t)
+
+  ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
+  (setq helm-swoop-split-direction 'split-window-vertically)
+
+  ;; (helm-occur-init-source)
+
+  ;; (helm-attrset 'follow 1 helm-source-occur)
+  ;; (helm-attrset 'follow 1 helm-source-moccur)
+
+  (provide 'setup-helm)
+
+
+#+end_src
+
+
+*** Package: =expand-region=
+:PROPERTIES:
+:ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
+:END:
+[[https://github.com/magnars/expand-region.el][Homepage]]
+
+*_Features_*:
+=expand-region= allows you to select text objects incrementally. 
+
+..[screenshot]...
+
+*_Installation_*:
+=M-x list-packages= and select *expand-region* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: expand-region                       ;;
+  ;;                                              ;;
+  ;; GROUP: Convenience -> Abbreviation -> Expand ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'expand-region)
+  (global-set-key (kbd "M-m") 'er/expand-region)
+#+end_src
+
+I bind =er/expand-regin= to *M-m*, because the functionality is
+included from the amended =beginning-of-line= we did above.
+
+*** Package: =ibuffer-vc=
 :PROPERTIES:
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
@@ -950,10 +1157,6 @@ package:
 ** setup-files.el
 :PROPERTIES:
 :ID:       a98a61ac-177b-4e5a-8096-03945a4406a9
-:END:
-*** Built-in: recentf
-:PROPERTIES:
-:ID:       9daec59b-8c5e-4712-955d-be3b3414ad83
 :END:
 My sample customization:
 
@@ -1001,6 +1204,10 @@ My sample customization:
   ;; automatically refresh dired buffer on changes
   (add-hook 'dired-mode-hook 'auto-revert-mode)
 
+  ;; if it is not Windows, use the following listing switches
+  (when (not (eq system-type 'windows-nt))
+    (setq dired-listing-switches "-lha --group-directories-first"))
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Files -> Dired -> Wdired    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1017,7 +1224,6 @@ My sample customization:
    recentf-max-menu-items 30
    recentf-max-saved-items 5000
    )
-
 #+end_src
 
 *** Package: recentf-ext
@@ -1069,22 +1275,343 @@ package:
 
 *_Group_*: It has no group, but since it is related to files, we
 consider it in "files" group.
+** setup-external.el
+:PROPERTIES:
+:ID:       446c031b-6b27-4ead-9fa8-bfd478deaa5b
+:END:
+Sample configuration:
+
+#+begin_src emacs-lisp
+  ;,--------------------------------------
+  ;| MAIN GROUP: Flyspell
+  ;`--------------------------------------
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Processes -> Flyspell       ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   ispell-program-name "aspell"   ; use aspell instead of ispell
+
+   ispell-extra-args '("--sug-mode=ultra") ; check as fast as
+                      ; possible
+   )
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
+  (flyspell-prog-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Processes -> Gud            ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq gud-chdir-before-run nil
+  (gud-tooltip-mode)
+#+end_src
+** setup-communication.el
+:PROPERTIES:
+:ID:       d3cf2c79-9796-4b28-be6c-c16f1983cb5b
+:END:
+This group allows to customize communications, networking, and remote
+access to files. For example, ftp, ldap, dig, whois, netstat... I am
+find with the defaults. Customize more if you want and add to this
+file.
+** setup-programming.el
+:PROPERTIES:
+:ID:       78bb22f2-bc13-4a30-9cd4-9bb58d9a8ef5
+:END:
+Sample configuration:
+
+#+begin_src emacs-lisp
+  ;,--------------------------------------
+  ;| MAIN GROUP: Programming
+  ;`--------------------------------------
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Programming -> Languages -> C  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   c-basic-offset 4
+   )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Programming -> Tools -> Gdb ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   gdb-many-windows t             ; use gdb-many-windows by default
+   gdb-show-main t            ;Non-nil means display source
+                      ;file containing the main
+                      ;routine at startup
+   )
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Programming -> Tools -> Compilation ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Compilation from Emacs
+
+  (defun prelude-colorize-compilation-buffer ()
+    "Colorize a compilation mode buffer."
+    (interactive)
+    ;; we don't want to mess with child modes such as grep-mode, ack, ag, etc
+    (when (eq major-mode 'compilation-mode)
+      (let ((inhibit-read-only t))
+        (ansi-color-apply-on-region (point-min) (point-max)))))
+
+  (require 'compile)
+  (setq compilation-ask-about-save nil ; Just save before compiling
+        compilation-always-kill t ; Just kill old compile processes before
+                                          ; starting the new one
+        compilation-scroll-output 'first-error ; Automatically scroll to first
+                                          ; error
+        )
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Programming -> Tools -> Makefile ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; takenn from prelude-c.el:48: https://github.com/bbatsov/prelude/blob/master/modules/prelude-c.el
+  (defun prelude-makefile-mode-defaults ()
+    (whitespace-toggle-options '(tabs))
+    (setq indent-tabs-mode t ))
+
+  (setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
+
+  (add-hook 'makefile-mode-hook (lambda ()
+                                  (run-hooks 'prelude-makefile-mode-hook)))
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Programming -> Tools -> Ediff ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   ediff-diff-options "-w"
+   ediff-split-window-function 'split-window-horizontally
+   ediff-window-setup-function 'ediff-setup-windows-plain
+   )
+#+end_src
+** setup-applications.el
+:PROPERTIES:
+:ID:       f980e4ab-6603-4941-ab84-3903357597bb
+:END:
+Sample configuration:
+
+#+begin_src emacs-lisp
+  ;,--------------------------------------
+  ;| MAIN GROUP: Applications
+  ;`--------------------------------------
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Applications-> Eshell       ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'eshell)
+  (require 'em-alias)
+
+  (eshell/alias "o" "")
+  (eshell/alias "o" "find-file-other-window $*")
+  (eshell/alias "vi" "find-file-other-window $*")
+  (eshell/alias "vim" "find-file-other-window $*")
+  (eshell/alias "emacs" "find-file-other-window $*")
+  (eshell/alias "em" "find-file-other-window $*")
+
+  (eshell-toggle-direct-send)
+
+  ;; change listing switches based on OS
+  (when (not (eq system-type 'windows-nt))
+    (eshell/alias "ls" "ls --color -h --group-directories-first $*"))
+
+  (add-hook 'eshell-mode-hook 'electric-pair-mode)
+#+end_src
+
+I only use Eshell. You should modify others if you need.
 
 ** setup-development.el
 :PROPERTIES:
 :ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
 :END:
+Sammple configuration:
 
+#+begin_src emacs-lisp
+  ;,--------------------------------------
+  ;| MAIN GROUP: Development
+  ;`--------------------------------------
 
-** setup-ui.el
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Development -> Extensions -> Eldoc  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Development -> Extensions -> Ido ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Uncomment if you want to use Ido
+  ;; I am going to introduce a tool, argurably better, that
+  ;; replaces Ido: Helm
+
+  ;; (require 'ido)
+
+  ;; (setq
+  ;;  ido-enable-dot-prefix t
+  ;;  ido-enable-flex-matching t
+  ;;  ido-create-new-buffer 'always
+  ;;  ido-use-filename-at-point 'guess
+  ;;  ido-max-prospects 10
+  ;;  ido-default-file-method 'selected-window
+  ;;  )
+  ;; (ido-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Development -> Internal     ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Start garbage collection every 100MB
+  (setq gc-cons-threshold 100000000)
+#+end_src
+
+** setup-environment.el
 :PROPERTIES:
-:ID:       0c54618f-8c80-4f47-9cb7-a7003fab46ab
+:ID:       ee235775-cbc2-4ced-9e8a-5326ea7cc6d1
+:END:
+Sample configuration:
+
+#+begin_src emacs-lisp
+  ;,--------------------------------------
+  ;| MAIN GROUP: Environment
+  ;`--------------------------------------
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Environment -> Initialization ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq
+   inhibit-startup-screen t
+   )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Environment -> Minibuffer   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (icomplete-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Environment -> Minibuffer -> Savehist ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; savehist saves minibuffer history by defaults
+  (setq
+   savehist-additional-variables '(search ring regexp-search-ring) ;; also save your regexp search queries
+   savehist-autosave-interval 60 ;; save every minute
+   )
+  (savehist-mode) ;; enable savehist
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Environment -> Mode Line    ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (column-number-mode)
+#+end_src
+** setup-faces.el
+:PROPERTIES:
+:ID:       b85b2223-c23a-433f-b3cc-89b3fec6eef6
 :END:
 
-*** Chagning Emacs apperance
+*** Package: =number-font-lock=
 :PROPERTIES:
-:ID:       25197681-292e-47d4-89ff-53658862068b
+:ID:       2a36a6dc-057d-4e43-a00c-45015adbb11f
 :END:
+*_Homepage_*: 
+*_Features_*:
+
+Give number its own face.
+
+*_Installation_*:
+
+=M-x list-packages= and select *number-font-lock* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: number-font-lock          ;;
+  ;;                                    ;;
+  ;; GROUP: Faces -> Number Font Lock   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-hook 'prog-mode-hook 'number-font-lock-mode)
+#+end_src
+
+
+** setup-help.el
+:PROPERTIES:
+:ID:       0b7ba2b9-8cce-4516-b7ad-ff351b30994b
+:END:
+
+*** Package: =info+=
+:PROPERTIES:
+:ID:       d9f960bc-0ef7-49df-b7d8-4c98f99893ac
+:END:
+*_Homepage_*: [[http://www.emacswiki.org/emacs/InfoPlus][Info+]]
+*_Features_*:
+Info+ helps you read Info documents more enjoyable with extra
+highlighting it provides.
+
+*_Installation_*:
+
+=M-x list-packages= and select *info+* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Help -> Info+               ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'info+)
+#+end_src
+
+*** Package: =help+=
+:PROPERTIES:
+:ID:       eb0f4552-02af-4500-a839-82016cff719c
+:END:
+*_Homepage_*: 
+*_Features_*:
+*_Installation_*:
+
+=M-x list-packages= and select *help+* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+*** Package: =help-fns+=
+:PROPERTIES:
+:ID:       8fd8c1ee-555c-4ba4-9513-176c5e382b72
+:END:
+*_Homepage_*: 
+*_Features_*:
+*_Installation_*:
+
+=M-x list-packages= and select *help-fns+* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: help-fns+                 ;;
+  ;;                                    ;;
+  ;; GROUP: Help                        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'help-fns+)
+#+end_src
+
+*** Package: help-mode+
+:PROPERTIES:
+:ID:       6d65f9ca-ab61-4d8e-83ac-40f9325e1780
+:END:
+*_Homepage_*: 
+*_Features_*:
+*_Installation_*:
+
+=M-x list-packages= and select *help-mode+* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: help-mode+                ;;
+  ;;                                    ;;
+  ;; GROUP: Help                        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'help-mode+)
+#+end_src
+
 ** setup-editor.el
 :PROPERTIES:
 :ID:       f3eab381-cb88-4e5a-8ff1-24cdb454a744
@@ -1189,11 +1716,11 @@ consider it in "files" group.
 :END:
 *** Package: golden-ratio
 :PROPERTIES:
-:ID:       55499f58-b666-477d-9e81-99cb92464b7f
+:ID:       f6ac2425-ef91-493e-bdb0-a50cc0ade267
 :END:
 *** Package: policty-witch.el
 :PROPERTIES:
-:ID:       e75cca87-377e-41eb-9b66-4de60814f490
+:ID:       449ca81b-5109-4a81-881e-982694422ab7
 :END:
 ** setup-projectile.el
 :PROPERTIES:
