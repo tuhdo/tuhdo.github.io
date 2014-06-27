@@ -700,7 +700,7 @@ line, but move to the first non-whitespace character of that line.
   (global-set-key (kbd "C-a") 'prelude-move-beginning-of-line)
 #+end_src
 
-The code is taken from this article: [[http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/][Smarter Navigation to the
+The code above is taken from this article: [[http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/][Smarter Navigation to the
 Beginning of a Line]].
 
 #+begin_src emacs-lisp
@@ -740,6 +740,8 @@ Beginning of a Line]].
 :PROPERTIES:
 :ID:       f8441653-b68d-4c18-8eb4-28ceff5739fc
 :END:
+*_Author_*: Keitalo Miyazaki, =Keitaro.Miyazaki@gmail.com=
+*_Homepage_*: [[http://www.emacswiki.org/emacs/VolatileHighlights][Emacswiki]]
 *_Features_*:
 
 VolatileHighlights highlights changes to the buffer caused by commands
@@ -763,12 +765,16 @@ the package:
   (volatile-highlights-mode t)
 #+end_src
 
+*_Usage_*: When you yank (paste) something, the yanked (pasted) region
+will be highlighted.
+
 *** Package: =clean-aindent-mode=
 :PROPERTIES:
 :ID:       49958ce7-6af0-47ac-b309-6ea75833f0e1
 :END:
 [[https://github.com/pmarinov/clean-aindent-mode][Homepage]]
-
+*_Author_*: [[https://github.com/pmarinov][Peter Marinov]]
+*_Homepage_*: [[https://github.com/pmarinov/clean-aindent-mode][Github]]
 *_Features_*:
 
 When you press *RET* to create a newline and got indented by
@@ -793,11 +799,14 @@ the package:
   (require 'clean-aindent-mode)
 #+end_src
 
+*_Usage_*: Automatically cleanup useless whitepsace on moving up/down.
+
 *** Package: =undo-tree=
 :PROPERTIES:
 :ID:       03030916-bb5c-4966-8fa1-68807b60bec2
 :END:
-*_Features:_*
+*_Author_*: Toby Cubitt, =toby-undo-tree@dr-qubit.org=
+*_Homepage_*: [[http://www.dr-qubit.org/emacs.php#undo-tree][www.dr-qubit.org]]
 *_Features_*: 
 
 =undo-tree= allows you to visual the whole history of your editing in
@@ -821,14 +830,19 @@ the package:
   (global-undo-tree-mode)
 #+end_src
 
+*_Usage_*:
+
 From now on, your undo (*C-/*) behaves just like normal editor. To
 redo, *C-_*. To open the undo tree, *C-x u*.
 
-*** Package: =yasnippet=
+*** COMMENT Package: =yasnippet=
 :PROPERTIES:
 :ID:       bb1ea352-f9ea-47fe-bb3e-5727e542c481
 :END:
+*_Author_*: [[https://github.com/capitaomorte][João Távora]]
+*_Homepage_*: [[https://github.com/capitaomorte/yasnippet][Github]]
 *_Features_*:
+
 YASnippet is a template system for Emacs. It allows you to type an
 abbreviation and automatically expand it into function
 templates. Bundled language templates include: C, C++, C#, Perl,
@@ -850,6 +864,18 @@ the package:
   (require 'yasnippet)
   (yas-global-mode 1)
 #+end_src
+
+*_Usage_*: In major modes where *yasnippet* has snippets available,
+typing a certain keyword and *TAB* insert a predefined snippet. For
+example, in a C buffer, if you type =for= and *TAB*, it expands to:
+
+#+begin_src c
+  for (i = 0; i < N; i++) {
+      ...point will be here....
+  }
+#+end_src
+
+You can view supported snippets [[https://github.com/AndreaCrotti/yasnippet-snippets/tree/master][here]].
 
 ** setup-convenience.el
 :PROPERTIES:
@@ -913,8 +939,8 @@ Here is my sample customization:
 :PROPERTIES:
 :ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
 :END:
-[[https://github.com/magnars/expand-region.el][Homepage]]
-
+*_Author_*: [[https://github.com/magnars][Magnar Sveen]]
+*_Homepage_*: [[https://github.com/magnars/expand-region.el][Github]]
 *_Features_*:
 =expand-region= allows you to select text objects incrementally. 
 
@@ -938,11 +964,14 @@ the package:
 I bind =er/expand-regin= to *M-m*, because the functionality is
 included from the amended =beginning-of-line= we did above.
 
+*_Usage_*: *M-m* to continue expand outward.
+
 *** Package: =ibuffer-vc=
 :PROPERTIES:
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
-...[add homepage]...
+*_Author_*: [[https://github.com/purcell][Steve Purcell]]
+*_Homepage_*: [[https://github.com/purcell/ibuffer-vc][Github]]
 *_Features_*:
 
 - Group your buffers by their parent vc root directory
@@ -976,6 +1005,9 @@ package:
                 filename-and-process)))
 #+end_src
 
+*_Usage_*: When you use =ibuffer=, it will automatically group buffers
+by version control system.
+
 *** Package: =rebox2=
 :PROPERTIES:
 :ID:       54921b8d-80fb-4b7d-b8d4-e47a90496af0
@@ -1004,10 +1036,14 @@ package:
 
 *_Usage_*:
 
+- Mark a region.
+- *M-q* to cycle between box styles.
+
 *** Package: =pretty-lambdada=
 :PROPERTIES:
 :ID:       c2e6f887-53a6-4c05-bfa2-87435e138699
 :END:
+*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 *_Homepage_*: [[http://www.emacswiki.org/emacs/PrettyLambda][Emacswiki]]
 *_Features_*:
 Display of the word `lambda' as the Greek character.
@@ -1026,10 +1062,14 @@ package:
   (global-pretty-lambda-mode)
 #+end_src
 
+*_Usage_*: The word `lambda' automatically displayed as Greek
+character.
+
 *** Package: =projectile=
 :PROPERTIES:
 :ID:       f6ec9632-9fa5-477b-bf34-5975b760577a
 :END:
+*_Author_*: [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
 *_Homepage_*: [[https://github.com/bbatsov/projectile][Github]]
 *_Features_*:
 
@@ -1083,11 +1123,12 @@ Here's a glimpse of Projectile in action:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (projectile-global-mode)
 #+end_src
-*_Usage_*:
+*_Usage_*: Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
 *** Package: =zygospore=
 :PROPERTIES:
 :ID:       27f1d211-f9b8-4cb8-b732-95025ed5469c
 :END:
+*_Author_*: [[https://github.com/LouisKottmann][Louis Kottmann]], =louis.kottmann@gmail.com=
 *_Homepage_*: [[https://github.com/LouisKottmann/zygospore.el][Github]]
 *_Features_*:
 =zygospore= lets you revert *C-x 1* (delete-other-window) by pressing
@@ -1106,13 +1147,19 @@ Here's a glimpse of Projectile in action:
   (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
 #+end_src
 
-*_Usage_*:
-Press =C-x 1= to toggle between previous/current windows.
+*_Usage_*: *C-x 1* to toggle between previous/current windows.
 *** Package: =helm=
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
 :END:
-*_Homepage_*:
+*_Author_*:
+
+- Tamas Patrovic (past maintainer), from 2007.
+- rubikitch =rubikitch@ruby-lang.org=, from 2008-2011.
+- [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current
+  maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
+
+*_Homepage_*: [[https://github.com/emacs-helm/helm][Github]]
 *_Installation_*:
 *_Features_*:
 
@@ -1131,10 +1178,6 @@ the package:
   (require 'helm-eshell)
   (require 'helm-files)
   (require 'wgrep-helm)
-
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
   (eval-after-load 'helm-grep
     '(progn
@@ -1182,6 +1225,7 @@ the package:
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-c h m") 'helm-man-woman)
   (global-set-key (kbd "C-c h f") 'helm-find)
+  (global-set-key (kbd "C-c h g") 'helm-do-grep)
   (global-set-key (kbd "C-c h o") 'helm-occur)
   (global-set-key (kbd "C-h C-f") 'helm-apropos)
 
@@ -1198,6 +1242,64 @@ the package:
 
 *_Usage_*:
 
+After using Helm, you are going to have a big change in the way you
+use Emacs. After getting used to the Helm way, you don't want to leave
+it. However, if you don't like Helm, you can still use Ido, which is
+introduted in later section. Let's learn how to use helm by play with
+it.
+
+- =helm-M-x=:
+
+=M-x= and see the difference. You will see a buffer that lists
+commands in Emacs. Some of you may not like it because it seems
+overkill at first. However, even if you really don't like, please bear
+with me until the end.
+
+Now, type =li pa=; that's right =li= , a space and =pa=. You will see,
+=list-packages= is at the top. Surprise! Let's try another input. Now,
+type =pa ^li=, and you will receive =list-package= as the first
+entry. Completion with Helm is very different with the usual Emacs
+completion:
+
+- You type someting.
+- Instead of *TAB* to expand the common part until you find your
+  candidates, in Helm, you type a parts of the candidate you want to
+  search, separated by spaces.
+- Helm will try to search and sort according to highest match, from
+  top to bottom. The best match is at the top, so you can press *RET*
+  and select it.
+- You can navigate the buffer with *C-n* and *C-p* or *<up>* and
+  *<down>* to move up/down, *C-v* and *M-v* to move to next/previous
+  pages, and *M-<* and *M->* to move to top and bottom of the Helm
+  buffer that is dispalying the candidates. Please try it.
+
+When you execute a Helm command, you enter a Helm session. A Helm
+session is a state dedicated to working with Helm features and a
+dedicated Helm buffer is opened. When you quit a Helm session, a Helm
+buffer is closed. In Helm, you basically need to remember the 3
+commands:
+
+- Access to action menu with *TAB*; an action menu is a text-based
+  menu that lists actions you can take. For example, =Find File= (open
+  file), =Find File in Dired=, =Grep File=...
+- *C-z* executes *helm-execute-persistent-action*; a persistent action
+  is an action that you use repeatedly in a Helm session.
+- In some Helm session, such as =helm-find-files= or =helm-mini=, you
+  can select more than one candidates and execute actions on them,
+  such as =grep= or =open=.
+
+However, for convinience, let's *TAB* with *C-z* in the above
+settings, so we can use *TAB* more comfortably, because you actually
+use *helm-execute-persistent-action* more than
+*helm-select-action* by adding the code snippet below:
+
+#+begin_src emacs-lisp
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+#+end_src
+
+
 
 ** setup-files.el
 :PROPERTIES:
@@ -1213,9 +1315,7 @@ My sample customization:
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Files                      ;;
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (setq
-   large-file-warning-threshold 100000000 ;; size in bytes
-   )
+  (setq large-file-warning-threshold 100000000) ;; size in bytes
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Files -> Back up            ;;
@@ -1253,9 +1353,30 @@ My sample customization:
   (when (not (eq system-type 'windows-nt))
     (setq dired-listing-switches "-lha --group-directories-first"))
 
+  ;;; KEY BINDINGS.
+  ;; (define-key ctl-x-map "\C-j" 'dired-jump)
+  ;; (define-key ctl-x-4-map "\C-j" 'dired-jump-other-window))
+  ;; (define-key dired-mode-map "\C-x\M-o" 'dired-omit-mode)
+  ;; (define-key dired-mode-map "*O" 'dired-mark-omitted)
+  ;; (define-key dired-mode-map "\M-(" 'dired-mark-sexp)
+  ;; (define-key dired-mode-map "*(" 'dired-mark-sexp)
+  ;; (define-key dired-mode-map "*." 'dired-mark-extension)
+  ;; (define-key dired-mode-map "\M-!" 'dired-smart-shell-command)
+  ;; (define-key dired-mode-map "\M-G" 'dired-goto-subdir)
+  ;; (define-key dired-mode-map "F" 'dired-do-find-marked-files)
+  ;; (define-key dired-mode-map "Y"  'dired-do-relsymlink)
+  ;; (define-key dired-mode-map "%Y" 'dired-do-relsymlink-regexp)
+  ;; (define-key dired-mode-map "V" 'dired-do-run-mail)
+  (require 'dired-x) ; provide extra commands for Dired
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Files -> Dired -> Wdired    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; wdired allows you to edit a Dired buffer and write changes to disk
+  ;; - Switch to Wdired by C-x C-q
+  ;; - Edit the Dired buffer, i.e. change filenames
+  ;; - Commit by C-c C-c, abort by C-c C-k
+  (require 'wdired)
   (setq
    wdired-allow-to-change-permissions t   ; allow to edit permission bits
    wdired-allow-to-redirect-links     ; allow to edit symlinks
@@ -1271,14 +1392,36 @@ My sample customization:
    )
 #+end_src
 
-*** Package: =wdired=
-:PROPERTIES:
-:ID:       4630f3ad-ff37-4728-8a9f-c153abb1bca0
-:END:
 *** Package: =dired+=
 :PROPERTIES:
 :ID:       fd414006-0a5c-4354-91fd-e68975aed67f
 :END:
+*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+*_Homepage_*: [[http://www.emacswiki.org/emacs/DiredPlus][Emacswiki]]
+*_Features_*:
+=Dired+= (library =dired+.el=), which extends functionalities provided by
+standard GNU Emacs libraries =dired.el=, =dired-aux.el=, and
+=dired-x.el=. The standard functions are all available, plus many
+more.
+
+...[screenshot]....
+...[screenshot]....
+...[screenshot]....
+
+*_Installation_*:
+=M-x list-packages= and select *dired+* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: dired+                     ;;
+  ;;                                     ;;
+  ;; GROUP: Files -> Dired -> Dired Plus ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'dired+)
+#+end_src
+
 *** Package: =recentf-ext=
 :PROPERTIES:
 :ID:       8013594a-f2f3-477c-820c-caf1354ac23d
@@ -1297,6 +1440,11 @@ it. After finish installing, add this code snippet to activate the
 package:
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: recentf-ext    ;;
+  ;;                         ;;
+  ;; GROUP: Files -> Recentf ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'recentf-ext)
 #+end_src
 
@@ -1322,6 +1470,13 @@ it. After finish installing, add this code snippet to activate the
 package:
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: ztree  ;;
+  ;;                 ;;
+  ;; GROUP: No group ;;
+  ;;;;;;;;;;;;;;;;;;;;;
+  ;; since ztree works with files and directories, let's consider it in
+  ;; group Files
   (require 'ztree-diff)
   (require 'ztree-dir)
 #+end_src
@@ -1333,6 +1488,55 @@ consider it in "files" group.
 :PROPERTIES:
 :ID:       0bcdb090-e59b-4c02-96d1-47a1cc6173eb
 :END:
+*_Author_*: [[https://github.com/m00natic][Andrey Kotlarski]], =m00naticus@gmail.com=
+*_Homepage_*: [[https://github.com/m00natic/vlfi][Github]]
+*_Features_*:
+
+Emacs minor mode that allows viewing, editing, searching and comparing
+large files in batches. Batch size can be adjusted on the fly and
+bounds the memory that is to be used for operations on the file. This
+way multiple large files (like terabytes or whatever) can be instantly
+and simultaneously accessed without swapping and degraded
+performance.
+
+This is development version of the GNU ELPA VLF package. Here’s what
+it offers in a nutshell:
+
+- regular expression search on whole file (in constant memory
+  determined by current batch size)
+- chunk editing (if size has changed, saving is done in constant
+  memory determined by current batch size)
+- Occur like indexing
+- options to jump to beginning, end or arbitrary file chunk
+- ability to jump/insert given number of batches at once
+- newly added content is acknowledged if file has changed size
+  meanwhile
+- automatic scrolling of batches
+- as a minor mode, font locking and functionality of the respective
+  major mode is also present
+- by batch Ediff comparison
+- can be added as option to automatically open large files
+- smooth integration with hexl-mode
+- works with TRAMP so accessing network files is fine
+
+GNU Emacs 23 and 24 are supported.
+
+*_Installation_*:
+=M-x list-packages= and select ** package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: vlf        ;;
+  ;;                     ;;
+  ;; GROUP: Files -> Vlf ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'vlf-integrate)
+  (setq vlf-application 'dont-ask) ;; automatically use vlf on large file,
+                                   ;; when the file exceed large-file-warning-threshold
+#+end_src
+
 ** setup-external.el
 :PROPERTIES:
 :ID:       446c031b-6b27-4ead-9fa8-bfd478deaa5b
@@ -1350,12 +1554,10 @@ Sample configuration:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (setq
    ispell-program-name "aspell"   ; use aspell instead of ispell
-
    ispell-extra-args '("--sug-mode=ultra") ; check as fast as
                       ; possible
    )
   (add-hook 'text-mode-hook 'flyspell-mode)
-  (add-hook 'org-mode-hook 'flyspell-mode)
   (flyspell-prog-mode)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1386,7 +1588,20 @@ Sample configuration:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Programming -> Languages -> C  ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Available C style:
+  ;; “gnu”: The default style for GNU projects
+  ;; “k&r”: What Kernighan and Ritchie, the authors of C used in their book
+  ;; “bsd”: What BSD developers use, aka “Allman style” after Eric Allman.
+  ;; “whitesmith”: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.
+  ;; “stroustrup”: What Stroustrup, the author of C++ used in his book
+  ;; “ellemtel”: Popular C++ coding standards as defined by “Programming in C++, Rules and Recommendations,” Erik Nyquist and Mats Henricson, Ellemtel
+  ;; “linux”: What the Linux developers use for kernel development
+  ;; “python”: What Python developers use for extension modules
+  ;; “java”: The default style for java-mode (see below)
+  ;; “user”: When you want to define your own style
   (setq
+   c-default-style "linux" ;; set style to "linux"
    c-basic-offset 4
    )
 
