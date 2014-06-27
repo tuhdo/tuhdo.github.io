@@ -56,10 +56,10 @@ remember these syntax constructs to use any Lisp:
      languages, meaning the most basic construct and indivisible. Atoms
      include following basic types, you should try in IELM:
 
-     + Number: integer like 1, 2, 3... or floating point numbers like
+     + *Number*: integer like 1, 2, 3... or floating point numbers like
        1.5, 3.14...
 
-     + String: strings like "a", "string", "this is a string"... Is
+     + *String*: strings like "a", "string", "this is a string"... Is
        also an atom. String is immutable.
 
      + =NIL= or =()=: NIL means =null= in other languages. =()= means
@@ -68,7 +68,7 @@ remember these syntax constructs to use any Lisp:
        =()= means the value =false=; all other non-empty values in Lisp
        are true.
 
-     + Symbol: A symbol is an object with a name. You can think of
+     + *Symbol*: A symbol is an object with a name. You can think of
        symbol as pointer or reference in other language. Each symbol
        has 4 components:
 
@@ -233,17 +233,18 @@ Lisp forms are classified into 3 types:
   both. For example, this is =if..then..else= in Lisp:
 
   #+begin_src emacs-lisp
-    (if condition
+    (if condition  ;; condition is a valid Lisp form
         ...do something if true...
       ...do something if false...)
   #+end_src
 
   Let's consider the behaviour of =if=, not just in Lisp but in any
-  language: if condition is true, then do something, else do something
-  if false. For this reason, =if= cannot be a function call because
-  =condition=, =true= and =false= are all evaluated and passed into
-  if, while we want first check =condition=, then depend on the
-  outcome of =condition=, we select a true or false branch.
+  language: if condition (a valid Lisp form) is true, then do
+  something, else do something if false. For this reason, =if= cannot
+  be a function call because =condition=, =true= and =false= are all
+  evaluated and passed into if, while we want first check =condition=,
+  then depend on the outcome of =condition=, we select a true or false
+  branch.
 
   Most forms in Lisp are functions, except special cases such as
   =if=, =and=, =or=... that cannot follow the evaluation rule of a

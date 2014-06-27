@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-06-26 Thu 12:02 -->
+<!-- 2014-06-27 Fri 16:27 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -258,11 +258,11 @@ languages, meaning the most basic construct and indivisible. Atoms
 include following basic types, you should try in IELM:
 
 <ul class="org-ul">
-<li>Number: integer like 1, 2, 3&#x2026; or floating point numbers like
+<li><b>Number</b>: integer like 1, 2, 3&#x2026; or floating point numbers like
 1.5, 3.14&#x2026;
 </li>
 
-<li>String: strings like "a", "string", "this is a string"&#x2026; Is
+<li><b>String</b>: strings like "a", "string", "this is a string"&#x2026; Is
 also an atom. String is immutable.
 </li>
 
@@ -273,7 +273,7 @@ or false test, usch as an if statement, <code>NIL</code> or the empty list
 are true.
 </li>
 
-<li>Symbol: A symbol is an object with a name. You can think of
+<li><b>Symbol</b>: A symbol is an object with a name. You can think of
 symbol as pointer or reference in other language. Each symbol
 has 4 components:
 
@@ -498,7 +498,7 @@ both. For example, this is <code>if..then..else</code> in Lisp:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> condition
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> condition  <span style="color: #b22222;">;; </span><span style="color: #b22222;">condition is a valid Lisp form</span>
     ...do something if true...
   ...do something if false...)
 </pre>
@@ -506,11 +506,12 @@ both. For example, this is <code>if..then..else</code> in Lisp:
 
 <p>
 Let's consider the behaviour of <code>if</code>, not just in Lisp but in any
-language: if condition is true, then do something, else do something
-if false. For this reason, <code>if</code> cannot be a function call because
-<code>condition</code>, <code>true</code> and <code>false</code> are all evaluated and passed into
-if, while we want first check <code>condition</code>, then depend on the
-outcome of <code>condition</code>, we select a true or false branch.
+language: if condition (a valid Lisp form) is true, then do
+something, else do something if false. For this reason, <code>if</code> cannot
+be a function call because <code>condition</code>, <code>true</code> and <code>false</code> are all
+evaluated and passed into if, while we want first check <code>condition</code>,
+then depend on the outcome of <code>condition</code>, we select a true or false
+branch.
 </p>
 
 <p>
