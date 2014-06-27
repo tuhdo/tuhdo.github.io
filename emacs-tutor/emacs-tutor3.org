@@ -909,184 +909,6 @@ Here is my sample customization:
   (windmove-default-keybindings)
 #+end_src
 
-*** Package: =helm=
-:PROPERTIES:
-:ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
-:END:
-*_Homepage_*:
-*_Installation_*:
-*_Features_*:
-
-=M-x list-packages= and select *helm* package, then
-install it. After finish installing, add this code snippet to activate
-the package:
-
-#+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGE: helm                      ;;
-  ;;                                    ;;
-  ;; GROUP: Convenience -> Helm         ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (require 'helm)
-  (require 'helm-config)
-  (require 'helm-eshell)
-  (require 'helm-files)
-  (require 'wgrep-helm)
-
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-z")  'helm-select-action)
-
-  (eval-after-load 'helm-grep
-    '(progn
-       (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
-       (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
-       (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)))
-
-  (setq helm-google-suggest-use-curl-p t
-                                          ;helm-kill-ring-threshold 1
-        ;; helm-raise-command "wmctrl -xa %s"
-        helm-scroll-amount 4
-        helm-quick-update t
-        helm-idle-delay 0.01
-        helm-input-idle-delay 0.01
-                                          ;helm-completion-window-scroll-margin 0
-                                          ;helm-display-source-at-screen-top nil
-        helm-ff-search-library-in-sexp t
-                                          ;helm-kill-ring-max-lines-number 5
-        ;; helm-default-external-file-browser "thunar"
-        ;; helm-pdfgrep-default-read-command "evince --page-label=%p '%f'"
-                                          ;helm-ff-transformer-show-only-basename t
-        ;; helm-ff-auto-update-initial-value t
-        ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
-        ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
-        ;; helm-reuse-last-window-split-state t
-                                          ;helm-split-window-default-side 'other
-                                          ;helm-split-window-in-side-p nil
-        ;; helm-always-two-windows t
-                                          ;helm-persistent-action-use-special-display t
-        helm-buffers-favorite-modes (append helm-buffers-favorite-modes
-                                            '(picture-mode artist-mode))
-        helm-ls-git-status-command 'magit-status
-                                          ;helm-never-delay-on-input nil
-        helm-candidate-number-limit 200
-        helm-M-x-requires-pattern 0
-        ;; helm-dabbrev-cycle-thresold 5
-        ;; helm-surfraw-duckduckgo-url "https://duckduckgo.com/?q=%s&ke=-1&kf=fw&kl=fr-fr&kr=b&k1=-1&k4=-1"
-        helm-boring-file-regexp-list '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$")
-                                          ;helm-mode-handle-completion-in-region t
-                                          ;helm-moccur-always-search-in-current t
-                                          ;helm-tramp-verbose 6
-                                          ;helm-ff-file-name-history-use-recentf t
-                                          ;helm-follow-mode-persistent t
-        helm-move-to-line-cycle-in-source t
-        ido-use-virtual-buffers t ; Needed in helm-buffers-list
-        helm-tramp-verbose 6
-        helm-buffers-fuzzy-matching t
-        )
-
-  (define-key helm-map (kbd "C-x 2") 'helm-select-2nd-action)
-  (define-key helm-map (kbd "C-x 3") 'helm-select-3rd-action)
-  (define-key helm-map (kbd "C-x 4") 'helm-select-4rd-action)
-
-  ;; (global-set-key (kbd "M-x") 'helm-M-x)
-  ;; (global-set-key (kbd "C-x b") 'helm-mini)
-
-  ;; (global-set-key (kbd "C-c f") 'helm-recentf)
-
-  ;; (add-hook 'eshell-mode-hook
-  ;;           #'(lambda ()
-  ;;               (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
-
-  ;; (setq helm-display-function
-  ;;       (lambda (buf)
-  ;;         (split-window-horizontally)
-  ;;         (other-window 1)
-  ;;         (switch-to-buffer buf)))
-
-  ;;; Debugging
-  ;;
-  ;;
-  (defun helm-debug-toggle ()
-    (interactive)
-    (setq helm-debug (not helm-debug))
-    (message "Helm Debug is now %s"
-             (if helm-debug "Enabled" "Disabled")))
-
-  (defun helm-ff-candidates-lisp-p (candidate)
-    (cl-loop for cand in (helm-marked-candidates)
-             always (string-match "\.el$" cand)))
-
-  ;; Add magit to `helm-source-ls-git'
-  ;; (helm-add-action-to-source
-  ;;  "Magit status"
-  ;;  #'(lambda (_candidate)
-  ;;      (with-helm-buffer (magit-status helm-default-directory)))
-  ;;  helm-source-ls-git 1)
-
-
-  ;;; Save current position to mark ring
-  ;;
-  ;; (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
-
-  ;; (require 'helm-ack)
-  ;; (setq helm-c-ack-auto-set-filetype nil)
-  ;; (setq helm-c-ack-insert-at-point'symbol)
-
-  ;; (require 'helm-ag)
-  ;; (setq helm-ag-insert-at-point 'symbol)
-  ;; (setq helm-ag-source-type 'file-line)
-
-  ;; (require 'helm-flycheck) ;; Not necessary if using ELPA package
-
-  ;; (require 'helm-swoop)
-
-  ;; (require 'helm-descbinds)
-  ;; (helm-descbinds-mode)
-
-
-  ;;; Enable helm-gtags-mode
-  ;; (add-hook 'c-mode-hook 'helm-gtags-mode)
-  ;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  ;; (add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-  ;; customize
-  ;; (custom-set-variables
-  ;;  '(helm-gtags-path-style 'relative)
-  ;;  '(helm-gtags-ignore-case t)
-  ;;  '(helm-gtags-auto-update t))
-
-  ;; key bindings
-  ;; (eval-after-load "helm-gtags"
-  ;;   '(progn
-  ;;      (define-key helm-gtags-mode-map (kbd "M-t") 'helm-gtags-find-tag)
-  ;;      (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
-  ;;      (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
-  ;;      (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
-  ;;      (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-  ;;      (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-  ;;      (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
-
-  ;; Save buffer when helm-multi-swoop-edit complete
-  (setq helm-multi-swoop-edit-save t)
-
-  ;; If this value is t, split window inside the current window
-  (setq helm-swoop-split-with-multiple-windows t)
-
-  ;; Split direcion. 'split-window-vertically or 'split-window-horizontally
-  (setq helm-swoop-split-direction 'split-window-vertically)
-
-  ;; (helm-occur-init-source)
-
-  ;; (helm-attrset 'follow 1 helm-source-occur)
-  ;; (helm-attrset 'follow 1 helm-source-moccur)
-
-  (provide 'setup-helm)
-
-
-#+end_src
-
-
 *** Package: =expand-region=
 :PROPERTIES:
 :ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
@@ -1129,7 +951,7 @@ included from the amended =beginning-of-line= we did above.
 
 ...[screenshot on homepage]...
 
-*_Installation*:
+*_Installation_*:
 =M-x list-packages= and select *ibuffer-vc* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1153,6 +975,229 @@ package:
                 " "
                 filename-and-process)))
 #+end_src
+
+*** Package: =rebox2=
+:PROPERTIES:
+:ID:       54921b8d-80fb-4b7d-b8d4-e47a90496af0
+:END:
+*_Homepage_*:
+*_Features_*:
+*_Installation_*:
+=M-x list-packages= and select *rebox2* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: rebox2             ;;
+  ;;                             ;;
+  ;; GROUP: Convenience -> Rebox ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'rebox2)
+  (global-set-key [(meta q)] 'rebox-dwim)
+  (global-set-key [(shift meta q)] 'rebox-cycle)
+  (add-hook 'prog-mode-hook (lambda ()
+                              (set (make-local-variable 'rebox-style-loop) '(25 17 21))
+                              (set (make-local-variable 'rebox-min-fill-column) 40)
+                              (rebox-mode 1)))
+#+end_src
+
+*_Usage_*:
+
+*** Package: =pretty-lambdada=
+:PROPERTIES:
+:ID:       c2e6f887-53a6-4c05-bfa2-87435e138699
+:END:
+*_Homepage_*: [[http://www.emacswiki.org/emacs/PrettyLambda][Emacswiki]]
+*_Features_*:
+Display of the word `lambda' as the Greek character.
+
+*_Installation_*:
+=M-x list-packages= and select *pretty-lambdada* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGEE: pretty-lambdada            ;;
+  ;;                                      ;;
+  ;; GROUP: Convenience -> Pretty Lambdap ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (global-pretty-lambda-mode)
+#+end_src
+
+*** Package: =projectile=
+:PROPERTIES:
+:ID:       f6ec9632-9fa5-477b-bf34-5975b760577a
+:END:
+*_Homepage_*: [[https://github.com/bbatsov/projectile][Github]]
+*_Features_*:
+
+*Projectile* is a project interaction library for Emacs. Its goal is to
+provide a nice set of features operating on a project level without
+introducing external dependencies(when feasible). For instance -
+finding project files has a portable implementation written in pure
+Emacs Lisp without the use of GNU =find= (but for performance sake an
+indexing mechanism backed by external commands exists as well). 
+
+Projectile tries to be practical - portability is great, but if some
+external tools could speed up some task substantially and the tools
+are available, Projectile will leverage them. 
+
+This library provides easy project management and navigation. The
+concept of a project is pretty basic - just a folder containing
+special file. Currently =git=, =mercurial=, =darcs= and =bazaar= repos are
+considered projects by default. So are =lein=, =maven=, =sbt=, =rebar= and
+bundler projects. If you want to mark a folder manually as a project
+just create an empty .projectile file in it. Some of Projectile's
+features:
+
+- jump to a file in project
+- jump to a directory in project
+- jump to a file in a directory
+- jump to a project buffer
+- jump to a test in project
+- toggle between code and its test
+- jump to recently visited files in the project
+- switch between projects you have worked on
+- kill all project buffers
+- replace in project
+- multi-occur in project buffers
+- grep in project
+- regenerate project etags or gtags (requires gtags).
+- visit project in dired
+- run make in a project with a single key chord
+
+Here's a glimpse of Projectile in action:
+
+...[screenshot]...
+
+
+*_Installation_*:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGES: projectile             ;;
+  ;;                                  ;;
+  ;; GROUP: Convenience -> Projectile ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (projectile-global-mode)
+#+end_src
+*_Usage_*:
+*** Package: =zygospore=
+:PROPERTIES:
+:ID:       27f1d211-f9b8-4cb8-b732-95025ed5469c
+:END:
+*_Homepage_*: [[https://github.com/LouisKottmann/zygospore.el][Github]]
+*_Features_*:
+=zygospore= lets you revert *C-x 1* (delete-other-window) by pressing
+**C-x 1* again
+
+...[screenshot]...
+
+*_Installation_*:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: zygospore                          ;;
+  ;;                                             ;;
+  ;; GROUP: No Group, but it's quiate convenient ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
+#+end_src
+
+*_Usage_*:
+Press =C-x 1= to toggle between previous/current windows.
+*** Package: =helm=
+:PROPERTIES:
+:ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
+:END:
+*_Homepage_*:
+*_Installation_*:
+*_Features_*:
+
+=M-x list-packages= and select *helm* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: helm                      ;;
+  ;;                                    ;;
+  ;; GROUP: Convenience -> Helm         ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'helm)
+  (require 'helm-config)
+  (require 'helm-eshell)
+  (require 'helm-files)
+  (require 'wgrep-helm)
+
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+
+  (eval-after-load 'helm-grep
+    '(progn
+       (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
+       (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
+       (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)))
+
+  (setq helm-google-suggest-use-curl-p t
+                                          ;helm-kill-ring-threshold 1
+        ;; helm-raise-command "wmctrl -xa %s"
+        helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
+        helm-quick-update t ; do not display invisible candidates
+        helm-idle-delay 0.01 ; be idle for this many seconds, before updating in delayed sources.
+        helm-input-idle-delay 0.01 ; be idle for this many seconds, before updating candidate buffer
+        helm-ff-search-library-in-sexp t  ; search for library in `require' and `declare-function' sexp.
+                                          ;helm-kill-ring-max-lines-number 5
+
+        ;; you can customize helm-do-grep to execute ack-grep
+        ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
+        ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
+        ;; helm-reuse-last-window-split-state t
+        helm-split-window-default-side 'other ;; open helm buffer in another window
+        helm-split-window-in-side-p nil ;; open helm buffer inside current window, not occupy whole other window
+        helm-buffers-favorite-modes (append helm-buffers-favorite-modes
+                                            '(picture-mode artist-mode))
+        helm-candidate-number-limit 200 ; limit the number of displayed canidates
+        helm-M-x-requires-pattern 0 ; show all candidates when set to 0
+        helm-boring-file-regexp-list
+        '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$") ; do not show these files in helm buffer
+        helm-ff-file-name-history-use-recentf t
+        helm-move-to-line-cycle-in-source t ; move to end or beginning of source
+                                          ; when reaching top or bottom of source.
+        ido-use-virtual-buffers t ; Needed in helm-buffers-list
+        helm-buffers-fuzzy-matching t ; fuzzy matching buffer names when non--nil
+                                          ; useful in helm-mini that lists buffers
+        )
+
+  (define-key helm-map (kbd "C-x 2") 'helm-select-2nd-action)
+  (define-key helm-map (kbd "C-x 3") 'helm-select-3rd-action)
+  (define-key helm-map (kbd "C-x 4") 'helm-select-4rd-action)
+
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  (global-set-key (kbd "C-x b") 'helm-mini)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-c h m") 'helm-man-woman)
+  (global-set-key (kbd "C-c h f") 'helm-find)
+  (global-set-key (kbd "C-c h o") 'helm-occur)
+  (global-set-key (kbd "C-h C-f") 'helm-apropos)
+
+  ;; use helm to list eshell history
+  (add-hook 'eshell-mode-hook
+            #'(lambda ()
+                (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
+
+  ;;; Save current position to mark ring
+  (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
+
+  (helm-mode)
+#+end_src
+
+*_Usage_*:
+
 
 ** setup-files.el
 :PROPERTIES:
@@ -1226,7 +1271,15 @@ My sample customization:
    )
 #+end_src
 
-*** Package: recentf-ext
+*** Package: =wdired=
+:PROPERTIES:
+:ID:       4630f3ad-ff37-4728-8a9f-c153abb1bca0
+:END:
+*** Package: =dired+=
+:PROPERTIES:
+:ID:       fd414006-0a5c-4354-91fd-e68975aed67f
+:END:
+*** Package: =recentf-ext=
 :PROPERTIES:
 :ID:       8013594a-f2f3-477c-820c-caf1354ac23d
 :END:
@@ -1247,7 +1300,7 @@ package:
   (require 'recentf-ext)
 #+end_src
 
-*** Package: ztree
+*** Package: =ztree=
 :PROPERTIES:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
 :END:
@@ -1275,6 +1328,11 @@ package:
 
 *_Group_*: It has no group, but since it is related to files, we
 consider it in "files" group.
+
+*** Package: =vlf=
+:PROPERTIES:
+:ID:       0bcdb090-e59b-4c02-96d1-47a1cc6173eb
+:END:
 ** setup-external.el
 :PROPERTIES:
 :ID:       446c031b-6b27-4ead-9fa8-bfd478deaa5b
@@ -1505,7 +1563,6 @@ Sample configuration:
 :PROPERTIES:
 :ID:       b85b2223-c23a-433f-b3cc-89b3fec6eef6
 :END:
-
 *** Package: =number-font-lock=
 :PROPERTIES:
 :ID:       2a36a6dc-057d-4e43-a00c-45015adbb11f
