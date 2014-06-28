@@ -877,7 +877,9 @@ Beginning of a Line]].
 :ID:       f8441653-b68d-4c18-8eb4-28ceff5739fc
 :END:
 *_Author_*: Keitalo Miyazaki, =Keitaro.Miyazaki@gmail.com=
+
 *_Homepage_*: [[http://www.emacswiki.org/emacs/VolatileHighlights][Emacswiki]]
+
 *_Features_*:
 
 VolatileHighlights highlights changes to the buffer caused by commands
@@ -908,9 +910,10 @@ will be highlighted.
 :PROPERTIES:
 :ID:       49958ce7-6af0-47ac-b309-6ea75833f0e1
 :END:
-[[https://github.com/pmarinov/clean-aindent-mode][Homepage]]
 *_Author_*: [[https://github.com/pmarinov][Peter Marinov]]
+
 *_Homepage_*: [[https://github.com/pmarinov/clean-aindent-mode][Github]]
+
 *_Features_*:
 
 When you press *RET* to create a newline and got indented by
@@ -942,7 +945,9 @@ the package:
 :ID:       03030916-bb5c-4966-8fa1-68807b60bec2
 :END:
 *_Author_*: Toby Cubitt, =toby-undo-tree@dr-qubit.org=
+
 *_Homepage_*: [[http://www.dr-qubit.org/emacs.php#undo-tree][www.dr-qubit.org]]
+
 *_Features_*: 
 
 =undo-tree= allows you to visual the whole history of your editing in
@@ -971,12 +976,14 @@ the package:
 From now on, your undo (*C-/*) behaves just like normal editor. To
 redo, *C-_*. To open the undo tree, *C-x u*.
 
-*** COMMENT Package: =yasnippet=
+*** Package: =yasnippet=
 :PROPERTIES:
 :ID:       bb1ea352-f9ea-47fe-bb3e-5727e542c481
 :END:
 *_Author_*: [[https://github.com/capitaomorte][João Távora]]
+
 *_Homepage_*: [[https://github.com/capitaomorte/yasnippet][Github]]
+
 *_Features_*:
 
 YASnippet is a template system for Emacs. It allows you to type an
@@ -1071,12 +1078,62 @@ Here is my sample customization:
   (windmove-default-keybindings)
 #+end_src
 
+*** Package: =company=
+:PROPERTIES:
+:ID:       613a1da4-4b5b-4c50-9c9d-8152d1a4bad9
+:END:
+*_Author_*: 
+
+- Nikolaj Schumacher (original author)
+- [[https://github.com/dgutov][Dmitry Gutov]] (current maintainer), =dgutov@yandex.ru=
+
+*_Homepage_*: [[http://company-mode.github.io/]]
+
+*_Features_*:
+
+Company is a text completion framework for Emacs. The name stands for
+"complete anything". It uses pluggable back-ends and front-ends to
+retrieve and display completion candidates.
+
+It comes with several back-ends such as =Elisp=, =Clang=, =Semantic=, =Eclim=,
+=Ropemacs=, =Ispell=, =CMake=, =BBDB=, =Yasnippet=, =dabbrev=, =etags=, =gtags=,
+=files=, =keywords= and a few others.
+
+The CAPF back-end provides a bridge to the standard
+completion-at-point-functions facility, and thus works with any major
+mode that defines a proper completion function.
+
+*_Installation_*:
+
+=M-x list-packages= and select *company* package, then
+install it. After finish installing, add this code snippet to activate
+the package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: company              ;;
+  ;;                               ;;
+  ;; GROUP: Convenience -> Company ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+*_Usage_*:
+
+Completion will start automatically after you type a few letters. Use
+*M-n* and *M-p* to select, *<return>* to complete or *<tab>* to complete the
+common part. Search through the completions with *C-s*, *C-r* and
+*C-o*. Press *M-(digit)* to quickly complete with one of the first 10
+candidates.
+
 *** Package: =expand-region=
 :PROPERTIES:
 :ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
 :END:
 *_Author_*: [[https://github.com/magnars][Magnar Sveen]]
+
 *_Homepage_*: [[https://github.com/magnars/expand-region.el][Github]]
+
 *_Features_*:
 =expand-region= allows you to select text objects incrementally. 
 
@@ -1107,7 +1164,9 @@ included from the amended =beginning-of-line= we did above.
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
 *_Author_*: [[https://github.com/purcell][Steve Purcell]]
+
 *_Homepage_*: [[https://github.com/purcell/ibuffer-vc][Github]]
+
 *_Features_*:
 
 - Group your buffers by their parent vc root directory
@@ -1276,31 +1335,7 @@ Here's a glimpse of Projectile in action:
   (projectile-global-mode)
 #+end_src
 *_Usage_*: Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
-*** Package: =zygospore=
-:PROPERTIES:
-:ID:       27f1d211-f9b8-4cb8-b732-95025ed5469c
-:END:
-*_Author_*: [[https://github.com/LouisKottmann][Louis Kottmann]], =louis.kottmann@gmail.com=
-*_Homepage_*: [[https://github.com/LouisKottmann/zygospore.el][Github]]
-*_Features_*:
-=zygospore= lets you revert *C-x 1* (delete-other-window) by pressing
-**C-x 1* again
-
-...[screenshot]...
-
-*_Installation_*:
-
-#+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGE: zygospore                          ;;
-  ;;                                             ;;
-  ;; GROUP: No Group, but it's quiate convenient ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
-#+end_src
-
-*_Usage_*: *C-x 1* to toggle between previous/current windows.
-*** Package: =helm=
+** Package on a league of its own: =helm=
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
 :END:
@@ -1450,7 +1485,6 @@ use *helm-execute-persistent-action* more than
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 #+end_src
-
 
 ** setup-files.el
 :PROPERTIES:
@@ -1702,6 +1736,14 @@ bibilography, or you want to write Latex.
 :END:
 Sample configuration:
 
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Data -> Saveplace ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; saveplace remembers your location in a file when saving files
+  (require 'saveplace)
+#+end_src
 
 ** setup-external.el
 :PROPERTIES:
@@ -1823,6 +1865,21 @@ Sample configuration:
    ediff-window-setup-function 'ediff-setup-windows-plain
    )
 #+end_src
+
+*** Package: =diff-hl=
+:PROPERTIES:
+:ID:       277b9a96-a515-42e5-82f9-559fe3a6c3db
+:END:
+
+*** Package: =magit=
+:PROPERTIES:
+:ID:       16744867-3d54-4212-856f-7742f2354706
+:END:
+
+*** Package: =flycheck=
+:PROPERTIES:
+:ID:       23dedddc-be7f-41cd-b17b-5670d1fcf0d2
+:END:
 ** setup-applications.el
 :PROPERTIES:
 :ID:       eba1989e-6113-4ac4-ba44-17094418f080
