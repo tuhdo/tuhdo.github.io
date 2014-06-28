@@ -1,5 +1,5 @@
 #+TITLE: Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS
-* Whny customize and extend Emacs?
+* Why customize and extend Emacs?
 :PROPERTIES:
 :ID:       84576135-507c-41ad-b122-2dd498235ecf
 :END:
@@ -24,125 +24,402 @@ want, much like Lisp.
 Unlike other editors which encourage users to stay with the default as
 much as they can, Emacs encourages users to customize and extend Emacs
 as much as they can.
-* Just enough Emacs Lisp (and Lisp in general)
+* Just enough Emacs Lisp
 :PROPERTIES:
 :ID:       267fa5b6-b998-42c6-8ec0-382035284873
 :END:
-In this section, you only need to read and understand. It's important
-that you understand the core ideas. After you finish the sub-sections
-of this section, we will play with Emacs Lisp code for customizing
-Emacs, and it's really fun to see your Emacs "evolves" gradually.
-** Commonly used functions and patterns for configuration
+In this section, you only need to read and understand. I will list the
+commonly used function used for customizing Emacs that we will use in
+later sections. It's important that you understand the core
+ideas. After you finish the sub-sections of this section, we will play
+with Emacs Lisp code for customizing Emacs, and it's really fun to see
+your Emacs "evolves" gradually.
+
+It's worth to review again. To read most of Lisp code, it is easy. You
+only need to these rules:
+
+- Code that get executed is a pair of parentheses, with things in
+in it: =(...)=. The first element always gets evaluated; your Lisp
+environment (in our case, Emacs) determinse which of the following
+3 forms the symbol in the first slot is, then acts accordingly:
+
++ Function form: if the first element points to a function definition,
+  then the following elements get evaluated from left to right and
+  finally passed into the function as arguments.
+
+  For example:
+
+  #+begin_src emacs-lisp
+    (message "Hello word %d" (+ 10 10))
+  #+end_src
+
+  =message= is a function that prints to echo area and =*Message*=
+  buffer (can be opened with *C-h e*). Emacs detects that =message= is a
+  function, then it evaluates the string "Hello world %d" and another
+  nested form =(+ 10 10)= sequentially. When Emacs gets to =(+ 10
+  10)=, it evaluates the form and return =20=. Then the string "Hello
+  world %d" and the number =20= are passed into =message=, and finally
+  output "Hello world 20" in the echo area and =*Message*= buffer.
+
++ Special form: if the first element is one of predefined functions in
+  Emacs Lisp that need special rules and/or syntax, then the remaining
+  elements are evaluated depend on the rule of the predefined
+  functions. Special form is just function form, but handle the
+  remaining in its own way rather than using the default in function
+  form. That's why we call it special. 
+
+  For example, =if= is a special form as we learned in previous part:
+
+  #+begin_src emacs-lisp
+    (if condition
+        true-case
+      false-case)
+  #+end_src
+
+  =condition= is a valid Lisp form; if it is evaluated to true (which
+  is anything not =NIL=, or the empty list =()=), then the true case -
+  also a valid Lisp form - gets evaluated; otherwise the false case -
+  also a valid Lisp form - gets evaluated.
+
+  Another special form is =and=. After Emacs determines the first
+  element is =and= special form, then it keeps evaluating the
+  remaining elements from left to right until one of the element
+  return false. If all elements get evaluated, =and= returns true.
+
++ Macro form: if the first element is created by the function
+  =defmacro= (which you do not need to know at this stage), then Emacs
+  do not evaluate any remaining elements, but passes them in as
+  data. Macro is a way for programmers to create their own
+  mini-language that do not follow the evaluation rules predefined in
+  Emacs (function form and special form). If you read a form that is
+  not a function form or any predefined special form, don't panic!
+  It's a macro form. Programmers always provide documentations on how
+  to use their mini-languages.
+
+- Data: has two types:
+
++ *Atom*: primites such as number, string, symbol and NIL.
+
++ *Non-atom*: if you put a =’= just before a form, it becomes
+  a list. Emacs treats these *quoted* forms as data.
+
+  Emacs also has other data types like array, hash-table... but list
+  is the most popular, used when performance is not needed.
+
+** Function: *(setq [ /SYM/ /VAL/ ]...)*
 :PROPERTIES:
-:ID:       e54be9d4-bce0-428e-94be-c137bdc0de11
+:ID:       d11dcafb-0eb4-4ba0-a2c2-6cc0175aece4
 :END:
-
-- Function: =(global-set-key /KEY/ /COMMAND/)=
+  *_Comment_*: A really fundamental function for customizing Emacs
+  settings. An Emacs setting is really just a variable. Emacs has GUI
+  for changing setting, but =setq= a variable is also equivalent.
 
   *_Example_*:
-   
   #+begin_src emacs-lisp
-    (global-set-key (kbd "C-x C-b") 'ibuffer) ;; bind "C-x C-b" to ibuffer command
-    (global-set-key "\C-x\C-b" 'ibuffer)  ;; bind "C-x C-b to ibuffer command, but modifier 
-                                          ;; keys must be escaped with the backslash
-    (global-set-key [?\C-x?\C-b] 'ibuffer) ;; use vector instead of a string
+    (setq global-mark-ring-max 50000)
   #+end_src
-   
-  I recommend you to use =(kbd ...)= function because we can write key
-  bindings using our familiar key notations without adding unnecessary
-  characters. Vector is array in other languags. Vector was used for
-  mapping function keys, such as =[left]=, =[right]=, =[up]=, =[down]=,
-  =[f1]...[f12]=. But now, you can also map function keys in =(kbd
-  ...)= function using angle brackets:
-   
-  #+begin_src emacs-lisp
-    (global-set-key (kbd "<f3>") 'kmacro-start-macro-or-insert-counter)0
-  #+end_src
-   
-  Here are common function keys: 
-   
-  | Key                                              | Description                                        |
-  |--------------------------------------------------+----------------------------------------------------|
-  | =left, up, right, down=                          | Cursor arrow keys                                  |
-  |--------------------------------------------------+----------------------------------------------------|
-  | =begin, end, home, next, prior=                  | Other cursor repositioning keys                    |
-  |                                                  | =prior= means =PageUp=                             |
-  |                                                  | =next= means =PageDOwn=                            |
-  |--------------------------------------------------+----------------------------------------------------|
-  | =select, print, execute, backtab=                | Miscellaneous keys                                 |
-  | =insert, undo, redo, clearline=                  | =backtab= means =S-TAB= or =C-iso-tab=             |
-  | =insertline, deleteline, insertchar, deletechar= |                                                    |
-  |--------------------------------------------------+----------------------------------------------------|
-  | =f1, f2, ... F35=                                | Numbered function keys on top of your keyboard     |
-  |--------------------------------------------------+----------------------------------------------------|
-  | =kp-add, kp-subtract, kp-multiply, kp-divide=    | Keypad keys (to the right of the regular keyboard) |
-  | =kp-backtab, kp-space, kp-tab, kp-enter=         | , with names or punctuation.                       |
-  | =kp-separator, kp-decimal, kp-equal=             |                                                    |
-  |                                                  |                                                    |
-  | =kp-0, kp-1, ... kp-9=                           | Keypad keys with digits.                           |
-  |                                                  |                                                    |
-  | =kp-f1, kp-f2, kp-f3, kp-f4=                     | Keypad PF keys.                                    |
-  |--------------------------------------------------+----------------------------------------------------|
-   
-  *_Built-in description_*:
-   
+
+  *_Built-int Documentation_*:
   #+BEGIN_QUOTE
-  Give /KEY/ a global binding as /COMMAND/.
-  /COMMAND/ is the command definition to use; usually it is
-  a symbol naming an interactively-callable function.
-  /KEY/ is a key sequence; noninteractively, it is a string or vector
-  of characters or event types, and non-ASCII characters with codes
-  above 127 (such as ISO Latin-1) can be included if you use a vector.
-   
-  Note that if /KEY/ has a local binding in the current buffer,
-  that local binding will continue to shadow any global binding
-  that you make with this function.
-  #+END_QUOTE
-   
-- Function: =(global-unset-key /KEY/)=
-  *_Example_*:
-
-  #+begin_src emacs-lisp
-    (global-unset-key (kbd "C-x b"))
-    (global-set-key (kbd "C-x b a") 'switch-to-buffer)
-    (global-set-key (kbd "C-x b b") 'ibuffer)
-  #+end_src
-  
-  *_Comment_*: A function to unset a key in global keymap. It's useful
-  if you want to turn a key binding into a prefix key. For example,
-  =C-x m= binding is =compose-mail=. But for example, you want to bind
-  =C-x b a= to =switch-to-buffer= and =C-x b b= to =ibuffer=, two commands of your
-  choice (this is just an example; you should use these bindings). To
-  do that, first you have to unset =C-x m=; only then, you will be
-  able to bind the keys. Otherwise, Emacs won't allow because
-  prefix key =C-x b= is alreay used to something else. Try the above
-  example with *C-x e*. To get your old bindings back, execute this
-  snippet:
-
-  #+begin_src emacs-lisp
-    (global-unset-key (kbd "C-x b a"))
-    (global-unset-key (kbd "C-x b b"))
-    (global-set-key (kbd "C-x b") 'switch-to-buffer)
-  #+end_src
-
-  *_Built-in description_*:
-  #+BEGIN_QUOTE
-  (global-unset-key /KEY)
-
-  Remove global binding of /KEY/.
-  /KEY/ is a string or vector representing a sequence of keystrokes.
+  Set each /SYM/ to the value of its /VAL/.
+  The symbols /SYM/ are variables; they are literal (not evaluated).
+  The values /VAL/ are expressions; they are evaluated.
+  Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
+  The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
+  each VAL can use the new value of variables set earlier in the `_setq_'.
+  The return value of the `_setq_' form is the value of the last /VAL/.
   #+END_QUOTE
 
-- Function: =(define-key /KEYMAP/ /KEY/ /DEF/)=
-  
-  *_Example_*:
-  
-
-** Configuration collector
+** Function: *(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)*
 :PROPERTIES:
-:ID:       31381170-81ba-413a-8b3e-b701bd62c30c
+:ID:       4b1c3760-40a7-4b3a-b3cd-14317ce316f3
+:END:
+  *_Comment_*: This function allows you to load a file. /FILE/ is the
+  filepath. Do you notice =&optional= keyword? When you see this
+  keyword, it means everything after =&optional= is, optional. The
+  parameters /NOERROR/, /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not
+  required to be passed into the function if you don't need. However,
+  if you want to pass an argument into the place of one a parameter,
+  you must also pass arguments to all the parameters to the left of
+  your chosen parameter. For example, if you want to pass an argument
+  into /NOSUFFIX/, you are *required* to pass arguments into
+  /NOERROR/, /NOMESSAGE/ first. You are safe to ignore everything
+  after your chosen parameter, and in our example, it's /MUST-SUFFIX/.
+
+  *_Example_*: 
+
+  #+begin_src emacs-lisp
+    (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
+    (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
+    (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
+  #+end_src
+   
+  *_Built-int Documentation_*:
+   
+  #+BEGIN_QUOTE
+  Execute a file of Lisp code named FILE.
+  First try FILE with `.elc' appended, then try with `.el', then try
+  FILE unmodified (the exact suffixes in the exact order are determined
+  by `load-suffixes').  Environment variable references in FILE are
+  replaced with their values by calling `substitute-in-file-name'. This
+  function searches the directories in `load-path'. 
+   
+  ....(*C-h f* for more information)...
+  #+END_QUOTE
+** Function: *(require /FEATURE/ &optional /FILENAME/ /NOERROR/)*
+:PROPERTIES:
+:ID:       05e89e77-6209-4bbb-987e-d665e2f0f880
+:END:
+*_Comment_*: If you install a package from =M-x list-packages=, to
+load that package, use =(require 'installed-package)=.
+
+*_Example_*: For example, you installed package =volatile-highlights=,
+to load it:
+
+#+begin_src emacs-lisp
+  (require 'volatile-highlights)
+#+end_src
+
+
+*_Built-int Documentation_*:
+
+#+BEGIN_QUOTE
+If feature /FEATURE/ is not loaded, load it from /FILENAME/.
+If /FEATURE/ is not a member of the list `features', then the feature
+is not loaded; so load the file /FILENAME/.
+If /FILENAME/ is omitted, the printname of /FEATURE/ is used as the file name,
+and `load' will try to load this name appended with the suffix `.elc' or
+`.el', in that order.  The name without appended suffix will not be used.
+See `get-load-suffixes' for the complete list of suffixes.
+If the optional third argument /NOERROR/ is non-nil,
+then return nil if the file is not found instead of signaling an error.
+Normally the return value is /FEATURE/.
+The normal messages at start and end of loading /FILENAME/ are suppressed.
+#+END_QUOTE
+
+** Function: *(add-hook /HOOK/ /FUNCTION/ &optional /APPEND/ /LOCAL/)*
+:PROPERTIES:
+:ID:       0768c5a4-d4c3-41ba-b1e8-2a808184e53f
+:END:
+*_Comment_*: A *hook* is a Lisp variable which holds a list of
+functions, to be called on some well-defined occasion. (This is called
+running the hook. You can search for hook using *C-h v* and enter
+=-hook= suffix then *TAB*. Or you can find hooks in *Customization Groups*.
+
+*_Example_*:
+
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'linum-mode)
+#+end_src
+
+After you add the function =linum-mode= - which activates line number
+on the left margin of your Emacs - then every time you enter a
+=prog-mode=, which is the root all programming major modes derive
+from. A programming mode can be =c-mode=, =asm-mode=,
+=emacs-lisp-mode=, =java-mode=...
+
+*_Built-int Documentation_*:
+#+BEGIN_QUOTE
+Add to the value of HOOK the function /FUNCTION/.
+/FUNCTION/ is not added if already present.
+/FUNCTION/ is added (if necessary) at the beginning of the hook list
+unless the optional argument /APPEND/ is non-nil, in which case
+/FUNCTION/ is added at the end.
+
+The optional fourth argument, /LOCAL/, if non-nil, says to modify
+the hook's buffer-local value rather than its global value.
+This makes the hook buffer-local, and it makes t a member of the
+buffer-local value.  That acts as a flag to run the hook
+functions of the global value as well as in the local value.
+
+/HOOK/ should be a symbol, and /FUNCTION/ may be any valid function.  If
+/HOOK/ is void, it is first set to nil.  If /HOOK/'s value is a single
+function, it is changed to a list of functions.
+#+END_QUOTE
+
+** Function: *(global-set-key /KEY/ /COMMAND/)*
+:PROPERTIES:
+:ID:       f4732968-0168-4946-b0b2-5432b50fc218
+:END:
+*_Comment_*: This function binds a command to a key, as you can see in
+the function interface.
+   
+*_Example_*:
+
+You can bind in one of the following ways:
+   
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-b") 'ibuffer) ;; bind "C-x C-b" to ibuffer command
+  (global-set-key "\C-x\C-b" 'ibuffer)  ;; bind "C-x C-b to ibuffer command, but modifier 
+                                        ;; keys must be escaped with the backslash
+  (global-set-key [?\C-x?\C-b] 'ibuffer) ;; use vector instead of a string
+#+end_src
+   
+I recommend you to use =(kbd ...)= function because we can write key
+bindings using our familiar key notations without adding unnecessary
+characters. Vector is array in other languags. Vector was used for
+mapping function keys, such as =[left]=, =[right]=, =[up]=, =[down]=,
+=[f1]...[f12]=. But now, you can also map function keys in =(kbd
+...)= function using angle brackets:
+ 
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f3>") 'kmacro-start-macro-or-insert-counter)
+#+end_src
+ 
+Here are common function keys (remember to wrap them in a pair of
+angle bracket):
+ 
+| Key                                              | Description                                        |
+|--------------------------------------------------+----------------------------------------------------|
+| =left, up, right, down=                          | Cursor arrow keys                                  |
+|--------------------------------------------------+----------------------------------------------------|
+| =begin, end, home, next, prior=                  | Other cursor repositioning keys                    |
+|                                                  | =prior= means =PageUp=                             |
+|                                                  | =next= means =PageDOwn=                            |
+|--------------------------------------------------+----------------------------------------------------|
+| =select, print, execute, backtab=                | Miscellaneous keys                                 |
+| =insert, undo, redo, clearline=                  | =backtab= means =S-TAB= or =C-iso-tab=             |
+| =insertline, deleteline, insertchar, deletechar= |                                                    |
+|--------------------------------------------------+----------------------------------------------------|
+| =f1, f2, ... F35=                                | Numbered function keys on top of your keyboard     |
+|--------------------------------------------------+----------------------------------------------------|
+| =kp-add, kp-subtract, kp-multiply, kp-divide=    | Keypad keys (to the right of the regular keyboard) |
+| =kp-backtab, kp-space, kp-tab, kp-enter=         | , with names or punctuation.                       |
+| =kp-separator, kp-decimal, kp-equal=             |                                                    |
+|                                                  |                                                    |
+| =kp-0, kp-1, ... kp-9=                           | Keypad keys with digits.                           |
+|                                                  |                                                    |
+| =kp-f1, kp-f2, kp-f3, kp-f4=                     | Keypad PF keys.                                    |
+|--------------------------------------------------+----------------------------------------------------|
+ 
+*_Built-int Documentation_*:
+ 
+#+BEGIN_QUOTE
+Give /KEY/ a global binding as /COMMAND/.
+/COMMAND/ is the command definition to use; usually it is
+a symbol naming an interactively-callable function.
+/KEY/ is a key sequence; noninteractively, it is a string or vector
+of characters or event types, and non-ASCII characters with codes
+above 127 (such as ISO Latin-1) can be included if you use a vector.
+ 
+Note that if /KEY/ has a local binding in the current buffer,
+that local binding will continue to shadow any global binding
+that you make with this function.
+#+END_QUOTE
+** Function: *(define-key /KEYMAP/ /KEY/ /DEF/)*
+:PROPERTIES:
+:ID:       fea9594c-b2e2-4d1b-8621-8c90a6192853
+:END:
+*_Comment_*: 
+
+This function binds a definition =DEF=, usually a command, to a key
+sequence =KEY=. A definition can be other things that you can find in
+the built-in documentation.
+
+A key sequence (key, for short) is a sequence of input events that
+have a meaning as a unit. Input events include characters, function
+keys and mouse buttons—all the inputs that you can send to the
+computer. A key sequence gets its meaning from its binding, which says
+what command it runs.
+
+When a key sequence =KEY= is pressed, Emacs runs the associated
+function. A keymap =KEYMAP= stores a list of bindings between =KEY=
+and definition =DEF=. Major mode or minor mode uses keymap to provide
+its own key bindings. A keymap usually has =-mode-map= suffix,
+i.e. dired-mode-map; if you want to change or add a key binding in a
+major mode or minor mode, you use =define-key= function like this:
+
+*_Example_*:
+
+#+begin_src emacs-lisp
+  ;; Dired uses "e", "f" or RET to open a file
+  ;; you can reuse one of these keys for different purpose
+  ;; for example, you can bind it to wdired-change-to-wdired-mode
+  ;; wdired-change-to-wdired-mode allows you to edit your Dired buffer
+  ;; like a normal text buffer, such as edit file/directory names,
+  ;; permission bits.. and then commit the changes to disk.
+  ;;
+  ;; "e" is short for "edit"
+  ;; After finish your editing, "C-c C-c" to commit, "C-c C-k" to abort
+  (define-key dired-mode-map (kbd "e") 'wdired-change-to-wdired-mode)
+#+end_src
+
+*_Built-int Documentation_*:
+
+#+BEGIN_QUOTE
+In /KEYMAP/, define key sequence /KEY/ as /DEF/.
+/KEYMAP/ is a keymap.
+
+/KEY/ is a string or a vector of symbols and characters, representing a
+sequence of keystrokes and events.  Non-ASCII characters with codes
+above 127 (such as ISO Latin-1) can be represented by vectors.
+Two types of vector have special meanings:
+[remap COMMAND] remaps any key binding for /COMMAND/.
+[t] creates a default definition, which applies to any event with no
+other definition in /KEYMAP/.
+
+/DEF/ is anything that can be a key's definition:
+nil (means key is undefined in this keymap),
+a command (a Lisp function suitable for interactive calling),
+a string (treated as a keyboard macro),
+a keymap (to define a prefix key),
+a symbol (when the key is looked up, the symbol will stand for its
+               function definition, which should at that time be one of the above,
+               or another symbol whose function definition is used, etc.),
+a cons (STRING . DEFN), meaning that DEFN is the definition
+(DEFN should be a valid definition in its own right),
+or a cons (MAP . CHAR), meaning use definition of CHAR in keymap MAP,
+or an extended menu item definition.
+(See info node `(elisp)Extended Menu Items'.)
+
+If /KEYMAP/ is a sparse keymap with a binding for /KEY/, the existing
+binding is altered.  If there is no binding for /KEY/, the new pair
+binding /KEY/ to /DEF/ is added at the front of /KEYMAP/.
+#+END_QUOTE
+** Macro: *(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)*
+:PROPERTIES:
+:ID:       8be46bc4-b0ef-468e-b776-b6f877629035
+:END:
+** Special form: =(interactive &optional /ARGS/)=
+:PROPERTIES:
+:ID:       852f9233-a00c-4736-a627-f85d0fc1fb16
 :END:
 
+
+
+:PROPERTIES:
+:ID:       9a4c1296-6f0e-4012-938f-33f435b6d84a
+:END:
+*_Comment_*: defun is a Lisp macro that allows you to define a
+function, like any other language. A function is a collection of
+Lisp forms to be executed. The return value is the last form.
+
+*_Example_*:
+
+- Create a normal function (Not available in =M-x=):
+
+#+begin_src emacs-lisp
+  (defun demo ()
+    (message "Hello World" number string))
+#+end_src
+
+- Create a command (Available in =M-x=):
+#+begin_src emacs-lisp
+  (defun demo ()
+    (interactive)
+    (message "Hello World"))
+#+end_src
+
+*_Built-int Documentation_*:
+#+BEGIN_QUOTE
+Define /NAME/ as a function.
+The definition is (lambda /ARGLIST/ [/DOCSTRING/] /BODY/...).
+See also the function `interactive'.
+/DECL/ is a declaration, optional, of the form (declare /DECLS...) where
+/DECLS/ is a list of elements of the form (/PROP/ . /VALUES/).  These are
+interpreted according to `defun-declarations-alist'.
+The return value is undefined.
+#+END_QUOTE
 * Useful built-in key bindings for navigating pairs
 :PROPERTIES:
 :ID:       1a1248d4-2a59-4c80-a5c5-e471adc40c8f
@@ -355,7 +632,7 @@ Emacs and allow you to select one.
 ....[screenshot]...
 
 You can also access the parent group of a group or a variable.
-*** Using =setq=
+*** Using Emacs Lisp
 :PROPERTIES:
 :ID:       24fade09-4735-4f0b-ba82-5742d3b5a314
 :END:
@@ -424,179 +701,6 @@ two possibilities:
     ;; GROUP: Editing
     ;;
   #+end_src
-
-** Function: =(setq [ /SYM/ /VAL/ ]...)=
-:PROPERTIES:
-:ID:       3da16e32-a1d6-4b47-916b-3d845a06067e
-:END:
-  *_Comment_*: A really fundamental function for customizing Emacs
-  settings. An Emacs setting is really just a variable. Emacs has GUI
-  for changing setting, but =setq= a variable is also equivalent.
-
-  *_Example_*:
-  #+begin_src emacs-lisp
-    (setq global-mark-ring-max 50000)
-  #+end_src
-
-  *_Built-in descriptions_*:
-  #+BEGIN_QUOTE
-  Set each /SYM/ to the value of its /VAL/.
-  The symbols /SYM/ are variables; they are literal (not evaluated).
-  The values /VAL/ are expressions; they are evaluated.
-  Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
-  The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
-  each VAL can use the new value of variables set earlier in the `_setq_'.
-  The return value of the `_setq_' form is the value of the last /VAL/.
-  #+END_QUOTE
-
-** Function: =(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)=
-:PROPERTIES:
-:ID:       525cbba2-a7dd-46aa-8215-bfb52502a4ac
-:END:
-  *_Comment_*: This function allows you to load a file. /FILE/ is the
-  filepath. Do you notice =&optional= keyword? When you see this
-  keyword, it means everything after =&optional= is, optional. The
-  parameters /NOERROR/, /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not
-  required to be passed into the function if you don't need. However,
-  if you want to pass an argument into the place of one a parameter,
-  you must also pass arguments to all the parameters to the left of
-  your chosen parameter. For example, if you want to pass an argument
-  into /NOSUFFIX/, you are *required* to pass arguments into
-  /NOERROR/, /NOMESSAGE/ first. You are safe to ignore everything
-  after your chosen parameter, and in our example, it's /MUST-SUFFIX/.
-
-  *_Example_*: 
-
-  #+begin_src emacs-lisp
-    (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
-    (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
-    (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
-  #+end_src
-   
-  *_Built-in description_*:
-   
-  #+BEGIN_QUOTE
-  Execute a file of Lisp code named FILE.
-  First try FILE with `.elc' appended, then try with `.el', then try
-  FILE unmodified (the exact suffixes in the exact order are determined
-  by `load-suffixes').  Environment variable references in FILE are
-  replaced with their values by calling `substitute-in-file-name'. This
-  function searches the directories in `load-path'. 
-   
-  ....(*C-h f* for more information)...
-  #+END_QUOTE
-
-** Function: =(require /FEATURE/ &optional /FILENAME/ /NOERROR/)=
-:PROPERTIES:
-:ID:       dffde709-1810-4253-861a-8e058608a88c
-:END:
-*_Comment_*: If you install a package from =M-x list-packages=, to
-load that package, use =(require 'installed-package)=.
-
-*_Example_*: For example, you installed package =volatile-highlights=,
-to load it:
-
-#+begin_src emacs-lisp
-  (require 'volatile-highlights)
-#+end_src
-
-
-*_Built-in description_*:
-
-#+BEGIN_QUOTE
-If feature /FEATURE/ is not loaded, load it from /FILENAME/.
-If /FEATURE/ is not a member of the list `features', then the feature
-is not loaded; so load the file /FILENAME/.
-If /FILENAME/ is omitted, the printname of /FEATURE/ is used as the file name,
-and `load' will try to load this name appended with the suffix `.elc' or
-`.el', in that order.  The name without appended suffix will not be used.
-See `get-load-suffixes' for the complete list of suffixes.
-If the optional third argument /NOERROR/ is non-nil,
-then return nil if the file is not found instead of signaling an error.
-Normally the return value is /FEATURE/.
-The normal messages at start and end of loading /FILENAME/ are suppressed.
-#+END_QUOTE
-
-** Function: =(add-hook /HOOK/ /FUNCTION/ &optional /APPEND/ /LOCAL/)=
-:PROPERTIES:
-:ID:       b8a5ed88-f7b6-40b1-917d-1d7bbbca4213
-:END:
-*_Comment_*: A *hook* is a Lisp variable which holds a list of
-functions, to be called on some well-defined occasion. (This is called
-running the hook. You can search for hook using *C-h v* and enter
-=-hook= suffix then *TAB*. Or you can find hooks in *Customization Groups*.
-
-*_Example_*:
-
-#+begin_src emacs-lisp
-  (add-hook 'prog-mode-hook 'linum-mode)
-#+end_src
-
-After you add the function =linum-mode= - which activates line number
-on the left margin of your Emacs - then every time you enter a
-=prog-mode=, which is the root all programming major modes derive
-from. A programming mode can be =c-mode=, =asm-mode=,
-=emacs-lisp-mode=, =java-mode=...
-
-*_Built-in description_*:
-#+BEGIN_QUOTE
-Add to the value of HOOK the function /FUNCTION/.
-/FUNCTION/ is not added if already present.
-/FUNCTION/ is added (if necessary) at the beginning of the hook list
-unless the optional argument /APPEND/ is non-nil, in which case
-/FUNCTION/ is added at the end.
-
-The optional fourth argument, /LOCAL/, if non-nil, says to modify
-the hook's buffer-local value rather than its global value.
-This makes the hook buffer-local, and it makes t a member of the
-buffer-local value.  That acts as a flag to run the hook
-functions of the global value as well as in the local value.
-
-/HOOK/ should be a symbol, and /FUNCTION/ may be any valid function.  If
-/HOOK/ is void, it is first set to nil.  If /HOOK/'s value is a single
-function, it is changed to a list of functions.
-#+END_QUOTE
-
-** Macro: =(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)=
-:PROPERTIES:
-:ID:       d8631984-db16-4ce6-89f4-f68b8edfc3f4
-:END:
-*_Comment_*: defun is a macro that allows you to define a function,
-like any other language. A function is a collection of expressions to
-be executed. The return value is the last expression.
-
-*_Example_*:
-
-- Create a normal function (Cannot be called from =M-x=):
-
-#+begin_src emacs-lisp
-  (defun demo (number string)
-    (message "Print a number: %d, a string: %s" number string))
-#+end_src
-
-- Create a command (Can be called from =M-x=):
-#+begin_src emacs-lisp
-  (defun demo (number string)
-    (interactive)
-    (message "Print a number: %d, a string: %s" number string))
-#+end_src
-
-*_Built-in description_*:
-#+BEGIN_QUOTE
-Define /NAME/ as a function.
-The definition is (lambda /ARGLIST/ [/DOCSTRING/] /BODY/...).
-See also the function `interactive'.
-/DECL/ is a declaration, optional, of the form (declare /DECLS...) where
-/DECLS/ is a list of elements of the form (/PROP/ . /VALUES/).  These are
-interpreted according to `defun-declarations-alist'.
-The return value is undefined.
-#+END_QUOTE
-*** Special form: =(interactive &optional /ARGS/)=
-:PROPERTIES:
-:ID:       852f9233-a00c-4736-a627-f85d0fc1fb16
-:END:
-
-
 
 ** setup-editing.el
 :PROPERTIES:
@@ -1012,8 +1116,21 @@ by version control system.
 :PROPERTIES:
 :ID:       54921b8d-80fb-4b7d-b8d4-e47a90496af0
 :END:
-*_Homepage_*:
-*_Features_*:
+*_Author_*: [[https://github.com/lewang][Le Wang]]
+
+*_Homepage_*: [[https://github.com/lewang/rebox2][Github]]
+
+*_Features_*: 
+
+Fancy box quoting I n comment.
+
+- auto-fill boxes (install filladapt for optimal filling)
+- motion (beginning-of-line, end-of-line) within box
+- S-return rebox-newline
+- kill/yank (within box) only text, not box borders
+- move box by using space, backspace / center with M-c
+- point has to be to the left of the border
+
 *_Installation_*:
 =M-x list-packages= and select *rebox2* package, then install
 it. After finish installing, add this code snippet to activate the
@@ -1039,14 +1156,17 @@ package:
 - Mark a region.
 - *M-q* to cycle between box styles.
 
-*** Package: =pretty-lambdada=
+*** Package: =pretty-mode=
 :PROPERTIES:
 :ID:       c2e6f887-53a6-4c05-bfa2-87435e138699
 :END:
-*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+*_Author_*: [[https://github.com/akatov][Dmitri Akatov]], =akatov@gmail.com=
+
 *_Homepage_*: [[http://www.emacswiki.org/emacs/PrettyLambda][Emacswiki]]
-*_Features_*:
-Display of the word `lambda' as the Greek character.
+
+*_Features_*: 
+
+Redisplays parts of the Emacs buffer as pretty symbols. Highly configurable and extendable
 
 *_Installation_*:
 =M-x list-packages= and select *pretty-lambdada* package, then install
