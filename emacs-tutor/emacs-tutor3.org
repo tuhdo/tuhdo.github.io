@@ -1,7 +1,7 @@
 #+TITLE: Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS
 * Why customize and extend Emacs?
 :PROPERTIES:
-:ID:       84576135-507c-41ad-b122-2dd498235ecf
+:ID:       bbed4318-de81-421d-a6c4-04b40b60b591
 :END:
 Emacs comes with a default settings. Some interesting features are
 disabled and hidden, i.e. Ibuffer, Semantic, electric
@@ -26,7 +26,7 @@ much as they can, Emacs encourages users to customize and extend Emacs
 as much as they can.
 * Just enough Emacs Lisp
 :PROPERTIES:
-:ID:       267fa5b6-b998-42c6-8ec0-382035284873
+:ID:       bd3c88d9-3a94-483f-bc35-3b5c215d0e79
 :END:
 In this section, you only need to read and understand. I will list the
 commonly used function used for customizing Emacs that we will use in
@@ -96,6 +96,11 @@ environment (in our case, Emacs) determinse which of the following
   It's a macro form. Programmers always provide documentations on how
   to use their mini-languages.
 
+After all, those different forms are just under one category:
+function. Function form is a regular function; special form is a
+function with its own rule; macro form is a function that generate
+code.
+
 - Data: has two types:
 
 + *Atom*: primites such as number, string, symbol and NIL.
@@ -105,10 +110,10 @@ environment (in our case, Emacs) determinse which of the following
 
   Emacs also has other data types like array, hash-table... but list
   is the most popular, used when performance is not needed.
-
+  
 ** Function: *(setq [ /SYM/ /VAL/ ]...)*
 :PROPERTIES:
-:ID:       d11dcafb-0eb4-4ba0-a2c2-6cc0175aece4
+:ID:       efdf75c7-0278-46ab-910c-fd557d0584e9
 :END:
   *_Comment_*: A really fundamental function for customizing Emacs
   settings. An Emacs setting is really just a variable. Emacs has GUI
@@ -119,7 +124,7 @@ environment (in our case, Emacs) determinse which of the following
     (setq global-mark-ring-max 50000)
   #+end_src
 
-  *_Built-int Documentation_*:
+  *_Built-in Documentation_*:
   #+BEGIN_QUOTE
   Set each /SYM/ to the value of its /VAL/.
   The symbols /SYM/ are variables; they are literal (not evaluated).
@@ -132,19 +137,20 @@ environment (in our case, Emacs) determinse which of the following
 
 ** Function: *(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)*
 :PROPERTIES:
-:ID:       4b1c3760-40a7-4b3a-b3cd-14317ce316f3
+:ID:       554a5d52-623c-487d-9e9b-81c5f8f67746
 :END:
   *_Comment_*: This function allows you to load a file. /FILE/ is the
-  filepath. Do you notice =&optional= keyword? When you see this
-  keyword, it means everything after =&optional= is, optional. The
-  parameters /NOERROR/, /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not
-  required to be passed into the function if you don't need. However,
-  if you want to pass an argument into the place of one a parameter,
-  you must also pass arguments to all the parameters to the left of
-  your chosen parameter. For example, if you want to pass an argument
-  into /NOSUFFIX/, you are *required* to pass arguments into
-  /NOERROR/, /NOMESSAGE/ first. You are safe to ignore everything
-  after your chosen parameter, and in our example, it's /MUST-SUFFIX/.
+  a filename that is looked up in the Varable =load-path=. Do you
+  notice =&optional= keyword? When you see this keyword, it means
+  everything after =&optional= is, optional. The parameters /NOERROR/,
+  /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not required to be passed
+  into the function if you don't need. However, if you want to pass an
+  argument into the place of one a parameter, you must also pass
+  arguments to all the parameters to the left of your chosen
+  parameter. For example, if you want to pass an argument into
+  /NOSUFFIX/, you are *required* to pass arguments into /NOERROR/,
+  /NOMESSAGE/ first. You are safe to ignore everything after your
+  chosen parameter, and in our example, it's /MUST-SUFFIX/.
 
   *_Example_*: 
 
@@ -152,6 +158,7 @@ environment (in our case, Emacs) determinse which of the following
     (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
     (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
     (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
+    (load "module") ; search for the file module.el or module.elc in variable load-path
   #+end_src
    
   *_Built-int Documentation_*:
@@ -168,7 +175,7 @@ environment (in our case, Emacs) determinse which of the following
   #+END_QUOTE
 ** Function: *(require /FEATURE/ &optional /FILENAME/ /NOERROR/)*
 :PROPERTIES:
-:ID:       05e89e77-6209-4bbb-987e-d665e2f0f880
+:ID:       6b51529d-424f-4735-84e6-c13a0818376b
 :END:
 *_Comment_*: If you install a package from =M-x list-packages=, to
 load that package, use =(require 'installed-package)=.
@@ -181,7 +188,7 @@ to load it:
 #+end_src
 
 
-*_Built-int Documentation_*:
+*_Built-in Documentation_*:
 
 #+BEGIN_QUOTE
 If feature /FEATURE/ is not loaded, load it from /FILENAME/.
@@ -196,10 +203,46 @@ then return nil if the file is not found instead of signaling an error.
 Normally the return value is /FEATURE/.
 The normal messages at start and end of loading /FILENAME/ are suppressed.
 #+END_QUOTE
+** Function: *(add-to-list /LIST-VAR/ /ELEMENT/ &optional /APPEND/ /COMPARE-FN/)*
+:PROPERTIES:
+:ID:       6d573c2c-768b-4233-b8c0-5796f0b23304
+:END:
+*_Comment_*: Add an element =ELEMENT= to a list named =LIST-VAR=.
+
+*_Example_*:
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.emacs.d/personal") ; add personal to load-path,
+                                                 ; so "load" function can search for files in it
+#+end_src
+
+*_Built-in Documentation_*:
+
+#+BEGIN_QUOTE
+Add /ELEMENT/ to the value of /LIST-VAR/ if it isn't there yet.
+The test for presence of /ELEMENT/ is done with `equal', or with
+/COMPARE-FN/ if that's non-nil.
+If /ELEMENT/ is added, it is added at the beginning of the list,
+unless the optional argument /APPEND/ is non-nil, in which case
+/ELEMENT/ is added at the end.
+
+The return value is the new value of /LIST-VAR/.
+
+This is handy to add some elements to configuration variables,
+but please do not abuse it in Elisp code, where you are usually
+better off using `push' or `cl-pushnew'.
+
+If you want to use `add-to-list' on a variable that is not
+defined until a certain package is loaded, you should put the
+call to `add-to-list' into a hook function that will be run only
+after loading the package.  `eval-after-load' provides one way to
+do this.  In some cases other hooks, such as major mode hooks,
+can do the job.
+#+END_QUOTE
 
 ** Function: *(add-hook /HOOK/ /FUNCTION/ &optional /APPEND/ /LOCAL/)*
 :PROPERTIES:
-:ID:       0768c5a4-d4c3-41ba-b1e8-2a808184e53f
+:ID:       acb677cd-cad6-43c7-9bdb-b31578337fe0
 :END:
 *_Comment_*: A *hook* is a Lisp variable which holds a list of
 functions, to be called on some well-defined occasion. (This is called
@@ -218,7 +261,7 @@ on the left margin of your Emacs - then every time you enter a
 from. A programming mode can be =c-mode=, =asm-mode=,
 =emacs-lisp-mode=, =java-mode=...
 
-*_Built-int Documentation_*:
+*_Built-in Documentation_*:
 #+BEGIN_QUOTE
 Add to the value of HOOK the function /FUNCTION/.
 /FUNCTION/ is not added if already present.
@@ -239,7 +282,7 @@ function, it is changed to a list of functions.
 
 ** Function: *(global-set-key /KEY/ /COMMAND/)*
 :PROPERTIES:
-:ID:       f4732968-0168-4946-b0b2-5432b50fc218
+:ID:       5c06ee7d-fb65-48bb-8419-c5660d4d4fd2
 :END:
 *_Comment_*: This function binds a command to a key, as you can see in
 the function interface.
@@ -292,7 +335,7 @@ angle bracket):
 | =kp-f1, kp-f2, kp-f3, kp-f4=                     | Keypad PF keys.                                    |
 |--------------------------------------------------+----------------------------------------------------|
  
-*_Built-int Documentation_*:
+*_Built-in Documentation_*:
  
 #+BEGIN_QUOTE
 Give /KEY/ a global binding as /COMMAND/.
@@ -308,7 +351,7 @@ that you make with this function.
 #+END_QUOTE
 ** Function: *(define-key /KEYMAP/ /KEY/ /DEF/)*
 :PROPERTIES:
-:ID:       fea9594c-b2e2-4d1b-8621-8c90a6192853
+:ID:       879a92aa-5c2b-4623-913a-45dddb84ed7b
 :END:
 *_Comment_*: 
 
@@ -344,7 +387,7 @@ major mode or minor mode, you use =define-key= function like this:
   (define-key dired-mode-map (kbd "e") 'wdired-change-to-wdired-mode)
 #+end_src
 
-*_Built-int Documentation_*:
+*_Built-in Documentation_*:
 
 #+BEGIN_QUOTE
 In /KEYMAP/, define key sequence /KEY/ as /DEF/.
@@ -378,17 +421,7 @@ binding /KEY/ to /DEF/ is added at the front of /KEYMAP/.
 #+END_QUOTE
 ** Macro: *(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)*
 :PROPERTIES:
-:ID:       8be46bc4-b0ef-468e-b776-b6f877629035
-:END:
-** Special form: =(interactive &optional /ARGS/)=
-:PROPERTIES:
-:ID:       852f9233-a00c-4736-a627-f85d0fc1fb16
-:END:
-
-
-
-:PROPERTIES:
-:ID:       9a4c1296-6f0e-4012-938f-33f435b6d84a
+:ID:       0d30e7ca-7282-441e-868b-0b07ce2eaf70
 :END:
 *_Comment_*: defun is a Lisp macro that allows you to define a
 function, like any other language. A function is a collection of
@@ -410,7 +443,12 @@ Lisp forms to be executed. The return value is the last form.
     (message "Hello World"))
 #+end_src
 
-*_Built-int Documentation_*:
+=interactive= is a special form that turns a function into a command
+and allow a command to accept various types of prefix arguments, such
+as a number, a string, symbol, buffer names... You can *C-h f* and
+type =interactive= to find out more.
+
+*_Built-in Documentation_*:
 #+BEGIN_QUOTE
 Define /NAME/ as a function.
 The definition is (lambda /ARGLIST/ [/DOCSTRING/] /BODY/...).
@@ -420,12 +458,12 @@ See also the function `interactive'.
 interpreted according to `defun-declarations-alist'.
 The return value is undefined.
 #+END_QUOTE
+
 * Useful built-in key bindings for navigating pairs
 :PROPERTIES:
-:ID:       1a1248d4-2a59-4c80-a5c5-e471adc40c8f
+:ID:       7522b365-52f4-4fa9-b316-7843b772c59a
 :END:
 
-| Key         | Binding                                  |
 |-------------+------------------------------------------|
 | =C-M-f=     | *Command*: =forward-sexp=                |
 |             | Move forward over a balanced expression  |
@@ -450,7 +488,7 @@ The return value is undefined.
 
 * Let's supercharge Emacs
 :PROPERTIES:
-:ID:       8d44370b-5ab7-40fc-9a72-1ef9dc66ffd2
+:ID:       7b18379f-81e9-4c8f-8aab-9b8acaccdb26
 :END:
 Throughout this section I will help you to extend Emacs with packages
 that improves general Emacs features, such as Info, Dired, buffer
@@ -498,7 +536,7 @@ used to getting help from Emacs.
 
 ** How to use Emacs package manager
 :PROPERTIES:
-:ID:       d0b0f0d6-3662-4be3-84e7-342735015170
+:ID:       06a338f7-bc33-47fe-8dca-f8bb9fac64ac
 :END:
 Emacs has a package manager to make the task of installing, update and
 removing easier, as well as inform users new packages created by the
@@ -549,18 +587,19 @@ have to install the packages later. Install these packages:
 
 ** Customize Emacs
 :PROPERTIES:
-:ID:       b72e8ff3-8924-4cbb-99e5-fa24d70d09fe
+:ID:       9a5a1fd7-1763-4de2-935e-b21f107a023b
 :END:
 *** Using GUI
 :PROPERTIES:
 :ID:       a5d94712-f14d-4b1d-9780-f40a20606813
 :END:
-You wonder, there are so many variables to set. How do you know which
-to which? Luckily, you don't have to manually guess which variable to
-set. Emacs has a command for setting Emacs internally, with a nice
-organization of settings, rather than randomly set a variable that you
-randomly found. =M-x customize= to open a window for customizing
-Emacs:
+If you want to change a specific setting, you need to change a
+variable value. You wonder, there are so many variables to set. How do
+you know which to which? Luckily, you don't have to manually guess
+which variable to set. Emacs has a command for setting Emacs
+internally, with a nice organization of settings, rather than randomly
+set a variable that you randomly found. =M-x customize= to open a
+window for customizing Emacs:
 
 ...[screenshol]...
 
@@ -575,12 +614,10 @@ Mark ring Max: ".
 - A menu appears with the following choice:
 
 =0 = Set for current Sesssion=
-...[screenshol]...
 This option is for trying out a new setting. If you close Emacs, the
 old setting is restored.
 
 =1 = Save for Future Sesssions=
-...[screenshol]...
 This option saves the new value permanently, so the next time you
 start Emacs, it uses your saved setting. The new value is saved at
 =~/.emacs.d/init.el= like this:
@@ -595,43 +632,37 @@ start Emacs, it uses your saved setting. The new value is saved at
 #+end_src
 
 =2 = Undo Edits=
-...[screenshol]...
 Undo to the previous value of a particular setting, if you haven't
 set.
 
 =3 = Revert This Sesssion's Customization=
-...[screenshol]...
 This restores the value of the variable to the last saved value, and
 updates the text accordingly.
 
 =4 = Erase Customization=
-...[screenshol]...
 Reset to standard value and delete set value in =~/emacs.d/init.el=.
 
 =7 = Add Comment=
-...[screenshol]...
 Someimtes you have something to say about your customization. Write it
 using this option. You customized variable will have 
 
 =: = Show Saved Lisp Expression=
-...[gif screenshol]...
-
 Show the actual variable representation. If you open the menu again,
 the option =: = Show Saved Lisp Expression= is changed to =Show
 current value= that switches back to the nicer representation.
 
-
-Here is the whole process of customizing a setting:
-
-...[gif screenshot]....
-
 Another way to change a setting is using *C-h v*, which runs
 =describe-variable= that list all the avaialble variables in your
-Emacs and allow you to select one.
+Emacs and allow you to select one. You can also access the parent
+group of a group or a variable.
 
-....[screenshot]...
+Aside from the general =customize= command, Emacs has many more
+customization command: =customize-group=, =customize-face=... That
+organize customization groups in different ways. However, in the scope
+of this guide, we only use =customize= for customize Emacs generally
+and =customize-group= to select a specific package for customizing,
+and also find out which parent group the package belongs to.
 
-You can also access the parent group of a group or a variable.
 *** Using Emacs Lisp
 :PROPERTIES:
 :ID:       24fade09-4735-4f0b-ba82-5742d3b5a314
@@ -654,40 +685,30 @@ setting to the function =custom-set-variables= like this:
 
 As you can read it the comment, =custom-set-variables= is expected to
 be unique in your init file. If you have more, things go wrong. So, by
-design, you cannot split the settigns into logical groups of your
+design, you cannot split the settings into logical groups of your
 choice.
 
 For that reason, =setq= is the preferred method. But, you can use the
-GUI with nice and logical grouping to guide you to the variables you
+GUI with nice and logical grouping to guide you to the settings you
 want to change. The grouping is nice, and for consistency, we should
-organize our module structure based on the grouping in =M-x customize=:
+organize our module structure based on the grouping in =M-x
+customize=:
 
 - setup-editing.el for =Editing= group.
 - setup-convenience.el for =Convenience= group.
 - setup-files.el for =Files= group.
+- setup-text.el for =Text= group.
 - setup-data.el for =Data= group.
+- setup-external.el for =External= group.
+- setup-communication.el for =Communication= group.
+- setup-programming.el for =Programming= group.
+- setup-applicationss.el for =Application= group.
+- setup-development.el for =Development= group.
+- setup-environment.el for =Environment= group.
+- setup-faces.el for =Faces= group.
 - setup-help.el for =Help= group.
-
-Those are the groups I will cover in this part, including packages for
-improving those groups. If a sub-group exists within a group, there
-two possibilities:
-
-- The sub-group contains only "terminals"; that is, it has no inner
-  sub-group. In this case, you change the subgroup variables directly
-  inside the parent-group file. For example, the sub-group *Editing*
-  -> *Electricity* belongs to *Editing*, and inside *Electricity* contains
-  only variables. In this case, you write =(setq ...)= statements
-  directly inside =setup-editing.el=, which is the file for =Editing=
-  group.
-
-- The sub-group contains many inner sub-group (more than 3). In this
-  case, you should create a file for that sub-group:
-  *setup-<sub-group>.el*, and load from the file of parent group. For
-  example, *Files* -> *Dired* sub-group contains many sub-groups
-  inside it. You should create a *setup-dired.el* and load it from
-  *setup-files.el*. However, if you only need a few options for
-  a few inner sub-groups, then don't create a file because it's not
-  worth it. 
+- setup-multimedia.el for =Multimedia= group.
+- setup-local.el for =Local= group.
 
 *_Exercise_*: 
 
@@ -697,14 +718,33 @@ two possibilities:
   each file, noting which group this file belongs to. For example:
 
   #+begin_src emacs-lisp
-    ;;
-    ;; GROUP: Editing
-    ;;
+    ;,--------------------------------------
+    ;| MAIN GROUP: Editing
+    ;`--------------------------------------
   #+end_src
+  
+You already installed the package =rebox2= in [[*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package
+manager]] section. When you mark a region and *M-q*, you can create the
+above comment box. There are many styles, you can cycle by pressing
+*M-q* repeatedly.
+
+Now, everything is prepared. We can really dive into customizing and
+extending Emacs with 3rd party packages and various code snippets that
+solve many little problems. In later sections, each is dedicated to a
+category. But, please note that I only provide the customizations that
+I found useful, not some template that you have to follow rigidly. You
+can consider my customizations as an example for your own
+customizations. You can use it either way:
+
+- Copy the sample configurations into your files and look back later
+  or just don't care.
+- Really control the customization process and make the customizations
+  actually yours, by reading the customization code and understand
+  what it does.
 
 ** setup-editing.el
 :PROPERTIES:
-:ID:       2f850290-6962-49f0-aea6-d735aa8bfbd9
+:ID:       bd536b4e-fdcf-465c-af88-d86c36502c8a
 :END:
 
   Let's use =setq= to change Emacs the way we want. You should type in
@@ -755,17 +795,10 @@ two possibilities:
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; GROUP: Editing -> Matching         ;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    ;; some variable automatically becomes buffer-local when set outside Custom
-    ;; such as case-fold-search. To make your value of choice default, use setq-default
-    ;; FIXME: Move this note to the beginning later
-
-    ;;
-    ;; GROUP: Editing -> Matching -> Paren Showing
     ;; As you can see, I only use a single option in the inner sub-group
     ;; It's not worth to create a file
-    (setq show-paren-delay 0)
-    (show-paren-mode)
+    (setq show-paren-delay 0) ; highlight parentheses immediately
+    (show-paren-mode) ; activate show-paren-mode
   #+end_src
 *** Customize built-in functions
 :PROPERTIES:
@@ -838,7 +871,6 @@ Beginning of a Line]].
                    (backward-char 1)))))
 
 #+end_src
-
 
 *** Package: =volatile-highlights=
 :PROPERTIES:
@@ -983,7 +1015,7 @@ You can view supported snippets [[https://github.com/AndreaCrotti/yasnippet-snip
 
 ** setup-convenience.el
 :PROPERTIES:
-:ID:       87f1578a-478c-48c3-afe4-a44ced18506d
+:ID:       475adb79-c675-457d-b1ae-b0540313d642
 :END:
 Here is my sample customization:
 
@@ -1320,7 +1352,7 @@ the package:
         ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
         ;; helm-reuse-last-window-split-state t
         helm-split-window-default-side 'other ;; open helm buffer in another window
-        helm-split-window-in-side-p nil ;; open helm buffer inside current window, not occupy whole other window
+        helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
         helm-buffers-favorite-modes (append helm-buffers-favorite-modes
                                             '(picture-mode artist-mode))
         helm-candidate-number-limit 200 ; limit the number of displayed canidates
@@ -1420,10 +1452,9 @@ use *helm-execute-persistent-action* more than
 #+end_src
 
 
-
 ** setup-files.el
 :PROPERTIES:
-:ID:       a98a61ac-177b-4e5a-8096-03945a4406a9
+:ID:       1b1d3e93-3ebc-437a-b20d-f6d880d02ba1
 :END:
 My sample customization:
 
@@ -1657,9 +1688,24 @@ package:
                                    ;; when the file exceed large-file-warning-threshold
 #+end_src
 
+** setup-text.el
+:PROPERTIES:
+:ID:       73046aa4-06bc-47d6-8724-b291f429c154
+:END:
+I only use default configuration for "Text" group. You can customize
+it if you want or leave this file blank, so you can add customizations
+when needed. This group is useful if you edit text frequently and need
+bibilography, or you want to write Latex.
+** setup-data.el
+:PROPERTIES:
+:ID:       1147c642-b1c9-4faf-ad98-cd4611bf4b5a
+:END:
+Sample configuration:
+
+
 ** setup-external.el
 :PROPERTIES:
-:ID:       446c031b-6b27-4ead-9fa8-bfd478deaa5b
+:ID:       0131a13d-b070-48f8-910a-f63b35b93984
 :END:
 Sample configuration:
 
@@ -1688,7 +1734,7 @@ Sample configuration:
 #+end_src
 ** setup-communication.el
 :PROPERTIES:
-:ID:       d3cf2c79-9796-4b28-be6c-c16f1983cb5b
+:ID:       d8f077a9-f7cb-4fdb-b587-461a2327fd1d
 :END:
 This group allows to customize communications, networking, and remote
 access to files. For example, ftp, ldap, dig, whois, netstat... I am
@@ -1696,7 +1742,7 @@ find with the defaults. Customize more if you want and add to this
 file.
 ** setup-programming.el
 :PROPERTIES:
-:ID:       78bb22f2-bc13-4a30-9cd4-9bb58d9a8ef5
+:ID:       c8702833-48cf-4cf8-b2e6-0f4ef7f4c8ab
 :END:
 Sample configuration:
 
@@ -1779,7 +1825,7 @@ Sample configuration:
 #+end_src
 ** setup-applications.el
 :PROPERTIES:
-:ID:       f980e4ab-6603-4941-ab84-3903357597bb
+:ID:       eba1989e-6113-4ac4-ba44-17094418f080
 :END:
 Sample configuration:
 
@@ -1814,7 +1860,7 @@ I only use Eshell. You should modify others if you need.
 
 ** setup-development.el
 :PROPERTIES:
-:ID:       c46919c3-e9a0-4118-97e3-d5ad79159550
+:ID:       7b8b3b61-ae0e-4ae4-b998-165a78a8512d
 :END:
 Sammple configuration:
 
@@ -1858,7 +1904,7 @@ Sammple configuration:
 
 ** setup-environment.el
 :PROPERTIES:
-:ID:       ee235775-cbc2-4ced-9e8a-5326ea7cc6d1
+:ID:       052d0e7c-f8c3-4288-9eb1-57cee9c63dab
 :END:
 Sample configuration:
 
@@ -1896,11 +1942,11 @@ Sample configuration:
 #+end_src
 ** setup-faces.el
 :PROPERTIES:
-:ID:       b85b2223-c23a-433f-b3cc-89b3fec6eef6
+:ID:       ee26ceb9-d308-4ea5-a96c-a805b33079a0
 :END:
 *** Package: =number-font-lock=
 :PROPERTIES:
-:ID:       2a36a6dc-057d-4e43-a00c-45015adbb11f
+:ID:       26a9a3fb-b564-4827-81f1-c82c2809c73e
 :END:
 *_Homepage_*: 
 *_Features_*:
@@ -1921,7 +1967,6 @@ the package:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (add-hook 'prog-mode-hook 'number-font-lock-mode)
 #+end_src
-
 
 ** setup-help.el
 :PROPERTIES:
@@ -2004,6 +2049,10 @@ the package:
   (require 'help-mode+)
 #+end_src
 
+** setup-local.el
+:PROPERTIES:
+:ID:       3a088d14-a8ae-4c4d-8526-57e60307f1d8
+:END:
 ** setup-editor.el
 :PROPERTIES:
 :ID:       f3eab381-cb88-4e5a-8ff1-24cdb454a744
@@ -2160,5 +2209,5 @@ the package:
 
 * More Emacs Lisp resources
 :PROPERTIES:
-:ID:       71d59853-4e9e-41d5-a0c7-56000cb01fc3
+:ID:       18ccd3a6-7545-4c7a-9b2b-3106dd05bdde
 :END:
