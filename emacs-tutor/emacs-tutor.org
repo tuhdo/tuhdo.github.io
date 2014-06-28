@@ -225,6 +225,7 @@ With GUI:
 - Download [[http://www.gnu.org/software/emacs/][Emacs]]; or if you prefer latest Emacs, get it from source: =git clone http://repo.or.cz/r/emacs.git=
 - If you download from the homepage, unpackage: =tar xvf emacs-*.tar.gz=
 - =cd emacs-<version>*=
+- =./autogen.sh=
 - Add prefix and path to where you want to install. This is useful if
   you work on remote server without root access: =./configure
   --with-x-tookit=gtk3 [--prefix=/path/to/dir]=
