@@ -903,8 +903,10 @@ the package:
   (volatile-highlights-mode t)
 #+end_src
 
-*_Usage_*: When you yank (paste) something, the yanked (pasted) region
-will be highlighted.
+*_Usage_*: 
+
+When you yank (paste) something, the yanked (pasted) region will be
+highlighted.
 
 *** Package: =clean-aindent-mode=
 :PROPERTIES:
@@ -938,7 +940,9 @@ the package:
   (require 'clean-aindent-mode)
 #+end_src
 
-*_Usage_*: Automatically cleanup useless whitepsace on moving up/down.
+*_Usage_*: 
+
+Automatically cleanup useless whitepsace on moving up/down.
 
 *** Package: =undo-tree=
 :PROPERTIES:
@@ -1157,7 +1161,9 @@ the package:
 I bind =er/expand-regin= to *M-m*, because the functionality is
 included from the amended =beginning-of-line= we did above.
 
-*_Usage_*: *M-m* to continue expand outward.
+*_Usage_*: 
+
+*M-m* to continue expand outward.
 
 *** Package: =ibuffer-vc=
 :PROPERTIES:
@@ -1200,8 +1206,10 @@ package:
                 filename-and-process)))
 #+end_src
 
-*_Usage_*: When you use =ibuffer=, it will automatically group buffers
-by version control system.
+*_Usage_*: 
+
+When you use =ibuffer=, it will automatically group buffers by version
+control system.
 
 *** Package: =rebox2=
 :PROPERTIES:
@@ -1247,41 +1255,14 @@ package:
 - Mark a region.
 - *M-q* to cycle between box styles.
 
-*** Package: =pretty-mode=
-:PROPERTIES:
-:ID:       c2e6f887-53a6-4c05-bfa2-87435e138699
-:END:
-*_Author_*: [[https://github.com/akatov][Dmitri Akatov]], =akatov@gmail.com=
-
-*_Homepage_*: [[http://www.emacswiki.org/emacs/PrettyLambda][Emacswiki]]
-
-*_Features_*: 
-
-Redisplays parts of the Emacs buffer as pretty symbols. Highly configurable and extendable
-
-*_Installation_*:
-=M-x list-packages= and select *pretty-lambdada* package, then install
-it. After finish installing, add this code snippet to activate the
-package:
-
-#+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGEE: pretty-lambdada            ;;
-  ;;                                      ;;
-  ;; GROUP: Convenience -> Pretty Lambdap ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (global-pretty-lambda-mode)
-#+end_src
-
-*_Usage_*: The word `lambda' automatically displayed as Greek
-character.
-
 *** Package: =projectile=
 :PROPERTIES:
 :ID:       f6ec9632-9fa5-477b-bf34-5975b760577a
 :END:
 *_Author_*: [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
+
 *_Homepage_*: [[https://github.com/bbatsov/projectile][Github]]
+
 *_Features_*:
 
 *Projectile* is a project interaction library for Emacs. Its goal is to
@@ -1334,7 +1315,9 @@ Here's a glimpse of Projectile in action:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (projectile-global-mode)
 #+end_src
-*_Usage_*: Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
+*_Usage_*: 
+
+Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
 ** Package on a league of its own: =helm=
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
@@ -1582,7 +1565,9 @@ My sample customization:
 :ID:       fd414006-0a5c-4354-91fd-e68975aed67f
 :END:
 *_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+
 *_Homepage_*: [[http://www.emacswiki.org/emacs/DiredPlus][Emacswiki]]
+
 *_Features_*:
 =Dired+= (library =dired+.el=), which extends functionalities provided by
 standard GNU Emacs libraries =dired.el=, =dired-aux.el=, and
@@ -1606,6 +1591,12 @@ package:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'dired+)
 #+end_src
+
+*_Usage_*:
+
+Please refer to Emacswiki [[http://www.emacswiki.org/emacs/DiredPlus][usage]]. Note that =Dired+= has A LOT of
+features, but you don't have to learn to use all of them at once. Even
+the extra faces are useful enough.
 
 *** Package: =recentf-ext=
 :PROPERTIES:
@@ -1633,10 +1624,18 @@ package:
   (require 'recentf-ext)
 #+end_src
 
+*_Usage_*:
+
+When you visit a directory, that directory is saved by =recentf= as well.
+
 *** Package: =ztree=
 :PROPERTIES:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
 :END:
+*_Author_*: [[https://github.com/fourier][Alexey Veretennikov]], =alexey.veretennikov@gmail.com=
+
+*_Homepage_*: [[https://github.com/fourier/ztree][Github]]
+
 *_Features_*:
 
 Ztree is a project dedicated to implementation of several text-tree
@@ -1645,8 +1644,11 @@ and ztree-dir(the basis of ztree-diff).
 
 - ztree-diff: Perform diff on two directories. Really handy when you
   want to create a big patch between two directories.
+
 ...[screenshot]...
+
 - ztree-dir: a simple tree explorer.
+
 ...[screenshot]...
 
 *_Installation_*:
@@ -1666,15 +1668,26 @@ package:
   (require 'ztree-dir)
 #+end_src
 
-*_Group_*: It has no group, but since it is related to files, we
-consider it in "files" group.
+*_Usage_*:
+
+=M-x ztree-diff=, then select the left and right directories to
+compare.
+
+=M-x ztree-dir= to explorer filesystem:
+
+- Open/close directories with double-click, =RET= or =Space= keys.
+- To jump to the parent directory, hit the =Backspace= key.
+- To toggle open/closed state of the subtree of the current directory,
+  hit the x key.
 
 *** Package: =vlf=
 :PROPERTIES:
 :ID:       0bcdb090-e59b-4c02-96d1-47a1cc6173eb
 :END:
 *_Author_*: [[https://github.com/m00natic][Andrey Kotlarski]], =m00naticus@gmail.com=
+
 *_Homepage_*: [[https://github.com/m00natic/vlfi][Github]]
+
 *_Features_*:
 
 Emacs minor mode that allows viewing, editing, searching and comparing
@@ -1721,6 +1734,10 @@ package:
   (setq vlf-application 'dont-ask) ;; automatically use vlf on large file,
                                    ;; when the file exceed large-file-warning-threshold
 #+end_src
+
+*_Usage_*:
+
+Please refer to [[https://github.com/m00natic/vlfi#detail-usage][Detail Usage]] section.
 
 ** setup-text.el
 :PROPERTIES:
@@ -1870,16 +1887,190 @@ Sample configuration:
 :PROPERTIES:
 :ID:       277b9a96-a515-42e5-82f9-559fe3a6c3db
 :END:
+*_Author_*: [[https://github.com/dgutov][Dmitry Gutov]], =dgutov@yandex.ru=
+
+*_Homepage_*: [[https://github.com/dgutov/diff-hl][Github]]
+
+*_Features_*: 
+
+=diff-hl-mode= highlights uncommitted changes on the left side of the
+window, allows you to jump between and revert them selectively.
+
+For the usage instructions and the list of commands, see the Commentary section inside the file.
+
+Tested with Git, Mercurial, Bazaar and SVN. May work with other VC backends, too.
+
+The package also contains auxiliary modes:
+
+- =diff-hl-dired-mode= provides similar functionality in Dired.
+- =diff-hl-margin-mode= changes the highlighting function to use the margin instead of the fringe.
+- =diff-hl-amend-mode= shifts the reference revision back by one.
+
+...[screeshot]...
+
+*_Installation_*:
+=M-x list-packages= and select *diff-hl* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: diff-hl                             ;;
+  ;;                                              ;;
+  ;; GROUP: Programming -> Tools -> Vc -> Diff Hl ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (global-diff-hl-mode)
+  (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+#+end_src
+
+*_Usage_*: 
 
 *** Package: =magit=
 :PROPERTIES:
 :ID:       16744867-3d54-4212-856f-7742f2354706
 :END:
+*_Author_*: 
+
+Original Author: Marius Vollmer =marius.vollmer@gmail.com=
+
+Maintainer: [[https://github.com/tarsius][Jonas Bernoulli]], =jonas@bernoul.li=
+
+Former-Maintainers:
+- Nicolas Dudebout, =nicolas.dudebout@gatech.edu=
+- Peter J. Weisberg, =pj@irregularexpressions.net=
+- Phil Jackson, =phil@shellarchive.co.uk=
+- Rémi Vanicat, =vanicat@debian.org=
+- Yann Hodique, =yann.hodique@gmail.com=
+
+*_Homepage_*: [[http://magit.github.io]]
+
+*_Features_*:
+Magit is an interface to the version control system Git, implemented
+as an Emacs extension.
+
+Unlike Emacs' native Version Control package which strives to provide
+a unified interface to various version control systems, Magit only
+supports Git and can therefore better take advantage of its native
+features.
+
+Magit supports GNU Emacs 23.2 or later; 24.1 or later is
+recommended. Magit supports Git 1.7.2.5 or later; 1.8.2 or later is
+recommended. The minimal versions are those available in Debian
+oldstable.
+
+*_Installation_*:
+=M-x list-packages= and select ** package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: magit                       ;;
+  ;;                                      ;;
+  ;; GROUP: Programming -> Tools -> Magit ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'magit)
+  (set-default 'magit-stage-all-confirm nil)
+  (add-hook 'magit-mode-hook 'magit-load-config-extensions)
+#+end_src
+
+*_Usage_*:
+
+Getting started with Magit is really easy:
+
+- =M-x magit-status= to see git status, and in the status buffer:
+- =s= to stage files
+- =c c= to commit, type in your commit message then =C-c C-c= to save
+  the message and commit, =C-c C-k= to abort current commit message
+  and go back magit-status.
+- =b b= to switch to a branch.
+
+Other handy keys:
+
+- =P P= to do a git push
+- =F F= to do a git pull
+- try to press TAB on entries.
+
+If you want to view the raw git commands, i.e. you want to know how
+=git push= is doing, press *$*.
+
+For more usage, please refer to the [[http://magit.github.io/documentation][official manual.]]
 
 *** Package: =flycheck=
 :PROPERTIES:
 :ID:       23dedddc-be7f-41cd-b17b-5670d1fcf0d2
 :END:
+*_Author_*: [[https://github.com/lunaryorn][Sebastian Wiesner]], =swiesner@lunaryorn.com=
+
+*_Homepage_*: [[http://flycheck.readthedocs.org/en/latest/][http://flycheck.readthedocs.org/]]
+
+*_Features_*:
+
+- Supports over 30 programming and markup languages with more than 60 different syntax checking tools
+- Fully automatic, fail-safe, on-the-fly syntax checking in background
+- Nice error indication and highlighting
+- Optional error list popup
+- Many customization options
+- A comprehensive manual
+- A simple interface to define new syntax checkers
+- A “doesn't get in your way” guarantee
+- Many [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html#rd-party-extensions][3rd party extensions]]
+
+*_Installation_*;
+
+=M-x list-packages= and select *flycheck* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: flycheck                       ;;
+  ;;                                         ;;
+  ;; GROUP: Programming -> Tools -> Flycheck ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'flycheck)
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+#+end_src
+
+*_Usage_*: 
+
+After you installed and activated flycheck, your supported buffers
+are automatically checked against errors as you typed and the errors
+are displayed in echo area.
+
+*** Package: =flycheck-tip=
+:PROPERTIES:
+:ID:       1e5070dd-c73a-4fe8-a8da-298ad1e74054
+:END:
+*_Author_*: [[https://github.com/yuutayamada][Yuta Yamada]], =cokesboy@gmail.com=
+
+*_Homepage_*: [[https://github.com/yuutayamada/flycheck-tip][Github]]
+
+*_Features_*:
+
+Show flycheck error by popupo.
+
+*_Installation_*:
+=M-x list-packages= and select *flycheck-tip* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: flycheck-tip                                      ;;
+  ;;                                                            ;;
+  ;; GROUP: Flycheck Tip, but just consider it part of Flycheck ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'flycheck-tip)
+  (flycheck-tip-use-timer 'verbose)
+#+end_src
+
+*_Usage_*:
+
+The errors are now displayed by popup, instead of printing into the
+echo area. Echo area should be preserved for other things like
+=eldoc-mode=.
+
 ** setup-applications.el
 :PROPERTIES:
 :ID:       eba1989e-6113-4ac4-ba44-17094418f080
@@ -2005,7 +2196,10 @@ Sample configuration:
 :PROPERTIES:
 :ID:       26a9a3fb-b564-4827-81f1-c82c2809c73e
 :END:
+*_Author_*:
+
 *_Homepage_*: 
+
 *_Features_*:
 
 Give number its own face.
@@ -2024,6 +2218,42 @@ the package:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (add-hook 'prog-mode-hook 'number-font-lock-mode)
 #+end_src
+
+*_Usage_*: 
+
+Numbers automatically have distinct colors.
+*** Package: =highlight-symbol=
+:PROPERTIES:
+:ID:       726fdb67-5494-4761-a1b6-379cabc73c85
+:END:
+*_Author_*:
+
+*_Homepage_*:
+
+*_Features_*:
+
+*_Installation_*:
+=M-x list-packages= and select *highlight-symbol* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  (require 'highlight-symbol)
+
+  (highlight-symbol-nav-mode)
+
+  (add-hook 'prog-mode-hook (lambda () (highlight-symbol-mode)))
+  (add-hook 'org-mode-hook (lambda () (highlight-symbol-mode)))
+  (setq highlight-symbol-on-navigation-p t) ; enable highlighting symbol at point automatically
+
+  (global-set-key [(control shift mouse-1)]
+                  (lambda (event)
+                    (interactive "e")
+                    (goto-char (posn-point (event-start event)))
+                    (highlight-symbol-at-point)))
+#+end_src
+
+*_Usage_*:
 
 ** setup-help.el
 :PROPERTIES:
@@ -2085,7 +2315,7 @@ the package:
   (require 'help-fns+)
 #+end_src
 
-*** Package: help-mode+
+*** Package: =help-mode+=
 :PROPERTIES:
 :ID:       6d65f9ca-ab61-4d8e-83ac-40f9325e1780
 :END:
@@ -2110,40 +2340,18 @@ the package:
 :PROPERTIES:
 :ID:       3a088d14-a8ae-4c4d-8526-57e60307f1d8
 :END:
+If you define your own Customization Group locally to your
+computer, your Customization Group should be added under =Local=
+parent and customize it here. The only sub-group in =Local= group is
+=holidy=, and I do not use it, so I leave this file blank.
 ** setup-editor.el
 :PROPERTIES:
 :ID:       f3eab381-cb88-4e5a-8ff1-24cdb454a744
 :END:
 
-*** Package: clean-aindent-mode
-:PROPERTIES:
-:ID:       f15a2012-97ad-4de7-b7b3-f0cb94dfd9d2
-:END:
-*** Package: smartparens-mode
-:PROPERTIES:
-:ID:       4a1b2e00-b23b-4104-b60d-4e44465b858a
-:END:
-
-**** Alternatives
-:PROPERTIES:
-:ID:       4f255ca3-8ad9-4316-a30a-6305c5715377
-:END:
-
 *** Package: ace-jump-mode
 :PROPERTIES:
 :ID:       8c648eca-d6fe-411f-913f-479de76c138a
-:END:
-*** Package: diff-hl
-:PROPERTIES:
-:ID:       c308752e-4f95-4409-8921-1e905aa73884
-:END:
-*** Package: expand-region
-:PROPERTIES:
-:ID:       6c217940-9a70-4654-8b55-38a3f99e12d3
-:END:
-*** Package: easy-kill
-:PROPERTIES:
-:ID:       2d0dc98b-3e5c-403e-9cc4-3dd8934c69cd
 :END:
 *** Package: highlight-symbol
 :PROPERTIES:
