@@ -24,6 +24,21 @@ want, much like Lisp.
 Unlike other editors which encourage users to stay with the default as
 much as they can, Emacs encourages users to customize and extend Emacs
 as much as they can.
+
+In the old days, when Emacs did not have a package managaer and did
+not have many learning resources like now, it's really uneasy to
+customize Emacs, because to customize Emacs properly you have to read
+a decent chunk of the Emacs Lisp manual. Many of us, including me, do
+not have that luxury of time. The way I learned to customize Emacs was
+copying little code snipopets that solve specific problems - when I
+encountered them - and paste everything in my =~/.emacs= file. I also
+had to download Emacs packages manually and load it manually in
+=~/.emacs=. I hope that this guide helps you to be at least as good as
+me in customzing Emacs without having to spend a long time in
+collecting configurations, or reading the whole Emacs Lsip
+manual. After you finish this chapter, you can dive in the Emacs Lisp
+manually if you want, and easier.
+
 * Just enough Emacs Lisp
 :PROPERTIES:
 :ID:       bd3c88d9-3a94-483f-bc35-3b5c215d0e79
@@ -532,7 +547,7 @@ the basic usage of the functions. If you want to understand more, *C-h
 f* and enter name of the function. All of the quoted function
 descriptions are taken from *C-h f*. If you forget what a function
 does and how to use it, *C-h f* to find out. Really, you should get
-used to getting help from Emacs.
+used to getting help from Emacs itself.
 
 ** How to use Emacs package manager
 :PROPERTIES:
