@@ -1964,7 +1964,7 @@ it. After finish installing, add this code snippet to activate the
 package:
 
 #+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; PACKAGE: magit                       ;;
   ;;                                      ;;
   ;; GROUP: Programming -> Tools -> Magit ;;
@@ -1972,6 +1972,18 @@ package:
   (require 'magit)
   (set-default 'magit-stage-all-confirm nil)
   (add-hook 'magit-mode-hook 'magit-load-config-extensions)
+
+  (global-unset-key (kbd "C-x g"))
+  (global-set-key (kbd "C-x g h") 'magit-log)
+  (global-set-key (kbd "C-x g f") 'magit-file-log)
+  (global-set-key (kbd "C-x g b") 'magit-blame-mode)
+  (global-set-key (kbd "C-x g m") 'magit-branch-manager)
+  (global-set-key (kbd "C-x g c") 'magit-branch)
+  (global-set-key (kbd "C-x g s") 'magit-status)
+  (global-set-key (kbd "C-x g g") 'helm-git-grep)
+  (global-set-key (kbd "C-x g l") 'helm-ls-git-ls)
+  (global-set-key (kbd "C-x g r") 'magit-reflog)
+  (global-set-key (kbd "C-x g t") 'magit-tag)
 #+end_src
 
 *_Usage_*:
@@ -2187,22 +2199,57 @@ Sample configuration:
   ;; GROUP: Environment -> Mode Line    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (column-number-mode)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Environment -> Windows      ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq split-width-threshold 0) ; always split vertically for pop-up
+                                          ; buffers like *Help* buffer, ibuffer,
+                                          ; magit-status buffer...
 #+end_src
-** setup-faces.el
+** setup-faces-and-ui.el
 :PROPERTIES:
 :ID:       ee26ceb9-d308-4ea5-a96c-a805b33079a0
 :END:
+Sample configuration:
+
+#+begin_src emacs-lisp
+  ;; you won't need any of the bar thingies
+  ;; turn it off to save screen estate
+  (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+  (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+  ;; the blinking cursor is nothing, but an annoyance
+  (blink-cursor-mode -1)
+
+  (setq scroll-margin 0
+        scroll-conservatively 100000
+        scroll-preserve-screen-position 1)
+
+  (size-indication-mode t)
+
+  ;; more useful frame title, that show either a file or a
+  ;; buffer name (if the buffer isn't visiting a file)
+  ;; taken from prelude-ui.el
+  (setq frame-title-format
+        '("" invocation-name " - " (:eval (if (buffer-file-name)
+                                                      (abbreviate-file-name (buffer-file-name))
+                                                    "%b"))))
+#+end_src
+
 *** Package: =number-font-lock=
 :PROPERTIES:
 :ID:       26a9a3fb-b564-4827-81f1-c82c2809c73e
 :END:
-*_Author_*:
+*_Author_*: [[https://github.com/Fanael][Fanael Linithien]], =fanael4@gmail.com=
 
-*_Homepage_*: 
+*_Homepage_*: [[https://github.com/Fanael/number-font-lock-mode][Github]]
 
 *_Features_*:
 
-Give number its own face.
+=number-font-lock-mode= is an Emacs minor mode that highlights numeric
+literals in source code.
 
 *_Installation_*:
 
@@ -2221,18 +2268,22 @@ the package:
 
 *_Usage_*: 
 
-Numbers automatically have distinct colors.
+Numbers automatically have distinct colors in buffer.
+
 *** Package: =highlight-symbol=
 :PROPERTIES:
 :ID:       726fdb67-5494-4761-a1b6-379cabc73c85
 :END:
-*_Author_*:
+*_Author_*: [[https://github.com/nschum][Nikolaj Schumacher]], =me@nschum.de=
 
-*_Homepage_*:
+*_Homepage_*: [[https://github.com/nschum/highlight-symbol.el][Github]]
 
 *_Features_*:
 
+Automatic and manual symbol highlighting for Emacs.
+
 *_Installation_*:
+
 =M-x list-packages= and select *highlight-symbol* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2251,9 +2302,16 @@ package:
                     (interactive "e")
                     (goto-char (posn-point (event-start event)))
                     (highlight-symbol-at-point)))
+
+  (global-set-key (kbd "M-n") 'highlight-symbol-next)
+  (global-set-key (kbd "M-p") 'highlight-symbol-prev)
 #+end_src
 
 *_Usage_*:
+
+If you move point on a symbol, it automatically highlights all the
+symbols in the current screen. From now on, pressing *M-n* and *M-p*
+will immeidately jump to the next/previous symbols in a buffer.
 
 ** setup-help.el
 :PROPERTIES:
@@ -2264,7 +2322,10 @@ package:
 :PROPERTIES:
 :ID:       d9f960bc-0ef7-49df-b7d8-4c98f99893ac
 :END:
-*_Homepage_*: [[http://www.emacswiki.org/emacs/InfoPlus][Info+]]
+*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+
+*_Homepage_*: [[http://www.emacswiki.org/emacs/InfoPlus][Emacswiki]]
+
 *_Features_*:
 Info+ helps you read Info documents more enjoyable with extra
 highlighting it provides.
@@ -2282,12 +2343,40 @@ the package:
   (require 'info+)
 #+end_src
 
+*** Package: =discover-my-major=
+:PROPERTIES:
+:ID:       f1eadf8c-e8d5-49f0-9c8a-2b14b5129da5
+:END:
+*_Author_*:
+
+*_Homepage_*:
+
+*_Features_*:
+
+*_Installation_*:
+=M-x list-packages= and select *flycheck-tip* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;; A quick major mode help with discover-my-major
+  (define-key 'help-command (kbd "C-m") 'discover-my-major)
+
+
+#+end_src
+
+*_Usage_*:
+
 *** Package: =help+=
 :PROPERTIES:
 :ID:       eb0f4552-02af-4500-a839-82016cff719c
 :END:
+*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+
 *_Homepage_*: 
+
 *_Features_*:
+
 *_Installation_*:
 
 =M-x list-packages= and select *help+* package, then
@@ -2298,8 +2387,12 @@ the package:
 :PROPERTIES:
 :ID:       8fd8c1ee-555c-4ba4-9513-176c5e382b72
 :END:
+*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+
 *_Homepage_*: 
+
 *_Features_*:
+
 *_Installation_*:
 
 =M-x list-packages= and select *help-fns+* package, then
@@ -2319,8 +2412,12 @@ the package:
 :PROPERTIES:
 :ID:       6d65f9ca-ab61-4d8e-83ac-40f9325e1780
 :END:
+*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+
 *_Homepage_*: 
+
 *_Features_*:
+
 *_Installation_*:
 
 =M-x list-packages= and select *help-mode+* package, then
