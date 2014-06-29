@@ -1333,6 +1333,77 @@ Here's a glimpse of Projectile in action:
 *_Usage_*: 
 
 Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
+
+*** Package: =workgroups2=
+:PROPERTIES:
+:ID:       8860083f-a522-4249-847a-6d31317fce80
+:END:
+
+*_Author_*: 
+
+[[http://pashinin.com/en/][Sergey Pashinin]], =sergey@pashinin.com=
+
+Based on the original [[https://github.com/tlh/workgroups.el][workgroups]], created by tlh, =thunkout@gmail.com=.
+
+*_Homepage_*: [[https://github.com/pashinin/workgroups2][Github]]
+
+*_Features_*:
+
+Workgroups is a session manager for Emacs.
+
+- It saves all your opened buffers, their location and sizes on disk
+  to restore later 
+
+- You can create several workspaces
+
+You can also restore such buffers as: org-agenda, shell, magit-status,
+help.
+
+*_Installation_*:
+=M-x list-packages= and select *workgroups2* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: workgroups2               ;;
+  ;;                                    ;;
+  ;; GROUP: Convenience -> Workgroups   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'workgroups2)
+  ;; Change some settings
+  (workgroups-mode 1)
+#+end_src
+
+*_Usage_*:
+
+Most commands are bound to both <prefix> <key> and <prefix> C-<key>.
+
+By default prefix is: "C-c z" (To change it - see settings below)
+
+#+BEGIN_QUOTE
+<prefix> <key>
+<prefix> c    - create workgroup
+<prefix> A    - rename workgroup
+<prefix> k    - kill workgroup
+<prefix> v    - switch to workgroup
+<prefix> C-s  - save session
+<prefix> C-f  - load session
+<prefix> 0..9 - switch to workgroup at index 0..9
+#+END_QUOTE
+
+Do you remember [[http://tuhdo.github.io/emacs-tutor.html#sec-7-28][how to use registers to store window configurations]]?
+Registers are good, but it does not allow you to name window
+configurations. It would be trouble when the number of window
+configurations getting large. You will have to tediously remember
+which register stores which configuration.
+
+With =workgroups2=, each window configuration is a workgroup, and you
+can create as many workgroups and named it with =<prefix> c=; later,
+you can switch back by =<prefix> v=. Because you can name your window
+configurations, you don't have the burden to remember which to which
+in registers. You can also save your window configurations to continue
+using them in later Emacs sessions.
 ** Package on a league of its own: =helm=
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
@@ -1483,7 +1554,10 @@ use *helm-execute-persistent-action* more than
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 #+end_src
-
+** Alternative to Helm: =ido= + =flx-ido= + =smex=
+:PROPERTIES:
+:ID:       28093c3d-795a-484f-9801-95237f99fc20
+:END:
 ** setup-files.el
 :PROPERTIES:
 :ID:       1b1d3e93-3ebc-437a-b20d-f6d880d02ba1
@@ -2220,14 +2294,56 @@ Sample configuration:
   ;; GROUP: Environment -> Mode Line    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (column-number-mode)
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Environment -> Windows      ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (setq split-width-threshold 0) ; always split vertically for pop-up
-                                          ; buffers like *Help* buffer, ibuffer,
-                                          ; magit-status buffer...
 #+end_src
+
+*** Package: =nyan-mode=
+:PROPERTIES:
+:ID:       e105a01f-2fbb-4ccb-b9a9-cc08fcbc6097
+:END:
+
+*_Author_*: Jacek "TeMPOraL" Zlydach, =temporal.pl@gmail.com=
+
+*_Homepage_*: [[http://nyan-mode.buildsomethingamazing.com/]]
+
+*_Features_*:
+
+Nyan Mode is an analog indicator of your position in the buffer. The
+Cat should go from left to right in your mode-line, as you move your
+point from 0% to 100%.
+
+[[file:static/part3/nyan-mode.png][file:static/part3/nyan-mode.png]]
+
+
+- Mind dumbing content included,
+- Experimental animation (M-x nyan-start-animation, M-x
+  nyan-stop-animation),
+- Wavy rainbow (M-x set-variable <ret> nyan-wavy-trail <ret> t),
+- Customizable properties.
+
+NOT INCLUDED: music.
+
+*_Installation_*:
+=M-x list-packages= and select *nyan-mode* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: nyan-mode                    ;;
+  ;;                                       ;;
+  ;; GROUOP: Environment -> Frames -> Nyan ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; only turn on if a window system is available
+  ;; this prevents error under terminal that does not support X
+  (case window-system
+    ((x w32) (nyan-mode)))
+#+end_src
+
+*_Usage_*:
+
+As you scroll through a buffer, the cat moves to indicate the position
+in buffer.
+
 ** setup-faces-and-ui.el
 :PROPERTIES:
 :ID:       ee26ceb9-d308-4ea5-a96c-a805b33079a0
@@ -2338,7 +2454,6 @@ will immeidately jump to the next/previous symbols in a buffer.
 :PROPERTIES:
 :ID:       0b7ba2b9-8cce-4516-b7ad-ff351b30994b
 :END:
-
 *** Package: =info+=
 :PROPERTIES:
 :ID:       d9f960bc-0ef7-49df-b7d8-4c98f99893ac
@@ -2368,26 +2483,67 @@ the package:
 :PROPERTIES:
 :ID:       f1eadf8c-e8d5-49f0-9c8a-2b14b5129da5
 :END:
-*_Author_*:
+*_Author_*: [[http://steckerhalter.co.vu/][steckerhalter]]
 
-*_Homepage_*:
+*_Homepage_*: [[https://github.com/steckerhalter/discover-my-major][Github]]
 
 *_Features_*:
 
+Discover key bindings and their meaning for the current Emacs major mode.
+
+[[file:static/part3/discover-my-major.png][file:static/part3/discover-my-major.png]]
+
 *_Installation_*:
-=M-x list-packages= and select *flycheck-tip* package, then install
+=M-x list-packages= and select *discover-my-major* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
 
 #+begin_src emacs-lisp
   ;; A quick major mode help with discover-my-major
   (define-key 'help-command (kbd "C-m") 'discover-my-major)
-
-
 #+end_src
 
 *_Usage_*:
 
+*** Package: =rainbow-mode=
+:PROPERTIES:
+:ID:       c0171162-e9cf-4e6e-a96b-b8304f68b020
+:END:
+*_Author_*: Julien Danjou, =julien@danjou.info=
+
+*_Homepage_*: [[http://elpa.gnu.org/packages/rainbow-mode.html][GNU ELPA]]
+
+*_Features_*:
+
+This minor mode sets background color to strings that match color
+names, e.g. #0000ff is displayed in white with a blue background.
+
+[[file:static/part3/rainbow-mode.png][file:static/part3/rainbow-mode.png]]
+
+*_Installation_*:
+=M-x list-packages= and select *rainbow-mode* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: rainbow-mode              ;;
+  ;;                                    ;;
+  ;; GROUP: Help -> Rainbow             ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (add-hook 'html-mode-hook 'rainbow-mode)
+  (add-hook 'css-mode-hook 'rainbow-mode)
+#+end_src
+
+It is useful to always activate =rainbow-mode= in those two major
+modes. For other modes, it is situational, so I don't use
+=prog-mode-hook=.
+
+*_Usage_*:
+
+As you type a hex number or a color string in a buffer with
+=rainbow-mode= activated, the hex number or color string is
+colourized.
 *** Package: =help+=
 :PROPERTIES:
 :ID:       eb0f4552-02af-4500-a839-82016cff719c
@@ -2462,73 +2618,9 @@ If you define your own Customization Group locally to your
 computer, your Customization Group should be added under =Local=
 parent and customize it here. The only sub-group in =Local= group is
 =holidy=, and I do not use it, so I leave this file blank.
-** setup-editor.el
-:PROPERTIES:
-:ID:       f3eab381-cb88-4e5a-8ff1-24cdb454a744
-:END:
-
-*** Package: ace-jump-mode
-:PROPERTIES:
-:ID:       8c648eca-d6fe-411f-913f-479de76c138a
-:END:
-*** Package: highlight-symbol
-:PROPERTIES:
-:ID:       c8c4279b-263c-4b7c-b370-ff465a357e92
-:END:
-*** Package: multiselect
-:PROPERTIES:
-:ID:       684f1185-fc42-42d2-8b26-f9e972f3fb83
-:END:
-*** Package: pretty-lambdada
-:PROPERTIES:
-:ID:       9bdee173-eea2-4ffe-9da5-51abcba85d66
-:END:
-*** Package: hippie-expand
-:PROPERTIES:
-:ID:       d308b663-9560-4c44-800f-e91757228590
-:END:
-*** Package: rainbow-mode
-:PROPERTIES:
-:ID:       2f37c16a-307a-4683-adf5-31a64c0817d5
-:END:
-*** Package: rawinbow-delimiter
-:PROPERTIES:
-:ID:       4ea22f1a-a72e-4ee9-b54f-88d866f25666
-:END:
-*** Package: yasnippet
-:PROPERTIES:
-:ID:       ea795154-fe90-4c00-9874-6b24a36430f0
-:END:
-*** Package: vlf
-:PROPERTIES:
-:ID:       175b96e7-c986-407a-b3d1-98c0a417e5de
-:END:
-*** Package: zop-to-char
-:PROPERTIES:
-:ID:       699984dc-fff2-4ded-82d2-a8131ab2e801
-:END:
-*** Package: undo-tree
-:PROPERTIES:
-:ID:       e4e1faa4-3fa4-4424-943b-94b626da982e
-:END:
-
-*** Package: nyan-mode
-:PROPERTIES:
-:ID:       77911eb8-f448-475a-a8fb-1546f7b43629
-:END:
-
 ** setup-ido.el
 :PROPERTIES:
 :ID:       de428bfd-de8d-4b53-ae08-1b7fd53ff1cb
-:END:
-** setup-info.el
-:PROPERTIES:
-:ID:       c94fdf0a-e6ac-49f9-b1cb-611fc9ea4753
-:END:
-
-** setup-bookmark
-:PROPERTIES:
-:ID:       5bde4b05-c051-42a2-bc14-8490728f11fa
 :END:
 ** setup-windows.el
 :PROPERTIES:
@@ -2542,54 +2634,6 @@ parent and customize it here. The only sub-group in =Local= group is
 :PROPERTIES:
 :ID:       f6ac2425-ef91-493e-bdb0-a50cc0ade267
 :END:
-*** Package: policty-witch.el
-:PROPERTIES:
-:ID:       449ca81b-5109-4a81-881e-982694422ab7
-:END:
-** setup-projectile.el
-:PROPERTIES:
-:ID:       024e5f66-8aaa-4fff-a5bf-27468b9548c3
-:END:
-** setup-eshell.el
-:PROPERTIES:
-:ID:       b5869f1c-54df-43e5-8eef-d557ef9fdfca
-:END:
-
-** setup-company.el
-:PROPERTIES:
-:ID:       dcf6c7ae-406a-4436-b09e-b1b5c7b554e2
-:END:
-** setup-helm.el
-:PROPERTIES:
-:ID:       a0fbf5d8-af3f-4fd8-a7f4-fff006a49fa8
-:END:
-*** Package: helm-ls-git
-:PROPERTIES:
-:ID:       790ab1dd-fe07-4b01-bb03-742586e3f6a1
-:END:
-*** Package: helm-desbinds
-:PROPERTIES:
-:ID:       46a860a4-4a29-4199-9069-29dd0cc043ea
-:END:
-*** Package: helm-projectile
-:PROPERTIES:
-:ID:       7b823d0a-212d-4277-ace2-bc317e196206
-:END:
-
-** setup-helps.el
-:PROPERTIES:
-:ID:       bf450c25-178f-4ab7-b4c9-4bd3475e375b
-:END:
-*** Package: discover-my-major
-:PROPERTIES:
-:ID:       92ff6c99-10a8-4779-a293-48b3c36c16bb
-:END:
-
-** Extend built-in functionality
-:PROPERTIES:
-:ID:       f7f5027d-65aa-4e1c-9c8f-d069297a207e
-:END:
-
 * More Emacs Lisp resources
 :PROPERTIES:
 :ID:       18ccd3a6-7545-4c7a-9b2b-3106dd05bdde
