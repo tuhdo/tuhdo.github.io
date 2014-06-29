@@ -1,0 +1,18 @@
+Missing packages to introduce in later parts:
+
+*** Package: ace-jump-mode
+:PROPERTIES:
+:ID:       8c648eca-d6fe-411f-913f-479de76c138a
+:END:
+*** Package: multiselect
+:PROPERTIES:
+:ID:       684f1185-fc42-42d2-8b26-f9e972f3fb83
+:END:
+*** Package: rawinbow-delimiter
+:PROPERTIES:
+:ID:       4ea22f1a-a72e-4ee9-b54f-88d866f25666
+:END:
+*** Package: zop-to-char
+:PROPERTIES:
+:ID:       699984dc-fff2-4ded-82d2-a8131ab2e801
+:END:
