@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-06-30 T2 21:37 -->
+<!-- 2014-06-30 T2 21:40 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -361,7 +361,7 @@ For example:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(message <span style="color: #70c0b1;">"Hello word %d"</span> (+ <span style="color: #7aa6da;">10</span> <span style="color: #7aa6da;">10</span>))
+<pre class="src src-emacs-lisp">(message <span style="color: #8b2252;">"Hello word %d"</span> (+ <span style="color: #008b8b;">10</span> <span style="color: #008b8b;">10</span>))
 </pre>
 </div>
 
@@ -389,7 +389,7 @@ For example, <code>if</code> is a special form as we learned in previous part:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">if</span> condition
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> condition
     true-case
   false-case)
 </pre>
@@ -468,7 +468,7 @@ for changing setting, but <code>setq</code> a variable is also equivalent.
 </p>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(setq global-mark-ring-max <span style="color: #7aa6da;">50000</span>)
+<pre class="src src-emacs-lisp">(setq global-mark-ring-max <span style="color: #008b8b;">50000</span>)
 </pre>
 </div>
 
@@ -512,10 +512,10 @@ chosen parameter, and in our example, it's <i>MUST-SUFFIX</i>.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(load (substitute-in-file-name <span style="color: #70c0b1;">"$HOME/.emacs.d/module"</span>)) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">first try to load module.elc; if not found, try to load module.el</span>
-(load (substitute-in-file-name <span style="color: #70c0b1;">"$HOME/.emacs.d/module.el"</span>)) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">only load module.el</span>
-(load (substitute-in-file-name <span style="color: #70c0b1;">"$HOME/.emacs.d/module.elc"</span>)) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">only load module.elc</span>
-(load <span style="color: #70c0b1;">"module"</span>) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">search for the file module.el or module.elc in variable load-path</span>
+<pre class="src src-emacs-lisp">(load (substitute-in-file-name <span style="color: #8b2252;">"$HOME/.emacs.d/module"</span>)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">first try to load module.elc; if not found, try to load module.el</span>
+(load (substitute-in-file-name <span style="color: #8b2252;">"$HOME/.emacs.d/module.el"</span>)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">only load module.el</span>
+(load (substitute-in-file-name <span style="color: #8b2252;">"$HOME/.emacs.d/module.elc"</span>)) <span style="color: #b22222;">;; </span><span style="color: #b22222;">only load module.elc</span>
+(load <span style="color: #8b2252;">"module"</span>) <span style="color: #b22222;">; </span><span style="color: #b22222;">search for the file module.el or module.elc in variable load-path</span>
 </pre>
 </div>
 
@@ -555,7 +555,7 @@ to load it:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">volatile-highlights</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">volatile-highlights</span>)
 </pre>
 </div>
 
@@ -594,8 +594,8 @@ The normal messages at start and end of loading <i>FILENAME</i> are suppressed.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #70c0b1;">"~/.emacs.d/personal"</span>) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">add personal to load-path,</span>
-                                               <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">so "load" function can search for files in it</span>
+<pre class="src src-emacs-lisp">(add-to-list 'load-path <span style="color: #8b2252;">"~/.emacs.d/personal"</span>) <span style="color: #b22222;">; </span><span style="color: #b22222;">add personal to load-path,</span>
+                                               <span style="color: #b22222;">; </span><span style="color: #b22222;">so "load" function can search for files in it</span>
 </pre>
 </div>
 
@@ -708,10 +708,10 @@ You can bind in one of the following ways:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #70c0b1;">"C-x C-b"</span>) 'ibuffer) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">bind "C-x C-b" to ibuffer command</span>
-(global-set-key <span style="color: #70c0b1;">"\C-x\C-b"</span> 'ibuffer)  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">bind "C-x C-b to ibuffer command, but modifier </span>
-                                      <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">keys must be escaped with the backslash</span>
-(global-set-key [?\C-x?\C-b] 'ibuffer) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">use vector instead of a string</span>
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"C-x C-b"</span>) 'ibuffer) <span style="color: #b22222;">;; </span><span style="color: #b22222;">bind "C-x C-b" to ibuffer command</span>
+(global-set-key <span style="color: #8b2252;">"\C-x\C-b"</span> 'ibuffer)  <span style="color: #b22222;">;; </span><span style="color: #b22222;">bind "C-x C-b to ibuffer command, but modifier </span>
+                                      <span style="color: #b22222;">;; </span><span style="color: #b22222;">keys must be escaped with the backslash</span>
+(global-set-key [?\C-x?\C-b] 'ibuffer) <span style="color: #b22222;">;; </span><span style="color: #b22222;">use vector instead of a string</span>
 </pre>
 </div>
 
@@ -726,7 +726,7 @@ mapping function keys, such as <code>[left]</code>, <code>[right]</code>, <code>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #70c0b1;">"&lt;f3&gt;"</span>) 'kmacro-start-macro-or-insert-counter)
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #8b2252;">"&lt;f3&gt;"</span>) 'kmacro-start-macro-or-insert-counter)
 </pre>
 </div>
 
@@ -890,16 +890,16 @@ major mode or minor mode, you use <code>define-key</code> function like this:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Dired uses "e", "f" or RET to open a file</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">you can reuse one of these keys for different purpose</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">for example, you can bind it to wdired-change-to-wdired-mode</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">wdired-change-to-wdired-mode allows you to edit your Dired buffer</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">like a normal text buffer, such as edit file/directory names,</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">permission bits.. and then commit the changes to disk.</span>
-<span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">"e" is short for "edit"</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">After finish your editing, "C-c C-c" to commit, "C-c C-k" to abort</span>
-(define-key dired-mode-map (kbd <span style="color: #70c0b1;">"e"</span>) 'wdired-change-to-wdired-mode)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Dired uses "e", "f" or RET to open a file</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">you can reuse one of these keys for different purpose</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">for example, you can bind it to wdired-change-to-wdired-mode</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">wdired-change-to-wdired-mode allows you to edit your Dired buffer</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">like a normal text buffer, such as edit file/directory names,</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">permission bits.. and then commit the changes to disk.</span>
+<span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">"e" is short for "edit"</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">After finish your editing, "C-c C-c" to commit, "C-c C-k" to abort</span>
+(define-key dired-mode-map (kbd <span style="color: #8b2252;">"e"</span>) 'wdired-change-to-wdired-mode)
 </pre>
 </div>
 
@@ -962,16 +962,16 @@ used to abbreviate command name.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defalias</span> '<span style="color: #e78c45;">yes-or-no-p</span> 'y-or-n-p) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">y or n is enough</span>
-(<span style="color: #b9ca4a;">defalias</span> '<span style="color: #e78c45;">list-buffers</span> 'ibuffer) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">always use ibuffer</span>
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defalias</span> '<span style="color: #0000ff;">yes-or-no-p</span> 'y-or-n-p) <span style="color: #b22222;">; </span><span style="color: #b22222;">y or n is enough</span>
+(<span style="color: #a020f0;">defalias</span> '<span style="color: #0000ff;">list-buffers</span> 'ibuffer) <span style="color: #b22222;">; </span><span style="color: #b22222;">always use ibuffer</span>
 
-                                        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">elisp</span>
-(<span style="color: #b9ca4a;">defalias</span> '<span style="color: #e78c45;">eb</span> 'eval-buffer)
-(<span style="color: #b9ca4a;">defalias</span> '<span style="color: #e78c45;">er</span> 'eval-region)
-(<span style="color: #b9ca4a;">defalias</span> '<span style="color: #e78c45;">ed</span> 'eval-defun)
+                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">elisp</span>
+(<span style="color: #a020f0;">defalias</span> '<span style="color: #0000ff;">eb</span> 'eval-buffer)
+(<span style="color: #a020f0;">defalias</span> '<span style="color: #0000ff;">er</span> 'eval-region)
+(<span style="color: #a020f0;">defalias</span> '<span style="color: #0000ff;">ed</span> 'eval-defun)
 
-                                        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">minor modes</span>
-(<span style="color: #b9ca4a;">defalias</span> '<span style="color: #e78c45;">wsm</span> 'whitespace-mode)
+                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">minor modes</span>
+(<span style="color: #a020f0;">defalias</span> '<span style="color: #0000ff;">wsm</span> 'whitespace-mode)
 </pre>
 </div>
 
@@ -1018,8 +1018,8 @@ Lisp forms to be executed. The return value is the last form.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">demo</span> ()
-  (message <span style="color: #70c0b1;">"Hello World"</span> number string))
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">demo</span> ()
+  (message <span style="color: #8b2252;">"Hello World"</span> number string))
 </pre>
 </div>
 
@@ -1029,9 +1029,9 @@ Lisp forms to be executed. The return value is the last form.
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">demo</span> ()
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">demo</span> ()
   (interactive)
-  (message <span style="color: #70c0b1;">"Hello World"</span>))
+  (message <span style="color: #8b2252;">"Hello World"</span>))
 </pre>
 </div>
 
@@ -1212,9 +1212,9 @@ the packages described in later sections. Add this code snippet to your
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">package</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span>)
 (add-to-list 'package-archives
-  '(<span style="color: #70c0b1;">"melpa"</span> . <span style="color: #70c0b1;">"http://melpa.milkbox.net/packages/"</span>) t)
+  '(<span style="color: #8b2252;">"melpa"</span> . <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span>) t)
 </pre>
 </div>
 
@@ -1330,11 +1330,11 @@ start Emacs, it uses your saved setting. The new value is saved at
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(custom-set-variables
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">custom-set-variables was added by Custom.</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">If you edit it by hand, you could mess it up, so be careful.</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Your init file should contain only one such instance.</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">If there is more than one, they won't work right.</span>
- '(global-mark-ring-max <span style="color: #7aa6da;">5000</span>))
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">custom-set-variables was added by Custom.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">Your init file should contain only one such instance.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">If there is more than one, they won't work right.</span>
+ '(global-mark-ring-max <span style="color: #008b8b;">5000</span>))
 </pre>
 </div>
 
@@ -1400,11 +1400,11 @@ setting to the function <code>custom-set-variables</code> like this:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(custom-set-variables
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">custom-set-variables was added by Custom.</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">If you edit it by hand, you could mess it up, so be careful.</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Your init file should contain only one such instance.</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">If there is more than one, they won't work right.</span>
- '(global-mark-ring-max <span style="color: #7aa6da;">5000</span> nil nil <span style="color: #70c0b1;">"test"</span>))
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">custom-set-variables was added by Custom.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">Your init file should contain only one such instance.</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">If there is more than one, they won't work right.</span>
+ '(global-mark-ring-max <span style="color: #008b8b;">5000</span> nil nil <span style="color: #8b2252;">"test"</span>))
 </pre>
 </div>
 
@@ -1470,9 +1470,9 @@ each file, noting which group this file belongs to. For example:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Editing</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Editing</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 </pre>
 </div>
 </li>
@@ -1519,53 +1519,53 @@ used to it.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Editing</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Editing</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Editing Basics   ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Editing Basics   ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">you can set a value to one variablea</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">you can set a value to one variablea</span>
 (setq
- global-mark-ring-max <span style="color: #7aa6da;">5000</span>
- mark-ring-max <span style="color: #7aa6da;">5000</span>
+ global-mark-ring-max <span style="color: #008b8b;">5000</span>
+ mark-ring-max <span style="color: #008b8b;">5000</span>
  mode-require-final-newline t
- tab-width <span style="color: #7aa6da;">4</span>)
+ tab-width <span style="color: #008b8b;">4</span>)
 
 (delete-selection-mode)
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Electricity      ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">you can see these variables Eletricity group. However, these variables</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">are not for setting because setting them have no effect. You have to activate</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">command of the same name. If some variables are required to be activated through</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">commands, the description of those variables explicitly say so.</span>
-(electric-indent-mode) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">activate automatic indent when press RET</span>
-(electric-pair-mode) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">activate automatic paring</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Electricity      ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">you can see these variables Eletricity group. However, these variables</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">are not for setting because setting them have no effect. You have to activate</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">command of the same name. If some variables are required to be activated through</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">commands, the description of those variables explicitly say so.</span>
+(electric-indent-mode) <span style="color: #b22222;">;; </span><span style="color: #b22222;">activate automatic indent when press RET</span>
+(electric-pair-mode) <span style="color: #b22222;">;; </span><span style="color: #b22222;">activate automatic paring</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">an example of association list, also an example of how to write a character</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">add more pairs if you want</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(setq electric-pair-pairs '(( ?\&lt; . ?\&gt;)))</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">an example of association list, also an example of how to write a character</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">add more pairs if you want</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(setq electric-pair-pairs '(( ?\&lt; . ?\&gt;)))</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Killing          ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Killing          ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq
- kill-ring-max <span style="color: #7aa6da;">5000</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">increase kill-ring capacity</span>
- kill-whole-line t  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">if NIL, kill whole line and move the next line up</span>
+ kill-ring-max <span style="color: #008b8b;">5000</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">increase kill-ring capacity</span>
+ kill-whole-line t  <span style="color: #b22222;">;; </span><span style="color: #b22222;">if NIL, kill whole line and move the next line up</span>
  )
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Matching         ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">As you can see, I only use a single option in the inner sub-group</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">It's not worth to create a file</span>
-(setq show-paren-delay <span style="color: #7aa6da;">0</span>) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">highlight parentheses immediately</span>
-(show-paren-mode) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">activate show-paren-mode</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Matching         ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">As you can see, I only use a single option in the inner sub-group</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">It's not worth to create a file</span>
+(setq show-paren-delay <span style="color: #008b8b;">0</span>) <span style="color: #b22222;">; </span><span style="color: #b22222;">highlight parentheses immediately</span>
+(show-paren-mode) <span style="color: #b22222;">; </span><span style="color: #b22222;">activate show-paren-mode</span>
 </pre>
 </div>
 </div>
@@ -1582,166 +1582,166 @@ line, but move to the first non-whitespace character of that line.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Customized functions                ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-move-beginning-of-line</span> (arg)
-  <span style="color: #c397d8;">"Move point back to indentation of beginning of line.</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Customized functions                ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-move-beginning-of-line</span> (arg)
+  <span style="color: #8b2252;">"Move point back to indentation of beginning of line.</span>
 
-<span style="color: #c397d8;">Move point to the first non-whitespace character on this line.</span>
-<span style="color: #c397d8;">If point is already there, move to the beginning of the line.</span>
-<span style="color: #c397d8;">Effectively toggle between the first non-whitespace character and</span>
-<span style="color: #c397d8;">the beginning of the line.</span>
+<span style="color: #8b2252;">Move point to the first non-whitespace character on this line.</span>
+<span style="color: #8b2252;">If point is already there, move to the beginning of the line.</span>
+<span style="color: #8b2252;">Effectively toggle between the first non-whitespace character and</span>
+<span style="color: #8b2252;">the beginning of the line.</span>
 
-<span style="color: #c397d8;">If ARG is not nil or 1, move forward ARG - 1 lines first. If</span>
-<span style="color: #c397d8;">point reaches the beginning or end of the buffer, stop there."</span>
-  (interactive <span style="color: #70c0b1;">"^p"</span>)
-  (setq arg (or arg <span style="color: #7aa6da;">1</span>))
+<span style="color: #8b2252;">If ARG is not nil or 1, move forward ARG - 1 lines first. If</span>
+<span style="color: #8b2252;">point reaches the beginning or end of the buffer, stop there."</span>
+  (interactive <span style="color: #8b2252;">"^p"</span>)
+  (setq arg (or arg <span style="color: #008b8b;">1</span>))
 
-  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Move lines first</span>
-  (<span style="color: #b9ca4a;">when</span> (/= arg <span style="color: #7aa6da;">1</span>)
-    (<span style="color: #b9ca4a;">let</span> ((line-move-visual nil))
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Move lines first</span>
+  (<span style="color: #a020f0;">when</span> (/= arg <span style="color: #008b8b;">1</span>)
+    (<span style="color: #a020f0;">let</span> ((line-move-visual nil))
       (forward-line (1- arg))))
 
-  (<span style="color: #b9ca4a;">let</span> ((orig-point (point)))
+  (<span style="color: #a020f0;">let</span> ((orig-point (point)))
     (back-to-indentation)
-    (<span style="color: #b9ca4a;">when</span> (= orig-point (point))
-      (move-beginning-of-line <span style="color: #7aa6da;">1</span>))))
+    (<span style="color: #a020f0;">when</span> (= orig-point (point))
+      (move-beginning-of-line <span style="color: #008b8b;">1</span>))))
 
 (global-set-key [remap move-beginning-of-line] 'prelude-move-beginning-of-line)
 
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">kill-ring-save</span> (before slick-copy activate compile)
-  <span style="color: #c397d8;">"When called interactively with no active region, copy a single</span>
-<span style="color: #c397d8;">line instead."</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-ring-save</span> (before slick-copy activate compile)
+  <span style="color: #8b2252;">"When called interactively with no active region, copy a single</span>
+<span style="color: #8b2252;">line instead."</span>
   (interactive
-   (<span style="color: #b9ca4a;">if</span> mark-active (list (region-beginning) (region-end))
-     (message <span style="color: #70c0b1;">"Copied line"</span>)
+   (<span style="color: #a020f0;">if</span> mark-active (list (region-beginning) (region-end))
+     (message <span style="color: #8b2252;">"Copied line"</span>)
      (list (line-beginning-position)
-           (line-beginning-position <span style="color: #7aa6da;">2</span>)))))
+           (line-beginning-position <span style="color: #008b8b;">2</span>)))))
 
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">kill-region</span> (before slick-cut activate compile)
-  <span style="color: #c397d8;">"When called interactively with no active region, kill a single</span>
-<span style="color: #c397d8;">  line instead."</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-region</span> (before slick-cut activate compile)
+  <span style="color: #8b2252;">"When called interactively with no active region, kill a single</span>
+<span style="color: #8b2252;">  line instead."</span>
   (interactive
-   (<span style="color: #b9ca4a;">if</span> mark-active (list (region-beginning) (region-end))
+   (<span style="color: #a020f0;">if</span> mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
-           (line-beginning-position <span style="color: #7aa6da;">2</span>)))))
+           (line-beginning-position <span style="color: #008b8b;">2</span>)))))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">kill a line, including whitespace characters until next non-whiepsace character</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">of next line</span>
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">kill-line</span> (before check-position activate)
-  (<span style="color: #b9ca4a;">if</span> (member major-mode
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">kill a line, including whitespace characters until next non-whiepsace character</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">of next line</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-line</span> (before check-position activate)
+  (<span style="color: #a020f0;">if</span> (member major-mode
               '(emacs-lisp-mode scheme-mode lisp-mode
                                 c-mode c++-mode objc-mode
                                 latex-mode plain-tex-mode))
-      (<span style="color: #b9ca4a;">if</span> (and (eolp) (not (bolp)))
-          (<span style="color: #b9ca4a;">progn</span> (forward-char <span style="color: #7aa6da;">1</span>)
-                 (just-one-space <span style="color: #7aa6da;">0</span>)
-                 (backward-char <span style="color: #7aa6da;">1</span>)))))
+      (<span style="color: #a020f0;">if</span> (and (eolp) (not (bolp)))
+          (<span style="color: #a020f0;">progn</span> (forward-char <span style="color: #008b8b;">1</span>)
+                 (just-one-space <span style="color: #008b8b;">0</span>)
+                 (backward-char <span style="color: #008b8b;">1</span>)))))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">taken from prelude-editor.el</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">automatically indenting yanked text if in programming-modes</span>
-(<span style="color: #b9ca4a;">defvar</span> <span style="color: #e7c547;">yank-indent-modes</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">taken from prelude-editor.el</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">automatically indenting yanked text if in programming-modes</span>
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">yank-indent-modes</span>
   '(LaTeX-mode TeX-mode)
-  <span style="color: #c397d8;">"Modes in which to indent regions that are yanked (or yank-popped).</span>
-<span style="color: #c397d8;">Only modes that don't derive from `</span><span style="color: #7aa6da;">prog-mode</span><span style="color: #c397d8;">' should be listed here."</span>)
+  <span style="color: #8b2252;">"Modes in which to indent regions that are yanked (or yank-popped).</span>
+<span style="color: #8b2252;">Only modes that don't derive from `</span><span style="color: #008b8b;">prog-mode</span><span style="color: #8b2252;">' should be listed here."</span>)
 
-(<span style="color: #b9ca4a;">defvar</span> <span style="color: #e7c547;">yank-indent-blacklisted-modes</span>
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">yank-indent-blacklisted-modes</span>
   '(python-mode slim-mode haml-mode)
-  <span style="color: #c397d8;">"Modes for which auto-indenting is suppressed."</span>)
+  <span style="color: #8b2252;">"Modes for which auto-indenting is suppressed."</span>)
 
-(<span style="color: #b9ca4a;">defvar</span> <span style="color: #e7c547;">yank-advised-indent-threshold</span> <span style="color: #7aa6da;">1000</span>
-  <span style="color: #c397d8;">"Threshold (# chars) over which indentation does not automatically occur."</span>)
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">yank-advised-indent-threshold</span> <span style="color: #008b8b;">1000</span>
+  <span style="color: #8b2252;">"Threshold (# chars) over which indentation does not automatically occur."</span>)
 
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">yank-advised-indent-function</span> (beg end)
-  <span style="color: #c397d8;">"Do indentation, as long as the region isn't too large."</span>
-  (<span style="color: #b9ca4a;">if</span> (&lt;= (- end beg) yank-advised-indent-threshold)
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">yank-advised-indent-function</span> (beg end)
+  <span style="color: #8b2252;">"Do indentation, as long as the region isn't too large."</span>
+  (<span style="color: #a020f0;">if</span> (&lt;= (- end beg) yank-advised-indent-threshold)
       (indent-region beg end nil)))
 
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">yank</span> (after yank-indent activate)
-  <span style="color: #c397d8;">"If current mode is one of 'yank-indent-modes,</span>
-<span style="color: #c397d8;">indent yanked text (with prefix arg don't indent)."</span>
-  (<span style="color: #b9ca4a;">if</span> (and (not (ad-get-arg <span style="color: #7aa6da;">0</span>))
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">yank</span> (after yank-indent activate)
+  <span style="color: #8b2252;">"If current mode is one of 'yank-indent-modes,</span>
+<span style="color: #8b2252;">indent yanked text (with prefix arg don't indent)."</span>
+  (<span style="color: #a020f0;">if</span> (and (not (ad-get-arg <span style="color: #008b8b;">0</span>))
            (not (member major-mode yank-indent-blacklisted-modes))
            (or (derived-mode-p 'prog-mode)
                (member major-mode yank-indent-modes)))
-      (<span style="color: #b9ca4a;">let</span> ((transient-mark-mode nil))
+      (<span style="color: #a020f0;">let</span> ((transient-mark-mode nil))
         (yank-advised-indent-function (region-beginning) (region-end)))))
 
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">yank-pop</span> (after yank-pop-indent activate)
-  <span style="color: #c397d8;">"If current mode is one of `</span><span style="color: #7aa6da;">yank-indent-modes</span><span style="color: #c397d8;">',</span>
-<span style="color: #c397d8;">indent yanked text (with prefix arg don't indent)."</span>
-  (<span style="color: #b9ca4a;">when</span> (and (not (ad-get-arg <span style="color: #7aa6da;">0</span>))
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">yank-pop</span> (after yank-pop-indent activate)
+  <span style="color: #8b2252;">"If current mode is one of `</span><span style="color: #008b8b;">yank-indent-modes</span><span style="color: #8b2252;">',</span>
+<span style="color: #8b2252;">indent yanked text (with prefix arg don't indent)."</span>
+  (<span style="color: #a020f0;">when</span> (and (not (ad-get-arg <span style="color: #008b8b;">0</span>))
              (not (member major-mode yank-indent-blacklisted-modes))
              (or (derived-mode-p 'prog-mode)
                  (member major-mode yank-indent-modes)))
-    (<span style="color: #b9ca4a;">let</span> ((transient-mark-mode nil))
+    (<span style="color: #a020f0;">let</span> ((transient-mark-mode nil))
       (yank-advised-indent-function (region-beginning) (region-end)))))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">prelude-core.el</span>
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-duplicate-current-line-or-region</span> (arg)
-  <span style="color: #c397d8;">"Duplicates the current line or region ARG times.</span>
-<span style="color: #c397d8;">If there's no region, the current line will be duplicated. However, if</span>
-<span style="color: #c397d8;">there's a region, all lines that region covers will be duplicated."</span>
-  (interactive <span style="color: #70c0b1;">"p"</span>)
-  (<span style="color: #b9ca4a;">pcase-let*</span> ((origin (point))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">prelude-core.el</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-duplicate-current-line-or-region</span> (arg)
+  <span style="color: #8b2252;">"Duplicates the current line or region ARG times.</span>
+<span style="color: #8b2252;">If there's no region, the current line will be duplicated. However, if</span>
+<span style="color: #8b2252;">there's a region, all lines that region covers will be duplicated."</span>
+  (interactive <span style="color: #8b2252;">"p"</span>)
+  (<span style="color: #a020f0;">pcase-let*</span> ((origin (point))
                (`(,beg . ,end) (prelude-get-positions-of-line-or-region))
                (region (buffer-substring-no-properties beg end)))
     (-dotimes arg
-      (<span style="color: #b9ca4a;">lambda</span> (n)
+      (<span style="color: #a020f0;">lambda</span> (n)
         (goto-char end)
         (newline)
         (insert region)
         (setq end (point))))
     (goto-char (+ origin (* (length region) arg) arg))))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">prelude-core.el</span>
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-indent-buffer</span> ()
-  <span style="color: #c397d8;">"Indent the currently visited buffer."</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">prelude-core.el</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-indent-buffer</span> ()
+  <span style="color: #8b2252;">"Indent the currently visited buffer."</span>
   (interactive)
   (indent-region (point-min) (point-max)))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">prelude-core.el</span>
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-cleanup-buffer</span> ()
-  <span style="color: #c397d8;">"Perform a bunch of operations on the whitespace content of a buffer."</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">prelude-core.el</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-cleanup-buffer</span> ()
+  <span style="color: #8b2252;">"Perform a bunch of operations on the whitespace content of a buffer."</span>
   (interactive)
-  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(prelude-untabify-buffer) ;; leave the buffer format alone</span>
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">(prelude-untabify-buffer) ;; leave the buffer format alone</span>
   (prelude-indent-buffer)
   (whitespace-cleanup))
 
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c i"</span>) 'prelude-cleanup-buffer)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c i"</span>) 'prelude-cleanup-buffer)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">add duplicate line function from Prelude</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">taken from prelude-core.el</span>
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-get-positions-of-line-or-region</span> ()
-  <span style="color: #c397d8;">"Return positions (beg . end) of the current line</span>
-<span style="color: #c397d8;">or region."</span>
-  (<span style="color: #b9ca4a;">let</span> (beg end)
-    (<span style="color: #b9ca4a;">if</span> (and mark-active (&gt; (point) (mark)))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">add duplicate line function from Prelude</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">taken from prelude-core.el</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-get-positions-of-line-or-region</span> ()
+  <span style="color: #8b2252;">"Return positions (beg . end) of the current line</span>
+<span style="color: #8b2252;">or region."</span>
+  (<span style="color: #a020f0;">let</span> (beg end)
+    (<span style="color: #a020f0;">if</span> (and mark-active (&gt; (point) (mark)))
         (exchange-point-and-mark))
     (setq beg (line-beginning-position))
-    (<span style="color: #b9ca4a;">if</span> mark-active
+    (<span style="color: #a020f0;">if</span> mark-active
         (exchange-point-and-mark))
     (setq end (line-end-position))
     (cons beg end)))
 
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-duplicate-current-line-or-region</span> (arg)
-  <span style="color: #c397d8;">"Duplicates the current line or region ARG times.</span>
-<span style="color: #c397d8;">If there's no region, the current line will be duplicated. However, if</span>
-<span style="color: #c397d8;">there's a region, all lines that region covers will be duplicated."</span>
-  (interactive <span style="color: #70c0b1;">"p"</span>)
-  (<span style="color: #b9ca4a;">pcase-let*</span> ((origin (point))
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-duplicate-current-line-or-region</span> (arg)
+  <span style="color: #8b2252;">"Duplicates the current line or region ARG times.</span>
+<span style="color: #8b2252;">If there's no region, the current line will be duplicated. However, if</span>
+<span style="color: #8b2252;">there's a region, all lines that region covers will be duplicated."</span>
+  (interactive <span style="color: #8b2252;">"p"</span>)
+  (<span style="color: #a020f0;">pcase-let*</span> ((origin (point))
                (`(,beg . ,end) (prelude-get-positions-of-line-or-region))
                (region (buffer-substring-no-properties beg end)))
     (-dotimes arg
-      (<span style="color: #b9ca4a;">lambda</span> (n)
+      (<span style="color: #a020f0;">lambda</span> (n)
         (goto-char end)
         (newline)
         (insert region)
         (setq end (point))))
     (goto-char (+ origin (* (length region) arg) arg))))
 
-(global-set-key (kbd <span style="color: #70c0b1;">"M-c"</span>) 'prelude-duplicate-current-line-or-region)
+(global-set-key (kbd <span style="color: #8b2252;">"M-c"</span>) 'prelude-duplicate-current-line-or-region)
 </pre>
 </div>
 
@@ -1752,34 +1752,34 @@ Beginning of a Line</a>.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">kill-ring-save</span> (before slick-copy activate compile)
-  <span style="color: #c397d8;">"When called interactively with no active region, copy a single</span>
-<span style="color: #c397d8;">line instead."</span>
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-ring-save</span> (before slick-copy activate compile)
+  <span style="color: #8b2252;">"When called interactively with no active region, copy a single</span>
+<span style="color: #8b2252;">line instead."</span>
   (interactive
-   (<span style="color: #b9ca4a;">if</span> mark-active (list (region-beginning) (region-end))
-     (message <span style="color: #70c0b1;">"Copied line"</span>)
+   (<span style="color: #a020f0;">if</span> mark-active (list (region-beginning) (region-end))
+     (message <span style="color: #8b2252;">"Copied line"</span>)
      (list (line-beginning-position)
-           (line-beginning-position <span style="color: #7aa6da;">2</span>)))))
+           (line-beginning-position <span style="color: #008b8b;">2</span>)))))
 
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">kill-region</span> (before slick-cut activate compile)
-  <span style="color: #c397d8;">"When called interactively with no active region, kill a single</span>
-<span style="color: #c397d8;">  line instead."</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-region</span> (before slick-cut activate compile)
+  <span style="color: #8b2252;">"When called interactively with no active region, kill a single</span>
+<span style="color: #8b2252;">  line instead."</span>
   (interactive
-   (<span style="color: #b9ca4a;">if</span> mark-active (list (region-beginning) (region-end))
+   (<span style="color: #a020f0;">if</span> mark-active (list (region-beginning) (region-end))
      (list (line-beginning-position)
-           (line-beginning-position <span style="color: #7aa6da;">2</span>)))))
+           (line-beginning-position <span style="color: #008b8b;">2</span>)))))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">kill a line, including whitespace characters until next non-whiepsace character</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">of next line</span>
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">kill-line</span> (before check-position activate)
-  (<span style="color: #b9ca4a;">if</span> (member major-mode
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">kill a line, including whitespace characters until next non-whiepsace character</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">of next line</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-line</span> (before check-position activate)
+  (<span style="color: #a020f0;">if</span> (member major-mode
               '(emacs-lisp-mode scheme-mode lisp-mode
                                 c-mode c++-mode objc-mode
                                 latex-mode plain-tex-mode))
-      (<span style="color: #b9ca4a;">if</span> (and (eolp) (not (bolp)))
-          (<span style="color: #b9ca4a;">progn</span> (forward-char <span style="color: #7aa6da;">1</span>)
-                 (just-one-space <span style="color: #7aa6da;">0</span>)
-                 (backward-char <span style="color: #7aa6da;">1</span>)))))
+      (<span style="color: #a020f0;">if</span> (and (eolp) (not (bolp)))
+          (<span style="color: #a020f0;">progn</span> (forward-char <span style="color: #008b8b;">1</span>)
+                 (just-one-space <span style="color: #008b8b;">0</span>)
+                 (backward-char <span style="color: #008b8b;">1</span>)))))
 </pre>
 </div>
 </div>
@@ -1818,12 +1818,12 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: volatile-highlights          ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                       </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Volatile Highlights ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">volatile-highlights</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: volatile-highlights          ;;</span>
+<span style="color: #b22222;">;;                                       </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Volatile Highlights ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">volatile-highlights</span>)
 (volatile-highlights-mode t)
 </pre>
 </div>
@@ -1874,12 +1874,12 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: clean-aindent-mode               ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                           </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Indent -&gt; Clean Aindent ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">clean-aindent-mode</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: clean-aindent-mode               ;;</span>
+<span style="color: #b22222;">;;                                           </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Indent -&gt; Clean Aindent ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">clean-aindent-mode</span>)
 </pre>
 </div>
 
@@ -1929,12 +1929,12 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: undo-tree                  ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                     </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Undo -&gt; Undo Tree ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">undo-tree</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: undo-tree                  ;;</span>
+<span style="color: #b22222;">;;                                     </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Undo -&gt; Undo Tree ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">undo-tree</span>)
 (global-undo-tree-mode)
 </pre>
 </div>
@@ -1982,13 +1982,13 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: yasnippet                 ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Editing -&gt; Yasnippet        ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">yasnippet</span>)
-(yas-global-mode <span style="color: #7aa6da;">1</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: yasnippet                 ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Yasnippet        ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">yasnippet</span>)
+(yas-global-mode <span style="color: #008b8b;">1</span>)
 </pre>
 </div>
 
@@ -2000,7 +2000,7 @@ example, in a C buffer, if you type <code>for</code> and <b>TAB</b>, it expands 
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #b9ca4a;">for</span> (i = <span style="color: #7aa6da;">0</span>; i &lt; N; i++) {
+<pre class="src src-c"><span style="color: #a020f0;">for</span> (i = <span style="color: #008b8b;">0</span>; i &lt; N; i++) {
     ...point will be here....
 }
 </pre>
@@ -2021,54 +2021,54 @@ Here is my sample customization:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">MAIN GROUP: Convenience</span>
-<span style="color: #969896; font-style: italic;">;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">MAIN GROUP: Convenience</span>
+<span style="color: #b22222;">;;</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Revert</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Revert</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">update any change made on file to the current buffer</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">update any change made on file to the current buffer</span>
 (global-auto-revert-mode)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Hippe Expand</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">hippie-expand is a better version of dabbrev-expand.</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">While dabbrev-expand searches for words you already types, in current;; buffers and other buffers, hippie-expand includes more sources,</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">such as filenames, klll ring...</span>
-(global-set-key (kbd <span style="color: #70c0b1;">"M-/"</span>) 'hippie-expand) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">replace dabbrev-expand</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Hippe Expand</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">hippie-expand is a better version of dabbrev-expand.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">While dabbrev-expand searches for words you already types, in current;; buffers and other buffers, hippie-expand includes more sources,</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">such as filenames, klll ring...</span>
+(global-set-key (kbd <span style="color: #8b2252;">"M-/"</span>) 'hippie-expand) <span style="color: #b22222;">;; </span><span style="color: #b22222;">replace dabbrev-expand</span>
 (setq
  hippie-expand-try-functions-list
- '(try-expand-dabbrev <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to expand word "dynamically", searching the current buffer.</span>
-   try-expand-dabbrev-all-buffers <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to expand word "dynamically", searching all other buffers.</span>
-   try-expand-dabbrev-from-kill <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to expand word "dynamically", searching the kill ring.</span>
-   try-complete-file-name-partially <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to complete text as a file name, as many characters as unique.</span>
-   try-complete-file-name <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to complete text as a file name.</span>
-   try-expand-all-abbrevs <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to expand word before point according to all abbrev tables.</span>
-   try-expand-list <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to complete the current line to an entire line in the buffer.</span>
-   try-expand-line <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to complete the current line to an entire line in the buffer.</span>
-   try-complete-lisp-symbol-partially <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to complete as an Emacs Lisp symbol, as many characters as unique.</span>
-   try-complete-lisp-symbol) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Try to complete word as an Emacs Lisp symbol.</span>
+ '(try-expand-dabbrev <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to expand word "dynamically", searching the current buffer.</span>
+   try-expand-dabbrev-all-buffers <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to expand word "dynamically", searching all other buffers.</span>
+   try-expand-dabbrev-from-kill <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to expand word "dynamically", searching the kill ring.</span>
+   try-complete-file-name-partially <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to complete text as a file name, as many characters as unique.</span>
+   try-complete-file-name <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to complete text as a file name.</span>
+   try-expand-all-abbrevs <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to expand word before point according to all abbrev tables.</span>
+   try-expand-list <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to complete the current line to an entire line in the buffer.</span>
+   try-expand-line <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to complete the current line to an entire line in the buffer.</span>
+   try-complete-lisp-symbol-partially <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to complete as an Emacs Lisp symbol, as many characters as unique.</span>
+   try-complete-lisp-symbol) <span style="color: #b22222;">;; </span><span style="color: #b22222;">Try to complete word as an Emacs Lisp symbol.</span>
  )
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; HL Line</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; HL Line</span>
 (global-hl-line-mode)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Ibuffer</span>
-(setq ibuffer-use-other-window t) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">always display ibuffer in another window</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Ibuffer</span>
+(setq ibuffer-use-other-window t) <span style="color: #b22222;">;; </span><span style="color: #b22222;">always display ibuffer in another window</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Linum</span>
-(add-hook 'prog-mode-hook 'linum-mode) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">enable linum only in programming modes</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Linum</span>
+(add-hook 'prog-mode-hook 'linum-mode) <span style="color: #b22222;">;; </span><span style="color: #b22222;">enable linum only in programming modes</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Whitespace</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Whitespace</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">whenever you create useless whitespace, the whitespace is highlighted</span>
-(add-hook 'prog-mode-hook (<span style="color: #b9ca4a;">lambda</span> () (interactive) (setq show-trailing-whitespace <span style="color: #7aa6da;">1</span>)))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">whenever you create useless whitespace, the whitespace is highlighted</span>
+(add-hook 'prog-mode-hook (<span style="color: #a020f0;">lambda</span> () (interactive) (setq show-trailing-whitespace <span style="color: #008b8b;">1</span>)))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">activate whitespace-mode to view all whitespace characters</span>
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c w"</span>) 'whitespace-mode)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">activate whitespace-mode to view all whitespace characters</span>
+(global-set-key (kbd <span style="color: #8b2252;">"C-c w"</span>) 'whitespace-mode)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Windmove</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Windmove</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">easier window navigation</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">easier window navigation</span>
 (windmove-default-keybindings)
 </pre>
 </div>
@@ -2126,11 +2126,11 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: company              ;;</span>
-<span style="color: #969896; font-style: italic;">;;                               </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Company ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: company              ;;</span>
+<span style="color: #b22222;">;;                               </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Company ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (add-hook 'after-init-hook 'global-company-mode)
 </pre>
 </div>
@@ -2173,13 +2173,13 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: expand-region                       ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                              </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Abbreviation -&gt; Expand ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">expand-region</span>)
-(global-set-key (kbd <span style="color: #70c0b1;">"M-m"</span>) 'er/expand-region)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: expand-region                       ;;</span>
+<span style="color: #b22222;">;;                                              </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Abbreviation -&gt; Expand ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">expand-region</span>)
+(global-set-key (kbd <span style="color: #8b2252;">"M-m"</span>) 'er/expand-region)
 </pre>
 </div>
 
@@ -2237,21 +2237,21 @@ package:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(add-hook 'ibuffer-hook
-          (<span style="color: #b9ca4a;">lambda</span> ()
+          (<span style="color: #a020f0;">lambda</span> ()
             (ibuffer-vc-set-filter-groups-by-vc-root)
-            (<span style="color: #b9ca4a;">unless</span> (eq ibuffer-sorting-mode 'alphabetic)
+            (<span style="color: #a020f0;">unless</span> (eq ibuffer-sorting-mode 'alphabetic)
               (ibuffer-do-sort-by-alphabetic))))
 
 (setq ibuffer-formats
-      '((mark modified read-only vc-status-mini <span style="color: #70c0b1;">" "</span>
-              (name <span style="color: #7aa6da;">18</span> <span style="color: #7aa6da;">18</span> <span style="color: #c397d8;">:left</span> <span style="color: #c397d8;">:elide</span>)
-              <span style="color: #70c0b1;">" "</span>
-              (size <span style="color: #7aa6da;">9</span> <span style="color: #7aa6da;">-1</span> <span style="color: #c397d8;">:right</span>)
-              <span style="color: #70c0b1;">" "</span>
-              (mode <span style="color: #7aa6da;">16</span> <span style="color: #7aa6da;">16</span> <span style="color: #c397d8;">:left</span> <span style="color: #c397d8;">:elide</span>)
-              <span style="color: #70c0b1;">" "</span>
-              (vc-status <span style="color: #7aa6da;">16</span> <span style="color: #7aa6da;">16</span> <span style="color: #c397d8;">:left</span>)
-              <span style="color: #70c0b1;">" "</span>
+      '((mark modified read-only vc-status-mini <span style="color: #8b2252;">" "</span>
+              (name <span style="color: #008b8b;">18</span> <span style="color: #008b8b;">18</span> <span style="color: #483d8b;">:left</span> <span style="color: #483d8b;">:elide</span>)
+              <span style="color: #8b2252;">" "</span>
+              (size <span style="color: #008b8b;">9</span> <span style="color: #008b8b;">-1</span> <span style="color: #483d8b;">:right</span>)
+              <span style="color: #8b2252;">" "</span>
+              (mode <span style="color: #008b8b;">16</span> <span style="color: #008b8b;">16</span> <span style="color: #483d8b;">:left</span> <span style="color: #483d8b;">:elide</span>)
+              <span style="color: #8b2252;">" "</span>
+              (vc-status <span style="color: #008b8b;">16</span> <span style="color: #008b8b;">16</span> <span style="color: #483d8b;">:left</span>)
+              <span style="color: #8b2252;">" "</span>
               filename-and-process)))
 </pre>
 </div>
@@ -2309,18 +2309,18 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: rebox2             ;;</span>
-<span style="color: #969896; font-style: italic;">;;                             </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Rebox ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">rebox2</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: rebox2             ;;</span>
+<span style="color: #b22222;">;;                             </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Rebox ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">rebox2</span>)
 (global-set-key [(meta q)] 'rebox-dwim)
 (global-set-key [(shift meta q)] 'rebox-cycle)
-(add-hook 'prog-mode-hook (<span style="color: #b9ca4a;">lambda</span> ()
-                            (set (make-local-variable 'rebox-style-loop) '(<span style="color: #7aa6da;">25</span> <span style="color: #7aa6da;">17</span> <span style="color: #7aa6da;">21</span>))
-                            (set (make-local-variable 'rebox-min-fill-column) <span style="color: #7aa6da;">40</span>)
-                            (rebox-mode <span style="color: #7aa6da;">1</span>)))
+(add-hook 'prog-mode-hook (<span style="color: #a020f0;">lambda</span> ()
+                            (set (make-local-variable 'rebox-style-loop) '(<span style="color: #008b8b;">25</span> <span style="color: #008b8b;">17</span> <span style="color: #008b8b;">21</span>))
+                            (set (make-local-variable 'rebox-min-fill-column) <span style="color: #008b8b;">40</span>)
+                            (rebox-mode <span style="color: #008b8b;">1</span>)))
 </pre>
 </div>
 
@@ -2425,11 +2425,11 @@ Here's a glimpse of Projectile in action:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGES: projectile             ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                  </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Projectile ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGES: projectile             ;;</span>
+<span style="color: #b22222;">;;                                  </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Projectile ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (projectile-global-mode)
 </pre>
 </div>
@@ -2492,14 +2492,14 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: workgroups2               ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Workgroups   ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">workgroups2</span>)
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Change some settings</span>
-(workgroups-mode <span style="color: #7aa6da;">1</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: workgroups2               ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Workgroups   ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">workgroups2</span>)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Change some settings</span>
+(workgroups-mode <span style="color: #008b8b;">1</span>)
 </pre>
 </div>
 
@@ -2599,12 +2599,12 @@ Minimal config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: helm              ;;</span>
-<span style="color: #969896; font-style: italic;">;;                            </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Helm ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">helm-config</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm              ;;</span>
+<span style="color: #b22222;">;;                            </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span>)
 </pre>
 </div>
 
@@ -2614,75 +2614,75 @@ My extended config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: helm              ;;</span>
-<span style="color: #969896; font-style: italic;">;;                            </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Helm ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">helm</span>)
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">helm-config</span>)
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">helm-eshell</span>)
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">helm-files</span>)
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">wgrep-helm</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm              ;;</span>
+<span style="color: #b22222;">;;                            </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-eshell</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-files</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">wgrep-helm</span>)
 
-(define-key helm-map (kbd <span style="color: #70c0b1;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">rebihnd tab to do persistent action</span>
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-i"</span>) 'helm-execute-persistent-action) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">make TAB works in terminal</span>
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-z"</span>)  'helm-select-action) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">list actions using C-z</span>
+(define-key helm-map (kbd <span style="color: #8b2252;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action) <span style="color: #b22222;">; </span><span style="color: #b22222;">rebihnd tab to do persistent action</span>
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-i"</span>) 'helm-execute-persistent-action) <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-z"</span>)  'helm-select-action) <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
 
 (eval-after-load 'helm-grep
-  '(<span style="color: #b9ca4a;">progn</span>
-     (define-key helm-grep-mode-map (kbd <span style="color: #70c0b1;">"&lt;return&gt;"</span>)  'helm-grep-mode-jump-other-window)
-     (define-key helm-grep-mode-map (kbd <span style="color: #70c0b1;">"n"</span>)  'helm-grep-mode-jump-other-window-forward)
-     (define-key helm-grep-mode-map (kbd <span style="color: #70c0b1;">"p"</span>)  'helm-grep-mode-jump-other-window-backward)))
+  '(<span style="color: #a020f0;">progn</span>
+     (define-key helm-grep-mode-map (kbd <span style="color: #8b2252;">"&lt;return&gt;"</span>)  'helm-grep-mode-jump-other-window)
+     (define-key helm-grep-mode-map (kbd <span style="color: #8b2252;">"n"</span>)  'helm-grep-mode-jump-other-window-forward)
+     (define-key helm-grep-mode-map (kbd <span style="color: #8b2252;">"p"</span>)  'helm-grep-mode-jump-other-window-backward)))
 
 (setq
  helm-google-suggest-use-curl-p t
- helm-scroll-amount <span style="color: #7aa6da;">4</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
- helm-quick-update t <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">do not display invisible candidates</span>
- helm-idle-delay <span style="color: #7aa6da;">0.01</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">be idle for this many seconds, before updating in delayed sources.</span>
- helm-input-idle-delay <span style="color: #7aa6da;">0.01</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">be idle for this many seconds, before updating candidate buffer</span>
- helm-ff-search-library-in-sexp t <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">search for library in `</span><span style="color: #7aa6da; font-style: italic;">require</span><span style="color: #969896; font-style: italic;">' and `</span><span style="color: #7aa6da; font-style: italic;">declare-function</span><span style="color: #969896; font-style: italic;">' sexp.</span>
+ helm-scroll-amount <span style="color: #008b8b;">4</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+ helm-quick-update t <span style="color: #b22222;">; </span><span style="color: #b22222;">do not display invisible candidates</span>
+ helm-idle-delay <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating in delayed sources.</span>
+ helm-input-idle-delay <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating candidate buffer</span>
+ helm-ff-search-library-in-sexp t <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
 
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">you can customize helm-do-grep to execute ack-grep</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"</span>
- <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"</span>
- helm-split-window-default-side 'other <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">open helm buffer in another window</span>
- helm-split-window-in-side-p t <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">open helm buffer inside current window, not occupy whole other window</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">you can customize helm-do-grep to execute ack-grep</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"</span>
+ helm-split-window-default-side 'other <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer in another window</span>
+ helm-split-window-in-side-p t <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
  helm-buffers-favorite-modes (append helm-buffers-favorite-modes
                                      '(picture-mode artist-mode))
- helm-candidate-number-limit <span style="color: #7aa6da;">200</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">limit the number of displayed canidates</span>
- helm-M-x-requires-pattern <span style="color: #7aa6da;">0</span>     <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">show all candidates when set to 0</span>
+ helm-candidate-number-limit <span style="color: #008b8b;">200</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">limit the number of displayed canidates</span>
+ helm-M-x-requires-pattern <span style="color: #008b8b;">0</span>     <span style="color: #b22222;">; </span><span style="color: #b22222;">show all candidates when set to 0</span>
  helm-boring-file-regexp-list
- '(<span style="color: #70c0b1;">"\\.git$"</span> <span style="color: #70c0b1;">"\\.hg$"</span> <span style="color: #70c0b1;">"\\.svn$"</span> <span style="color: #70c0b1;">"\\.CVS$"</span> <span style="color: #70c0b1;">"\\._darcs$"</span> <span style="color: #70c0b1;">"\\.la$"</span> <span style="color: #70c0b1;">"\\.o$"</span> <span style="color: #70c0b1;">"\\.i$"</span>) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">do not show these files in helm buffer</span>
+ '(<span style="color: #8b2252;">"\\.git$"</span> <span style="color: #8b2252;">"\\.hg$"</span> <span style="color: #8b2252;">"\\.svn$"</span> <span style="color: #8b2252;">"\\.CVS$"</span> <span style="color: #8b2252;">"\\._darcs$"</span> <span style="color: #8b2252;">"\\.la$"</span> <span style="color: #8b2252;">"\\.o$"</span> <span style="color: #8b2252;">"\\.i$"</span>) <span style="color: #b22222;">; </span><span style="color: #b22222;">do not show these files in helm buffer</span>
  helm-ff-file-name-history-use-recentf t
- helm-move-to-line-cycle-in-source t <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">move to end or beginning of source</span>
-                                        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">when reaching top or bottom of source.</span>
- ido-use-virtual-buffers t      <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">Needed in helm-buffers-list</span>
- helm-buffers-fuzzy-matching t          <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">fuzzy matching buffer names when non--nil</span>
-                                        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">useful in helm-mini that lists buffers</span>
+ helm-move-to-line-cycle-in-source t <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source</span>
+                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">when reaching top or bottom of source.</span>
+ ido-use-virtual-buffers t      <span style="color: #b22222;">; </span><span style="color: #b22222;">Needed in helm-buffers-list</span>
+ helm-buffers-fuzzy-matching t          <span style="color: #b22222;">; </span><span style="color: #b22222;">fuzzy matching buffer names when non--nil</span>
+                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">useful in helm-mini that lists buffers</span>
  )
 
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-x 2"</span>) 'helm-select-2nd-action)
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-x 3"</span>) 'helm-select-3rd-action)
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-x 4"</span>) 'helm-select-4rd-action)
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-x 2"</span>) 'helm-select-2nd-action)
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-x 3"</span>) 'helm-select-3rd-action)
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-x 4"</span>) 'helm-select-4rd-action)
 
-(global-set-key (kbd <span style="color: #70c0b1;">"M-x"</span>) 'helm-M-x)
-(global-set-key (kbd <span style="color: #70c0b1;">"M-y"</span>) 'helm-show-kill-ring)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x b"</span>) 'helm-mini)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x C-f"</span>) 'helm-find-files)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c h m"</span>) 'helm-man-woman)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c h g"</span>) 'helm-do-grep)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c h f"</span>) 'helm-find)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c h l"</span>) 'helm-locate)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-c h o"</span>) 'helm-occur)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-h C-f"</span>) 'helm-apropos)
+(global-set-key (kbd <span style="color: #8b2252;">"M-x"</span>) 'helm-M-x)
+(global-set-key (kbd <span style="color: #8b2252;">"M-y"</span>) 'helm-show-kill-ring)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x b"</span>) 'helm-mini)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x C-f"</span>) 'helm-find-files)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h m"</span>) 'helm-man-woman)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h g"</span>) 'helm-do-grep)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h f"</span>) 'helm-find)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h l"</span>) 'helm-locate)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h o"</span>) 'helm-occur)
+(global-set-key (kbd <span style="color: #8b2252;">"C-h C-f"</span>) 'helm-apropos)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">use helm to list eshell history</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">use helm to list eshell history</span>
 (add-hook 'eshell-mode-hook
-          #'(<span style="color: #b9ca4a;">lambda</span> ()
-              (define-key eshell-mode-map (kbd <span style="color: #70c0b1;">"M-l"</span>)  'helm-eshell-history)))
+          #'(<span style="color: #a020f0;">lambda</span> ()
+              (define-key eshell-mode-map (kbd <span style="color: #8b2252;">"M-l"</span>)  'helm-eshell-history)))
 
-<span style="color: #969896; font-style: italic;">;;; </span><span style="color: #969896; font-style: italic;">Save current position to mark ring</span>
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">Save current position to mark ring</span>
 (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
 (helm-mode)
@@ -2762,9 +2762,9 @@ use <b>helm-execute-persistent-action</b> more than
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(define-key helm-map (kbd <span style="color: #70c0b1;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">rebihnd tab to do persistent action</span>
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-i"</span>) 'helm-execute-persistent-action) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">make TAB works in terminal</span>
-(define-key helm-map (kbd <span style="color: #70c0b1;">"C-z"</span>)  'helm-select-action) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">list actions using C-z</span>
+<pre class="src src-emacs-lisp">(define-key helm-map (kbd <span style="color: #8b2252;">"&lt;tab&gt;"</span>) 'helm-execute-persistent-action) <span style="color: #b22222;">; </span><span style="color: #b22222;">rebihnd tab to do persistent action</span>
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-i"</span>) 'helm-execute-persistent-action) <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
+(define-key helm-map (kbd <span style="color: #8b2252;">"C-z"</span>)  'helm-select-action) <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
 </pre>
 </div>
 
@@ -3113,12 +3113,12 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: helm-descbinds                      ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                              </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Helm -&gt; Helm Descbinds ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">helm-descbinds</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm-descbinds                      ;;</span>
+<span style="color: #b22222;">;;                                              </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm -&gt; Helm Descbinds ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-descbinds</span>)
 (helm-descbinds-mode)
 </pre>
 </div>
@@ -3141,26 +3141,26 @@ configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Development -&gt; Extensions -&gt; Ido ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Uncomment if you want to use Ido</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">I am going to introduce a tool, argurably better, that</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">replaces Ido: Helm</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Development -&gt; Extensions -&gt; Ido ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Uncomment if you want to use Ido</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">I am going to introduce a tool, argurably better, that</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">replaces Ido: Helm</span>
 
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">ido</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ido</span>)
 
 (setq
  ido-enable-prefix nil
  ido-enable-flex-matching t
  ido-create-new-buffer 'always
  ido-use-filename-at-point 'guess
- ido-max-prospects <span style="color: #7aa6da;">10</span>
+ ido-max-prospects <span style="color: #008b8b;">10</span>
  ido-default-file-method 'selected-window
- ido-auto-merge-work-directories-length <span style="color: #7aa6da;">-1</span>
+ ido-auto-merge-work-directories-length <span style="color: #008b8b;">-1</span>
  )
 
-(ido-mode <span style="color: #7aa6da;">+1</span>)
+(ido-mode <span style="color: #008b8b;">+1</span>)
 </pre>
 </div>
 </div>
@@ -3204,12 +3204,12 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: ido-ubiquitous                                   ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                                           </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Development -&gt; Extensions -&gt; Ido -&gt; Ido Ubiquitous ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(ido-ubiquitous-mode <span style="color: #7aa6da;">+1</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: ido-ubiquitous                                   ;;</span>
+<span style="color: #b22222;">;;                                                           </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Development -&gt; Extensions -&gt; Ido -&gt; Ido Ubiquitous ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(ido-ubiquitous-mode <span style="color: #008b8b;">+1</span>)
 </pre>
 </div>
 
@@ -3243,14 +3243,14 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: flx-ido                                          ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                                           </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Development -&gt; Extensions -&gt; Ido                   ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;;; </span><span style="color: #969896; font-style: italic;">smarter fuzzy matching for ido</span>
-(flx-ido-mode <span style="color: #7aa6da;">+1</span>)
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">disable ido faces to see flx highlights</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: flx-ido                                          ;;</span>
+<span style="color: #b22222;">;;                                                           </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Development -&gt; Extensions -&gt; Ido                   ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">smarter fuzzy matching for ido</span>
+(flx-ido-mode <span style="color: #008b8b;">+1</span>)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">disable ido faces to see flx highlights</span>
 (setq ido-use-faces nil)
 </pre>
 </div>
@@ -3300,15 +3300,15 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: smex                                             ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                                           </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Convenience -&gt; Extensions -&gt; Smex                  ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">smex</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: smex                                             ;;</span>
+<span style="color: #b22222;">;;                                                           </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Extensions -&gt; Smex                  ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smex</span>)
 (smex-initialize)
-(global-set-key (kbd <span style="color: #70c0b1;">"M-x"</span>) 'smex)
-(global-set-key (kbd <span style="color: #70c0b1;">"M-X"</span>) 'smex-major-mode-commands)
+(global-set-key (kbd <span style="color: #8b2252;">"M-x"</span>) 'smex)
+(global-set-key (kbd <span style="color: #8b2252;">"M-X"</span>) 'smex-major-mode-commands)
 </pre>
 </div>
 
@@ -3333,83 +3333,83 @@ My sample customization:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"> <span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files                      ;;</span>
- <span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(setq large-file-warning-threshold <span style="color: #7aa6da;">100000000</span>) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">size in bytes</span>
+<pre class="src src-emacs-lisp"> <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files                      ;;</span>
+ <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(setq large-file-warning-threshold <span style="color: #008b8b;">100000000</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">size in bytes</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Back up            ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">defvar</span> <span style="color: #e7c547;">backup-directory</span> <span style="color: #70c0b1;">"~/.backups"</span>)
-(<span style="color: #b9ca4a;">if</span> (not (file-exists-p backup-directory))
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Back up            ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">backup-directory</span> <span style="color: #8b2252;">"~/.backups"</span>)
+(<span style="color: #a020f0;">if</span> (not (file-exists-p backup-directory))
     (make-directory backup-directory t))
 (setq
- make-backup-files t        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">backup a file the first time it is saved</span>
- backup-directory-alist '((<span style="color: #70c0b1;">".*"</span> . backup-directory)) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">save backup files in ~/.backups</span>
- backup-by-copying t     <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">copy the current file into backup directory</span>
- version-control t   <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">version numbers for backup files</span>
- delete-old-versions t   <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">delete unnecessary versions</span>
- kept-old-versions <span style="color: #7aa6da;">6</span>     <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">oldest versions to keep when a new numbered backup is made (default: 2)</span>
- kept-new-versions <span style="color: #7aa6da;">9</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">newest versions to keep when a new numbered backup is made (default: 2)</span>
- auto-save-default t <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">auto-save every buffer that visits a file</span>
- auto-save-timeout <span style="color: #7aa6da;">20</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">number of seconds idle time before auto-save (default: 30)</span>
- auto-save-interval <span style="color: #7aa6da;">200</span> <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">number of keystrokes between auto-saves (default: 300)</span>
+ make-backup-files t        <span style="color: #b22222;">; </span><span style="color: #b22222;">backup a file the first time it is saved</span>
+ backup-directory-alist '((<span style="color: #8b2252;">".*"</span> . backup-directory)) <span style="color: #b22222;">; </span><span style="color: #b22222;">save backup files in ~/.backups</span>
+ backup-by-copying t     <span style="color: #b22222;">; </span><span style="color: #b22222;">copy the current file into backup directory</span>
+ version-control t   <span style="color: #b22222;">; </span><span style="color: #b22222;">version numbers for backup files</span>
+ delete-old-versions t   <span style="color: #b22222;">; </span><span style="color: #b22222;">delete unnecessary versions</span>
+ kept-old-versions <span style="color: #008b8b;">6</span>     <span style="color: #b22222;">; </span><span style="color: #b22222;">oldest versions to keep when a new numbered backup is made (default: 2)</span>
+ kept-new-versions <span style="color: #008b8b;">9</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">newest versions to keep when a new numbered backup is made (default: 2)</span>
+ auto-save-default t <span style="color: #b22222;">; </span><span style="color: #b22222;">auto-save every buffer that visits a file</span>
+ auto-save-timeout <span style="color: #008b8b;">20</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">number of seconds idle time before auto-save (default: 30)</span>
+ auto-save-interval <span style="color: #008b8b;">200</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">number of keystrokes between auto-saves (default: 300)</span>
  )
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Dired              ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Dired              ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq
- dired-dwim-target t            <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">if another Dired buffer is visibpple in another window, use that directory as target for Rename/Copy</span>
- dired-recursive-copies 'always         <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">"always" means no asking</span>
- dired-recursive-deletes 'top           <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">"top" means ask once for top level directory</span>
- dired-listing-switches <span style="color: #70c0b1;">"-lha"</span>          <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">human-readable listing</span>
+ dired-dwim-target t            <span style="color: #b22222;">; </span><span style="color: #b22222;">if another Dired buffer is visibpple in another window, use that directory as target for Rename/Copy</span>
+ dired-recursive-copies 'always         <span style="color: #b22222;">; </span><span style="color: #b22222;">"always" means no asking</span>
+ dired-recursive-deletes 'top           <span style="color: #b22222;">; </span><span style="color: #b22222;">"top" means ask once for top level directory</span>
+ dired-listing-switches <span style="color: #8b2252;">"-lha"</span>          <span style="color: #b22222;">; </span><span style="color: #b22222;">human-readable listing</span>
  )
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">automatically refresh dired buffer on changes</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">automatically refresh dired buffer on changes</span>
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">if it is not Windows, use the following listing switches</span>
-(<span style="color: #b9ca4a;">when</span> (not (eq system-type 'windows-nt))
-  (setq dired-listing-switches <span style="color: #70c0b1;">"-lha --group-directories-first"</span>))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">if it is not Windows, use the following listing switches</span>
+(<span style="color: #a020f0;">when</span> (not (eq system-type 'windows-nt))
+  (setq dired-listing-switches <span style="color: #8b2252;">"-lha --group-directories-first"</span>))
 
-<span style="color: #969896; font-style: italic;">;;; </span><span style="color: #969896; font-style: italic;">KEY BINDINGS.</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key ctl-x-map "\C-j" 'dired-jump)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key ctl-x-4-map "\C-j" 'dired-jump-other-window))</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "\C-x\M-o" 'dired-omit-mode)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "*O" 'dired-mark-omitted)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "\M-(" 'dired-mark-sexp)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "*(" 'dired-mark-sexp)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "*." 'dired-mark-extension)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "\M-!" 'dired-smart-shell-command)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "\M-G" 'dired-goto-subdir)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "F" 'dired-do-find-marked-files)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "Y"  'dired-do-relsymlink)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "%Y" 'dired-do-relsymlink-regexp)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(define-key dired-mode-map "V" 'dired-do-run-mail)</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">dired-x</span>) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">provide extra commands for Dired</span>
+<span style="color: #b22222;">;;; </span><span style="color: #b22222;">KEY BINDINGS.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key ctl-x-map "\C-j" 'dired-jump)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key ctl-x-4-map "\C-j" 'dired-jump-other-window))</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "\C-x\M-o" 'dired-omit-mode)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "*O" 'dired-mark-omitted)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "\M-(" 'dired-mark-sexp)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "*(" 'dired-mark-sexp)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "*." 'dired-mark-extension)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "\M-!" 'dired-smart-shell-command)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "\M-G" 'dired-goto-subdir)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "F" 'dired-do-find-marked-files)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "Y"  'dired-do-relsymlink)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "%Y" 'dired-do-relsymlink-regexp)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">(define-key dired-mode-map "V" 'dired-do-run-mail)</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dired-x</span>) <span style="color: #b22222;">; </span><span style="color: #b22222;">provide extra commands for Dired</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Dired -&gt; Wdired    ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">wdired allows you to edit a Dired buffer and write changes to disk</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">- Switch to Wdired by C-x C-q</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">- Edit the Dired buffer, i.e. change filenames</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">- Commit by C-c C-c, abort by C-c C-k</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">wdired</span>)
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Dired -&gt; Wdired    ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">wdired allows you to edit a Dired buffer and write changes to disk</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">- Switch to Wdired by C-x C-q</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">- Edit the Dired buffer, i.e. change filenames</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">- Commit by C-c C-c, abort by C-c C-k</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">wdired</span>)
 (setq
- wdired-allow-to-change-permissions t   <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">allow to edit permission bits</span>
- wdired-allow-to-redirect-links     <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">allow to edit symlinks</span>
+ wdired-allow-to-change-permissions t   <span style="color: #b22222;">; </span><span style="color: #b22222;">allow to edit permission bits</span>
+ wdired-allow-to-redirect-links     <span style="color: #b22222;">; </span><span style="color: #b22222;">allow to edit symlinks</span>
  )
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Recentf            ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Recentf            ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (recentf-mode)
 (setq
- recentf-max-menu-items <span style="color: #7aa6da;">30</span>
- recentf-max-saved-items <span style="color: #7aa6da;">5000</span>
+ recentf-max-menu-items <span style="color: #008b8b;">30</span>
+ recentf-max-saved-items <span style="color: #008b8b;">5000</span>
  )
 </pre>
 </div>
@@ -3449,12 +3449,12 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: dired+                     ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                     </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Dired -&gt; Dired Plus ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">dired+</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: dired+                     ;;</span>
+<span style="color: #b22222;">;;                                     </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Dired -&gt; Dired Plus ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dired+</span>)
 </pre>
 </div>
 
@@ -3499,12 +3499,12 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: recentf-ext    ;;</span>
-<span style="color: #969896; font-style: italic;">;;                         </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Recentf ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">recentf-ext</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: recentf-ext    ;;</span>
+<span style="color: #b22222;">;;                         </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Recentf ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">recentf-ext</span>)
 </pre>
 </div>
 
@@ -3570,15 +3570,15 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: ztree  ;;</span>
-<span style="color: #969896; font-style: italic;">;;                 </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: No group ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">since ztree works with files and directories, let's consider it in</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">group Files</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">ztree-diff</span>)
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">ztree-dir</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: ztree  ;;</span>
+<span style="color: #b22222;">;;                 </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: No group ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">since ztree works with files and directories, let's consider it in</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">group Files</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ztree-diff</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ztree-dir</span>)
 </pre>
 </div>
 
@@ -3679,14 +3679,14 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: vlf        ;;</span>
-<span style="color: #969896; font-style: italic;">;;                     </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Files -&gt; Vlf ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">vlf-integrate</span>)
-(setq vlf-application 'dont-ask) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">automatically use vlf on large file,</span>
-                                 <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">when the file exceed large-file-warning-threshold</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: vlf        ;;</span>
+<span style="color: #b22222;">;;                     </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Vlf ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">vlf-integrate</span>)
+(setq vlf-application 'dont-ask) <span style="color: #b22222;">;; </span><span style="color: #b22222;">automatically use vlf on large file,</span>
+                                 <span style="color: #b22222;">;; </span><span style="color: #b22222;">when the file exceed large-file-warning-threshold</span>
 </pre>
 </div>
 
@@ -3721,12 +3721,12 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Data -&gt; Saveplace ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Data -&gt; Saveplace ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">saveplace remembers your location in a file when saving files</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">saveplace</span>)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">saveplace remembers your location in a file when saving files</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">saveplace</span>)
 </pre>
 </div>
 </div>
@@ -3740,25 +3740,25 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Flyspell</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Flyspell</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Processes -&gt; Flyspell       ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Processes -&gt; Flyspell       ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq
- ispell-program-name <span style="color: #70c0b1;">"aspell"</span>   <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">use aspell instead of ispell</span>
- ispell-extra-args '(<span style="color: #70c0b1;">"--sug-mode=ultra"</span>) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">check as fast as</span>
-                    <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">possible</span>
+ ispell-program-name <span style="color: #8b2252;">"aspell"</span>   <span style="color: #b22222;">; </span><span style="color: #b22222;">use aspell instead of ispell</span>
+ ispell-extra-args '(<span style="color: #8b2252;">"--sug-mode=ultra"</span>) <span style="color: #b22222;">; </span><span style="color: #b22222;">check as fast as</span>
+                    <span style="color: #b22222;">; </span><span style="color: #b22222;">possible</span>
  )
 (add-hook 'text-mode-hook 'flyspell-mode)
 (flyspell-prog-mode)
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Processes -&gt; Gud            ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Processes -&gt; Gud            ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq gud-chdir-before-run nil
 (gud-tooltip-mode)
 </pre>
@@ -3787,78 +3787,78 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Programming</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Programming</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Languages -&gt; C  ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Languages -&gt; C  ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Available C style:</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;gnu&#8221;: The default style for GNU projects</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;k&amp;r&#8221;: What Kernighan and Ritchie, the authors of C used in their book</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;bsd&#8221;: What BSD developers use, aka &#8220;Allman style&#8221; after Eric Allman.</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;whitesmith&#8221;: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;stroustrup&#8221;: What Stroustrup, the author of C++ used in his book</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;ellemtel&#8221;: Popular C++ coding standards as defined by &#8220;Programming in C++, Rules and Recommendations,&#8221; Erik Nyquist and Mats Henricson, Ellemtel</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;linux&#8221;: What the Linux developers use for kernel development</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;python&#8221;: What Python developers use for extension modules</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;java&#8221;: The default style for java-mode (see below)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">&#8220;user&#8221;: When you want to define your own style</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Available C style:</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;gnu&#8221;: The default style for GNU projects</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;k&amp;r&#8221;: What Kernighan and Ritchie, the authors of C used in their book</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;bsd&#8221;: What BSD developers use, aka &#8220;Allman style&#8221; after Eric Allman.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;whitesmith&#8221;: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;stroustrup&#8221;: What Stroustrup, the author of C++ used in his book</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;ellemtel&#8221;: Popular C++ coding standards as defined by &#8220;Programming in C++, Rules and Recommendations,&#8221; Erik Nyquist and Mats Henricson, Ellemtel</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;linux&#8221;: What the Linux developers use for kernel development</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;python&#8221;: What Python developers use for extension modules</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;java&#8221;: The default style for java-mode (see below)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;user&#8221;: When you want to define your own style</span>
 (setq
- c-default-style <span style="color: #70c0b1;">"linux"</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">set style to "linux"</span>
- c-basic-offset <span style="color: #7aa6da;">4</span>
+ c-default-style <span style="color: #8b2252;">"linux"</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">set style to "linux"</span>
+ c-basic-offset <span style="color: #008b8b;">4</span>
  )
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Gdb ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Gdb ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq
- gdb-many-windows t             <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">use gdb-many-windows by default</span>
- gdb-show-main t            <span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">Non-nil means display source</span>
-                    <span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">file containing the main</span>
-                    <span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">routine at startup</span>
+ gdb-many-windows t             <span style="color: #b22222;">; </span><span style="color: #b22222;">use gdb-many-windows by default</span>
+ gdb-show-main t            <span style="color: #b22222;">;</span><span style="color: #b22222;">Non-nil means display source</span>
+                    <span style="color: #b22222;">;</span><span style="color: #b22222;">file containing the main</span>
+                    <span style="color: #b22222;">;</span><span style="color: #b22222;">routine at startup</span>
  )
 
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Compilation ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Compilation from Emacs</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Compilation ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Compilation from Emacs</span>
 
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-colorize-compilation-buffer</span> ()
-  <span style="color: #c397d8;">"Colorize a compilation mode buffer."</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-colorize-compilation-buffer</span> ()
+  <span style="color: #8b2252;">"Colorize a compilation mode buffer."</span>
   (interactive)
-  <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">we don't want to mess with child modes such as grep-mode, ack, ag, etc</span>
-  (<span style="color: #b9ca4a;">when</span> (eq major-mode 'compilation-mode)
-    (<span style="color: #b9ca4a;">let</span> ((inhibit-read-only t))
+  <span style="color: #b22222;">;; </span><span style="color: #b22222;">we don't want to mess with child modes such as grep-mode, ack, ag, etc</span>
+  (<span style="color: #a020f0;">when</span> (eq major-mode 'compilation-mode)
+    (<span style="color: #a020f0;">let</span> ((inhibit-read-only t))
       (ansi-color-apply-on-region (point-min) (point-max)))))
 
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">compile</span>)
-(setq compilation-ask-about-save nil <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">Just save before compiling</span>
-      compilation-always-kill t <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">Just kill old compile processes before</span>
-                                        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">starting the new one</span>
-      compilation-scroll-output 'first-error <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">Automatically scroll to first</span>
-                                        <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">error</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">compile</span>)
+(setq compilation-ask-about-save nil <span style="color: #b22222;">; </span><span style="color: #b22222;">Just save before compiling</span>
+      compilation-always-kill t <span style="color: #b22222;">; </span><span style="color: #b22222;">Just kill old compile processes before</span>
+                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">starting the new one</span>
+      compilation-scroll-output 'first-error <span style="color: #b22222;">; </span><span style="color: #b22222;">Automatically scroll to first</span>
+                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">error</span>
       )
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Makefile ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">takenn from prelude-c.el:48: https://github.com/bbatsov/prelude/blob/master/modules/prelude-c.el</span>
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">prelude-makefile-mode-defaults</span> ()
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Makefile ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">takenn from prelude-c.el:48: https://github.com/bbatsov/prelude/blob/master/modules/prelude-c.el</span>
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-makefile-mode-defaults</span> ()
   (whitespace-toggle-options '(tabs))
   (setq indent-tabs-mode t ))
 
 (setq prelude-makefile-mode-hook 'prelude-makefile-mode-defaults)
 
-(add-hook 'makefile-mode-hook (<span style="color: #b9ca4a;">lambda</span> ()
+(add-hook 'makefile-mode-hook (<span style="color: #a020f0;">lambda</span> ()
                                 (run-hooks 'prelude-makefile-mode-hook)))
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Ediff ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Ediff ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq
- ediff-diff-options <span style="color: #70c0b1;">"-w"</span>
+ ediff-diff-options <span style="color: #8b2252;">"-w"</span>
  ediff-split-window-function 'split-window-horizontally
  ediff-window-setup-function 'ediff-setup-windows-plain
  )
@@ -3939,11 +3939,11 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: diff-hl                             ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                              </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Vc -&gt; Diff Hl ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: diff-hl                             ;;</span>
+<span style="color: #b22222;">;;                                              </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Vc -&gt; Diff Hl ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (global-diff-hl-mode)
 (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 </pre>
@@ -4028,32 +4028,32 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: magit                       ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                      </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Magit ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">magit</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: magit                       ;;</span>
+<span style="color: #b22222;">;;                                      </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Magit ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">magit</span>)
 (set-default 'magit-stage-all-confirm nil)
 (add-hook 'magit-mode-hook 'magit-load-config-extensions)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">full screen magit-status</span>
-(<span style="color: #b9ca4a;">defadvice</span> <span style="color: #e78c45;">magit-status</span> (around magit-fullscreen activate)
-  (window-configuration-to-register <span style="color: #c397d8;">:magit-fullscreen</span>)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">full screen magit-status</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">magit-status</span> (around magit-fullscreen activate)
+  (window-configuration-to-register <span style="color: #483d8b;">:magit-fullscreen</span>)
   ad-do-it
   (delete-other-windows))
 
-(global-unset-key (kbd <span style="color: #70c0b1;">"C-x g"</span>))
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g h"</span>) 'magit-log)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g f"</span>) 'magit-file-log)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g b"</span>) 'magit-blame-mode)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g m"</span>) 'magit-branch-manager)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g c"</span>) 'magit-branch)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g s"</span>) 'magit-status)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g g"</span>) 'helm-git-grep)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g l"</span>) 'helm-ls-git-ls)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g r"</span>) 'magit-reflog)
-(global-set-key (kbd <span style="color: #70c0b1;">"C-x g t"</span>) 'magit-tag)
+(global-unset-key (kbd <span style="color: #8b2252;">"C-x g"</span>))
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g h"</span>) 'magit-log)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g f"</span>) 'magit-file-log)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g b"</span>) 'magit-blame-mode)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g m"</span>) 'magit-branch-manager)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g c"</span>) 'magit-branch)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g s"</span>) 'magit-status)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g g"</span>) 'helm-git-grep)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g l"</span>) 'helm-ls-git-ls)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g r"</span>) 'magit-reflog)
+(global-set-key (kbd <span style="color: #8b2252;">"C-x g t"</span>) 'magit-tag)
 </pre>
 </div>
 
@@ -4149,12 +4149,12 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: flycheck                       ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                         </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Programming -&gt; Tools -&gt; Flycheck ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">flycheck</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: flycheck                       ;;</span>
+<span style="color: #b22222;">;;                                         </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Programming -&gt; Tools -&gt; Flycheck ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">flycheck</span>)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 </pre>
 </div>
@@ -4198,12 +4198,12 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: flycheck-tip                                      ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                                            </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Flycheck Tip, but just consider it part of Flycheck ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">flycheck-tip</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: flycheck-tip                                      ;;</span>
+<span style="color: #b22222;">;;                                                            </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Flycheck Tip, but just consider it part of Flycheck ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">flycheck-tip</span>)
 (flycheck-tip-use-timer 'verbose)
 </pre>
 </div>
@@ -4229,28 +4229,28 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Applications</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Applications</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Applications-&gt; Eshell       ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">eshell</span>)
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">em-alias</span>)
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Applications-&gt; Eshell       ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">eshell</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">em-alias</span>)
 
-(eshell/alias <span style="color: #70c0b1;">"o"</span> <span style="color: #70c0b1;">""</span>)
-(eshell/alias <span style="color: #70c0b1;">"o"</span> <span style="color: #70c0b1;">"find-file-other-window $*"</span>)
-(eshell/alias <span style="color: #70c0b1;">"vi"</span> <span style="color: #70c0b1;">"find-file-other-window $*"</span>)
-(eshell/alias <span style="color: #70c0b1;">"vim"</span> <span style="color: #70c0b1;">"find-file-other-window $*"</span>)
-(eshell/alias <span style="color: #70c0b1;">"emacs"</span> <span style="color: #70c0b1;">"find-file-other-window $*"</span>)
-(eshell/alias <span style="color: #70c0b1;">"em"</span> <span style="color: #70c0b1;">"find-file-other-window $*"</span>)
+(eshell/alias <span style="color: #8b2252;">"o"</span> <span style="color: #8b2252;">""</span>)
+(eshell/alias <span style="color: #8b2252;">"o"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)
+(eshell/alias <span style="color: #8b2252;">"vi"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)
+(eshell/alias <span style="color: #8b2252;">"vim"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)
+(eshell/alias <span style="color: #8b2252;">"emacs"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)
+(eshell/alias <span style="color: #8b2252;">"em"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)
 
 (eshell-toggle-direct-send)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">change listing switches based on OS</span>
-(<span style="color: #b9ca4a;">when</span> (not (eq system-type 'windows-nt))
-  (eshell/alias <span style="color: #70c0b1;">"ls"</span> <span style="color: #70c0b1;">"ls --color -h --group-directories-first $*"</span>))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">change listing switches based on OS</span>
+(<span style="color: #a020f0;">when</span> (not (eq system-type 'windows-nt))
+  (eshell/alias <span style="color: #8b2252;">"ls"</span> <span style="color: #8b2252;">"ls --color -h --group-directories-first $*"</span>))
 
 (add-hook 'eshell-mode-hook 'electric-pair-mode)
 </pre>
@@ -4270,22 +4270,22 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Development</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Development</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Development -&gt; Extensions -&gt; Eldoc  ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Development -&gt; Extensions -&gt; Eldoc  ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Development -&gt; Internal     ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Start garbage collection every 100MB</span>
-(setq gc-cons-threshold <span style="color: #7aa6da;">100000000</span>)
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Development -&gt; Internal     ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Start garbage collection every 100MB</span>
+(setq gc-cons-threshold <span style="color: #008b8b;">100000000</span>)
 </pre>
 </div>
 </div>
@@ -4299,35 +4299,35 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">,--------------------------------------</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">| MAIN GROUP: Environment</span>
-<span style="color: #969896; font-style: italic;">;</span><span style="color: #969896; font-style: italic;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Environment</span>
+<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Environment -&gt; Initialization ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Environment -&gt; Initialization ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (setq
  inhibit-startup-screen t
  )
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Environment -&gt; Minibuffer   ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Environment -&gt; Minibuffer   ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (icomplete-mode)
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Environment -&gt; Minibuffer -&gt; Savehist ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">savehist saves minibuffer history by defaults</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Environment -&gt; Minibuffer -&gt; Savehist ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">savehist saves minibuffer history by defaults</span>
 (setq
- savehist-additional-variables '(search ring regexp-search-ring) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">also save your regexp search queries</span>
- savehist-autosave-interval <span style="color: #7aa6da;">60</span> <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">save every minute</span>
+ savehist-additional-variables '(search ring regexp-search-ring) <span style="color: #b22222;">;; </span><span style="color: #b22222;">also save your regexp search queries</span>
+ savehist-autosave-interval <span style="color: #008b8b;">60</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">save every minute</span>
  )
-(savehist-mode) <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">enable savehist</span>
+(savehist-mode) <span style="color: #b22222;">;; </span><span style="color: #b22222;">enable savehist</span>
 
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Environment -&gt; Mode Line    ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Environment -&gt; Mode Line    ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (column-number-mode)
 </pre>
 </div>
@@ -4386,13 +4386,13 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: nyan-mode                    ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                       </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUOP: Environment -&gt; Frames -&gt; Nyan ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">only turn on if a window system is available</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">this prevents error under terminal that does not support X</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: nyan-mode                    ;;</span>
+<span style="color: #b22222;">;;                                       </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUOP: Environment -&gt; Frames -&gt; Nyan ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">only turn on if a window system is available</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">this prevents error under terminal that does not support X</span>
 (case window-system
   ((x w32) (nyan-mode)))
 </pre>
@@ -4455,38 +4455,38 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: golden-ratio                         ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                               </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Environment -&gt; Windows -&gt; Golden Ratio ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(eval-after-load <span style="color: #70c0b1;">"golden-ratio"</span>
-  '(<span style="color: #b9ca4a;">progn</span>
-     (add-to-list 'golden-ratio-exclude-modes <span style="color: #70c0b1;">"ediff-mode"</span>)
-     (add-to-list 'golden-ratio-exclude-modes <span style="color: #70c0b1;">"helm-mode"</span>)
-     (add-to-list 'golden-ratio-exclude-modes <span style="color: #70c0b1;">"dired-mode"</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: golden-ratio                         ;;</span>
+<span style="color: #b22222;">;;                                               </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Environment -&gt; Windows -&gt; Golden Ratio ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(eval-after-load <span style="color: #8b2252;">"golden-ratio"</span>
+  '(<span style="color: #a020f0;">progn</span>
+     (add-to-list 'golden-ratio-exclude-modes <span style="color: #8b2252;">"ediff-mode"</span>)
+     (add-to-list 'golden-ratio-exclude-modes <span style="color: #8b2252;">"helm-mode"</span>)
+     (add-to-list 'golden-ratio-exclude-modes <span style="color: #8b2252;">"dired-mode"</span>)
      (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
      (add-to-list 'golden-ratio-inhibit-functions 'pl/ediff-comparison-buffer-p)))
 
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">pl/ediff-comparison-buffer-p</span> ()
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">pl/ediff-comparison-buffer-p</span> ()
   ediff-this-buffer-ediff-sessions)
 
-(<span style="color: #b9ca4a;">defun</span> <span style="color: #e78c45;">pl/helm-alive-p</span> ()
-  (<span style="color: #b9ca4a;">if</span> (boundp 'helm-alive-p)
+(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">pl/helm-alive-p</span> ()
+  (<span style="color: #a020f0;">if</span> (boundp 'helm-alive-p)
       (symbol-value 'helm-alive-p)))
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">do not enable golden-raio in thses modes</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">do not enable golden-raio in thses modes</span>
 (setq golden-ratio-exclude-modes
-      '(<span style="color: #70c0b1;">"ediff-mode"</span>
-        <span style="color: #70c0b1;">"gdb-locals-mode"</span>
-        <span style="color: #70c0b1;">"gdb-breakpoints-mode"</span>
-        <span style="color: #70c0b1;">"gdb-frames-mode"</span>
-        <span style="color: #70c0b1;">"gud-mode"</span>
-        <span style="color: #70c0b1;">"gdb-inferior-io-mode"</span>
-        <span style="color: #70c0b1;">"magit-log-mode"</span>
-        <span style="color: #70c0b1;">"magit-reflog-mode"</span>
-        <span style="color: #70c0b1;">"magit-status-mode"</span>
-        <span style="color: #70c0b1;">"eshell-mode"</span>
-        <span style="color: #70c0b1;">"dired-mode"</span>))
+      '(<span style="color: #8b2252;">"ediff-mode"</span>
+        <span style="color: #8b2252;">"gdb-locals-mode"</span>
+        <span style="color: #8b2252;">"gdb-breakpoints-mode"</span>
+        <span style="color: #8b2252;">"gdb-frames-mode"</span>
+        <span style="color: #8b2252;">"gud-mode"</span>
+        <span style="color: #8b2252;">"gdb-inferior-io-mode"</span>
+        <span style="color: #8b2252;">"magit-log-mode"</span>
+        <span style="color: #8b2252;">"magit-reflog-mode"</span>
+        <span style="color: #8b2252;">"magit-status-mode"</span>
+        <span style="color: #8b2252;">"eshell-mode"</span>
+        <span style="color: #8b2252;">"dired-mode"</span>))
 
 (golden-ratio-mode)
 </pre>
@@ -4508,36 +4508,36 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">you won't need any of the bar thingies</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">turn it off to save screen estate</span>
-(<span style="color: #b9ca4a;">if</span> (fboundp 'scroll-bar-mode) (scroll-bar-mode <span style="color: #7aa6da;">-1</span>))
-(<span style="color: #b9ca4a;">if</span> (fboundp 'tool-bar-mode) (tool-bar-mode <span style="color: #7aa6da;">-1</span>))
-(<span style="color: #b9ca4a;">if</span> (fboundp 'menu-bar-mode) (menu-bar-mode <span style="color: #7aa6da;">-1</span>))
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">you won't need any of the bar thingies</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">turn it off to save screen estate</span>
+(<span style="color: #a020f0;">if</span> (fboundp 'scroll-bar-mode) (scroll-bar-mode <span style="color: #008b8b;">-1</span>))
+(<span style="color: #a020f0;">if</span> (fboundp 'tool-bar-mode) (tool-bar-mode <span style="color: #008b8b;">-1</span>))
+(<span style="color: #a020f0;">if</span> (fboundp 'menu-bar-mode) (menu-bar-mode <span style="color: #008b8b;">-1</span>))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">the blinking cursor is nothing, but an annoyance</span>
-(blink-cursor-mode <span style="color: #7aa6da;">-1</span>)
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">the blinking cursor is nothing, but an annoyance</span>
+(blink-cursor-mode <span style="color: #008b8b;">-1</span>)
 
-(setq scroll-margin <span style="color: #7aa6da;">0</span>
-      scroll-conservatively <span style="color: #7aa6da;">100000</span>
-      scroll-preserve-screen-position <span style="color: #7aa6da;">1</span>)
+(setq scroll-margin <span style="color: #008b8b;">0</span>
+      scroll-conservatively <span style="color: #008b8b;">100000</span>
+      scroll-preserve-screen-position <span style="color: #008b8b;">1</span>)
 
 (size-indication-mode t)
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">more useful frame title, that show either a file or a</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">buffer name (if the buffer isn't visiting a file)</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">taken from prelude-ui.el</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">more useful frame title, that show either a file or a</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">buffer name (if the buffer isn't visiting a file)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">taken from prelude-ui.el</span>
 (setq frame-title-format
-      '(<span style="color: #70c0b1;">""</span> invocation-name <span style="color: #70c0b1;">" - "</span> (<span style="color: #c397d8;">:eval</span> (<span style="color: #b9ca4a;">if</span> (buffer-file-name)
+      '(<span style="color: #8b2252;">""</span> invocation-name <span style="color: #8b2252;">" - "</span> (<span style="color: #483d8b;">:eval</span> (<span style="color: #a020f0;">if</span> (buffer-file-name)
                                                     (abbreviate-file-name (buffer-file-name))
-                                                  <span style="color: #70c0b1;">"%b"</span>))))
+                                                  <span style="color: #8b2252;">"%b"</span>))))
 
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">change font to Inconsolata for better looking text</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">remember to install the font Inconsolata first</span>
-(setq default-frame-alist '((font . <span style="color: #70c0b1;">"Inconsolata-11"</span>)))
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">set italic font for italic face, since Emacs does not set italic</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">face automatically</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">change font to Inconsolata for better looking text</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">remember to install the font Inconsolata first</span>
+(setq default-frame-alist '((font . <span style="color: #8b2252;">"Inconsolata-11"</span>)))
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">set italic font for italic face, since Emacs does not set italic</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">face automatically</span>
 (set-face-attribute 'italic nil
-                    <span style="color: #c397d8;">:family</span> <span style="color: #70c0b1;">"Inconsolata-Italic"</span>)
+                    <span style="color: #483d8b;">:family</span> <span style="color: #8b2252;">"Inconsolata-Italic"</span>)
 </pre>
 </div>
 </div>
@@ -4574,11 +4574,11 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: number-font-lock          ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Faces -&gt; Number Font Lock   ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: number-font-lock          ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Faces -&gt; Number Font Lock   ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (add-hook 'prog-mode-hook 'number-font-lock-mode)
 </pre>
 </div>
@@ -4623,22 +4623,22 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">highlight-symbol</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">highlight-symbol</span>)
 
 (highlight-symbol-nav-mode)
 
-(add-hook 'prog-mode-hook (<span style="color: #b9ca4a;">lambda</span> () (highlight-symbol-mode)))
-(add-hook 'org-mode-hook (<span style="color: #b9ca4a;">lambda</span> () (highlight-symbol-mode)))
-(setq highlight-symbol-on-navigation-p t) <span style="color: #969896; font-style: italic;">; </span><span style="color: #969896; font-style: italic;">enable highlighting symbol at point automatically</span>
+(add-hook 'prog-mode-hook (<span style="color: #a020f0;">lambda</span> () (highlight-symbol-mode)))
+(add-hook 'org-mode-hook (<span style="color: #a020f0;">lambda</span> () (highlight-symbol-mode)))
+(setq highlight-symbol-on-navigation-p t) <span style="color: #b22222;">; </span><span style="color: #b22222;">enable highlighting symbol at point automatically</span>
 
 (global-set-key [(control shift mouse-1)]
-                (<span style="color: #b9ca4a;">lambda</span> (event)
-                  (interactive <span style="color: #70c0b1;">"e"</span>)
+                (<span style="color: #a020f0;">lambda</span> (event)
+                  (interactive <span style="color: #8b2252;">"e"</span>)
                   (goto-char (posn-point (event-start event)))
                   (highlight-symbol-at-point)))
 
-(global-set-key (kbd <span style="color: #70c0b1;">"M-n"</span>) 'highlight-symbol-next)
-(global-set-key (kbd <span style="color: #70c0b1;">"M-p"</span>) 'highlight-symbol-prev)
+(global-set-key (kbd <span style="color: #8b2252;">"M-n"</span>) 'highlight-symbol-next)
+(global-set-key (kbd <span style="color: #8b2252;">"M-p"</span>) 'highlight-symbol-prev)
 </pre>
 </div>
 
@@ -4697,10 +4697,10 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Help -&gt; Info+               ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">info+</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Help -&gt; Info+               ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">info+</span>)
 </pre>
 </div>
 </div>
@@ -4739,8 +4739,8 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">A quick major mode help with discover-my-major</span>
-(define-key 'help-command (kbd <span style="color: #70c0b1;">"C-m"</span>) 'discover-my-major)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">A quick major mode help with discover-my-major</span>
+(define-key 'help-command (kbd <span style="color: #8b2252;">"C-m"</span>) 'discover-my-major)
 </pre>
 </div>
 
@@ -4784,11 +4784,11 @@ package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">PACKAGE: rainbow-mode              ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Help -&gt; Rainbow             ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: rainbow-mode              ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Help -&gt; Rainbow             ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (add-hook 'html-mode-hook 'rainbow-mode)
 (add-hook 'css-mode-hook 'rainbow-mode)
 </pre>
@@ -4843,12 +4843,12 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: help+                     ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Help                        ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">help+</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: help+                     ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Help                        ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">help+</span>)
 </pre>
 </div>
 
@@ -4904,12 +4904,12 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: help-fns+                 ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Help                        ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">help-fns+</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: help-fns+                 ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Help                        ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">help-fns+</span>)
 </pre>
 </div>
 
@@ -4990,12 +4990,12 @@ the package:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Package: help-mode+                ;;</span>
-<span style="color: #969896; font-style: italic;">;;                                    </span><span style="color: #969896; font-style: italic;">;;</span>
-<span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">GROUP: Help                        ;;</span>
-<span style="color: #969896; font-style: italic;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-(<span style="color: #b9ca4a;">require</span> '<span style="color: #7aa6da;">help-mode+</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: help-mode+                ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Help                        ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">help-mode+</span>)
 </pre>
 </div>
 
