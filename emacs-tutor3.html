@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-06-30 T2 21:58 -->
+<!-- 2014-06-30 T2 22:41 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -1339,33 +1339,31 @@ start Emacs, it uses your saved setting. The new value is saved at
 </div>
 
 <p>
-<code>2 = Undo Edits</code>
-Undo to the previous value of a particular setting, if you haven't
+<code>2 = Undo Edits</code>: Undo to the previous value of a particular setting, if you haven't
 set. 
 </p>
 
 <p>
-<code>3 = Revert This Sesssion's Customization</code>
-This restores the value of the variable to the last saved value, and
-updates the text accordingly. 
+<code>3 = Revert This Sesssion's Customization</code>: This restores the value of
+the variable to the last saved value, and updates the text
+accordingly.
 </p>
 
 <p>
-<code>4 = Erase Customization</code>
-Reset to standard value and delete set value in <code>~/emacs.d/init.el</code>.
+<code>4 = Erase Customization</code>: Reset to standard value and delete set
+value in <code>~/emacs.d/init.el</code>.
 </p>
 
 <p>
-<code>7 = Add Comment</code>
-Sometimes you have something to say about your customization. Write it
-using this option.
+<code>7 = Add Comment</code>: Sometimes you have something to say about your
+customization. Write it using this option.
 </p>
 
 <p>
-<code>: = Show Saved Lisp Expression</code>
-Show the actual variable representation. If you open the menu again,
-the option <code>: = Show Saved Lisp Expression</code> is changed to <code>Show
-current value</code> that switches back to the nicer representation.
+<code>: = Show Saved Lisp Expression</code>: Show the actual variable
+representation. If you open the menu again, the option <code>: = Show Saved
+Lisp Expression</code> is changed to <code>Show current value</code> that switches back
+to the nicer representation.
 </p>
 
 <p>
@@ -2832,9 +2830,18 @@ built-in documentation of that command in another buffer.
  provides the above features like showing key bindings and <b>TAB</b> to
  open built-in documentation.
 </p>
-</div>
-</div>
 
+<p>
+Demo:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-m-x.gif"><img src="static/part3/helm-m-x.gif" alt="helm-m-x.gif" /></a>
+</p>
+</div>
+</div>
+</div>
 <div id="outline-container-sec-4-5-2" class="outline-4">
 <h4 id="sec-4-5-2"><a id="ID-77b4d145-c280-4ed4-98a7-d645fe1d18bf"></a><code>helm-show-kill-ring</code></h4>
 <div class="outline-text-4" id="text-4-5-2">
@@ -2857,6 +2864,17 @@ using the default <code>M-y</code>.
 If you follow my Helm configuration, <code>M-y</code> binds to
 <code>helm-show-kill-ring</code>. Try it and see! Much easier than the default.
 </p>
+
+<p>
+<code>helm-kill-ring</code> in action (the demo starts when you see START in the
+minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-kill-ring.gif"><img src="static/part3/helm-kill-ring.gif" alt="helm-kill-ring.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-4-5-3" class="outline-4">
@@ -2936,6 +2954,18 @@ and matching w3.
 </p>
 </li>
 </ul>
+
+<p>
+Demo: Search for buffers that contain string "Answer", and transfer
+the search string to <code>helm-moccur</code> for the exact matches (the demo
+starts when you see START in the minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-mini.gif"><img src="static/part3/helm-mini.gif" alt="helm-mini.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-4-5-4" class="outline-4">
@@ -2993,6 +3023,18 @@ You can perform more actions on the highlighting entry by running
 <code>helm-select-action</code>, which is bound to <b>TAB</b> by default and <b>C-z</b> in
 my configuration.
 </p>
+
+<p>
+Demo: I only needed to type into the prompt a few character to get the
+candidate I wanted among many candidates. The demo starts when you
+see START in the minibuffer:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-find-files.gif"><img src="static/part3/helm-find-files.gif" alt="helm-find-files.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-4-5-5" class="outline-4">
@@ -3051,6 +3093,17 @@ Similar to <code>occur</code>, but using Helm interface. As you type, matching
 lines are updated immediately. Very interactively, as it is the nature
 of Helm.
 </p>
+
+<p>
+Demo: You can see that candidates kept getting updated when I was
+typing. The demo starts when you see START in the minibuffer.
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-occur.gif"><img src="static/part3/helm-occur.gif" alt="helm-occur.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-4-5-10" class="outline-4">

@@ -689,25 +689,23 @@ start Emacs, it uses your saved setting. The new value is saved at
    '(global-mark-ring-max 5000))
 #+end_src
 
-=2 = Undo Edits=
-Undo to the previous value of a particular setting, if you haven't
+=2 = Undo Edits=: Undo to the previous value of a particular setting, if you haven't
 set. 
 
-=3 = Revert This Sesssion's Customization=
-This restores the value of the variable to the last saved value, and
-updates the text accordingly. 
+=3 = Revert This Sesssion's Customization=: This restores the value of
+the variable to the last saved value, and updates the text
+accordingly.
 
-=4 = Erase Customization=
-Reset to standard value and delete set value in =~/emacs.d/init.el=.
+=4 = Erase Customization=: Reset to standard value and delete set
+value in =~/emacs.d/init.el=.
 
-=7 = Add Comment=
-Sometimes you have something to say about your customization. Write it
-using this option.
+=7 = Add Comment=: Sometimes you have something to say about your
+customization. Write it using this option.
 
-=: = Show Saved Lisp Expression=
-Show the actual variable representation. If you open the menu again,
-the option =: = Show Saved Lisp Expression= is changed to =Show
-current value= that switches back to the nicer representation.
+=: = Show Saved Lisp Expression=: Show the actual variable
+representation. If you open the menu again, the option =: = Show Saved
+Lisp Expression= is changed to =Show current value= that switches back
+to the nicer representation.
 
 Another way to change a setting is using *C-h v*, which runs
 =describe-variable= that list all the available variables in your
@@ -1793,6 +1791,11 @@ built-in documentation of that command in another buffer.
  still get Helm completion, but using the vanilla *M-x* that does not
  provides the above features like showing key bindings and *TAB* to
  open built-in documentation.
+
+Demo:
+
+[[file:static/part3/helm-m-x.gif][file:static/part3/helm-m-x.gif]]
+
 *** =helm-show-kill-ring=
 :PROPERTIES:
 :ID:       77b4d145-c280-4ed4-98a7-d645fe1d18bf
@@ -1810,6 +1813,11 @@ using the default =M-y=.
 
 If you follow my Helm configuration, =M-y= binds to
 =helm-show-kill-ring=. Try it and see! Much easier than the default.
+
+=helm-kill-ring= in action (the demo starts when you see START in the
+minibuffer):
+
+[[file:static/part3/helm-kill-ring.gif][file:static/part3/helm-kill-ring.gif]]
 
 *** =helm-mini=
 :PROPERTIES:
@@ -1865,6 +1873,12 @@ Example:
 
  =helm-mini= is like an interactive version of =ibuffer=.
 
+Demo: Search for buffers that contain string "Answer", and transfer
+the search string to =helm-moccur= for the exact matches (the demo
+starts when you see START in the minibuffer):
+
+[[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]]
+
 *** =helm-find-files=
 :PROPERTIES:
 :ID:       b71abd6c-cb29-4b64-a55f-29bd75937c11
@@ -1907,6 +1921,12 @@ You can perform more actions on the highlighting entry by running
 =helm-select-action=, which is bound to *TAB* by default and *C-z* in
 my configuration.
 
+Demo: I only needed to type into the prompt a few character to get the
+candidate I wanted among many candidates. The demo starts when you
+see START in the minibuffer:
+
+[[file:static/part3/helm-find-files.gif][file:static/part3/helm-find-files.gif]]
+
 *** =helm-man-woman=
 :PROPERTIES:
 :ID:       2578b1bd-7ae9-4250-b701-c9191603404f
@@ -1948,6 +1968,11 @@ Similar to =helm-find=, but you =locate= command.
 Similar to =occur=, but using Helm interface. As you type, matching
 lines are updated immediately. Very interactively, as it is the nature
 of Helm.
+
+Demo: You can see that candidates kept getting updated when I was
+typing. The demo starts when you see START in the minibuffer.
+
+[[file:static/part3/helm-occur.gif][file:static/part3/helm-occur.gif]]
 
 *** =helm-apropos=
 :PROPERTIES:
