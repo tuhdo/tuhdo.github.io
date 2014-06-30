@@ -65,7 +65,7 @@ only need to these rules:
   For example:
   
   #+begin_src emacs-lisp
-    age "Hello word %d" (+ 10 10))
+    (message "Hello word %d" (+ 10 10))
   #+end_src
   
   =message= is a function that prints to echo area and =*Message*=
@@ -135,16 +135,16 @@ them all. You should really work it out on your own gradually with
 :PROPERTIES:
 :ID:       efdf75c7-0278-46ab-910c-fd557d0584e9
 :END:
-*_Comment_*: A really fundamental function for customizing Emacs
+_Comment_: A really fundamental function for customizing Emacs
 settings. An Emacs setting is really just a variable. Emacs has GUI
 for changing setting, but =setq= a variable is also equivalent.
 
-*_Example_*:
+_Example_:
 #+begin_src emacs-lisp
     (setq global-mark-ring-max 50000)
 #+end_src
 
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 #+BEGIN_QUOTE
 Set each /SYM/ to the value of its /VAL/.
 The symbols /SYM/ are variables; they are literal (not evaluated).
@@ -159,7 +159,7 @@ The return value of the `_setq_' form is the value of the last /VAL/.
 :PROPERTIES:
 :ID:       554a5d52-623c-487d-9e9b-81c5f8f67746
 :END:
-*_Comment_*: This function allows you to load a file. /FILE/ is the
+_Comment_: This function allows you to load a file. /FILE/ is the
 a filename that is looked up in the variable =load-path=. Do you
 notice =&optional= keyword? When you see this keyword, it means
 everything after =&optional= is, optional. The parameters /NOERROR/,
@@ -172,7 +172,7 @@ parameter. For example, if you want to pass an argument into
 /NOMESSAGE/ first. You are safe to ignore everything after your
 chosen parameter, and in our example, it's /MUST-SUFFIX/.
 
-*_Example_*: 
+_Example_:
 
 #+begin_src emacs-lisp
     (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
@@ -181,7 +181,7 @@ chosen parameter, and in our example, it's /MUST-SUFFIX/.
     (load "module") ; search for the file module.el or module.elc in variable load-path
 #+end_src
 
-*_Built-int Documentation_*:
+_Built-in Documentation_:
 
 #+BEGIN_QUOTE
 Execute a file of Lisp code named FILE.
@@ -197,18 +197,17 @@ function searches the directories in `load-path'.
 :PROPERTIES:
 :ID:       6b51529d-424f-4735-84e6-c13a0818376b
 :END:
-*_Comment_*: If you install a package from =M-x list-packages=, to
+_Comment_: If you install a package from =M-x list-packages=, to
 load that package, use =(require 'installed-package)=.
 
-*_Example_*: For example, you installed package =volatile-highlights=,
+_Example_: For example, you installed package =volatile-highlights=,
 to load it:
 
 #+begin_src emacs-lisp
   (require 'volatile-highlights)
 #+end_src
 
-
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 
 #+BEGIN_QUOTE
 If feature /FEATURE/ is not loaded, load it from /FILENAME/.
@@ -227,16 +226,16 @@ The normal messages at start and end of loading /FILENAME/ are suppressed.
 :PROPERTIES:
 :ID:       6d573c2c-768b-4233-b8c0-5796f0b23304
 :END:
-*_Comment_*: Add an element =ELEMENT= to a list named =LIST-VAR=.
+_Comment_: Add an element =ELEMENT= to a list named =LIST-VAR=.
 
-*_Example_*:
+_Example_:
 
 #+begin_src emacs-lisp
   (add-to-list 'load-path "~/.emacs.d/personal") ; add personal to load-path,
                                                  ; so "load" function can search for files in it
 #+end_src
 
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 
 #+BEGIN_QUOTE
 Add /ELEMENT/ to the value of /LIST-VAR/ if it isn't there yet.
@@ -264,12 +263,12 @@ can do the job.
 :PROPERTIES:
 :ID:       acb677cd-cad6-43c7-9bdb-b31578337fe0
 :END:
-*_Comment_*: A *hook* is a Lisp variable which holds a list of
+_Comment_: A *hook* is a Lisp variable which holds a list of
 functions, to be called on some well-defined occasion. (This is called
 running the hook. You can search for hook using *C-h v* and enter
 =-hook= suffix then *TAB*. Or you can find hooks in *Customization Groups*.
 
-*_Example_*:
+_Example_:
 
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook 'linum-mode)
@@ -281,7 +280,7 @@ on the left margin of your Emacs - then every time you enter a
 from. A programming mode can be =c-mode=, =asm-mode=,
 =emacs-lisp-mode=, =java-mode=...
 
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 #+BEGIN_QUOTE
 Add to the value of HOOK the function /FUNCTION/.
 /FUNCTION/ is not added if already present.
@@ -304,10 +303,10 @@ function, it is changed to a list of functions.
 :PROPERTIES:
 :ID:       5c06ee7d-fb65-48bb-8419-c5660d4d4fd2
 :END:
-*_Comment_*: This function binds a command to a key, as you can see in
+_Comment_: This function binds a command to a key, as you can see in
 the function interface.
 
-*_Example_*:
+_Example_:
 
 You can bind in one of the following ways:
 
@@ -355,7 +354,7 @@ angle bracket):
 | =kp-f1, kp-f2, kp-f3, kp-f4=                     | Keypad PF keys.                                    |
 |--------------------------------------------------+----------------------------------------------------|
 
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 
 #+BEGIN_QUOTE
 Give /KEY/ a global binding as /COMMAND/.
@@ -373,7 +372,7 @@ that you make with this function.
 :PROPERTIES:
 :ID:       879a92aa-5c2b-4623-913a-45dddb84ed7b
 :END:
-*_Comment_*: 
+_Comment_:
 
 This function binds a definition =DEF=, usually a command, to a key
 sequence =KEY=. A definition can be other things that you can find in
@@ -392,7 +391,7 @@ its own key bindings. A keymap usually has =-mode-map= suffix,
 i.e. dired-mode-map; if you want to change or add a key binding in a
 major mode or minor mode, you use =define-key= function like this:
 
-*_Example_*:
+_Example_:
 
 #+begin_src emacs-lisp
   ;; Dired uses "e", "f" or RET to open a file
@@ -407,7 +406,7 @@ major mode or minor mode, you use =define-key= function like this:
   (define-key dired-mode-map (kbd "e") 'wdired-change-to-wdired-mode)
 #+end_src
 
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 
 #+BEGIN_QUOTE
 In /KEYMAP/, define key sequence /KEY/ as /DEF/.
@@ -439,15 +438,51 @@ If /KEYMAP/ is a sparse keymap with a binding for /KEY/, the existing
 binding is altered.  If there is no binding for /KEY/, the new pair
 binding /KEY/ to /DEF/ is added at the front of /KEYMAP/.
 #+END_QUOTE
+** Function: *(defalias /SYMBOL/ /DEFINITION/ &optional /DOCSTRING/)*
+:PROPERTIES:
+:ID:       bc2a13cd-9341-45f9-aad5-a0d94c7c4b0f
+:END:
+_Comment_: =defalias= allows you to rename a command. It is usually
+used to abbreviate command name.
+
+_Example_: Put the following aliases in your =init.el=:
+
+#+begin_src emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
+  (defalias 'list-buffers 'ibuffer) ; always use ibuffer
+
+                                          ; elisp
+  (defalias 'eb 'eval-buffer)
+  (defalias 'er 'eval-region)
+  (defalias 'ed 'eval-defun)
+
+                                          ; minor modes
+  (defalias 'wsm 'whitespace-mode)
+#+end_src
+
+_Built-in Documentation_:
+#+BEGIN_QUOTE
+Set /SYMBOL/'s function definition to /DEFINITION/.
+Associates the function with the current load file, if any.
+The optional third argument /DOCSTRING/ specifies the documentation string
+for /SYMBOL/; if it is omitted or nil, /SYMBOL/ uses the documentation string
+determined by /DEFINITION/.
+
+Internally, this normally uses `fset', but if /SYMBOL/ has a
+`defalias-fset-function' property, the associated value is used instead.
+
+The return value is undefined.
+#+END_QUOTE
+
 ** Macro: *(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)*
 :PROPERTIES:
 :ID:       0d30e7ca-7282-441e-868b-0b07ce2eaf70
 :END:
-*_Comment_*: defun is a Lisp macro that allows you to define a
+_Comment_: =defun= is a Lisp macro that allows you to define a
 function, like any other language. A function is a collection of
 Lisp forms to be executed. The return value is the last form.
 
-*_Example_*:
+_Example_:
 
 - Create a normal function (Not available in =M-x=):
   
@@ -468,7 +503,7 @@ and allow a command to accept various types of prefix arguments, such
 as a number, a string, symbol, buffer names... You can *C-h f* and
 type =interactive= to find out more.
 
-*_Built-in Documentation_*:
+_Built-in Documentation_:
 #+BEGIN_QUOTE
 Define /NAME/ as a function.
 The definition is (lambda /ARGLIST/ [/DOCSTRING/] /BODY/...).
@@ -494,15 +529,18 @@ The return value is undefined.
   
   [[file:static/part3/backward-sexp.gif][file:static/part3/backward-sexp.gif]]
 
-- *C-M-k* binds to =kill-sexp=, kill balanced expression forward.
+- *C-M-k* binds to =kill-sexp=, kill balanced expression
+  forward. Demo:
   
   [[file:static/part3/kill-sexp.gif][file:static/part3/kill-sexp.gif]]
 
-- *C-M-t* binds to =transpose-sexps=, transpose expressions
+- *C-M-t* binds to =transpose-sexps=, transpose expressions. Demo:
 
   [[file:static/part3/transpose-sexp.gif][file:static/part3/transpose-sexp.gif]]
 
-- *C-M-<SPC>* or *C-M-@* binds to =mark-sexp=, put mark after following expression      
+- *C-M-<SPC>* or *C-M-@* binds to =mark-sexp=, put mark after
+  following expression. Demo:
+
   [[file:static/part3/mark-sexp.gif][file:static/part3/mark-sexp.gif]]
 
 * Let's supercharge Emacs
@@ -538,7 +576,8 @@ files when it starts:
 - ~/.emacs.d/init.el
   
 To apply a setting, move point to the end of a Lisp expression and
-*C-x C-e*, which runs =eval-last-sexp=.
+*C-x C-e*, which runs =eval-last-sexp=. Or, you can evaluate the whole
+buffer with =eval-buffer=.
 
 When you want to complete function names in Emacs Lisp: *C-M-i*,
 which runs =completion-at-point=. It will display a list of possible
