@@ -1122,6 +1122,7 @@ whitespace.
 View this [[http://www.emacswiki.org/emacs/CleanAutoIndent][Emacswiki page]] for more details.
 
 _Installation_:
+
 =M-x list-packages= and select *clean-aindent-mode* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1157,6 +1158,7 @@ states. Highly recommended.
 [[file:static/part3/undo-tree.jpg][file:static/part3/undo-tree.jpg]]
 
 _Installation_:
+
 =M-x list-packages= and select *undo-tree* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1194,6 +1196,7 @@ inspired from TextMate's syntax, you can even import most TextMate
 templates to YASnippet.
 
 _Installation_:
+
 =M-x list-packages= and select *yasnippet* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1208,7 +1211,9 @@ the package:
   (yas-global-mode 1)
 #+end_src
 
-_Usage_: In major modes where *yasnippet* has snippets available,
+_Usage_:
+
+In major modes where *yasnippet* has snippets available,
 typing a certain keyword and *TAB* insert a predefined snippet. For
 example, in a C buffer, if you type =for= and *TAB*, it expands to:
 
@@ -1338,6 +1343,7 @@ _Features_:
 =expand-region= allows you to select text objects incrementally. 
 
 _Installation_:
+
 =M-x list-packages= and select *expand-region* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1376,6 +1382,7 @@ _Features_:
 [[file:static/part3/ibuffer-vc.png][file:static/part3/ibuffer-vc.png]]
 
 _Installation_:
+
 =M-x list-packages= and select *ibuffer-vc* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1425,6 +1432,7 @@ Fancy box quoting I n comment.
 - point has to be to the left of the border
 
 _Installation_:
+
 =M-x list-packages= and select *rebox2* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1538,6 +1546,7 @@ You can also restore such buffers as: org-agenda, shell, magit-status,
 help.
 
 _Installation_:
+
 =M-x list-packages= and select *workgroups2* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1596,6 +1605,7 @@ _Author_:
 _Homepage_: [[https://github.com/emacs-helm/helm][Github]]
 
 _Features_:
+
 =Helm= is incremental completion and selection narrowing framework for
 Emacs. It will help steer you in the right direction when you're
 looking for stuff in Emacs (like buffers, files, etc).
@@ -1960,11 +1970,13 @@ Provide Helm interface for quickly selecting files in a project using
 Projectile.
 
 _Installation_:
+
 =M-x list-packages= and select *helm-projectile* package, then install
 it. After finish installing, you can start using =helm-projectile=
 immediately.
 
 _Usage_:
+
 *C-c p h* to run =helm-projectile= and select files in your project.
 
 *** Package: =helm-descbind=
@@ -1991,6 +2003,7 @@ Additionally you have the following actions
 - Find the command
 
 _Installation_:
+
 =M-x list-packages= and select *helm-descbind* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2006,6 +2019,7 @@ package:
 #+end_src
 
 _Usage_:
+
 Enter a prefix key and *C-h* after it. You will see a list of bindings
 using Helm interface for narrowing.
 
@@ -2059,6 +2073,7 @@ Note that ido-ubiquitous is not enabled for org mode or magit mode,
 because those modes have their own support for ido.
 
 _Installation_:
+
 =M-x list-packages= and select *ido-ubiquitous* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2103,6 +2118,7 @@ package:
 #+end_src
 
 _Usage_:
+
 =flx-ido= provides fuzzy completion to select completion
 candidates. For example, if you want to select a file
 =src/foo/bar.txt=, you only need to type in Ido prompt "sfb", short
@@ -2125,6 +2141,7 @@ commands. And to all the other commands, too.
 [[file:static/part3/smex.png][file:static/part3/smex.png]]
 
 _Installation_:
+
 =M-x list-packages= and select *flx-ido* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2249,6 +2266,7 @@ more.
 [[file:static/part3/dired-plus.jpg][file:static/part3/dired-plus.jpg]]
 
 _Installation_:
+
 =M-x list-packages= and select *dired+* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2322,6 +2340,7 @@ and ztree-dir(the basis of ztree-diff).
 [[file:static/part3/ztree-dir.png][file:static/part3/ztree-dir.png]]
 
 _Installation_:
+
 =M-x list-packages= and select *ztree* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2390,6 +2409,7 @@ it offers in a nutshell:
 GNU Emacs 23 and 24 are supported.
 
 _Installation_:
+
 =M-x list-packages= and select ** package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2588,6 +2608,7 @@ The package also contains auxiliary modes:
 - =diff-hl-amend-mode= shifts the reference revision back by one.
 
 _Installation_:
+
 =M-x list-packages= and select *diff-hl* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2644,7 +2665,8 @@ recommended. The minimal versions are those available in Debian
 oldstable.
 
 _Installation_:
-=M-x list-packages= and select ** package, then install
+
+=M-x list-packages= and select *magit* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
 
@@ -2900,6 +2922,7 @@ point from 0% to 100%.
 NOT INCLUDED: music.
 
 _Installation_:
+
 =M-x list-packages= and select *nyan-mode* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2945,6 +2968,7 @@ be readable enough to know it's content.
 [[file:static/part3/golden-ratio.gif][file:static/part3/golden-ratio.gif]]
 
 _Installation_:
+
 =M-x list-packages= and select *golden-ratio* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2987,6 +3011,7 @@ package:
 #+end_src
 
 _Usage_:
+
 *C-x o* and see your windows being resized.
 
 ** setup-faces-and-ui.el
@@ -3128,7 +3153,7 @@ Info+ helps you read Info documents more enjoyable with extra
 highlighting it provides.
 
 _Installation_:
-n
+
 =M-x list-packages= and select *info+* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -3155,6 +3180,7 @@ Discover key bindings and their meaning for the current Emacs major mode.
 [[file:static/part3/discover-my-major.png][file:static/part3/discover-my-major.png]]
 
 _Installation_:
+
 =M-x list-packages= and select *discover-my-major* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -3165,6 +3191,11 @@ package:
 #+end_src
 
 _Usage_:
+
+The above setup binds *C-h C-m* to =discover-my-major=. In a buffer,
+*C-h C-m* and you will see key bindings of that major mode and its
+description, as opposed to usual *C-h m* which gives mappings between
+keys and commands.
 
 *** Package: =rainbow-mode=
 :PROPERTIES:
