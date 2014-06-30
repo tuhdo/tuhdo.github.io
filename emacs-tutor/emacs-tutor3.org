@@ -4,7 +4,7 @@
 :ID:       bbed4318-de81-421d-a6c4-04b40b60b591
 :END:
 Emacs comes with a default settings. Some interesting features are
-disabled and hidden, i.e. Ibuffer, Semantic, electric
+disabled and hidden, i.e. ibuffer, Semantic, electric
 modes... Probably to make it more user friendly to new users and
 behave more like "normal" editors, i.e. Normal users do not expect
 automatic pairing of punctuation marks like parentheses, brackets,
@@ -18,24 +18,24 @@ Emacs appearance... Without the ability to extend, Emacs will just be
 another obscure editor with some useful features but cannot meet the
 demands of people, because different people have different needs, and
 Emacs maintainers cannot provide them all and integrate all into
-Emacs. With the extensibility, people can bend Emacs the way they
+Emacs. With the ability to extend, people can bend Emacs the way they
 want, much like Lisp.
 
 Unlike other editors which encourage users to stay with the default as
 much as they can, Emacs encourages users to customize and extend Emacs
 as much as they can.
 
-In the old days, when Emacs did not have a package managaer and did
+In the old days, when Emacs did not have a package manager and did
 not have many learning resources like now, it's really uneasy to
 customize Emacs, because to customize Emacs properly you have to read
 a decent chunk of the Emacs Lisp manual. Many of us, including me, do
 not have that luxury of time. The way I learned to customize Emacs was
-copying little code snipopets that solve specific problems - when I
+copying little code snippets that solve specific problems - when I
 encountered them - and paste everything in my =~/.emacs= file. I also
 had to download Emacs packages manually and load it manually in
 =~/.emacs=. I hope that this guide helps you to be at least as good as
-me in customzing Emacs without having to spend a long time in
-collecting configurations, or reading the whole Emacs Lsip
+me in customizing Emacs without having to spend a long time in
+collecting configurations, or reading the whole Emacs Lisp
 manual. After you finish this chapter, you can dive in the Emacs Lisp
 manually if you want, and easier.
 
@@ -53,10 +53,10 @@ your Emacs "evolves" gradually.
 It's worth to review again. To read most of Lisp code, it is easy. You
 only need to these rules:
 
-- Code that get executed is a pair of parentheses, with things in
-in it: =(...)=. The first element always gets evaluated; your Lisp
-environment (in our case, Emacs) determinse which of the following
-3 forms the symbol in the first slot is, then acts accordingly:
+- Code that get executed is a pair of parentheses, with things in it:
+  =(...)=. The first element always gets evaluated; your Lisp
+  environment (in our case, Emacs) determines which of the following 3
+  forms the symbol in the first slot is, then acts accordingly:
 
 + Function form: if the first element points to a function definition,
   then the following elements get evaluated from left to right and
@@ -118,7 +118,7 @@ code.
 
 - Data: has two types:
   
-+ *Atom*: primites such as number, string, symbol and NIL.
++ *Atom*: primitives such as number, string, symbol and NIL.
   
 + *Non-atom*: if you put a =’= just before a form, it becomes
   a list. Emacs treats these *quoted* forms as data.
@@ -160,7 +160,7 @@ The return value of the `_setq_' form is the value of the last /VAL/.
 :ID:       554a5d52-623c-487d-9e9b-81c5f8f67746
 :END:
 *_Comment_*: This function allows you to load a file. /FILE/ is the
-a filename that is looked up in the Varable =load-path=. Do you
+a filename that is looked up in the variable =load-path=. Do you
 notice =&optional= keyword? When you see this keyword, it means
 everything after =&optional= is, optional. The parameters /NOERROR/,
 /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not required to be passed
@@ -320,7 +320,7 @@ You can bind in one of the following ways:
 
 I recommend you to use =(kbd ...)= function because we can write key
 bindings using our familiar key notations without adding unnecessary
-characters. Vector is array in other languags. Vector was used for
+characters. Vector is array in other languages. Vector was used for
 mapping function keys, such as =[left]=, =[right]=, =[up]=, =[down]=,
 =[f1]...[f12]=. But now, you can also map function keys in =(kbd
 ...)= function using angle brackets:
@@ -336,7 +336,7 @@ angle bracket):
 |--------------------------------------------------+----------------------------------------------------|
 | =left, up, right, down=                          | Cursor arrow keys                                  |
 |--------------------------------------------------+----------------------------------------------------|
-| =begin, end, home, next, prior=                  | Other cursor repositioning keys                    |
+| =begin, end, home, next, prior=                  | Other cursor re-positioning keys                    |
 |                                                  | =prior= means =PageUp=                             |
 |                                                  | =next= means =PageDOwn=                            |
 |--------------------------------------------------+----------------------------------------------------|
@@ -484,27 +484,26 @@ The return value is undefined.
 :ID:       7522b365-52f4-4fa9-b316-7843b772c59a
 :END:
 
-|-------------+------------------------------------------|
-| =C-M-f=     | *Command*: =forward-sexp=                |
-|             | Move forward over a balanced expression  |
-|             | ...[screenshot]...                       |
-|-------------+------------------------------------------|
-| =C-M-b=     | *Command*: =backward-sexp=               |
-|             | Move backward over a balanced expression |
-|             | ...[screenshot]...                       |
-|-------------+------------------------------------------|
-| =C-M-k=     | *Command*: =kill-sexp=                   |
-|             | Kill balanced expression forward         |
-|             | ...[screenshot]...                       |
-|-------------+------------------------------------------|
-| =C-M-t=     | *Command*: =transpose-sexps=             |
-|             | Transpose expressions                    |
-|             | ...[screenshot]...                       |
-|-------------+------------------------------------------|
-| =C-M-<SPC>= | *Command*: =mark-sexp=                   |
-| =C-M-@=     | Put mark after following expression      |
-|             | ...[screenshot]...                       |
-|-------------+------------------------------------------|
+- *C-M-f* binds to =forward-sexp=, move forward over a balanced
+  expression. Demo:
+
+  [[file:static/part3/forward-sexp.gif][file:static/part3/forward-sexp.gif]]
+
+- *C-M-b* binds to =backward-sexp=, move backward over a balanced
+  expression. Demo:
+  
+  [[file:static/part3/backward-sexp.gif][file:static/part3/backward-sexp.gif]]
+
+- *C-M-k* binds to =kill-sexp=, kill balanced expression forward.
+  
+  [[file:static/part3/kill-sexp.gif][file:static/part3/kill-sexp.gif]]
+
+- *C-M-t* binds to =transpose-sexps=, transpose expressions
+
+  [[file:static/part3/transpose-sexp.gif][file:static/part3/transpose-sexp.gif]]
+
+- *C-M-<SPC>* or *C-M-@* binds to =mark-sexp=, put mark after following expression      
+  [[file:static/part3/mark-sexp.gif][file:static/part3/mark-sexp.gif]]
 
 * Let's supercharge Emacs
 :PROPERTIES:
@@ -591,7 +590,7 @@ of packages.
 - To mark a package for delete, press *d*.
 - To unmark a package, press *u*.
 - To execute the marked packages (either for install or delete), press *x*.
-- To referesh and update the lastest package list, press *r*.
+- To refresh and update the latest package list, press *r*.
 - To display these key bindings, press *h*.
   
 That's that.
@@ -621,7 +620,7 @@ internally, with a nice organization of settings, rather than randomly
 set a variable that you randomly found. =M-x customize= to open a
 window for customizing Emacs:
 
-...[screenshol]...
+[[file:static/part3/customize.jpg][file:static/part3/customize.jpg]]
 
 You will see various categories for customizing Emacs. These
 categories are called *Customization Groups* in Emacs. Let's try
@@ -672,7 +671,7 @@ the option =: = Show Saved Lisp Expression= is changed to =Show
 current value= that switches back to the nicer representation.
 
 Another way to change a setting is using *C-h v*, which runs
-=describe-variable= that list all the avaialble variables in your
+=describe-variable= that list all the available variables in your
 Emacs and allow you to select one. You can also access the parent
 group of a group or a variable.
 
@@ -687,7 +686,7 @@ and also find out which parent group the package belongs to.
 :PROPERTIES:
 :ID:       24fade09-4735-4f0b-ba82-5742d3b5a314
 :END:
-The above approach uses GUI, which makes Emacs look familar to normal
+The above approach uses GUI, which makes Emacs look familiar to normal
 users from other editors: using GUI to change the editors. However, it
 has disadvantages: Monolithic. Although the settings are nicely
 organized into groups, its underlying representation is not. After you
@@ -722,7 +721,7 @@ customize=:
 - setup-external.el for =External= group.
 - setup-communication.el for =Communication= group.
 - setup-programming.el for =Programming= group.
-- setup-applicationss.el for =Application= group.
+- setup-applications.el for =Application= group.
 - setup-development.el for =Development= group.
 - setup-environment.el for =Environment= group.
 - setup-faces.el for =Faces= group.
@@ -752,8 +751,8 @@ Now, everything is prepared. We can really dive into customizing and
 extending Emacs with 3rd party packages and various code snippets that
 solve many little problems. In later sections, each is dedicated to a
 category. But, please note that I only provide the customizations that
-I found useful, not some template that you have to follow rigidly. You
-can consider my customizations as an example for your own
+I found useful, not templates that you have to follow rigidly. You can
+consider my customizations as an example for your own
 customizations. You can use it either way:
 
 - Copy the sample configurations into your files and look back later
@@ -826,7 +825,7 @@ customizations. You can use it either way:
 :ID:       a46d3a98-d481-41a3-8b15-50eb98c2e4ac
 :END:
 Sometimes, we want to adjust or improve the behaviours of some
-commands in certain contexts. Consider this situataion: *C-a*, whicn
+commands in certain contexts. Consider this situation: *C-a*, which
 runs =move-beginning-of-line=, always move to the beginning of
 line. However, sometimes we don't always to move to the beginning of 
 line, but move to the first non-whitespace character of that line.
@@ -1099,7 +1098,7 @@ the package:
 
 *_Usage_*: 
 
-Automatically cleanup useless whitepsace on moving up/down.
+Automatically cleanup useless whitespaced on moving up/down.
 
 *** Package: =undo-tree=
 :PROPERTIES:
@@ -1113,9 +1112,10 @@ Automatically cleanup useless whitepsace on moving up/down.
 
 =undo-tree= allows you to visual the whole history of your editing in
 a tree. It also provides regular undo/redo behaviours in other
-editors. =undo-tree= can even provide a diff between two different states. Highly recommended. 
+editors. =undo-tree= can even provide a diff between two different
+states. Highly recommended.
 
-...[screenshot]...
+[[file:static/part3/undo-tree.jpg][file:static/part3/undo-tree.jpg]]
 
 *_Installation_*:
 =M-x list-packages= and select *undo-tree* package, then
@@ -1298,8 +1298,6 @@ candidates.
 *_Features_*:
 =expand-region= allows you to select text objects incrementally. 
 
-..[screenshot]...
-
 *_Installation_*:
 =M-x list-packages= and select *expand-region* package, then
 install it. After finish installing, add this code snippet to activate
@@ -1336,7 +1334,7 @@ included from the amended =beginning-of-line= we did above.
 - See the VC status of the associated files
 - Sort buffers by their VC status
 
-...[screenshot on homepage]...
+[[file:static/part3/ibuffer-vc.png][file:static/part3/ibuffer-vc.png]]
 
 *_Installation_*:
 =M-x list-packages= and select *ibuffer-vc* package, then install
@@ -1459,8 +1457,7 @@ features:
 
 Here's a glimpse of Projectile in action:
 
-...[screenshot]...
-
+[[file:static/part3/projectile.png][file:static/part3/projectile.png]]
 
 *_Installation_*:
 
@@ -1564,7 +1561,7 @@ using them in later Emacs sessions.
 Emacs. It will help steer you in the right direction when you're
 looking for stuff in Emacs (like buffers, files, etc).
 
-Helm is a fork of =anything.el= originaly written by Tamas Patrovic and
+Helm is a fork of =anything.el= originally written by Tamas Patrovic and
 can be considered to be its successor. =Helm= sets out to clean up the
 legacy code in =anything.el= and provide a cleaner, leaner and more
 modular tool, that's not tied in the trap of backward compatibility.
@@ -1675,7 +1672,7 @@ it.
 Completion with Helm is very different with the usual Emacs
 completion:
 
-- You type someting.
+- You type something.
 
 - Instead of *TAB* to expand the common part until you find your
   candidates, in Helm, you type a parts of the candidate you want to
@@ -1689,7 +1686,7 @@ completion:
 - You can navigate the buffer with *C-n* and *C-p* or *<up>* and
   *<down>* to move up/down, *C-v* and *M-v* to move to next/previous
   pages, and *M-<* and *M->* to move to top and bottom of the Helm
-  buffer that is dispalying the candidates. Please try it.
+  buffer that is displaying the candidates. Please try it.
 
 When you execute a Helm command, you enter a Helm session. A Helm
 session is a dedicated state to working with Helm features; while in a
@@ -1702,14 +1699,14 @@ to remember the 3 commands:
   file), =Find File in Dired=, =Grep File=...
 
 - *C-z* executes *helm-execute-persistent-action*; a persistent action
-  is an action that you use in a Helm session without quiting the
+  is an action that you use in a Helm session without quitting the
   session.
 
 - In some Helm session, such as =helm-find-files= or =helm-mini=, you
   can select more than one candidates and execute actions on them,
   such as =grep= or =open=.
 
-However, for convinience, let's *TAB* with *C-z* in the above
+However, for convenience, let's *TAB* with *C-z* in the above
 settings, so we can use *TAB* more comfortably, because you actually
 use *helm-execute-persistent-action* more than
 *helm-select-action* by adding the code snippet below:
@@ -1814,7 +1811,7 @@ Example:
   that do not match "helm".
 
 - If I enter in pattern prompt: "/helm/ w3"
-  Helm will narrow down to buffers that are in any "helm" subdirectory
+  Helm will narrow down to buffers that are in any "helm" sub-directory
   and matching w3.
 
  =helm-mini= is like an interactive version of =ibuffer=.
@@ -1823,7 +1820,7 @@ Example:
 :PROPERTIES:
 :ID:       b71abd6c-cb29-4b64-a55f-29bd75937c11
 :END:
-=helm-find-files= is file nagviation on steroid: 
+=helm-find-files= is file navigation on steroid: 
 
 - You can complete with partial basename. e.g "fob" or "fbr" will
   complete "foobar". With =helm-find-files=.
@@ -1835,7 +1832,7 @@ Example:
 
 - You can go up one directory level with *C-l*. *_Important_*: if you
   use *C-l*, Helm goes up one level and the cursor is on the directory
-  you've just got out. If you want to go up and have the cursosr on
+  you've just got out. If you want to go up and have the cursors on
   the parent directory, in Helm prompt, enter =../=.
 
 - To create a directory, enter a new name that does not exist in the
@@ -1857,7 +1854,7 @@ Example:
   (initial start of session). If you are in `default-directory' move
   cursor on top.
 
-You can performa more actions on the highlighting entry by running
+You can perform more actions on the highlighting entry by running
 =helm-select-action=, which is bound to *TAB* by default and *C-z* in
 my configuration.
 
@@ -1885,8 +1882,8 @@ with *C-s*.
 :PROPERTIES:
 :ID:       b7a95407-8629-48c4-bc9c-d0a391c95478
 :END:
-You can also quicly find a file with =helm-find=, binds to *C-c h f*
-(in my configuratiohn). As usual, when you type a character, Helm
+You can also quickly find a file with =helm-find=, binds to *C-c h f*
+(in my configuration). As usual, when you type a character, Helm
 filters candidates accordingly.
 
 *** =helm-locate=
@@ -2210,9 +2207,7 @@ standard GNU Emacs libraries =dired.el=, =dired-aux.el=, and
 =dired-x.el=. The standard functions are all available, plus many
 more.
 
-...[screenshot]....
-...[screenshot]....
-...[screenshot]....
+[[file:static/part3/dired-plus.jpg][file:static/part3/dired-plus.jpg]]
 
 *_Installation_*:
 =M-x list-packages= and select *dired+* package, then install
@@ -2275,17 +2270,17 @@ When you visit a directory, that directory is saved by =recentf= as well.
 *_Features_*:
 
 Ztree is a project dedicated to implementation of several text-tree
-applications inside Emacs. It consists of 2 subprojects: ztree-diff
+applications inside Emacs. It consists of 2 sub-projects: ztree-diff
 and ztree-dir(the basis of ztree-diff).
 
 - ztree-diff: Perform diff on two directories. Really handy when you
   want to create a big patch between two directories.
 
-...[screenshot]...
+[[file:static/part3/ztree-diff.png][file:static/part3/ztree-diff.png]]
 
 - ztree-dir: a simple tree explorer.
 
-...[screenshot]...
+[[file:static/part3/ztree-dir.png][file:static/part3/ztree-dir.png]]
 
 *_Installation_*:
 =M-x list-packages= and select *ztree* package, then install
@@ -2382,7 +2377,7 @@ Please refer to [[https://github.com/m00natic/vlfi#detail-usage][Detail Usage]] 
 I only use default configuration for "Text" group. You can customize
 it if you want or leave this file blank, so you can add customizations
 when needed. This group is useful if you edit text frequently and need
-bibilography, or you want to write Latex.
+bibliography, or you want to write Latex.
 ** setup-data.el
 :PROPERTIES:
 :ID:       1147c642-b1c9-4faf-ad98-cd4611bf4b5a
@@ -2532,17 +2527,24 @@ Sample configuration:
 =diff-hl-mode= highlights uncommitted changes on the left side of the
 window, allows you to jump between and revert them selectively.
 
-For the usage instructions and the list of commands, see the Commentary section inside the file.
+[[file:static/part3/diff-hl-buffer.png][file:static/part3/diff-hl-buffer.png]]
 
-Tested with Git, Mercurial, Bazaar and SVN. May work with other VC backends, too.
+For the usage instructions and the list of commands, see the
+Commentary section inside the file.
+
+Tested with Git, Mercurial, Bazaar and SVN. May work with other VC
+backends, too.
 
 The package also contains auxiliary modes:
 
 - =diff-hl-dired-mode= provides similar functionality in Dired.
-- =diff-hl-margin-mode= changes the highlighting function to use the margin instead of the fringe.
-- =diff-hl-amend-mode= shifts the reference revision back by one.
+  [[file:static/part3/diff-hl-dired.png][file:static/part3/diff-hl-dired.png]]
 
-...[screeshot]...
+- =diff-hl-margin-mode= changes the highlighting function to use the
+  margin instead of the fringe.
+  [[file:static/part3/diff-hl-margin.png][file:static/part3/diff-hl-margin.png]]
+
+- =diff-hl-amend-mode= shifts the reference revision back by one.
 
 *_Installation_*:
 =M-x list-packages= and select *diff-hl* package, then install
@@ -2764,7 +2766,7 @@ I only use Eshell. You should modify others if you need.
 :PROPERTIES:
 :ID:       7b8b3b61-ae0e-4ae4-b998-165a78a8512d
 :END:
-Sammple configuration:
+Sample configuration:
 
 #+begin_src emacs-lisp
   ;,--------------------------------------
@@ -3052,12 +3054,12 @@ package:
 
 If you move point on a symbol, it automatically highlights all the
 symbols in the current screen. From now on, pressing *M-n* and *M-p*
-will immeidately jump to the next/previous symbols in a buffer.
+will immediately jump to the next/previous symbols in a buffer.
 *** Change Emacs appearance by using color theme
 :PROPERTIES:
 :ID:       3056fb43-9b7c-4337-8f05-b5e8f971e262
 :END:
-Emacs has many color themes avaiable for you to use. My personal one
+Emacs has many color themes available for you to use. My personal one
 is [[https://github.com/purcell/color-theme-sanityinc-tomorrow][color-theme-sanityinc-tomorrow]] or [[https://github.com/steckerhalter/grandshell-theme][grandshell-theme]]. Some popular
 themes are [[https://github.com/sellout/emacs-color-theme-solarized][emacs-color-theme-solarized]] and [[https://github.com/bbatsov/zenburn-emacs][zenburn]]. You can select
 themes of your choice from MELPA.
