@@ -61,13 +61,13 @@ environment (in our case, Emacs) determinse which of the following
 + Function form: if the first element points to a function definition,
   then the following elements get evaluated from left to right and
   finally passed into the function as arguments.
-
+  
   For example:
-
+  
   #+begin_src emacs-lisp
-  age "Hello word %d" (+ 10 10))
+    age "Hello word %d" (+ 10 10))
   #+end_src
-
+  
   =message= is a function that prints to echo area and =*Message*=
   buffer (can be opened with *C-h e*). Emacs detects that =message= is a
   function, then it evaluates the string "Hello world %d" and another
@@ -75,32 +75,32 @@ environment (in our case, Emacs) determinse which of the following
   10)=, it evaluates the form and return =20=. Then the string "Hello
   world %d" and the number =20= are passed into =message=, and finally
   output "Hello world 20" in the echo area and =*Message*= buffer.
-
+  
 + Special form: if the first element is one of predefined functions in
   Emacs Lisp that need special rules and/or syntax, then the remaining
   elements are evaluated depend on the rule of the predefined
   functions. Special form is just function form, but handle the
   remaining in its own way rather than using the default in function
   form. That's why we call it special. 
-
+  
   For example, =if= is a special form as we learned in previous part:
-
+  
   #+begin_src emacs-lisp
     (if condition
         true-case
       false-case)
   #+end_src
-
+  
   =condition= is a valid Lisp form; if it is evaluated to true (which
   is anything not =NIL=, or the empty list =()=), then the true case -
   also a valid Lisp form - gets evaluated; otherwise the false case -
   also a valid Lisp form - gets evaluated.
-
+  
   Another special form is =and=. After Emacs determines the first
   element is =and= special form, then it keeps evaluating the
   remaining elements from left to right until one of the element
   return false. If all elements get evaluated, =and= returns true.
-
+  
 + Macro form: if the first element is created by the function
   =defmacro= (which you do not need to know at this stage), then Emacs
   do not evaluate any remaining elements, but passes them in as
@@ -110,89 +110,89 @@ environment (in our case, Emacs) determinse which of the following
   not a function form or any predefined special form, don't panic!
   It's a macro form. Programmers always provide documentations on how
   to use their mini-languages.
-
+  
 After all, those different forms are just under one category:
 function. Function form is a regular function; special form is a
 function with its own rule; macro form is a function that generate
 code.
 
 - Data: has two types:
-
+  
 + *Atom*: primites such as number, string, symbol and NIL.
-
+  
 + *Non-atom*: if you put a =’= just before a form, it becomes
   a list. Emacs treats these *quoted* forms as data.
-
+  
   Emacs also has other data types like array, hash-table... but list
   is the most popular, used when performance is not needed.
-
+  
 In this section, I only explained the frequently used functions. In
 the later sections, there are more functions used. I can't explain
 them all. You should really work it out on your own gradually with
 *C-h f* and *C-h v*.
-  
+
 ** Function: *(setq [ /SYM/ /VAL/ ]...)*
 :PROPERTIES:
 :ID:       efdf75c7-0278-46ab-910c-fd557d0584e9
 :END:
-  *_Comment_*: A really fundamental function for customizing Emacs
-  settings. An Emacs setting is really just a variable. Emacs has GUI
-  for changing setting, but =setq= a variable is also equivalent.
+*_Comment_*: A really fundamental function for customizing Emacs
+settings. An Emacs setting is really just a variable. Emacs has GUI
+for changing setting, but =setq= a variable is also equivalent.
 
-  *_Example_*:
-  #+begin_src emacs-lisp
+*_Example_*:
+#+begin_src emacs-lisp
     (setq global-mark-ring-max 50000)
-  #+end_src
+#+end_src
 
-  *_Built-in Documentation_*:
-  #+BEGIN_QUOTE
-  Set each /SYM/ to the value of its /VAL/.
-  The symbols /SYM/ are variables; they are literal (not evaluated).
-  The values /VAL/ are expressions; they are evaluated.
-  Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
-  The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
-  each VAL can use the new value of variables set earlier in the `_setq_'.
-  The return value of the `_setq_' form is the value of the last /VAL/.
-  #+END_QUOTE
+*_Built-in Documentation_*:
+#+BEGIN_QUOTE
+Set each /SYM/ to the value of its /VAL/.
+The symbols /SYM/ are variables; they are literal (not evaluated).
+The values /VAL/ are expressions; they are evaluated.
+Thus, (setq x (1+ y)) sets `x' to the value of `(1+ y)'.
+The second /VAL/ is not computed until after the first /SYM/ is set, and so on;
+each VAL can use the new value of variables set earlier in the `_setq_'.
+The return value of the `_setq_' form is the value of the last /VAL/.
+#+END_QUOTE
 
 ** Function: *(load /FILE/ &optional /NOERROR/ /NOMESSAGE/ /NOSUFFIX/ /MUST-SUFFIX/)*
 :PROPERTIES:
 :ID:       554a5d52-623c-487d-9e9b-81c5f8f67746
 :END:
-  *_Comment_*: This function allows you to load a file. /FILE/ is the
-  a filename that is looked up in the Varable =load-path=. Do you
-  notice =&optional= keyword? When you see this keyword, it means
-  everything after =&optional= is, optional. The parameters /NOERROR/,
-  /NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not required to be passed
-  into the function if you don't need. However, if you want to pass an
-  argument into the place of one a parameter, you must also pass
-  arguments to all the parameters to the left of your chosen
-  parameter. For example, if you want to pass an argument into
-  /NOSUFFIX/, you are *required* to pass arguments into /NOERROR/,
-  /NOMESSAGE/ first. You are safe to ignore everything after your
-  chosen parameter, and in our example, it's /MUST-SUFFIX/.
+*_Comment_*: This function allows you to load a file. /FILE/ is the
+a filename that is looked up in the Varable =load-path=. Do you
+notice =&optional= keyword? When you see this keyword, it means
+everything after =&optional= is, optional. The parameters /NOERROR/,
+/NOMESSAGE/, /NOSUFFIX/, /MUST-SUFFIX/ are not required to be passed
+into the function if you don't need. However, if you want to pass an
+argument into the place of one a parameter, you must also pass
+arguments to all the parameters to the left of your chosen
+parameter. For example, if you want to pass an argument into
+/NOSUFFIX/, you are *required* to pass arguments into /NOERROR/,
+/NOMESSAGE/ first. You are safe to ignore everything after your
+chosen parameter, and in our example, it's /MUST-SUFFIX/.
 
-  *_Example_*: 
+*_Example_*: 
 
-  #+begin_src emacs-lisp
+#+begin_src emacs-lisp
     (load (substitute-in-file-name "$HOME/.emacs.d/module")) ;; first try to load module.elc; if not found, try to load module.el
     (load (substitute-in-file-name "$HOME/.emacs.d/module.el")) ;; only load module.el
     (load (substitute-in-file-name "$HOME/.emacs.d/module.elc")) ;; only load module.elc
     (load "module") ; search for the file module.el or module.elc in variable load-path
-  #+end_src
-   
-  *_Built-int Documentation_*:
-   
-  #+BEGIN_QUOTE
-  Execute a file of Lisp code named FILE.
-  First try FILE with `.elc' appended, then try with `.el', then try
-  FILE unmodified (the exact suffixes in the exact order are determined
-  by `load-suffixes').  Environment variable references in FILE are
-  replaced with their values by calling `substitute-in-file-name'. This
-  function searches the directories in `load-path'. 
-   
-  ....(*C-h f* for more information)...
-  #+END_QUOTE
+#+end_src
+
+*_Built-int Documentation_*:
+
+#+BEGIN_QUOTE
+Execute a file of Lisp code named FILE.
+First try FILE with `.elc' appended, then try with `.el', then try
+FILE unmodified (the exact suffixes in the exact order are determined
+by `load-suffixes').  Environment variable references in FILE are
+replaced with their values by calling `substitute-in-file-name'. This
+function searches the directories in `load-path'. 
+
+....(*C-h f* for more information)...
+#+END_QUOTE
 ** Function: *(require /FEATURE/ &optional /FILENAME/ /NOERROR/)*
 :PROPERTIES:
 :ID:       6b51529d-424f-4735-84e6-c13a0818376b
@@ -306,32 +306,32 @@ function, it is changed to a list of functions.
 :END:
 *_Comment_*: This function binds a command to a key, as you can see in
 the function interface.
-   
+
 *_Example_*:
 
 You can bind in one of the following ways:
-   
+
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer) ;; bind "C-x C-b" to ibuffer command
   (global-set-key "\C-x\C-b" 'ibuffer)  ;; bind "C-x C-b to ibuffer command, but modifier 
                                         ;; keys must be escaped with the backslash
   (global-set-key [?\C-x?\C-b] 'ibuffer) ;; use vector instead of a string
 #+end_src
-   
+
 I recommend you to use =(kbd ...)= function because we can write key
 bindings using our familiar key notations without adding unnecessary
 characters. Vector is array in other languags. Vector was used for
 mapping function keys, such as =[left]=, =[right]=, =[up]=, =[down]=,
 =[f1]...[f12]=. But now, you can also map function keys in =(kbd
 ...)= function using angle brackets:
- 
+
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f3>") 'kmacro-start-macro-or-insert-counter)
 #+end_src
- 
+
 Here are common function keys (remember to wrap them in a pair of
 angle bracket):
- 
+
 | Key                                              | Description                                        |
 |--------------------------------------------------+----------------------------------------------------|
 | =left, up, right, down=                          | Cursor arrow keys                                  |
@@ -354,9 +354,9 @@ angle bracket):
 |                                                  |                                                    |
 | =kp-f1, kp-f2, kp-f3, kp-f4=                     | Keypad PF keys.                                    |
 |--------------------------------------------------+----------------------------------------------------|
- 
+
 *_Built-in Documentation_*:
- 
+
 #+BEGIN_QUOTE
 Give /KEY/ a global binding as /COMMAND/.
 /COMMAND/ is the command definition to use; usually it is
@@ -364,7 +364,7 @@ a symbol naming an interactively-callable function.
 /KEY/ is a key sequence; noninteractively, it is a string or vector
 of characters or event types, and non-ASCII characters with codes
 above 127 (such as ISO Latin-1) can be included if you use a vector.
- 
+
 Note that if /KEY/ has a local binding in the current buffer,
 that local binding will continue to shadow any global binding
 that you make with this function.
@@ -427,8 +427,8 @@ a command (a Lisp function suitable for interactive calling),
 a string (treated as a keyboard macro),
 a keymap (to define a prefix key),
 a symbol (when the key is looked up, the symbol will stand for its
-               function definition, which should at that time be one of the above,
-               or another symbol whose function definition is used, etc.),
+function definition, which should at that time be one of the above,
+or another symbol whose function definition is used, etc.),
 a cons (STRING . DEFN), meaning that DEFN is the definition
 (DEFN should be a valid definition in its own right),
 or a cons (MAP . CHAR), meaning use definition of CHAR in keymap MAP,
@@ -450,7 +450,7 @@ Lisp forms to be executed. The return value is the last form.
 *_Example_*:
 
 - Create a normal function (Not available in =M-x=):
-
+  
 #+begin_src emacs-lisp
   (defun demo ()
     (message "Hello World" number string))
@@ -537,7 +537,7 @@ files when it starts:
 - ~/.emacs
 - ~/.emacs.d/init
 - ~/.emacs.d/init.el
-
+  
 To apply a setting, move point to the end of a Lisp expression and
 *C-x C-e*, which runs =eval-last-sexp=.
 
@@ -568,7 +568,7 @@ Linux. Currently, there are 3 package archives in Emacs:
 - Marmalade: more packages, but mostly outdated since people moved to MELPA.
 - MELPA: the most popular and most up to date package archive, with
   most number of packages.
-
+  
 Marmalade and MELPA are not activated by default; you have to add them
 manually. You only need to setup MELPA and that's enough to get all
 the packages described in later sections. Add this code snippet to your
@@ -593,7 +593,7 @@ of packages.
 - To execute the marked packages (either for install or delete), press *x*.
 - To referesh and update the lastest package list, press *r*.
 - To display these key bindings, press *h*.
-
+  
 That's that.
 
 *_Exercise_*: Let's install a few packages in advance, so you won't
@@ -604,7 +604,7 @@ have to install the packages later. Install these packages:
 - undo-tree
 - yasnippet
 - rebox2
-
+  
 ** Customize Emacs
 :PROPERTIES:
 :ID:       9a5a1fd7-1763-4de2-935e-b21f107a023b
@@ -632,7 +632,7 @@ Mark ring Max: ".
 - Change the value to 5000.
 - Move point on *State* button. Press *RET*.
 - A menu appears with the following choice:
-
+  
 =0 = Set for current Sesssion=
 This option is for trying out a new setting. If you close Emacs, the
 old setting is restored.
@@ -653,18 +653,18 @@ start Emacs, it uses your saved setting. The new value is saved at
 
 =2 = Undo Edits=
 Undo to the previous value of a particular setting, if you haven't
-set.
+set. 
 
 =3 = Revert This Sesssion's Customization=
 This restores the value of the variable to the last saved value, and
-updates the text accordingly.
+updates the text accordingly. 
 
 =4 = Erase Customization=
 Reset to standard value and delete set value in =~/emacs.d/init.el=.
 
 =7 = Add Comment=
-Someimtes you have something to say about your customization. Write it
-using this option. You customized variable will have 
+Sometimes you have something to say about your customization. Write it
+using this option.
 
 =: = Show Saved Lisp Expression=
 Show the actual variable representation. If you open the menu again,
@@ -1909,18 +1909,206 @@ of Helm.
 :END:
 Similar to *C-h a* which runs =apropos-command=, but use Helm
 interface and update as you type.
-** Alternative to Helm: =ido= + =flx-ido= + =smex=
+
+*** Package: =helm-projectile=
+:PROPERTIES:
+:ID:       50cc1f5e-022d-4818-bedf-0a52e7e4615b
+:END:
+*_Author_*:  [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
+
+*_Homepage_*: [[https://github.com/bbatsov/projectile][Github]]
+
+*_Features_*:
+
+Provide Helm interface for quickly selecting files in a project using
+Projectile.
+
+*_Installation_*:
+=M-x list-packages= and select *helm-projectile* package, then install
+it. After finish installing, you can start using =helm-projectile=
+immediately.
+
+*_Usage_*:
+*C-c p h* to run =helm-projectile= and select files in your project.
+
+*** Package: =helm-descbind=
+:PROPERTIES:
+:ID:       3a128b01-725f-4142-bd0d-f9bbd4b715cc
+:END:
+*_Author_*
+
+2008-2010:    Taiki SUGAWARA, =buzz.taiki@gmail.com=
+2012-2013     Michael Markert, =markert.michael@googlemail.com=
+2013-present: Daniel Hackney =dan@haxney.org=
+
+*_Homepage_*: [[https://github.com/emacs-helm/helm-descbinds][Github]]
+
+*_Features_*:
+Helm Descbinds provides an interface to emacs’ describe-bindings
+making the currently active key bindings interactively searchable with
+helm.
+
+Additionally you have the following actions
+
+- Execute the command
+- Describe the command
+- Find the command
+
+*_Installation_*:
+=M-x list-packages= and select *helm-descbind* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: helm-descbinds                      ;;
+  ;;                                              ;;
+  ;; GROUP: Convenience -> Helm -> Helm Descbinds ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'helm-descbinds)
+  (helm-descbinds-mode)
+#+end_src
+
+*_Usage_*:
+Enter a prefix key and *C-h* after it. You will see a list of bindings
+using Helm interface for narrowing.
+
+** Alternative to Helm: =ido= + =ido-ubiquitous= + =flx-ido= + =smex=
 :PROPERTIES:
 :ID:       28093c3d-795a-484f-9801-95237f99fc20
 :END:
+If you want to use Ido, at replace Helm configuration with this sample
+configuration:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Development -> Extensions -> Ido ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Uncomment if you want to use Ido
+  ;; I am going to introduce a tool, argurably better, that
+  ;; replaces Ido: Helm
+
+  (require 'ido)
+
+  (setq
+   ido-enable-prefix nil
+   ido-enable-flex-matching t
+   ido-create-new-buffer 'always
+   ido-use-filename-at-point 'guess
+   ido-max-prospects 10
+   ido-default-file-method 'selected-window
+   ido-auto-merge-work-directories-length -1
+   )
+
+  (ido-mode +1)
+#+end_src
+
+*** Package: =ido-ubiquitous=
+:PROPERTIES:
+:ID:       56493d92-1d18-4280-b1c2-3eb13f8b6e9f
+:END:
+*_Author_*: [[https://github.com/DarwinAwardWinner][Ryan C. Thompson]], =rct+github@thompsonclan.org=
+
+*_Homepage_*: [[https://github.com/DarwinAwardWinner/ido-ubiquitous][Github]]
+
+*_Features_*: 
+
+Gimme some ido... everywhere!
+
+Does what you were really hoping for when you did (setq ido-everywhere
+t). Replaces stock emacs completion with ido completion wherever it is
+possible to do so without breaking things.
+
+Note that ido-ubiquitous is not enabled for org mode or magit mode,
+because those modes have their own support for ido.
+
+*_Installation_*:
+=M-x list-packages= and select *ido-ubiquitous* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: ido-ubiquitous                                   ;;
+  ;;                                                           ;;
+  ;; GROUP: Development -> Extensions -> Ido -> Ido Ubiquitous ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (ido-ubiquitous-mode +1)
+#+end_src
+
+*_Usage_*:
+
+Once you activated =Ido=, it is available where you expect to select
+and narrow down candidates.
+
 *** Package: =flx-ido=
 :PROPERTIES:
 :ID:       c067eb7d-5aa0-47da-a603-431d38049d1a
 :END:
+*_Author_*: [[https://github.com/lewang][Le Wang]]
+
+*_Homepage_*: [[https://github.com/lewang/flx][Github]]
+
+*_Features_*:
+=M-x list-packages= and select *flx-ido* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: flx-ido                                          ;;
+  ;;                                                           ;;
+  ;; GROUP: Development -> Extensions -> Ido                   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;; smarter fuzzy matching for ido
+  (flx-ido-mode +1)
+  ;; disable ido faces to see flx highlights
+  (setq ido-use-faces nil)
+#+end_src
+
+*_Usage_*:
+=flx-ido= provides fuzzy completion to select completion
+candidates. For example, if you want to select a file
+=src/foo/bar.txt=, you only need to type in Ido prompt "sfb", short
+for =(s)rc/(f)oo/(b)ar=.
+
 *** Package: =smex=
 :PROPERTIES:
 :ID:       102d3ed8-a177-4a8f-a6e3-6da1195c2bcc
 :END:
+*_Author_*: Cornelius Mika, =cornelius.mika@gmail.com=
+
+*_Homepage_*: [[https://github.com/lewang/flx][Github]]
+
+*_Features_*:
+
+Smex is a M-x enhancement for Emacs. Built on top of Ido, it provides
+a convenient interface to your recently and most frequently used
+commands. And to all the other commands, too.
+
+[[file:static/part3/smex.png][file:static/part3/smex.png]]
+
+*_Installation_*:
+=M-x list-packages= and select *flx-ido* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: smex                                             ;;
+  ;;                                                           ;;
+  ;; GROUP: Convenience -> Extensions -> Smex                  ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'smex)
+  (smex-initialize)
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+#+end_src
+
+*_Usage_*:
+
+=smex= is an improved =M-x= command. After you setup, =M-x= to run
+=smex= and =M-X= to select only commands in the current major mode.
 ** setup-files.el
 :PROPERTIES:
 :ID:       1b1d3e93-3ebc-437a-b20d-f6d880d02ba1
@@ -2590,25 +2778,6 @@ Sammple configuration:
   (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Development -> Extensions -> Ido ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Uncomment if you want to use Ido
-  ;; I am going to introduce a tool, argurably better, that
-  ;; replaces Ido: Helm
-
-  ;; (require 'ido)
-
-  ;; (setq
-  ;;  ido-enable-dot-prefix t
-  ;;  ido-enable-flex-matching t
-  ;;  ido-create-new-buffer 'always
-  ;;  ido-use-filename-at-point 'guess
-  ;;  ido-max-prospects 10
-  ;;  ido-default-file-method 'selected-window
-  ;;  )
-  ;; (ido-mode)
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Development -> Internal     ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2703,6 +2872,74 @@ package:
 As you scroll through a buffer, the cat moves to indicate the position
 in buffer.
 
+*** Package: =golden-ratio=
+:PROPERTIES:
+:ID:       5202a6a1-9322-4375-85ad-861d67be2a09
+:END:
+*_Author_*: [[https://github.com/roman][Roman Gonzalez]], =romanandreg@gmail.com=
+
+*_Homepage_*: [[https://github.com/roman/golden-ratio.el][Github]]
+
+*_Features_*:
+
+Automatic resizing of Emacs windows to the golden ratio
+
+When working with many windows at the same time, each window has a size that is not convenient for editing.
+
+=golden-ratio= helps on this issue by resizing automatically the windows
+you are working on to the size specified in the "Golden Ratio". The
+window that has the main focus will have the perfect size for editing,
+while the ones that are not being actively edited will be re-sized to
+a smaller size that doesn't get in the way, but at the same time will
+be readable enough to know it's content.
+
+[[file:static/part3/golden-ratio.gif][file:static/part3/golden-ratio.gif]]
+
+*_Installation_*:
+=M-x list-packages= and select *golden-ratio* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: golden-ratio                         ;;
+  ;;                                               ;;
+  ;; GROUP: Environment -> Windows -> Golden Ratio ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (eval-after-load "golden-ratio"
+    '(progn
+       (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+       (add-to-list 'golden-ratio-exclude-modes "helm-mode")
+       (add-to-list 'golden-ratio-exclude-modes "dired-mode")
+       (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+       (add-to-list 'golden-ratio-inhibit-functions 'pl/ediff-comparison-buffer-p)))
+
+  (defun pl/ediff-comparison-buffer-p ()
+    ediff-this-buffer-ediff-sessions)
+
+  (defun pl/helm-alive-p ()
+    (if (boundp 'helm-alive-p)
+        (symbol-value 'helm-alive-p)))
+  ;; do not enable golden-raio in thses modes
+  (setq golden-ratio-exclude-modes
+        '("ediff-mode"
+          "gdb-locals-mode"
+          "gdb-breakpoints-mode"
+          "gdb-frames-mode"
+          "gud-mode"
+          "gdb-inferior-io-mode"
+          "magit-log-mode"
+          "magit-reflog-mode"
+          "magit-status-mode"
+          "eshell-mode"
+          "dired-mode"))
+
+  (golden-ratio-mode)
+#+end_src
+
+*_Usage_*:
+*C-x o* and see your windows being resized.
+
 ** setup-faces-and-ui.el
 :PROPERTIES:
 :ID:       ee26ceb9-d308-4ea5-a96c-a805b33079a0
@@ -2732,6 +2969,14 @@ Sample configuration:
         '("" invocation-name " - " (:eval (if (buffer-file-name)
                                                       (abbreviate-file-name (buffer-file-name))
                                                     "%b"))))
+
+  ;; change font to Inconsolata for better looking text
+  ;; remember to install the font Inconsolata first
+  (setq default-frame-alist '((font . "Inconsolata-11")))
+  ;; set italic font for italic face, since Emacs does not set italic
+  ;; face automatically
+  (set-face-attribute 'italic nil
+                      :family "Inconsolata-Italic")
 #+end_src
 
 *** Package: =number-font-lock=
@@ -2808,6 +3053,14 @@ package:
 If you move point on a symbol, it automatically highlights all the
 symbols in the current screen. From now on, pressing *M-n* and *M-p*
 will immeidately jump to the next/previous symbols in a buffer.
+*** Change Emacs appearance by using color theme
+:PROPERTIES:
+:ID:       3056fb43-9b7c-4337-8f05-b5e8f971e262
+:END:
+Emacs has many color themes avaiable for you to use. My personal one
+is [[https://github.com/purcell/color-theme-sanityinc-tomorrow][color-theme-sanityinc-tomorrow]] or [[https://github.com/steckerhalter/grandshell-theme][grandshell-theme]]. Some popular
+themes are [[https://github.com/sellout/emacs-color-theme-solarized][emacs-color-theme-solarized]] and [[https://github.com/bbatsov/zenburn-emacs][zenburn]]. You can select
+themes of your choice from MELPA.
 
 ** setup-help.el
 :PROPERTIES:
@@ -2826,7 +3079,7 @@ Info+ helps you read Info documents more enjoyable with extra
 highlighting it provides.
 
 *_Installation_*:
-
+n
 =M-x list-packages= and select *info+* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -3042,23 +3295,13 @@ If you define your own Customization Group locally to your
 computer, your Customization Group should be added under =Local=
 parent and customize it here. The only sub-group in =Local= group is
 =holidy=, and I do not use it, so I leave this file blank.
-** setup-ido.el
-:PROPERTIES:
-:ID:       de428bfd-de8d-4b53-ae08-1b7fd53ff1cb
-:END:
-** setup-windows.el
-:PROPERTIES:
-:ID:       738556d6-e56f-464b-87f6-e1d7878f7d5e
-:END:
-*** Built-in: winner-mode
-:PROPERTIES:
-:ID:       d90e7bb7-2470-4bae-a184-9c41009098a1
-:END:
-*** Package: golden-ratio
-:PROPERTIES:
-:ID:       f6ac2425-ef91-493e-bdb0-a50cc0ade267
-:END:
 * More Emacs Lisp resources
 :PROPERTIES:
-:ID:       18ccd3a6-7545-4c7a-9b2b-3106dd05bdde
+:ID:       8f4d8185-04b5-4e2b-8ff4-7a03cbe1f9f4
 :END:
+If you want to learn more about Emacs Lisp programming, [[http://ergoemacs.org/emacs/elisp.html][Xah Lee's
+Emacs Lisp tutorial is a good start]].
+
+After that, you can start writing some package, up to your
+imagination! During your Emacs Lisp programming session, please refer
+to the Emacs Lisp manual as much as you could.
