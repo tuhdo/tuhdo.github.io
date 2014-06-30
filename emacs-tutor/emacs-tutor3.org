@@ -3170,9 +3170,9 @@ will immediately jump to the next/previous symbols in a buffer.
 :ID:       3056fb43-9b7c-4337-8f05-b5e8f971e262
 :END:
 Emacs has many color themes available for you to use. My personal one
-is [[https://github.com/purcell/color-theme-sanityinc-tomorrow][color-theme-sanityinc-tomorrow]] or [[https://github.com/steckerhalter/grandshell-theme][grandshell-theme]]. Some popular
-themes are [[https://github.com/sellout/emacs-color-theme-solarized][emacs-color-theme-solarized]] and [[https://github.com/bbatsov/zenburn-emacs][zenburn]]. You can select
-themes of your choice from MELPA.
+is [[https://github.com/purcell/color-theme-sanityinc-tomorrow][color-theme-sanityinc-tomorrow]] or [[https://github.com/steckerhalter/grandshell-theme][grandshell-theme]] or
+[[https://github.com/lvillani/el-monokai-theme][monokai-theme]]. Some popular themes are [[https://github.com/sellout/emacs-color-theme-solarized][emacs-color-theme-solarized]] and
+[[https://github.com/bbatsov/zenburn-emacs][zenburn]]. You can select themes of your choice from MELPA.
 
 ** setup-help.el
 :PROPERTIES:
