@@ -65,7 +65,7 @@ environment (in our case, Emacs) determinse which of the following
   For example:
 
   #+begin_src emacs-lisp
-    (message "Hello word %d" (+ 10 10))
+  age "Hello word %d" (+ 10 10))
   #+end_src
 
   =message= is a function that prints to echo area and =*Message*=
@@ -125,6 +125,11 @@ code.
 
   Emacs also has other data types like array, hash-table... but list
   is the most popular, used when performance is not needed.
+
+In this section, I only explained the frequently used functions. In
+the later sections, there are more functions used. I can't explain
+them all. You should really work it out on your own gradually with
+*C-h f* and *C-h v*.
   
 ** Function: *(setq [ /SYM/ /VAL/ ]...)*
 :PROPERTIES:
@@ -753,6 +758,7 @@ customizations. You can use it either way:
 
 - Copy the sample configurations into your files and look back later
   or just don't care.
+
 - Really control the customization process and make the customizations
   actually yours, by reading the customization code and understand
   what it does.
@@ -826,6 +832,9 @@ line. However, sometimes we don't always to move to the beginning of
 line, but move to the first non-whitespace character of that line.
 
 #+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Customized functions                ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (defun prelude-move-beginning-of-line (arg)
     "Move point back to indentation of beginning of line.
 
@@ -849,7 +858,140 @@ line, but move to the first non-whitespace character of that line.
       (when (= orig-point (point))
         (move-beginning-of-line 1))))
 
-  (global-set-key (kbd "C-a") 'prelude-move-beginning-of-line)
+  (global-set-key [remap move-beginning-of-line] 'prelude-move-beginning-of-line)
+
+  (defadvice kill-ring-save (before slick-copy activate compile)
+    "When called interactively with no active region, copy a single
+  line instead."
+    (interactive
+     (if mark-active (list (region-beginning) (region-end))
+       (message "Copied line")
+       (list (line-beginning-position)
+             (line-beginning-position 2)))))
+
+  (defadvice kill-region (before slick-cut activate compile)
+    "When called interactively with no active region, kill a single
+    line instead."
+    (interactive
+     (if mark-active (list (region-beginning) (region-end))
+       (list (line-beginning-position)
+             (line-beginning-position 2)))))
+
+  ;; kill a line, including whitespace characters until next non-whiepsace character
+  ;; of next line
+  (defadvice kill-line (before check-position activate)
+    (if (member major-mode
+                '(emacs-lisp-mode scheme-mode lisp-mode
+                                  c-mode c++-mode objc-mode
+                                  latex-mode plain-tex-mode))
+        (if (and (eolp) (not (bolp)))
+            (progn (forward-char 1)
+                   (just-one-space 0)
+                   (backward-char 1)))))
+
+  ;; taken from prelude-editor.el
+  ;; automatically indenting yanked text if in programming-modes
+  (defvar yank-indent-modes
+    '(LaTeX-mode TeX-mode)
+    "Modes in which to indent regions that are yanked (or yank-popped).
+  Only modes that don't derive from `prog-mode' should be listed here.")
+
+  (defvar yank-indent-blacklisted-modes
+    '(python-mode slim-mode haml-mode)
+    "Modes for which auto-indenting is suppressed.")
+
+  (defvar yank-advised-indent-threshold 1000
+    "Threshold (# chars) over which indentation does not automatically occur.")
+
+  (defun yank-advised-indent-function (beg end)
+    "Do indentation, as long as the region isn't too large."
+    (if (<= (- end beg) yank-advised-indent-threshold)
+        (indent-region beg end nil)))
+
+  (defadvice yank (after yank-indent activate)
+    "If current mode is one of 'yank-indent-modes,
+  indent yanked text (with prefix arg don't indent)."
+    (if (and (not (ad-get-arg 0))
+             (not (member major-mode yank-indent-blacklisted-modes))
+             (or (derived-mode-p 'prog-mode)
+                 (member major-mode yank-indent-modes)))
+        (let ((transient-mark-mode nil))
+          (yank-advised-indent-function (region-beginning) (region-end)))))
+
+  (defadvice yank-pop (after yank-pop-indent activate)
+    "If current mode is one of `yank-indent-modes',
+  indent yanked text (with prefix arg don't indent)."
+    (when (and (not (ad-get-arg 0))
+               (not (member major-mode yank-indent-blacklisted-modes))
+               (or (derived-mode-p 'prog-mode)
+                   (member major-mode yank-indent-modes)))
+      (let ((transient-mark-mode nil))
+        (yank-advised-indent-function (region-beginning) (region-end)))))
+
+  ;; prelude-core.el
+  (defun prelude-duplicate-current-line-or-region (arg)
+    "Duplicates the current line or region ARG times.
+  If there's no region, the current line will be duplicated. However, if
+  there's a region, all lines that region covers will be duplicated."
+    (interactive "p")
+    (pcase-let* ((origin (point))
+                 (`(,beg . ,end) (prelude-get-positions-of-line-or-region))
+                 (region (buffer-substring-no-properties beg end)))
+      (-dotimes arg
+        (lambda (n)
+          (goto-char end)
+          (newline)
+          (insert region)
+          (setq end (point))))
+      (goto-char (+ origin (* (length region) arg) arg))))
+
+  ;; prelude-core.el
+  (defun prelude-indent-buffer ()
+    "Indent the currently visited buffer."
+    (interactive)
+    (indent-region (point-min) (point-max)))
+
+  ;; prelude-core.el
+  (defun prelude-cleanup-buffer ()
+    "Perform a bunch of operations on the whitespace content of a buffer."
+    (interactive)
+    ;; (prelude-untabify-buffer) ;; leave the buffer format alone
+    (prelude-indent-buffer)
+    (whitespace-cleanup))
+
+  (global-set-key (kbd "C-c i") 'prelude-cleanup-buffer)
+
+  ;; add duplicate line function from Prelude
+  ;; taken from prelude-core.el
+  (defun prelude-get-positions-of-line-or-region ()
+    "Return positions (beg . end) of the current line
+  or region."
+    (let (beg end)
+      (if (and mark-active (> (point) (mark)))
+          (exchange-point-and-mark))
+      (setq beg (line-beginning-position))
+      (if mark-active
+          (exchange-point-and-mark))
+      (setq end (line-end-position))
+      (cons beg end)))
+
+  (defun prelude-duplicate-current-line-or-region (arg)
+    "Duplicates the current line or region ARG times.
+  If there's no region, the current line will be duplicated. However, if
+  there's a region, all lines that region covers will be duplicated."
+    (interactive "p")
+    (pcase-let* ((origin (point))
+                 (`(,beg . ,end) (prelude-get-positions-of-line-or-region))
+                 (region (buffer-substring-no-properties beg end)))
+      (-dotimes arg
+        (lambda (n)
+          (goto-char end)
+          (newline)
+          (insert region)
+          (setq end (point))))
+      (goto-char (+ origin (* (length region) arg) arg))))
+
+  (global-set-key (kbd "M-c") 'prelude-duplicate-current-line-or-region)
 #+end_src
 
 The code above is taken from this article: [[http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/][Smarter Navigation to the
@@ -1416,24 +1558,52 @@ using them in later Emacs sessions.
   maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
 
 *_Homepage_*: [[https://github.com/emacs-helm/helm][Github]]
-*_Installation_*:
+
 *_Features_*:
+=Helm= is incremental completion and selection narrowing framework for
+Emacs. It will help steer you in the right direction when you're
+looking for stuff in Emacs (like buffers, files, etc).
+
+Helm is a fork of =anything.el= originaly written by Tamas Patrovic and
+can be considered to be its successor. =Helm= sets out to clean up the
+legacy code in =anything.el= and provide a cleaner, leaner and more
+modular tool, that's not tied in the trap of backward compatibility.
+
+*_Installation_*:
 
 =M-x list-packages= and select *helm* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
 
+Minimal config:
+
 #+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGE: helm                      ;;
-  ;;                                    ;;
-  ;; GROUP: Convenience -> Helm         ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: helm              ;;
+  ;;                            ;;
+  ;; GROUP: Convenience -> Helm ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'helm-config)
+
+#+end_src
+
+My extended config:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: helm              ;;
+  ;;                            ;;
+  ;; GROUP: Convenience -> Helm ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'helm)
   (require 'helm-config)
   (require 'helm-eshell)
   (require 'helm-files)
   (require 'wgrep-helm)
+
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+  (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
   (eval-after-load 'helm-grep
     '(progn
@@ -1441,35 +1611,32 @@ the package:
        (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
        (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)))
 
-  (setq helm-google-suggest-use-curl-p t
-                                          ;helm-kill-ring-threshold 1
-        ;; helm-raise-command "wmctrl -xa %s"
-        helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
-        helm-quick-update t ; do not display invisible candidates
-        helm-idle-delay 0.01 ; be idle for this many seconds, before updating in delayed sources.
-        helm-input-idle-delay 0.01 ; be idle for this many seconds, before updating candidate buffer
-        helm-ff-search-library-in-sexp t  ; search for library in `require' and `declare-function' sexp.
-                                          ;helm-kill-ring-max-lines-number 5
+  (setq
+   helm-google-suggest-use-curl-p t
+   helm-scroll-amount 4 ; scroll 4 lines other window using M-<next>/M-<prior>
+   helm-quick-update t ; do not display invisible candidates
+   helm-idle-delay 0.01 ; be idle for this many seconds, before updating in delayed sources.
+   helm-input-idle-delay 0.01 ; be idle for this many seconds, before updating candidate buffer
+   helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
 
-        ;; you can customize helm-do-grep to execute ack-grep
-        ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
-        ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
-        ;; helm-reuse-last-window-split-state t
-        helm-split-window-default-side 'other ;; open helm buffer in another window
-        helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
-        helm-buffers-favorite-modes (append helm-buffers-favorite-modes
-                                            '(picture-mode artist-mode))
-        helm-candidate-number-limit 200 ; limit the number of displayed canidates
-        helm-M-x-requires-pattern 0 ; show all candidates when set to 0
-        helm-boring-file-regexp-list
-        '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$") ; do not show these files in helm buffer
-        helm-ff-file-name-history-use-recentf t
-        helm-move-to-line-cycle-in-source t ; move to end or beginning of source
+   ;; you can customize helm-do-grep to execute ack-grep
+   ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
+   ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
+   helm-split-window-default-side 'other ;; open helm buffer in another window
+   helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
+   helm-buffers-favorite-modes (append helm-buffers-favorite-modes
+                                       '(picture-mode artist-mode))
+   helm-candidate-number-limit 200 ; limit the number of displayed canidates
+   helm-M-x-requires-pattern 0     ; show all candidates when set to 0
+   helm-boring-file-regexp-list
+   '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$") ; do not show these files in helm buffer
+   helm-ff-file-name-history-use-recentf t
+   helm-move-to-line-cycle-in-source t ; move to end or beginning of source
                                           ; when reaching top or bottom of source.
-        ido-use-virtual-buffers t ; Needed in helm-buffers-list
-        helm-buffers-fuzzy-matching t ; fuzzy matching buffer names when non--nil
+   ido-use-virtual-buffers t      ; Needed in helm-buffers-list
+   helm-buffers-fuzzy-matching t          ; fuzzy matching buffer names when non--nil
                                           ; useful in helm-mini that lists buffers
-        )
+   )
 
   (define-key helm-map (kbd "C-x 2") 'helm-select-2nd-action)
   (define-key helm-map (kbd "C-x 3") 'helm-select-3rd-action)
@@ -1480,8 +1647,9 @@ the package:
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-c h m") 'helm-man-woman)
-  (global-set-key (kbd "C-c h f") 'helm-find)
   (global-set-key (kbd "C-c h g") 'helm-do-grep)
+  (global-set-key (kbd "C-c h f") 'helm-find)
+  (global-set-key (kbd "C-c h l") 'helm-locate)
   (global-set-key (kbd "C-c h o") 'helm-occur)
   (global-set-key (kbd "C-h C-f") 'helm-apropos)
 
@@ -1511,7 +1679,8 @@ completion:
 
 - Instead of *TAB* to expand the common part until you find your
   candidates, in Helm, you type a parts of the candidate you want to
-  search, separated by spaces.
+  search, separated by spaces. In Helm, these strings are called
+  *patterns*.
 
 - Helm will try to search and sort according to highest match, from
   top to bottom. The best match is at the top, so you can press *RET*
@@ -1523,10 +1692,10 @@ completion:
   buffer that is dispalying the candidates. Please try it.
 
 When you execute a Helm command, you enter a Helm session. A Helm
-session is a state dedicated to working with Helm features and a
-dedicated Helm buffer is opened. When you quit a Helm session, a Helm
-buffer is closed. In Helm, you basically need to remember the 3
-commands:
+session is a dedicated state to working with Helm features; while in a
+Helm session, a dedicated Helm buffer is always opened. When you quit
+a Helm session, a Helm buffer is closed. In Helm, you basically need
+to remember the 3 commands:
 
 - Access to action menu with *TAB*; an action menu is a text-based
   menu that lists actions you can take. For example, =Find File= (open
@@ -1551,6 +1720,10 @@ use *helm-execute-persistent-action* more than
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 #+end_src
 
+In a Helm session, if you need help, use *C-c ?*, or refer to this
+manual again. The commands in the key bindings above are good enough
+to help you using Helm productively.
+
 *** =helm-M-x=:
 :PROPERTIES:
 :ID:       500a1c68-ab43-40a5-97c3-5d556a9f748d
@@ -1566,6 +1739,14 @@ Now, type =li pa=; that's right =li= , a space and =pa=. You will see,
 type =pa ^li=, and you will receive =list-package= as the first
 entry.
 
+=helm-M-x= is also better then the default =M-x=, because it provides
+key bindings right next to the commands, and *TAB* provides you the
+built-in documentation of that command in another buffer.
+
+*NOTE*: You have to bind =helm-M-x= to *M-x* manually. Otherwise, you
+ still get Helm completion, but using the vanilla *M-x* that does not
+ provides the above features like showing key bindings and *TAB* to
+ open built-in documentation.
 *** =helm-show-kill-ring=
 :PROPERTIES:
 :ID:       77b4d145-c280-4ed4-98a7-d645fe1d18bf
@@ -1599,25 +1780,138 @@ You can move back and forth between the groups by using *<left>* and
 *<right>* arrow keys. Or you can just scroll down/up with *C-v* and
 *M-v*.
 
-You can filter out buffers by major mode using =*<major-mode>=. For
-example, =*dired= selects only Dired buffers.
+You can filter out buffers by major mode using the query
+=*<major-mode>=. For example, =*dired= narrows to only Dired
+buffers. You can also filter out buffers that belong to a major mode
+by adding =!= to the query. For example, =*!dired= select all buffers
+that are not in Dired mode.
 
-You can even use =helm-mini= to filter out buffers that contains a
-regexp.
+You can also select buffers in a specific directory by using the query
+=/directory=. For example, =/.emacs.d/= narrows to buffers that are
+only inside =.emacs.d=. Add =!= before the query for reverse
+version. For example, =!/.emacs.d/= narrows to buffers not in
+=.emacs.d=.
 
-=helm-mini= is like an interactive version of =ibuffer=.
+You can even use =helm-mini= to narrow to buffers that contains a
+regexp in their contents, by using the query =@content=. For example,
+you can select buffers that only contain the string "test":
+=@test=. If you want to see the positions of the string in the
+buffers, *C-s* while in =helm-mini= session to switch to
+=helm-moccur=.
 
-*** 
+Example:
+
+- If I enter in pattern prompt: "*lisp ^helm @moc"
+  Helm will narrow down the list by selecting only buffers that are in
+  lisp mode, start by helm and match \"moc\" in their contents.
+
+- If I enter in pattern prompt: "*lisp ^helm moc"
+  Notice there is no =@= this time helm will look for lisp mode
+  buffers starting by "helm" and have "moc" in their name.
+
+- If I enter in pattern prompt: "*!lisp !helm"
+  Helm will narrow down to buffers that are not in \"lisp\" mode and
+  that do not match "helm".
+
+- If I enter in pattern prompt: "/helm/ w3"
+  Helm will narrow down to buffers that are in any "helm" subdirectory
+  and matching w3.
+
+ =helm-mini= is like an interactive version of =ibuffer=.
+
+*** =helm-find-files=
 :PROPERTIES:
 :ID:       b71abd6c-cb29-4b64-a55f-29bd75937c11
 :END:
+=helm-find-files= is file nagviation on steroid: 
+
+- You can complete with partial basename. e.g "fob" or "fbr" will
+  complete "foobar". With =helm-find-files=.
+
+- You can also execute persistent action, which binds to *C-z* (by
+  default), or *TAB* if you use my configuration to view content of
+  the buffer. Move the buffer up/down by *M-<next>* and
+  *M-<prior>*.
+
+- You can go up one directory level with *C-l*. *_Important_*: if you
+  use *C-l*, Helm goes up one level and the cursor is on the directory
+  you've just got out. If you want to go up and have the cursosr on
+  the parent directory, in Helm prompt, enter =../=.
+
+- To create a directory, enter a new name that does not exist in the
+  current directory and append =/= at the end. After you created a
+  directory, Helm continues in that directory.
+
+- To create a new file, enter a name and select the top row that has
+  the symbol =[?]= next to it. By default, Helm always selects the
+  first match in the directory.
+
+- You can invoke =grep= on the current highlighting entry by
+  *C-s*. *C-u C-s* to perform recursive grep.
+
+- Enter =~/= at end of pattern to quickly reach home directory.
+
+- Enter =/= at end of pattern to quickly reach root of your file system.
+
+- Enter =./= at end of pattern to quickly reach `default-directory'
+  (initial start of session). If you are in `default-directory' move
+  cursor on top.
+
+You can performa more actions on the highlighting entry by running
+=helm-select-action=, which is bound to *TAB* by default and *C-z* in
+my configuration.
+
+*** =helm-man-woman=
+:PROPERTIES:
+:ID:       2578b1bd-7ae9-4250-b701-c9191603404f
+:END:
+With =helm-man-woman=, you can quickly jump to any man entry using
+Helm interface. Give it a try.
+
+*** =helm-do-grep=
+:PROPERTIES:
+:ID:       fb36142a-6b14-4f9f-a6c1-d58d2a004ddc
+:END:
+In the first part, you already saw my live grep demo:
+
+[[file:static/live_grep.gif][file:static/live_grep.gif]]
+
+*C-c h g* (if you use my key bindings) or =M-x helm-do-grep= to
+perform live grep as you typing. Use prefix argument for recursive
+grep. You can also invoke =helm-do-grep= in =helm-find-files= session
+with *C-s*.
+
+*** =helm-find=
+:PROPERTIES:
+:ID:       b7a95407-8629-48c4-bc9c-d0a391c95478
+:END:
+You can also quicly find a file with =helm-find=, binds to *C-c h f*
+(in my configuratiohn). As usual, when you type a character, Helm
+filters candidates accordingly.
+
+*** =helm-locate=
+:PROPERTIES:
+:ID:       0e8e485d-c539-4175-9c81-9c8f9f17f608
+:END:
+Similar to =helm-find=, but you =locate= command.
+
+*** =helm-occur=
+:PROPERTIES:
+:ID:       5fe9a6c3-5af2-4b4a-94ff-5849560c831f
+:END:
+Similar to =occur=, but using Helm interface. As you type, matching
+lines are updated immediately. Very interactively, as it is the nature
+of Helm.
+
+*** =helm-apropos=
+:PROPERTIES:
+:ID:       479cdaab-0aba-48b8-b4d2-b026d23eb41a
+:END:
+Similar to *C-h a* which runs =apropos-command=, but use Helm
+interface and update as you type.
 ** Alternative to Helm: =ido= + =flx-ido= + =smex=
 :PROPERTIES:
 :ID:       28093c3d-795a-484f-9801-95237f99fc20
-:END:
-*** Package: =ido=
-:PROPERTIES:
-:ID:       46ac2c65-1713-46fb-8a93-3b6032ca534b
 :END:
 *** Package: =flx-ido=
 :PROPERTIES:
@@ -1634,10 +1928,6 @@ regexp.
 My sample customization:
 
 #+begin_src emacs-lisp
-  ;,----
-  ;| MAIN GROUP: Files
-  ;`----
-
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Files                      ;;
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2619,9 +2909,11 @@ colourized.
 :END:
 *_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: 
+*_Homepage_*: [[http://www.emacswiki.org/emacs/HelpPlus][Emacswiki]]
 
 *_Features_*:
+
+Extensions to `help.el' for Emacs 
 
 *_Installation_*:
 
@@ -2629,15 +2921,40 @@ colourized.
 install it. After finish installing, add this code snippet to activate
 the package:
 
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: help+                     ;;
+  ;;                                    ;;
+  ;; GROUP: Help                        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'help+)
+#+end_src
+
+*_Usage_*:
+
+The following bindings are made:
+
+  `C-h u'      `manual-entry'
+  `C-h C-a'    `apropos'
+  `C-h C-l'    `locate-library'
+  `C-h RET'    `help-on-click/key'
+  `C-h M-a'    `apropos-documentation'
+  `C-h M-o'    `pop-to-help-toggle'
+  `C-h C-M-a'  `tags-apropos'
+  [mouse-1]    `mouse-help-on-click' (non-mode-line)
+  [mouse-1]    `mouse-help-on-mode-line-click' (mode-line)
+
 *** Package: =help-fns+=
 :PROPERTIES:
 :ID:       8fd8c1ee-555c-4ba4-9513-176c5e382b72
 :END:
 *_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: 
+*_Homepage_*: [[http://www.emacswiki.org/emacs/HelpPlus][Emacswiki]]
 
 *_Features_*:
+
+Extensions to `help-fns.el'
 
 *_Installation_*:
 
@@ -2654,15 +2971,48 @@ the package:
   (require 'help-fns+)
 #+end_src
 
+*_Usage_*:
+
+Keys bound here:
+
+  `C-h B'      `describe-buffer'
+  `C-h c'      `describe-command'     (replaces `describe-key-briefly')
+  `C-h o'      `describe-option'
+  `C-h C-c'    `describe-key-briefly' (replaces `C-h c')
+  `C-h C-o'    `describe-option-of-type'
+  `C-h M-c'    `describe-copying'     (replaces `C-h C-c')
+  `C-h M-f'    `describe-file'
+  `C-h M-k'    `describe-keymap'
+  `C-h M-l'    `find-function-on-key'
+
 *** Package: =help-mode+=
 :PROPERTIES:
 :ID:       6d65f9ca-ab61-4d8e-83ac-40f9325e1780
 :END:
 *_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: 
+*_Homepage_*: [[http://www.emacswiki.org/emacs/HelpModePlus][Emacswiki]]
 
 *_Features_*:
+
+Extensions to `help-mode.el'
+
+Links to libraries are provided whenever library names appear in
+buffer ‘*Help*’. After loading help-mode+.el, library names in buffer
+*Help* have mouse-over links to the corresponding library code. 
+
+For example, ‘C-h v features’ describes the variable ‘features’; this
+description lists all of the libraries currently loaded in Emacs.
+
+- In vanilla Emacs (without help-mode+.el loaded), the library names
+  are not linked, unless a library (such as ‘grep’) happens to have
+  the same name as an Emacs function or variable, in which case
+  clicking the name displays the function or variable description in
+  buffer *Help*.
+
+- With help-mode+.el loaded, each library name in the ‘C-h v features’
+  list is linked to the library (code) itself. Click a name to
+  edit/view the library file.
 
 *_Installation_*:
 
@@ -2678,6 +3028,11 @@ the package:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'help-mode+)
 #+end_src
+
+*_Usage_*:
+
+If a =*Help*= buffer contains other library names, the names
+automatically becomes links to jump to.
 
 ** setup-local.el
 :PROPERTIES:
