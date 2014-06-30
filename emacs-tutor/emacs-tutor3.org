@@ -717,7 +717,8 @@ customization command: =customize-group=, =customize-face=... That
 organize customization groups in different ways. However, in the scope
 of this guide, we only use =customize= for customize Emacs generally
 and =customize-group= to select a specific package for customizing,
-and also find out which parent group the package belongs to.
+and also find out which parent group the package belongs to, after you
+finished installing from the package manager.
 
 *** Using Emacs Lisp
 :PROPERTIES:
@@ -1735,6 +1736,18 @@ completion:
   pages, and *M-<* and *M->* to move to top and bottom of the Helm
   buffer that is displaying the candidates. Please try it.
 
+*_IMPORTANT_*: /Please remember that, when you use Helm, you never *TAB*/
+/to complete prefixes like vanilla or other packages like Ido and its/
+/related packages. In Helm, when you type something, candidates get/
+/updated *automatically*. In vanilla Emacs, you have to *TAB* to get a//
+/list of candidate. This is a great feature from Helm, not a miss of/
+/feature. You have to forget the mentally of *TABBING* to get/
+/candidates. If you want quick completion of search strings in Helm/
+/prompt, you always have =hippie-expand= to replace the *TAB*/
+/behaviour, as introduced at the beginning of this section. This is/
+/the biggest confusion for new people switching to Helm. When you are/
+/used to Helm, you will love it./
+
 When you execute a Helm command, you enter a Helm session. A Helm
 session is a dedicated state to working with Helm features; while in a
 Helm session, a dedicated Helm buffer is always opened. When you quit
@@ -1768,7 +1781,7 @@ In a Helm session, if you need help, use *C-c ?*, or refer to this
 manual again. The commands in the key bindings above are good enough
 to help you using Helm productively.
 
-*** =helm-M-x=:
+*** Command: =helm-M-x=:
 :PROPERTIES:
 :ID:       500a1c68-ab43-40a5-97c3-5d556a9f748d
 :END:
@@ -1796,7 +1809,7 @@ Demo:
 
 [[file:static/part3/helm-m-x.gif][file:static/part3/helm-m-x.gif]]
 
-*** =helm-show-kill-ring=
+*** Command: =helm-show-kill-ring=
 :PROPERTIES:
 :ID:       77b4d145-c280-4ed4-98a7-d645fe1d18bf
 :END:
@@ -1819,7 +1832,7 @@ minibuffer):
 
 [[file:static/part3/helm-kill-ring.gif][file:static/part3/helm-kill-ring.gif]]
 
-*** =helm-mini=
+*** Command: =helm-mini=
 :PROPERTIES:
 :ID:       0386c827-7f5d-4056-bf4d-8d0fc01fc1ab
 :END:
@@ -1879,7 +1892,7 @@ starts when you see START in the minibuffer):
 
 [[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]]
 
-*** =helm-find-files=
+*** Command: =helm-find-files=
 :PROPERTIES:
 :ID:       b71abd6c-cb29-4b64-a55f-29bd75937c11
 :END:
@@ -1893,7 +1906,7 @@ starts when you see START in the minibuffer):
   the buffer. Move the buffer up/down by *M-<next>* and
   *M-<prior>*.
 
-- You can go up one directory level with *C-l*. *_Important_*: if you
+- You can go up one directory level with *C-l*. *_NOTE_*: if you
   use *C-l*, Helm goes up one level and the cursor is on the directory
   you've just got out. If you want to go up and have the cursors on
   the parent directory, in Helm prompt, enter =../=.
@@ -1927,14 +1940,14 @@ see START in the minibuffer:
 
 [[file:static/part3/helm-find-files.gif][file:static/part3/helm-find-files.gif]]
 
-*** =helm-man-woman=
+*** Command: =helm-man-woman=
 :PROPERTIES:
 :ID:       2578b1bd-7ae9-4250-b701-c9191603404f
 :END:
 With =helm-man-woman=, you can quickly jump to any man entry using
 Helm interface. Give it a try.
 
-*** =helm-do-grep=
+*** Command: =helm-do-grep=
 :PROPERTIES:
 :ID:       fb36142a-6b14-4f9f-a6c1-d58d2a004ddc
 :END:
@@ -1947,7 +1960,7 @@ perform live grep as you typing. Use prefix argument for recursive
 grep. You can also invoke =helm-do-grep= in =helm-find-files= session
 with *C-s*.
 
-*** =helm-find=
+*** Command: =helm-find=
 :PROPERTIES:
 :ID:       b7a95407-8629-48c4-bc9c-d0a391c95478
 :END:
@@ -1955,13 +1968,13 @@ You can also quickly find a file with =helm-find=, binds to *C-c h f*
 (in my configuration). As usual, when you type a character, Helm
 filters candidates accordingly.
 
-*** =helm-locate=
+*** Command: =helm-locate=
 :PROPERTIES:
 :ID:       0e8e485d-c539-4175-9c81-9c8f9f17f608
 :END:
 Similar to =helm-find=, but you =locate= command.
 
-*** =helm-occur=
+*** Command: =helm-occur=
 :PROPERTIES:
 :ID:       5fe9a6c3-5af2-4b4a-94ff-5849560c831f
 :END:
@@ -1974,7 +1987,7 @@ typing. The demo starts when you see START in the minibuffer.
 
 [[file:static/part3/helm-occur.gif][file:static/part3/helm-occur.gif]]
 
-*** =helm-apropos=
+*** Command: =helm-apropos=
 :PROPERTIES:
 :ID:       479cdaab-0aba-48b8-b4d2-b026d23eb41a
 :END:
