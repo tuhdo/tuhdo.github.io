@@ -1071,18 +1071,18 @@ Beginning of a Line]].
 :PROPERTIES:
 :ID:       f8441653-b68d-4c18-8eb4-28ceff5739fc
 :END:
-*_Author_*: Keitalo Miyazaki, =Keitaro.Miyazaki@gmail.com=
+_Author_: Keitalo Miyazaki, =Keitaro.Miyazaki@gmail.com=
 
-*_Homepage_*: [[http://www.emacswiki.org/emacs/VolatileHighlights][Emacswiki]]
+_Homepa0ge_: [[http://www.emacswiki.org/emacs/VolatileHighlights][Emacswiki]]
 
-*_Features_*:
+_Features_:
 
 VolatileHighlights highlights changes to the buffer caused by commands
 such as ‘undo’, ‘yank’/’yank-pop’, etc. The highlight disappears at
 the next command. The highlighting gives useful visual feedback for
 what your operation actually changed in the buffer.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *volatile-highlights* package, then
 install it. After finish installing, add this code snippet to activate
@@ -1098,7 +1098,7 @@ the package:
   (volatile-highlights-mode t)
 #+end_src
 
-*_Usage_*: 
+_Usage_: 
 
 When you yank (paste) something, the yanked (pasted) region will be
 highlighted.
@@ -1107,11 +1107,11 @@ highlighted.
 :PROPERTIES:
 :ID:       49958ce7-6af0-47ac-b309-6ea75833f0e1
 :END:
-*_Author_*: [[https://github.com/pmarinov][Peter Marinov]]
+_Author_: [[https://github.com/pmarinov][Peter Marinov]]
 
-*_Homepage_*: [[https://github.com/pmarinov/clean-aindent-mode][Github]]
+_Homepage_: [[https://github.com/pmarinov/clean-aindent-mode][Github]]
 
-*_Features_*:
+_Features_:
 
 When you press *RET* to create a newline and got indented by
 =eletric-indent-mode=, you have appropriate whitespace for
@@ -1121,7 +1121,7 @@ whitespace.
 
 View this [[http://www.emacswiki.org/emacs/CleanAutoIndent][Emacswiki page]] for more details.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *clean-aindent-mode* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1135,7 +1135,7 @@ the package:
   (require 'clean-aindent-mode)
 #+end_src
 
-*_Usage_*: 
+_Usage_: 
 
 Automatically cleanup useless whitespaced on moving up/down.
 
@@ -1143,11 +1143,11 @@ Automatically cleanup useless whitespaced on moving up/down.
 :PROPERTIES:
 :ID:       03030916-bb5c-4966-8fa1-68807b60bec2
 :END:
-*_Author_*: Toby Cubitt, =toby-undo-tree@dr-qubit.org=
+_Author_: Toby Cubitt, =toby-undo-tree@dr-qubit.org=
 
-*_Homepage_*: [[http://www.dr-qubit.org/emacs.php#undo-tree][www.dr-qubit.org]]
+_Homepage_: [[http://www.dr-qubit.org/emacs.php#undo-tree][www.dr-qubit.org]]
 
-*_Features_*: 
+_Features_: 
 
 =undo-tree= allows you to visual the whole history of your editing in
 a tree. It also provides regular undo/redo behaviours in other
@@ -1156,7 +1156,7 @@ states. Highly recommended.
 
 [[file:static/part3/undo-tree.jpg][file:static/part3/undo-tree.jpg]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *undo-tree* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1171,7 +1171,7 @@ the package:
   (global-undo-tree-mode)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 From now on, your undo (*C-/*) behaves just like normal editor. To
 redo, *C-_*. To open the undo tree, *C-x u*.
@@ -1180,11 +1180,11 @@ redo, *C-_*. To open the undo tree, *C-x u*.
 :PROPERTIES:
 :ID:       bb1ea352-f9ea-47fe-bb3e-5727e542c481
 :END:
-*_Author_*: [[https://github.com/capitaomorte][João Távora]]
+_Author_: [[https://github.com/capitaomorte][João Távora]]
 
-*_Homepage_*: [[https://github.com/capitaomorte/yasnippet][Github]]
+_Homepage_: [[https://github.com/capitaomorte/yasnippet][Github]]
 
-*_Features_*:
+_Features_:
 
 YASnippet is a template system for Emacs. It allows you to type an
 abbreviation and automatically expand it into function
@@ -1193,7 +1193,7 @@ Python, Ruby, SQL, LaTeX, HTML, CSS and more. The snippet syntax is
 inspired from TextMate's syntax, you can even import most TextMate
 templates to YASnippet.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *yasnippet* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1208,7 +1208,7 @@ the package:
   (yas-global-mode 1)
 #+end_src
 
-*_Usage_*: In major modes where *yasnippet* has snippets available,
+_Usage_: In major modes where *yasnippet* has snippets available,
 typing a certain keyword and *TAB* insert a predefined snippet. For
 example, in a C buffer, if you type =for= and *TAB*, it expands to:
 
@@ -1282,14 +1282,14 @@ Here is my sample customization:
 :PROPERTIES:
 :ID:       613a1da4-4b5b-4c50-9c9d-8152d1a4bad9
 :END:
-*_Author_*: 
+_Author_: 
 
 - Nikolaj Schumacher (original author)
 - [[https://github.com/dgutov][Dmitry Gutov]] (current maintainer), =dgutov@yandex.ru=
 
-*_Homepage_*: [[http://company-mode.github.io/]]
+_Homepage_: [[http://company-mode.github.io/]]
 
-*_Features_*:
+_Features_:
 
 Company is a text completion framework for Emacs. The name stands for
 "complete anything". It uses pluggable back-ends and front-ends to
@@ -1303,7 +1303,7 @@ The CAPF back-end provides a bridge to the standard
 completion-at-point-functions facility, and thus works with any major
 mode that defines a proper completion function.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *company* package, then
 install it. After finish installing, add this code snippet to activate
@@ -1318,7 +1318,7 @@ the package:
   (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Completion will start automatically after you type a few letters. Use
 *M-n* and *M-p* to select, *<return>* to complete or *<tab>* to complete the
@@ -1330,14 +1330,14 @@ candidates.
 :PROPERTIES:
 :ID:       4c5acb48-c884-4720-a9c0-e25c2ee35296
 :END:
-*_Author_*: [[https://github.com/magnars][Magnar Sveen]]
+_Author_: [[https://github.com/magnars][Magnar Sveen]]
 
-*_Homepage_*: [[https://github.com/magnars/expand-region.el][Github]]
+_Homepage_: [[https://github.com/magnars/expand-region.el][Github]]
 
-*_Features_*:
+_Features_:
 =expand-region= allows you to select text objects incrementally. 
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *expand-region* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
@@ -1355,7 +1355,7 @@ the package:
 I bind =er/expand-regin= to *M-m*, because the functionality is
 included from the amended =beginning-of-line= we did above.
 
-*_Usage_*: 
+_Usage_: 
 
 *M-m* to continue expand outward.
 
@@ -1363,11 +1363,11 @@ included from the amended =beginning-of-line= we did above.
 :PROPERTIES:
 :ID:       7b0b29a2-6a13-4b39-bbec-bb52ff97783b
 :END:
-*_Author_*: [[https://github.com/purcell][Steve Purcell]]
+_Author_: [[https://github.com/purcell][Steve Purcell]]
 
-*_Homepage_*: [[https://github.com/purcell/ibuffer-vc][Github]]
+_Homepage_: [[https://github.com/purcell/ibuffer-vc][Github]]
 
-*_Features_*:
+_Features_:
 
 - Group your buffers by their parent vc root directory
 - See the VC status of the associated files
@@ -1375,7 +1375,7 @@ included from the amended =beginning-of-line= we did above.
 
 [[file:static/part3/ibuffer-vc.png][file:static/part3/ibuffer-vc.png]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *ibuffer-vc* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1400,7 +1400,7 @@ package:
                 filename-and-process)))
 #+end_src
 
-*_Usage_*: 
+_Usage_: 
 
 When you use =ibuffer=, it will automatically group buffers by version
 control system.
@@ -1409,11 +1409,11 @@ control system.
 :PROPERTIES:
 :ID:       54921b8d-80fb-4b7d-b8d4-e47a90496af0
 :END:
-*_Author_*: [[https://github.com/lewang][Le Wang]]
+_Author_: [[https://github.com/lewang][Le Wang]]
 
-*_Homepage_*: [[https://github.com/lewang/rebox2][Github]]
+_Homepage_: [[https://github.com/lewang/rebox2][Github]]
 
-*_Features_*: 
+_Features_: 
 
 Fancy box quoting I n comment.
 
@@ -1424,7 +1424,7 @@ Fancy box quoting I n comment.
 - move box by using space, backspace / center with M-c
 - point has to be to the left of the border
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *rebox2* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1444,7 +1444,7 @@ package:
                               (rebox-mode 1)))
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 - Mark a region.
 - *M-q* to cycle between box styles.
@@ -1453,11 +1453,11 @@ package:
 :PROPERTIES:
 :ID:       f6ec9632-9fa5-477b-bf34-5975b760577a
 :END:
-*_Author_*: [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
+_Author_: [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
 
-*_Homepage_*: [[https://github.com/bbatsov/projectile][Github]]
+_Homepage_: [[https://github.com/bbatsov/projectile][Github]]
 
-*_Features_*:
+_Features_:
 
 *Projectile* is a project interaction library for Emacs. Its goal is to
 provide a nice set of features operating on a project level without
@@ -1498,7 +1498,7 @@ Here's a glimpse of Projectile in action:
 
 [[file:static/part3/projectile.png][file:static/part3/projectile.png]]
 
-*_Installation_*:
+_Installation_:
 
 #+begin_src emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1508,7 +1508,7 @@ Here's a glimpse of Projectile in action:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (projectile-global-mode)
 #+end_src
-*_Usage_*: 
+_Usage_: 
 
 Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
 
@@ -1517,15 +1517,15 @@ Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on th
 :ID:       8860083f-a522-4249-847a-6d31317fce80
 :END:
 
-*_Author_*: 
+_Author_: 
 
 [[http://pashinin.com/en/][Sergey Pashinin]], =sergey@pashinin.com=
 
 Based on the original [[https://github.com/tlh/workgroups.el][workgroups]], created by tlh, =thunkout@gmail.com=.
 
-*_Homepage_*: [[https://github.com/pashinin/workgroups2][Github]]
+_Homepage_: [[https://github.com/pashinin/workgroups2][Github]]
 
-*_Features_*:
+_Features_:
 
 Workgroups is a session manager for Emacs.
 
@@ -1537,7 +1537,7 @@ Workgroups is a session manager for Emacs.
 You can also restore such buffers as: org-agenda, shell, magit-status,
 help.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *workgroups2* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -1553,7 +1553,7 @@ package:
   (workgroups-mode 1)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Most commands are bound to both <prefix> <key> and <prefix> C-<key>.
 
@@ -1586,16 +1586,16 @@ using them in later Emacs sessions.
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
 :END:
-*_Author_*:
+_Author_:
 
 - Tamas Patrovic (past maintainer), from 2007.
 - rubikitch =rubikitch@ruby-lang.org=, from 2008-2011.
 - [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current
   maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
 
-*_Homepage_*: [[https://github.com/emacs-helm/helm][Github]]
+_Homepage_: [[https://github.com/emacs-helm/helm][Github]]
 
-*_Features_*:
+_Features_:
 =Helm= is incremental completion and selection narrowing framework for
 Emacs. It will help steer you in the right direction when you're
 looking for stuff in Emacs (like buffers, files, etc).
@@ -1605,7 +1605,7 @@ can be considered to be its successor. =Helm= sets out to clean up the
 legacy code in =anything.el= and provide a cleaner, leaner and more
 modular tool, that's not tied in the trap of backward compatibility.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *helm* package, then
 install it. After finish installing, add this code snippet to activate
@@ -1700,7 +1700,7 @@ My extended config:
   (helm-mode)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 After using Helm, you are going to have a big change in the way you
 use Emacs. After getting used to the Helm way, you don't want to leave
@@ -1950,36 +1950,36 @@ interface and update as you type.
 :PROPERTIES:
 :ID:       50cc1f5e-022d-4818-bedf-0a52e7e4615b
 :END:
-*_Author_*:  [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
+_Author_:  [[https://github.com/bbatsov][Bozhidar Batsov]], =bozhidar@batsov.com=
 
-*_Homepage_*: [[https://github.com/bbatsov/projectile][Github]]
+_Homepage_: [[https://github.com/bbatsov/projectile][Github]]
 
-*_Features_*:
+_Features_:
 
 Provide Helm interface for quickly selecting files in a project using
 Projectile.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *helm-projectile* package, then install
 it. After finish installing, you can start using =helm-projectile=
 immediately.
 
-*_Usage_*:
+_Usage_:
 *C-c p h* to run =helm-projectile= and select files in your project.
 
 *** Package: =helm-descbind=
 :PROPERTIES:
 :ID:       3a128b01-725f-4142-bd0d-f9bbd4b715cc
 :END:
-*_Author_*
+_Author_
 
 2008-2010:    Taiki SUGAWARA, =buzz.taiki@gmail.com=
 2012-2013     Michael Markert, =markert.michael@googlemail.com=
 2013-present: Daniel Hackney =dan@haxney.org=
 
-*_Homepage_*: [[https://github.com/emacs-helm/helm-descbinds][Github]]
+_Homepage_: [[https://github.com/emacs-helm/helm-descbinds][Github]]
 
-*_Features_*:
+_Features_:
 Helm Descbinds provides an interface to emacs’ describe-bindings
 making the currently active key bindings interactively searchable with
 helm.
@@ -1990,7 +1990,7 @@ Additionally you have the following actions
 - Describe the command
 - Find the command
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *helm-descbind* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2005,7 +2005,7 @@ package:
   (helm-descbinds-mode)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 Enter a prefix key and *C-h* after it. You will see a list of bindings
 using Helm interface for narrowing.
 
@@ -2043,11 +2043,11 @@ configuration:
 :PROPERTIES:
 :ID:       56493d92-1d18-4280-b1c2-3eb13f8b6e9f
 :END:
-*_Author_*: [[https://github.com/DarwinAwardWinner][Ryan C. Thompson]], =rct+github@thompsonclan.org=
+_Author_: [[https://github.com/DarwinAwardWinner][Ryan C. Thompson]], =rct+github@thompsonclan.org=
 
-*_Homepage_*: [[https://github.com/DarwinAwardWinner/ido-ubiquitous][Github]]
+_Homepage_: [[https://github.com/DarwinAwardWinner/ido-ubiquitous][Github]]
 
-*_Features_*: 
+_Features_: 
 
 Gimme some ido... everywhere!
 
@@ -2058,7 +2058,7 @@ possible to do so without breaking things.
 Note that ido-ubiquitous is not enabled for org mode or magit mode,
 because those modes have their own support for ido.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *ido-ubiquitous* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2072,7 +2072,7 @@ package:
   (ido-ubiquitous-mode +1)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Once you activated =Ido=, it is available where you expect to select
 and narrow down candidates.
@@ -2081,11 +2081,11 @@ and narrow down candidates.
 :PROPERTIES:
 :ID:       c067eb7d-5aa0-47da-a603-431d38049d1a
 :END:
-*_Author_*: [[https://github.com/lewang][Le Wang]]
+_Author_: [[https://github.com/lewang][Le Wang]]
 
-*_Homepage_*: [[https://github.com/lewang/flx][Github]]
+_Homepage_: [[https://github.com/lewang/flx][Github]]
 
-*_Features_*:
+_Features_:
 =M-x list-packages= and select *flx-ido* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2102,7 +2102,7 @@ package:
   (setq ido-use-faces nil)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 =flx-ido= provides fuzzy completion to select completion
 candidates. For example, if you want to select a file
 =src/foo/bar.txt=, you only need to type in Ido prompt "sfb", short
@@ -2112,11 +2112,11 @@ for =(s)rc/(f)oo/(b)ar=.
 :PROPERTIES:
 :ID:       102d3ed8-a177-4a8f-a6e3-6da1195c2bcc
 :END:
-*_Author_*: Cornelius Mika, =cornelius.mika@gmail.com=
+_Author_: Cornelius Mika, =cornelius.mika@gmail.com=
 
-*_Homepage_*: [[https://github.com/lewang/flx][Github]]
+_Homepage_: [[https://github.com/lewang/flx][Github]]
 
-*_Features_*:
+_Features_:
 
 Smex is a M-x enhancement for Emacs. Built on top of Ido, it provides
 a convenient interface to your recently and most frequently used
@@ -2124,7 +2124,7 @@ commands. And to all the other commands, too.
 
 [[file:static/part3/smex.png][file:static/part3/smex.png]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *flx-ido* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2141,7 +2141,7 @@ package:
   (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 =smex= is an improved =M-x= command. After you setup, =M-x= to run
 =smex= and =M-X= to select only commands in the current major mode.
@@ -2236,11 +2236,11 @@ My sample customization:
 :PROPERTIES:
 :ID:       fd414006-0a5c-4354-91fd-e68975aed67f
 :END:
-*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+_Author_: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: [[http://www.emacswiki.org/emacs/DiredPlus][Emacswiki]]
+_Homepage_: [[http://www.emacswiki.org/emacs/DiredPlus][Emacswiki]]
 
-*_Features_*:
+_Features_:
 =Dired+= (library =dired+.el=), which extends functionalities provided by
 standard GNU Emacs libraries =dired.el=, =dired-aux.el=, and
 =dired-x.el=. The standard functions are all available, plus many
@@ -2248,7 +2248,7 @@ more.
 
 [[file:static/part3/dired-plus.jpg][file:static/part3/dired-plus.jpg]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *dired+* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2262,7 +2262,7 @@ package:
   (require 'dired+)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Please refer to Emacswiki [[http://www.emacswiki.org/emacs/DiredPlus][usage]]. Note that =Dired+= has A LOT of
 features, but you don't have to learn to use all of them at once. Even
@@ -2272,14 +2272,14 @@ the extra faces are useful enough.
 :PROPERTIES:
 :ID:       8013594a-f2f3-477c-820c-caf1354ac23d
 :END:
-*_Features_*:
+_Features_:
 
 Extension of `recentf' package.
 
 - `dired' buffers can be handled.
 - Switching to file buffer considers it as most recent file.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *recentf-ext* package, then install
 it. After finish installing, add this code snippet to activate the
@@ -2294,7 +2294,7 @@ package:
   (require 'recentf-ext)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 When you visit a directory, that directory is saved by =recentf= as well.
 
@@ -2302,11 +2302,11 @@ When you visit a directory, that directory is saved by =recentf= as well.
 :PROPERTIES:
 :ID:       509e175b-8d72-472d-ad1c-7e96c647cb77
 :END:
-*_Author_*: [[https://github.com/fourier][Alexey Veretennikov]], =alexey.veretennikov@gmail.com=
+_Author_: [[https://github.com/fourier][Alexey Veretennikov]], =alexey.veretennikov@gmail.com=
 
-*_Homepage_*: [[https://github.com/fourier/ztree][Github]]
+_Homepage_: [[https://github.com/fourier/ztree][Github]]
 
-*_Features_*:
+_Features_:
 
 Ztree is a project dedicated to implementation of several text-tree
 applications inside Emacs. It consists of 2 sub-projects: ztree-diff
@@ -2321,7 +2321,7 @@ and ztree-dir(the basis of ztree-diff).
 
 [[file:static/part3/ztree-dir.png][file:static/part3/ztree-dir.png]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *ztree* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2338,7 +2338,7 @@ package:
   (require 'ztree-dir)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 =M-x ztree-diff=, then select the left and right directories to
 compare.
@@ -2354,11 +2354,11 @@ compare.
 :PROPERTIES:
 :ID:       0bcdb090-e59b-4c02-96d1-47a1cc6173eb
 :END:
-*_Author_*: [[https://github.com/m00natic][Andrey Kotlarski]], =m00naticus@gmail.com=
+_Author_: [[https://github.com/m00natic][Andrey Kotlarski]], =m00naticus@gmail.com=
 
-*_Homepage_*: [[https://github.com/m00natic/vlfi][Github]]
+_Homepage_: [[https://github.com/m00natic/vlfi][Github]]
 
-*_Features_*:
+_Features_:
 
 Emacs minor mode that allows viewing, editing, searching and comparing
 large files in batches. Batch size can be adjusted on the fly and
@@ -2389,7 +2389,7 @@ it offers in a nutshell:
 
 GNU Emacs 23 and 24 are supported.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select ** package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2405,7 +2405,7 @@ package:
                                    ;; when the file exceed large-file-warning-threshold
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Please refer to [[https://github.com/m00natic/vlfi#detail-usage][Detail Usage]] section.
 
@@ -2557,11 +2557,11 @@ Sample configuration:
 :PROPERTIES:
 :ID:       277b9a96-a515-42e5-82f9-559fe3a6c3db
 :END:
-*_Author_*: [[https://github.com/dgutov][Dmitry Gutov]], =dgutov@yandex.ru=
+_Author_: [[https://github.com/dgutov][Dmitry Gutov]], =dgutov@yandex.ru=
 
-*_Homepage_*: [[https://github.com/dgutov/diff-hl][Github]]
+_Homepage_: [[https://github.com/dgutov/diff-hl][Github]]
 
-*_Features_*: 
+_Features_: 
 
 =diff-hl-mode= highlights uncommitted changes on the left side of the
 window, allows you to jump between and revert them selectively.
@@ -2577,15 +2577,17 @@ backends, too.
 The package also contains auxiliary modes:
 
 - =diff-hl-dired-mode= provides similar functionality in Dired.
+
   [[file:static/part3/diff-hl-dired.png][file:static/part3/diff-hl-dired.png]]
 
 - =diff-hl-margin-mode= changes the highlighting function to use the
   margin instead of the fringe.
+
   [[file:static/part3/diff-hl-margin.png][file:static/part3/diff-hl-margin.png]]
 
 - =diff-hl-amend-mode= shifts the reference revision back by one.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *diff-hl* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2600,13 +2602,19 @@ package:
   (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
 #+end_src
 
-*_Usage_*: 
+_Usage_: 
+
+To see =diff-hl= in action, open a buffer under a version control and
+type something and save. You will see highlighted changes in the
+fringe on the left.
+
+It is also similar with =diff-hl-dired-mode=.
 
 *** Package: =magit=
 :PROPERTIES:
 :ID:       16744867-3d54-4212-856f-7742f2354706
 :END:
-*_Author_*: 
+_Author_: 
 
 Original Author: Marius Vollmer =marius.vollmer@gmail.com=
 
@@ -2619,9 +2627,9 @@ Former-Maintainers:
 - Rémi Vanicat, =vanicat@debian.org=
 - Yann Hodique, =yann.hodique@gmail.com=
 
-*_Homepage_*: [[http://magit.github.io]]
+_Homepage_: [[http://magit.github.io]]
 
-*_Features_*:
+_Features_:
 Magit is an interface to the version control system Git, implemented
 as an Emacs extension.
 
@@ -2635,7 +2643,7 @@ recommended. Magit supports Git 1.7.2.5 or later; 1.8.2 or later is
 recommended. The minimal versions are those available in Debian
 oldstable.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select ** package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2669,7 +2677,7 @@ package:
   (global-set-key (kbd "C-x g t") 'magit-tag)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Getting started with Magit is really easy:
 
@@ -2695,11 +2703,11 @@ For more usage, please refer to the [[http://magit.github.io/documentation][offi
 :PROPERTIES:
 :ID:       23dedddc-be7f-41cd-b17b-5670d1fcf0d2
 :END:
-*_Author_*: [[https://github.com/lunaryorn][Sebastian Wiesner]], =swiesner@lunaryorn.com=
+_Author_: [[https://github.com/lunaryorn][Sebastian Wiesner]], =swiesner@lunaryorn.com=
 
-*_Homepage_*: [[http://flycheck.readthedocs.org/en/latest/][http://flycheck.readthedocs.org/]]
+_Homepage_: [[http://flycheck.readthedocs.org/en/latest/][http://flycheck.readthedocs.org/]]
 
-*_Features_*:
+_Features_:
 
 - Supports over 30 programming and markup languages with more than 60 different syntax checking tools
 - Fully automatic, fail-safe, on-the-fly syntax checking in background
@@ -2711,7 +2719,7 @@ For more usage, please refer to the [[http://magit.github.io/documentation][offi
 - A “doesn't get in your way” guarantee
 - Many [[http://flycheck.readthedocs.org/en/latest/guide/introduction.html#rd-party-extensions][3rd party extensions]]
 
-*_Installation_*;
+_Installation_;
 
 =M-x list-packages= and select *flycheck* package, then install
 it. After finish installing, add this code snippet to activate the
@@ -2727,7 +2735,7 @@ package:
   (add-hook 'after-init-hook #'global-flycheck-mode)
 #+end_src
 
-*_Usage_*: 
+_Usage_: 
 
 After you installed and activated flycheck, your supported buffers
 are automatically checked against errors as you typed and the errors
@@ -2737,15 +2745,15 @@ are displayed in echo area.
 :PROPERTIES:
 :ID:       1e5070dd-c73a-4fe8-a8da-298ad1e74054
 :END:
-*_Author_*: [[https://github.com/yuutayamada][Yuta Yamada]], =cokesboy@gmail.com=
+_Author_: [[https://github.com/yuutayamada][Yuta Yamada]], =cokesboy@gmail.com=
 
-*_Homepage_*: [[https://github.com/yuutayamada/flycheck-tip][Github]]
+_Homepage_: [[https://github.com/yuutayamada/flycheck-tip][Github]]
 
-*_Features_*:
+_Features_:
 
 Show flycheck error by popupo.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *flycheck-tip* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2760,7 +2768,7 @@ package:
   (flycheck-tip-use-timer 'verbose)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 The errors are now displayed by popup, instead of printing into the
 echo area. Echo area should be preserved for other things like
@@ -2870,11 +2878,11 @@ Sample configuration:
 :ID:       e105a01f-2fbb-4ccb-b9a9-cc08fcbc6097
 :END:
 
-*_Author_*: Jacek "TeMPOraL" Zlydach, =temporal.pl@gmail.com=
+_Author_: Jacek "TeMPOraL" Zlydach, =temporal.pl@gmail.com=
 
-*_Homepage_*: [[http://nyan-mode.buildsomethingamazing.com/]]
+_Homepage_: [[http://nyan-mode.buildsomethingamazing.com/]]
 
-*_Features_*:
+_Features_:
 
 Nyan Mode is an analog indicator of your position in the buffer. The
 Cat should go from left to right in your mode-line, as you move your
@@ -2891,7 +2899,7 @@ point from 0% to 100%.
 
 NOT INCLUDED: music.
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *nyan-mode* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2908,7 +2916,7 @@ package:
     ((x w32) (nyan-mode)))
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 As you scroll through a buffer, the cat moves to indicate the position
 in buffer.
@@ -2917,11 +2925,11 @@ in buffer.
 :PROPERTIES:
 :ID:       5202a6a1-9322-4375-85ad-861d67be2a09
 :END:
-*_Author_*: [[https://github.com/roman][Roman Gonzalez]], =romanandreg@gmail.com=
+_Author_: [[https://github.com/roman][Roman Gonzalez]], =romanandreg@gmail.com=
 
-*_Homepage_*: [[https://github.com/roman/golden-ratio.el][Github]]
+_Homepage_: [[https://github.com/roman/golden-ratio.el][Github]]
 
-*_Features_*:
+_Features_:
 
 Automatic resizing of Emacs windows to the golden ratio
 
@@ -2936,7 +2944,7 @@ be readable enough to know it's content.
 
 [[file:static/part3/golden-ratio.gif][file:static/part3/golden-ratio.gif]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *golden-ratio* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -2978,7 +2986,7 @@ package:
   (golden-ratio-mode)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 *C-x o* and see your windows being resized.
 
 ** setup-faces-and-ui.el
@@ -3024,16 +3032,16 @@ Sample configuration:
 :PROPERTIES:
 :ID:       26a9a3fb-b564-4827-81f1-c82c2809c73e
 :END:
-*_Author_*: [[https://github.com/Fanael][Fanael Linithien]], =fanael4@gmail.com=
+_Author_: [[https://github.com/Fanael][Fanael Linithien]], =fanael4@gmail.com=
 
-*_Homepage_*: [[https://github.com/Fanael/number-font-lock-mode][Github]]
+_Homepage_: [[https://github.com/Fanael/number-font-lock-mode][Github]]
 
-*_Features_*:
+_Features_:
 
 =number-font-lock-mode= is an Emacs minor mode that highlights numeric
 literals in source code.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *number-font-lock* package, then
 install it. After finish installing, add this code snippet to activate
@@ -3048,7 +3056,7 @@ the package:
   (add-hook 'prog-mode-hook 'number-font-lock-mode)
 #+end_src
 
-*_Usage_*: 
+_Usage_: 
 
 Numbers automatically have distinct colors in buffer.
 
@@ -3056,15 +3064,15 @@ Numbers automatically have distinct colors in buffer.
 :PROPERTIES:
 :ID:       726fdb67-5494-4761-a1b6-379cabc73c85
 :END:
-*_Author_*: [[https://github.com/nschum][Nikolaj Schumacher]], =me@nschum.de=
+_Author_: [[https://github.com/nschum][Nikolaj Schumacher]], =me@nschum.de=
 
-*_Homepage_*: [[https://github.com/nschum/highlight-symbol.el][Github]]
+_Homepage_: [[https://github.com/nschum/highlight-symbol.el][Github]]
 
-*_Features_*:
+_Features_:
 
 Automatic and manual symbol highlighting for Emacs.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *highlight-symbol* package, then install
 it. After finish installing, add this code snippet to activate the
@@ -3089,7 +3097,7 @@ package:
   (global-set-key (kbd "M-p") 'highlight-symbol-prev)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 If you move point on a symbol, it automatically highlights all the
 symbols in the current screen. From now on, pressing *M-n* and *M-p*
@@ -3111,15 +3119,15 @@ themes of your choice from MELPA.
 :PROPERTIES:
 :ID:       d9f960bc-0ef7-49df-b7d8-4c98f99893ac
 :END:
-*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+_Author_: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: [[http://www.emacswiki.org/emacs/InfoPlus][Emacswiki]]
+_Homepage_: [[http://www.emacswiki.org/emacs/InfoPlus][Emacswiki]]
 
-*_Features_*:
+_Features_:
 Info+ helps you read Info documents more enjoyable with extra
 highlighting it provides.
 
-*_Installation_*:
+_Installation_:
 n
 =M-x list-packages= and select *info+* package, then
 install it. After finish installing, add this code snippet to activate
@@ -3136,17 +3144,17 @@ the package:
 :PROPERTIES:
 :ID:       f1eadf8c-e8d5-49f0-9c8a-2b14b5129da5
 :END:
-*_Author_*: [[http://steckerhalter.co.vu/][steckerhalter]]
+_Author_: [[http://steckerhalter.co.vu/][steckerhalter]]
 
-*_Homepage_*: [[https://github.com/steckerhalter/discover-my-major][Github]]
+_Homepage_: [[https://github.com/steckerhalter/discover-my-major][Github]]
 
-*_Features_*:
+_Features_:
 
 Discover key bindings and their meaning for the current Emacs major mode.
 
 [[file:static/part3/discover-my-major.png][file:static/part3/discover-my-major.png]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *discover-my-major* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -3156,24 +3164,24 @@ package:
   (define-key 'help-command (kbd "C-m") 'discover-my-major)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 *** Package: =rainbow-mode=
 :PROPERTIES:
 :ID:       c0171162-e9cf-4e6e-a96b-b8304f68b020
 :END:
-*_Author_*: Julien Danjou, =julien@danjou.info=
+_Author_: Julien Danjou, =julien@danjou.info=
 
-*_Homepage_*: [[http://elpa.gnu.org/packages/rainbow-mode.html][GNU ELPA]]
+_Homepage_: [[http://elpa.gnu.org/packages/rainbow-mode.html][GNU ELPA]]
 
-*_Features_*:
+_Features_:
 
 This minor mode sets background color to strings that match color
 names, e.g. #0000ff is displayed in white with a blue background.
 
 [[file:static/part3/rainbow-mode.png][file:static/part3/rainbow-mode.png]]
 
-*_Installation_*:
+_Installation_:
 =M-x list-packages= and select *rainbow-mode* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
@@ -3192,7 +3200,7 @@ It is useful to always activate =rainbow-mode= in those two major
 modes. For other modes, it is situational, so I don't use
 =prog-mode-hook=.
 
-*_Usage_*:
+_Usage_:
 
 As you type a hex number or a color string in a buffer with
 =rainbow-mode= activated, the hex number or color string is
@@ -3201,15 +3209,15 @@ colourized.
 :PROPERTIES:
 :ID:       eb0f4552-02af-4500-a839-82016cff719c
 :END:
-*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+_Author_: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: [[http://www.emacswiki.org/emacs/HelpPlus][Emacswiki]]
+_Homepage_: [[http://www.emacswiki.org/emacs/HelpPlus][Emacswiki]]
 
-*_Features_*:
+_Features_:
 
 Extensions to `help.el' for Emacs 
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *help+* package, then
 install it. After finish installing, add this code snippet to activate
@@ -3224,7 +3232,7 @@ the package:
   (require 'help+)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 The following bindings are made:
 
@@ -3242,15 +3250,15 @@ The following bindings are made:
 :PROPERTIES:
 :ID:       8fd8c1ee-555c-4ba4-9513-176c5e382b72
 :END:
-*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+_Author_: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: [[http://www.emacswiki.org/emacs/HelpPlus][Emacswiki]]
+_Homepage_: [[http://www.emacswiki.org/emacs/HelpPlus][Emacswiki]]
 
-*_Features_*:
+_Features_:
 
 Extensions to `help-fns.el'
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *help-fns+* package, then
 install it. After finish installing, add this code snippet to activate
@@ -3265,7 +3273,7 @@ the package:
   (require 'help-fns+)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 Keys bound here:
 
@@ -3283,11 +3291,11 @@ Keys bound here:
 :PROPERTIES:
 :ID:       6d65f9ca-ab61-4d8e-83ac-40f9325e1780
 :END:
-*_Author_*: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
+_Author_: [[http://www.emacswiki.org/emacs/DrewAdams][Drew Adams]], =drew.adams@oracle.com=
 
-*_Homepage_*: [[http://www.emacswiki.org/emacs/HelpModePlus][Emacswiki]]
+_Homepage_: [[http://www.emacswiki.org/emacs/HelpModePlus][Emacswiki]]
 
-*_Features_*:
+_Features_:
 
 Extensions to `help-mode.el'
 
@@ -3308,7 +3316,7 @@ description lists all of the libraries currently loaded in Emacs.
   list is linked to the library (code) itself. Click a name to
   edit/view the library file.
 
-*_Installation_*:
+_Installation_:
 
 =M-x list-packages= and select *help-mode+* package, then
 install it. After finish installing, add this code snippet to activate
@@ -3323,7 +3331,7 @@ the package:
   (require 'help-mode+)
 #+end_src
 
-*_Usage_*:
+_Usage_:
 
 If a =*Help*= buffer contains other library names, the names
 automatically becomes links to jump to.
