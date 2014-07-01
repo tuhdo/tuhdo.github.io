@@ -40,26 +40,24 @@ Minimal config:
 My extended config:
 
 #+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; PACKAGE: helm              ;;
   ;;                            ;;
   ;; GROUP: Convenience -> Helm ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'helm)
   (require 'helm-config)
   (require 'helm-eshell)
   (require 'helm-files)
-  (require 'wgrep-helm)
+  (require 'helm-grep)
 
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
-  (eval-after-load 'helm-grep
-    '(progn
-       (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
-       (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
-       (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)))
+  (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
+  (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
+  (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
 
   (setq
    helm-google-suggest-use-curl-p t
@@ -101,6 +99,7 @@ My extended config:
   (global-set-key (kbd "C-c h f") 'helm-find)
   (global-set-key (kbd "C-c h l") 'helm-locate)
   (global-set-key (kbd "C-c h o") 'helm-occur)
+  (global-set-key (kbd "C-c h r") 'helm-resume)
   (global-set-key (kbd "C-h C-f") 'helm-apropos)
 
   ;; use helm to list eshell history
@@ -108,7 +107,7 @@ My extended config:
             #'(lambda ()
                 (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
 
-  ;;; Save current position to mark ring
+    ;;; Save current position to mark ring
   (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
   (helm-mode)
@@ -426,6 +425,21 @@ typing. The demo starts when you see START in the minibuffer.
 :END:
 Similar to *C-h a* which runs =apropos-command=, but use Helm
 interface and update as you type.
+
+*** Command: =helm-resume=
+    This command allows you to resume the previous Helm session, along
+    with your previous patterns in the prompt. For example, if your
+    last helm session was =helm-do-grep= and you entered patterns in
+    Helm prompt, =helm-resume= resumes that session along with your
+    previous input.
+
+    This is really convenient when you have complex input ,and
+    preparation steps. For example, if you have multiple regexp
+    patterns in your previous Helm session, then you don't have to
+    type it again. Or in your previous Helm session, you have to
+    travel to a deep directory, and =helm-resume= helps you to reuse
+    your previous session without going through all the troubles
+    again.
 
 *** Package: =helm-projectile=
 :PROPERTIES:
