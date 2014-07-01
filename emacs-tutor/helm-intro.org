@@ -3,4 +3,4 @@
 This guide is extracted from part 3 of the Mini Manual series, for
 people who only wants to learn Helm and what makes it great.
 
-#+INCLUDE: helm.org
+#+INCLUDE: ../share/helm.org

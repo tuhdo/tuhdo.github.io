@@ -1619,7 +1619,7 @@ using them in later Emacs sessions.
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
 :END:
 
-#+INCLUDE: helm.org
+#+INCLUDE: ../share/helm.org
 
 ** Alternative to Helm: =ido= + =ido-ubiquitous= + =flx-ido= + =smex=
 :PROPERTIES:
