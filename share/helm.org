@@ -147,7 +147,7 @@ completion:
 /updated *automatically*. In vanilla Emacs, you have to *TAB* to get a//
 /list of candidate. This is a great feature from Helm, not a miss of/
 /feature. You have to forget the mentally of *TABBING* to get/
-/candidates. If you want quick completion of search strings in Helm/
+/candidates. If you want quick completion of search patterns in Helm/
 /prompt, you always have =hippie-expand= to replace the *TAB*/
 /behaviour, as introduced at the beginning of this section. This is/
 /the biggest confusion for new people switching to Helm. When you are/
@@ -269,30 +269,45 @@ regexp in their contents, by using the query =@content=. For example,
 you can select buffers that only contain the string "test":
 =@test=. If you want to see the positions of the string in the
 buffers, *C-s* while in =helm-mini= session to switch to
-=helm-moccur=.
+=helm-moccur=. You can mark buffers to search by *C-SPC* or you can
+select all buffers by *M-a*.
+
+Meaning of colors and prefixes for buffers:
+
+- Remote buffers are prefixed with '@'.
+- Red => Buffer have its file modified on disk by an external
+  process.
+- Indianred2 => Buffer exists but its file have been deleted.
+- Orange => Buffer is modified and its file not saved to disk.
+- Italic => A non--file buffer.
+
+Some Emacs themes change the colors. You should check the
+corresponding colour in your color themes.
 
 Example:
 
-- If I enter in pattern prompt: "*lisp ^helm @moc"
-  Helm will narrow down the list by selecting only buffers that are in
-  lisp mode, start by helm and match \"moc\" in their contents.
+- If I enter in pattern prompt: =*lisp ^helm @moc=, Helm will narrow
+  down the list by selecting only buffers that are in lisp mode, start
+  by helm and match "moc" in their contents.
 
-- If I enter in pattern prompt: "*lisp ^helm moc"
-  Notice there is no =@= this time helm will look for lisp mode
-  buffers starting by "helm" and have "moc" in their name.
+- If I want to specify more than one major-mode, separate them with
+  =,=, e.g =*!lisp,!sh,!fun= will list all buffers but the ones in
+  lisp-mode, sh-mode and fundamental-mode.
 
-- If I enter in pattern prompt: "*!lisp !helm"
-  Helm will narrow down to buffers that are not in \"lisp\" mode and
-  that do not match "helm".
+- If I enter in pattern prompt: =*lisp ^helm moc=. Notice there is no
+  =@= this time helm will look for lisp mode buffers starting by
+  "helm" and have "moc" in their name.
 
-- If I enter in pattern prompt: "/helm/ w3"
-  Helm will narrow down to buffers that are in any "helm" sub-directory
-  and matching w3.
+- If I enter in pattern prompt: =*!lisp !helm= Helm will narrow down
+  to buffers that are not in "lisp" mode and that do not match "helm".
+
+- If I enter in pattern prompt: =/helm/ w3= Helm will narrow down
+  buffers that are in any "helm" sub-directory and matching w3.
 
  =helm-mini= is like an interactive version of =ibuffer=.
 
 Demo: Search for buffers that contain string "Answer", and transfer
-the search string to =helm-moccur= for the exact matches (the demo
+the search patterns to =helm-moccur= for the exact matches (the demo
 starts when you see START in the minibuffer):
 
 [[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]]
@@ -488,7 +503,7 @@ using Helm interface for narrowing.
 Helm's strengths:
 
 - /_Simple and Consistent interface_/: Every Helm session starts with
-  a same simple interface: a prompt for entering search strings and
+  a same simple interface: a prompt for entering search patterns and
   a Helm buffer for displying results as a user types. Because of the
   consistency and simple interface, new people use Helm with ease.
 
@@ -499,15 +514,16 @@ Helm's strengths:
   =helm-do-grep=, update grep results as you type.
 
 - /_Matching mechanism_/: This is a powerful feature in Helm that I
-  hvaen't seen in other packages: out of order matching with regex. A
-  really powerful concept: it enhances explanatory power for many
-  things. One of use cases is exploring a new project: using Helm, you
-  can "learn" the project structure interactively. For example,
-  suppose I'm completely new to the linux kernel source tree, and I
-  wonder whether a file =main.c= exists for =x86= architecture. I know
-  that they must have =x86= directory somewhere, and the file could
-  contain =main.c= in it, i.e. It can be =main.c= or
-  =x86-main.c=. These are the only information I know, so I must
+  hvaen't seen in other packages: out of order matching, *with
+  regex*. That's right, you can enter every search pattern as
+  regex!. A really powerful concept: it enhances explanatory power for
+  many things. One of use cases is exploring a new project: using
+  Helm, you can "learn" the project structure interactively. For
+  example, suppose I'm completely new to the linux kernel source tree,
+  and I wonder whether a file =main.c= exists for =x86=
+  architecture. I know that they must have =x86= directory somewhere,
+  and the file could contain =main.c= in it, i.e. It can be =main.c=
+  or =x86-main.c=. These are the only information I know, so I must
   confirm whether it is true or not, so I tried it in Helm:
 
   [[file:static/helm_projectile.gif][file:static/helm_projectile.gif]]

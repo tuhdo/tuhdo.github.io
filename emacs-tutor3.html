@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-01 Tue 13:36 -->
+<!-- 2014-07-01 Tue 17:25 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -2798,7 +2798,7 @@ buffer that is displaying the candidates. Please try it.
 <i>updated <b>automatically</b>. In vanilla Emacs, you have to <b>TAB</b> to get a/</i>
 <i>list of candidate. This is a great feature from Helm, not a miss of</i>
 <i>feature. You have to forget the mentally of <b>TABBING</b> to get</i>
-<i>candidates. If you want quick completion of search strings in Helm</i>
+<i>candidates. If you want quick completion of search patterns in Helm</i>
 <i>prompt, you always have <code>hippie-expand</code> to replace the <b>TAB</b></i>
 <i>behaviour, as introduced at the beginning of this section. This is</i>
 <i>the biggest confusion for new people switching to Helm. When you are</i>
@@ -2973,7 +2973,31 @@ regexp in their contents, by using the query <code>@content</code>. For example,
 you can select buffers that only contain the string "test":
 <code>@test</code>. If you want to see the positions of the string in the
 buffers, <b>C-s</b> while in <code>helm-mini</code> session to switch to
-<code>helm-moccur</code>.
+<code>helm-moccur</code>. You can mark buffers to search by <b>C-SPC</b> or you can
+select all buffers by <b>M-a</b>.
+</p>
+
+<p>
+Meaning of colors and prefixes for buffers:
+</p>
+
+<ul class="org-ul">
+<li>Remote buffers are prefixed with '@'.
+</li>
+<li>Red =&gt; Buffer have its file modified on disk by an external
+process.
+</li>
+<li>Indianred2 =&gt; Buffer exists but its file have been deleted.
+</li>
+<li>Orange =&gt; Buffer is modified and its file not saved to disk.
+</li>
+<li>Italic =&gt; A non&#x2013;file buffer.
+</li>
+</ul>
+
+<p>
+Some Emacs themes change the colors. You should check the
+corresponding colour in your color themes.
 </p>
 
 <p>
@@ -2981,24 +3005,27 @@ Example:
 </p>
 
 <ul class="org-ul">
-<li>If I enter in pattern prompt: "*lisp ^helm @moc"
-Helm will narrow down the list by selecting only buffers that are in
-lisp mode, start by helm and match \"moc\" in their contents.
+<li>If I enter in pattern prompt: <code>*lisp ^helm @moc</code>, Helm will narrow
+down the list by selecting only buffers that are in lisp mode, start
+by helm and match "moc" in their contents.
 </li>
 
-<li>If I enter in pattern prompt: "*lisp ^helm moc"
-Notice there is no <code>@</code> this time helm will look for lisp mode
-buffers starting by "helm" and have "moc" in their name.
+<li>If I want to specify more than one major-mode, separate them with
+<code>,</code>, e.g <code>*!lisp,!sh,!fun</code> will list all buffers but the ones in
+lisp-mode, sh-mode and fundamental-mode.
 </li>
 
-<li>If I enter in pattern prompt: "*!lisp !helm"
-Helm will narrow down to buffers that are not in \"lisp\" mode and
-that do not match "helm".
+<li>If I enter in pattern prompt: <code>*lisp ^helm moc</code>. Notice there is no
+<code>@</code> this time helm will look for lisp mode buffers starting by
+"helm" and have "moc" in their name.
 </li>
 
-<li>If I enter in pattern prompt: "<i>helm</i> w3"
-Helm will narrow down to buffers that are in any "helm" sub-directory
-and matching w3.
+<li>If I enter in pattern prompt: <code>*!lisp !helm</code> Helm will narrow down
+to buffers that are not in "lisp" mode and that do not match "helm".
+</li>
+
+<li>If I enter in pattern prompt: <code>/helm/ w3</code> Helm will narrow down
+buffers that are in any "helm" sub-directory and matching w3.
 
 <p>
 <code>helm-mini</code> is like an interactive version of <code>ibuffer</code>.
@@ -3008,7 +3035,7 @@ and matching w3.
 
 <p>
 Demo: Search for buffers that contain string "Answer", and transfer
-the search string to <code>helm-moccur</code> for the exact matches (the demo
+the search patterns to <code>helm-moccur</code> for the exact matches (the demo
 starts when you see START in the minibuffer):
 </p>
 
@@ -3312,7 +3339,7 @@ Helm's strengths:
 
 <ul class="org-ul">
 <li><i><span class="underline">Simple and Consistent interface</span></i>: Every Helm session starts with
-a same simple interface: a prompt for entering search strings and
+a same simple interface: a prompt for entering search patterns and
 a Helm buffer for displying results as a user types. Because of the
 consistency and simple interface, new people use Helm with ease.
 </li>
@@ -3325,15 +3352,16 @@ commmands that do not exist outside of Helm. For example,
 </li>
 
 <li><i><span class="underline">Matching mechanism</span></i>: This is a powerful feature in Helm that I
-hvaen't seen in other packages: out of order matching with regex. A
-really powerful concept: it enhances explanatory power for many
-things. One of use cases is exploring a new project: using Helm, you
-can "learn" the project structure interactively. For example,
-suppose I'm completely new to the linux kernel source tree, and I
-wonder whether a file <code>main.c</code> exists for <code>x86</code> architecture. I know
-that they must have <code>x86</code> directory somewhere, and the file could
-contain <code>main.c</code> in it, i.e. It can be <code>main.c</code> or
-<code>x86-main.c</code>. These are the only information I know, so I must
+hvaen't seen in other packages: out of order matching, <b>with
+regex</b>. That's right, you can enter every search pattern as
+regex!. A really powerful concept: it enhances explanatory power for
+many things. One of use cases is exploring a new project: using
+Helm, you can "learn" the project structure interactively. For
+example, suppose I'm completely new to the linux kernel source tree,
+and I wonder whether a file <code>main.c</code> exists for <code>x86</code>
+architecture. I know that they must have <code>x86</code> directory somewhere,
+and the file could contain <code>main.c</code> in it, i.e. It can be <code>main.c</code>
+or <code>x86-main.c</code>. These are the only information I know, so I must
 confirm whether it is true or not, so I tried it in Helm:
 
 
