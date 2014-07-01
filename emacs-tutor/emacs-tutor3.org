@@ -2031,6 +2031,8 @@ _Features_:
 Provide Helm interface for quickly selecting files in a project using
 Projectile.
 
+[[file:static/helm_projectile.gif][file:static/helm_projectile.gif]]
+
 _Installation_:
 
 =M-x list-packages= and select *helm-projectile* package, then install
@@ -2084,6 +2086,57 @@ _Usage_:
 
 Enter a prefix key and *C-h* after it. You will see a list of bindings
 using Helm interface for narrowing.
+
+*** Why Helm is poweful
+:PROPERTIES:
+:ID:       260dfe60-eb43-4d20-b1c4-b51af5133a32
+:END:
+Helm's strengths:
+
+- /_Simple and Consistent interface_/: Every Helm session starts with
+  a same simple interface: a prompt for entering search strings and
+  a Helm buffer for displying results as a user types. Because of the
+  consistency and simple interface, new people use Helm with ease.
+
+- /_Interactivity_/: By nature, Helm is very interactive: as a user
+  types, results get updated immediately in the Helm buffer. Because
+  of this feature, Helm provides a unique interactive verion of many
+  commmands that do not exist outside of Helm. For example,
+  =helm-do-grep=, update grep results as you type.
+
+- /_Matching mechanism_/: This is a powerful feature in Helm that I
+  hvaen't seen in other packages: out of order matching with regex. A
+  really powerful concept: it enhances explanatory power for many
+  things. One of use cases is exploring a new project: using Helm, you
+  can "learn" the project structure interactively. For example,
+  suppose I'm completely new to the linux kernel source tree, and I
+  wonder whether a file =main.c= exists for =x86= architecture. I know
+  that they must have =x86= directory somewhere, and the file could
+  contain =main.c= in it, i.e. It can be =main.c= or
+  =x86-main.c=. These are the only information I know, so I must
+  confirm whether it is true or not, so I tried it in Helm:
+
+  [[file:static/helm_projectile.gif][file:static/helm_projectile.gif]]
+
+  It does exist. I also wonder where =i5100_edac.c= exists, because
+  Intel has a datasheet for it a long time, so it must be
+  implemented. As demonstrated in the above screencast, there was only
+  one =i5100_eda.c=. Using other so-called "fuzzy-matching" mechanism,
+  you are still required to know things in advanced and this severely
+  limit the explanatory power. For example, to get to the file
+  =driver/edac/i5100_edac.c=, you have to know the path to fuzzy
+  match like this: =dedi51=; *d* for matching =driver=, *ed* for matching
+  =edac= because other directories also start with "e"; *i51* for
+  matching =i5100_edac.c= because serveral files also start with "i5",
+  or contains "1" and "0" or "edac" in it. "i51" is the only unique
+  prefix. Using Helm, you can immediately enter the unique pattern of
+  a candidate and ignore the common prefix to get a candidate. For
+  example, in the screencast above, I got =driver/edac/i5100_edac.c=
+  immediately just by typing "*i51*" and the file was narrowed down.
+
+  It's also not all that useful when using with a large source tree,
+  since the source tree contains a large amount of files, and many of
+  these files have same prefix.
 
 ** Alternative to Helm: =ido= + =ido-ubiquitous= + =flx-ido= + =smex=
 :PROPERTIES:
