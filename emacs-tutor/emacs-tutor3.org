@@ -140,11 +140,13 @@ settings. An Emacs setting is really just a variable. Emacs has GUI
 for changing setting, but =setq= a variable is also equivalent.
 
 _Example_:
+
 #+begin_src emacs-lisp
     (setq global-mark-ring-max 50000)
 #+end_src
 
 _Built-in Documentation_:
+
 #+BEGIN_QUOTE
 Set each /SYM/ to the value of its /VAL/.
 The symbols /SYM/ are variables; they are literal (not evaluated).
@@ -281,6 +283,7 @@ from. A programming mode can be =c-mode=, =asm-mode=,
 =emacs-lisp-mode=, =java-mode=...
 
 _Built-in Documentation_:
+
 #+BEGIN_QUOTE
 Add to the value of HOOK the function /FUNCTION/.
 /FUNCTION/ is not added if already present.
@@ -461,6 +464,7 @@ _Example_: Put the following aliases in your =init.el=:
 #+end_src
 
 _Built-in Documentation_:
+
 #+BEGIN_QUOTE
 Set /SYMBOL/'s function definition to /DEFINITION/.
 Associates the function with the current load file, if any.
@@ -472,6 +476,28 @@ Internally, this normally uses `fset', but if /SYMBOL/ has a
 `defalias-fset-function' property, the associated value is used instead.
 
 The return value is undefined.
+#+END_QUOTE
+
+** Function: *(mapc /FUNCTION/ /SEQUENCE/)*
+:PROPERTIES:
+:ID:       b63e4bf4-a904-45b0-bf4c-69e0b761135c
+:END:
+_Comment_: =mapc= calls the function =FUNCTION= on each element of the
+sequence =SEQUENCE=.
+
+_Example_:
+
+#+begin_src emacs-lisp
+  ;; load every .el file inside ~/.emacs.d/custom/
+  (mapc 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
+#+end_src
+
+_Built-in Documentation_:
+
+#+BEGIN_QUOTE
+Apply /FUNCTION/ to each element of /SEQUENCE/ for side effects only.
+Unlike `mapcar', don't accumulate the results.  Return /SEQUENCE/.
+/SEQUENCE/ may be a list, a vector, a bool-vector, or a string.
 #+END_QUOTE
 
 ** Macro: *(defun /NAME/ /ARGLIST/ &optional /DOCSTRING/ /DECL/ &rest /BODY/)*
@@ -504,6 +530,7 @@ as a number, a string, symbol, buffer names... You can *C-h f* and
 type =interactive= to find out more.
 
 _Built-in Documentation_:
+
 #+BEGIN_QUOTE
 Define /NAME/ as a function.
 The definition is (lambda /ARGLIST/ [/DOCSTRING/] /BODY/...).
@@ -771,15 +798,12 @@ customize=:
 
 - Create a directory: =~/.emacs.d/custom/=
 - Create the above =setup-*.el= files under it.
-- For each file, add its appropriate group. Add a comment at start of
-  each file, noting which group this file belongs to. For example:
+- Load the files above using =mapc=:
 
-  #+begin_src emacs-lisp
-    ;,--------------------------------------
-    ;| MAIN GROUP: Editing
-    ;`--------------------------------------
-  #+end_src
-  
+#+begin_src emacs-lisp
+  (mapc 'load (directory-files "~/.emacs.d/custom" t ".*\.el"))
+#+end_src
+
 You already installed the package =rebox2= in [[*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package
 manager]] section. When you mark a region and *M-q*, you can create the
 above comment box. There are many styles, you can cycle by pressing

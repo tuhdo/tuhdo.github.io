@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-07-01 T3 00:46 -->
+<!-- 2014-07-01 Tue 09:40 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -172,7 +172,8 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-2-6">Function: <b>(global-set-key <i>KEY</i> <i>COMMAND</i>)</b></a></li>
 <li><a href="#sec-2-7">Function: <b>(define-key <i>KEYMAP</i> <i>KEY</i> <i>DEF</i>)</b></a></li>
 <li><a href="#sec-2-8">Function: <b>(defalias <i>SYMBOL</i> <i>DEFINITION</i> &amp;optional <i>DOCSTRING</i>)</b></a></li>
-<li><a href="#sec-2-9">Macro: <b>(defun <i>NAME</i> <i>ARGLIST</i> &amp;optional <i>DOCSTRING</i> <i>DECL</i> &amp;rest <i>BODY</i>)</b></a></li>
+<li><a href="#sec-2-9">Function: <b>(mapc <i>FUNCTION</i> <i>SEQUENCE</i>)</b></a></li>
+<li><a href="#sec-2-10">Macro: <b>(defun <i>NAME</i> <i>ARGLIST</i> &amp;optional <i>DOCSTRING</i> <i>DECL</i> &amp;rest <i>BODY</i>)</b></a></li>
 </ul>
 </li>
 <li><a href="#sec-3">Useful built-in key bindings for navigating pairs</a></li>
@@ -466,6 +467,7 @@ for changing setting, but <code>setq</code> a variable is also equivalent.
 <p>
 <span class="underline">Example</span>:
 </p>
+
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(setq global-mark-ring-max <span style="color: #008b8b;">50000</span>)
@@ -475,6 +477,7 @@ for changing setting, but <code>setq</code> a variable is also equivalent.
 <p>
 <span class="underline">Built-in Documentation</span>:
 </p>
+
 <blockquote>
 <p>
 Set each <i>SYM</i> to the value of its <i>VAL</i>.
@@ -665,6 +668,7 @@ from. A programming mode can be <code>c-mode</code>, <code>asm-mode</code>,
 <p>
 <span class="underline">Built-in Documentation</span>:
 </p>
+
 <blockquote>
 <p>
 Add to the value of HOOK the function <i>FUNCTION</i>.
@@ -978,6 +982,7 @@ used to abbreviate command name.
 <p>
 <span class="underline">Built-in Documentation</span>:
 </p>
+
 <blockquote>
 <p>
 Set <i>SYMBOL</i>'s function definition to <i>DEFINITION</i>.
@@ -999,8 +1004,40 @@ The return value is undefined.
 </div>
 </div>
 <div id="outline-container-sec-2-9" class="outline-3">
-<h3 id="sec-2-9"><a id="ID-0d30e7ca-7282-441e-868b-0b07ce2eaf70"></a>Macro: <b>(defun <i>NAME</i> <i>ARGLIST</i> &amp;optional <i>DOCSTRING</i> <i>DECL</i> &amp;rest <i>BODY</i>)</b></h3>
+<h3 id="sec-2-9"><a id="ID-b63e4bf4-a904-45b0-bf4c-69e0b761135c"></a>Function: <b>(mapc <i>FUNCTION</i> <i>SEQUENCE</i>)</b></h3>
 <div class="outline-text-3" id="text-2-9">
+<p>
+<span class="underline">Comment</span>: <code>mapc</code> calls the function <code>FUNCTION</code> on each element of the
+sequence <code>SEQUENCE</code>.
+</p>
+
+<p>
+<span class="underline">Example</span>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">load every .el file inside ~/.emacs.d/custom/</span>
+(mapc 'load (directory-files <span style="color: #8b2252;">"~/.emacs.d/custom"</span> t <span style="color: #8b2252;">".*\.el"</span>))
+</pre>
+</div>
+
+<p>
+<span class="underline">Built-in Documentation</span>:
+</p>
+
+<blockquote>
+<p>
+Apply <i>FUNCTION</i> to each element of <i>SEQUENCE</i> for side effects only.
+Unlike `mapcar', don't accumulate the results.  Return <i>SEQUENCE</i>.
+<i>SEQUENCE</i> may be a list, a vector, a bool-vector, or a string.
+</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-sec-2-10" class="outline-3">
+<h3 id="sec-2-10"><a id="ID-0d30e7ca-7282-441e-868b-0b07ce2eaf70"></a>Macro: <b>(defun <i>NAME</i> <i>ARGLIST</i> &amp;optional <i>DOCSTRING</i> <i>DECL</i> &amp;rest <i>BODY</i>)</b></h3>
+<div class="outline-text-3" id="text-2-10">
 <p>
 <span class="underline">Comment</span>: <code>defun</code> is a Lisp macro that allows you to define a
 function, like any other language. A function is a collection of
@@ -1045,6 +1082,7 @@ type <code>interactive</code> to find out more.
 <p>
 <span class="underline">Built-in Documentation</span>:
 </p>
+
 <blockquote>
 <p>
 Define <i>NAME</i> as a function.
@@ -1464,18 +1502,15 @@ customize</code>:
 </li>
 <li>Create the above <code>setup-*.el</code> files under it.
 </li>
-<li>For each file, add its appropriate group. Add a comment at start of
-each file, noting which group this file belongs to. For example:
+<li>Load the files above using <code>mapc</code>:
+</li>
+</ul>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
-<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Editing</span>
-<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
+<pre class="src src-emacs-lisp">(mapc 'load (directory-files <span style="color: #8b2252;">"~/.emacs.d/custom"</span> t <span style="color: #8b2252;">".*\.el"</span>))
 </pre>
 </div>
-</li>
-</ul>
 
 <p>
 You already installed the package <code>rebox2</code> in <i>How to use Emacs package
