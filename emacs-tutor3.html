@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-01 T3 23:06 -->
+<!-- 2014-07-02 T4 00:12 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -2669,6 +2669,7 @@ Minimal config:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span>)
+(helm-mode <span style="color: #008b8b;">1</span>)
 </pre>
 </div>
 
@@ -2748,7 +2749,7 @@ My extended config:
   <span style="color: #b22222;">;;; </span><span style="color: #b22222;">Save current position to mark ring</span>
 (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
-(helm-mode)
+(helm-mode <span style="color: #008b8b;">1</span>)
 </pre>
 </div>
 

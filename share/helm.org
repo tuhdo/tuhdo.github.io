@@ -34,7 +34,7 @@ Minimal config:
   ;; GROUP: Convenience -> Helm ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'helm-config)
-
+  (helm-mode 1)
 #+end_src
 
 My extended config:
@@ -110,7 +110,7 @@ My extended config:
     ;;; Save current position to mark ring
   (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
-  (helm-mode)
+  (helm-mode 1)
 #+end_src
 
 _Usage_:
