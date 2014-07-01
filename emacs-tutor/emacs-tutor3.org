@@ -3,41 +3,41 @@
 :PROPERTIES:
 :ID:       bbed4318-de81-421d-a6c4-04b40b60b591
 :END:
-Emacs comes with a default settings. Some interesting features are
+Emacs comes with default settings. Some interesting features are
 disabled and hidden, i.e. ibuffer, Semantic, electric
-modes... Probably to make it more user friendly to new users and
-behave more like "normal" editors, i.e. Normal users do not expect
-automatic pairing of punctuation marks like parentheses, brackets,
-curly brackets...
+modes... Probably, to make it more user friendly to new users and
+make it behave more like "normal" editors, i.e. Normal users do not
+expect automatic pairing of punctuation marks like parentheses,
+brackets, curly brackets...
 
 Because the nature of Emacs is an extensible system, people write
 extensions to improve Emacs and share with others. The extensions
-improve various aspects of Emacs: Improve and add editing features,
-integrate 3rd party tools, add programming languages supports, change
-Emacs appearance... Without the ability to extend, Emacs will just be
-another obscure editor with some useful features but cannot meet the
-demands of people, because different people have different needs, and
-Emacs maintainers cannot provide them all and integrate all into
-Emacs. With the ability to extend, people can bend Emacs the way they
-want, much like Lisp.
+improve various aspects of Emacs: Improve existing and add new editing
+features, integrate 3rd party tools, add programming languages
+supports, change Emacs appearance... Without the ability to extend,
+Emacs will just be another obscure editor with some useful features
+but cannot meet the demands of people, because different people have
+different needs, and Emacs maintainers cannot provide them all and
+integrate all into Emacs. With the ability to extend, people can bend
+Emacs the way they want, much like Lisp.
 
 Unlike other editors which encourage users to stay with the default as
 much as they can, Emacs encourages users to customize and extend Emacs
 as much as they can.
 
 In the old days, when Emacs did not have a package manager and did
-not have many learning resources like now, it's really uneasy to
-customize Emacs, because to customize Emacs properly you have to read
-a decent chunk of the Emacs Lisp manual. Many of us, including me, do
-not have that luxury of time. The way I learned to customize Emacs was
-copying little code snippets that solve specific problems - when I
-encountered them - and paste everything in my =~/.emacs= file. I also
-had to download Emacs packages manually and load it manually in
-=~/.emacs=. I hope that this guide helps you to be at least as good as
-me in customizing Emacs without having to spend a long time in
-collecting configurations, or reading the whole Emacs Lisp
-manual. After you finish this chapter, you can dive in the Emacs Lisp
-manually if you want, and easier.
+not have many learning resources, it's really uneasy to customize
+Emacs, because to customize Emacs properly you have to read a decent
+chunk of the Emacs Lisp manual. Many of us, including me, do not have
+that luxury of time. The way I learned to customize Emacs was copying
+little code snippets that solve specific problems - when I encountered
+them - and paste everything in my =~/.emacs= file. I also had to
+download Emacs packages manually and load it manually in =~/.emacs=. I
+hope that this guide helps you to be at least as good as me in
+customizing Emacs without having to spend a long time in collecting
+configurations, or reading the whole Emacs Lisp manual. After you
+finish this chapter, you can dive in the Emacs Lisp manually if you
+want, and easier.
 
 * Just enough Emacs Lisp
 :PROPERTIES:
