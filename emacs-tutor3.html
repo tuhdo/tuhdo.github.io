@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-02 Wed 10:12 -->
+<!-- 2014-07-02 Wed 10:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -1572,6 +1572,7 @@ used to it.
  tab-width <span style="color: #008b8b;">4</span>)
 
 (delete-selection-mode)
+(global-set-key (kbd <span style="color: #8b2252;">"RET"</span>) 'newline-and-indent)  <span style="color: #b22222;">; </span><span style="color: #b22222;">automatically indent when press RET</span>
 
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Electricity      ;;</span>
@@ -1920,6 +1921,7 @@ the package:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Indent -&gt; Clean Aindent ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">clean-aindent-mode</span>)
+(add-hook 'prog-mode-hook 'clean-aindent-mode)
 </pre>
 </div>
 

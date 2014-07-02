@@ -850,6 +850,7 @@ customizations. You can use it either way:
      tab-width 4)
 
     (delete-selection-mode)
+    (global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; GROUP: Editing -> Electricity      ;;
@@ -1157,6 +1158,7 @@ the package:
   ;; GROUP: Editing -> Indent -> Clean Aindent ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'clean-aindent-mode)
+  (add-hook 'prog-mode-hook 'clean-aindent-mode)
 #+end_src
 
 _Usage_: 
