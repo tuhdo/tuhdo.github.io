@@ -94,6 +94,7 @@ My extended config:
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-c h s") 'helm-semantic-or-imenu)
   (global-set-key (kbd "C-c h m") 'helm-man-woman)
   (global-set-key (kbd "C-c h g") 'helm-do-grep)
   (global-set-key (kbd "C-c h f") 'helm-find)
@@ -240,7 +241,10 @@ built-in documentation of that command in another buffer.
 *NOTE*: You have to bind =helm-M-x= to *M-x* manually. Otherwise, you
  still get Helm completion, but using the vanilla *M-x* that does not
  provides the above features like showing key bindings and *TAB* to
- open built-in documentation.
+ open built-in documentation. Another important thing is, you have to
+ pass prefix argument *AFTER* you run =helm-M-x=, because your prefix
+ argument will be displayed in the modeline when in =helm-M-x=
+ buffer. Passing prefix argument *BEFORE* =helm-M-x= *has no effect*.
 
 Demo:
 
@@ -342,7 +346,7 @@ Demo: Search for buffers that contain string "Answer", and transfer
 the search patterns to =helm-moccur= for the exact matches (the demo
 starts when you see START in the minibuffer):
 
-[[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]]
+[[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]
 
 *** Command: =helm-find-files=
 :PROPERTIES:
@@ -404,6 +408,52 @@ point on a proper filepath, and Helm will reach the correct path for
 you, similar to the screenshot. Now, you have no longer to use a
 separate command for open file at point, but using the same *C-x
 C-f*. It's really convenient.
+
+*** Command: =helm-semantic-or-imenu=
+    The Imenu facility offers a way to find the major definitions,
+    such as function definitions, variable definitions in a file by
+    name. You can run =imenu= command individually.
+
+    Semantic is a package that provides language-aware editing
+    commands based on 'source code parsers'.  When enabled, each file
+    you visit is automatically parsed. Semantic provides execellent
+    supports for C/C++. To enable Semantic mode, execute
+    =(semantic-mode 1)=.
+
+    Helm offers an interface to both Semantic and Imenu at the same
+    time: If `semantic-mode' is active in the current buffer, then use
+    semantic for generating tags, otherwise fall back to =imenu=. If
+    point is on a symbol, helm feeds the symbol into input prompt by
+    default.
+
+    Demo: Here is =helm-semantic-or-imenu= in action, please notice
+    the "pattern: " prompt in the minibuffer:
+
+    - At first, I narrow to candidates that are functions with this
+      pattern in the prompt: =Functi=.
+
+    - Then, I narrow to candidates that are functions and contains
+      =void= in it with this pattern: =functi void=, effectively
+      select functions that have type =void= and accepts =void= arguments.
+
+    - Then, I narrow to candidates that are functions and contains
+      =int= in it with this pattern: =functi int=, effectively select
+      functions that have type =int= and accpets =int= arguments.
+
+    - Then, I narrow to candidates that are variables and contains
+      =u16= in it, effectively select only variables that have type
+      =u16=; the same for =u32= in the demo. 
+
+      [[file:static/part3/helm-semantic-or-imenu.gif][file:static/part3/helm-semantic-or-imenu.gif]]
+
+   *RET* to visit the the candidate location. The above examples are
+   just demonstration. You can narrow to anything you want with
+   search patterns separated by spaces, i.e. you can use two
+   string, one is "func" and one is part of a function name, and
+   Helm can narrow to it fine.
+
+   In the demo, you see things like =class u16= and =class u32=; that
+   is because =u16= and =u32= are defined by typedef.
 
 *** Command: =helm-man-woman=
 :PROPERTIES:

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-02 T4 23:13 -->
+<!-- 2014-07-03 T5 00:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="tuhdo" />
@@ -212,17 +212,18 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-4-5-3">Command: <code>helm-show-kill-ring</code></a></li>
 <li><a href="#sec-4-5-4">Command: <code>helm-mini</code></a></li>
 <li><a href="#sec-4-5-5">Command: <code>helm-find-files</code></a></li>
-<li><a href="#sec-4-5-6">Command: <code>helm-man-woman</code></a></li>
-<li><a href="#sec-4-5-7">Command: <code>helm-do-grep</code></a></li>
-<li><a href="#sec-4-5-8">Command: <code>helm-find</code></a></li>
-<li><a href="#sec-4-5-9">Command: <code>helm-locate</code></a></li>
-<li><a href="#sec-4-5-10">Command: <code>helm-occur</code></a></li>
-<li><a href="#sec-4-5-11">Command: <code>helm-apropos</code></a></li>
-<li><a href="#sec-4-5-12">Command: <code>helm-info-emacs</code></a></li>
-<li><a href="#sec-4-5-13">Command: <code>helm-resume</code></a></li>
-<li><a href="#sec-4-5-14">Package: <code>helm-projectile</code></a></li>
-<li><a href="#sec-4-5-15">Package: <code>helm-descbind</code></a></li>
-<li><a href="#sec-4-5-16">Why Helm is poweful</a></li>
+<li><a href="#sec-4-5-6">Command: <code>helm-semantic-or-imenu</code></a></li>
+<li><a href="#sec-4-5-7">Command: <code>helm-man-woman</code></a></li>
+<li><a href="#sec-4-5-8">Command: <code>helm-do-grep</code></a></li>
+<li><a href="#sec-4-5-9">Command: <code>helm-find</code></a></li>
+<li><a href="#sec-4-5-10">Command: <code>helm-locate</code></a></li>
+<li><a href="#sec-4-5-11">Command: <code>helm-occur</code></a></li>
+<li><a href="#sec-4-5-12">Command: <code>helm-apropos</code></a></li>
+<li><a href="#sec-4-5-13">Command: <code>helm-info-emacs</code></a></li>
+<li><a href="#sec-4-5-14">Command: <code>helm-resume</code></a></li>
+<li><a href="#sec-4-5-15">Package: <code>helm-projectile</code></a></li>
+<li><a href="#sec-4-5-16">Package: <code>helm-descbind</code></a></li>
+<li><a href="#sec-4-5-17">Why Helm is poweful</a></li>
 </ul>
 </li>
 <li><a href="#sec-4-6">Alternative to Helm: <code>ido</code> + <code>ido-ubiquitous</code> + <code>flx-ido</code> + <code>smex</code></a>
@@ -2737,6 +2738,7 @@ My extended config:
 (global-set-key (kbd <span style="color: #8b2252;">"M-y"</span>) 'helm-show-kill-ring)
 (global-set-key (kbd <span style="color: #8b2252;">"C-x b"</span>) 'helm-mini)
 (global-set-key (kbd <span style="color: #8b2252;">"C-x C-f"</span>) 'helm-find-files)
+(global-set-key (kbd <span style="color: #8b2252;">"C-c h s"</span>) 'helm-semantic-or-imenu)
 (global-set-key (kbd <span style="color: #8b2252;">"C-c h m"</span>) 'helm-man-woman)
 (global-set-key (kbd <span style="color: #8b2252;">"C-c h g"</span>) 'helm-do-grep)
 (global-set-key (kbd <span style="color: #8b2252;">"C-c h f"</span>) 'helm-find)
@@ -2934,7 +2936,10 @@ built-in documentation of that command in another buffer.
 <b>NOTE</b>: You have to bind <code>helm-M-x</code> to <b>M-x</b> manually. Otherwise, you
  still get Helm completion, but using the vanilla <b>M-x</b> that does not
  provides the above features like showing key bindings and <b>TAB</b> to
- open built-in documentation.
+ open built-in documentation. Another important thing is, you have to
+ pass prefix argument <b>AFTER</b> you run <code>helm-M-x</code>, because your prefix
+ argument will be displayed in the modeline when in <code>helm-M-x</code>
+ buffer. Passing prefix argument <b>BEFORE</b> <code>helm-M-x</code> <b>has no effect</b>.
 </p>
 
 <p>
@@ -3094,11 +3099,9 @@ the search patterns to <code>helm-moccur</code> for the exact matches (the demo
 starts when you see START in the minibuffer):
 </p>
 
-
-<div class="figure">
-<p><a href="static/part3/helm-mini.gif"><img src="static/part3/helm-mini.gif" alt="helm-mini.gif" /></a>
+<p>
+[[<img src="static/part3/helm-mini.gif][file:static/part3/helm-mini.gif" alt="helm-mini.gif" />]
 </p>
-</div>
 </div>
 </div>
 <div id="outline-container-sec-4-5-5" class="outline-4">
@@ -3194,8 +3197,79 @@ C-f</b>. It's really convenient.
 </div>
 </div>
 <div id="outline-container-sec-4-5-6" class="outline-4">
-<h4 id="sec-4-5-6"><a id="ID-2578b1bd-7ae9-4250-b701-c9191603404f"></a>Command: <code>helm-man-woman</code></h4>
+<h4 id="sec-4-5-6">Command: <code>helm-semantic-or-imenu</code></h4>
 <div class="outline-text-4" id="text-4-5-6">
+<p>
+The Imenu facility offers a way to find the major definitions,
+such as function definitions, variable definitions in a file by
+name. You can run <code>imenu</code> command individually.
+</p>
+
+<p>
+Semantic is a package that provides language-aware editing
+commands based on 'source code parsers'.  When enabled, each file
+you visit is automatically parsed. Semantic provides execellent
+supports for C/C++. To enable Semantic mode, execute
+<code>(semantic-mode 1)</code>.
+</p>
+
+<p>
+Helm offers an interface to both Semantic and Imenu at the same
+time: If `semantic-mode' is active in the current buffer, then use
+semantic for generating tags, otherwise fall back to <code>imenu</code>. If
+point is on a symbol, helm feeds the symbol into input prompt by
+default.
+</p>
+
+<p>
+Demo: Here is <code>helm-semantic-or-imenu</code> in action, please notice
+the "pattern: " prompt in the minibuffer:
+</p>
+
+<ul class="org-ul">
+<li>At first, I narrow to candidates that are functions with this
+pattern in the prompt: <code>Functi</code>.
+</li>
+
+<li>Then, I narrow to candidates that are functions and contains
+<code>void</code> in it with this pattern: <code>functi void</code>, effectively
+select functions that have type <code>void</code> and accepts <code>void</code> arguments.
+</li>
+
+<li>Then, I narrow to candidates that are functions and contains
+<code>int</code> in it with this pattern: <code>functi int</code>, effectively select
+functions that have type <code>int</code> and accpets <code>int</code> arguments.
+</li>
+
+<li>Then, I narrow to candidates that are variables and contains
+<code>u16</code> in it, effectively select only variables that have type
+<code>u16</code>; the same for <code>u32</code> in the demo. 
+
+
+<div class="figure">
+<p><a href="static/part3/helm-semantic-or-imenu.gif"><img src="static/part3/helm-semantic-or-imenu.gif" alt="helm-semantic-or-imenu.gif" /></a>
+</p>
+</div>
+</li>
+</ul>
+
+<p>
+<b>RET</b> to visit the the candidate location. The above examples are
+just demonstration. You can narrow to anything you want with
+search patterns separated by spaces, i.e. you can use two
+string, one is "func" and one is part of a function name, and
+Helm can narrow to it fine.
+</p>
+
+<p>
+In the demo, you see things like <code>class u16</code> and <code>class u32</code>; that
+is because <code>u16</code> and <code>u32</code> are defined by typedef.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-4-5-7" class="outline-4">
+<h4 id="sec-4-5-7"><a id="ID-2578b1bd-7ae9-4250-b701-c9191603404f"></a>Command: <code>helm-man-woman</code></h4>
+<div class="outline-text-4" id="text-4-5-7">
 <p>
 With <code>helm-man-woman</code>, you can quickly jump to any man entry using
 Helm interface, either by typing in Helm prompt or if point is on a
@@ -3203,9 +3277,9 @@ symbol, get a man page at point. Give it a try.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-7" class="outline-4">
-<h4 id="sec-4-5-7"><a id="ID-fb36142a-6b14-4f9f-a6c1-d58d2a004ddc"></a>Command: <code>helm-do-grep</code></h4>
-<div class="outline-text-4" id="text-4-5-7">
+<div id="outline-container-sec-4-5-8" class="outline-4">
+<h4 id="sec-4-5-8"><a id="ID-fb36142a-6b14-4f9f-a6c1-d58d2a004ddc"></a>Command: <code>helm-do-grep</code></h4>
+<div class="outline-text-4" id="text-4-5-8">
 <p>
 In the first part, you already saw my live grep demo:
 </p>
@@ -3224,9 +3298,9 @@ with <b>C-s</b>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-8" class="outline-4">
-<h4 id="sec-4-5-8"><a id="ID-b7a95407-8629-48c4-bc9c-d0a391c95478"></a>Command: <code>helm-find</code></h4>
-<div class="outline-text-4" id="text-4-5-8">
+<div id="outline-container-sec-4-5-9" class="outline-4">
+<h4 id="sec-4-5-9"><a id="ID-b7a95407-8629-48c4-bc9c-d0a391c95478"></a>Command: <code>helm-find</code></h4>
+<div class="outline-text-4" id="text-4-5-9">
 <p>
 You can also quickly find a file with <code>helm-find</code>, binds to <b>C-c h f</b>
 (in my configuration). As usual, when you type a character, Helm
@@ -3235,18 +3309,18 @@ query into terminal and wait, you have a simple Helm interface.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-9" class="outline-4">
-<h4 id="sec-4-5-9"><a id="ID-0e8e485d-c539-4175-9c81-9c8f9f17f608"></a>Command: <code>helm-locate</code></h4>
-<div class="outline-text-4" id="text-4-5-9">
+<div id="outline-container-sec-4-5-10" class="outline-4">
+<h4 id="sec-4-5-10"><a id="ID-0e8e485d-c539-4175-9c81-9c8f9f17f608"></a>Command: <code>helm-locate</code></h4>
+<div class="outline-text-4" id="text-4-5-10">
 <p>
 Similar to <code>helm-find</code>, but you <code>locate</code> command, using <b>C-c h l</b> (in
 my configuration). You can specify a local database with prefix argument.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-10" class="outline-4">
-<h4 id="sec-4-5-10"><a id="ID-5fe9a6c3-5af2-4b4a-94ff-5849560c831f"></a>Command: <code>helm-occur</code></h4>
-<div class="outline-text-4" id="text-4-5-10">
+<div id="outline-container-sec-4-5-11" class="outline-4">
+<h4 id="sec-4-5-11"><a id="ID-5fe9a6c3-5af2-4b4a-94ff-5849560c831f"></a>Command: <code>helm-occur</code></h4>
+<div class="outline-text-4" id="text-4-5-11">
 <p>
 Similar to <code>occur</code>, but using Helm interface. As you type, matching
 lines are updated immediately. Very interactively, as it is the nature
@@ -3265,18 +3339,18 @@ typing. The demo starts when you see START in the minibuffer.
 </div>
 </div>
 </div>
-<div id="outline-container-sec-4-5-11" class="outline-4">
-<h4 id="sec-4-5-11"><a id="ID-479cdaab-0aba-48b8-b4d2-b026d23eb41a"></a>Command: <code>helm-apropos</code></h4>
-<div class="outline-text-4" id="text-4-5-11">
+<div id="outline-container-sec-4-5-12" class="outline-4">
+<h4 id="sec-4-5-12"><a id="ID-479cdaab-0aba-48b8-b4d2-b026d23eb41a"></a>Command: <code>helm-apropos</code></h4>
+<div class="outline-text-4" id="text-4-5-12">
 <p>
 Similar to <b>C-h a</b> which runs <code>apropos-command</code>, but use Helm
 interface and update as you type.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-12" class="outline-4">
-<h4 id="sec-4-5-12"><a id="ID-93e5fcb9-231b-43b8-81df-501a59bca2b6"></a>Command: <code>helm-info-emacs</code></h4>
-<div class="outline-text-4" id="text-4-5-12">
+<div id="outline-container-sec-4-5-13" class="outline-4">
+<h4 id="sec-4-5-13"><a id="ID-93e5fcb9-231b-43b8-81df-501a59bca2b6"></a>Command: <code>helm-info-emacs</code></h4>
+<div class="outline-text-4" id="text-4-5-13">
 <p>
 In the extended config, I replace the default <code>info-emacs-manual</code> with
 <code>helm-info-emacs</code>.
@@ -3296,9 +3370,9 @@ You should bind your favourite info commands to some key bindings.
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-13" class="outline-4">
-<h4 id="sec-4-5-13"><a id="ID-9d698347-33ee-447d-9fd1-eb01e9770dbb"></a>Command: <code>helm-resume</code></h4>
-<div class="outline-text-4" id="text-4-5-13">
+<div id="outline-container-sec-4-5-14" class="outline-4">
+<h4 id="sec-4-5-14"><a id="ID-9d698347-33ee-447d-9fd1-eb01e9770dbb"></a>Command: <code>helm-resume</code></h4>
+<div class="outline-text-4" id="text-4-5-14">
 <p>
 This command allows you to resume the previous Helm session, along
 with your previous patterns in the prompt. For example, if your
@@ -3318,9 +3392,9 @@ again.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-14" class="outline-4">
-<h4 id="sec-4-5-14"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h4>
-<div class="outline-text-4" id="text-4-5-14">
+<div id="outline-container-sec-4-5-15" class="outline-4">
+<h4 id="sec-4-5-15"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h4>
+<div class="outline-text-4" id="text-4-5-15">
 <p>
 <span class="underline">Author</span>:  <a href="https://github.com/bbatsov">Bozhidar Batsov</a>, <code>bozhidar@batsov.com</code>
 </p>
@@ -3363,9 +3437,9 @@ immediately.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-15" class="outline-4">
-<h4 id="sec-4-5-15"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h4>
-<div class="outline-text-4" id="text-4-5-15">
+<div id="outline-container-sec-4-5-16" class="outline-4">
+<h4 id="sec-4-5-16"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h4>
+<div class="outline-text-4" id="text-4-5-16">
 <p>
 <span class="underline">Author</span>
 </p>
@@ -3435,9 +3509,9 @@ using Helm interface for narrowing.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-4-5-16" class="outline-4">
-<h4 id="sec-4-5-16"><a id="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32"></a>Why Helm is poweful</h4>
-<div class="outline-text-4" id="text-4-5-16">
+<div id="outline-container-sec-4-5-17" class="outline-4">
+<h4 id="sec-4-5-17"><a id="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32"></a>Why Helm is poweful</h4>
+<div class="outline-text-4" id="text-4-5-17">
 <p>
 Helm's strengths:
 </p>
