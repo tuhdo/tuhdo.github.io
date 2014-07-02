@@ -196,6 +196,28 @@ In a Helm session, if you need help, use *C-c ?*, or refer to this
 manual again. The commands in the key bindings above are good enough
 to help you using Helm productively.
 
+*** Operate on text at point:
+:PROPERTIES:
+:ID:       8de25a41-da8b-42b5-b152-e62ef75d2bfd
+:END:
+If you are already in a Helm session, you can still get input from the
+current editing buffer by the following key bindings:
+
+- *C-w* yanks word at point, starting from point to the end of the
+  word, into the Helm prompt (the minibuffer).
+- *M-n* yanks symbol at point
+
+Help commands also automatically recognize symbols at point if such
+symbols exist in Emacs. For example:
+
+- *C-h f*, which runs =describe-function=, automatically takes the
+  symbol at point as default for searching function.
+- *C-h v*, which runs =describe-variable=, automatically takes the
+  symbol at point as default for searching variable.
+- *C-h w*, which runs =where-is=, automatically takes the
+  symbol at point as default for showing key binding for a command.
+- ... and so on... (*C-h C-h* to view all commands)
+
 *** Command: =helm-M-x=:
 :PROPERTIES:
 :ID:       500a1c68-ab43-40a5-97c3-5d556a9f748d
@@ -503,9 +525,9 @@ _Usage_:
 :END:
 _Author_
 
-2008-2010:    Taiki SUGAWARA, =buzz.taiki@gmail.com=
-2012-2013     Michael Markert, =markert.michael@googlemail.com=
-2013-present: Daniel Hackney =dan@haxney.org=
+- 2008-2010:    Taiki SUGAWARA, =buzz.taiki@gmail.com=
+- 2012-2013     Michael Markert, =markert.michael@googlemail.com=
+- 2013-present: Daniel Hackney =dan@haxney.org=
 
 _Homepage_: [[https://github.com/emacs-helm/helm-descbinds][Github]]
 
