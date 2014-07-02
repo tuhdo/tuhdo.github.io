@@ -100,7 +100,8 @@ My extended config:
   (global-set-key (kbd "C-c h l") 'helm-locate)
   (global-set-key (kbd "C-c h o") 'helm-occur)
   (global-set-key (kbd "C-c h r") 'helm-resume)
-  (global-set-key (kbd "C-h C-f") 'helm-apropos)
+  (define-key 'help-command (kbd "C-f") 'helm-apropos)
+  (define-key 'help-command (kbd "r") 'helm-info-emacs)
 
   ;; use helm to list eshell history
   (add-hook 'eshell-mode-hook
@@ -138,7 +139,15 @@ completion:
 - You can navigate the buffer with *C-n* and *C-p* or *<up>* and
   *<down>* to move up/down, *C-v* and *M-v* to move to next/previous
   pages, and *M-<* and *M->* to move to top and bottom of the Helm
-  buffer that is displaying the candidates. Please try it.
+  buffer.
+
+- You can also mark candidates with *C-SPC*; this is useful when you
+  need to perform an action on many candidates of your choice. *M-a*
+  to select all.
+
+You can practice the above commands with *C-x b*, whicn runs
+=helm-mini=. If you mark more than one buffers, *RET* opens the
+selected buffers.
 
 *_IMPORTANT_*: /Please remember that, when you use Helm, you never *TAB*/
 /to complete prefixes like vanilla or other packages like Ido and its/
@@ -158,9 +167,11 @@ Helm session, a dedicated Helm buffer is always opened. When you quit
 a Helm session, a Helm buffer is closed. In Helm, you basically need
 to remember the 3 commands:
 
-- Access to action menu with *TAB*; an action menu is a text-based
-  menu that lists actions you can take. For example, =Find File= (open
-  file), =Find File in Dired=, =Grep File=...
+- Access to action menu with *TAB*. An action is a command to run on
+  marked candidates (one or more) and quit current Helm session; an
+  action menu is a text-based menu that lists actions you can
+  take. For example, =Find File= (open file), =Find File in Dired=,
+  =Grep File=...
 
 - *C-z* executes *helm-execute-persistent-action*; a persistent action
   is an action that you use in a Helm session without quitting the
@@ -317,8 +328,8 @@ starts when you see START in the minibuffer):
 :END:
 =helm-find-files= is file navigation on steroid: 
 
-- You can complete with partial basename. e.g "fob" or "fbr" will
-  complete "foobar". With =helm-find-files=.
+- =helm-find-files= can fuzzy match candidates in current
+  directory. e.g "fob" or "fbr" will complete "foobar".
 
 - You can also execute persistent action, which binds to *C-z* (by
   default), or *TAB* if you use my configuration to view content of
@@ -377,7 +388,8 @@ C-f*. It's really convenient.
 :ID:       2578b1bd-7ae9-4250-b701-c9191603404f
 :END:
 With =helm-man-woman=, you can quickly jump to any man entry using
-Helm interface. Give it a try.
+Helm interface, either by typing in Helm prompt or if point is on a
+symbol, get a man page at point. Give it a try.
 
 *** Command: =helm-do-grep=
 :PROPERTIES:
@@ -398,13 +410,15 @@ with *C-s*.
 :END:
 You can also quickly find a file with =helm-find=, binds to *C-c h f*
 (in my configuration). As usual, when you type a character, Helm
-filters candidates accordingly.
+filters candidates accordingly. Now, instead of typing a long find
+query into terminal and wait, you have a simple Helm interface.
 
 *** Command: =helm-locate=
 :PROPERTIES:
 :ID:       0e8e485d-c539-4175-9c81-9c8f9f17f608
 :END:
-Similar to =helm-find=, but you =locate= command.
+Similar to =helm-find=, but you =locate= command, using *C-c h l* (in
+my configuration). You can specify a local database with prefix argument.
 
 *** Command: =helm-occur=
 :PROPERTIES:
@@ -426,7 +440,24 @@ typing. The demo starts when you see START in the minibuffer.
 Similar to *C-h a* which runs =apropos-command=, but use Helm
 interface and update as you type.
 
+*** Command: =helm-info-emacs=
+:PROPERTIES:
+:ID:       93e5fcb9-231b-43b8-81df-501a59bca2b6
+:END:
+In the extended config, I replace the default =info-emacs-manual= with
+=helm-info-emacs=.
+
+=helm= offers a wide ranges of info commands for various topics. =M-x
+helm info= to see these commands, i.e. =helm-info-as=,
+=helm-info-gdb=... You can search for info nodes easily with Helm
+interface and *TAB* on an entry to view. *M-<next>* moves to the next
+page, *M-<prior>* moves to the previous page in the other buffer.
+
+You should bind info commands to some key bindings.
 *** Command: =helm-resume=
+:PROPERTIES:
+:ID:       9d698347-33ee-447d-9fd1-eb01e9770dbb
+:END:
     This command allows you to resume the previous Helm session, along
     with your previous patterns in the prompt. For example, if your
     last helm session was =helm-do-grep= and you entered patterns in
