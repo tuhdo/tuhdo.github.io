@@ -453,7 +453,7 @@ helm info= to see these commands, i.e. =helm-info-as=,
 interface and *TAB* on an entry to view. *M-<next>* moves to the next
 page, *M-<prior>* moves to the previous page in the other buffer.
 
-You should bind info commands to some key bindings.
+You should bind your favourite info commands to some key bindings.
 *** Command: =helm-resume=
 :PROPERTIES:
 :ID:       9d698347-33ee-447d-9fd1-eb01e9770dbb
