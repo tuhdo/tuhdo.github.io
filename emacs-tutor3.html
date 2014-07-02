@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-02 Wed 17:32 -->
+<!-- 2014-07-02 T4 23:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu, Do Hoang" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -1683,7 +1683,7 @@ line, but move to the first non-whitespace character of that line.
 (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">yank-indent-modes</span>
   '(LaTeX-mode TeX-mode)
   <span style="color: #8b2252;">"Modes in which to indent regions that are yanked (or yank-popped).</span>
-<span style="color: #8b2252;">Only modes that don't derive from `</span><span style="color: #008b8b;">prog-mode</span><span style="color: #8b2252;">' should be listed here."</span>)
+<span style="color: #8b2252;">Only modes that don't derive from `</span><span style="color: #8b2252;">prog-mode</span><span style="color: #8b2252;">' should be listed here."</span>)
 
 (<span style="color: #a020f0;">defvar</span> <span style="color: #a0522d;">yank-indent-blacklisted-modes</span>
   '(python-mode slim-mode haml-mode)
@@ -1708,7 +1708,7 @@ line, but move to the first non-whitespace character of that line.
         (yank-advised-indent-function (region-beginning) (region-end)))))
 
 (<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">yank-pop</span> (after yank-pop-indent activate)
-  <span style="color: #8b2252;">"If current mode is one of `</span><span style="color: #008b8b;">yank-indent-modes</span><span style="color: #8b2252;">',</span>
+  <span style="color: #8b2252;">"If current mode is one of `</span><span style="color: #8b2252;">yank-indent-modes</span><span style="color: #8b2252;">',</span>
 <span style="color: #8b2252;">indent yanked text (with prefix arg don't indent)."</span>
   (<span style="color: #a020f0;">when</span> (and (not (ad-get-arg <span style="color: #008b8b;">0</span>))
              (not (member major-mode yank-indent-blacklisted-modes))
@@ -2708,7 +2708,7 @@ My extended config:
  helm-quick-update t <span style="color: #b22222;">; </span><span style="color: #b22222;">do not display invisible candidates</span>
  helm-idle-delay <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating in delayed sources.</span>
  helm-input-idle-delay <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating candidate buffer</span>
- helm-ff-search-library-in-sexp t <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
+ helm-ff-search-library-in-sexp t <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #b22222;">require</span><span style="color: #b22222;">' and `</span><span style="color: #b22222;">declare-function</span><span style="color: #b22222;">' sexp.</span>
 
  <span style="color: #b22222;">;; </span><span style="color: #b22222;">you can customize helm-do-grep to execute ack-grep</span>
  <span style="color: #b22222;">;; </span><span style="color: #b22222;">helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"</span>
@@ -4449,8 +4449,6 @@ package:
 (global-set-key (kbd <span style="color: #8b2252;">"C-x g m"</span>) 'magit-branch-manager)
 (global-set-key (kbd <span style="color: #8b2252;">"C-x g c"</span>) 'magit-branch)
 (global-set-key (kbd <span style="color: #8b2252;">"C-x g s"</span>) 'magit-status)
-(global-set-key (kbd <span style="color: #8b2252;">"C-x g g"</span>) 'helm-git-grep)
-(global-set-key (kbd <span style="color: #8b2252;">"C-x g l"</span>) 'helm-ls-git-ls)
 (global-set-key (kbd <span style="color: #8b2252;">"C-x g r"</span>) 'magit-reflog)
 (global-set-key (kbd <span style="color: #8b2252;">"C-x g t"</span>) 'magit-tag)
 </pre>

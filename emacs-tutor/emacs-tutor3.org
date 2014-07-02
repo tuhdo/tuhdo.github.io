@@ -2293,8 +2293,6 @@ package:
   (global-set-key (kbd "C-x g m") 'magit-branch-manager)
   (global-set-key (kbd "C-x g c") 'magit-branch)
   (global-set-key (kbd "C-x g s") 'magit-status)
-  (global-set-key (kbd "C-x g g") 'helm-git-grep)
-  (global-set-key (kbd "C-x g l") 'helm-ls-git-ls)
   (global-set-key (kbd "C-x g r") 'magit-reflog)
   (global-set-key (kbd "C-x g t") 'magit-tag)
 #+end_src
