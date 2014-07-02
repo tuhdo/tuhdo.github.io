@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-02 Wed 10:30 -->
+<!-- 2014-07-02 Wed 12:31 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu, Do Hoang" />
@@ -1646,7 +1646,7 @@ line, but move to the first non-whitespace character of that line.
     (<span style="color: #a020f0;">when</span> (= orig-point (point))
       (move-beginning-of-line <span style="color: #008b8b;">1</span>))))
 
-(global-set-key [remap move-beginning-of-line] 'prelude-move-beginning-of-line)
+(global-set-key (kbd <span style="color: #8b2252;">"C-a"</span>) 'prelude-move-beginning-of-line)
 
 (<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">kill-ring-save</span> (before slick-copy activate compile)
   <span style="color: #8b2252;">"When called interactively with no active region, copy a single</span>
