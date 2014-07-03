@@ -784,7 +784,7 @@ directory of buffer of that entry.
 |-------+---------------------------------|
 | =/ <= | Add a filter by buffer size     |
 |-------+---------------------------------|
-| =/ /= | Remove all filters in effect9   |
+| =/ /= | Remove all filters in effect    |
 |-------+---------------------------------|
 
 - Filter group commands:
@@ -851,12 +851,12 @@ bookmark too.
 
 Remember the key bindings is easy. You just need to remember that *C-x
 r* is the prefix for bookmark related commands. *m* stands for *mark*,
-meaning you *mark* something in some place; *b* stands for *bookmark*,
-*b* stands for bookmark, meaning you can switch to any bookmark quickly,
-similar to *C-x b* switches to buffers quickly. Finally, *l* means
-*list* for listing bookmarks, analogous to =ibuffer= for listing
-buffers. If you want to preserve the bookmarks across Emacs sessions,
-*C-x r l* to open the bookmark list and press *s* to save the list to file.
+meaning you *mark* something in some place; *b* stands for bookmark,
+meaning you can switch to any bookmark quickly, similar to *C-x b*
+switches to buffers quickly. Finally, *l* means *list* for listing
+bookmarks, analogous to =ibuffer= for listing buffers. If you want to
+preserve the bookmarks across Emacs sessions, *C-x r l* to open the
+bookmark list and press *s* to save the list to file.
 
 If you understand how to manage buffers, managing bookmarks is the
 same, with differnt but similar key bindings. Finally, not only you
@@ -1026,7 +1026,7 @@ Then:
 
 - Insert the 3 lines and kill all again.
 
-- *C-3 C-y*, you will see =aaa= got inserted; * again, you will
+- *C-3 C-y*, you will see =aaa= got inserted; *C-y* again, you will
   see =aaa= got inserted again. =aaa= now bedcomes head of the list
 
 - ... and so on ...
@@ -1547,7 +1547,7 @@ buffer, a shell... Basically anything that Emacs can display. Let's try them out
 
 *C-x 2* to split the current window into two horizontal windows. After
 splitting, you will have the exact duplicate of your current editing
-**buffer. *C-x 2* is bound to =split-window-below=.
+buffer. *C-x 2* is bound to =split-window-below=.
 
 *C-x 3* to split your current window into two vertical windows. After
 splitting, you will have the exact duplicate of your current editing
@@ -1759,7 +1759,7 @@ C-f* variant.
 
 *_Exercise_*:
 
-- Create a new directory called "dired_practice" or a name of your
+- Create a new directory called =dired_practice= or a name of your
   choice.
 - Create a new file of your choice.
 *** Visit files

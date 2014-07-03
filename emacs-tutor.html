@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-06-28 T7 14:04 -->
+<!-- 2014-07-03 T5 21:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu, Do Hoang" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -1674,7 +1674,7 @@ directory of buffer of that entry.
 <tbody>
 <tr>
 <td class="left"><code>/ /</code></td>
-<td class="left">Remove all filters in effect9</td>
+<td class="left">Remove all filters in effect</td>
 </tr>
 </tbody>
 </table>
@@ -1881,12 +1881,12 @@ bookmark too.
 <p>
 Remember the key bindings is easy. You just need to remember that <b>C-x
 r</b> is the prefix for bookmark related commands. <b>m</b> stands for <b>mark</b>,
-meaning you <b>mark</b> something in some place; <b>b</b> stands for <b>bookmark</b>,
-<b>b</b> stands for bookmark, meaning you can switch to any bookmark quickly,
-similar to <b>C-x b</b> switches to buffers quickly. Finally, <b>l</b> means
-<b>list</b> for listing bookmarks, analogous to <code>ibuffer</code> for listing
-buffers. If you want to preserve the bookmarks across Emacs sessions,
-<b>C-x r l</b> to open the bookmark list and press <b>s</b> to save the list to file.
+meaning you <b>mark</b> something in some place; <b>b</b> stands for bookmark,
+meaning you can switch to any bookmark quickly, similar to <b>C-x b</b>
+switches to buffers quickly. Finally, <b>l</b> means <b>list</b> for listing
+bookmarks, analogous to <code>ibuffer</code> for listing buffers. If you want to
+preserve the bookmarks across Emacs sessions, <b>C-x r l</b> to open the
+bookmark list and press <b>s</b> to save the list to file.
 </p>
 
 <p>
@@ -2225,7 +2225,7 @@ see <code>aaa</code> got inserted again. <code>aaa</code> now bedcomes head of t
 <li>Insert the 3 lines and kill all again.
 </li>
 
-<li><b>C-3 C-y</b>, you will see <code>aaa</code> got inserted; * again, you will
+<li><b>C-3 C-y</b>, you will see <code>aaa</code> got inserted; <b>C-y</b> again, you will
 see <code>aaa</code> got inserted again. <code>aaa</code> now bedcomes head of the list
 </li>
 
@@ -3231,7 +3231,7 @@ buffer, a shell&#x2026; Basically anything that Emacs can display. Let's try the
 <p>
 <b>C-x 2</b> to split the current window into two horizontal windows. After
 splitting, you will have the exact duplicate of your current editing
-<b>*buffer. *C-x 2</b> is bound to <code>split-window-below</code>.
+buffer. <b>C-x 2</b> is bound to <code>split-window-below</code>.
 </p>
 
 <p>
@@ -3726,7 +3726,7 @@ C-f</b> variant.
 </p>
 
 <ul class="org-ul">
-<li>Create a new directory called "dired<sub>practice</sub>" or a name of your
+<li>Create a new directory called <code>dired_practice</code> or a name of your
 choice.
 </li>
 <li>Create a new file of your choice.
