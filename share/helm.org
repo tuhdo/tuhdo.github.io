@@ -410,6 +410,9 @@ separate command for open file at point, but using the same *C-x
 C-f*. It's really convenient.
 
 *** Command: =helm-semantic-or-imenu=
+:PROPERTIES:
+:ID:       57d8eda0-9f2d-4aaf-b85d-3bcd261c40e8
+:END:
     The Imenu facility offers a way to find the major definitions,
     such as function definitions, variable definitions in a file by
     name. You can run =imenu= command individually.
@@ -434,11 +437,11 @@ C-f*. It's really convenient.
 
     - Then, I narrow to candidates that are functions and contains
       =void= in it with this pattern: =functi void=, effectively
-      select functions that have type =void= and accepts =void= arguments.
+      select functions that have type =void= *or* accept =void= arguments.
 
     - Then, I narrow to candidates that are functions and contains
       =int= in it with this pattern: =functi int=, effectively select
-      functions that have type =int= and accpets =int= arguments.
+      functions that have type =int= *or* accept =int= arguments.
 
     - Then, I narrow to candidates that are variables and contains
       =u16= in it, effectively select only variables that have type
