@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package on a league of its own: <code>Helm</code> </title>
-<!-- 2014-07-03 Thu 10:18 -->
+<!-- 2014-07-03 T5 23:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -162,7 +162,7 @@ alt="hit counter"></a></div></noscript>
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Operate on text at point:</a></li>
-<li><a href="#sec-2">Command: <code>helm-M-x</code>:</a></li>
+<li><a href="#sec-2">Command: <code>helm-M-x</code></a></li>
 <li><a href="#sec-3">Command: <code>helm-show-kill-ring</code></a></li>
 <li><a href="#sec-4">Command: <code>helm-mini</code></a></li>
 <li><a href="#sec-5">Command: <code>helm-find-files</code></a></li>
@@ -478,7 +478,7 @@ symbol at point as default for showing key binding for a command.
 </div>
 </div>
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><a id="ID-500a1c68-ab43-40a5-97c3-5d556a9f748d"></a>Command: <code>helm-M-x</code>:</h2>
+<h2 id="sec-2"><a id="ID-500a1c68-ab43-40a5-97c3-5d556a9f748d"></a>Command: <code>helm-M-x</code></h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <code>M-x</code> and see the difference. You will see a buffer that lists
@@ -741,7 +741,7 @@ see START in the minibuffer:
 </div>
 
 <p>
-<b><span class="underline">Find file at piont</span></b>:
+<b><span class="underline">Find file at point</span></b>:
 </p>
 
 <p>
@@ -761,6 +761,29 @@ point on a proper filepath, and Helm will reach the correct path for
 you, similar to the screenshot. Now, you have no longer to use a
 separate command for open file at point, but using the same <b>C-x
 C-f</b>. It's really convenient.
+</p>
+
+<p>
+<b><span class="underline">File and directory histories</span></b>:
+</p>
+
+<p>
+With prefix argument before running <code>helm-find-files</code>, Helm displays a
+list of visited directories. Select one at point transfer
+<code>helm-find-files</code> to that directory and you can start navigating
+there.
+</p>
+
+<p>
+During a <code>helm-find-files</code> session, you can get a list of visited
+files and directories with <b>C-c h</b>. From there, the default action is
+<b>RET</b> to open the file/directory at point, or continue with
+<code>helm-find-files</code> starting at that file/directory.
+</p>
+
+<p>
+You can use <b>M-p</b> and <b>M-n</b> to move back and forth between previously
+visited directory.
 </p>
 </div>
 </div>
@@ -947,6 +970,14 @@ with your previous patterns in the prompt. For example, if your
 last helm session was <code>helm-do-grep</code> and you entered patterns in
 Helm prompt, <code>helm-resume</code> resumes that session along with your
 previous input.
+</p>
+
+<p>
+With prefix argument, <code>helm-resume</code> allows you to choose among all
+existing Helm buffers. <code>helm-mini</code> or <code>helm-buffer-list</code> does not
+show existing Helm buffers; they ignore it by default; but if you
+run <code>ibuffer</code>, you will see a list of Helm buffers visible
+there. Don't kill them or you won't be able to resume.
 </p>
 
 <p>

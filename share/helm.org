@@ -219,7 +219,7 @@ symbols exist in Emacs. For example:
   symbol at point as default for showing key binding for a command.
 - ... and so on... (*C-h C-h* to view all commands)
 
-*** Command: =helm-M-x=:
+*** Command: =helm-M-x=
 :PROPERTIES:
 :ID:       500a1c68-ab43-40a5-97c3-5d556a9f748d
 :END:
@@ -396,7 +396,7 @@ see START in the minibuffer:
 
 [[file:static/part3/helm-find-files.gif][file:static/part3/helm-find-files.gif]]
 
-*_Find file at piont_*:
+*_Find file at point_*:
 
 Do you know the feature =ffap=? I wrote it in part 1, but here is the
 demo:
@@ -408,6 +408,21 @@ point on a proper filepath, and Helm will reach the correct path for
 you, similar to the screenshot. Now, you have no longer to use a
 separate command for open file at point, but using the same *C-x
 C-f*. It's really convenient.
+
+*_File and directory histories_*:
+
+With prefix argument before running =helm-find-files=, Helm displays a
+list of visited directories. Select one at point transfer
+=helm-find-files= to that directory and you can start navigating
+there.
+
+During a =helm-find-files= session, you can get a list of visited
+files and directories with *C-c h*. From there, the default action is
+*RET* to open the file/directory at point, or continue with
+=helm-find-files= starting at that file/directory.
+
+You can use *M-p* and *M-n* to move back and forth between previously
+visited directory.
 
 *** Command: =helm-semantic-or-imenu=
 :PROPERTIES:
@@ -538,6 +553,12 @@ You should bind your favourite info commands to some key bindings.
     last helm session was =helm-do-grep= and you entered patterns in
     Helm prompt, =helm-resume= resumes that session along with your
     previous input.
+
+    With prefix argument, =helm-resume= allows you to choose among all
+    existing Helm buffers. =helm-mini= or =helm-buffer-list= does not
+    show existing Helm buffers; they ignore it by default; but if you
+    run =ibuffer=, you will see a list of Helm buffers visible
+    there. Don't kill them or you won't be able to resume.
 
     This is really convenient when you have complex input ,and
     preparation steps. For example, if you have multiple regexp
