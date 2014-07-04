@@ -67,9 +67,6 @@ My extended config:
    helm-input-idle-delay 0.01 ; be idle for this many seconds, before updating candidate buffer
    helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
 
-   ;; you can customize helm-do-grep to execute ack-grep
-   ;; helm-grep-default-command "ack-grep -Hn --smart-case --no-group --no-color %e %p %f"
-   ;; helm-grep-default-recurse-command "ack-grep -H --smart-case --no-group --no-color %e %p %f"
    helm-split-window-default-side 'other ;; open helm buffer in another window
    helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
    helm-buffers-favorite-modes (append helm-buffers-favorite-modes
@@ -96,7 +93,6 @@ My extended config:
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-c h s") 'helm-semantic-or-imenu)
   (global-set-key (kbd "C-c h m") 'helm-man-woman)
-  (global-set-key (kbd "C-c h g") 'helm-do-grep)
   (global-set-key (kbd "C-c h f") 'helm-find)
   (global-set-key (kbd "C-c h l") 'helm-locate)
   (global-set-key (kbd "C-c h o") 'helm-occur)
@@ -396,10 +392,13 @@ see START in the minibuffer:
 
 [[file:static/part3/helm-find-files.gif][file:static/part3/helm-find-files.gif]]
 
-*_Find file at point_*:
+**** Find file at point:
+:PROPERTIES:
+:ID:       a70d8543-d81d-42f6-bd80-f0d459ed1a8c
+:END:
 
-Do you know the feature =ffap=? I wrote it in part 1, but here is the
-demo:
+Do you know the command =ffap=? It was introduced in part 1, but here
+is the demo:
 
 [[file:static/ffap.gif][file:static/ffap.gif]]
 
@@ -409,7 +408,10 @@ you, similar to the screenshot. Now, you have no longer to use a
 separate command for open file at point, but using the same *C-x
 C-f*. It's really convenient.
 
-*_File and directory histories_*:
+**** File and directory histories:
+:PROPERTIES:
+:ID:       e1b80059-4a23-4a65-adb7-916764b47695
+:END:
 
 With prefix argument before running =helm-find-files=, Helm displays a
 list of visited directories. Select one at point transfer
@@ -423,6 +425,21 @@ files and directories with *C-c h*. From there, the default action is
 
 You can use *M-p* and *M-n* to move back and forth between previously
 visited directory.
+
+**** Live grep in Helm
+:PROPERTIES:
+:ID:       fb36142a-6b14-4f9f-a6c1-d58d2a004ddc
+:END:
+
+[[file:static/live_grep.gif][file:static/live_grep.gif]]
+
+From within a =helm-find-files= session, you can invoke
+=helm-ff-run-grep= with *C-s* to search a file/directory on
+highlighted entry in the Helm buffer. With prefix argument,
+recursively grep a selected directory.
+
+There's also a standalone =helm-do-grep= command, but it will be
+deprecated soon.
 
 *** Command: =helm-semantic-or-imenu=
 :PROPERTIES:
@@ -480,19 +497,6 @@ visited directory.
 With =helm-man-woman=, you can quickly jump to any man entry using
 Helm interface, either by typing in Helm prompt or if point is on a
 symbol, get a man page at point. Give it a try.
-
-*** Command: =helm-do-grep=
-:PROPERTIES:
-:ID:       fb36142a-6b14-4f9f-a6c1-d58d2a004ddc
-:END:
-In the first part, you already saw my live grep demo:
-
-[[file:static/live_grep.gif][file:static/live_grep.gif]]
-
-*C-c h g* (if you use my key bindings) or =M-x helm-do-grep= to
-perform live grep as you typing. Use prefix argument for recursive
-grep. You can also invoke =helm-do-grep= in =helm-find-files= session
-with *C-s*.
 
 *** Command: =helm-find=
 :PROPERTIES:
