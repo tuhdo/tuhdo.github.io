@@ -554,7 +554,7 @@ You should bind your favourite info commands to some key bindings.
 :END:
     This command allows you to resume the previous Helm session, along
     with your previous patterns in the prompt. For example, if your
-    last helm session was =helm-do-grep= and you entered patterns in
+    last helm session was =helm-ff-run-grep= and you entered patterns in
     Helm prompt, =helm-resume= resumes that session along with your
     previous input.
 
@@ -656,7 +656,7 @@ Helm's strengths:
   types, results get updated immediately in the Helm buffer. Because
   of this feature, Helm provides a unique interactive verion of many
   commmands that do not exist outside of Helm. For example,
-  =helm-do-grep=, update grep results as you type.
+  =helm-ff-run-grep=, update grep results as you type.
 
 - /_Matching mechanism_/: This is a powerful feature in Helm that I
   hvaen't seen in other packages: out of order matching, *with
