@@ -299,8 +299,8 @@ version. For example, =!/.emacs.d/= narrows to buffers not in
 You can even use =helm-mini= to narrow to buffers that contains a
 regexp in their contents, by using the query =@content=. For example,
 you can select buffers that only contain the string "test":
-=@test=. If you want to see the positions of the string in the
-buffers, *C-s* while in =helm-mini= session to switch to
+=@test=. If you want to see the locations of the string in the
+buffers,  *C-s* while in =helm-mini= session to switch to
 =helm-moccur=. You can mark buffers to search by *C-SPC* or you can
 select all buffers by *M-a*.
 
@@ -342,7 +342,7 @@ Demo: Search for buffers that contain string "Answer", and transfer
 the search patterns to =helm-moccur= for the exact matches (the demo
 starts when you see START in the minibuffer):
 
-[[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]
+[[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]]
 
 *** Command: =helm-find-files=
 :PROPERTIES:
@@ -672,6 +672,11 @@ Helm's strengths:
   confirm whether it is true or not, so I tried it in Helm:
 
   [[file:static/helm_projectile.gif][file:static/helm_projectile.gif]]
+
+  First, I enter =main.c=, and I got lots of candidates. Then, I only
+  want the =main.c= inside x86 directory, so I type =x86=. The whole
+  pattern is =main.c x86= and Helm returns the correct candidate:
+  =arch/x86/boot/main.c=.
 
   It does exist. I also wonder where =i5100_edac.c= exists, because
   Intel has a datasheet for it a long time, so it must be

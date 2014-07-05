@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package on a league of its own: <code>Helm</code> </title>
-<!-- 2014-07-04 Fri 18:11 -->
+<!-- 2014-07-05 T7 12:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -600,8 +600,8 @@ version. For example, <code>!/.emacs.d/</code> narrows to buffers not in
 You can even use <code>helm-mini</code> to narrow to buffers that contains a
 regexp in their contents, by using the query <code>@content</code>. For example,
 you can select buffers that only contain the string "test":
-<code>@test</code>. If you want to see the positions of the string in the
-buffers, <b>C-s</b> while in <code>helm-mini</code> session to switch to
+<code>@test</code>. If you want to see the locations of the string in the
+buffers,  <b>C-s</b> while in <code>helm-mini</code> session to switch to
 <code>helm-moccur</code>. You can mark buffers to search by <b>C-SPC</b> or you can
 select all buffers by <b>M-a</b>.
 </p>
@@ -668,9 +668,11 @@ the search patterns to <code>helm-moccur</code> for the exact matches (the demo
 starts when you see START in the minibuffer):
 </p>
 
-<p>
-[[<img src="static/part3/helm-mini.gif][file:static/part3/helm-mini.gif" alt="helm-mini.gif" />]
+
+<div class="figure">
+<p><a href="static/part3/helm-mini.gif"><img src="static/part3/helm-mini.gif" alt="helm-mini.gif" /></a>
 </p>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-5" class="outline-2">
@@ -1150,6 +1152,13 @@ confirm whether it is true or not, so I tried it in Helm:
 <p><a href="static/helm_projectile.gif"><img src="static/helm_projectile.gif" alt="helm_projectile.gif" /></a>
 </p>
 </div>
+
+<p>
+First, I enter <code>main.c</code>, and I got lots of candidates. Then, I only
+want the <code>main.c</code> inside x86 directory, so I type <code>x86</code>. The whole
+pattern is <code>main.c x86</code> and Helm returns the correct candidate:
+<code>arch/x86/boot/main.c</code>.
+</p>
 
 <p>
 It does exist. I also wonder where <code>i5100_edac.c</code> exists, because
