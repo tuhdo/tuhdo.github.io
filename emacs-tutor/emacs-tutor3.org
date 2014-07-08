@@ -2906,15 +2906,26 @@ _Usage_:
 
 Keys bound here:
 
-  `C-h B'      `describe-buffer'
-  `C-h c'      `describe-command'     (replaces `describe-key-briefly')
-  `C-h o'      `describe-option'
-  `C-h C-c'    `describe-key-briefly' (replaces `C-h c')
-  `C-h C-o'    `describe-option-of-type'
-  `C-h M-c'    `describe-copying'     (replaces `C-h C-c')
-  `C-h M-f'    `describe-file'
-  `C-h M-k'    `describe-keymap'
-  `C-h M-l'    `find-function-on-key'
+| Keys      | Bindings                                                    |
+|-----------+-------------------------------------------------------------|
+| *C-h B*   | =describe-buffer=                                           |
+|-----------+-------------------------------------------------------------|
+| *C-h c*   | =describe-command=        (replaces =describe-key-briefly=) |
+|-----------+-------------------------------------------------------------|
+| *C-h o*   | =describe-option=                                           |
+|-----------+-------------------------------------------------------------|
+| *C-h C-c* | =describe-key-briefly=    (replaces *C-h c*)                |
+|-----------+-------------------------------------------------------------|
+| *C-h C-o* | =describe-option-of-type=                                   |
+|-----------+-------------------------------------------------------------|
+| *C-h M-c* | =describe-copying=        (replaces *C-h C-c*)              |
+|-----------+-------------------------------------------------------------|
+| *C-h M-f* | =describe-file=                                             |
+|-----------+-------------------------------------------------------------|
+| *C-h M-k* | =describe-keymap=                                           |
+|-----------+-------------------------------------------------------------|
+| *C-h M-l* | =find-function-on-key=                                      |
+|-----------+-------------------------------------------------------------|
 
 *** Package: =help-mode+=
 :PROPERTIES:
