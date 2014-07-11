@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-09 Wed 14:24 -->
+<!-- 2014-07-11 Fri 15:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -220,9 +220,10 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-4-5-11">Command: <code>helm-apropos</code></a></li>
 <li><a href="#sec-4-5-12">Command: <code>helm-info-emacs</code></a></li>
 <li><a href="#sec-4-5-13">Command: <code>helm-resume</code></a></li>
-<li><a href="#sec-4-5-14">Package: <code>helm-projectile</code></a></li>
-<li><a href="#sec-4-5-15">Package: <code>helm-descbind</code></a></li>
-<li><a href="#sec-4-5-16">Why Helm is poweful</a></li>
+<li><a href="#sec-4-5-14">Command: <code>helm-all-mark-rings</code></a></li>
+<li><a href="#sec-4-5-15">Package: <code>helm-projectile</code></a></li>
+<li><a href="#sec-4-5-16">Package: <code>helm-descbind</code></a></li>
+<li><a href="#sec-4-5-17">Why Helm is poweful</a></li>
 </ul>
 </li>
 <li><a href="#sec-4-6">Alternative to Helm: <code>ido</code> + <code>ido-ubiquitous</code> + <code>flx-ido</code> + <code>smex</code></a>
@@ -2780,6 +2781,8 @@ My extended config:
 (<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h l"</span>) '<span style="color: #783f5a;">helm-locate</span>)
 (<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h o"</span>) '<span style="color: #37785e;">helm-occur</span>)
 (<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h r"</span>) '<span style="color: #4f7e67;">helm-resume</span>)
+(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c m"</span>) '<span style="color: #783f5a;">helm-all-mark-rings</span>)
+
 (<span style="color: #37785e;">define-key</span> '<span style="color: #783778;">help-command</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-f"</span>) '<span style="color: #37785e;">helm-apropos</span>)
 (<span style="color: #37785e;">define-key</span> '<span style="color: #783778;">help-command</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"r"</span>) '<span style="color: #4f5c7e;">helm-info-emacs</span>)
 
@@ -3486,10 +3489,40 @@ again.
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-4-5-14" class="outline-4">
-<h4 id="sec-4-5-14"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h4>
+<h4 id="sec-4-5-14"><a id="ID-12d8e9d0-1a43-434f-8398-6bb5deb729df"></a>Command: <code>helm-all-mark-rings</code></h4>
 <div class="outline-text-4" id="text-4-5-14">
+<p>
+One handy command. It allows you to view the content of the both the
+local and global mark rings in a friendly interface, so you can always
+jump back to where you were. Without this command, if you want to view
+the mark rings, you have to run <b>M-:</b> and enter <code>mark-ring</code> or
+<code>global-mark-ring</code> to view  their contents. And even so, Emacs only
+displays the bare content of the <code>mark-ring</code> and <code>global-mark-ring</code>
+lists, which is the line number and its buffer like this:
+</p>
+
+<p>
+<code>(#&lt;marker at 23614 in helm.org&gt; #&lt;marker at 2343 in setup-helm.el&gt; #&lt;marker at 4280 in helm.org&gt; #&lt;marker in no buffer&gt; #&lt;marker at 1271 in helm.org&gt; #&lt;marker at 643 in emacs-tutor.org&gt; #&lt;marker in no buffer&gt; #&lt;marker at 1 in setup-applications.el&gt; #&lt;marker at 1 in emacs-tutor3.org&gt;)</code>
+</p>
+
+
+<p>
+With <code>helm-all-mark-rings</code>, you have this nice interface with line
+content and syntax highlighting:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-all-mark-rings.gif"><img src="static/part3/helm-all-mark-rings.gif" alt="helm-all-mark-rings.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-5-15" class="outline-4">
+<h4 id="sec-4-5-15"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h4>
+<div class="outline-text-4" id="text-4-5-15">
 <p>
 <span class="underline">Author</span>:  <a href="https://github.com/bbatsov">Bozhidar Batsov</a>, <code>bozhidar@batsov.com</code>
 </p>
@@ -3533,9 +3566,9 @@ immediately.
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-15" class="outline-4">
-<h4 id="sec-4-5-15"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h4>
-<div class="outline-text-4" id="text-4-5-15">
+<div id="outline-container-sec-4-5-16" class="outline-4">
+<h4 id="sec-4-5-16"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h4>
+<div class="outline-text-4" id="text-4-5-16">
 <p>
 <span class="underline">Author</span>
 </p>
@@ -3606,9 +3639,9 @@ using Helm interface for narrowing.
 </div>
 </div>
 
-<div id="outline-container-sec-4-5-16" class="outline-4">
-<h4 id="sec-4-5-16"><a id="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32"></a>Why Helm is poweful</h4>
-<div class="outline-text-4" id="text-4-5-16">
+<div id="outline-container-sec-4-5-17" class="outline-4">
+<h4 id="sec-4-5-17"><a id="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32"></a>Why Helm is poweful</h4>
+<div class="outline-text-4" id="text-4-5-17">
 <p>
 Helm's strengths:
 </p>
@@ -4836,6 +4869,16 @@ Sample configuration:
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">eshell</span>)
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">em-alias</span>)
 
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Advise find-file-other-window to accept more than one file</span>
+(<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">find-file-other-window</span> (<span style="color: #7e544f;">around</span> <span style="color: #374478;">find-files</span> <span style="color: #707e4f;">activate</span>)
+  <span style="color: #8b2252;">"Also find all files within a list of files. This even works recursively."</span>
+  (<span style="color: #a020f0;">if</span> (<span style="color: #783f5a;">listp</span> <span style="color: #783f5a;">filename</span>)
+      (<span style="color: #78683f;">loop</span> <span style="color: #4f7e67;">for</span> <span style="color: #5e7837;">f</span> <span style="color: #513f78;">in</span> <span style="color: #783f5a;">filename</span> <span style="color: #374478;">do</span> (<span style="color: #7e544f;">find-file-other-window</span> <span style="color: #5e7837;">f</span> <span style="color: #7a4f7e;">wildcards</span>))
+    <span style="color: #4f7e67;">ad-do-it</span>))
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">In Eshell, you can run the commands in M-x</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Here are the aliases to the commands.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">$* means accepts all arguments.</span>
 (<span style="color: #374478;">eshell/alias</span> <span style="color: #8b2252;">"o"</span> <span style="color: #8b2252;">""</span>)
 (<span style="color: #374478;">eshell/alias</span> <span style="color: #8b2252;">"o"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)
 (<span style="color: #374478;">eshell/alias</span> <span style="color: #8b2252;">"vi"</span> <span style="color: #8b2252;">"find-file-other-window $*"</span>)

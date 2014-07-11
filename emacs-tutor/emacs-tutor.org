@@ -5,22 +5,32 @@
 :ID: 
 :ID:       76607dbd-b97c-43dd-975b-3236192408b6
 :END:
-*_NOTE_*: Before you start, please remember that you can always access
-a section using the floating table of content on the upper-right
-corner of your screen. Now, let's start your Emacs journey.
+*_Before we start_*: 
+
+- Please remember that you can always access a section using the
+  floating table of content on the upper-right corner of your
+  screen.
+
+- Many people asked how can this manual be "mini", since it is pretty
+  big for an online single page article. Yes, if this page is exported
+  to PDF, it is more than 40 pages. However, this manual is "mini"
+  relative to the size of the official Emacs manual, which is more
+  than 600 pages. That's the reason why.
+
+*_Let's start your Emacs journey_*:
 
 In Emacs, you can do many things aside from editing. Emacs is a
 programming platform, not just another editor in the sense that people
 think. If you want more details, read the [[*Appendix][Appendix]].
 
-Have a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
+Take a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
 
-My personal tour, *with added 3rd party plugins*. Don't worry if your
-Emacs does not look like the screenshots. You can have something like
-mine and even better, but for now you need to get a solid
-foundation. The screenshots are just for show. Even though, after
-going through this guide, you will be able to browse Linux kernel
-source tree with ease.
+Here is my personal tour, *with added 3rd party plugins*. Don't worry
+if your Emacs does not look like the screenshots. You can have
+something like mine and even better, but for now you need to get a
+solid foundation. The screenshots are just for show. Even though,
+after going through this guide, you will be able to browse Linux
+kernel source tree with ease.
 
 - Performance: Editing a 39MB C source file with no problem. But
   well, if your project use really large source file like that, if

@@ -97,6 +97,8 @@ My extended config:
   (global-set-key (kbd "C-c h l") 'helm-locate)
   (global-set-key (kbd "C-c h o") 'helm-occur)
   (global-set-key (kbd "C-c h r") 'helm-resume)
+  (global-set-key (kbd "C-c m") 'helm-all-mark-rings)
+
   (define-key 'help-command (kbd "C-f") 'helm-apropos)
   (define-key 'help-command (kbd "r") 'helm-info-emacs)
 
@@ -571,6 +573,25 @@ You should bind your favourite info commands to some key bindings.
     travel to a deep directory, and =helm-resume= helps you to reuse
     your previous session without going through all the troubles
     again.
+*** Command: =helm-all-mark-rings=
+:PROPERTIES:
+:ID:       12d8e9d0-1a43-434f-8398-6bb5deb729df
+:END:
+One handy command. It allows you to view the content of the both the
+local and global mark rings in a friendly interface, so you can always
+jump back to where you were. Without this command, if you want to view
+the mark rings, you have to run *M-:* and enter =mark-ring= or
+=global-mark-ring= to view  their contents. And even so, Emacs only
+displays the bare content of the =mark-ring= and =global-mark-ring=
+lists, which is the line number and its buffer like this:
+
+=(#<marker at 23614 in helm.org> #<marker at 2343 in setup-helm.el> #<marker at 4280 in helm.org> #<marker in no buffer> #<marker at 1271 in helm.org> #<marker at 643 in emacs-tutor.org> #<marker in no buffer> #<marker at 1 in setup-applications.el> #<marker at 1 in emacs-tutor3.org>)=
+
+
+With =helm-all-mark-rings=, you have this nice interface with line
+content and syntax highlighting:
+
+[[file:static/part3/helm-all-mark-rings.gif][file:static/part3/helm-all-mark-rings.gif]]
 
 *** Package: =helm-projectile=
 :PROPERTIES:
