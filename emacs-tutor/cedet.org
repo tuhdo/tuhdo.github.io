@@ -1,0 +1,128 @@
+#+TITLE: C/C++ development with =CEDET=
+* What is CEDET?
+:PROPERTIES:
+:ID:       5e06a903-4853-4093-a5b0-b5b28b3a6eaa
+:END:
+* Installation
+:PROPERTIES:
+:ID:       fd13a740-7ffe-4924-8a57-d627bc1401f4
+:END:
+* Main Semantic minor modes
+:PROPERTIES:
+:ID:       e57ff2d7-623a-4feb-91ac-c69487996527
+:END:
+** Command: =global-semanticdb-minor-mode=
+:PROPERTIES:
+:ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
+:END:
+** Command: =global-semantic-idle-scheduler-mode=
+:PROPERTIES:
+:ID:       fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3
+:END:
+** Command: =global-semantic-idle-summary-mode=
+:PROPERTIES:
+:ID:       3988c0b5-5cd2-409f-9825-54ac476bca7a
+:END:
+** Command: =global-semantic-decoration-mode=
+:PROPERTIES:
+:ID:       fd13b113-2460-4dea-8bae-aadc7bcf8d1d
+:END:
+** Command: =global-semantic-idle-completions-mode=
+:PROPERTIES:
+:ID:       b6630c63-04b2-4ddc-a209-273384b1f8f9
+:END:
+** Command: =global-semantic-decoration-mode=
+:PROPERTIES:
+:ID:       b76a7318-ff2f-42e0-941d-bd518917b2df
+:END:
+** Command: =global-semantic-highlight-func-mode=
+:PROPERTIES:
+:ID:       42e31b85-90de-4bf8-99fb-8778d312178d
+:END:
+** Command: =global-semantic-stickyfunc-mode=
+:PROPERTIES:
+:ID:       d5bd8f70-92c2-4143-8be1-2d5be650ea28
+:END:
+** Command: =global-semantic-mru-bookmark-mode=
+:PROPERTIES:
+:ID:       fe4d8d37-0455-4a7d-8a18-6ddb1226a046
+:END:
+** Command: =global-cedet-m3-minor-mode=
+:PROPERTIES:
+:ID:       e6ccdc02-c5ca-45a3-9114-bdc6bcc8ac7d
+:END:
+** Command: =global-semantic-idle-local-symbol-highlight-mode=
+:PROPERTIES:
+:ID:       67b03c99-46dc-4c30-940e-de842949447f
+:END:
+** Command: =global-semantic-highlight-edits-mode=
+:PROPERTIES:
+:ID:       4f2ee6d4-e10d-40c6-b5fd-78712946b312
+:END:
+** Command: =global-semantic-show-unmatched-syntax-mode=
+:PROPERTIES:
+:ID:       84a2c5de-45ca-4788-988e-3ad3739725b5
+:END:
+** Command: =global-semantic-show-parser-state-mode=
+:PROPERTIES:
+:ID:       06bd6895-c58c-460a-ac10-465acd03a6fd
+:END:
+* Setup and manage project with EDE
+:PROPERTIES:
+:ID:       243bfa47-475a-41fb-8f2f-78af150c95eb
+:END:
+* Source code navigation
+:PROPERTIES:
+:ID:       2b850804-a33b-4f37-96fd-5bb4e422dbee
+:END:
+** System include path
+:PROPERTIES:
+:ID:       754d6360-f8ee-4985-8a0b-794b59435123
+:END:
+
+** Project include path
+:PROPERTIES:
+:ID:       ca17991f-1d1f-4767-b8fc-e9c06c44c25a
+:END:
+
+** Find definitions in current buffer
+:PROPERTIES:
+:ID:       d146d5d0-092c-4e62-a362-9dcb02a64a39
+:END:
+
+** Find definitions in project
+:PROPERTIES:
+:ID:       0331265b-7c3f-457e-ba1d-ef6c3cd24208
+:END:
+** Find references in project
+:PROPERTIES:
+:ID:       410cfad4-a08d-4139-8c37-cb1bff5bd44e
+:END:
+* Source code completion
+:PROPERTIES:
+:ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
+:END:
+* Source code manipulation
+:PROPERTIES:
+:ID:       0fa2afe0-728c-49f6-86f1-7769cebc5de0
+:END:
+** Folding
+:PROPERTIES:
+:ID:       48b6ad5f-24e2-41c3-9a44-c1decdde6910
+:END:
+** Semantically kill/copy/yank (copy/cut/paste)
+:PROPERTIES:
+:ID:       21edcf89-82dc-476c-ae5d-714cdce1c7b4
+:END:
+* Integration with other tools
+:PROPERTIES:
+:ID:       4b5a5bfe-4589-4c7e-9f0d-4e24ad37153b
+:END:
+** GNU Global
+:PROPERTIES:
+:ID:       21ea863a-a4be-4f96-b83c-1d1cf1417621
+:END:
+** Exuberant Ctags
+:PROPERTIES:
+:ID:       846ea88b-da99-4102-b909-136b9a6aefcd
+:END:
