@@ -2401,15 +2401,12 @@ echo area. Echo area should be preserved for other things like
 Sample configuration:
 
 #+begin_src emacs-lisp
-  ;,--------------------------------------
-  ;| MAIN GROUP: Applications
-  ;`--------------------------------------
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Applications-> Eshell       ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'eshell)
   (require 'em-alias)
+  (require 'cl)
 
   ;; Advise find-file-other-window to accept more than one file
   (defadvice find-file-other-window (around find-files activate)

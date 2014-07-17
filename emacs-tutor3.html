@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-07-11 Fri 15:45 -->
+<!-- 2014-07-12 T7 12:33 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -4859,15 +4859,12 @@ Sample configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;</span><span style="color: #b22222;">,--------------------------------------</span>
-<span style="color: #b22222;">;</span><span style="color: #b22222;">| MAIN GROUP: Applications</span>
-<span style="color: #b22222;">;</span><span style="color: #b22222;">`--------------------------------------</span>
-
-<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Applications-&gt; Eshell       ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">eshell</span>)
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">em-alias</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">cl</span>)
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Advise find-file-other-window to accept more than one file</span>
 (<span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">find-file-other-window</span> (<span style="color: #7e544f;">around</span> <span style="color: #374478;">find-files</span> <span style="color: #707e4f;">activate</span>)
