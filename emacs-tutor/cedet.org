@@ -110,6 +110,10 @@
 :PROPERTIES:
 :ID:       48b6ad5f-24e2-41c3-9a44-c1decdde6910
 :END:
+** Narrowing
+:PROPERTIES:
+:ID:       000644fa-84e8-42a2-b780-6ff1b0c84a5a
+:END:
 ** Semantically kill/copy/yank (copy/cut/paste)
 :PROPERTIES:
 :ID:       21edcf89-82dc-476c-ae5d-714cdce1c7b4
