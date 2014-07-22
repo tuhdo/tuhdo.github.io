@@ -3,10 +3,50 @@
 :PROPERTIES:
 :ID:       5e06a903-4853-4093-a5b0-b5b28b3a6eaa
 :END:
+CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
+with the end goal of creating an advanced development environment in
+Emacs. CEDET includes common features such as intelligent completion,
+source code navigation, project management, code generation with
+templates . CEDET also provides a framework for working with
+programming languages; support for new programming languages can be
+added and use CEDET to provide IDE-like features.
+
+* Why use CEDET?
+:PROPERTIES:
+:ID:       b8922b61-b52a-4690-8626-4ca463dd2f85
+:END:
+CEDET is simple to setup and portable (right winthin Emacs and written
+entirely with Emacs Lisp). Without CEDET, you have to use external
+tools and third party Emacs packages. The downside of external tools
+is that they are not specifically designed for Emacs. They have
+similar use cases, but not always satisfying. For example, source code
+indexing tools such as GNU Global and Exuberant Ctags are really good
+at working static source code, but they do not keep track changes in
+real time; CEDET does:
+
+...[screenshot]...
+
+As you can see, CEDET recognizes when =printk.h= is included and
+provides appropriate completion candidates. In constrast, non-context
+sentisve completion is like this:
+
+...[screenshot]...
+
+In this case, the completion system gets all candidates straight from
+GNU Global generated database without considering current context.
+
+The disadvantage is that CEDET is written in Emacs Lisp, and it is
+bound to the performance limitations of Emacs. Even though, CEDET is
+still really fast for moderate-size source files. CEDET also makes use
+of external tools like GNU Global or Cscope or Exuberant Ctags for
+finding symbol references/definition in a project to reduce its
+workload.
+
 * Installation
 :PROPERTIES:
 :ID:       fd13a740-7ffe-4924-8a57-d627bc1401f4
 :END:
+CEDET is built into Emacs from 
 * Main Semantic minor modes
 :PROPERTIES:
 :ID:       e57ff2d7-623a-4feb-91ac-c69487996527
