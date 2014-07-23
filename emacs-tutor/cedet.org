@@ -11,6 +11,9 @@ templates . CEDET also provides a framework for working with
 programming languages; support for new programming languages can be
 added and use CEDET to provide IDE-like features.
 
+This tutorial only helps you use CEDET to get IDE features for C/C++,
+not adding support for a new programming language using CEDET.
+
 * Why use CEDET?
 :PROPERTIES:
 :ID:       b8922b61-b52a-4690-8626-4ca463dd2f85
@@ -46,67 +49,171 @@ workload.
 :PROPERTIES:
 :ID:       fd13a740-7ffe-4924-8a57-d627bc1401f4
 :END:
-CEDET is built into Emacs from 
-* Main Semantic minor modes
+CEDET was merged into Emacs since 23.2. You do not need to install
+CEDET manually. However, you can also use the development repository
+that contains latest bug fixes and more features. Nevertheless, the
+built-in Emacs is still adequate for daily usage and convenient for
+trying out before actually cloning and use the development version.
+
+If you really want to use the development version with latest feature,
+checkout this branch:
+
+#+begin_src sh
+  bzr checkout bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/ede-ldf cedet
+#+end_src
+
+Then compile it:
+
+#+begin_src sh
+  cd cedet
+  make # wait for it to complete
+  cd contrib
+  make
+#+end_src
+
+Finally, assume that you placed your newly cloned CEDET in
+=~/.emacs.d=, load it into your Emacs:
+
+#+begin_src emacs-lisp
+  (load-file (concat user-emacs-directory "/cedet/cedet-devel-load.el"))
+  (load-file (concat user-emacs-directory "cedet/contrib/cedet-contrib-load.el"))
+#+end_src
+
+* Semantic minor modes
 :PROPERTIES:
 :ID:       e57ff2d7-623a-4feb-91ac-c69487996527
 :END:
+=Semantic= is a package that provides language-aware editing commands
+based on source code parsers. Parsing is a process of analyzing source
+code based on programming language syntax. Emacs understands your
+source code through this process to provides features such as
+contextual code completion, code navigation.
+
+** Command: =semantic-mode=
+:PROPERTIES:
+:ID:       8f24eec1-81f5-445b-bdc7-1b7e27943ce5
+:END:
+This command activates =semantic-mode=. In Semantic mode, Emacs parses
+the buffers you visit for their semantic content. The parsing looks
+like this:
+
+...[screenshot]...
+
+Notice that at the bottom, Emacs prints messages like this: =Parsing
+<file> (LL)...<progress in percentage>=. This is common behavior of
+=Semantic=: when you perform a jump to a symbol or perform a
+completion, =Semantic= tries to be accurate by parsing all the
+included files and all the included files in the included files and so
+on, until it reaches the end.
+
+You may worry that this process would take a long time. Indeed, it
+does. However, this is just a one time process. Once it is parsed,
+Semantic will cache the parsing result for future use. The next time
+you perform some action on the parsed code, you will get your desired
+output instantly.
+
 ** Command: =global-semanticdb-minor-mode=
 :PROPERTIES:
 :ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
 :END:
+As mentioned above, Semantic caches parsing output for future
+use. To do that, =semanticdb-minor-mode= must be activated. In
+Semantic DB mode, Semantic parsers store results in a database, which
+can be saved for future Emacs sessions. The cache is saved in
+directory specified by =semanticdb-default-save-directory=
+variable. The default directory is =~/.emacs.d/semanticdb=.
+
 ** Command: =global-semantic-idle-scheduler-mode=
 :PROPERTIES:
 :ID:       fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3
 :END:
+When =semantic-idle-scheduler-mode= is enabled, Emacs periodically
+checks to see if the buffer is out of date, and reparses while the
+user is idle (not typing). When this mode is off, a buffer is only
+reparsed when user explicitly issue some command.
+
+With =semantic-idle-scheduler-mode=, Emacs keeps track live changes of
+your source code.
+
 ** Command: =global-semantic-idle-summary-mode=
 :PROPERTIES:
 :ID:       3988c0b5-5cd2-409f-9825-54ac476bca7a
 :END:
+...[screenshot]...
+When this minor mode is enabled, the echo area displays a summary of
+the symbol at point whenever Emacs is idle. For example, in the above
+picture, the function interface is displayed because the symbol at
+point is a function name.
+
 ** Command: =global-semantic-decoration-mode=
 :PROPERTIES:
 :ID:       fd13b113-2460-4dea-8bae-aadc7bcf8d1d
 :END:
+...screenshot]...
+
+This mode "decorates" certain type of tags, i.e. included header,
+function name, class... This can be defined by users.
+
 ** Command: =global-semantic-idle-completions-mode=
 :PROPERTIES:
 :ID:       b6630c63-04b2-4ddc-a209-273384b1f8f9
 :END:
-** Command: =global-semantic-decoration-mode=
-:PROPERTIES:
-:ID:       b76a7318-ff2f-42e0-941d-bd518917b2df
-:END:
+When enabled, Emacs displays a list of possible completions at idle
+time. 
+
+While a completion is displayed, RET accepts the completion; M-n and
+M-p cycle through completion alternatives; TAB attempts to complete as
+far as possible, and cycles if no additional completion is possible;
+and any other command cancels the completion: 
+
+...[screenshot]...
+
 ** Command: =global-semantic-highlight-func-mode=
 :PROPERTIES:
 :ID:       42e31b85-90de-4bf8-99fb-8778d312178d
 :END:
+...[screenshot]...
 ** Command: =global-semantic-stickyfunc-mode=
 :PROPERTIES:
 :ID:       d5bd8f70-92c2-4143-8be1-2d5be650ea28
 :END:
+...[screenshot]...
 ** Command: =global-semantic-mru-bookmark-mode=
 :PROPERTIES:
 :ID:       fe4d8d37-0455-4a7d-8a18-6ddb1226a046
 :END:
+...[screenshot]...
+
 ** Command: =global-cedet-m3-minor-mode=
 :PROPERTIES:
 :ID:       e6ccdc02-c5ca-45a3-9114-bdc6bcc8ac7d
 :END:
+...[screenshot]...
+
 ** Command: =global-semantic-idle-local-symbol-highlight-mode=
 :PROPERTIES:
 :ID:       67b03c99-46dc-4c30-940e-de842949447f
 :END:
+...[screenshot]...
+
 ** Command: =global-semantic-highlight-edits-mode=
 :PROPERTIES:
 :ID:       4f2ee6d4-e10d-40c6-b5fd-78712946b312
 :END:
+...[screenshot]...
+
 ** Command: =global-semantic-show-unmatched-syntax-mode=
 :PROPERTIES:
 :ID:       84a2c5de-45ca-4788-988e-3ad3739725b5
 :END:
+...[screenshot]...
+
 ** Command: =global-semantic-show-parser-state-mode=
 :PROPERTIES:
 :ID:       06bd6895-c58c-460a-ac10-465acd03a6fd
 :END:
+...[screenshot]...
+
 * Setup and manage project with EDE
 :PROPERTIES:
 :ID:       243bfa47-475a-41fb-8f2f-78af150c95eb
