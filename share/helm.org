@@ -393,8 +393,8 @@ _Similar Commands_:
 :END:
 _Key binding_:
 
-*<prefix> C-x C-f* or *C-x C-f*; =<prefix>= is *C-x c* by default, or
-*C-c h* if set. This is a rather long key sequence, and
+*<prefix> C-x C-f* or *C-x C-f* (prefix is *C-x c* by default, or
+*C-c h* if set). This is a rather long key sequence, and
 *=helm-find-files= deserves a better binding:
 
 #+begin_src emacs-lisp
@@ -510,7 +510,7 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> i*, =<prefix>= is *C-x c* by default, or *C-c h* if set.
+*<prefix> i* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -567,7 +567,7 @@ because =u16= and =u32= are defined by typedef.
 :END:
 _Key binding_:
 
-*<prefix> m*, =<prefix>= is *C-x c* by default, or *C-c h* if set.
+*<prefix> m* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -581,7 +581,7 @@ symbol, get a man page at point.
 :END:
 _Key binding_:
 
-*<prefix> /*, =<prefix>= is *C-x c* by default, or *C-c h* if set.
+*<prefix> /* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -617,7 +617,7 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> l*, =<prefix>= is *C-x c* by default, or *C-c h* if set.
+*<prefix> l* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -647,8 +647,8 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> M-s o*, =<prefix>= is *C-x c* by default, or *C-c h* if
-set. Since this is a rather long binding, we should bind a more
+*<prefix> M-s o* (prefix is *C-x c* by default, or *C-c h* if
+set). Since this is a rather long binding, we should bind a more
 convenient key sequence:
 
 #+begin_src emacs-lisp
@@ -673,7 +673,7 @@ typing. The demo starts when you see START in the minibuffer.
 :END:
 _Key binding_:
 
-*<prefix> a*, =<prefix>= is *C-x c* by default, or *C-c h* if set.
+*<prefix> a* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -687,8 +687,8 @@ faces - all in one command!. It is similar to *C-h a* which runs
 :END:
 _Key binding_:
 
-*<prefix> h <key>*, =<prefix>= is *C-x c* by default, or *C-c h* if
-set; *<key>*, by defaults, is one of *g*, *i* or *r*:
+*<prefix> h <key>* (prefix is *C-x c* by default, or *C-c h* if
+set); *<key>*, by defaults, is one of *g*, *i* or *r*:
 
 | Key            | Binding                       |
 |----------------+-------------------------------|
@@ -725,7 +725,7 @@ default info prefix: =<prefix> h= or key bindings of your choice.
 :END:
 _Key binding_:
 
- *<prefix> b*, =<prefix>= is *C-x c* by default, or *C-c h* if set.
+ *<prefix> b* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -755,8 +755,8 @@ again.
 :END:
 _Key binding_:
 
-*<prefix> C-c SPC*, =<prefix>= is *C-x c* by default, or *C-c h* if
-set. This is a rather long key sequence, this command deserves a
+*<prefix> C-c SPC* (prefix is *C-x c* by default, or *C-c h* if
+set). This is a rather long key sequence, this command deserves a
 better binding, for example:
 
 #+begin_src emacs-lisp
@@ -785,7 +785,7 @@ content and syntax highlighting:
 :ID:       2990875c-646a-4109-b8b4-1f8ea951e78d
 :END:
 _Key binding_:
-*<prefix> r*, <prefix> is *C-x c* by default, or *C-c h* if set.
+*<prefix> r* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -815,8 +815,8 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> C-x r i*, <prefix> is *C-x c* by default, or *C-c
-h* if set. Let's bind it to something else:
+*<prefix> C-x r i* (prefix is *C-x c* by default, or *C-c
+h* if set). Let's bind it to something else:
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c h x") 'helm-register)
@@ -850,7 +850,7 @@ _Demo_:
 :END:
 _Key binding_: 
 
-*<prefix> p*, <prefix> is *C-x c* by default, or *C-c h* if set.
+*<prefix> p* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -863,7 +863,7 @@ highlighting process.
 :END:
 _Key binding_:
 
-*<prefix> t*, <prefix> is *C-x c* by default, or *C-c h* if set.
+*<prefix> t* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -908,7 +908,7 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> s*, <prefix> is *C-x c* by default, or *C-c h* if set.
+*<prefix> s* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -932,8 +932,8 @@ _Demo_:
 :END:
 _Key binding_: 
 
-*<prefix> C-c g*, <prefix> is *C-x c* by default, or *C-c h* if
-set. Let's bind it to something else:
+*<prefix> C-c g* (prefix is *C-x c* by default, or *C-c h* if
+set). Let's bind it to something else:
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c h g") 'helm-google-suggest)
@@ -959,7 +959,7 @@ _Demo_:
 :END:
 _Key binding_:
 n
-*<prefix> c*, <prefix> is *C-x c* by default, or *C-c h* if set.
+*<prefix> c* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -1012,8 +1012,8 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> C-:*, <prefix> is *C-x c* by default, or *C-c h* if
-set. *C-:* is a bit difficult to press, it would be better with:
+*<prefix> C-:* (prefix is *C-x c* by default, or *C-c h* if
+set). *C-:* is a bit difficult to press, it would be better with:
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
@@ -1040,7 +1040,7 @@ _Demo_:
 :END:
 _Key binding_:
 
-*<prefix> C-,*, <prefix> is *C-x c* by default, or *C-c h* if set.
+*<prefix> C-,* (prefix is *C-x c* by default, or *C-c h* if set).
 
 _Description_:
 
@@ -1204,5 +1204,3 @@ Helm's strengths:
   these files have same prefix.
 
 - /Performance/: Helm can work with over 10000 candidates no problem.
-
-g

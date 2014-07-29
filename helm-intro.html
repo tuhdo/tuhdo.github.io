@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package on a league of its own: <code>Helm</code> </title>
-<!-- 2014-07-11 Fri 15:45 -->
+<!-- 2014-07-30 T4 01:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="Tu Do" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -167,23 +167,32 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-4">Command: <code>helm-mini</code></a></li>
 <li><a href="#sec-5">Command: <code>helm-find-files</code></a>
 <ul>
-<li><a href="#sec-5-1">Find file at point:</a></li>
-<li><a href="#sec-5-2">File and directory histories:</a></li>
-<li><a href="#sec-5-3">Live grep in Helm</a></li>
+<li><a href="#sec-5-1"><span class="underline">Find file at point</span>:</a></li>
+<li><a href="#sec-5-2"><span class="underline">File and directory histories</span>:</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">Command: <code>helm-semantic-or-imenu</code></a></li>
-<li><a href="#sec-7">Command: <code>helm-man-woman</code></a></li>
-<li><a href="#sec-8">Command: <code>helm-find</code></a></li>
-<li><a href="#sec-9">Command: <code>helm-locate</code></a></li>
-<li><a href="#sec-10">Command: <code>helm-occur</code></a></li>
-<li><a href="#sec-11">Command: <code>helm-apropos</code></a></li>
-<li><a href="#sec-12">Command: <code>helm-info-emacs</code></a></li>
-<li><a href="#sec-13">Command: <code>helm-resume</code></a></li>
-<li><a href="#sec-14">Command: <code>helm-all-mark-rings</code></a></li>
-<li><a href="#sec-15">Package: <code>helm-projectile</code></a></li>
-<li><a href="#sec-16">Package: <code>helm-descbind</code></a></li>
-<li><a href="#sec-17">Why Helm is poweful</a></li>
+<li><a href="#sec-6">Command: <code>helm-ff-do-grep</code>, Live grep in Helm</a></li>
+<li><a href="#sec-7">Command: <code>helm-semantic-or-imenu</code></a></li>
+<li><a href="#sec-8">Command: <code>helm-man-woman</code></a></li>
+<li><a href="#sec-9">Command: <code>helm-find</code></a></li>
+<li><a href="#sec-10">Command: <code>helm-locate</code></a></li>
+<li><a href="#sec-11">Command: <code>helm-occur</code></a></li>
+<li><a href="#sec-12">Command: <code>helm-apropos</code></a></li>
+<li><a href="#sec-13">Command: <code>helm-info-*</code></a></li>
+<li><a href="#sec-14">Command: <code>helm-resume</code></a></li>
+<li><a href="#sec-15">Command: <code>helm-all-mark-rings</code></a></li>
+<li><a href="#sec-16">Command: <code>helm-regexp</code></a></li>
+<li><a href="#sec-17">Command: <code>helm-register</code></a></li>
+<li><a href="#sec-18">Command: <code>helm-list-emacs-process</code></a></li>
+<li><a href="#sec-19">Command: <code>helm-top</code></a></li>
+<li><a href="#sec-20">Command: <code>helm-surfraw</code></a></li>
+<li><a href="#sec-21">Command: <code>helm-google-suggest</code></a></li>
+<li><a href="#sec-22">Command: <code>helm-color</code></a></li>
+<li><a href="#sec-23">Command: <code>helm-eval-expression-with-eldoc</code></a></li>
+<li><a href="#sec-24">Command: <code>helm-calcul-expression</code></a></li>
+<li><a href="#sec-25">Package: <code>helm-projectile</code></a></li>
+<li><a href="#sec-26">Package: <code>helm-descbind</code></a></li>
+<li><a href="#sec-27">Why Helm is poweful</a></li>
 </ul>
 </div>
 </div>
@@ -197,7 +206,8 @@ people who only wants to learn Helm and what makes it great.
 </p>
 
 <ul class="org-ul">
-<li>Tamas Patrovic (original author), from 2007.
+<li>Tamas Patrovic (original author), from 2007. At this time, Helm was
+named <code>anything</code>.
 </li>
 <li>rubikitch <code>rubikitch@ruby-lang.org</code>, from 2008-2011.
 </li>
@@ -254,7 +264,7 @@ Minimal config:
 </div>
 
 <p>
-My extended config:
+Extended config:
 </p>
 
 <div class="org-src-container">
@@ -265,6 +275,12 @@ My extended config:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
   <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span>)
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">must set before helm-config,  otherwise helm use default</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">prefix "C-x c", which is inconvenient because you can</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">accidentially pressed "C-x C-c"</span>
+(<span style="color: #784437;">setq</span> <span style="color: #37785e;">helm-command-prefix-key</span> <span style="color: #8b2252;">"C-c h"</span>)
+
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span>)
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-eshell</span>)
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-files</span>)
@@ -302,31 +318,7 @@ My extended config:
                                         <span style="color: #b22222;">; </span><span style="color: #b22222;">useful in helm-mini that lists buffers</span>
  )
 
-(<span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x 2"</span>) '<span style="color: #374478;">helm-select-2nd-action</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x 3"</span>) '<span style="color: #513f78;">helm-select-3rd-action</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x 4"</span>) '<span style="color: #3f7178;">helm-select-4rd-action</span>)
-
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-x"</span>) '<span style="color: #7a4f7e;">helm-M-x</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-y"</span>) '<span style="color: #4f5c7e;">helm-show-kill-ring</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x b"</span>) '<span style="color: #5e7837;">helm-mini</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x C-f"</span>) '<span style="color: #374478;">helm-find-files</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h s"</span>) '<span style="color: #5e7837;">helm-semantic-or-imenu</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h m"</span>) '<span style="color: #7a4f7e;">helm-man-woman</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h f"</span>) '<span style="color: #784437;">helm-find</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h l"</span>) '<span style="color: #783f5a;">helm-locate</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h o"</span>) '<span style="color: #37785e;">helm-occur</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h r"</span>) '<span style="color: #4f7e67;">helm-resume</span>)
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c m"</span>) '<span style="color: #783f5a;">helm-all-mark-rings</span>)
-
-(<span style="color: #37785e;">define-key</span> '<span style="color: #783778;">help-command</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-f"</span>) '<span style="color: #37785e;">helm-apropos</span>)
-(<span style="color: #37785e;">define-key</span> '<span style="color: #783778;">help-command</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"r"</span>) '<span style="color: #4f5c7e;">helm-info-emacs</span>)
-
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">use helm to list eshell history</span>
-(<span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span>
-          #'(<span style="color: #a020f0;">lambda</span> ()
-              (<span style="color: #37785e;">define-key</span> <span style="color: #4f7e67;">eshell-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-l"</span>)  '<span style="color: #783778;">helm-eshell-history</span>)))
-
-  <span style="color: #b22222;">;;; </span><span style="color: #b22222;">Save current position to mark ring</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Save current position to mark ring when jumping to a different place</span>
 (<span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">helm-goto-line-before-hook</span> '<span style="color: #3f7178;">helm-save-current-pos-to-mark-ring</span>)
 
 (<span style="color: #4f5c7e;">helm-mode</span> <span style="color: #008b8b;">1</span>)
@@ -357,7 +349,7 @@ completion:
 <li>Instead of <b>TAB</b> to expand the common part until you find your
 candidates, in Helm, you type a parts of the candidate you want to
 search, separated by spaces. In Helm, these strings are called
-<b>patterns</b>.
+<b>patterns</b>. Patterns can also be regexps.
 </li>
 
 <li>Helm will try to search and sort according to highest match, from
@@ -446,7 +438,7 @@ to help you using Helm productively.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-8de25a41-da8b-42b5-b152-e62ef75d2bfd"></a>Operate on text at point:</h2>
+<h2 id="sec-1"><a id="ID-8de25a41-da8b-42b5-b152-e62ef75d2bfd" name="ID-8de25a41-da8b-42b5-b152-e62ef75d2bfd"></a>Operate on text at point:</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 If you are already in a Helm session, you can still get input from the
@@ -462,8 +454,9 @@ word, into the Helm prompt (the minibuffer).
 </ul>
 
 <p>
-Help commands also automatically recognize symbols at point if such
-symbols exist in Emacs. For example:
+If <code>helm-mode</code> is activated, help commands also automatically
+recognize symbols at point if such symbols exist in Emacs, and use
+Helm interface for interactive selecting. For example:
 </p>
 
 <ul class="org-ul">
@@ -479,12 +472,34 @@ symbol at point as default for showing key binding for a command.
 <li>&#x2026; and so on&#x2026; (<b>C-h C-h</b> to view all commands)
 </li>
 </ul>
+
+<p>
+All of those commands automatically make use Helm.
+</p>
 </div>
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><a id="ID-500a1c68-ab43-40a5-97c3-5d556a9f748d"></a>Command: <code>helm-M-x</code></h2>
+<h2 id="sec-2"><a id="ID-500a1c68-ab43-40a5-97c3-5d556a9f748d" name="ID-500a1c68-ab43-40a5-97c3-5d556a9f748d"></a>Command: <code>helm-M-x</code></h2>
 <div class="outline-text-2" id="text-2">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+No key binding. We should give it one:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-x"</span>) '<span style="color: #7a4f7e;">helm-M-x</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
 <p>
 <code>M-x</code> and see the difference. You will see a buffer that lists
 commands in Emacs. Some of you may not like it because it seems
@@ -516,7 +531,7 @@ built-in documentation of that command in another buffer.
 </p>
 
 <p>
-Demo:
+<span class="underline">Demo</span>:
 </p>
 
 
@@ -528,8 +543,26 @@ Demo:
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><a id="ID-77b4d145-c280-4ed4-98a7-d645fe1d18bf"></a>Command: <code>helm-show-kill-ring</code></h2>
+<h2 id="sec-3"><a id="ID-77b4d145-c280-4ed4-98a7-d645fe1d18bf" name="ID-77b4d145-c280-4ed4-98a7-d645fe1d18bf"></a>Command: <code>helm-show-kill-ring</code></h2>
 <div class="outline-text-2" id="text-3">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+No key binding. We should give it one:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-y"</span>) '<span style="color: #4f5c7e;">helm-show-kill-ring</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
 <p>
 Do you remember that <code>C-y</code> <a href="http://tuhdo.github.io/emacs-tutor.html#sec-7-15">cycle the kill ring</a>? However, working with
 default kill ring is painful because you have a burden to remember an
@@ -551,6 +584,10 @@ If you follow my Helm configuration, <code>M-y</code> binds to
 </p>
 
 <p>
+<span class="underline">Demo</span>:
+</p>
+
+<p>
 <code>helm-kill-ring</code> in action (the demo starts when you see START in the
 minibuffer):
 </p>
@@ -564,10 +601,24 @@ minibuffer):
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-0386c827-7f5d-4056-bf4d-8d0fc01fc1ab"></a>Command: <code>helm-mini</code></h2>
+<h2 id="sec-4"><a id="ID-0386c827-7f5d-4056-bf4d-8d0fc01fc1ab" name="ID-0386c827-7f5d-4056-bf4d-8d0fc01fc1ab"></a>Command: <code>helm-mini</code></h2>
 <div class="outline-text-2" id="text-4">
 <p>
-This Helm command comprises of multiple sources:
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+No key binding. We should give it one:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x b"</span>) '<span style="color: #5e7837;">helm-mini</span>)
+</pre>
+</div>
+
+<p>
+<code>helm-mini</code> comprises of multiple sources:
 </p>
 
 <ul class="org-ul">
@@ -587,29 +638,34 @@ You can move back and forth between the groups by using <b>&lt;left&gt;</b> and
 </p>
 
 <p>
-You can filter out buffers by major mode using the query
+You can filter out buffers by major mode using the pattern
 <code>*&lt;major-mode&gt;</code>. For example, <code>*dired</code> narrows to only Dired
 buffers. You can also filter out buffers that belong to a major mode
-by adding <code>!</code> to the query. For example, <code>*!dired</code> select all buffers
+by adding <code>!</code> to the pattern. For example, <code>*!dired</code> select all buffers
 that are not in Dired mode.
 </p>
 
 <p>
-You can also select buffers in a specific directory by using the query
+You can also select buffers in a specific directory by using the pattern
 <code>/directory</code>. For example, <code>/.emacs.d/</code> narrows to buffers that are
-only inside <code>.emacs.d</code>. Add <code>!</code> before the query for reverse
+only inside <code>.emacs.d</code>. Add <code>!</code> before the pattern for reverse
 version. For example, <code>!/.emacs.d/</code> narrows to buffers not in
 <code>.emacs.d</code>.
 </p>
 
 <p>
 You can even use <code>helm-mini</code> to narrow to buffers that contains a
-regexp in their contents, by using the query <code>@content</code>. For example,
-you can select buffers that only contain the string "test":
-<code>@test</code>. If you want to see the locations of the string in the
-buffers,  <b>C-s</b> while in <code>helm-mini</code> session to switch to
-<code>helm-moccur</code>. You can mark buffers to search by <b>C-SPC</b> or you can
-select all buffers by <b>M-a</b>.
+regexp in their contents, by appending <code>@</code> before the search
+pattern. For example, you can select buffers that only contain the
+string "test": <code>@test</code>. If you want to see the locations of the string
+in the buffers,  <b>C-s</b> while in <code>helm-mini</code> session to switch to
+<code>helm-moccur</code>. By default, <code>helm-mini</code> searches all opening buffers;
+you can mark buffers to search by <b>C-SPC</b>; note that even if you mark
+buffers with <b>C-SPC</b>, content search using <code>@</code> still lists all buffers
+that contain the pattern; only when you switch to <code>helm-moccur</code>,
+matches that are in selected buffers are displayed. You can also
+perform <code>occur</code> only on the current buffer with prefix argument: <code>C-u
+C-s</code>.
 </p>
 
 <p>
@@ -640,37 +696,27 @@ Example:
 </p>
 
 <ul class="org-ul">
-<li><p>
-If I enter in pattern prompt: <code>*lisp ^helm @moc</code>, Helm will narrow
+<li>If I enter in pattern prompt: <code>*lisp ^helm @moc</code>, Helm will narrow
 down the list by selecting only buffers that are in lisp mode, start
 by helm and match "moc" in their contents.
-</p>
 </li>
 
-<li><p>
-If I want to specify more than one major-mode, separate them with
-=,=, e.g <code>*!lisp,!sh,!fun</code> will list all buffers but the ones in
+<li>If I want to specify more than one major-mode, separate them with
+<code>,</code>, e.g <code>*!lisp,!sh,!fun</code> will list all buffers but the ones in
 lisp-mode, sh-mode and fundamental-mode.
-</p>
 </li>
 
-<li><p>
-If I enter in pattern prompt: <code>*lisp ^helm moc</code>. Notice there is no
+<li>If I enter in pattern prompt: <code>*lisp ^helm moc</code>. Notice there is no
 <code>@</code> this time helm will look for lisp mode buffers starting by
 "helm" and have "moc" in their name.
-</p>
 </li>
 
-<li><p>
-If I enter in pattern prompt: <code>*!lisp !helm</code> Helm will narrow down
+<li>If I enter in pattern prompt: <code>*!lisp !helm</code> Helm will narrow down
 to buffers that are not in "lisp" mode and that do not match "helm".
-</p>
 </li>
 
-<li><p>
-If I enter in pattern prompt: <code>/helm/ w3</code> Helm will narrow down
+<li>If I enter in pattern prompt: <code>/helm/ w3</code> Helm will narrow down
 buffers that are in any "helm" sub-directory and matching w3.
-</p>
 
 <p>
 <code>helm-mini</code> is like an interactive version of <code>ibuffer</code>.
@@ -679,8 +725,12 @@ buffers that are in any "helm" sub-directory and matching w3.
 </ul>
 
 <p>
-Demo: Search for buffers that contain string "Answer", and transfer
-the search patterns to <code>helm-moccur</code> for the exact matches (the demo
+<span class="underline">Demo</span>:
+</p>
+
+<p>
+Search for buffers that contain string "Answer", and transfer the
+search patterns to <code>helm-moccur</code> for the exact matches (the demo
 starts when you see START in the minibuffer):
 </p>
 
@@ -689,14 +739,65 @@ starts when you see START in the minibuffer):
 <p><a href="static/part3/helm-mini.gif"><img src="static/part3/helm-mini.gif" alt="helm-mini.gif" /></a>
 </p>
 </div>
+
+<p>
+<span class="underline">Similar Commands</span>:
+</p>
+
+<ul class="org-ul">
+<li><code>helm-for-files</code>: this command lists buffers and recent files and
+files in current directory. However, when no match is found,
+<code>helm-mini</code> asks if you want to create a new buffer by highlighting
+the only entry that look like this:
+
+
+<div class="figure">
+<p><a href="static/helm-new-file-buffer.gif"><img src="static/helm-new-file-buffer.gif" alt="helm-new-file-buffer.gif" /></a>
+</p>
+</div>
+
+<p>
+while <code>helm-for-files</code> starts a <code>helm-locate</code> session to search in
+file system for the desired file. By default, <code>helm-for-files</code> binds
+to  <code>&lt;prefix&gt; f</code> (current prefix is <b>C-c h</b>).
+</p>
+</li>
+
+<li><code>helm-buffer-list</code>: similar to <code>helm-mini</code>, but instead of listing
+recent files from <code>recentf</code>, it uses <code>ido-virtual-buffers</code>, which is
+a list of recently visited files managed by <code>ido</code>. The virtual
+buffers do not contain path in it. Depends on preference, you can
+use this command in place of <code>helm-mini</code>.
+</li>
+</ul>
 </div>
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><a id="ID-b71abd6c-cb29-4b64-a55f-29bd75937c11"></a>Command: <code>helm-find-files</code></h2>
+<h2 id="sec-5"><a id="ID-b71abd6c-cb29-4b64-a55f-29bd75937c11" name="ID-b71abd6c-cb29-4b64-a55f-29bd75937c11"></a>Command: <code>helm-find-files</code></h2>
 <div class="outline-text-2" id="text-5">
 <p>
-<code>helm-find-files</code> is file navigation on steroid: 
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; C-x C-f</b> or <b>C-x C-f</b> (prefix is <b>C-x c</b> by default, or
+<b>C-c h</b> if set). This is a rather long key sequence, and
+*=helm-find-files= deserves a better binding:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x C-f"</span>) '<span style="color: #374478;">helm-find-files</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+<code>helm-find-files</code> is file navigation on steroid:
 </p>
 
 <ul class="org-ul">
@@ -749,9 +850,13 @@ my configuration.
 </p>
 
 <p>
-Demo: I only needed to type into the prompt a few character to get the
-candidate I wanted among many candidates. The demo starts when you
-see START in the minibuffer:
+<span class="underline">Demo</span>: 
+</p>
+
+<p>
+I only needed to type into the prompt a few character to get the
+candidate I wanted among many candidates. The demo starts when you see
+START in the minibuffer:
 </p>
 
 
@@ -762,8 +867,9 @@ see START in the minibuffer:
 </div>
 
 <div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><a id="ID-a70d8543-d81d-42f6-bd80-f0d459ed1a8c"></a>Find file at point:</h3>
+<h3 id="sec-5-1"><a id="ID-a70d8543-d81d-42f6-bd80-f0d459ed1a8c" name="ID-a70d8543-d81d-42f6-bd80-f0d459ed1a8c"></a><span class="underline">Find file at point</span>:</h3>
 <div class="outline-text-3" id="text-5-1">
+
 <p>
 Do you know the command <code>ffap</code>? It was introduced in part 1, but here
 is the demo:
@@ -786,8 +892,9 @@ C-f</b>. It's really convenient.
 </div>
 
 <div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><a id="ID-e1b80059-4a23-4a65-adb7-916764b47695"></a>File and directory histories:</h3>
+<h3 id="sec-5-2"><a id="ID-e1b80059-4a23-4a65-adb7-916764b47695" name="ID-e1b80059-4a23-4a65-adb7-916764b47695"></a><span class="underline">File and directory histories</span>:</h3>
 <div class="outline-text-3" id="text-5-2">
+
 <p>
 With prefix argument before running <code>helm-find-files</code>, Helm displays a
 list of visited directories. Select one at point transfer
@@ -808,15 +915,15 @@ visited directory.
 </p>
 </div>
 </div>
-
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><a id="ID-fb36142a-6b14-4f9f-a6c1-d58d2a004ddc"></a>Live grep in Helm</h3>
-<div class="outline-text-3" id="text-5-3">
-
-<div class="figure">
-<p><a href="static/live_grep.gif"><img src="static/live_grep.gif" alt="live_grep.gif" /></a>
-</p>
 </div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><a id="ID-ded88dfc-ea36-4650-856b-b7e176836f46" name="ID-ded88dfc-ea36-4650-856b-b7e176836f46"></a>Command: <code>helm-ff-do-grep</code>, Live grep in Helm</h2>
+<div class="outline-text-2" id="text-6">
+
+<p>
+<span class="underline">Key binding</span>: 
+</p>
 
 <p>
 From within a <code>helm-find-files</code> session, you can invoke
@@ -826,16 +933,41 @@ recursively grep a selected directory.
 </p>
 
 <p>
-There's also a standalone <code>helm-do-grep</code> command, but it will be
-deprecated soon.
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Every time you type in a character, <code>helm</code> updates <code>grep</code> result at
+that very moment.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/live_grep.gif"><img src="static/live_grep.gif" alt="live_grep.gif" /></a>
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><a id="ID-57d8eda0-9f2d-4aaf-b85d-3bcd261c40e8"></a>Command: <code>helm-semantic-or-imenu</code></h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><a id="ID-57d8eda0-9f2d-4aaf-b85d-3bcd261c40e8" name="ID-57d8eda0-9f2d-4aaf-b85d-3bcd261c40e8"></a>Command: <code>helm-semantic-or-imenu</code></h2>
+<div class="outline-text-2" id="text-7">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; i</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
 <p>
 The Imenu facility offers a way to find the major definitions,
 such as function definitions, variable definitions in a file by
@@ -859,36 +991,32 @@ default.
 </p>
 
 <p>
-Demo: Here is <code>helm-semantic-or-imenu</code> in action, please notice
-the "pattern: " prompt in the minibuffer:
+<span class="underline">Demo</span>:
+</p>
+
+<p>
+Here is <code>helm-semantic-or-imenu</code> in action, please notice the
+"pattern: " prompt in the minibuffer:
 </p>
 
 <ul class="org-ul">
-<li><p>
-At first, I narrow to candidates that are functions with this
+<li>At first, I narrow to candidates that are functions with this
 pattern in the prompt: <code>Functi</code>.
-</p>
 </li>
 
-<li><p>
-Then, I narrow to candidates that are functions and contains
+<li>Then, I narrow to candidates that are functions and contains
 <code>void</code> in it with this pattern: <code>functi void</code>, effectively
 select functions that have type <code>void</code> <b>or</b> accept <code>void</code> arguments.
-</p>
 </li>
 
-<li><p>
-Then, I narrow to candidates that are functions and contains
-<code>int</code> in it with this pattern: <code>functi int</code>, effectively select
-functions that have type <code>int</code> <b>or</b> accept <code>int</code> arguments.
-</p>
+<li>Then, I narrow to candidates that are functions and contains <code>int</code>
+in it with this pattern: <code>functi int</code>, effectively select functions
+that have type <code>int</code> <b>or</b> accept <code>int</code> arguments.
 </li>
 
-<li><p>
-Then, I narrow to candidates that are variables and contains
-<code>u16</code> in it, effectively select only variables that have type
-<code>u16</code>; the same for <code>u32</code> in the demo. 
-</p>
+<li>Then, I narrow to candidates that are variables and contains <code>u16</code>
+in it, effectively select only variables that have type <code>u16</code>; the
+same for <code>u32</code> in the demo.
 
 
 <div class="figure">
@@ -899,64 +1027,185 @@ Then, I narrow to candidates that are variables and contains
 </ul>
 
 <p>
-<b>RET</b> to visit the the candidate location. The above examples are
-just demonstration. You can narrow to anything you want with
-search patterns separated by spaces, i.e. you can use two
-string, one is "func" and one is part of a function name, and
-Helm can narrow to it fine.
+<b>RET</b> to visit the the candidate location. The above examples are just
+demonstration. You can narrow to anything you want with search
+patterns separated by spaces, i.e. you can use two string, one is
+"func" and one is part of a function name, and Helm can narrow to it
+fine.
 </p>
 
 <p>
-In the demo, you see things like <code>class u16</code> and <code>class u32</code>; that
-is because <code>u16</code> and <code>u32</code> are defined by typedef.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><a id="ID-2578b1bd-7ae9-4250-b701-c9191603404f"></a>Command: <code>helm-man-woman</code></h2>
-<div class="outline-text-2" id="text-7">
-<p>
-With <code>helm-man-woman</code>, you can quickly jump to any man entry using
-Helm interface, either by typing in Helm prompt or if point is on a
-symbol, get a man page at point. Give it a try.
+In the demo, you see things like <code>class u16</code> and <code>class u32</code>; that is
+because <code>u16</code> and <code>u32</code> are defined by typedef.
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><a id="ID-b7a95407-8629-48c4-bc9c-d0a391c95478"></a>Command: <code>helm-find</code></h2>
+<h2 id="sec-8"><a id="ID-2578b1bd-7ae9-4250-b701-c9191603404f" name="ID-2578b1bd-7ae9-4250-b701-c9191603404f"></a>Command: <code>helm-man-woman</code></h2>
 <div class="outline-text-2" id="text-8">
 <p>
-You can also quickly find a file with <code>helm-find</code>, binds to <b>C-c h f</b>
-(in my configuration). As usual, when you type a character, Helm
-filters candidates accordingly. Now, instead of typing a long find
-query into terminal and wait, you have a simple Helm interface.
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; m</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+With <code>helm-man-woman</code>, you can quickly jump to any man entry using
+Helm interface, either by typing in Helm prompt or if point is on a
+symbol, get a man page at point.
 </p>
 </div>
 </div>
 
 <div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9"><a id="ID-0e8e485d-c539-4175-9c81-9c8f9f17f608"></a>Command: <code>helm-locate</code></h2>
+<h2 id="sec-9"><a id="ID-b7a95407-8629-48c4-bc9c-d0a391c95478" name="ID-b7a95407-8629-48c4-bc9c-d0a391c95478"></a>Command: <code>helm-find</code></h2>
 <div class="outline-text-2" id="text-9">
 <p>
-Similar to <code>helm-find</code>, but you <code>locate</code> command, using <b>C-c h l</b> (in
-my configuration). You can specify a local database with prefix argument.
+<span class="underline">Key binding</span>:
 </p>
+
+<p>
+<b>&lt;prefix&gt; /</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Normally, you use <code>find</code> command with arguments in terminal, then
+press RET and wait for a big list of result, and if the result is not
+as expected, repeat the whole thing. You can shorten this process by
+interactively get results from Unix <code>find</code> for every character you
+enter into Helm prompt.
+</p>
+
+<p>
+You can separate search patterns by spaces. However, since Helm is
+using Unix <code>find</code> utility, you have to enter search patterns according
+to the search string of <code>find</code>; use <code>helm-man-woman</code> to read <code>find</code>
+man page.
+</p>
+
+<p>
+By default, invoking <code>helm-find</code> only searches current directory. With
+prefix argument <code>C-u</code> (i.e. <code>C-u C-c h /</code>), a prompt asks for a
+directory to find. <code>helm-find</code> can be invoked within <code>helm-find-files</code>
+session, by using <b>C-c /</b>. To open more than one file, mark candidates
+by <b>C-SPC</b> or mark all with <b>M-a</b>, then <b>RET</b>. You can switch to
+<code>helm-find-files</code> by <b>C-x C-f</b>.
+</p>
+
+<p>
+If you use <code>helm-find</code> on a large directory and feel the update is too
+sluggish, you can always suspend the live updating with <b>C-!</b> and
+resume the live updating with <b>C-!</b> later.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-find.gif"><img src="static/part3/helm-find.gif" alt="helm-find.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 
 <div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><a id="ID-5fe9a6c3-5af2-4b4a-94ff-5849560c831f"></a>Command: <code>helm-occur</code></h2>
+<h2 id="sec-10"><a id="ID-0e8e485d-c539-4175-9c81-9c8f9f17f608" name="ID-0e8e485d-c539-4175-9c81-9c8f9f17f608"></a>Command: <code>helm-locate</code></h2>
 <div class="outline-text-2" id="text-10">
 <p>
-Similar to <code>occur</code>, but using Helm interface. As you type, matching
-lines are updated immediately. Very interactively, as it is the nature
-of Helm.
+<span class="underline">Key binding</span>:
 </p>
 
 <p>
-Demo: You can see that candidates kept getting updated when I was
+<b>&lt;prefix&gt; l</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Similar to <code>helm-find</code>, but use <code>locate</code> command and accepts search
+patterns according to <code>locate</code> input. Use <code>helm-man-woman</code> to read
+<code>locate</code> man page.
+</p>
+
+<p>
+To use local database, execute <code>helm-locate</code> with prefix argument
+<code>C-u</code>. You can also customize Helm to use <code>locate</code> with arguments of
+your choice:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">helm-locate-command</span> <span style="color: #8b2252;">"locate %s -e -A --regex %s"</span>)
+</pre>
+</div>
+
+<p>
+If you use <code>helm-locate</code> on a large directory and feel the update is
+too sluggish, you can always suspend the live updating with <b>C-!</b> and
+resume the live updating with <b>C-!</b> later.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-locate.gif"><img src="static/part3/helm-locate.gif" alt="helm-locate.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><a id="ID-5fe9a6c3-5af2-4b4a-94ff-5849560c831f" name="ID-5fe9a6c3-5af2-4b4a-94ff-5849560c831f"></a>Command: <code>helm-occur</code></h2>
+<div class="outline-text-2" id="text-11">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; M-s o</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if
+set). Since this is a rather long binding, we should bind a more
+convenient key sequence:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h o"</span>) '<span style="color: #37785e;">helm-occur</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Similar to <code>occur</code>, but using Helm interface. As you type, matching
+lines are updated immediately.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+<p>
+You can see that candidates kept getting updated when I was
 typing. The demo starts when you see START in the minibuffer.
 </p>
 
@@ -968,22 +1217,81 @@ typing. The demo starts when you see START in the minibuffer.
 </div>
 </div>
 
-<div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11"><a id="ID-479cdaab-0aba-48b8-b4d2-b026d23eb41a"></a>Command: <code>helm-apropos</code></h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-sec-12" class="outline-2">
+<h2 id="sec-12"><a id="ID-479cdaab-0aba-48b8-b4d2-b026d23eb41a" name="ID-479cdaab-0aba-48b8-b4d2-b026d23eb41a"></a>Command: <code>helm-apropos</code></h2>
+<div class="outline-text-2" id="text-12">
 <p>
-Similar to <b>C-h a</b> which runs <code>apropos-command</code>, but use Helm
-interface and update as you type.
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; a</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Pre-configured helm to describe commands, functions, variables and
+faces - all in one command!. It is similar to <b>C-h a</b> which runs
+<code>apropos-command</code>, but interactive includes more than just commands.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-12" class="outline-2">
-<h2 id="sec-12"><a id="ID-93e5fcb9-231b-43b8-81df-501a59bca2b6"></a>Command: <code>helm-info-emacs</code></h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-sec-13" class="outline-2">
+<h2 id="sec-13"><a id="ID-93e5fcb9-231b-43b8-81df-501a59bca2b6" name="ID-93e5fcb9-231b-43b8-81df-501a59bca2b6"></a>Command: <code>helm-info-*</code></h2>
+<div class="outline-text-2" id="text-13">
 <p>
-In the extended config, I replace the default <code>info-emacs-manual</code> with
-<code>helm-info-emacs</code>.
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; h &lt;key&gt;</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if
+set); <b>&lt;key&gt;</b>, by defaults, is one of <b>g</b>, <b>i</b> or <b>r</b>:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>&lt;prefix&gt; h g</b></td>
+<td class="left">Command: <code>helm-info-gnus</code></td>
+</tr>
+
+<tr>
+<td class="left"><b>&lt;prefix&gt; h r</b></td>
+<td class="left">Command: <code>helm-info-at-point</code></td>
+</tr>
+
+<tr>
+<td class="left"><b>&lt;prefix&gt; h r</b></td>
+<td class="left">Command: <code>helm-info-emacs</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+So, the prefix for info commands is <code>&lt;prefix&gt; h</code>. You can think of <code>h</code>
+as stands for <b>help</b> and <b>&lt;key&gt;</b> is one of the info topic to make it
+easier to remember and recall.
 </p>
 
 <p>
@@ -991,17 +1299,47 @@ In the extended config, I replace the default <code>info-emacs-manual</code> wit
 helm info</code> to see these commands, i.e. <code>helm-info-as</code>,
 <code>helm-info-gdb</code>&#x2026; You can search for info nodes easily with Helm
 interface and <b>TAB</b> on an entry to view. <b>M-&lt;next&gt;</b> moves to the next
-page, <b>M-&lt;prior&gt;</b> moves to the previous page in the other buffer.
+page, <b>M-&lt;prior&gt;</b> moves to the previous page in the other buffer. 
 </p>
 
 <p>
-You should bind your favourite info commands to some key bindings.
+You can have more <code>helm-info-</code> commands, such as:
+</p>
+
+<ul class="org-ul">
+<li><code>helm-info-gdb</code>.
+</li>
+<li><code>helm-info-find</code>.
+</li>
+<li><code>helm-info-elisp</code>.
+</li>
+</ul>
+<p>
+&#x2026;.
+</p>
+
+<p>
+Use <code>M-x helm-info</code> to see the list of <code>helm-info-</code> commands using the
+default info prefix: <code>&lt;prefix&gt; h</code> or key bindings of your choice.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-13" class="outline-2">
-<h2 id="sec-13"><a id="ID-9d698347-33ee-447d-9fd1-eb01e9770dbb"></a>Command: <code>helm-resume</code></h2>
-<div class="outline-text-2" id="text-13">
+
+<div id="outline-container-sec-14" class="outline-2">
+<h2 id="sec-14"><a id="ID-9d698347-33ee-447d-9fd1-eb01e9770dbb" name="ID-9d698347-33ee-447d-9fd1-eb01e9770dbb"></a>Command: <code>helm-resume</code></h2>
+<div class="outline-text-2" id="text-14">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; b</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
 <p>
 This command allows you to resume the previous Helm session, along
 with your previous patterns in the prompt. For example, if your
@@ -1029,9 +1367,30 @@ again.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-14" class="outline-2">
-<h2 id="sec-14"><a id="ID-12d8e9d0-1a43-434f-8398-6bb5deb729df"></a>Command: <code>helm-all-mark-rings</code></h2>
-<div class="outline-text-2" id="text-14">
+
+<div id="outline-container-sec-15" class="outline-2">
+<h2 id="sec-15"><a id="ID-12d8e9d0-1a43-434f-8398-6bb5deb729df" name="ID-12d8e9d0-1a43-434f-8398-6bb5deb729df"></a>Command: <code>helm-all-mark-rings</code></h2>
+<div class="outline-text-2" id="text-15">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; C-c SPC</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if
+set). This is a rather long key sequence, this command deserves a
+better binding, for example:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-h SPC"</span>) '<span style="color: #783f5a;">helm-all-mark-rings</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
 <p>
 One handy command. It allows you to view the content of the both the
 local and global mark rings in a friendly interface, so you can always
@@ -1046,7 +1405,6 @@ lists, which is the line number and its buffer like this:
 <code>(#&lt;marker at 23614 in helm.org&gt; #&lt;marker at 2343 in setup-helm.el&gt; #&lt;marker at 4280 in helm.org&gt; #&lt;marker in no buffer&gt; #&lt;marker at 1271 in helm.org&gt; #&lt;marker at 643 in emacs-tutor.org&gt; #&lt;marker in no buffer&gt; #&lt;marker at 1 in setup-applications.el&gt; #&lt;marker at 1 in emacs-tutor3.org&gt;)</code>
 </p>
 
-
 <p>
 With <code>helm-all-mark-rings</code>, you have this nice interface with line
 content and syntax highlighting:
@@ -1060,9 +1418,687 @@ content and syntax highlighting:
 </div>
 </div>
 
-<div id="outline-container-sec-15" class="outline-2">
-<h2 id="sec-15"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-sec-16" class="outline-2">
+<h2 id="sec-16"><a id="ID-2990875c-646a-4109-b8b4-1f8ea951e78d" name="ID-2990875c-646a-4109-b8b4-1f8ea951e78d"></a>Command: <code>helm-regexp</code></h2>
+<div class="outline-text-2" id="text-16">
+<p>
+<span class="underline">Key binding</span>:
+<b>&lt;prefix&gt; r</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Pre-configured helm to build regexps. This commands is useful when you
+want to test out regexp interactively. Following actions are
+available if <b>C-z</b>:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>[f1]</b></td>
+<td class="left">Action: <code>Kill regexp as sexp</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Saves the regexp as a string in <code>kill-ring</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f2]</b></td>
+<td class="left">Action: <code>Query Replace Regexp</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Invoke <code>query-replace</code> with current regexp to be replaced</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f3]</b></td>
+<td class="left">Action: <code>Kill regexp</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Saves the regexp as is in the current Helm prompt</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-regexp.gif"><img src="static/part3/helm-regexp.gif" alt="helm-regexp.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h2 id="sec-17"><a id="ID-eba2ce38-e084-4338-8209-cd1c3a8e26b9" name="ID-eba2ce38-e084-4338-8209-cd1c3a8e26b9"></a>Command: <code>helm-register</code></h2>
+<div class="outline-text-2" id="text-17">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; C-x r i</b> (prefix is <b>C-x c</b> by default, or <b>C-c
+h</b> if set). Let's bind it to something else:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h x"</span>) '<span style="color: #513f78;">helm-register</span>)
+</pre>
+</div>
+
+<p>
+Pre-configured for viewing of Emacs registers. By simply executing
+<code>helm-register</code>, you can view what is in registers. <b>RET</b> or <b>TAB</b>
+inserts content of highlighting register.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>[f1]</b></td>
+<td class="left">Action: <code>Insert Register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Insert register content into buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f2]</b></td>
+<td class="left">Action: <code>Append Region to Register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Append an active region to current content</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">in highlighting register</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f3]</b></td>
+<td class="left">Action: <code>Prepend Region to Register</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Prepend an active region to current content</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">in highlighting register</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-registers.gif"><img src="static/part3/helm-registers.gif" alt="helm-registers.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h2 id="sec-18"><a id="ID-78775761-7c91-4be1-b787-831695dda673" name="ID-78775761-7c91-4be1-b787-831695dda673"></a>Command: <code>helm-list-emacs-process</code></h2>
+<div class="outline-text-2" id="text-18">
+<p>
+<span class="underline">Key binding</span>: 
+</p>
+
+<p>
+<b>&lt;prefix&gt; p</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+This command lists processes that Emacs is using. <b>TAB</b> kills the
+highlighting process.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-19" class="outline-2">
+<h2 id="sec-19"><a id="ID-f8adcc89-8421-434d-a8a3-92865d1cbb2a" name="ID-f8adcc89-8421-434d-a8a3-92865d1cbb2a"></a>Command: <code>helm-top</code></h2>
+<div class="outline-text-2" id="text-19">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; t</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+This command provides Helm interface for <code>top</code> program. You can
+interact with each process with the following actions:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>[f1]</b></td>
+<td class="left">kill (SIGTERM)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f2]</b></td>
+<td class="left">kill (SIGKILL)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f3]</b></td>
+<td class="left">kill (SIGINT)</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f4]</b></td>
+<td class="left">kill (Choose signal)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<code>helm-top</code> specific commands:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>C-c C-u</b></td>
+<td class="left">Refresh <code>helm-top</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-C</b></td>
+<td class="left">Sort by <b>shell commands</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-P</b></td>
+<td class="left">Sort by <b>CPU usage</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-U</b></td>
+<td class="left">Sort by <b>user</b></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-M</b></td>
+<td class="left">Sort by <b>memory</b></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<code>user</code> and <code>shell commands</code> are sorted alphabetically.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-top.gif"><img src="static/part3/helm-top.gif" alt="helm-top.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-20" class="outline-2">
+<h2 id="sec-20"><a id="ID-b436e961-79a4-426e-a2a1-23d790390cb1" name="ID-b436e961-79a4-426e-a2a1-23d790390cb1"></a>Command: <code>helm-surfraw</code></h2>
+<div class="outline-text-2" id="text-20">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; s</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+Surfraw provides a fast UNIX command line interface to a variety
+of popular WWW search engines and other artifacts of power.  It
+reclaims google, altavista, dejanews, freshmeat, research index,
+slashdot&#x2026;
+</p>
+
+<p>
+<code>helm-surfraw</code> provides Helm interface to <code>surfraw</code> program that is
+easy to use. All you have to do is enter a search term, and then Helm
+provides a number of services, such as Google, Stackoverflow&#x2026; to
+use.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-surfraw.gif"><img src="static/part3/helm-surfraw.gif" alt="helm-surfraw.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-21" class="outline-2">
+<h2 id="sec-21"><a id="ID-fe45a7e8-785a-456a-8a16-73c2c4e3a52b" name="ID-fe45a7e8-785a-456a-8a16-73c2c4e3a52b"></a>Command: <code>helm-google-suggest</code></h2>
+<div class="outline-text-2" id="text-21">
+<p>
+<span class="underline">Key binding</span>: 
+</p>
+
+<p>
+<b>&lt;prefix&gt; C-c g</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if
+set). Let's bind it to something else:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h g"</span>) '<span style="color: #7e544f;">helm-google-suggest</span>)
+</pre>
+</div>
+
+<p>
+If you don't have <code>surfraw</code> program or don't want to use, you can
+override <b>C-c h s</b> binding with this command.
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+This command allows you to interactively enter search terms and get
+results from Google in a Helm buffer. Then, you can open one of the
+candidates in other services, such as Google, Wikipedia, Youtube,
+Imbd, Google Maps, Google News.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-google-suggest.gif"><img src="static/part3/helm-google-suggest.gif" alt="helm-google-suggest.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-22" class="outline-2">
+<h2 id="sec-22"><a id="ID-6e010b94-e671-40f4-9a5a-31e54ba00bdd" name="ID-6e010b94-e671-40f4-9a5a-31e54ba00bdd"></a>Command: <code>helm-color</code></h2>
+<div class="outline-text-2" id="text-22">
+<p>
+<span class="underline">Key binding</span>:
+n
+<b>&lt;prefix&gt; c</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+If you want to quickly view and copy hexadecimal values of colors,
+<code>helm-color</code> provides such features. But, <code>helm-color</code> is beyond a
+mere color picker. The real usage for <code>helm-color</code> is for face
+customization: the command list ALL available faces, with a preview of
+each face in the same row. This makes theme customization really quick
+because you can quickly view a face with its color. Because the way
+Helm work, you can look at a group of faces together to have a global
+view if the colors work well with each other.
+</p>
+
+<p>
+<code>helm-color</code> contains two groups, with actions in each:
+</p>
+
+<ul class="org-ul">
+<li>Colors:
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>[f1]</b> or <b>C-c N</b></td>
+<td class="left"><code>Copy Name</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Copy color name into kill-ring</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f2]</b> or <b>C-c R</b></td>
+<td class="left"><code>Copy RGB</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Copy hex value into kill-ring</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f3]</b> or <b>C-c n</b></td>
+<td class="left"><code>Insert Name</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Insert color name into current buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f4]</b> or <b>C-c r</b></td>
+<td class="left"><code>Insert RGB</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Insert hex value  into current buffer</td>
+</tr>
+</tbody>
+</table>
+
+<ul class="org-ul">
+<li>Customize Face: 
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>[f1]</b></td>
+<td class="left"><code>Customize</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Open Customization window</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>[f2]</b></td>
+<td class="left"><code>Copy Name</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Copy face name</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-color.gif"><img src="static/part3/helm-color.gif" alt="helm-color.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-23" class="outline-2">
+<h2 id="sec-23"><a id="ID-5ff6249d-02a6-449a-98b8-9b40664b32ce" name="ID-5ff6249d-02a6-449a-98b8-9b40664b32ce"></a>Command: <code>helm-eval-expression-with-eldoc</code></h2>
+<div class="outline-text-2" id="text-23">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; C-:</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if
+set). <b>C-:</b> is a bit difficult to press, it would be better with:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h M-:"</span>) '<span style="color: #7e544f;">helm-eval-expression-with-eldoc</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+This command allows you to enter Emacs Lisp expressions and get
+instant result in a Helm buffer for every character you type. The
+changed key binding above makes it easier to remember, since the
+stock <code>eval-expression</code> binds to <b>M-:</b>. So, from now on, to eval
+expression without live update, use <b>M-:</b>, and with live update, use
+<b>C-c h M-:</b>. This command is useful when you want to try out a command
+with various inputs, and want to see result as fast as
+possible.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-eval-expression.gif"><img src="static/part3/helm-eval-expression.gif" alt="helm-eval-expression.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-24" class="outline-2">
+<h2 id="sec-24"><a id="ID-25c713ac-d068-48f9-b518-93df630ed0a2" name="ID-25c713ac-d068-48f9-b518-93df630ed0a2"></a>Command: <code>helm-calcul-expression</code></h2>
+<div class="outline-text-2" id="text-24">
+<p>
+<span class="underline">Key binding</span>:
+</p>
+
+<p>
+<b>&lt;prefix&gt; C-,</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
+</p>
+
+<p>
+<span class="underline">Description</span>:
+</p>
+
+<p>
+This commands provides a Helm interface for <code>calc</code> command. What is
+<code>calc</code>? According to <a href="http://www.gnu.org/software/emacs/manual/html_mono/calc.html#Getting-Started">Calc Manual</a>:
+</p>
+
+<blockquote>
+<p>
+Calc is an advanced calculator and mathematical tool that runs as part
+of the GNU Emacs environment. Very roughly based on the HP-28/48
+series of calculators, its many features include:
+</p>
+
+<ul class="org-ul">
+<li>Choice of algebraic or RPN (stack-based) entry of calculations.
+</li>
+<li>Arbitrary precision integers and floating-point numbers.
+</li>
+<li>Arithmetic on rational numbers, complex numbers (rectangular and
+polar), error forms with standard deviations, open and closed
+intervals, vectors and matrices, dates and times, infinities, sets,
+quantities with units, and algebraic formulas.
+</li>
+<li>Mathematical operations such as logarithms and trigonometric functions.
+</li>
+<li>Programmer's features (bitwise operations, non-decimal numbers).
+</li>
+<li>Financial functions such as future value and internal rate of return.
+</li>
+<li>Number theoretical features such as prime factorization and arithmetic modulo m for any m.
+</li>
+<li>Algebraic manipulation features, including symbolic calculus.
+</li>
+<li>Moving data to and from regular editing buffers.
+</li>
+<li>Embedded mode for manipulating Calc formulas and data directly inside any editing buffer.
+</li>
+<li>Graphics using GNUPLOT, a versatile (and free) plotting program.
+</li>
+<li>Easy programming using keyboard macros, algebraic formulas, algebraic rewrite rules, or extended Emacs Lisp. 
+</li>
+</ul>
+</blockquote>
+
+<p>
+You can enter valid <code>calc</code> mathematic expressions such as +, -,*, /,
+sin,cos,tan, sqrt&#x2026;. To make the most out of this command, obviously
+you should carefully study <code>calc</code> itself with <a href="http://www.gnu.org/software/emacs/manual/html_mono/calc.html">Calc Manual</a>.
+</p>
+
+<p>
+<span class="underline">Demo</span>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-calc.gif"><img src="static/part3/helm-calc.gif" alt="helm-calc.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-25" class="outline-2">
+<h2 id="sec-25"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b" name="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h2>
+<div class="outline-text-2" id="text-25">
 <p>
 <span class="underline">Author</span>:  <a href="https://github.com/bbatsov">Bozhidar Batsov</a>, <code>bozhidar@batsov.com</code>
 </p>
@@ -1106,9 +2142,9 @@ immediately.
 </div>
 </div>
 
-<div id="outline-container-sec-16" class="outline-2">
-<h2 id="sec-16"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-sec-26" class="outline-2">
+<h2 id="sec-26"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc" name="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h2>
+<div class="outline-text-2" id="text-26">
 <p>
 <span class="underline">Author</span>
 </p>
@@ -1179,37 +2215,32 @@ using Helm interface for narrowing.
 </div>
 </div>
 
-<div id="outline-container-sec-17" class="outline-2">
-<h2 id="sec-17"><a id="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32"></a>Why Helm is poweful</h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-sec-27" class="outline-2">
+<h2 id="sec-27"><a id="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32" name="ID-260dfe60-eb43-4d20-b1c4-b51af5133a32"></a>Why Helm is poweful</h2>
+<div class="outline-text-2" id="text-27">
 <p>
 Helm's strengths:
 </p>
 
 <ul class="org-ul">
-<li><p>
-<i><span class="underline">Simple and Consistent interface</span></i>: Every Helm session starts with
+<li><i><span class="underline">Simple and Consistent interface</span></i>: Every Helm session starts with
 a same simple interface: a prompt for entering search patterns and
 a Helm buffer for displying results as a user types. Because of the
 consistency and simple interface, new people use Helm with ease.
-</p>
 </li>
 
-<li><p>
-<i><span class="underline">Interactivity</span></i>: By nature, Helm is very interactive: as a user
+<li><i><span class="underline">Interactivity</span></i>: By nature, Helm is very interactive: as a user
 types, results get updated immediately in the Helm buffer. Because
 of this feature, Helm provides a unique interactive verion of many
 commmands that do not exist outside of Helm. For example,
 <code>helm-ff-run-grep</code>, update grep results as you type.
-</p>
 </li>
 
-<li><p>
-<i><span class="underline">Matching mechanism</span></i>: This is a powerful feature in Helm that I
-hvaen't seen in other packages: out of order matching, <b>with
-regex</b>. That's right, you can enter every search pattern as
-regex!. A really powerful concept: it enhances explanatory power for
-many things. One of use cases is exploring a new project: using
+<li><i><span class="underline">Matching mechanism</span></i>: This is a powerful feature in Helm that I
+hvaen't seen in other packages: out of order matching, <b>with regular
+expression</b>. That's right, you can enter every search pattern as
+regexp!. A really powerful concept: it enhances explanatory power
+for many things. One of use cases is exploring a new project: using
 Helm, you can "learn" the project structure interactively. For
 example, suppose I'm completely new to the linux kernel source tree,
 and I wonder whether a file <code>main.c</code> exists for <code>x86</code>
@@ -1217,7 +2248,6 @@ architecture. I know that they must have <code>x86</code> directory somewhere,
 and the file could contain <code>main.c</code> in it, i.e. It can be <code>main.c</code>
 or <code>x86-main.c</code>. These are the only information I know, so I must
 confirm whether it is true or not, so I tried it in Helm:
-</p>
 
 
 <div class="figure">
@@ -1257,9 +2287,7 @@ these files have same prefix.
 </p>
 </li>
 
-<li><p>
-<i>Performance</i>: Helm can work with over 10000 candidates no problem.
-</p>
+<li><i>Performance</i>: Helm can work with over 10000 candidates no problem.
 </li>
 </ul>
 </div>
