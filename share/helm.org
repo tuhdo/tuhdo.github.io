@@ -37,7 +37,7 @@ Minimal config:
   (helm-mode 1)
 #+end_src
 
-My extended config:
+Extended config:
 
 #+begin_src emacs-lisp
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -47,6 +47,9 @@ My extended config:
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (require 'helm)
   (require 'helm-config)
+  (setq helm-command-prefix-key "C-c h") ; must set before helm-config,
+                                          ; otherwise helm use default
+                                          ; prefix "C-x c"
   (require 'helm-eshell)
   (require 'helm-files)
   (require 'helm-grep)
@@ -83,31 +86,7 @@ My extended config:
                                           ; useful in helm-mini that lists buffers
    )
 
-  (define-key helm-map (kbd "C-x 2") 'helm-select-2nd-action)
-  (define-key helm-map (kbd "C-x 3") 'helm-select-3rd-action)
-  (define-key helm-map (kbd "C-x 4") 'helm-select-4rd-action)
-
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-c h s") 'helm-semantic-or-imenu)
-  (global-set-key (kbd "C-c h m") 'helm-man-woman)
-  (global-set-key (kbd "C-c h f") 'helm-find)
-  (global-set-key (kbd "C-c h l") 'helm-locate)
-  (global-set-key (kbd "C-c h o") 'helm-occur)
-  (global-set-key (kbd "C-c h r") 'helm-resume)
-  (global-set-key (kbd "C-c m") 'helm-all-mark-rings)
-
-  (define-key 'help-command (kbd "C-f") 'helm-apropos)
-  (define-key 'help-command (kbd "r") 'helm-info-emacs)
-
-  ;; use helm to list eshell history
-  (add-hook 'eshell-mode-hook
-            #'(lambda ()
-                (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
-
-    ;;; Save current position to mark ring
+  ;; Save current position to mark ring when jumping to a different place
   (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
 
   (helm-mode 1)
@@ -129,7 +108,7 @@ completion:
 - Instead of *TAB* to expand the common part until you find your
   candidates, in Helm, you type a parts of the candidate you want to
   search, separated by spaces. In Helm, these strings are called
-  *patterns*.
+  *patterns*. Patterns can also be regexps.
 
 - Helm will try to search and sort according to highest match, from
   top to bottom. The best match is at the top, so you can press *RET*
@@ -206,8 +185,9 @@ current editing buffer by the following key bindings:
   word, into the Helm prompt (the minibuffer).
 - *M-n* yanks symbol at point
 
-Help commands also automatically recognize symbols at point if such
-symbols exist in Emacs. For example:
+If =helm-mode= is activated, help commands also automatically
+recognize symbols at point if such symbols exist in Emacs, and use
+Helm interface for interactive selecting. For example:
 
 - *C-h f*, which runs =describe-function=, automatically takes the
   symbol at point as default for searching function.
@@ -217,10 +197,18 @@ symbols exist in Emacs. For example:
   symbol at point as default for showing key binding for a command.
 - ... and so on... (*C-h C-h* to view all commands)
 
+All of those commands automatically make use Helm.
+
 *** Command: =helm-M-x=
 :PROPERTIES:
 :ID:       500a1c68-ab43-40a5-97c3-5d556a9f748d
 :END:
+_Key binding_: No key binding. We should give it one:
+
+#+begin_src emacs-lisp
+    (global-set-key (kbd "M-x") 'helm-M-x)
+#+end_src
+
 
 =M-x= and see the difference. You will see a buffer that lists
 commands in Emacs. Some of you may not like it because it seems
@@ -252,6 +240,13 @@ Demo:
 :PROPERTIES:
 :ID:       77b4d145-c280-4ed4-98a7-d645fe1d18bf
 :END:
+_Key binding_: No key binding. We should give it one:
+
+#+begin_src emacs-lisp
+    (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+#+end_src
+
+
 Do you remember that =C-y= [[http://tuhdo.github.io/emacs-tutor.html#sec-7-15][cycle the kill ring]]? However, working with
 default kill ring is painful because you have a burden to remember an
 invisible thing, that is the kill ring, at which position you kill
@@ -275,7 +270,32 @@ minibuffer):
 :PROPERTIES:
 :ID:       0386c827-7f5d-4056-bf4d-8d0fc01fc1ab
 :END:
-This Helm command comprises of multiple sources:
+_Key binding_: No key binding. We should give it one:
+
+#+begin_src emacs-lisp
+    (global-set-key (kbd "C-x b") 'helm-mini)
+#+end_src
+
+_Similar Commands_:
+
+- =helm-for-files=: this command lists buffers and recent files and
+  files in current directory. However, when no match is found,
+  =helm-mini= asks if you want to create a new buffer by highlighting
+  the only entry that look like this:
+
+  [[file:static/helm-new-file-buffer.gif][file:static/helm-new-file-buffer.gif]]
+
+  while =helm-for-files= starts a =helm-locate= session to search in
+  file system for the desired file. By default, =helm-for-files= binds
+  to  =<prefix> f= (current prefix is *C-c h*).
+
+- =helm-buffer-list=: similar to =helm-mini=, but instead of listing
+  recent files from =recentf=, it uses =ido-virtual-buffers=, which is
+  a list of recently visited files managed by =ido=. The virtual
+  buffers do not contain path in it. Depends on preference, you can
+  use this command in place of =helm-mini=.
+
+=helm-mini= comprises of multiple sources:
 
 - Current opening buffers, under the header =Buffers=.
 - Recently opened files, under the header =Recentf=.
@@ -286,25 +306,30 @@ You can move back and forth between the groups by using *<left>* and
 *<right>* arrow keys. Or you can just scroll down/up with *C-v* and
 *M-v*.
 
-You can filter out buffers by major mode using the query
+You can filter out buffers by major mode using the pattern
 =*<major-mode>=. For example, =*dired= narrows to only Dired
 buffers. You can also filter out buffers that belong to a major mode
-by adding =!= to the query. For example, =*!dired= select all buffers
+by adding =!= to the pattern. For example, =*!dired= select all buffers
 that are not in Dired mode.
 
-You can also select buffers in a specific directory by using the query
+You can also select buffers in a specific directory by using the pattern
 =/directory=. For example, =/.emacs.d/= narrows to buffers that are
-only inside =.emacs.d=. Add =!= before the query for reverse
+only inside =.emacs.d=. Add =!= before the pattern for reverse
 version. For example, =!/.emacs.d/= narrows to buffers not in
 =.emacs.d=.
 
 You can even use =helm-mini= to narrow to buffers that contains a
-regexp in their contents, by using the query =@content=. For example,
-you can select buffers that only contain the string "test":
-=@test=. If you want to see the locations of the string in the
-buffers,  *C-s* while in =helm-mini= session to switch to
-=helm-moccur=. You can mark buffers to search by *C-SPC* or you can
-select all buffers by *M-a*.
+regexp in their contents, by appending =@= before the search
+pattern. For example, you can select buffers that only contain the
+string "test": =@test=. If you want to see the locations of the string
+in the buffers,  *C-s* while in =helm-mini= session to switch to
+=helm-moccur=. By default, =helm-mini= searches all opening buffers; 
+you can mark buffers to search by *C-SPC*; note that even if you mark
+buffers with *C-SPC*, content search using =@= still lists all buffers
+that contain the pattern; only when you switch to =helm-moccur=,
+matches that are in selected buffers are displayed. You can also
+perform =occur= only on the current buffer with prefix argument: =C-u
+C-s=.
 
 Meaning of colors and prefixes for buffers:
 
@@ -350,6 +375,14 @@ starts when you see START in the minibuffer):
 :PROPERTIES:
 :ID:       b71abd6c-cb29-4b64-a55f-29bd75937c11
 :END:
+_Key binding_: *<prefix> C-x C-f* or *C-x C-f*; =<prefix>= is *C-x c* by
+default, or *C-c h* if set. This is a rather long key sequence, and
+=helm-find-files= deserves a better binding:
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+#+end_src
+
 =helm-find-files= is file navigation on steroid: 
 
 - =helm-find-files= can fuzzy match candidates in current
@@ -394,7 +427,7 @@ see START in the minibuffer:
 
 [[file:static/part3/helm-find-files.gif][file:static/part3/helm-find-files.gif]]
 
-**** Find file at point:
+**** _Find file at point_:
 :PROPERTIES:
 :ID:       a70d8543-d81d-42f6-bd80-f0d459ed1a8c
 :END:
@@ -410,7 +443,7 @@ you, similar to the screenshot. Now, you have no longer to use a
 separate command for open file at point, but using the same *C-x
 C-f*. It's really convenient.
 
-**** File and directory histories:
+**** _File and directory histories_:
 :PROPERTIES:
 :ID:       e1b80059-4a23-4a65-adb7-916764b47695
 :END:
@@ -428,7 +461,7 @@ files and directories with *C-c h*. From there, the default action is
 You can use *M-p* and *M-n* to move back and forth between previously
 visited directory.
 
-**** Live grep in Helm
+**** _Live grep in Helm_:
 :PROPERTIES:
 :ID:       fb36142a-6b14-4f9f-a6c1-d58d2a004ddc
 :END:
@@ -447,82 +480,123 @@ deprecated soon.
 :PROPERTIES:
 :ID:       57d8eda0-9f2d-4aaf-b85d-3bcd261c40e8
 :END:
-    The Imenu facility offers a way to find the major definitions,
-    such as function definitions, variable definitions in a file by
-    name. You can run =imenu= command individually.
+_Key binding_: *<prefix> i*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set.
 
-    Semantic is a package that provides language-aware editing
-    commands based on 'source code parsers'.  When enabled, each file
-    you visit is automatically parsed. Semantic provides execellent
-    supports for C/C++. To enable Semantic mode, execute
-    =(semantic-mode 1)=.
+The Imenu facility offers a way to find the major definitions,
+such as function definitions, variable definitions in a file by
+name. You can run =imenu= command individually.
 
-    Helm offers an interface to both Semantic and Imenu at the same
-    time: If `semantic-mode' is active in the current buffer, then use
-    semantic for generating tags, otherwise fall back to =imenu=. If
-    point is on a symbol, helm feeds the symbol into input prompt by
-    default.
+Semantic is a package that provides language-aware editing
+commands based on 'source code parsers'.  When enabled, each file
+you visit is automatically parsed. Semantic provides execellent
+supports for C/C++. To enable Semantic mode, execute
+=(semantic-mode 1)=.
 
-    Demo: Here is =helm-semantic-or-imenu= in action, please notice
-    the "pattern: " prompt in the minibuffer:
+Helm offers an interface to both Semantic and Imenu at the same
+time: If `semantic-mode' is active in the current buffer, then use
+semantic for generating tags, otherwise fall back to =imenu=. If
+point is on a symbol, helm feeds the symbol into input prompt by
+default.
 
-    - At first, I narrow to candidates that are functions with this
-      pattern in the prompt: =Functi=.
+Demo: Here is =helm-semantic-or-imenu= in action, please notice
+the "pattern: " prompt in the minibuffer:
 
-    - Then, I narrow to candidates that are functions and contains
-      =void= in it with this pattern: =functi void=, effectively
-      select functions that have type =void= *or* accept =void= arguments.
+- At first, I narrow to candidates that are functions with this
+  pattern in the prompt: =Functi=.
+      
+- Then, I narrow to candidates that are functions and contains
+  =void= in it with this pattern: =functi void=, effectively
+  select functions that have type =void= *or* accept =void= arguments.
+      
+- Then, I narrow to candidates that are functions and contains =int=
+  in it with this pattern: =functi int=, effectively select functions
+  that have type =int= *or* accept =int= arguments.
+      
+- Then, I narrow to candidates that are variables and contains =u16=
+  in it, effectively select only variables that have type =u16=; the
+  same for =u32= in the demo.
+      
+  [[file:static/part3/helm-semantic-or-imenu.gif][file:static/part3/helm-semantic-or-imenu.gif]]
+      
+*RET* to visit the the candidate location. The above examples are just
+demonstration. You can narrow to anything you want with search
+patterns separated by spaces, i.e. you can use two string, one is
+"func" and one is part of a function name, and Helm can narrow to it
+fine. 
 
-    - Then, I narrow to candidates that are functions and contains
-      =int= in it with this pattern: =functi int=, effectively select
-      functions that have type =int= *or* accept =int= arguments.
-
-    - Then, I narrow to candidates that are variables and contains
-      =u16= in it, effectively select only variables that have type
-      =u16=; the same for =u32= in the demo. 
-
-      [[file:static/part3/helm-semantic-or-imenu.gif][file:static/part3/helm-semantic-or-imenu.gif]]
-
-   *RET* to visit the the candidate location. The above examples are
-   just demonstration. You can narrow to anything you want with
-   search patterns separated by spaces, i.e. you can use two
-   string, one is "func" and one is part of a function name, and
-   Helm can narrow to it fine.
-
-   In the demo, you see things like =class u16= and =class u32=; that
-   is because =u16= and =u32= are defined by typedef.
+In the demo, you see things like =class u16= and =class u32=; that is
+because =u16= and =u32= are defined by typedef.
 
 *** Command: =helm-man-woman=
 :PROPERTIES:
 :ID:       2578b1bd-7ae9-4250-b701-c9191603404f
 :END:
+_Key binding_: *<prefix> m*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set.
+
 With =helm-man-woman=, you can quickly jump to any man entry using
 Helm interface, either by typing in Helm prompt or if point is on a
-symbol, get a man page at point. Give it a try.
+symbol, get a man page at point.
 
 *** Command: =helm-find=
 :PROPERTIES:
 :ID:       b7a95407-8629-48c4-bc9c-d0a391c95478
 :END:
-You can also quickly find a file with =helm-find=, binds to *C-c h f*
-(in my configuration). As usual, when you type a character, Helm
-filters candidates accordingly. Now, instead of typing a long find
-query into terminal and wait, you have a simple Helm interface.
+_Key binding_: *<prefix> /*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set. 
+
+Normally, you use =find= command with arguments in terminal, then
+press RET and wait for a big list of result, and if the result is not
+as expected, repeat the whole thing. You can shorten this process by
+interactively get results from Unix =find= for every character you
+enter into Helm prompt.
+
+You can separate search patterns by spaces. However, since Helm is
+using Unix =find= utility, you have to enter search patterns according
+to the search string of =find=; use =helm-man-woman= to read =find=
+man page.
+
+By default, invoking =helm-find= only searches current directory. With
+prefix argument =C-u= (i.e. =C-u C-c h /=), a prompt asks for a
+directory to find. =helm-find= can be invoked within =helm-find-files=
+session, by using *C-c /*. To open more than one file, mark candidates
+by *C-SPC* or mark all with *M-a*, then *RET*. You can switch to
+=helm-find-files= by *C-x C-f*.
 
 *** Command: =helm-locate=
 :PROPERTIES:
 :ID:       0e8e485d-c539-4175-9c81-9c8f9f17f608
 :END:
-Similar to =helm-find=, but you =locate= command, using *C-c h l* (in
-my configuration). You can specify a local database with prefix argument.
+_Key binding_: *<prefix> l*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set.
+
+Similar to =helm-find=, but use =locate= command and accepts search
+patterns according to =locate= input. Use =helm-man-woman= to read
+=locate= man page.
+
+To use local database, execute =helm-locate= with prefix argument
+=C-u=. You can also customize Helm to use =locate= with arguments of
+your choice:
+
+#+begin_src emacs-lisp
+  (setq helm-locate-command "locate %s -e -A --regex %s")
+#+end_src
 
 *** Command: =helm-occur=
 :PROPERTIES:
 :ID:       5fe9a6c3-5af2-4b4a-94ff-5849560c831f
 :END:
+_Key binding_: *<prefix> M-s o*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set. Since this is a rather long binding, we should bind a more
+convenient key sequence:
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c h o") 'helm-occur)
+#+end_src
+
 Similar to =occur=, but using Helm interface. As you type, matching
-lines are updated immediately. Very interactively, as it is the nature
-of Helm.
+lines are updated immediately.
 
 Demo: You can see that candidates kept getting updated when I was
 typing. The demo starts when you see START in the minibuffer.
@@ -533,50 +607,86 @@ typing. The demo starts when you see START in the minibuffer.
 :PROPERTIES:
 :ID:       479cdaab-0aba-48b8-b4d2-b026d23eb41a
 :END:
-Similar to *C-h a* which runs =apropos-command=, but use Helm
-interface and update as you type.
+_Key binding_: *<prefix> a*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set.
 
-*** Command: =helm-info-emacs=
+Pre-configured helm to describe commands, functions, variables and
+faces - all in one command!. It is similar to *C-h a* which runs
+=apropos-command=, but interactive includes more than just commands.
+
+*** Command: =helm-info-*=
 :PROPERTIES:
 :ID:       93e5fcb9-231b-43b8-81df-501a59bca2b6
 :END:
-In the extended config, I replace the default =info-emacs-manual= with
-=helm-info-emacs=.
+_Key binding_: *<prefix> h <key>*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set; *<key>*, by defaults, is one of *g*, *i* or *r*:
+
+| Key            | Binding                       |
+|----------------+-------------------------------|
+| *<prefix> h g* | Command: =helm-info-gnus=     |
+| *<prefix> h r* | Command: =helm-info-at-point= |
+| *<prefix> h r* | Command: =helm-info-emacs=    |
+|----------------+-------------------------------|
+
+So, the prefix for info commands is =<prefix> h=. You can think of =h=
+as stands for *help* and *<key>* is one of the info topic to make it
+easier to remember and recall.
 
 =helm= offers a wide ranges of info commands for various topics. =M-x
 helm info= to see these commands, i.e. =helm-info-as=,
 =helm-info-gdb=... You can search for info nodes easily with Helm
 interface and *TAB* on an entry to view. *M-<next>* moves to the next
-page, *M-<prior>* moves to the previous page in the other buffer.
+page, *M-<prior>* moves to the previous page in the other buffer. 
 
-You should bind your favourite info commands to some key bindings.
+You can have more =helm-info-= commands, such as:
+
+- =helm-info-gdb=.
+- =helm-info-find=.
+- =helm-info-elisp=.
+....
+
+Use =M-x helm-info= to see the list of =helm-info-= commands using the
+default info prefix: =<prefix> h= or key bindings of your choice.
+
 *** Command: =helm-resume=
 :PROPERTIES:
 :ID:       9d698347-33ee-447d-9fd1-eb01e9770dbb
 :END:
-    This command allows you to resume the previous Helm session, along
-    with your previous patterns in the prompt. For example, if your
-    last helm session was =helm-ff-run-grep= and you entered patterns in
-    Helm prompt, =helm-resume= resumes that session along with your
-    previous input.
+_Key binding_: *<prefix> b*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set.
 
-    With prefix argument, =helm-resume= allows you to choose among all
-    existing Helm buffers. =helm-mini= or =helm-buffer-list= does not
-    show existing Helm buffers; they ignore it by default; but if you
-    run =ibuffer=, you will see a list of Helm buffers visible
-    there. Don't kill them or you won't be able to resume.
+This command allows you to resume the previous Helm session, along
+with your previous patterns in the prompt. For example, if your
+last helm session was =helm-ff-run-grep= and you entered patterns in
+Helm prompt, =helm-resume= resumes that session along with your
+previous input.
 
-    This is really convenient when you have complex input ,and
-    preparation steps. For example, if you have multiple regexp
-    patterns in your previous Helm session, then you don't have to
-    type it again. Or in your previous Helm session, you have to
-    travel to a deep directory, and =helm-resume= helps you to reuse
-    your previous session without going through all the troubles
-    again.
+With prefix argument, =helm-resume= allows you to choose among all
+existing Helm buffers. =helm-mini= or =helm-buffer-list= does not
+show existing Helm buffers; they ignore it by default; but if you
+run =ibuffer=, you will see a list of Helm buffers visible
+there. Don't kill them or you won't be able to resume.
+
+This is really convenient when you have complex input ,and
+preparation steps. For example, if you have multiple regexp
+patterns in your previous Helm session, then you don't have to
+type it again. Or in your previous Helm session, you have to
+travel to a deep directory, and =helm-resume= helps you to reuse
+your previous session without going through all the troubles
+again.
+
 *** Command: =helm-all-mark-rings=
 :PROPERTIES:
 :ID:       12d8e9d0-1a43-434f-8398-6bb5deb729df
 :END:
+_Key binding_: *<prefix> C-c SPC*, =<prefix>= is *C-x c* by default, or *C-c
+h* if set. This is a rather long key sequence, this command deserves a
+better binding, for example:
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+#+end_src
+
 One handy command. It allows you to view the content of the both the
 local and global mark rings in a friendly interface, so you can always
 jump back to where you were. Without this command, if you want to view
@@ -586,7 +696,6 @@ displays the bare content of the =mark-ring= and =global-mark-ring=
 lists, which is the line number and its buffer like this:
 
 =(#<marker at 23614 in helm.org> #<marker at 2343 in setup-helm.el> #<marker at 4280 in helm.org> #<marker in no buffer> #<marker at 1271 in helm.org> #<marker at 643 in emacs-tutor.org> #<marker in no buffer> #<marker at 1 in setup-applications.el> #<marker at 1 in emacs-tutor3.org>)=
-
 
 With =helm-all-mark-rings=, you have this nice interface with line
 content and syntax highlighting:
@@ -680,10 +789,10 @@ Helm's strengths:
   =helm-ff-run-grep=, update grep results as you type.
 
 - /_Matching mechanism_/: This is a powerful feature in Helm that I
-  hvaen't seen in other packages: out of order matching, *with
-  regex*. That's right, you can enter every search pattern as
-  regex!. A really powerful concept: it enhances explanatory power for
-  many things. One of use cases is exploring a new project: using
+  hvaen't seen in other packages: out of order matching, *with regular
+  expression*. That's right, you can enter every search pattern as
+  regexp!. A really powerful concept: it enhances explanatory power
+  for many things. One of use cases is exploring a new project: using
   Helm, you can "learn" the project structure interactively. For
   example, suppose I'm completely new to the linux kernel source tree,
   and I wonder whether a file =main.c= exists for =x86=
@@ -720,3 +829,4 @@ Helm's strengths:
   these files have same prefix.
 
 - /Performance/: Helm can work with over 10000 candidates no problem.
+
