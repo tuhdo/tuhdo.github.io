@@ -1,7 +1,8 @@
 #+TITLE:
 _Author_:
 
-- Tamas Patrovic (original author), from 2007.
+- Tamas Patrovic (original author), from 2007. At this time, Helm was
+  named =anything=.
 - rubikitch =rubikitch@ruby-lang.org=, from 2008-2011.
 - [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current
   maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
@@ -602,9 +603,13 @@ session, by using *C-c /*. To open more than one file, mark candidates
 by *C-SPC* or mark all with *M-a*, then *RET*. You can switch to
 =helm-find-files= by *C-x C-f*.
 
+If you use =helm-find= on a large directory and feel the update is too
+sluggish, you can always suspend the live updating with *C-!* and
+resume the live updating with *C-!* later.
+
 _Demo_:
 
-...[screenshot]..
+[[file:static/part3/helm-find.gif][file:static/part3/helm-find.gif]]
 
 *** Command: =helm-locate=
 :PROPERTIES:
@@ -628,9 +633,13 @@ your choice:
   (setq helm-locate-command "locate %s -e -A --regex %s")
 #+end_src
 
+If you use =helm-locate= on a large directory and feel the update is
+too sluggish, you can always suspend the live updating with *C-!* and
+resume the live updating with *C-!* later.
+
 _Demo_:
 
-...[screenshot]..
+[[file:static/part3/helm-locate.gif][file:static/part3/helm-locate.gif]]
 
 *** Command: =helm-occur=
 :PROPERTIES:
@@ -796,7 +805,9 @@ available if *C-z*:
 |        | Saves the regexp as is in the current Helm prompt          |
 |--------+------------------------------------------------------------|
 
-...[screenshot]...
+_Demo_:
+
+[[file:static/part3/helm-regexp.gif][file:static/part3/helm-regexp.gif]]
 
 *** Command: =helm-register=
 :PROPERTIES:
@@ -829,7 +840,9 @@ inserts content of highlighting register.
 |        | in highlighting register                    |
 |--------+---------------------------------------------|
 
-...[screenshot]...
+_Demo_:
+
+[[file:static/part3/helm-registers.gif][file:static/part3/helm-registers.gif]]
 
 *** Command: =helm-list-emacs-process=
 :PROPERTIES:
@@ -838,6 +851,8 @@ inserts content of highlighting register.
 _Key binding_: 
 
 *<prefix> p*, <prefix> is *C-x c* by default, or *C-c h* if set.
+
+_Description_:
 
 This command lists processes that Emacs is using. *TAB* kills the
 highlighting process.
@@ -883,6 +898,10 @@ interact with each process with the following actions:
 
 =user= and =shell commands= are sorted alphabetically.
 
+_Demo_:
+
+[[file:static/part3/helm-top.gif][file:static/part3/helm-top.gif]]
+
 *** Command: =helm-surfraw=
 :PROPERTIES:
 :ID:       b436e961-79a4-426e-a2a1-23d790390cb1
@@ -905,7 +924,7 @@ use.
 
 _Demo_:
 
-...[screenshot]...
+[[file:static/part3/helm-surfraw.gif][file:static/part3/helm-surfraw.gif]]
 
 *** Command: =helm-google-suggest=
 :PROPERTIES:
@@ -920,21 +939,8 @@ set. Let's bind it to something else:
   (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 #+end_src
 
-_Description_:
-
 If you don't have =surfraw= program or don't want to use, you can
 override *C-c h s* binding with this command.
-
-
-_Key binding_:
-
-*<prefix> C-c g*, <prefix> is *C-x c* by default, or *C-c h* if
-set. If you already use =helm-surfraw=, then this command is not
-needed. However, if you want to use, bind it to a key:
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c h s") 'helm-google-suggest)
-#+end_src
 
 _Description_:
 
@@ -944,6 +950,8 @@ candidates in other services, such as Google, Wikipedia, Youtube,
 Imbd, Google Maps, Google News.
 
 _Demo_:
+
+[[file:static/part3/helm-google-suggest.gif][file:static/part3/helm-google-suggest.gif]]
 
 *** Command: =helm-color=
 :PROPERTIES:
@@ -996,7 +1004,7 @@ view if the colors work well with each other.
 
 _Demo_:
 
-...[screenshot]..
+[[file:static/part3/helm-color.gif][file:static/part3/helm-color.gif]]
 
 *** Command: =helm-eval-expression-with-eldoc=
 :PROPERTIES:
@@ -1024,7 +1032,7 @@ possible.
 
 _Demo_:
 
-...[screenshot]...
+[[file:static/part3/helm-eval-expression.gif][file:static/part3/helm-eval-expression.gif]]
 
 *** Command: =helm-calcul-expression=
 :PROPERTIES:
@@ -1067,7 +1075,7 @@ you should carefully study =calc= itself with [[http://www.gnu.org/software/emac
 
 _Demo_:
 
-...[screenshot]...
+[[file:static/part3/helm-calc.gif][file:static/part3/helm-calc.gif]]
 
 *** Package: =helm-projectile=
 :PROPERTIES:
