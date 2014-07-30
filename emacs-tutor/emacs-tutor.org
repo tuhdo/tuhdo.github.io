@@ -498,7 +498,7 @@ Let's learn one especially handy command. =M-x find-=, then press
 prefix =find-=. Select the command =find-file=, either by clicking on
 it in the list; or keep typing a few more characters, and pressing
 *TAB* until the command is completed. After =find-file= is in your
-prompt, press *RET*. For quickly running =file-file=, you can use key
+prompt, press *RET*. For quickly running =find-file=, you can use key
 binding *C-x C-f*.
 
 You can use *wildcard expression* to select more than one file. For
@@ -672,7 +672,7 @@ this directory. For example, buffer A is from =~/dir1/= and buffer B
 is in =~/dir2/=, if point is in buffer A, *C-x C-f* starts in
 =~/dir1/=; if point is in buffer B, *C-x C-f* starts in =~/dir2/=.
 
-In an Emacs sessions, you may have a lot of buffers, including
+In an Emacs session, you may have a lot of buffers, including
 non-file buffers such as shell buffers, email buffers... How do you
 manage buffers when it's getting large? *C-x C-b* executes
 =list-buffers=, provide you a list of buffer in which you can
@@ -873,7 +873,7 @@ preserve the bookmarks across Emacs sessions, *C-x r l* to open the
 bookmark list and press *s* to save the list to file.
 
 If you understand how to manage buffers, managing bookmarks is the
-same, with differnt but similar key bindings. Finally, not only you
+same, with different but similar key bindings. Finally, not only you
 can bookmark buffers that are associated with files, you can bookmark
 non-files buffers too:
 
@@ -1282,8 +1282,8 @@ a better tool to manage rather than going back and forth with
 Isearch. For example, you have a match around line 1000, but you are
 currently at line 500. In between the two lines are many other
 matches. You cannot use Isearch to jump through them all. This is
-where =*Occur*= is handy. =*Occur*= is also useful for queyr and
-replace a sting with another, and allow you to verify that you did
+where =*Occur*= is handy. =*Occur*= is also useful for query and
+replace a string with another, and allow you to verify that you did
 indeed replace the correct string.
 
 To invoke =occur=, run =M-s o=; if you =M-s o= in Isearch prompt,
@@ -1994,7 +1994,7 @@ When I first heard about registers in Emacs, it scared me. I thought
 "Wow, what is this "register" thingie? Am I going to work directly
 with CPU registers?" As it turned out, despite the name "Register",
 it's not something that complicated to understand. Although, Emacs register
-is simlar to CPU register in the sense that it allows quicly access of
+is similar to CPU register in the sense that it allows quick access to
 temporal data.
 
 Each register has a name that consists of a single character, which we
@@ -2019,8 +2019,8 @@ bindings, *C-x r C-h* to get the list of key bindings.
 :PROPERTIES:
 :ID:       840ff6ae-1f2b-4796-9f7f-7cd5db33d879
 :END:
-One of the best of use of register. It simly saves your window
-configuration at the moment and restore the layout later. 
+One of the best of use of register. It simply saves your current window
+configuration and restores the layout later. 
 
 For example, you are viewing four source code buffers, but want to
 open two Dired buffers side by side to for managing files, so you
