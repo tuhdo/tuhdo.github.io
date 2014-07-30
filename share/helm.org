@@ -4,9 +4,8 @@ _Author_:
 - Tamas Patrovic (original author), from 2007. At this time, Helm was
   named =anything=.
 - rubikitch =rubikitch@ruby-lang.org=, from 2008-2011.
-- [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current
-  maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
-
+- [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
+  
 _Homepage_: [[https://github.com/emacs-helm/helm][Github]]
 
 _Features_:
