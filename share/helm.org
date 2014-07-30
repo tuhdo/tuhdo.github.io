@@ -1076,6 +1076,39 @@ _Demo_:
 
 [[file:static/part3/helm-calc.gif][file:static/part3/helm-calc.gif]]
 
+*** Command: =helm-eshell-history=
+:PROPERTIES:
+:ID:       ad0fbac6-b78e-42b7-82d4-f95057401ba2
+:END:
+
+_Key binding_:
+
+No key binding. Let's bind it to a key to be used in Eshell:
+
+#+begin_src emacs-lisp
+  (require 'helm-eshell)
+
+  (add-hook 'eshell-mode-hook
+            #'(lambda ()
+                (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
+#+end_src
+
+_Description_:
+
+If you usually re-execute an old shell command in Eshell with *M-r*,
+then =helm-eshell-history= provides a easy and efficient way to work
+with command history. Using stock *M-r*, you have to actively remember
+past commands you worked with; otherwise Eshell cannot find the
+command. If you forget, you will have to type in the command =history=
+to refresh your memory. =helm-eshell-history= combines the two: you
+can interactively use regexp to select past commands and get live
+feedback with a list of commands that satisfy. Now you don't have to
+remember which command exists. Let Helm handles that problem for you.
+
+_Demo_:
+
+[[file:static/part3/helm-eshell-history.gif][file:static/part3/helm-eshell-history.gif]]
+
 *** Package: =helm-projectile=
 :PROPERTIES:
 :ID:       50cc1f5e-022d-4818-bedf-0a52e7e4615b
