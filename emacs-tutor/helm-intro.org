@@ -1,4 +1,4 @@
-#+TITLE: A Package on a league of its own: =Helm=
+#+TITLE: A Package in a league of its own: =Helm=
 
 This guide is extracted from part 3 of the Mini Manual series, for
 people who only wants to learn Helm and what makes it great.
