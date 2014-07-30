@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package on a league of its own: <code>Helm</code> </title>
-<!-- 2014-07-30 T4 01:09 -->
+<!-- 2014-07-30 Wed 10:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -300,7 +300,7 @@ Extended config:
  <span style="color: #7a4f7e;">helm-quick-update</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">do not display invisible candidates</span>
  <span style="color: #7a4f7e;">helm-idle-delay</span> <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating in delayed sources.</span>
  <span style="color: #78683f;">helm-input-idle-delay</span> <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating candidate buffer</span>
- <span style="color: #3f7178;">helm-ff-search-library-in-sexp</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #b22222;">require</span><span style="color: #b22222;">' and `</span><span style="color: #b22222;">declare-function</span><span style="color: #b22222;">' sexp.</span>
+ <span style="color: #3f7178;">helm-ff-search-library-in-sexp</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
 
  <span style="color: #43783f;">helm-split-window-default-side</span> '<span style="color: #374478;">other</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer in another window</span>
  <span style="color: #37785e;">helm-split-window-in-side-p</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
@@ -1447,13 +1447,13 @@ available if <b>C-z</b>:
 <thead>
 <tr>
 <th scope="col" class="left">Key</th>
-<th scope="col" class="left">Binding</th>
+<th scope="col" class="left">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="left"><b>[f1]</b></td>
-<td class="left">Action: <code>Kill regexp as sexp</code></td>
+<td class="left"><code>Kill regexp as sexp</code></td>
 </tr>
 
 <tr>
@@ -1464,7 +1464,7 @@ available if <b>C-z</b>:
 <tbody>
 <tr>
 <td class="left"><b>[f2]</b></td>
-<td class="left">Action: <code>Query Replace Regexp</code></td>
+<td class="left"><code>Query Replace Regexp</code></td>
 </tr>
 
 <tr>
@@ -1475,7 +1475,7 @@ available if <b>C-z</b>:
 <tbody>
 <tr>
 <td class="left"><b>[f3]</b></td>
-<td class="left">Action: <code>Kill regexp</code></td>
+<td class="left"><code>Kill regexp</code></td>
 </tr>
 
 <tr>
@@ -1532,13 +1532,13 @@ inserts content of highlighting register.
 <thead>
 <tr>
 <th scope="col" class="left">Key</th>
-<th scope="col" class="left">Binding</th>
+<th scope="col" class="left">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="left"><b>[f1]</b></td>
-<td class="left">Action: <code>Insert Register</code></td>
+<td class="left"><code>Insert Register</code></td>
 </tr>
 
 <tr>
@@ -1549,7 +1549,7 @@ inserts content of highlighting register.
 <tbody>
 <tr>
 <td class="left"><b>[f2]</b></td>
-<td class="left">Action: <code>Append Region to Register</code></td>
+<td class="left"><code>Append Region to Register</code></td>
 </tr>
 
 <tr>
@@ -1565,7 +1565,7 @@ inserts content of highlighting register.
 <tbody>
 <tr>
 <td class="left"><b>[f3]</b></td>
-<td class="left">Action: <code>Prepend Region to Register</code></td>
+<td class="left"><code>Prepend Region to Register</code></td>
 </tr>
 
 <tr>
@@ -1756,7 +1756,7 @@ interact with each process with the following actions:
 </p>
 
 <p>
-Surfraw provides a fast UNIX command line interface to a variety
+<code>surfraw</code> provides a fast UNIX command line interface to a variety
 of popular WWW search engines and other artifacts of power.  It
 reclaims google, altavista, dejanews, freshmeat, research index,
 slashdot&#x2026;
@@ -1800,11 +1800,6 @@ set). Let's bind it to something else:
 </div>
 
 <p>
-If you don't have <code>surfraw</code> program or don't want to use, you can
-override <b>C-c h s</b> binding with this command.
-</p>
-
-<p>
 <span class="underline">Description</span>:
 </p>
 
@@ -1812,7 +1807,9 @@ override <b>C-c h s</b> binding with this command.
 This command allows you to interactively enter search terms and get
 results from Google in a Helm buffer. Then, you can open one of the
 candidates in other services, such as Google, Wikipedia, Youtube,
-Imbd, Google Maps, Google News.
+Imbd, Google Maps, Google News. If you are on Windows, don't type too
+fast or, you will have an error and you have to abandon this Helm
+session.
 </p>
 
 <p>

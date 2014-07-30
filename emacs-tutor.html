@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-07-11 Fri 15:41 -->
+<!-- 2014-07-30 Wed 10:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="Tu Do" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -378,7 +378,7 @@ alt="hit counter"></a></div></noscript>
 </div>
 </div>
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-76607dbd-b97c-43dd-975b-3236192408b6"></a>Why Emacs?</h2>
+<h2 id="sec-1"><a id="ID-76607dbd-b97c-43dd-975b-3236192408b6" name="ID-76607dbd-b97c-43dd-975b-3236192408b6"></a>Why Emacs?</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <b><span class="underline">Before we start</span></b>: 
@@ -422,11 +422,9 @@ kernel source tree with ease.
 </p>
 
 <ul class="org-ul">
-<li><p>
-Performance: Editing a 39MB C source file with no problem. But
+<li>Performance: Editing a 39MB C source file with no problem. But
 well, if your project use really large source file like that, if
 your favourite editors crash, it's not their fault.
-</p>
 
 
 <div class="figure">
@@ -435,13 +433,9 @@ your favourite editors crash, it's not their fault.
 </div>
 </li>
 
-<li><p>
-Programming:
-</p>
+<li>Programming:
 <ul class="org-ul">
-<li><p>
-Jump to any header file:
-</p>
+<li>Jump to any header file:
 
 
 <div class="figure">
@@ -450,10 +444,8 @@ Jump to any header file:
 </div>
 </li>
 
-<li><p>
-Autocompletion: Pay attention to the completion candidates when
+<li>Autocompletion: Pay attention to the completion candidates when
 <code>include &lt;linux/printk.h&gt;</code> presents and not present
-</p>
 
 
 <div class="figure">
@@ -462,9 +454,7 @@ Autocompletion: Pay attention to the completion candidates when
 </div>
 </li>
 
-<li><p>
-Showing function arguments:
-</p>
+<li>Showing function arguments:
 
 
 <div class="figure">
@@ -473,9 +463,7 @@ Showing function arguments:
 </div>
 </li>
 
-<li><p>
-Quickly comment multiple lines:
-</p>
+<li>Quickly comment multiple lines:
 
 
 <div class="figure">
@@ -484,9 +472,7 @@ Quickly comment multiple lines:
 </div>
 </li>
 
-<li><p>
-GDB Many Windows:
-</p>
+<li>GDB Many Windows:
 
 <div class="center">
 <p>
@@ -515,9 +501,7 @@ GDB Many Windows:
 </ul>
 </li>
 
-<li><p>
-Diff between current editting file and latest file revision:
-</p>
+<li>Diff between current editting file and latest file revision:
 
 
 <div class="figure">
@@ -526,9 +510,7 @@ Diff between current editting file and latest file revision:
 </div>
 </li>
 
-<li><p>
-Magit: From unstage -&gt; stage -&gt; commit -&gt; push
-</p>
+<li>Magit: From unstage -&gt; stage -&gt; commit -&gt; push
 
 
 <div class="figure">
@@ -537,9 +519,7 @@ Magit: From unstage -&gt; stage -&gt; commit -&gt; push
 </div>
 </li>
 
-<li><p>
-Live Grep:
-</p>
+<li>Live Grep:
 
 
 <div class="figure">
@@ -548,13 +528,11 @@ Live Grep:
 </div>
 
 <p>
-<a id="helm_projectile"></a>
+<a id="helm_projectile" name="helm_projectile"></a>
 </p>
 </li>
-<li><p>
-Quickly select any file in a directory under a Version Control
+<li>Quickly select any file in a directory under a Version Control
 System, for example, Linux kernel:
-</p>
 
 
 <div class="figure">
@@ -563,9 +541,7 @@ System, for example, Linux kernel:
 </div>
 </li>
 
-<li><p>
-Quickly select any file/directory in previous working session:
-</p>
+<li>Quickly select any file/directory in previous working session:
 
 
 <div class="figure">
@@ -582,7 +558,7 @@ Finally, <a href="http://jtnimoy.net/workviewer.php?q=178">Emacs is featured in 
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><a id="ID-6cbf58f3-6986-4c27-8e04-f25c8bec778a"></a>Why this guide?</h2>
+<h2 id="sec-2"><a id="ID-6cbf58f3-6986-4c27-8e04-f25c8bec778a" name="ID-6cbf58f3-6986-4c27-8e04-f25c8bec778a"></a>Why this guide?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Let's look at part of the Emacs manual:
@@ -630,7 +606,7 @@ tutorial, only if it isn't made for demonstration.
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><a id="ID-c8f88c3a-ecad-433d-931b-2cca8a4f62ac"></a>A bit of history</h2>
+<h2 id="sec-3"><a id="ID-c8f88c3a-ecad-433d-931b-2cca8a4f62ac" name="ID-c8f88c3a-ecad-433d-931b-2cca8a4f62ac"></a>A bit of history</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The current version is Emacs 24.3, with the upcoming Emacs 24.4 is on the
@@ -661,7 +637,7 @@ drawn) the Self-Documenting Extensible Editor.
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-45226aea-d1af-4853-8be9-5dc1ee962973"></a>"I don't want a complicated editor, I want something simple like Notepad(++)"</h2>
+<h2 id="sec-4"><a id="ID-45226aea-d1af-4853-8be9-5dc1ee962973" name="ID-45226aea-d1af-4853-8be9-5dc1ee962973"></a>"I don't want a complicated editor, I want something simple like Notepad(++)"</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Well, that's your choice. But I suggest that why manually write code
@@ -760,11 +736,11 @@ save it for something more interesting.
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><a id="ID-3ca43124-6e45-4ef6-a23e-628207936155"></a>Installation</h2>
+<h2 id="sec-5"><a id="ID-3ca43124-6e45-4ef6-a23e-628207936155" name="ID-3ca43124-6e45-4ef6-a23e-628207936155"></a>Installation</h2>
 <div class="outline-text-2" id="text-5">
 </div>
 <div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><a id="ID-8acc1c68-72e7-4116-8afd-2265dda008d2"></a>Linux:</h3>
+<h3 id="sec-5-1"><a id="ID-8acc1c68-72e7-4116-8afd-2265dda008d2" name="ID-8acc1c68-72e7-4116-8afd-2265dda008d2"></a>Linux:</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Easy way to install if you are using Ubuntu: <code>sudo apt-get install
@@ -779,40 +755,26 @@ With GUI:
 </p>
 
 <ul class="org-ul">
-<li><p>
-Download <a href="http://www.gnu.org/software/emacs/">Emacs</a>; or if you prefer latest Emacs, get it from source: <code>git clone http://repo.or.cz/r/emacs.git</code>
-</p>
+<li>Download <a href="http://www.gnu.org/software/emacs/">Emacs</a>; or if you prefer latest Emacs, get it from source: <code>git clone http://repo.or.cz/r/emacs.git</code>
 </li>
-<li><p>
-If you download from the homepage, unpackage: <code>tar xvf emacs-*.tar.gz</code>
-</p>
+<li>If you download from the homepage, unpackage: <code>tar xvf emacs-*.tar.gz</code>
 </li>
-<li><p>
-<code>cd emacs-&lt;version&gt;*</code>
-</p>
+<li><code>cd emacs-&lt;version&gt;*</code>
 </li>
-<li><p>
-<code>./autogen.sh</code>
-</p>
+<li><code>./autogen.sh</code>
 </li>
-<li><p>
-Add prefix and path to where you want to install. This is useful if
+<li>Add prefix and path to where you want to install. This is useful if
 you work on remote server without root access: <code>./configure
   --with-x-tookit=gtk3 [--prefix=/path/to/dir]</code>
-</p>
 
 <p>
 You should use GTKx 3, so you will be able to use true type fonts
 such as Inconsolata for better Emacs experience.
 </p>
 </li>
-<li><p>
-<code>make</code>
-</p>
+<li><code>make</code>
 </li>
-<li><p>
-<code>sudo make install</code>
-</p>
+<li><code>sudo make install</code>
 </li>
 </ul>
 
@@ -860,7 +822,7 @@ So you can start Emacs as fast as vim!
 </div>
 
 <div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><a id="ID-301e3dcb-a00d-4b20-a5a8-f2b0946c56d1"></a>Windows:</h3>
+<h3 id="sec-5-2"><a id="ID-301e3dcb-a00d-4b20-a5a8-f2b0946c56d1" name="ID-301e3dcb-a00d-4b20-a5a8-f2b0946c56d1"></a>Windows:</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 You can either download it on GNU Emacs homepage or better, download
@@ -876,7 +838,7 @@ to <code>C:\Program Files\Emacs\bin\emacsclientw.exe</code> on desktop.
 </div>
 
 <div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><a id="ID-f86712b7-d138-4ad3-aef0-494a744c3b34"></a>Mac OS X:</h3>
+<h3 id="sec-5-3"><a id="ID-f86712b7-d138-4ad3-aef0-494a744c3b34" name="ID-f86712b7-d138-4ad3-aef0-494a744c3b34"></a>Mac OS X:</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 Download compiled Emacs for Mac OS X: <a href="http://emacsformacosx.com/">http://emacsformacosx.com/</a>.
@@ -886,7 +848,7 @@ Download compiled Emacs for Mac OS X: <a href="http://emacsformacosx.com/">http:
 </div>
 
 <div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Swap Control and Capslock</h2>
+<h2 id="sec-6"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5" name="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Swap Control and Capslock</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Swapping Control and Capslock, in general, not required to make the
@@ -905,7 +867,7 @@ for quick cursor movement.
 </div>
 
 <div id="outline-container-sec-6-1" class="outline-3">
-<h3 id="sec-6-1"><a id="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d"></a>Windows</h3>
+<h3 id="sec-6-1"><a id="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d" name="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d"></a>Windows</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Follow this guide: <a href="http://www.kodiva.com/post/swapping-caps-lock-and-control-keys">Swapping Capslock and Control keys</a>
@@ -913,7 +875,7 @@ Follow this guide: <a href="http://www.kodiva.com/post/swapping-caps-lock-and-co
 </div>
 </div>
 <div id="outline-container-sec-6-2" class="outline-3">
-<h3 id="sec-6-2"><a id="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301"></a>Linux</h3>
+<h3 id="sec-6-2"><a id="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301" name="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301"></a>Linux</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Put this in your shell init file (.bashrc, .zshrc&#x2026;):
@@ -932,7 +894,7 @@ ubuntu 13.10</a>.
 </div>
 </div>
 <div id="outline-container-sec-6-3" class="outline-3">
-<h3 id="sec-6-3"><a id="ID-dc1f00fd-29a6-45e0-8398-211418cba728"></a>Mac OS X</h3>
+<h3 id="sec-6-3"><a id="ID-dc1f00fd-29a6-45e0-8398-211418cba728" name="ID-dc1f00fd-29a6-45e0-8398-211418cba728"></a>Mac OS X</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Follow this answer on StackOverflow: <a href="http://stackoverflow.com/a/162907/496700">Emacs on Mac OS X Leopard key
@@ -941,7 +903,7 @@ bindings</a>
 </div>
 </div>
 <div id="outline-container-sec-6-4" class="outline-3">
-<h3 id="sec-6-4"><a id="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d"></a>If you don't like to swap Capslock and Control&#x2026;</h3>
+<h3 id="sec-6-4"><a id="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d" name="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d"></a>If you don't like to swap Capslock and Control&#x2026;</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 You can use your Palm to press Control in standard PC keyboard.
@@ -950,11 +912,11 @@ You can use your Palm to press Control in standard PC keyboard.
 </div>
 </div>
 <div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><a id="ID-dc9722bb-91fb-4f38-b701-ffd3fb84d4c7"></a>Concepts</h2>
+<h2 id="sec-7"><a id="ID-dc9722bb-91fb-4f38-b701-ffd3fb84d4c7" name="ID-dc9722bb-91fb-4f38-b701-ffd3fb84d4c7"></a>Concepts</h2>
 <div class="outline-text-2" id="text-7">
 </div>
 <div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
+<h3 id="sec-7-1"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e" name="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 In Emacs, behind every user interaction is a function. You press a key
@@ -980,7 +942,7 @@ they want to change the implementations.
 </div>
 
 <div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2"><a id="ID-c428fffd-3636-43e4-916e-9bc67c48db4e"></a>Emacs Key Notation</h3>
+<h3 id="sec-7-2"><a id="ID-c428fffd-3636-43e4-916e-9bc67c48db4e" name="ID-c428fffd-3636-43e4-916e-9bc67c48db4e"></a>Emacs Key Notation</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Taken from here: <a href="http://www.emacswiki.org/emacs/EmacsKeyNotation">EmacsWiki</a>
@@ -1102,11 +1064,11 @@ many built-in tools such as <i>Dired</i>, <i>Ibuffer</i>, <i>Occur</i>&#x2026;
 </div>
 
 <div id="outline-container-sec-7-3" class="outline-3">
-<h3 id="sec-7-3"><a id="ID-02fde8b1-2053-4793-8711-d5664fbe3a29"></a>Ask for help - from Emacs</h3>
+<h3 id="sec-7-3"><a id="ID-02fde8b1-2053-4793-8711-d5664fbe3a29" name="ID-02fde8b1-2053-4793-8711-d5664fbe3a29"></a>Ask for help - from Emacs</h3>
 <div class="outline-text-3" id="text-7-3">
 </div>
 <div id="outline-container-sec-7-3-1" class="outline-4">
-<h4 id="sec-7-3-1"><a id="ID-47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927"></a>Built-in help system</h4>
+<h4 id="sec-7-3-1"><a id="ID-47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927" name="ID-47d6ff15-1cf5-4a6a-a6b8-f4c83bac3927"></a>Built-in help system</h4>
 <div class="outline-text-4" id="text-7-3-1">
 <p>
 I will describe some most useful commands based on my experience. I
@@ -1159,7 +1121,7 @@ commands of prefix <b>C-h</b>.
 </div>
 
 <div id="outline-container-sec-7-3-2" class="outline-4">
-<h4 id="sec-7-3-2"><a id="ID-c40810fc-9af0-4b13-8fd2-db999d3e9859"></a>Info</h4>
+<h4 id="sec-7-3-2"><a id="ID-c40810fc-9af0-4b13-8fd2-db999d3e9859" name="ID-c40810fc-9af0-4b13-8fd2-db999d3e9859"></a>Info</h4>
 <div class="outline-text-4" id="text-7-3-2">
 <p>
 <code>M-x info</code> or <b>C-h i</b> to see all the Info manual in Emacs. If you
@@ -1181,7 +1143,7 @@ beneficial not only for Emacs.
 </div>
 
 <div id="outline-container-sec-7-3-3" class="outline-4">
-<h4 id="sec-7-3-3"><a id="ID-6edee0b5-213a-4fd4-9c40-041206b86a52"></a>Man</h4>
+<h4 id="sec-7-3-3"><a id="ID-6edee0b5-213a-4fd4-9c40-041206b86a52" name="ID-6edee0b5-213a-4fd4-9c40-041206b86a52"></a>Man</h4>
 <div class="outline-text-4" id="text-7-3-3">
 <p>
 You can view man pages with two commands:
@@ -1201,7 +1163,7 @@ external <code>man</code> program.
 </div>
 
 <div id="outline-container-sec-7-4" class="outline-3">
-<h3 id="sec-7-4"><a id="ID-07FB6443-922D-4B66-AF40-58347F16700C"></a>Point</h3>
+<h3 id="sec-7-4"><a id="ID-07FB6443-922D-4B66-AF40-58347F16700C" name="ID-07FB6443-922D-4B66-AF40-58347F16700C"></a>Point</h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 Point is your current cursor position. From now on, instead of saying
@@ -1211,7 +1173,7 @@ Point is your current cursor position. From now on, instead of saying
 </div>
 
 <div id="outline-container-sec-7-5" class="outline-3">
-<h3 id="sec-7-5"><a id="ID-cdb163ad-eb98-46af-83b5-d9ad1803a0d1"></a>Opening files</h3>
+<h3 id="sec-7-5"><a id="ID-cdb163ad-eb98-46af-83b5-d9ad1803a0d1" name="ID-cdb163ad-eb98-46af-83b5-d9ad1803a0d1"></a>Opening files</h3>
 <div class="outline-text-3" id="text-7-5">
 <p>
 Let's learn one especially handy command. <code>M-x find-</code>, then press
@@ -1219,7 +1181,7 @@ Let's learn one especially handy command. <code>M-x find-</code>, then press
 prefix <code>find-</code>. Select the command <code>find-file</code>, either by clicking on
 it in the list; or keep typing a few more characters, and pressing
 <b>TAB</b> until the command is completed. After <code>find-file</code> is in your
-prompt, press <b>RET</b>. For quickly running <code>file-file</code>, you can use key
+prompt, press <b>RET</b>. For quickly running <code>find-file</code>, you can use key
 binding <b>C-x C-f</b>.
 </p>
 
@@ -1294,7 +1256,7 @@ prompt.
 </div>
 </div>
 <div id="outline-container-sec-7-6" class="outline-3">
-<h3 id="sec-7-6"><a id="ID-a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7"></a>Ido mode</h3>
+<h3 id="sec-7-6"><a id="ID-a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7" name="ID-a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7"></a>Ido mode</h3>
 <div class="outline-text-3" id="text-7-6">
 <p>
 Emacs has an interesting feature called <b>Ido</b>, shorts for
@@ -1363,7 +1325,7 @@ through the rest of this manual.
 </div>
 
 <div id="outline-container-sec-7-7" class="outline-3">
-<h3 id="sec-7-7"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer</h3>
+<h3 id="sec-7-7"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624" name="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer</h3>
 <div class="outline-text-3" id="text-7-7">
 <p>
 Buffer is where you edit your file content. Buffer holds content
@@ -1465,7 +1427,7 @@ temporary content of the file that is being displayed.
 </div>
 
 <div id="outline-container-sec-7-8" class="outline-3">
-<h3 id="sec-7-8"><a id="ID-2d67567c-985d-49af-83d1-f36ebda0e20c"></a>Major mode</h3>
+<h3 id="sec-7-8"><a id="ID-2d67567c-985d-49af-83d1-f36ebda0e20c" name="ID-2d67567c-985d-49af-83d1-f36ebda0e20c"></a>Major mode</h3>
 <div class="outline-text-3" id="text-7-8">
 <p>
 Major modes provide specialized facilities for working on a particular
@@ -1485,7 +1447,7 @@ buffer properly.
 </div>
 
 <div id="outline-container-sec-7-9" class="outline-3">
-<h3 id="sec-7-9"><a id="ID-9e9200cb-9205-4931-8795-b9c9e00f95f2"></a>Minor mode</h3>
+<h3 id="sec-7-9"><a id="ID-9e9200cb-9205-4931-8795-b9c9e00f95f2" name="ID-9e9200cb-9205-4931-8795-b9c9e00f95f2"></a>Minor mode</h3>
 <div class="outline-text-3" id="text-7-9">
 <p>
 Minor modes are optional features which you can turn on or off, not
@@ -1498,7 +1460,7 @@ selected major mode.
 </div>
 
 <div id="outline-container-sec-7-10" class="outline-3">
-<h3 id="sec-7-10"><a id="ID-520961cd-e999-4730-a208-dfa8db1c5fa3"></a>Basic buffer managements</h3>
+<h3 id="sec-7-10"><a id="ID-520961cd-e999-4730-a208-dfa8db1c5fa3" name="ID-520961cd-e999-4730-a208-dfa8db1c5fa3"></a>Basic buffer managements</h3>
 <div class="outline-text-3" id="text-7-10">
 <p>
 So, you learn how to open file and create buffer of that file. 
@@ -1524,7 +1486,7 @@ is in <code>~/dir2/</code>, if point is in buffer A, <b>C-x C-f</b> starts in
 </p>
 
 <p>
-In an Emacs sessions, you may have a lot of buffers, including
+In an Emacs session, you may have a lot of buffers, including
 non-file buffers such as shell buffers, email buffers&#x2026; How do you
 manage buffers when it's getting large? <b>C-x C-b</b> executes
 <code>list-buffers</code>, provide you a list of buffer in which you can
@@ -1577,12 +1539,10 @@ Now the fun begins.
 </p>
 
 <ul class="org-ul">
-<li><p>
-Suppose that you want to work with C code. <b>/ m</b> and enter a major
+<li>Suppose that you want to work with C code. <b>/ m</b> and enter a major
 mode to select buffers that belong to this major mode. Prefix <b>/</b> in
 <b>ibuffer</b> groups filtering commands. <b>TAB</b> to see a list of major
 modes: 
-</p>
 
 
 <div class="figure">
@@ -1591,45 +1551,34 @@ modes:
 </div>
 </li>
 
-<li><p>
-Enter <code>c-mode</code>.
-</p>
+<li>Enter <code>c-mode</code>.
 </li>
 
-<li><p>
-Only C buffers remain. But you open buffers in two major modes:
+<li>Only C buffers remain. But you open buffers in two major modes:
 <code>c-mode</code> and <code>emacs-lisp-mode</code>. You can create each group for one by 
 pressing <b>/ g</b>, and give the group a name. Only execute <b>/ g</b> after
 executing any filtering commands.
-</p>
 </li>
 
-<li><p>
-Up to this point, the filtering is still applied. Press <b>/ /</b> to
+<li>Up to this point, the filtering is still applied. Press <b>/ /</b> to
 remove previous filter and return the full buffer list.
-</p>
 </li>
 
-<li><p>
-Let's create another group based filtering. <b>/ m</b> and enter
+<li>Let's create another group based filtering. <b>/ m</b> and enter
 <code>emacs-lisp-mode</code>. Create another group with <b>/ g</b> and give it a
 name. Now, every time you open files that their buffers satisfy the
 filtering criteria, the buffers are put into appropriate groups.
-</p>
 </li>
 
-<li><p>
-To open a buffer, <b>o</b> or <b>C-o</b>. <b>o</b> opens a buffer and switch point
+<li>To open a buffer, <b>o</b> or <b>C-o</b>. <b>o</b> opens a buffer and switch point
 to it. <b>C-o</b> leaves point on the buffer list. Let's open a buffer
 with <b>o</b> and <b>C-o</b>. To switch back to the other buffer, do <b>C-x
 o</b>. <b>C-x o</b> executes <code>other-window</code> command, which cycles among the
 opening buffers (technically the buffers are in Emacs "windows", 
 and you are cycling "windows", but we will get to that later).
-</p>
 </li>
 
-<li><p>
-Either using <b>C-o</b> or <b>o</b> creates another buffer below, leaving
+<li>Either using <b>C-o</b> or <b>o</b> creates another buffer below, leaving
 you two horizontal buffers. You probably don't like the layout because you
 have a big screen. If you use <b>o</b>, <b>C-x o</b> to switch back to the
 list and <b>C-x 1</b> to close other buffer. If you have multiple buffers
@@ -1638,7 +1587,6 @@ one with point, which is our buffer list) remains. To close an
 active buffer, <b>C-x 0</b>. <b>C-x 3</b> to create a vertical buffer to the
 right. It creates an exact duplicate of the active buffer. Now, <b>o</b>
 on any C buffer again, and point is in that buffer:
-</p>
 
 
 <div class="figure">
@@ -1647,18 +1595,14 @@ on any C buffer again, and point is in that buffer:
 </div>
 </li>
 
-<li><p>
-Edit something in the buffer. Switch back to <code>ibuffer</code> and press
+<li>Edit something in the buffer. Switch back to <code>ibuffer</code> and press
 <b>g</b>, which runs the command <code>ibuffer-update</code> to refresh the
 list. You will see an asterisk on the left of your just edited
 buffer. It indicates that buffer has been modified.
-</p>
 </li>
 
-<li><p>
-You can also mark a buffer by pressing <b>m</b> on multiple entries to
+<li>You can also mark a buffer by pressing <b>m</b> on multiple entries to
 perform various operations:
-</p>
 
 <ul class="org-ul">
 <li><b>view</b>: press <b>A</b> to view the marked buffers
@@ -1678,11 +1622,9 @@ To unmark a buffer, press <b>u</b> on the marked entries.
 </p>
 </li>
 
-<li><p>
-Another way to open the buffer: <b>e</b> (<i>enter</i>), <b>f</b> (<i>find</i>) or <b>RET</b>
+<li>Another way to open the buffer: <b>e</b> (<i>enter</i>), <b>f</b> (<i>find</i>) or <b>RET</b>
 to bury and replace the list with selected buffer. Switch back to
 the list using <b>C-x C-b</b> again.
-</p>
 </li>
 </ul>
 
@@ -1855,7 +1797,7 @@ directory of buffer of that entry.
 </thead>
 <tbody>
 <tr>
-<td class="left">=,=</td>
+<td class="left"><code>,</code></td>
 <td class="left">Rotate between sorting modes</td>
 </tr>
 </tbody>
@@ -1904,7 +1846,7 @@ To quit <code>ibuffer</code>, press <b>q</b>.
 </div>
 
 <div id="outline-container-sec-7-11" class="outline-3">
-<h3 id="sec-7-11"><a id="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7"></a>Bookmark: save locations across Emacs sessions with</h3>
+<h3 id="sec-7-11"><a id="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7" name="ID-801bd37d-dd77-4d3d-9925-4980cabaefd7"></a>Bookmark: save locations across Emacs sessions with</h3>
 <div class="outline-text-3" id="text-7-11">
 <p>
 When you read books, you usually cannot read all at once and place a
@@ -1984,7 +1926,7 @@ bookmark list and press <b>s</b> to save the list to file.
 
 <p>
 If you understand how to manage buffers, managing bookmarks is the
-same, with differnt but similar key bindings. Finally, not only you
+same, with different but similar key bindings. Finally, not only you
 can bookmark buffers that are associated with files, you can bookmark
 non-files buffers too:
 </p>
@@ -2134,7 +2076,7 @@ want. Then bookmark and kill current Info buffer.
 </div>
 
 <div id="outline-container-sec-7-12" class="outline-3">
-<h3 id="sec-7-12"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h3>
+<h3 id="sec-7-12"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1" name="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h3>
 <div class="outline-text-3" id="text-7-12">
 <p>
 These key bindings are also used by popular shells such as <b>bash</b> or
@@ -2210,7 +2152,7 @@ commands on any buffer.
 </div>
 
 <div id="outline-container-sec-7-13" class="outline-3">
-<h3 id="sec-7-13"><a id="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7"></a>Basic editing commands</h3>
+<h3 id="sec-7-13"><a id="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7" name="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7"></a>Basic editing commands</h3>
 <div class="outline-text-3" id="text-7-13">
 <p>
 In Emacs, <code>kill</code> means <code>Cut</code> in other editors. these key bindings also
@@ -2242,7 +2184,7 @@ When you kill something, the killed content is put into the Kill Ring.
 </div>
 
 <div id="outline-container-sec-7-14" class="outline-3">
-<h3 id="sec-7-14"><a id="ID-8232e425-1aec-4a4a-85de-900faa19a8b1"></a>Dynamic Abbreviations</h3>
+<h3 id="sec-7-14"><a id="ID-8232e425-1aec-4a4a-85de-900faa19a8b1" name="ID-8232e425-1aec-4a4a-85de-900faa19a8b1"></a>Dynamic Abbreviations</h3>
 <div class="outline-text-3" id="text-7-14">
 <p>
 Dynamic Abbreviations are a completion feature in Emacs, but work for
@@ -2274,8 +2216,9 @@ to let Emacs remember your words, you have to type a complete word.
 </div>
 </div>
 <div id="outline-container-sec-7-15" class="outline-3">
-<h3 id="sec-7-15"><a id="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0"></a>Kill ring</h3>
+<h3 id="sec-7-15"><a id="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0" name="ID-7F7CD162-4C59-43D8-B445-ECB28D042CC0"></a>Kill ring</h3>
 <div class="outline-text-3" id="text-7-15">
+
 <p>
 Kill ring is the list of previously killed contents. You can insert the
 most recently killed element by <b>C-y</b>.
@@ -2343,7 +2286,7 @@ shine.
 </div>
 
 <div id="outline-container-sec-7-16" class="outline-3">
-<h3 id="sec-7-16"><a id="ID-01EA0EFF-2A5F-4E68-8A29-A9DB8A0DB2EA"></a>Mark and region</h3>
+<h3 id="sec-7-16"><a id="ID-01EA0EFF-2A5F-4E68-8A29-A9DB8A0DB2EA" name="ID-01EA0EFF-2A5F-4E68-8A29-A9DB8A0DB2EA"></a>Mark and region</h3>
 <div class="outline-text-3" id="text-7-16">
 <p>
 Mark is a record of a position in a buffer. It's like when reading a
@@ -2365,48 +2308,32 @@ like in other text editors.
 </p>
 
 <ul class="org-ul">
-<li><p>
-Place a mark in buffer with <b>C-SPC C-SPC</b>. Let's call this mark <b>A</b>.
-</p>
+<li>Place a mark in buffer with <b>C-SPC C-SPC</b>. Let's call this mark <b>A</b>.
 </li>
 
-<li><p>
-Move to another place in the buffer, place another mark with <b>C-SPC
+<li>Move to another place in the buffer, place another mark with <b>C-SPC
 C-SPC</b>. this is mark <b>B</b>.
-</p>
 </li>
 
-<li><p>
-Move to another place and <b>C-SPC C-SPC</b> again. This is mark <b>C</b>.
-</p>
+<li>Move to another place and <b>C-SPC C-SPC</b> again. This is mark <b>C</b>.
 </li>
 
-<li><p>
-Now press <b>C-u C-SPC</b>. You can see point goes back to mark
+<li>Now press <b>C-u C-SPC</b>. You can see point goes back to mark
 <b>B</b>.
-</p>
 </li>
 
-<li><p>
-<b>C-u C-SPC</b> again. Point goes back to mark <b>A</b>.
-</p>
+<li><b>C-u C-SPC</b> again. Point goes back to mark <b>A</b>.
 </li>
 
-<li><p>
-<b>C-u C-SPC</b> again. Point goes back to mark <b>C</b>.
-</p>
+<li><b>C-u C-SPC</b> again. Point goes back to mark <b>C</b>.
 </li>
 
-<li><p>
-Let's create a region: <b>C-SPC</b>, then move point forward. What
+<li>Let's create a region: <b>C-SPC</b>, then move point forward. What
 happened?
-</p>
 </li>
 
-<li><p>
-The highlighted area is called a region. You can perform editing
+<li>The highlighted area is called a region. You can perform editing
 commands on the region:
-</p>
 <ul class="org-ul">
 <li><b>C-w</b> to kill the region
 </li>
@@ -2417,12 +2344,10 @@ commands on the region:
 </ul>
 </li>
 
-<li><p>
-Let's copy or kill a region; you should select a big region. Now
+<li>Let's copy or kill a region; you should select a big region. Now
 yank (paste) it elsewhere. After yanking, you notice point is
 not at the original location anymore. If you want to return to the
 where you yanked, <b>C-u C-SPC</b> or <b>C-x C-x</b>.
-</p>
 
 <p>
 When you yank, you create a mark at point before the new content is
@@ -2466,7 +2391,7 @@ Practice until you get used to these two commands.
 </div>
 </div>
 <div id="outline-container-sec-7-17" class="outline-3">
-<h3 id="sec-7-17"><a id="ID-025E9CF4-B70C-41FA-A51D-AE3E2391227D"></a>Mark ring</h3>
+<h3 id="sec-7-17"><a id="ID-025E9CF4-B70C-41FA-A51D-AE3E2391227D" name="ID-025E9CF4-B70C-41FA-A51D-AE3E2391227D"></a>Mark ring</h3>
 <div class="outline-text-3" id="text-7-17">
 <p>
 Emacs stores buffer marks in a list, that's why you are able to cycle
@@ -2479,7 +2404,7 @@ such extension. We will discuss more on extension packages later.
 </div>
 
 <div id="outline-container-sec-7-18" class="outline-3">
-<h3 id="sec-7-18"><a id="ID-4B4B71A3-80F4-4716-80FB-FA0270B88357"></a>Global mark ring</h3>
+<h3 id="sec-7-18"><a id="ID-4B4B71A3-80F4-4716-80FB-FA0270B88357" name="ID-4B4B71A3-80F4-4716-80FB-FA0270B88357"></a>Global mark ring</h3>
 <div class="outline-text-3" id="text-7-18">
 <p>
 Mark ring is local to each buffer. If you switch to another buffer,
@@ -2499,7 +2424,7 @@ You cycle the global mark ring by <b>C-x C-SPC</b>.
 </div>
 
 <div id="outline-container-sec-7-19" class="outline-3">
-<h3 id="sec-7-19"><a id="ID-709F26BC-3A20-47C1-93C6-264C00CD5C89"></a>Undo/redo</h3>
+<h3 id="sec-7-19"><a id="ID-709F26BC-3A20-47C1-93C6-264C00CD5C89" name="ID-709F26BC-3A20-47C1-93C6-264C00CD5C89"></a>Undo/redo</h3>
 <div class="outline-text-3" id="text-7-19">
 <p>
 To undo: <b>C-/</b> or <b>C-x u</b>
@@ -2584,7 +2509,7 @@ Again, two features in one command, but a bit confusing this time.
 </div>
 </div>
 <div id="outline-container-sec-7-20" class="outline-3">
-<h3 id="sec-7-20"><a id="ID-ca3e54c5-fbc6-457f-b82e-55fe59cc3ef9"></a>Search for text</h3>
+<h3 id="sec-7-20"><a id="ID-ca3e54c5-fbc6-457f-b82e-55fe59cc3ef9" name="ID-ca3e54c5-fbc6-457f-b82e-55fe59cc3ef9"></a>Search for text</h3>
 <div class="outline-text-3" id="text-7-20">
 <p>
 Content search is an essential feature in every editor. Emacs has many
@@ -2592,7 +2517,7 @@ built-in tools for this problem.
 </p>
 </div>
 <div id="outline-container-sec-7-20-1" class="outline-4">
-<h4 id="sec-7-20-1"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h4>
+<h4 id="sec-7-20-1"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094" name="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h4>
 <div class="outline-text-4" id="text-7-20-1">
 <p>
 So, you want to look for something in the buffer? <b>C-s</b> invokes
@@ -2761,7 +2686,7 @@ are bound to <b>M-g</b> prefix key:
 </div>
 
 <div id="outline-container-sec-7-20-2" class="outline-4">
-<h4 id="sec-7-20-2"><a id="ID-e49a59d6-efab-401c-9164-0ae45806e719"></a>Occur</h4>
+<h4 id="sec-7-20-2"><a id="ID-e49a59d6-efab-401c-9164-0ae45806e719" name="ID-e49a59d6-efab-401c-9164-0ae45806e719"></a>Occur</h4>
 <div class="outline-text-4" id="text-7-20-2">
 <p>
 Command <code>occur</code> lists all line that match a string or a regexp and
@@ -2771,8 +2696,8 @@ a better tool to manage rather than going back and forth with
 Isearch. For example, you have a match around line 1000, but you are
 currently at line 500. In between the two lines are many other
 matches. You cannot use Isearch to jump through them all. This is
-where <code>*Occur*</code> is handy. <code>*Occur*</code> is also useful for queyr and
-replace a sting with another, and allow you to verify that you did
+where <code>*Occur*</code> is handy. <code>*Occur*</code> is also useful for query and
+replace a string with another, and allow you to verify that you did
 indeed replace the correct string.
 </p>
 
@@ -2930,7 +2855,7 @@ buffer.
 </div>
 
 <div id="outline-container-sec-7-20-3" class="outline-4">
-<h4 id="sec-7-20-3"><a id="ID-4145517f-b864-47f3-bc8b-63509a59d26c"></a>Query replace</h4>
+<h4 id="sec-7-20-3"><a id="ID-4145517f-b864-47f3-bc8b-63509a59d26c" name="ID-4145517f-b864-47f3-bc8b-63509a59d26c"></a>Query replace</h4>
 <div class="outline-text-4" id="text-7-20-3">
 <p>
 To replace something, <b>M-%</b> to execute <b>query-replace</b>. <b>M-%</b> asks you
@@ -2971,7 +2896,7 @@ hands:
 </div>
 
 <div id="outline-container-sec-7-20-4" class="outline-4">
-<h4 id="sec-7-20-4"><a id="ID-49674610-411e-4345-a954-f333bced3969"></a>Multi-occur</h4>
+<h4 id="sec-7-20-4"><a id="ID-49674610-411e-4345-a954-f333bced3969" name="ID-49674610-411e-4345-a954-f333bced3969"></a>Multi-occur</h4>
 <div class="outline-text-4" id="text-7-20-4">
 <p>
 It is the same as <code>occur</code> except it asks user for multiple buffers. 
@@ -2990,7 +2915,7 @@ for occurences in buffers that match the regexp.
 </div>
 
 <div id="outline-container-sec-7-21" class="outline-3">
-<h3 id="sec-7-21"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
+<h3 id="sec-7-21"><a id="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b" name="ID-d0ff17f7-bb7f-4923-b4d9-ddbf7b8a143b"></a>Modeline</h3>
 <div class="outline-text-3" id="text-7-21">
 <p>
 The mode line is the empty area below the buffer. It has useful
@@ -3101,7 +3026,7 @@ viewing screen is 20% away from the top.
 </div>
 
 <div id="outline-container-sec-7-22" class="outline-3">
-<h3 id="sec-7-22"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
+<h3 id="sec-7-22"><a id="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee" name="ID-c20af14e-8eca-4698-b4b0-d95ded1724ee"></a>Minibuffer</h3>
 <div class="outline-text-3" id="text-7-22">
 <p>
 <code>Minibuffer</code> is the small area at the bottom of your Emacs screen.
@@ -3141,7 +3066,7 @@ already used <b>M-p</b> and <b>M-n</b> to get old inputs in Isearch.
 </div>
 
 <div id="outline-container-sec-7-23" class="outline-3">
-<h3 id="sec-7-23"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
+<h3 id="sec-7-23"><a id="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7" name="ID-e5ca41b8-5058-4f98-8b21-c906bc80a4d7"></a>Echo area</h3>
 <div class="outline-text-3" id="text-7-23">
 <p>
 <code>Minibuffer</code> can be used for output as well. The echo area is used for
@@ -3157,8 +3082,9 @@ share the same physical space. You should not be confused between the two.
 </div>
 
 <div id="outline-container-sec-7-24" class="outline-3">
-<h3 id="sec-7-24"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
+<h3 id="sec-7-24"><a id="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3" name="ID-9d06632d-a923-47ee-8ca2-e2b4a106dad3"></a>Frames</h3>
 <div class="outline-text-3" id="text-7-24">
+
 <p>
 An application window in operating system is called a <b>Frame</b> in
 Emacs. So, you execute <b>Emacs</b> from the command line and open Emacs,
@@ -3336,7 +3262,7 @@ These are the key bindings for manipulating frames:
 </div>
 
 <div id="outline-container-sec-7-25" class="outline-3">
-<h3 id="sec-7-25"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
+<h3 id="sec-7-25"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf" name="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window</h3>
 <div class="outline-text-3" id="text-7-25">
 <p>
 Unlike other editors, Emacs can split your frame area into multiple smaller
@@ -3631,7 +3557,7 @@ Help system will be discussed in later section.
 </div>
 
 <div id="outline-container-sec-7-26" class="outline-3">
-<h3 id="sec-7-26"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
+<h3 id="sec-7-26"><a id="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510" name="ID-8bfeb59d-16e9-4ad5-9293-7fbb8135e510"></a>Prefix Arguments</h3>
 <div class="outline-text-3" id="text-7-26">
 <p>
 In Emacs, behind anything is a function. Function can accept
@@ -3706,7 +3632,7 @@ Why number 4 for <b>C-u</b>? I don't know.
 </div>
 
 <div id="outline-container-sec-7-27" class="outline-3">
-<h3 id="sec-7-27"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
+<h3 id="sec-7-27"><a id="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd" name="ID-91d19428-6c3d-4805-8d8e-62f6d06a7edd"></a>Basic file management with Dired</h3>
 <div class="outline-text-3" id="text-7-27">
 <p>
 Emacs has a built-in one called Dired, short for
@@ -3720,8 +3646,9 @@ you read and practice these commands, read the <a href="https://www.gnu.org/soft
 </div>
 
 <div id="outline-container-sec-7-27-1" class="outline-4">
-<h4 id="sec-7-27-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
+<h4 id="sec-7-27-1"><a id="ID-578d357f-bb6f-437c-93a8-f6863b97ce25" name="ID-578d357f-bb6f-437c-93a8-f6863b97ce25"></a>Enter Dired</h4>
 <div class="outline-text-4" id="text-7-27-1">
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3764,7 +3691,7 @@ it. What command do you like the most?
 </div>
 
 <div id="outline-container-sec-7-27-2" class="outline-4">
-<h4 id="sec-7-27-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
+<h4 id="sec-7-27-2"><a id="ID-63b35a41-7ec7-4ee5-8f40-f189be084488" name="ID-63b35a41-7ec7-4ee5-8f40-f189be084488"></a>Navigation</h4>
 <div class="outline-text-4" id="text-7-27-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -3812,8 +3739,9 @@ to the entry which is 4 lines below.
 </div>
 
 <div id="outline-container-sec-7-27-3" class="outline-4">
-<h4 id="sec-7-27-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
+<h4 id="sec-7-27-3"><a id="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1" name="ID-a0b0ebab-0bdd-4bbd-8e1c-47b9998e9ab1"></a>Create files</h4>
 <div class="outline-text-4" id="text-7-27-3">
+
 <p>
 To create a new file in Dired, you use the same <b>C-x C-f</b> and <b>C-x 4
 C-f</b> variant.
@@ -3861,8 +3789,9 @@ choice.
 </div>
 </div>
 <div id="outline-container-sec-7-27-4" class="outline-4">
-<h4 id="sec-7-27-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
+<h4 id="sec-7-27-4"><a id="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6" name="ID-d5a3c375-0881-4620-a2ba-01fbd774e0d6"></a>Visit files</h4>
 <div class="outline-text-4" id="text-7-27-4">
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -3913,32 +3842,20 @@ choice.
 <b><span class="underline">Exercise</span></b>:
 </p>
 <ul class="org-ul">
-<li><p>
-Assume you are in your newly created directory in previous section.
-</p>
+<li>Assume you are in your newly created directory in previous section.
 </li>
-<li><p>
-Go up to the parent directory using <code>^</code>.
-</p>
+<li>Go up to the parent directory using <code>^</code>.
 </li>
-<li><p>
-Open another directory. You will enter that directory, and a new
+<li>Open another directory. You will enter that directory, and a new
 buffer is created for listing the content of that directory.
-</p>
 </li>
-<li><p>
-Go up to the parent directory using <code>^</code>.
-</p>
+<li>Go up to the parent directory using <code>^</code>.
 </li>
-<li><p>
-Repeat opening and go up parent directory a few times.
-</p>
+<li>Repeat opening and go up parent directory a few times.
 </li>
-<li><p>
-<b>C-x b</b> and <b>TAB</b>. You will see a bunch of opened directory through
+<li><b>C-x b</b> and <b>TAB</b>. You will see a bunch of opened directory through
 your filesystem navigation. Whenever you open a file or directory,
 using Dired or other methods, you have a buffer of that directory.
-</p>
 
 <p>
 At this point, you may feel annoyed that Dired open too many buffers
@@ -3947,15 +3864,11 @@ you have <code>ibuffer</code>.
 </p>
 </li>
 
-<li><p>
-<code>M-x ibuffer</code> or <code>C-x C-b</code> if you already replace <code>list-buffers</code>.
-</p>
+<li><code>M-x ibuffer</code> or <code>C-x C-b</code> if you already replace <code>list-buffers</code>.
 </li>
-<li><p>
-<code>/ m</code> and select <code>dired-mode</code>. <code>/ g</code> and name the group <code>Dired</code> and
+<li><code>/ m</code> and select <code>dired-mode</code>. <code>/ g</code> and name the group <code>Dired</code> and
 you have a separate grouop for managing directories. No more
 cluttered view with other buffers. You can stop worrying now.
-</p>
 
 
 <div class="figure">
@@ -4003,7 +3916,7 @@ to it quick and easy.
 </div>
 
 <div id="outline-container-sec-7-27-5" class="outline-4">
-<h4 id="sec-7-27-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
+<h4 id="sec-7-27-5"><a id="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5" name="ID-683038dd-dc69-47d0-8b9c-8c708277a8e5"></a>File Marking</h4>
 <div class="outline-text-4" id="text-7-27-5">
 <p>
 You flag files for deleting. You mark files for everything else
@@ -4065,7 +3978,7 @@ files/directories for the next section.
 </div>
 
 <div id="outline-container-sec-7-27-6" class="outline-4">
-<h4 id="sec-7-27-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
+<h4 id="sec-7-27-6"><a id="ID-843b5802-eb08-4456-883b-aa986db31dc9" name="ID-843b5802-eb08-4456-883b-aa986db31dc9"></a>Operating on files</h4>
 <div class="outline-text-4" id="text-7-27-6">
 <p>
 These commands use uppercase character. If you see an uppercase
@@ -4169,8 +4082,9 @@ attributes are cleared and you won't be able to access those files.
 </div>
 
 <div id="outline-container-sec-7-27-7" class="outline-4">
-<h4 id="sec-7-27-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
+<h4 id="sec-7-27-7"><a id="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86" name="ID-fc3bf0c1-8a22-4dd3-81cb-f811435d1e86"></a>Deleting files</h4>
 <div class="outline-text-4" id="text-7-27-7">
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -4232,7 +4146,7 @@ attributes are cleared and you won't be able to access those files.
 </div>
 
 <div id="outline-container-sec-7-27-8" class="outline-4">
-<h4 id="sec-7-27-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
+<h4 id="sec-7-27-8"><a id="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2" name="ID-c2f3564c-d338-4a08-a37b-a77d040d67a2"></a>Execute shell commands in Dired</h4>
 <div class="outline-text-4" id="text-7-27-8">
 <p>
 Just like using a shell, you can execute command at current directory
@@ -4270,8 +4184,9 @@ in Dired too.
 </div>
 
 <div id="outline-container-sec-7-27-9" class="outline-4">
-<h4 id="sec-7-27-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
+<h4 id="sec-7-27-9"><a id="ID-cb415791-d4a8-48ba-88f7-942f70c44a88" name="ID-cb415791-d4a8-48ba-88f7-942f70c44a88"></a>Compare files</h4>
 <div class="outline-text-4" id="text-7-27-9">
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -4302,7 +4217,7 @@ in Dired too.
 </div>
 
 <div id="outline-container-sec-7-27-10" class="outline-4">
-<h4 id="sec-7-27-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
+<h4 id="sec-7-27-10"><a id="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8" name="ID-adb6cb47-65a4-45a8-b122-c14efa59cec8"></a>Subdirectories</h4>
 <div class="outline-text-4" id="text-7-27-10">
 <p>
 This is an excising feature in Dired. In other file explorers, you get
@@ -4356,14 +4271,14 @@ subdirectories too.
 </div>
 
 <div id="outline-container-sec-7-28" class="outline-3">
-<h3 id="sec-7-28"><a id="ID-d4060b6d-0cc9-41bc-976e-d33b56b0df6b"></a>Registers</h3>
+<h3 id="sec-7-28"><a id="ID-d4060b6d-0cc9-41bc-976e-d33b56b0df6b" name="ID-d4060b6d-0cc9-41bc-976e-d33b56b0df6b"></a>Registers</h3>
 <div class="outline-text-3" id="text-7-28">
 <p>
 When I first heard about registers in Emacs, it scared me. I thought
 "Wow, what is this "register" thingie? Am I going to work directly
 with CPU registers?" As it turned out, despite the name "Register",
 it's not something that complicated to understand. Although, Emacs register
-is simlar to CPU register in the sense that it allows quicly access of
+is similar to CPU register in the sense that it allows quick access to
 temporal data.
 </p>
 
@@ -4395,11 +4310,11 @@ bindings, <b>C-x r C-h</b> to get the list of key bindings.
 </div>
 
 <div id="outline-container-sec-7-28-1" class="outline-4">
-<h4 id="sec-7-28-1"><a id="ID-840ff6ae-1f2b-4796-9f7f-7cd5db33d879"></a>Save window configuration</h4>
+<h4 id="sec-7-28-1"><a id="ID-840ff6ae-1f2b-4796-9f7f-7cd5db33d879" name="ID-840ff6ae-1f2b-4796-9f7f-7cd5db33d879"></a>Save window configuration</h4>
 <div class="outline-text-4" id="text-7-28-1">
 <p>
-One of the best of use of register. It simly saves your window
-configuration at the moment and restore the layout later. 
+One of the best use of register. It simply saves your current window
+configuration and restores the layout later. 
 </p>
 
 <p>
@@ -4499,7 +4414,7 @@ The demo starts when you see at the bottom a prompt with "Eval: START".
 </div>
 
 <div id="outline-container-sec-7-28-2" class="outline-4">
-<h4 id="sec-7-28-2"><a id="ID-cf4d74d8-e13e-4238-a5ff-9de0f006b6c5"></a>Save text</h4>
+<h4 id="sec-7-28-2"><a id="ID-cf4d74d8-e13e-4238-a5ff-9de0f006b6c5" name="ID-cf4d74d8-e13e-4238-a5ff-9de0f006b6c5"></a>Save text</h4>
 <div class="outline-text-4" id="text-7-28-2">
 <p>
 You can also save a region in registers. 
@@ -4565,23 +4480,19 @@ you got a kill ring? Here are the reasons:
 </p>
 
 <ul class="org-ul">
-<li><p>
-As you already know, insert past contents from the kill ring makes
+<li>As you already know, insert past contents from the kill ring makes
 the chosen content the head entry. This is inconvenient, and this is
 when registers are handy for storing many pieces of text without
 affect the kill ring. For example, you read a manual (man page or
 info page), and you want to remember many keywords and paste it
 somewhre later. Registers can help you with this use case.
-</p>
 </li>
 
-<li><p>
-You can also use register to save many code template. For example,
+<li>You can also use register to save many code template. For example,
 you can save a for loop template into register <b>f</b>, if template into
 register <b>i</b>, function definition into register <b>F</b>&#x2026; This is
 really handy when you are learning a new language and keep
 forgetting syntax all the time. 
-</p>
 
 <p>
 For example, this C++11 code snippet would be hard to remember if
@@ -4609,7 +4520,7 @@ source code is large.
 </div>
 
 <div id="outline-container-sec-7-29" class="outline-3">
-<h3 id="sec-7-29"><a id="ID-7a1827f6-3bcf-4ff4-92a3-44bf0aae9ab9"></a>Macro</h3>
+<h3 id="sec-7-29"><a id="ID-7a1827f6-3bcf-4ff4-92a3-44bf0aae9ab9" name="ID-7a1827f6-3bcf-4ff4-92a3-44bf0aae9ab9"></a>Macro</h3>
 <div class="outline-text-3" id="text-7-29">
 <p>
 Macro records your actions in Emacs and play back later.
@@ -4717,7 +4628,7 @@ you want to repeat until the end of file, use prefix argument 0:
 </div>
 
 <div id="outline-container-sec-7-30" class="outline-3">
-<h3 id="sec-7-30"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
+<h3 id="sec-7-30"><a id="ID-112710a7-779a-434c-ad23-e6a9a27aae82" name="ID-112710a7-779a-434c-ad23-e6a9a27aae82"></a>Version Control</h3>
 <div class="outline-text-3" id="text-7-30">
 <p>
 This section is taken directly from <a href="http://www.gnu.org/software/emacs/tour/">GNU Emacs Tour</a>, with
@@ -4911,7 +4822,7 @@ done playing with it.
 </div>
 
 <div id="outline-container-sec-7-31" class="outline-3">
-<h3 id="sec-7-31"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
+<h3 id="sec-7-31"><a id="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9" name="ID-bb3e0977-97b2-450a-9c60-1b80b23280a9"></a>Shell</h3>
 <div class="outline-text-3" id="text-7-31">
 <p>
 In Emacs, you have 3 types of shell commands: <code>shell</code>, <code>term</code> and
@@ -4964,12 +4875,13 @@ Ctrl+C</code>.
 </div>
 </div>
 <div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><a id="ID-1a530e6f-85a0-4fff-ac23-14463f358436"></a>Project: Browsing Linux kernel source code like a pro</h2>
+<h2 id="sec-8"><a id="ID-1a530e6f-85a0-4fff-ac23-14463f358436" name="ID-1a530e6f-85a0-4fff-ac23-14463f358436"></a>Project: Browsing Linux kernel source code like a pro</h2>
 <div class="outline-text-2" id="text-8">
 </div>
 <div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><a id="ID-c22e3814-8f4c-48e0-b0d7-6beac6a2260e"></a>Setup</h3>
+<h3 id="sec-8-1"><a id="ID-c22e3814-8f4c-48e0-b0d7-6beac6a2260e" name="ID-c22e3814-8f4c-48e0-b0d7-6beac6a2260e"></a>Setup</h3>
 <div class="outline-text-3" id="text-8-1">
+
 <p>
 You have learnt quite a bit about Emacs. Now, you can immediately use
 Emacs to do practical thing like jumping around a big source tree like
@@ -4982,9 +4894,7 @@ First, you have to install <a href="http://www.gnu.org/software/global/global.ht
 </p>
 
 <ul class="org-ul">
-<li><p>
-<b><span class="underline">Linux</span></b>:
-</p>
+<li><b><span class="underline">Linux</span></b>:
 
 <p>
 Click <a href="http://www.gnu.org/software/global/download.html">here</a> and download the latest stable GNU Global. Then change to
@@ -5007,9 +4917,7 @@ steps:
 </ul>
 </li>
 
-<li><p>
-<b><span class="underline">Windows</span></b>:
-</p>
+<li><b><span class="underline">Windows</span></b>:
 
 <p>
 Click <a href="http://www.gnu.org/software/global/download.html">here</a> and click "DOS and Windows 32 version" to download the
@@ -5048,10 +4956,8 @@ variable. Each path is separated by <code>;</code> like this:
 </div>
 </li>
 
-<li><p>
-<b><span class="underline">Mac OSX</span></b>:
+<li><b><span class="underline">Mac OSX</span></b>:
 Mac OSX version is distributed by <a href="http://www.macports.org/">MacPorts</a>.
-</p>
 </li>
 </ul>
 
@@ -5132,20 +5038,16 @@ That's it. Now you can browse kernel easy and fast in Emacs
 </div>
 
 <div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><a id="ID-879d6e18-4162-43f6-b5e8-39fa5b5266c7"></a>Browsing the kernel source tree</h3>
+<h3 id="sec-8-2"><a id="ID-879d6e18-4162-43f6-b5e8-39fa5b5266c7" name="ID-879d6e18-4162-43f6-b5e8-39fa5b5266c7"></a>Browsing the kernel source tree</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 You can enjoy exploring the kernel source tree by following these steps:
 </p>
 
 <ul class="org-ul">
-<li><p>
-Clone the kernel source: <code>git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ~/linux</code>
-</p>
+<li>Clone the kernel source: <code>git clone https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git ~/linux</code>
 </li>
-<li><p>
-<b>C-x d</b> and navigate to <code>~/linux</code>, then press <b>Enter</b>.
-</p>
+<li><b>C-x d</b> and navigate to <code>~/linux</code>, then press <b>Enter</b>.
 
 
 <div class="figure">
@@ -5158,21 +5060,17 @@ Then, turn on ggtags: <code>M-x ggtags-mode</code> .
 </p>
 </li>
 
-<li><p>
-Emacs has a file explorer, as you've seen above, called <code>Dired</code>,
+<li>Emacs has a file explorer, as you've seen above, called <code>Dired</code>,
 short for <code>(Dir)ectory (Ed)it</code>.
-</p>
 </li>
 
-<li><p>
-Before start browsing the kernel, you need to create a database for
+<li>Before start browsing the kernel, you need to create a database for
 quick searching. Press <code>M-x</code>, type <code>ggtags-create-tags</code>. It asks for
 a directory; since you're in the root directory of Linux already,
 press <b>Enter</b>; <code>ggtags</code> asks whether you use <code>ctags</code> (which is
 another tag generating program, works with more languages but has
 less features). Type <code>no</code>, press <b>Enter</b> and wait for <code>ggtags</code> to
 generate the database.
-</p>
 </li>
 </ul>
 
@@ -5183,35 +5081,25 @@ generate the database.
 </div>
 
 <ul class="org-ul">
-<li><p>
-After the tag database is done generating, a message at the bottom of
+<li>After the tag database is done generating, a message at the bottom of
 your Emacs prints a message <code>GTAGS generated in ~/linux</code>. Now you
 can start going anywhere in Linux source tree in an instant instead
 of spending hours to grep!
-</p>
 </li>
 
-<li><p>
-Let's find a file in Linux. Every C program, whether large or small
+<li>Let's find a file in Linux. Every C program, whether large or small
 must have a <code>main()</code> function, and a file containing the
 function. Let's find out where the <code>main()</code> of Linux kernel is.
-</p>
 </li>
 
-<li><p>
-<code>M-x</code>, type <code>ggtags-find-file</code>. <b>C-c M-f</b> also executes
+<li><code>M-x</code>, type <code>ggtags-find-file</code>. <b>C-c M-f</b> also executes
 <code>ggtags-find-file</code>. A prompt ask for a file to find. You can also
 invoke <code>ggtags-find-file</code> with <code>C-c M-f</code>.
-</p>
 </li>
 
-<li><p>
-Enter <code>main.c</code> to the prompt and press <b>Enter</b>.
-</p>
+<li>Enter <code>main.c</code> to the prompt and press <b>Enter</b>.
 </li>
-<li><p>
-You will see a list of <code>main.c</code> files below in various directory:
-</p>
+<li>You will see a list of <code>main.c</code> files below in various directory:
 
 
 <div class="figure">
@@ -5230,21 +5118,17 @@ Press <b>M-s s</b>. A prompt appears waiting for something to search; type
 </p>
 </li>
 
-<li><p>
-Finally you get into the correct file. This is where Linux
+<li>Finally you get into the correct file. This is where Linux
 starts after the bootloader stage.
-</p>
 </li>
 
-<li><p>
-Now, you see a lot of names in this file: variable names, function
+<li>Now, you see a lot of names in this file: variable names, function
 names&#x2026; Now, you want to find where all of these names are defined
 and where they are used. Let's scroll down a bit, either with <b>Page
 Down</b> key or scrolling with the mouse or search for it. If you want
 to search, press <b>C-s</b> and type <code>kernel_init</code> and press <b>C-s</b>
 repeatedly. <b>C-s</b> is available everywhere in Emacs. <b>M-s s</b> is just
 available in <b>ggtags</b>. You see a function declaration like this:
-</p>
 
 <div class="org-src-container">
 
@@ -5368,7 +5252,7 @@ properly. Finally, close everything you don't need with <b>C-x k</b>
 </div>
 
 <div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9"><a id="ID-b6f5eaff-b912-4e00-9835-a3127632b019"></a>Extending Emacs Primer</h2>
+<h2 id="sec-9"><a id="ID-b6f5eaff-b912-4e00-9835-a3127632b019" name="ID-b6f5eaff-b912-4e00-9835-a3127632b019"></a>Extending Emacs Primer</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 To let Emacs automatically loads those configuration, save it to
@@ -5443,7 +5327,7 @@ directory to see if it works properly.
 </div>
 </div>
 <div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><a id="ID-c17a142e-f9a8-4584-989a-e629e3bcd303"></a>Conclusion</h2>
+<h2 id="sec-10"><a id="ID-c17a142e-f9a8-4584-989a-e629e3bcd303" name="ID-c17a142e-f9a8-4584-989a-e629e3bcd303"></a>Conclusion</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 That's it. Now you can start using Emacs for many things, from editing
@@ -5464,11 +5348,11 @@ Finally, thanks to <a href="http://orgmode.org/worg/">Worg</a> for this awesome 
 </div>
 </div>
 <div id="outline-container-sec-11" class="outline-2">
-<h2 id="sec-11"><a id="ID-06e5b4a9-130f-447a-b735-1fcc70262fb2"></a>Appendix</h2>
+<h2 id="sec-11"><a id="ID-06e5b4a9-130f-447a-b735-1fcc70262fb2" name="ID-06e5b4a9-130f-447a-b735-1fcc70262fb2"></a>Appendix</h2>
 <div class="outline-text-2" id="text-11">
 </div>
 <div id="outline-container-sec-11-1" class="outline-3">
-<h3 id="sec-11-1"><a id="ID-b135c9e2-a68c-4461-a711-a92016eeb034"></a>Why Emacs? (Extended)</h3>
+<h3 id="sec-11-1"><a id="ID-b135c9e2-a68c-4461-a711-a92016eeb034" name="ID-b135c9e2-a68c-4461-a711-a92016eeb034"></a>Why Emacs? (Extended)</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 Emacs allows you to do much more than just editing. Emacs is no mere
@@ -5525,7 +5409,7 @@ different editor when you learn a random language.
 </div>
 </div>
 <div id="outline-container-sec-11-2" class="outline-3">
-<h3 id="sec-11-2"><a id="ID-2da15989-7cfe-414e-ad39-3c09098bf045"></a>Other people's "Why Emacs?"</h3>
+<h3 id="sec-11-2"><a id="ID-2da15989-7cfe-414e-ad39-3c09098bf045" name="ID-2da15989-7cfe-414e-ad39-3c09098bf045"></a>Other people's "Why Emacs?"</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 <a href="http://semantic.supelec.fr/popineau/programming-emacs.html#sec-1">"Why Emacs?"</a> by Fabrice Popinea. He is the maintainer of Emacs 64
@@ -5554,7 +5438,7 @@ guy).
 </div>
 
 <div id="outline-container-sec-11-3" class="outline-3">
-<h3 id="sec-11-3"><a id="ID-b8c9ecfe-46d0-4169-8e58-9270aa72a9a5"></a>More on Emacs history</h3>
+<h3 id="sec-11-3"><a id="ID-b8c9ecfe-46d0-4169-8e58-9270aa72a9a5" name="ID-b8c9ecfe-46d0-4169-8e58-9270aa72a9a5"></a>More on Emacs history</h3>
 <div class="outline-text-3" id="text-11-3">
 <p>
 Ever heard of a computing system called <b>Lisp Machine</b>? I bet many of

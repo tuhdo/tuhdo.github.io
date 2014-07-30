@@ -2019,7 +2019,7 @@ bindings, *C-x r C-h* to get the list of key bindings.
 :PROPERTIES:
 :ID:       840ff6ae-1f2b-4796-9f7f-7cd5db33d879
 :END:
-One of the best of use of register. It simply saves your current window
+One of the best use of register. It simply saves your current window
 configuration and restores the layout later. 
 
 For example, you are viewing four source code buffers, but want to

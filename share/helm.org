@@ -793,17 +793,17 @@ Pre-configured helm to build regexps. This commands is useful when you
 want to test out regexp interactively. Following actions are
 available if *C-z*:
 
-| Key    | Binding                                                    |
-|--------+------------------------------------------------------------|
-| *[f1]* | Action: =Kill regexp as sexp=                              |
-|        | Saves the regexp as a string in =kill-ring=                |
-|--------+------------------------------------------------------------|
-| *[f2]* | Action: =Query Replace Regexp=                             |
-|        | Invoke =query-replace= with current regexp to be replaced  |
-|--------+------------------------------------------------------------|
-| *[f3]* | Action: =Kill regexp=                                      |
-|        | Saves the regexp as is in the current Helm prompt          |
-|--------+------------------------------------------------------------|
+| Key    | Action                                                    |
+|--------+-----------------------------------------------------------|
+| *[f1]* | =Kill regexp as sexp=                                     |
+|        | Saves the regexp as a string in =kill-ring=               |
+|--------+-----------------------------------------------------------|
+| *[f2]* | =Query Replace Regexp=                                    |
+|        | Invoke =query-replace= with current regexp to be replaced |
+|--------+-----------------------------------------------------------|
+| *[f3]* | =Kill regexp=                                             |
+|        | Saves the regexp as is in the current Helm prompt         |
+|--------+-----------------------------------------------------------|
 
 _Demo_:
 
@@ -826,16 +826,16 @@ Pre-configured for viewing of Emacs registers. By simply executing
 =helm-register=, you can view what is in registers. *RET* or *TAB*
 inserts content of highlighting register.
 
-| Key    | Binding                                     |
+| Key    | Action                               |
 |--------+---------------------------------------------|
-| *[f1]* | Action: =Insert Register=                   |
+| *[f1]* | =Insert Register=                   |
 |        | Insert register content into buffer         |
 |--------+---------------------------------------------|
-| *[f2]* | Action: =Append Region to Register=         |
+| *[f2]* | =Append Region to Register=         |
 |        | Append an active region to current content  |
 |        | in highlighting register                    |
 |--------+---------------------------------------------|
-| *[f3]* | Action: =Prepend Region to Register=        |
+| *[f3]* | =Prepend Region to Register=        |
 |        | Prepend an active region to current content |
 |        | in highlighting register                    |
 |--------+---------------------------------------------|
@@ -912,7 +912,7 @@ _Key binding_:
 
 _Description_:
 
-Surfraw provides a fast UNIX command line interface to a variety
+=surfraw= provides a fast UNIX command line interface to a variety
 of popular WWW search engines and other artifacts of power.  It
 reclaims google, altavista, dejanews, freshmeat, research index,
 slashdot...
@@ -939,15 +939,14 @@ set). Let's bind it to something else:
   (global-set-key (kbd "C-c h g") 'helm-google-suggest)
 #+end_src
 
-If you don't have =surfraw= program or don't want to use, you can
-override *C-c h s* binding with this command.
-
 _Description_:
 
 This command allows you to interactively enter search terms and get
 results from Google in a Helm buffer. Then, you can open one of the
 candidates in other services, such as Google, Wikipedia, Youtube,
-Imbd, Google Maps, Google News.
+Imbd, Google Maps, Google News. If you are on Windows, don't type too
+fast or, you will have an error and you have to abandon this Helm
+session.
 
 _Demo_:
 
