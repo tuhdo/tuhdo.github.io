@@ -2174,7 +2174,8 @@ have to repeat yourself, using macro. Follow these steps:
 
 - Place point at the beginning of the first line.
 - Press *<f3>*.
-- *C-f* to the beginning of each character group and add whitespace.
+- Use *C-s* to jump to the beginning of each character group (or *C-f*
+  if you want something simple) and add whitespace.
 - Return to the beginning of next line. Press *<f4>* to finish recording.
 - Continuously press *<f4>* and see Emacs playbacks the whole action
   sequence you've just recorded.
