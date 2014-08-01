@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-08-01 T6 20:08 -->
+<!-- 2014-08-01 T6 20:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -568,7 +568,7 @@ Let's look at part of the Emacs manual:
 </div>
 
 <p>
-All about handling files is inside the <code>Files</code> entry, which includes
+All about handling files are inside the <code>Files</code> entry, which includes
 how to open files, save files, revert and auto-revert files,comparing
 files&#x2026;, many things from basic to advance. If you are a new  and
 reading the Emacs manual, you have the burden to actively select what
@@ -3286,30 +3286,30 @@ buffer, a shell&#x2026; Basically anything that Emacs can display. Let's try the
 <p>
 <b>C-x 2</b> to split the current window into two horizontal windows. After
 splitting, you will have the exact duplicate of your current editing
-buffer. <b>C-x 2</b> is bound to <code>split-window-below</code>.
+buffer. <code>split-window-below</code> is bound to <b>C-x 2</b>.
 </p>
 
 <p>
 <b>C-x 3</b> to split your current window into two vertical windows. After
 splitting, you will have the exact duplicate of your current editing
-buffer. <b>C-x 3</b> is bound to <code>split-window-right</code>.
+buffer. <code>split-window-right</code> is bound to <b>C-x 3</b>.
 </p>
 
 <p>
 Now, after you execute the two commands above, you will have three
 windows: two above and one below. Each window can hold a buffer. With
 the above two commands ,you can create arbitrary window layout. In
-Emacs, a window layout is called a window configuration.
+Emacs, a window layout is called a <b>window configuration</b>.
 </p>
 
 <p>
-To navigate through the windows, <b>C-x o</b> which executes the command
+To navigate through the windows, <b>C-x o</b> which runs the command
 <code>other-window</code>. Try cycle around the windows a few times to get used
 to it.
 </p>
 
 <p>
-In Emacs, <code>&lt;next&gt;</code> is the <b>PageDown</b> key <code>&lt;prior&gt;</code> is the <b>PageUp</b>
+In Emacs, <code>&lt;next&gt;</code> is the <b>PageDown</b> key, <code>&lt;prior&gt;</code> is the <b>PageUp</b>
 key. <b>M-&lt;next&gt;</b> runs <code>scroll-other-window</code> and scroll the other
 window forward; <b>M-&lt;prior&gt;</b> runs <code>scroll-other-window-down</code> and scroll
 the other window backward. Other window is the window that you visit
@@ -4438,7 +4438,7 @@ You can also save a region in registers.
 <thead>
 <tr>
 <th scope="col" class="left">Key</th>
-<th scope="col" class="left">Bind</th>
+<th scope="col" class="left">Binding</th>
 </tr>
 </thead>
 <tbody>

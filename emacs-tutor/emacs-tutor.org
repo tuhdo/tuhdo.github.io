@@ -101,7 +101,7 @@ Let's look at part of the Emacs manual:
 
 [[file:static/emacs-manual-toc.gif][file:static/emacs-manual-toc.gif]]
 
-All about handling files is inside the =Files= entry, which includes
+All about handling files are inside the =Files= entry, which includes
 how to open files, save files, revert and auto-revert files,comparing
 files..., many things from basic to advance. If you are a new  and
 reading the Emacs manual, you have the burden to actively select what
@@ -1567,22 +1567,22 @@ buffer, a shell... Basically anything that Emacs can display. Let's try them out
 
 *C-x 2* to split the current window into two horizontal windows. After
 splitting, you will have the exact duplicate of your current editing
-buffer. *C-x 2* is bound to =split-window-below=.
+buffer. =split-window-below= is bound to *C-x 2*.
 
 *C-x 3* to split your current window into two vertical windows. After
 splitting, you will have the exact duplicate of your current editing
-buffer. *C-x 3* is bound to =split-window-right=.
+buffer. =split-window-right= is bound to *C-x 3*.
 
 Now, after you execute the two commands above, you will have three
 windows: two above and one below. Each window can hold a buffer. With
 the above two commands ,you can create arbitrary window layout. In
-Emacs, a window layout is called a window configuration.
+Emacs, a window layout is called a *window configuration*.
 
-To navigate through the windows, *C-x o* which executes the command
+To navigate through the windows, *C-x o* which runs the command
 =other-window=. Try cycle around the windows a few times to get used
 to it.
 
-In Emacs, =<next>= is the *PageDown* key =<prior>= is the *PageUp*
+In Emacs, =<next>= is the *PageDown* key, =<prior>= is the *PageUp*
 key. *M-<next>* runs =scroll-other-window= and scroll the other
 window forward; *M-<prior>* runs =scroll-other-window-down= and scroll
 the other window backward. Other window is the window that you visit
@@ -2077,7 +2077,7 @@ The demo starts when you see at the bottom a prompt with "Eval: START".
 :END:
 You can also save a region in registers. 
 
-| Key           | Bind                            |
+| Key           | Binding                         |
 |---------------+---------------------------------|
 | =C-x r s Reg= | *Command*: =copy-to-register=   |
 |               | Copy region into register *REG* |
