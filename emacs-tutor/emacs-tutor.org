@@ -8,24 +8,24 @@
 *_Before we start_*: 
 
 - Please remember that you can always access a section using the
-  floating table of content on the upper-right corner of your
+  floating table of content at the upper-right corner of your
   screen.
 
 - Many people asked how can this manual be "mini", since it is pretty
-  big for an online single page article. Yes, if this page is exported
-  to PDF, it is more than 40 pages. However, this manual is "mini"
+  big for an single page article. Yes, if this page is exported to
+  PDF, it is more than 40 pages. However, this manual is "mini"
   relative to the size of the official Emacs manual, which is more
-  than 600 pages. That's the reason why.
+  than 600 pages. That's why.
 
 *_Let's start your Emacs journey_*:
 
 In Emacs, you can do many things aside from editing. Emacs is a
 programming platform, not just another editor in the sense that people
-think. If you want more details, read the [[*Appendix][Appendix]].
+think. For more details, read the [[*Appendix][Appendix]].
 
-Take a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
+Have a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
 
-Here is my personal tour, *with added 3rd party plugins*. Don't worry
+Here is my personal tour, *with 3rd party plugins added*. Don't worry
 if your Emacs does not look like the screenshots. You can have
 something like mine and even better, but for now you need to get a
 solid foundation. The screenshots are just for show. Even though,
@@ -43,8 +43,8 @@ kernel source tree with ease.
     
     [[file:static/jump_headers.gif][file:static/jump_headers.gif]]
 
-  - Autocompletion: Pay attention to the completion candidates when
-    ~include <linux/printk.h>~ presents and not present
+  - Autocompletion: Pay attention to completion candidates when
+    ~include <linux/printk.h>~ added and not added.
 
     [[file:static/auto_complete.gif][file:static/auto_complete.gif]]
 
@@ -56,7 +56,7 @@ kernel source tree with ease.
 
     [[file:static/comment.gif][file:static/comment.gif]]
 
-  - GDB Many Windows:
+  - GDB:
 
     #+BEGIN_CENTER
     (screnshot from this website:
@@ -70,7 +70,7 @@ kernel source tree with ease.
     [[file:static/gdb-many-windows2.png][file:static/gdb-many-windows2.png]]
     #+END_CENTER
 
-- Diff between current editting file and latest file revision:
+- =diff= between editting file and latest file revision:
 
   [[file:static/vc-diff.jpg][file:static/vc-diff.jpg]]
 
@@ -82,7 +82,6 @@ kernel source tree with ease.
 
   [[file:static/live_grep.gif][file:static/live_grep.gif]]
 
-  <<helm_projectile>>
 - Quickly select any file in a directory under a Version Control
   System, for example, Linux kernel:
 
@@ -102,20 +101,20 @@ Let's look at part of the Emacs manual:
 
 [[file:static/emacs-manual-toc.gif][file:static/emacs-manual-toc.gif]]
 
-All about handling files is inside the =Files= entry, including open
-files, save files, revert and auto-revert files,comparing files..., so
-many things from basic to advance. If you are a new Emacs user and
-reading the Emacs manual, you have the burden to actively pick what
+All about handling files is inside the =Files= entry, which includes
+how to open files, save files, revert and auto-revert files,comparing
+files..., many things from basic to advance. If you are a new  and
+reading the Emacs manual, you have the burden to actively select what
 you need from the manual to learn to achieve the basic common tasks in
 other editors.
 
-If you read the manual cover by cover, it would be long before you can
-start using Emacs for basic operations (i.e. open files). Worse,
-"Fundamental Editing Commands" section is placed before "Major
-Structures of Emacs" section that contains manual about file
-handling. How can you learn to basic edit command if you don't even
-know how to open a file? The problem with the manual is, it does not
-really organize for new Emacs user to progressively learn Emacs.
+If you read the manual cover to cover, it would take a long time
+before you can start using Emacs for basic operations (i.e. open
+files). "Fundamental Editing Commands" section is placed before "Major
+Structures of Emacs" section that contains information about file
+handling. How can you learn to basic editing commands if you don't
+even know how to open a file? The problem with the manual is, it does
+not really organize for new Emacs user to progressively learn Emacs.
 
 I want to help you to use Emacs efficient in a relative short amount of
 time, probably around a week. This guide is written to lift the burden
@@ -131,8 +130,8 @@ tutorial, only if it isn't made for demonstration.
 :PROPERTIES:
 :ID:       c8f88c3a-ecad-433d-931b-2cca8a4f62ac
 :END:
-The current version is Emacs 24.3, with the upcoming Emacs 24.4 is on the
-way at the point of writing this.
+The current version is Emacs 24.3; the upcoming Emacs 24.4 when this
+manual was written.
 
 Quote from GNU Emacs homepage:
 
@@ -155,42 +154,41 @@ drawn) the Self-Documenting Extensible Editor.
 :PROPERTIES:
 :ID:       45226aea-d1af-4853-8be9-5dc1ee962973
 :END:
-Well, that's your choice. But I suggest that why manually write code
-is harmful.
+Well, that's your choice. But I suggest that writing code without any
+support is harmful.
 
-If you are a programmer, you should try to automate thing as much as
-possible. One way of doing this is using a good editor that automates
+If you are a programmer, you should automate thing as much as
+possible. One way to do this is using a good editor that automates
 many menial and tedious tasks. For example, one of the thing that
-annoys me is using the command *cd* to change into a deep directory
+annoys me is using the command *cd* to change into a deep directory 
 path like this:
 
 =/path/to/a/very/long/long/long/long/long/long/..../directory/=
 
-A solution to this problem in terminal is the tool [[https://github.com/clvv/fasd][fasd]], that allow
-your to jump to visited directories with a few keystrokes. In Emacs,
-if you have a directory under a version control system, you can
-immedately jump to any file you want quickly, even if it is 20 levels 
-deep (as demonstrated at the beginning).
+In Emacs, if you have a directory under a version control system, you
+can immediately jump to any file quickly, even if it is buried 20
+levels deep (as demonstrated at the beginning).
 
-Or when you want to comments many lines of code but the language you
-are writing only has single line comment. In many editors, you have to
-comment line by line tediously. In Emacs, you can simply highlight the
-lines and press a shortcut for inserting comments.
+Or when you want to quickly comment many lines of code but the
+programming language you are using only has single line comment. In
+many editors, you have to comment line by line tediously. In Emacs,
+you can simply highlight the lines and press a shortcut for inserting
+comments.
 
 Many people think that writing program manually is much cooler than
-other "amateurs" that use fancy "Integrated Development
-Environment". I used to think like that too, because working in Linux
-environment requires me to understand the underlying mechanism, such
-as building software using Makefile in C/C++, automate with shell
-script... And this is already considered "user friendly", as opposed
-to click the nice little play button in typical IDE. However, I was
+"amateurs" that use fancy "Integrated Development Environment". I used
+to think like that too, because working in Linux environment requires
+me to understand the underlying working, such as building software
+using Makefile in C/C++, automating with shell script... And this is
+already considered "user friendly" in Linux world, as opposed to click
+the nice little play button in typical IDE. However, I was
 wrong. While working with such tools allow me to understand what's
 going on, I do not need to type in code manually to understand it. If
 you get what a for loop does, typing it character by character is
-tedious and interrupt your thinkings.
+tedious and interrupt your thoughts.
 
-Doing it manually won't make you smarter, because when you actually
-type, you  already have something in your head. Typing is just a
+Write code manually won't make you smarter, because when you actually
+type, you  already have something in your head. Typing is just a mere
 reflection of your thoughts into the editor. You need to finish typing
 as fast as possible, because the quicker you finish, the quicker you
 can get back to your thinking. Only thoughts matter, and there's no
@@ -198,10 +196,9 @@ value in manually typing the same things thousands of times. I must
 say, =Cut=, =Copy= and =Paste= are really great ideas and great
 automation tools because of their simplicity.
 
-In many cases, your job requires you to use an esoteric in-house
-programming language and you don't like it. Having an editor to help
-you finish the tasks as soon as possible is a way to make yourself
-happier.
+Your job may require you to use an esoteric in-house programming
+language and you don't like it. Having an editor to help you finish
+the tasks as soon as possible is a way to make yourself happier.
 
 Typing too much can also lead to RSI. If you manually type code too
 much, it harms your fingers. At least if you use a handsaw instead of
@@ -234,10 +231,14 @@ of your distribution and install Emacs. However, the package manager
 only has the lastest stable Emacs; if you want the latest Emacs, build
 from source as the below instructions.
 
-With GUI:
+To use Emacs with GUI:
 
 - Download [[http://www.gnu.org/software/emacs/][Emacs]]; or if you prefer latest Emacs, get it from source: =git clone http://repo.or.cz/r/emacs.git=
-- If you download from the homepage, unpackage: =tar xvf emacs-*.tar.gz=
+- If you download from the homepage, unpackage: =tar xvf
+  emacs-*.tar.gz=
+- Install GTK: =sudo apt-get install libgtk-3-dev libgtk-3-common
+  libgtk-3-0=. You have to use gtk3 to be able to use true type
+  fonts.
 - =cd emacs-<version>*=
 - =./autogen.sh=
 - Add prefix and path to where you want to install. This is useful if
@@ -249,10 +250,12 @@ With GUI:
 - =make=
 - =sudo make install=
 
-If ./configure tells you the dependencies missing, you should install
+If =./configure= tells you the dependencies missing, you should install
 it. Recommended dependency: libtiff, libgiff, libjpeg, libpng, libxml2
-for viewing and browsing web inside Emacs. You have to use gtk3 to be
-able to use external fonts.
+for viewing and browsing web inside Emacs:
+
+=sudo apt-get install libtiff5-dev libpng12-dev libjpeg-dev libgif-dev
+libgnutls-dev libxml2-dev=
 
 Using in Terminal only:
 
@@ -340,18 +343,21 @@ You can use your Palm to press Control in standard PC keyboard.
 :PROPERTIES:
 :ID:       4bb52c4a-1d30-42e0-999b-b18d8831997e
 :END:
-In Emacs, behind every user interaction is a function. You press a key
-to insert a character, Emacs runs =self-insert-command=. There are two
+In Emacs, every user interaction is a function. You press a key to
+insert a character, Emacs runs =self-insert-command=. There are two
 types of functions in Emacs:
 
-    - *Normal functions*: These functions are like functions in other
+    - *Normal functions*: These are like functions in other
       programming languages, and are used for implementing features in
       Emacs. Users do not need to care about these functions, unless
-      they want to change the implementations.
+      they want to implement something or modifying the
+      implementations.
 
-    - *Commands*: Interactive function provides to editor users.
+    - *Commands*: Commands are like functions, but interactive. It
+      means, commands are features provided to users and users
+      directly use them.
 
-*M-x* itself is bound to =execute-extended-command=.
+=execute-extended-command= is bound to *M-x*.
 
 ** Emacs Key Notation
 :PROPERTIES:
@@ -388,16 +394,16 @@ key binding; it will help you get used to Emacs quicker. One exception
 though, I only say "press *key*" if *key* is a single character on the
 keyboard.
 
-If you see =M-x command=, which means you need to *M-x* and type that
+If you see =M-x command=, it means you need to *M-x* and type
 *command*.
 
 A prefix key is a part of a full key binding. For example, a full key
 binding is *C-x r l* to run the command =bookmark-bmenu-list=, then
-*C-x* or *C-x r* are its prefixes. Note that key sequence such as
-*C-x* or *M-x* is considered a single character. Knowing prefix key is
-handy. If you forget the key bindings of something, but remember its
-prefix, you can press the prefix key and  *C-h* to get a list of
-commands with that prefix.
+*C-x* and *C-x r* are its prefixes. Note that key sequence such as
+*C-x* and *M-x* are considered a single character. Knowing prefix key
+is handy: if you forget key bindings of some commands that use the
+same prefix key, and remember the prefix, you can press the prefix key
+and *C-h* to get a list of commands with that prefix.
 
 For example, *C-x r* is the prefix for /register/ and /bookmark/
 commands in Emacs. However, you forget a specific key binding for a

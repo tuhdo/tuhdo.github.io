@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-07-30 Wed 10:13 -->
+<!-- 2014-08-01 T6 20:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -386,15 +386,15 @@ alt="hit counter"></a></div></noscript>
 
 <ul class="org-ul">
 <li>Please remember that you can always access a section using the
-floating table of content on the upper-right corner of your
+floating table of content at the upper-right corner of your
 screen.
 </li>
 
 <li>Many people asked how can this manual be "mini", since it is pretty
-big for an online single page article. Yes, if this page is exported
-to PDF, it is more than 40 pages. However, this manual is "mini"
+big for an single page article. Yes, if this page is exported to
+PDF, it is more than 40 pages. However, this manual is "mini"
 relative to the size of the official Emacs manual, which is more
-than 600 pages. That's the reason why.
+than 600 pages. That's why.
 </li>
 </ul>
 
@@ -405,15 +405,15 @@ than 600 pages. That's the reason why.
 <p>
 In Emacs, you can do many things aside from editing. Emacs is a
 programming platform, not just another editor in the sense that people
-think. If you want more details, read the <a href="#sec-11">Appendix</a>.
+think. For more details, read the <a href="#sec-11">Appendix</a>.
 </p>
 
 <p>
-Take a <a href="http://www.gnu.org/software/emacs/tour/">tour</a> from the official Emacs homepage.
+Have a <a href="http://www.gnu.org/software/emacs/tour/">tour</a> from the official Emacs homepage.
 </p>
 
 <p>
-Here is my personal tour, <b>with added 3rd party plugins</b>. Don't worry
+Here is my personal tour, <b>with 3rd party plugins added</b>. Don't worry
 if your Emacs does not look like the screenshots. You can have
 something like mine and even better, but for now you need to get a
 solid foundation. The screenshots are just for show. Even though,
@@ -444,8 +444,8 @@ your favourite editors crash, it's not their fault.
 </div>
 </li>
 
-<li>Autocompletion: Pay attention to the completion candidates when
-<code>include &lt;linux/printk.h&gt;</code> presents and not present
+<li>Autocompletion: Pay attention to completion candidates when
+<code>include &lt;linux/printk.h&gt;</code> added and not added.
 
 
 <div class="figure">
@@ -472,7 +472,7 @@ your favourite editors crash, it's not their fault.
 </div>
 </li>
 
-<li>GDB Many Windows:
+<li>GDB:
 
 <div class="center">
 <p>
@@ -501,7 +501,7 @@ your favourite editors crash, it's not their fault.
 </ul>
 </li>
 
-<li>Diff between current editting file and latest file revision:
+<li><code>diff</code> between editting file and latest file revision:
 
 
 <div class="figure">
@@ -526,11 +526,8 @@ your favourite editors crash, it's not their fault.
 <p><a href="static/live_grep.gif"><img src="static/live_grep.gif" alt="live_grep.gif" /></a>
 </p>
 </div>
-
-<p>
-<a id="helm_projectile" name="helm_projectile"></a>
-</p>
 </li>
+
 <li>Quickly select any file in a directory under a Version Control
 System, for example, Linux kernel:
 
@@ -571,22 +568,22 @@ Let's look at part of the Emacs manual:
 </div>
 
 <p>
-All about handling files is inside the <code>Files</code> entry, including open
-files, save files, revert and auto-revert files,comparing files&#x2026;, so
-many things from basic to advance. If you are a new Emacs user and
-reading the Emacs manual, you have the burden to actively pick what
+All about handling files is inside the <code>Files</code> entry, which includes
+how to open files, save files, revert and auto-revert files,comparing
+files&#x2026;, many things from basic to advance. If you are a new  and
+reading the Emacs manual, you have the burden to actively select what
 you need from the manual to learn to achieve the basic common tasks in
 other editors.
 </p>
 
 <p>
-If you read the manual cover by cover, it would be long before you can
-start using Emacs for basic operations (i.e. open files). Worse,
-"Fundamental Editing Commands" section is placed before "Major
-Structures of Emacs" section that contains manual about file
-handling. How can you learn to basic edit command if you don't even
-know how to open a file? The problem with the manual is, it does not
-really organize for new Emacs user to progressively learn Emacs.
+If you read the manual cover to cover, it would take a long time
+before you can start using Emacs for basic operations (i.e. open
+files). "Fundamental Editing Commands" section is placed before "Major
+Structures of Emacs" section that contains information about file
+handling. How can you learn to basic editing commands if you don't
+even know how to open a file? The problem with the manual is, it does
+not really organize for new Emacs user to progressively learn Emacs.
 </p>
 
 <p>
@@ -609,8 +606,8 @@ tutorial, only if it isn't made for demonstration.
 <h2 id="sec-3"><a id="ID-c8f88c3a-ecad-433d-931b-2cca8a4f62ac" name="ID-c8f88c3a-ecad-433d-931b-2cca8a4f62ac"></a>A bit of history</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-The current version is Emacs 24.3, with the upcoming Emacs 24.4 is on the
-way at the point of writing this.
+The current version is Emacs 24.3; the upcoming Emacs 24.4 when this
+manual was written.
 </p>
 
 <p>
@@ -640,15 +637,15 @@ drawn) the Self-Documenting Extensible Editor.
 <h2 id="sec-4"><a id="ID-45226aea-d1af-4853-8be9-5dc1ee962973" name="ID-45226aea-d1af-4853-8be9-5dc1ee962973"></a>"I don't want a complicated editor, I want something simple like Notepad(++)"</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Well, that's your choice. But I suggest that why manually write code
-is harmful.
+Well, that's your choice. But I suggest that writing code without any
+support is harmful.
 </p>
 
 <p>
-If you are a programmer, you should try to automate thing as much as
-possible. One way of doing this is using a good editor that automates
+If you are a programmer, you should automate thing as much as
+possible. One way to do this is using a good editor that automates
 many menial and tedious tasks. For example, one of the thing that
-annoys me is using the command <b>cd</b> to change into a deep directory
+annoys me is using the command <b>cd</b> to change into a deep directory 
 path like this:
 </p>
 
@@ -657,37 +654,36 @@ path like this:
 </p>
 
 <p>
-A solution to this problem in terminal is the tool <a href="https://github.com/clvv/fasd">fasd</a>, that allow
-your to jump to visited directories with a few keystrokes. In Emacs,
-if you have a directory under a version control system, you can
-immedately jump to any file you want quickly, even if it is 20 levels 
-deep (as demonstrated at the beginning).
+In Emacs, if you have a directory under a version control system, you
+can immediately jump to any file quickly, even if it is buried 20
+levels deep (as demonstrated at the beginning).
 </p>
 
 <p>
-Or when you want to comments many lines of code but the language you
-are writing only has single line comment. In many editors, you have to
-comment line by line tediously. In Emacs, you can simply highlight the
-lines and press a shortcut for inserting comments.
+Or when you want to quickly comment many lines of code but the
+programming language you are using only has single line comment. In
+many editors, you have to comment line by line tediously. In Emacs,
+you can simply highlight the lines and press a shortcut for inserting
+comments.
 </p>
 
 <p>
 Many people think that writing program manually is much cooler than
-other "amateurs" that use fancy "Integrated Development
-Environment". I used to think like that too, because working in Linux
-environment requires me to understand the underlying mechanism, such
-as building software using Makefile in C/C++, automate with shell
-script&#x2026; And this is already considered "user friendly", as opposed
-to click the nice little play button in typical IDE. However, I was
+"amateurs" that use fancy "Integrated Development Environment". I used
+to think like that too, because working in Linux environment requires
+me to understand the underlying working, such as building software
+using Makefile in C/C++, automating with shell script&#x2026; And this is
+already considered "user friendly" in Linux world, as opposed to click
+the nice little play button in typical IDE. However, I was
 wrong. While working with such tools allow me to understand what's
 going on, I do not need to type in code manually to understand it. If
 you get what a for loop does, typing it character by character is
-tedious and interrupt your thinkings.
+tedious and interrupt your thoughts.
 </p>
 
 <p>
-Doing it manually won't make you smarter, because when you actually
-type, you  already have something in your head. Typing is just a
+Write code manually won't make you smarter, because when you actually
+type, you  already have something in your head. Typing is just a mere
 reflection of your thoughts into the editor. You need to finish typing
 as fast as possible, because the quicker you finish, the quicker you
 can get back to your thinking. Only thoughts matter, and there's no
@@ -697,10 +693,9 @@ automation tools because of their simplicity.
 </p>
 
 <p>
-In many cases, your job requires you to use an esoteric in-house
-programming language and you don't like it. Having an editor to help
-you finish the tasks as soon as possible is a way to make yourself
-happier.
+Your job may require you to use an esoteric in-house programming
+language and you don't like it. Having an editor to help you finish
+the tasks as soon as possible is a way to make yourself happier.
 </p>
 
 <p>
@@ -745,19 +740,24 @@ save it for something more interesting.
 <p>
 Easy way to install if you are using Ubuntu: <code>sudo apt-get install
 emacs</code>. If you use other Linux distributions, use the package manager
-of your distrubtion and install Emacs. However, the package manager
+of your distribution and install Emacs. However, the package manager
 only has the lastest stable Emacs; if you want the latest Emacs, build
 from source as the below instructions.
 </p>
 
 <p>
-With GUI:
+To use Emacs with GUI:
 </p>
 
 <ul class="org-ul">
 <li>Download <a href="http://www.gnu.org/software/emacs/">Emacs</a>; or if you prefer latest Emacs, get it from source: <code>git clone http://repo.or.cz/r/emacs.git</code>
 </li>
-<li>If you download from the homepage, unpackage: <code>tar xvf emacs-*.tar.gz</code>
+<li>If you download from the homepage, unpackage: <code>tar xvf
+  emacs-*.tar.gz</code>
+</li>
+<li>Install GTK: <code>sudo apt-get install libgtk-3-dev libgtk-3-common
+  libgtk-3-0</code>. You have to use gtk3 to be able to use true type
+fonts.
 </li>
 <li><code>cd emacs-&lt;version&gt;*</code>
 </li>
@@ -779,10 +779,14 @@ such as Inconsolata for better Emacs experience.
 </ul>
 
 <p>
-If ./configure tells you the dependencies missing, you should install
+If <code>./configure</code> tells you the dependencies missing, you should install
 it. Recommended dependency: libtiff, libgiff, libjpeg, libpng, libxml2
-for viewing and browsing web inside Emacs. You have to use gtk3 to be
-able to use external fonts.
+for viewing and browsing web inside Emacs:
+</p>
+
+<p>
+<code>sudo apt-get install libtiff5-dev libpng12-dev libjpeg-dev libgif-dev
+libgnutls-dev libxml2-dev</code>
 </p>
 
 <p>
@@ -811,7 +815,7 @@ After installation is done, at this line to your <b>.bashrc</b> or <b>.zshrc</b>
 
 <div class="org-src-container">
 
-<pre class="src src-shell-script"><span style="color: #483d8b;">alias</span> <span style="color: #a0522d;">em</span>=<span style="color: #8b2252;">'emacs'</span>
+<pre class="src src-shell-script"><span style="color: #483d8b;">alias</span> <span style="color: #374478;">em</span>=<span style="color: #8b2252;">'emacs'</span>
 </pre>
 </div>
 
@@ -919,24 +923,27 @@ You can use your Palm to press Control in standard PC keyboard.
 <h3 id="sec-7-1"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e" name="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
-In Emacs, behind every user interaction is a function. You press a key
-to insert a character, Emacs runs <code>self-insert-command</code>. There are two
+In Emacs, every user interaction is a function. You press a key to
+insert a character, Emacs runs <code>self-insert-command</code>. There are two
 types of functions in Emacs:
 </p>
 
 <ul class="org-ul">
-<li><b>Normal functions</b>: These functions are like functions in other
+<li><b>Normal functions</b>: These are like functions in other
 programming languages, and are used for implementing features in
 Emacs. Users do not need to care about these functions, unless
-they want to change the implementations.
+they want to implement something or modifying the
+implementations.
 </li>
 
-<li><b>Commands</b>: Interactive function provides to editor users.
+<li><b>Commands</b>: Commands are like functions, but interactive. It
+means, commands are features provided to users and users
+directly use them.
 </li>
 </ul>
 
 <p>
-<b>M-x</b> itself is bound to <code>execute-extended-command</code>.
+<code>execute-extended-command</code> is bound to <b>M-x</b>.
 </p>
 </div>
 </div>
@@ -1025,18 +1032,18 @@ keyboard.
 </p>
 
 <p>
-If you see <code>M-x command</code>, which means you need to <b>M-x</b> and type that
+If you see <code>M-x command</code>, it means you need to <b>M-x</b> and type
 <b>command</b>.
 </p>
 
 <p>
 A prefix key is a part of a full key binding. For example, a full key
 binding is <b>C-x r l</b> to run the command <code>bookmark-bmenu-list</code>, then
-<b>C-x</b> or <b>C-x r</b> are its prefixes. Note that key sequence such as
-<b>C-x</b> or <b>M-x</b> is considered a single character. Knowing prefix key is
-handy. If you forget the key bindings of something, but remember its
-prefix, you can press the prefix key and  <b>C-h</b> to get a list of
-commands with that prefix.
+<b>C-x</b> and <b>C-x r</b> are its prefixes. Note that key sequence such as
+<b>C-x</b> and <b>M-x</b> are considered a single character. Knowing prefix key
+is handy: if you forget key bindings of some commands that use the
+same prefix key, and remember the prefix, you can press the prefix key
+and <b>C-h</b> to get a list of commands with that prefix.
 </p>
 
 <p>
@@ -4501,7 +4508,7 @@ you are new:
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = <span style="color: #513f78;">find_if</span> (<span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">begin</span>(), <span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">end</span>(), [&amp;<span style="color: #707e4f;">v_idx</span>] (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #a0522d;">o</span>) -&gt; <span style="color: #228b22;">bool</span> {
+<pre class="src src-c++"><span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = <span style="color: #513f78;">find_if</span> (<span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">begin</span>(), <span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">end</span>(), [&amp;<span style="color: #707e4f;">v_idx</span>] (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #783f5a;">o</span>) -&gt; <span style="color: #228b22;">bool</span> {
         <span style="color: #a020f0;">return</span> <span style="color: #783f5a;">o</span>.<span style="color: #7a4f7e;">id</span> == <span style="color: #707e4f;">v_idx</span>;
     });
 </pre>
