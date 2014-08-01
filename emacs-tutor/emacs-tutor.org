@@ -521,15 +521,15 @@ Then in *find-file* prompt, you can open all file with extension =.c=
 like this: =file*.c=. Or if you only want to select file with character
 =a= in it: =*a*.c=. Of if you only want to select file with =1= and
 extension =.c.= in it: =*1.c=. Basically, wildcard expression =*=
-accepts anything, bounded by a specific characters next to it.
+accepts anything.
 
 During the exercise, if there's something happens, for example, you
 press the wrong keys and Emacs is behaving weird, just press *C-g*.
 
 The command you have just executed is for browsing and opening files
-in Emacs, similar to =Open With= in regular editors, except instead of
-navigating with the mouse, you navigate with keyboard which is much
-faster.
+in Emacs, similar to =Open With= in regular editors, except that
+instead of navigating with the mouse, you navigate with keyboard,
+which is much faster.
 
 If you use =find-file= to navigate to an existing file in a deep
 directory and press *RET*, it opens that file. Otherwise, if the file
