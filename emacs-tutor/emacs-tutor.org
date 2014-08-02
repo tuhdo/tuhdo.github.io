@@ -997,7 +997,7 @@ Dynamic Abbreviations are a completion feature in Emacs, but work for
 text and is context-independent. After you type a word once, if you
 type that word again, you can type it partially and *M-/* to complete
 it. If your type a prefix that has many candidates, *M-/* cycles the
-candidates. This is a really cool feature and you ougt to try it.
+candidates. This is a really cool feature and you ought to try it.
 
 *_Exercise_*:
 
@@ -1007,7 +1007,7 @@ candidates. This is a really cool feature and you ougt to try it.
 - Type "random" into your buffer and *M-/*. You will see Emacs
   tell your that no dynamic abbreviations found.
 - Type "randomWord" and add a whitespace. Now, type "random" and *M-/*
-  again. Emacs can now hapily complete "random" for you. Remember that
+  again. Emacs can now happily complete "random" for you. Remember that
   to let Emacs remember your words, you have to type a complete word.
 ** Kill ring
 :PROPERTIES:
@@ -1055,9 +1055,9 @@ Then:
 the behaviour of you command. You will learn about prefix
 argument in later section.
 
-You may wonder, what happens if the kill ring getting really large?
-That's right. It's a problem, and that's when the 3rd party plugins
-shine.
+You may wonder, what happens if the kill ring keeps getting really
+large? That's right. It's a problem, and that's when the 3rd party
+plugins shine.
 
 ** Mark and region
 :PROPERTIES:
@@ -1667,8 +1667,8 @@ Help system will be discussed in later section.
 :PROPERTIES:
 :ID:       8bfeb59d-16e9-4ad5-9293-7fbb8135e510
 :END:
-In Emacs, behind anything is a function. Function can accept
-argument. You can also pass arguments into Emacs commands to modify
+In Emacs, behind anything is a function. Functions can accept
+arguments. You can also pass arguments into Emacs commands to modify
 its behaviours. However, you don't have to write code that calls
 a function with its arguments and then compile or evaluate it. You can
 pass arguments interactively.
@@ -1793,11 +1793,11 @@ C-f* variant.
 |---------------------+---------------------------------------------------------------------------|
 | =o=                 | Open file at point in another window.                                     |
 |---------------------+---------------------------------------------------------------------------|
-| =C-o=               | Open file at point in another window, but does not select that window.    |
+| =C-o=               | Open file at point in another window, but do not select that window.      |
 |---------------------+---------------------------------------------------------------------------|
-| =v=                 | open file for read only.                                                  |
+| =v=                 | Open file for read only.                                                  |
 |---------------------+---------------------------------------------------------------------------|
-| =^=                 | open parent directory and create another Dired buffer of parent directory |
+| =^=                 | Open parent directory and create another Dired buffer of parent directory |
 |---------------------+---------------------------------------------------------------------------|
 
 *_Exercise_*:
