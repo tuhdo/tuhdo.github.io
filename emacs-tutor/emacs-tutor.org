@@ -12,8 +12,8 @@
   screen.
 
 - Many people asked how can this manual be "mini", since it is pretty
-  big for an single page article. Yes, if this page is exported to
-  PDF, it is more than 40 pages. However, this manual is "mini"
+  big for an online single page article. Yes, if this page is exported
+  to PDF, it is more than 40 pages. However, this manual is "mini"
   relative to the size of the official Emacs manual, which is more
   than 600 pages. That's why.
 
@@ -34,7 +34,7 @@ kernel source tree with ease.
 
 - Performance: Editing a 39MB C source file with no problem. But
   well, if your project use really large source file like that, if
-  your favourite editors crash, it's not their fault.
+  your favorite editors crash, it's not their fault.
 
   [[file:static/performance.gif][file:static/performance.gif]]
 
@@ -59,7 +59,7 @@ kernel source tree with ease.
   - GDB:
 
     #+BEGIN_CENTER
-    (screnshot from this website:
+    (screenshot from this website:
     http://everet.org/2013/01/customize-emacs-gud-many-windows.html)
 
     [[file:static/gdb-many-windows1.png][file:static/gdb-many-windows1.png]]
@@ -70,7 +70,7 @@ kernel source tree with ease.
     [[file:static/gdb-many-windows2.png][file:static/gdb-many-windows2.png]]
     #+END_CENTER
 
-- =diff= between editting file and latest file revision:
+- Diff between current editing file and latest file revision:
 
   [[file:static/vc-diff.jpg][file:static/vc-diff.jpg]]
 
@@ -185,7 +185,7 @@ the nice little play button in typical IDE. However, I was
 wrong. While working with such tools allow me to understand what's
 going on, I do not need to type in code manually to understand it. If
 you get what a for loop does, typing it character by character is
-tedious and interrupt your thoughts.
+tedious and interrupt your thinking.
 
 Write code manually won't make you smarter, because when you actually
 type, you  already have something in your head. Typing is just a mere
@@ -228,11 +228,12 @@ save it for something more interesting.
 Easy way to install if you are using Ubuntu: =sudo apt-get install
 emacs=. If you use other Linux distributions, use the package manager
 of your distribution and install Emacs. However, the package manager
-only has the lastest stable Emacs; if you want the latest Emacs, build
+only has the latest stable Emacs; if you want the latest Emacs, build
 from source as the below instructions.
 
 To use Emacs with GUI:
 
+- Install GTK 3: =sudo apt-get install libgtk-3-dev libgtk-3-common libgtk-3-0=
 - Download [[http://www.gnu.org/software/emacs/][Emacs]]; or if you prefer latest Emacs, get it from source: =git clone http://repo.or.cz/r/emacs.git=
 - If you download from the homepage, unpackage: =tar xvf
   emacs-*.tar.gz=
@@ -334,7 +335,7 @@ bindings]]
 :PROPERTIES:
 :ID:       cefa92ca-8234-44bf-9ae5-66dc76aadd0d
 :END:
-You can use your Palm to press Control in standard PC keyboard.
+You can use your palm to press Control in standard PC keyboard.
 * Concepts
 :PROPERTIES:
 :ID:       dc9722bb-91fb-4f38-b701-ffd3fb84d4c7
@@ -451,13 +452,13 @@ logging of echo area messages.
 
 *C-h v* runs =describe-variable=, and ask you for a variable; you can
 *TAB* to complete a variable. This command is important, because aside
-from describing a variable, it allows you to customize the behaviours
+from describing a variable, it allows you to customize the behaviors
 of Emacs and 3rd party packages. But for now, you don't need it.
 
 *C-h C-h* runs *help-for-help*. Use this command if you want to see
 list of available help commands. Remember, if you partially remember a
 key binding, just press as much as you can remember and then press
-*C-h*, Emacs will list avaiable commands for that prefix. Prefix *C-h*
+*C-h*, Emacs will list available commands for that prefix. Prefix *C-h*
 is no exception. *C-h C-h* simply returns all key bindings and
 commands of prefix *C-h*.
 
@@ -547,7 +548,7 @@ file under point,  =M-x ffap= opens that directory or file directly!
 
 As you see in the screenshot, if for some reason, the directory at
 point does not exist, =ffap= tries the parent directory until one
-exist. In the example, only =/home/= exists and got feeded into the
+exist. In the example, only =/home/= exists and got fed into the
 prompt.
 ** Ido mode
 :PROPERTIES:
@@ -957,7 +958,7 @@ These key bindings are in Emacs only:
 - Move to the beginning of a sentence: *M-a*
 - Move to the end of a sentence: *M-e*
 - Recenter a screen: *M-l*
-- Reposition point to the top, middle and bottom of the current
+- Re-position point to the top, middle and bottom of the current
   screen: *M-r*
 - Move to top of the buffer: *M-<*
 - Move to end of the buffer: *M->*
@@ -988,6 +989,14 @@ work under the terminal.
 - Kill a sentence: *M-k*
 
 When you kill something, the killed content is put into the Kill Ring.
+
+If you write code, you can also quickly add comments or
+comment/uncomment code with *M-;*:
+
+- If you do not highlight a text region, *M-;* add a comment to the
+  end of line.
+- If you highlight a region (i.e. with a mouse), *M-;* comments out
+  the region.
 
 ** Dynamic Abbreviations
 :PROPERTIES:
@@ -1052,12 +1061,21 @@ Then:
 - ... and so on ...
 
 *C-<number>* is called prefix argument. Basically it's for altering
-the behaviour of you command. You will learn about prefix
+the behavior of you command. You will learn about prefix 
 argument in later section.
 
-You may wonder, what happens if the kill ring keeps getting really
-large? That's right. It's a problem, and that's when the 3rd party
-plugins shine.
+Alternatively to the above sequence, you can use *M-y* which runs
+=yank-pop=. By default, when *C-y*, it inserts the most recent killed
+text. If you want to retrieve earlier kill texts, after *C-y*, *M-y*
+to cycle through the entries in =kill-ring=. You must first run *C-y*,
+otherwise *M-y* has no effect.
+
+You may wonder, what happens if the kill ring getting really large,
+how can you remember where is which? That's right. It's a problem, and
+that's when the 3rd party plugins shine. However, you can view the
+kill ring with *C-h v*, then enter =kill-ring=. After this, you will
+see the =kill-ring= content, but in its code form, which is not really
+pretty and friendly.
 
 ** Mark and region
 :PROPERTIES:
@@ -1191,7 +1209,7 @@ track your recent undo actions. execute some motion command, i.e
 *C-f*, then try *C-/* twice and see what happens.
 
 Great, you get your old content, *bbb* and *ccc* back. That is because
-you have just undoed the latest "undo insert: ..." entries in the file
+you have just undone the latest "undo insert: ..." entries in the file
 history.
 
 When you was execute a series of undoing, /without any other commands in
@@ -1238,7 +1256,7 @@ previous match.
 *C-g* to cancels the current search session.
 
 Move point to a word. *C-s* then *C-w*, selects content from point to
-end of a word. For example, if point is on charcter 'e' of "Hello
+end of a word. For example, if point is on character 'e' of "Hello
 world" *C-w* feeds "ello" into current *C-s* prompt.
 
 *C-w* again feeds " world" into current prompt to become "ello world"
@@ -1328,7 +1346,7 @@ Here are key bindings in =occur=:
 |-----------+-------------------------------------|
 | =C-n=     | Go to next line                     |
 |-----------+-------------------------------------|
-| =C-p=     | Go to previoius line                |
+| =C-p=     | Go to previous line                 |
 |-----------+-------------------------------------|
 | =<=       | Go to beginning of buffer           |
 |-----------+-------------------------------------|
@@ -1387,6 +1405,27 @@ It is the same as =occur= except it asks user for multiple buffers.
   until you give it empty input.
 - =multi-occur-in-matching-buffers= requires a regexp, and it searches
   for occurences in buffers that match the regexp.
+
+*** Grep
+:PROPERTIES:
+:ID:       9e55a123-c29d-4b48-bc2c-4e2d0ab191c5
+:END:
+=M-x rgrep= allows you to search for text with external =grep= command
+and displays the results in a buffer. The good thing about running
+=grep= in Emacs is that the raw output are processed. The end results
+are colored and clickable, so that you can quickly visit the matched
+location!
+
+=rgrep= recursively greps for =regexp= in =files= in directory tree rooted
+at =dir=. You will be prompted for these three inputs when runs
+=rgrep=.
+
+With *C-u* prefix, you can edit the constructed shell command line
+before it is executed. With two *C-u* prefixes, directly edit and run
+=grep-find-command= (this is a variable), which is the underlying
+command used for executing =rgrep=.
+
+...[screenshot]...
 
 ** Modeline
 :PROPERTIES:
@@ -1463,14 +1502,14 @@ viewing screen is 20% away from the top.
 The =Minibuffer= is where Emacs commands read complicated arguments,
 such as file names, buffer names, Emacs command names, or Lisp
 expressions. When you execute =find-file=, it asks for your file from the
-=Minibuffer=, which is one of =find-file= required argument. Remeber I
+=Minibuffer=, which is one of =find-file= required argument. Remember I
 said earlier that in Emacs, everything is a function. =find-file= is a
 command, in other words, it's an interactive function. As a function,
 it also takes arguments. =Minibuffer= is where users can feed arguments
 to the interactive functions.
 
 Minibuffer has an input history. If you enter anything into the
-minibuffer and *RET*, minbuffer remembers the input and you can access
+minibuffer and *RET*, minibuffer remembers the input and you can access
 the input again with:
 
 - *M-p* moves to the previous input in minibuffer history.
@@ -1689,7 +1728,7 @@ Many of commands allow repeating a command many times with prefix
 arguments. 
 
 You can even pass negative prefix arguments. Try executing the above
-commands with *C--4*, that's right, *Control* and *-4* (minus 4). You
+commands with *C--4*, that's right, *Control* and *-* and *4* (minus 4). You
 see that you also execute the commands 4 times, but in /reverse/. That
 is, with *C-f*, instead of moving forward 4 characters, you move
 backward 4 times. You might wonder, what does it differ from *C-4
@@ -1822,7 +1861,7 @@ C-f* variant.
 
   [[file:static/ibuffer-dired-group.gif][file:static/ibuffer-dired-group.gif]]
 
-  If you  want to enter directory you visisted, open =ibuffer= and
+  If you  want to enter directory you visited, open =ibuffer= and
   look for it. This is efficient for a complex directory tree. For
   example, if you have to constantly work with these many directories:
 
@@ -1834,7 +1873,7 @@ C-f* variant.
   The layouts of top two directories are common when you have to
   create patches. Working in normal file manager like File Explorer in
   Window, you only one directory view. Going back and forth is tedious
-  and inefficient, and you have to remember differnt directory
+  and inefficient, and you have to remember different directory
   paths. To make it easy, you have to open multiple File Explorer
   manually. Under the terminal, you have to create symbolic links for
   those directories to save you time. However, you still have to
@@ -1903,10 +1942,10 @@ character for a command, it means *S-<character>*.
   the rename prompt.
 - Enter the directory you have just copied the files.
 - Move your cursor on a file and =H= to create a hard link. A prompt
-  ask for destionation and the link name. Create a link at the current
+  ask for destination and the link name. Create a link at the current
   location with different name from the original file.
 - Move your cursor on a file and =S= to create a symolic link. A prompt
-  ask for destionation and the link name. Create a link at the current
+  ask for destination and the link name. Create a link at the current
   location with different name from the original file.
 - Move your cursor on either the hardlink or symlink you created and
   =M= and change the bit permission; set it to something like =000=.
@@ -1997,7 +2036,7 @@ a project frequently.
 :ID:       d4060b6d-0cc9-41bc-976e-d33b56b0df6b
 :END:
 When I first heard about registers in Emacs, it scared me. I thought
-"Wow, what is this "register" thingie? Am I going to work directly
+"Wow, what is this "register" thing? Am I going to work directly
 with CPU registers?" As it turned out, despite the name "Register",
 it's not something that complicated to understand. Although, Emacs register
 is similar to CPU register in the sense that it allows quick access to
@@ -2009,12 +2048,10 @@ will denote by /r/; /r/ can be a letter (such as ‘a’) or a number (such as
 
 In Emacs, registers are for quick access to things. Things can be a
 position, a piece of text, a rectangle, a number, a file name, or a
-window configuratoin (yes, you can save how Emacs organizes its screen
-and restore later!). However, the most useful ones, in my experience,
-are window configuration,text region, as they are easy to use and use
-frequently.
+window configuration (yes, you can save how Emacs organizes its screen
+and restore later!).
 
-Saving differnt types of objects has diffent key bindings, but to jump
+Saving different types of objects has different key bindings, but to jump
 to a register, you use a single command *C-x r j REG*; *REG* is a
 register of your choice.
 
@@ -2036,12 +2073,12 @@ and later it would be tedious to restore one by one to finally
 recreate the original layout you were working with. Then, later, you
 have to do something, you have to break your window configuration, you
 have to manually restore your window configuration again, and have to
-remeber exactly which buffers you were working with.
+remember exactly which buffers you were working with.
 
 To free you from this burden, register is the answer. You can save a
 window configuration having four windows displaying four buffers, and
 another one having two Dired buffers for your project. You can switch
-between them easiler. 
+between them easier. 
 
 | Key           | Binding                                                                      |
 |---------------+------------------------------------------------------------------------------|
@@ -2063,7 +2100,7 @@ registers *a* and *b*, using *C-x r w*. Register *a* stores the Dired
 buffer that contains two project directories. Then, I open two files
 in the two directories, create another smaller window and open another
 file. Then, suddenly I want to go back to my project roots. It's then 
-when I execute *C-x r j*, get a promp, enter *a* and Emacs switches
+when I execute *C-x r j*, get a prompt, enter *a* and Emacs switches
 back the Dired buffer. Then, I switch back to the files I was editing
 with *C-x r j*, get a prompt, enter *b*.
 
@@ -2100,7 +2137,7 @@ you got a kill ring? Here are the reasons:
   when registers are handy for storing many pieces of text without
   affect the kill ring. For example, you read a manual (man page or
   info page), and you want to remember many keywords and paste it
-  somewhre later. Registers can help you with this use case.
+  somewhere later. Registers can help you with this use case.
 
 - You can also use register to save many code template. For example,
   you can save a for loop template into register *f*, if template into
@@ -2118,7 +2155,7 @@ you got a kill ring? Here are the reasons:
   #+end_src
 
   Save it to a register, insert and modify it to fit my current need
-  until I remeber it. Much faster than go back to previous source
+  until I remember it. Much faster than go back to previous source
   location to look up again, and would be time consuming if your
   source code is large.
 
@@ -2139,7 +2176,8 @@ Macro records your actions in Emacs and play back later.
 
 Personally, I use =f3= and =f4= for recording/playback, so I don't
 have to press many keys. To repeat a macro many times, use prefix
-argument. For example, =C-u 10 <f4>= executes a macro 10 times.
+argument. For example, =C-u 10 <f4>= executes a macro 10 times. If you
+want to cancel recording, *C-g*.
 
 *_Exercise_*:
 
@@ -2181,9 +2219,202 @@ have to repeat yourself, using macro. Follow these steps:
   sequence you've just recorded.
 - If you want to repeat more than 1 time, using prefix argument. If
   you want to repeat until the end of file, use prefix argument 0:
-  *C-u 0 <f4>*.
+  *C-u 0 <f4>*. Alternatively, highlight the region of remaining
+  lines, and *C-x C-k r*: run the last keyboard macro on each line
+  that begins in the region (=apply-macro-to-region-lines=).
 
 [[file:static/macro.gif][file:static/macro.gif]]
+
+After a macro is defined, it is saved in keyboard macro ring. There is
+only one keyboard macro ring, shared by all buffers. All commands
+which operate on the keyboard macro ring use the same *C-x C-k*
+prefix. Just remember the prefix *C-x C-k* = macro commands, and you
+won't find macro key bindings difficult to remember.
+
+*** Keyboard macro ring
+:PROPERTIES:
+:ID:       9cce9728-7c2e-4c6b-86f3-20217c9d490d
+:END:
+| Key           | Binding                                              |
+|---------------+------------------------------------------------------|
+| *C-x C-k C-k* | Command: =kmacro-end-or-call-macro-repeat=           |
+|               | Execute the keyboard macro at the head of the ring   |
+|---------------+------------------------------------------------------|
+| *C-x C-k C-n* | Command: =kmacro-cycle-ring-next=                    |
+|               | Rotate the keyboard macro ring to the next macro     |
+|               | (defined earlier).                                   |
+|---------------+------------------------------------------------------|
+| *C-x C-k C-p* | Command: =kmacro-cycle-ring-previous=                |
+|               | Rotate the keyboard macro ring to the previous macro |
+|               | (defined later)                                      |
+|---------------+------------------------------------------------------|
+
+*_Exercise_*:
+
+Define a few more keyboard macros and practice the above commands.
+
+*** The Keyboard Macro Counter
+:PROPERTIES:
+:ID:       8f80bf88-4b37-425f-8e55-d57c38a3c311
+:END:
+Each macro has a counter which is initialized to 0. Everytime a
+counter is inserted into the buffer, its value is incremented by 1.
+
+| Key           | Binding                                                     |
+|---------------+-------------------------------------------------------------|
+| *<f3>*        | Command: =kmacro-start-macro-or-insert-counter=             |
+|               | Insert the counter into the buffer and increase             |
+|               | the counter by 1                                            |
+|---------------+-------------------------------------------------------------|
+| *C-x C-k C-i* | Command: =kmacro-insert-counter=                            |
+|               | Insert the counter of current macro into the buffer         |
+|---------------+-------------------------------------------------------------|
+| *C-x C-k C-c* | Command: =kmacro-set-counter=                               |
+|               | Change the counter value of current macro                   |
+|---------------+-------------------------------------------------------------|
+| *C-x C-k C-a* | Command: =kmacro-add-counter=                               |
+|               | Add a number to the current keyboard macro counter. *C-u*   |
+|               | before running this command resets the counter back to      |
+|               | previous value                                              |
+|---------------+-------------------------------------------------------------|
+| *C-x C-k C-f* | Command: =kmacro-set-format=                                |
+|               | Specify the format for inserting the keyboard macro counter |
+|---------------+-------------------------------------------------------------|
+
+Valid format specifications:
+
+| Specification | Description                                                                            |
+|---------------+----------------------------------------------------------------------------------------|
+| =%o=          | Replace the specification with the base-eight representation of an integer.            |
+|---------------+----------------------------------------------------------------------------------------|
+| =%d=          | Replace the specification with the base-ten representation of an integer.              |
+|---------------+----------------------------------------------------------------------------------------|
+| =%x=          | Replace the specification with the base-sixteen representation of an integer.          |
+| =%X=          | ‘%x’ uses lower case and ‘%X’ uses upper case.                                         |
+|---------------+----------------------------------------------------------------------------------------|
+| =%c=          | Replace the specification with the character which is the value given.                 |
+|---------------+----------------------------------------------------------------------------------------|
+| =%e=          | Replace the specification with the exponential notation for a floating point number.   |
+|---------------+----------------------------------------------------------------------------------------|
+| =%f=          | Replace the specification with the decimal-point notation for a floating point number. |
+|---------------+----------------------------------------------------------------------------------------|
+| =%g=          | Replace the specification with notation for a floating point number, using either      |
+|               | exponential notation or decimal-point notation, whichever is shorter.                  |
+|---------------+----------------------------------------------------------------------------------------|
+| =%%=          | Replace the specification with a single ‘%’. This format specification is unusual in   |
+|               | in that it does not use a value. For example, (format "%% %d" 30) returns "% 30".      |
+|---------------+----------------------------------------------------------------------------------------|
+
+*_Exercise_*:
+
+*** Macros with Variations
+:PROPERTIES:
+:ID:       29ef199d-1fc8-49e5-aee8-a8b2e7c69b6c
+:END:
+Macro is excellent for repetitive editing tasks. However, sometimes
+you have a repetitive task that can make use of macro, but not always
+repetitive: a part of the task varies every time you repeat it. For
+example, you have a text template, with some blank fields for fitting
+in appropriate information. Keyboard macro supports this use case.
+
+When in the process of defining a keyboard macro, *C-x q* marks the
+current point in the process, and when the keyboard macro is executed
+and reaches this point, it will ask to confirm:
+
+| Response | Action                                                        |
+|----------+---------------------------------------------------------------|
+| *Y*      | Finish this iteration normally and continue with the next.    |
+|----------+---------------------------------------------------------------|
+| *N*:     | Skip the rest of this iteration, and start the next.          |
+|----------+---------------------------------------------------------------|
+| *RET*    | Stop the macro entirely right now.                            |
+|----------+---------------------------------------------------------------|
+| *C-l*    | Redisplay the screen, then ask again.                         |
+|----------+---------------------------------------------------------------|
+| *C-r*    | Start editing at point. *C-M-c* to go back to macro execution |
+|----------+---------------------------------------------------------------|
+
+*_Exercise_*:
+
+*** Naming and Saving Macro
+:PROPERTIES:
+:ID:       66464d52-c522-4598-a6ab-7992c5a0a4e7
+:END:
+
+| Key         | Binding                                                         |
+|-------------+-----------------------------------------------------------------|
+| *C-x C-k n* | Command: =kmacro-name-last-macr=                                |
+|             | Give a command name (for the duration of the Emacs session)     |
+|             | to themost recently defined keyboard macro.                     |
+|-------------+-----------------------------------------------------------------|
+| *C-x C-k b* | Command: =kmacro-bind-to-key=                                   |
+|             | Bind the most recently defined keyboard macro to a key sequence |
+|             | (for the duration of the session)                               |
+|-------------+-----------------------------------------------------------------|
+
+When macro has a name, it becomes a command and you can find it in
+*M-x* and can be saved with =M-x insert-kbd-macro=. After executing
+the command, you are prompted for a macro name (you can use *TAB* to 
+complete the name); select a macro and the Lisp code of the chosen
+macro is inserted into the current buffer, then save the buffer. You
+should have a dedicated file for your own keyboard macros. You can
+reload this file for later Emacs session with the command
+=load-file=.
+
+You can also bind a macro to any key sequence. However, to avoid
+clashing with existing key bindings, you should use the prefix *C-x
+C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
+*C-x C-k 2*...
+
+*_Exercise_*:
+
+- Record some keyboard macros.
+- Give the macros names with *C-x C-k n*.
+- Bind the macros to *C-x C-k 1*, *C-x C-k 2*... with *C-x C-k b*.
+- Create the file =~/.emacs.d/init.el=. If you do not have the
+  directory and the file, create it with =find-file=.
+- Create the file =~/.emacs.d/macros= with =find-file=. You should be
+  inside the buffer of this file after creating it.
+- Save the macros with =M-x insert-kbd-macro=.
+- To save you trouble of reloading the macro file manually, put this
+  Emacs Lisp code inside =~/.emacs.d/init.el=:
+
+  #+begin_src emacs-lisp
+    (load-file "~/.emacs.d/macros")
+  #+end_src
+
+  The above code essentially loads a file at a path. Only files that
+  are Emacs Lisp source code are valid.
+
+- Now, every time Emacs starts, it will automatically load the
+  =macros= file. By default, Emacs loads any Emacs Lisp code at
+  =~/.emacs.d/init.el= when it starts. Since you put the above code in
+  =init.el=, your =macros= file is also loaded.
+
+*** Edit Keyboard Macro
+:PROPERTIES:
+:ID:       e757ddcb-6453-4dad-b6a7-ce66ea6b4ffb
+:END:
+
+| Key                    | Binding                                           |
+|------------------------+---------------------------------------------------|
+| *C-x C-k C-e*          | Command: =kmacro-edit-macro=                      |
+|                        | Edit the last defined keyboard macro              |
+|------------------------+---------------------------------------------------|
+| *C-x C-k e name <RET>* | Command: =edit-kbd-macro=                         |
+|                        | Edit a previously defined keyboard macro name     |
+|------------------------+---------------------------------------------------|
+| *C-x C-k l*            | Command: =kmacro-edit-lossage=                    |
+|                        | Treat the last 300 keystrokes as a keyboard macro |
+|------------------------+---------------------------------------------------|
+
+*_Exericse_*:
+
+*** Interactive Keyboard Macro Editing:
+:PROPERTIES:
+:ID:       03e7f694-5647-452b-8fc7-8f88180b29ab
+:END:
+
 
 ** Version Control
 :PROPERTIES:
@@ -2311,7 +2542,7 @@ Ctrl+C=.
 :ID:       c22e3814-8f4c-48e0-b0d7-6beac6a2260e
 :END:
 
-You have learnt quite a bit about Emacs. Now, you can immediately use
+You have learned quite a bit about Emacs. Now, you can immediately use
 Emacs to do practical thing like jumping around a big source tree like
 Linux kernel.  However, this is just a demo. You can do much more if
 you learn Emacs properly.
@@ -2668,8 +2899,7 @@ start with Emacs.
 
 [[http://cs.mcgill.ca/~vfoley1/posts/2014-06-10-why-emacs.html][Why I use Emacs]] by Vincent Foley-Bourgon.
 
-[[http://gnuvince.wordpress.com/2012/02/19/why-i-still-use-emacs/][Why I Still Use Emacs]] by Vincent Foley (not sure both are the same
-guy).
+[[http://gnuvince.wordpress.com/2012/02/19/why-i-still-use-emacs/][Why I Still Use Emacs]], also by Vincent Foley-Bourgon.
 
 [[http://emacs.sexy/][Emacs is sexy]].
 
