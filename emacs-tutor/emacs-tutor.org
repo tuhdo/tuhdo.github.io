@@ -1425,7 +1425,50 @@ before it is executed. With two *C-u* prefixes, directly edit and run
 =grep-find-command= (this is a variable), which is the underlying
 command used for executing =rgrep=.
 
-...[screenshot]...
+[[file:static/grep.gif][file:static/grep.gif]]
+
+When you get a list of results displayed in a buffer named =*grep*=,
+you can click on the results or use *M-g p* and *M-g n* to back and
+forth between grep results, even if point is not active in =*grep*=
+buffer.
+
+The following key bindings are available:
+
+| Key     | Description                                                           |
+|---------+-----------------------------------------------------------------------|
+| *TAB*   | Go to next match, but *do not* display matched buffer                 |
+|---------+-----------------------------------------------------------------------|
+| *S-TAB* | Go to previous match, but *do not* display matched buffer             |
+|---------+-----------------------------------------------------------------------|
+| *{*     | Go to previous file, *do not* display matched buffer                  |
+|---------+-----------------------------------------------------------------------|
+| *}*     | Go to next file, *do not* display matched buffer                      |
+|---------+-----------------------------------------------------------------------|
+| *C-o*   | Display matched location, but *do not* switch point to matched buffer |
+|---------+-----------------------------------------------------------------------|
+| *n*     | Display next matched buffer, but *do not* switch point                |
+|---------+-----------------------------------------------------------------------|
+| *p*     | Display previous matched buffer, but *do not* switch point            |
+|---------+-----------------------------------------------------------------------|
+| *M-g n* | Display next matched buffer, switch point to matched position         |
+|---------+-----------------------------------------------------------------------|
+| *M-g p* | Display previous matched buffer, switch point to matched position     |
+|---------+-----------------------------------------------------------------------|
+| *RET*   | Display matched location, switch point to matched bufer               |
+|---------+-----------------------------------------------------------------------|
+| *SPC*   | Scroll down, equivalent to *C-v*                                      |
+|---------+-----------------------------------------------------------------------|
+| *S-SPC* | Scroll up, equivalent to *M-v*                                        |
+|---------+-----------------------------------------------------------------------|
+| *g*     | Refresh the =*grep*= buffer with previously executed command          |
+|---------+-----------------------------------------------------------------------|
+| *q*     | Quit =*grep*= buffer                                                  |
+|---------+-----------------------------------------------------------------------|
+
+To get the list of key bindings, in =*grep*= buffer, type =?= or =h=
+or *C-h m*. Such a big list of key bindings, but worry not. These key
+bindings are quite common in other Emacs utilities. You can reuse many
+of these key bindings.
 
 ** Modeline
 :PROPERTIES:
@@ -2063,7 +2106,7 @@ bindings, *C-x r C-h* to get the list of key bindings.
 :ID:       840ff6ae-1f2b-4796-9f7f-7cd5db33d879
 :END:
 One of the best use of register. It simply saves your current window
-configuration and restores the layout later. 
+configuration and restores the layout later.
 
 For example, you are viewing four source code buffers, but want to
 open two Dired buffers side by side to for managing files, so you
@@ -2078,7 +2121,7 @@ remember exactly which buffers you were working with.
 To free you from this burden, register is the answer. You can save a
 window configuration having four windows displaying four buffers, and
 another one having two Dired buffers for your project. You can switch
-between them easier. 
+between them easier.
 
 | Key           | Binding                                                                      |
 |---------------+------------------------------------------------------------------------------|
@@ -2099,7 +2142,7 @@ _Demo_: In this demo, I saved two windows configurations in two
 registers *a* and *b*, using *C-x r w*. Register *a* stores the Dired
 buffer that contains two project directories. Then, I open two files
 in the two directories, create another smaller window and open another
-file. Then, suddenly I want to go back to my project roots. It's then 
+file. Then, suddenly I want to go back to my project roots. It's then
 when I execute *C-x r j*, get a prompt, enter *a* and Emacs switches
 back the Dired buffer. Then, I switch back to the files I was editing
 with *C-x r j*, get a prompt, enter *b*.
@@ -2108,18 +2151,27 @@ The demo starts when you see at the bottom a prompt with "Eval: START".
 
 [[file:static/register-windows.gif][file:static/register-windows.gif]]
 
+*_Exercise_*:
+
+- Save a few window configurations into registers. I suggest that each
+  window configuration should represent a workspace of a project. But
+  it could be anything you like, up to your imagination.
+
+- Go back and forth between window configurations by jumping into
+  appropriate registers.
+
 *** Save text
 :PROPERTIES:
 :ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
 :END:
-You can also save a region in registers. 
+You can also save a region in registers.
 
 | Key           | Binding                         |
 |---------------+---------------------------------|
-| =C-x r s Reg= | *Command*: =copy-to-register=   |
+| =C-x r s REG= | *Command*: =copy-to-register=   |
 |               | Copy region into register *REG* |
 |---------------+---------------------------------|
-| =C-x r Reg=   | *Command*: =insert-register=    |
+| =C-x r REG=   | *Command*: =insert-register=    |
 |               | Insert text from register *REG* |
 |---------------+---------------------------------|
 | =C-x r j REG= | *Command*: =jump-to-register=   |
@@ -2132,10 +2184,10 @@ You can also save a region in registers.
 You may wonder, what's the point of storing text into register? Haven't
 you got a kill ring? Here are the reasons:
 
-- As you already know, insert past contents from the kill ring makes
+- As you already know, inserting past contents from the kill ring makes
   the chosen content the head entry. This is inconvenient, and this is
   when registers are handy for storing many pieces of text without
-  affect the kill ring. For example, you read a manual (man page or
+  affecting the kill ring. For example, you read a manual (man page or
   info page), and you want to remember many keywords and paste it
   somewhere later. Registers can help you with this use case.
 
@@ -2143,7 +2195,7 @@ you got a kill ring? Here are the reasons:
   you can save a for loop template into register *f*, if template into
   register *i*, function definition into register *F*... This is
   really handy when you are learning a new language and keep
-  forgetting syntax all the time. 
+  forgetting syntax all the time.
 
   For example, this C++11 code snippet would be hard to remember if
   you are new:
@@ -2158,6 +2210,79 @@ you got a kill ring? Here are the reasons:
   until I remember it. Much faster than go back to previous source
   location to look up again, and would be time consuming if your
   source code is large.
+
+*_Exercise_*:
+
+- Copy a few text snippets into registers.
+- Re-insert it in a buffer.
+- Jump to the location of the text in registers.
+
+*** Save rectangles
+:PROPERTIES:
+:ID:       a9136910-960b-4561-8155-1ccc8fb0bb29
+:END:
+
+| Key           | Binding                                     |
+|---------------+---------------------------------------------|
+| *C-x r r REG* | Command: =copy-rectangle-to-register=       |
+|               | Copy the region-rectangle into register REG |
+|               | With *C-u* prefix, delete it as well        |
+|---------------+---------------------------------------------|
+
+Insert the rectangle in register /REG/ by *C-x r i REG*.
+
+*_Exercise_*:
+
+- Save a few rectangles in registers a few times to get used to it.
+- Insert the rectangles in the registers into some buffer.
+
+*** Save position
+:PROPERTIES:
+:ID:       fb7c23dd-b7fe-4764-94eb-c15e70505970
+:END:
+
+| Key               | Binding                                                              |
+|-------------------+----------------------------------------------------------------------|
+| *C-x r <SPC> REG* | Command: =point-to-register=                                         |
+|                   | Record the position of point and the current buffer in register REG  |
+|-------------------+----------------------------------------------------------------------|
+| *C-x r j REG*     | Command: =jump-to-register=                                          |
+|                   | Jump to the position and buffer saved in register REG. If the buffer |
+|                   | is killed, revisit the file and open the buffer, then jump.          |
+|-------------------+----------------------------------------------------------------------|
+
+Saving positions are useful when it is used with Macro, which is
+discussed later.
+
+*_Exercise_*:
+
+- Save a few buffer positions into registers.
+- Jump to the positions in registers.
+
+*** Save numbers
+:PROPERTIES:
+:ID:       050dfff1-d8b1-4de0-b1c2-8aa6fcff79ee
+:END:
+
+| Key                      | Binding                                   |
+|--------------------------+-------------------------------------------|
+| *C-u number C-x r n REG* | Command: =number-to-register=             |
+|                          | Store /number/ into register /REG/        |
+|--------------------------+-------------------------------------------|
+| *C-u number C-x r + REG* | Command: =increment-register=             |
+|                          | If /REG/ contains a number, increment the |
+|                          | /number/ in that register by number.      |
+|--------------------------+-------------------------------------------|
+
+You can insert the number from a register /REG/ with *C-x r i
+REG*. These numbers are handy when using with =Keyboard Macro=.
+
+*_Exericse_*:
+
+- Save a few numbers into registers.
+- Add a number of your choice into numbers saved in the registers.
+- Insert back the number in registers into a buffer, and see the
+  result.
 
 ** Macro
 :PROPERTIES:
@@ -2230,6 +2355,35 @@ only one keyboard macro ring, shared by all buffers. All commands
 which operate on the keyboard macro ring use the same *C-x C-k*
 prefix. Just remember the prefix *C-x C-k* = macro commands, and you
 won't find macro key bindings difficult to remember.
+
+*_Exercise 2_*:
+
+Suppose that you practice Agile and have to write user stories with a
+template like this:
+
+#+BEGIN_QUOTE
+*As a* <type of user>, *I want* <some goal> *so that* <some reason>.
+#+END_QUOTE
+
+For example:
+
+#+BEGIN_QUOTE
+As a *user*, I want *to search for my customers by their first and
+last names*, so that *I can find the customers I'm needing*.
+#+END_QUOTE
+
+It would be tiresome to type the template texts, such as =As a=, =*
+want= or =so that=. We should automate the inserting those texts
+because it is repetitive. This can be done by just manually typing in
+relevant information in a table format:
+
+- Row contains an instance of the text template.
+- Column separates types of data.
+
+For example, I have this table with some user stories:
+
+user, to search for my customers by their first and last names, I can find the customers I'm needing
+admin, 
 
 *** Keyboard macro ring
 :PROPERTIES:
@@ -2336,6 +2490,12 @@ and reaches this point, it will ask to confirm:
 
 *_Exercise_*:
 
+#+BEGIN_QUOTE
+*As a* <type of user>, *I want* <some goal> *so that* <some reason>.
+#+END_QUOTE
+
+Obviously, you do not want to 
+
 *** Naming and Saving Macro
 :PROPERTIES:
 :ID:       66464d52-c522-4598-a6ab-7992c5a0a4e7
@@ -2354,7 +2514,7 @@ and reaches this point, it will ask to confirm:
 
 When macro has a name, it becomes a command and you can find it in
 *M-x* and can be saved with =M-x insert-kbd-macro=. After executing
-the command, you are prompted for a macro name (you can use *TAB* to 
+the command, you are prompted for a macro name (you can use *TAB* to
 complete the name); select a macro and the Lisp code of the chosen
 macro is inserted into the current buffer, then save the buffer. You
 should have a dedicated file for your own keyboard macros. You can
@@ -2410,12 +2570,22 @@ C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
 
 *_Exericse_*:
 
+
+
 *** Interactive Keyboard Macro Editing:
 :PROPERTIES:
 :ID:       03e7f694-5647-452b-8fc7-8f88180b29ab
 :END:
+*C-x C-k SPC* runs =kmacro-step-edit-macro= that allows you to view
+commands of the last keyboard macro, one by one at a time, like a
+debugger. When you enter this mode, you have a set of predefined
+commands to apply on each command. Press *?* for a list of available
+interactive commands and play with it.
 
-
+** Registers and Macros
+:PROPERTIES:
+:ID:       9ecc6b05-284e-48a3-b780-2b918ab63ee0
+:END:
 ** Version Control
 :PROPERTIES:
 :ID:       112710a7-779a-434c-ad23-e6a9a27aae82
