@@ -2160,6 +2160,32 @@ The demo starts when you see at the bottom a prompt with "Eval: START".
 - Go back and forth between window configurations by jumping into
   appropriate registers.
 
+*** Save frame configuration
+:PROPERTIES:
+:ID:       7ecf0eed-367e-4e8c-8230-aee169a225c3
+:END:
+
+| Key           | Binding                                              |
+|---------------+------------------------------------------------------|
+| *C-x r f REG* | Save current frame configuration into register /REG/ |
+|---------------+------------------------------------------------------|
+
+If you create multiple frames with frame commands (prefix *C-x 5*),
+then you may want to save your frames with different window
+configurations in it, for later use. For example, I can have a frame
+for reading documents and my main frame for writing and browsing
+code. When I finish working, I close the extra frame, leaving my main
+frame active. But later, when I need to have that exact frame setup, I
+can always restore with saved frameset in a register.
+
+*_Exercise_*:
+
+- Create a few frames with *C-x 5 2*, *C-x 5 d*, *C-x 5 f*...
+- Save the frameset into a register.
+- Close all the frames except the main one.
+- Restore the frames by jumping to the register that stores the
+  frameset.
+
 *** Save text
 :PROPERTIES:
 :ID:       cf4d74d8-e13e-4238-a5ff-9de0f006b6c5
@@ -2358,37 +2384,86 @@ won't find macro key bindings difficult to remember.
 
 *_Exercise 2_*:
 
-Suppose that you practice Agile and have to write user stories with a
-template like this:
+For example, I have this table with some data:
 
-#+BEGIN_QUOTE
-*As a* <type of user>, *I want* <some goal> *so that* <some reason>.
-#+END_QUOTE
+#+begin_src fundamental
+  machine1=(aa:bb:cc:dd:ee:a1 aa:bb:cc:dd:ee:a2 aa:bb:cc:dd:ee:a3)
+  machine3=(aa:bb:cc:dd:ee:b1 aa:bb:cc:dd:ee:b2 aa:bb:cc:dd:ee:b3)
+  machine4=(aa:bb:cc:dd:ee:c1 aa:bb:cc:dd:ee:c2 aa:bb:cc:dd:ee:c3)
+  machine5=(aa:bb:cc:dd:ee:d1 aa:bb:cc:dd:ee:d2 aa:bb:cc:dd:ee:d3)
+  machine6=(aa:bb:cc:dd:ee:e1 aa:bb:cc:dd:ee:e2 aa:bb:cc:dd:ee:e3)
+  machine7=(aa:bb:cc:dd:ee:f1 aa:bb:cc:dd:ee:f2 aa:bb:cc:dd:ee:f3)
+#+end_src
 
-For example:
+Basically, each row contains the MAC addresses of Ethernet interfaces
+of a machine in the server cluster at my workplace. The data are
+stored in a plain text file. But then, we want to integrate these data
+inside our YAML file to do other thing. Basically, from the above
+format, I have to transform into this format:
 
-#+BEGIN_QUOTE
-As a *user*, I want *to search for my customers by their first and
-last names*, so that *I can find the customers I'm needing*.
-#+END_QUOTE
+#+begin_src yaml
+  machine 1:
+      mac1: aa:bb:cc:dd:ee:a1
+      mac2: aa:bb:cc:dd:ee:a2
+      mac3: aa:bb:cc:dd:ee:a3
+#+end_src
 
-It would be tiresome to type the template texts, such as =As a=, =*
-want= or =so that=. We should automate the inserting those texts
-because it is repetitive. This can be done by just manually typing in
-relevant information in a table format:
+In the real data file, it contains around 50 entries. Manually
+transform text would be tiresome. Thanks to Emacs, I solved this
+problem with keyboard macro.
 
-- Row contains an instance of the text template.
-- Column separates types of data.
+- _Pre-recording setup_:
+  Before recording macro to automate this transformation, we need to
+  proper set things up:
 
-For example, I have this table with some user stories:
+  - Create two buffers side by side with *C-x b*. Name the left buffer
+    =buf1= and right buffer =buf2=.
+  - Yank the original data into =buf1=. Move point back to
+    beginning of buffer.
 
-user, to search for my customers by their first and last names, I can find the customers I'm needing
-admin, 
+    That's set and done. Numbered registers are used for storing
+    buffer positions and uppercase-character register =A= is used for
+    storing text template. This convention helps us to remember which
+    register to save content into.
+
+- _Record_:
+
+   Point should be at =buf1=, at the first line of the data.
+
+  - Press *<f3>* to start.
+  - *C-SPC* then *M-f*. This mark the word =machine1=. Store this word
+    into register =a= with *C-x r s a*.
+  - Move point to the beginning of the first MAC address. *C-SPC* then
+    *C-s* and search to the first delimiter, which is an empty space "
+    " in this case. *C-b* to move back to the end of the first MAC
+    address. Store this region into register *b* with *C-x r s b*.
+  - After that, move point to the beginning of the 2nd MAC address,
+    *C-s* to space and *C-b* to go back one character. Save the region
+    into register *c* with *C-x r s c*.
+  - Repeat for the last MAC address and save it in register *d*.
+  - Switch to the second buffer with *C-x o*
+  - Insert the register from =a= to =d= according to the template:
+
+    ...screenshot...
+
+  - After inserting, move point to the next empty line.
+
+  - Switch back to =buf1= with *C-x o*.
+
+  - Move to the beginning of next line.
+
+  - Press *<f4>* to stop.
+
+- _Play_:
+
+  Now you can play back your new keyboard macro to transform the
+  remaining entries.
 
 *** Keyboard macro ring
 :PROPERTIES:
 :ID:       9cce9728-7c2e-4c6b-86f3-20217c9d490d
 :END:
+
 | Key           | Binding                                              |
 |---------------+------------------------------------------------------|
 | *C-x C-k C-k* | Command: =kmacro-end-or-call-macro-repeat=           |
