@@ -157,10 +157,11 @@ Well, that's your choice. But I suggest that writing code without any
 support is harmful.
 
 If you are a programmer, you should automate things as much as
-possible. One way to do this is using a good editor that automates
-many menial and tedious tasks. For example, one of the thing that
-annoys me is using the command *cd* to change into a deep directory 
-path like this:
+possible, when the automation cost does not outweigh the cost of
+doing manually. One /really easy/ way to do this is using a good
+editor that automates many menial and tedious tasks. For example, one
+of the thing that annoys me is using the command *cd* to change into a
+deep directory path like this:
 
 =/path/to/a/very/long/long/long/long/long/long/..../directory/=
 
@@ -2152,13 +2153,13 @@ between them easier.
 
 | Key           | Binding                                                                      |
 |---------------+------------------------------------------------------------------------------|
-| =C-x r w REG= | *Command*: =window-configuration-to-register=                                |
+| *C-x r w REG* | *Command*: =window-configuration-to-register=                                |
 |               | Save the window configuration of current frame into register *REG*           |
 |---------------+------------------------------------------------------------------------------|
-| =C-x r f REG= | *Command*: =frame-configuration-to-register=                                 |
+| *C-x r f REG* | *Command*: =frame-configuration-to-register=                                 |
 |               | Save the state of all frames, including all their windows, in register *REG* |
 |---------------+------------------------------------------------------------------------------|
-| =C-x r j REG= | *Command*: =jump-to-register=                                                |
+| *C-x r j REG* | *Command*: =jump-to-register=                                                |
 |               | Jump to a register *REG*.                                                    |
 |---------------+------------------------------------------------------------------------------|
 
@@ -2221,13 +2222,13 @@ You can also save a region in registers.
 
 | Key           | Binding                         |
 |---------------+---------------------------------|
-| =C-x r s REG= | *Command*: =copy-to-register=   |
+| *C-x r s REG* | *Command*: =copy-to-register=   |
 |               | Copy region into register *REG* |
 |---------------+---------------------------------|
-| =C-x r REG=   | *Command*: =insert-register=    |
+| *C-x r i REG* | *Command*: =insert-register=    |
 |               | Insert text from register *REG* |
 |---------------+---------------------------------|
-| =C-x r j REG= | *Command*: =jump-to-register=   |
+| *C-x r j REG* | *Command*: =jump-to-register=   |
 |               | Jump to a register *REG*.       |
 |---------------+---------------------------------|
 
