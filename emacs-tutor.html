@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-08-07 Thu 18:45 -->
+<!-- 2014-08-07 T5 19:53 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -297,6 +297,7 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-7-30-4">Naming and Saving Macro</a></li>
 <li><a href="#sec-7-30-5">Edit Keyboard Macro</a></li>
 <li><a href="#sec-7-30-6">Interactive Keyboard Macro Editing:</a></li>
+<li><a href="#sec-7-30-7">Tips for using macro effectively</a></li>
 </ul>
 </li>
 <li><a href="#sec-7-31">Version Control</a></li>
@@ -5866,7 +5867,7 @@ are Emacs Lisp source code are valid.
 </ul>
 
 <p>
-<b><span class="underline">Exercise 2</span></b>: Composable macros
+<b><span class="underline">Exercise 2</span></b>: Composite macros
 </p>
 
 <p>
@@ -6117,6 +6118,39 @@ debugger. When you enter this mode, you have a set of predefined
 commands to apply on each command. Press <b>?</b> for a list of available
 interactive commands and play with it.
 </p>
+</div>
+</div>
+
+<div id="outline-container-sec-7-30-7" class="outline-4">
+<h4 id="sec-7-30-7"><a id="ID-47512938-6e58-4350-829e-e9c5f137195d" name="ID-47512938-6e58-4350-829e-e9c5f137195d"></a>Tips for using macro effectively</h4>
+<div class="outline-text-4" id="text-7-30-7">
+
+<ul class="org-ul">
+<li>Find a pattern: after going through all the exercises, you can see
+that a successful macro is a macro that is repeatable, when a
+certain condition is met. Basically, for text transformation, you
+need to create a loop, with proper initialization and end
+condition. If you data does not have a pattern, try to organize it
+in a repeatable way. As you can see in the exercises, data are laid
+out in a way that macro can be repeatable naturally: each line is an
+iteration.
+</li>
+<li>You can also use macro for almost other things not text in
+Emacs. For example, you can create a macro than run <code>find-file</code> and
+go to <code>~/Downloads</code>.
+</li>
+<li>Use registers: As you see in the exercises, macro is a fine way to
+store information. You can use registers as a temporary information
+holder and organize those information into an arbitrary structure
+later.
+</li>
+<li>Do it slowly and think before you do: Don't rush yourself. Do it
+slow enough that you are sure when you press some keys and execute
+some commands, it is correct.
+</li>
+<li>Break large macro into smaller macros.
+</li>
+</ul>
 </div>
 </div>
 </div>

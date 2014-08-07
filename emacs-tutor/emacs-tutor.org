@@ -2766,7 +2766,7 @@ C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
   =~/.emacs.d/init.el= when it starts. Since you put the above code in
   =init.el=, your =macros= file is also loaded.
 
-*_Exercise 2_*: Composable macros
+*_Exercise 2_*: Composite macros
 
 Back to exercise 2 at the beginning of Macro section, do you remember
 you have to create a big macro to convert text structures? Certainly
@@ -2897,6 +2897,31 @@ commands of the last keyboard macro, one by one at a time, like a
 debugger. When you enter this mode, you have a set of predefined
 commands to apply on each command. Press *?* for a list of available
 interactive commands and play with it.
+
+*** Tips for using macro effectively
+:PROPERTIES:
+:ID:       47512938-6e58-4350-829e-e9c5f137195d
+:END:
+
+- Find a pattern: after going through all the exercises, you can see
+  that a successful macro is a macro that is repeatable, when a
+  certain condition is met. Basically, for text transformation, you
+  need to create a loop, with proper initialization and end
+  condition. If you data does not have a pattern, try to organize it
+  in a repeatable way. As you can see in the exercises, data are laid
+  out in a way that macro can be repeatable naturally: each line is an
+  iteration.
+- You can also use macro for almost other things not text in
+  Emacs. For example, you can create a macro than run =find-file= and
+  go to =~/Downloads=.
+- Use registers: As you see in the exercises, macro is a fine way to
+  store information. You can use registers as a temporary information
+  holder and organize those information into an arbitrary structure
+  later.
+- Do it slowly and think before you do: Don't rush yourself. Do it
+  slow enough that you are sure when you press some keys and execute
+  some commands, it is correct.
+- Break large macro into smaller macros.
 
 ** Version Control
 :PROPERTIES:
