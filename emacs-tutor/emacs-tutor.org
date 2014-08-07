@@ -2194,7 +2194,7 @@ The demo starts when you see at the bottom a prompt with "Eval: START".
 
 | Key           | Binding                                              |
 |---------------+------------------------------------------------------|
-| *C-x r f REG* | Save current frame configuration into register /REG/ |
+| *C-x r f REG* | Save current frame configuration into register *REG* |
 |---------------+------------------------------------------------------|
 
 If you create multiple frames with frame commands (prefix *C-x 5*),
@@ -2275,14 +2275,14 @@ you got a kill ring? Here are the reasons:
 :ID:       a9136910-960b-4561-8155-1ccc8fb0bb29
 :END:
 
-| Key           | Binding                                     |
-|---------------+---------------------------------------------|
-| *C-x r r REG* | Command: =copy-rectangle-to-register=       |
-|               | Copy the region-rectangle into register REG |
-|               | With *C-u* prefix, delete it as well        |
-|---------------+---------------------------------------------|
+| Key           | Binding                                       |
+|---------------+-----------------------------------------------|
+| *C-x r r REG* | Command: =copy-rectangle-to-register=         |
+|               | Copy the region-rectangle into register *REG* |
+|               | With *C-u* prefix, delete it as well          |
+|---------------+-----------------------------------------------|
 
-Insert the rectangle in register /REG/ by *C-x r i REG*.
+Insert the rectangle in register *REG* by *C-x r i REG*.
 
 *_Exercise_*:
 
@@ -2310,9 +2310,9 @@ discussed later.
 *_Important Note_*:
 
 When you jump to a position into a register, Emacs *always* jumps to
-that position, even if the content of the buffer is *changed. That is,
+that position, even if the content of the buffer is changed. That is,
 if you already saved a position into a register and when the buffer
-that holds the position changes, the recorded position changes as
+that holds that position changes, the saved position changes as
 well. For example, you save position 100 (it means the position of
 100th character) and you add or remove a number of characters before
 the 100th character, then the position in the saving register also add
@@ -2324,7 +2324,7 @@ or subtract according to that number.
 - Move point else where.
 - Jump back to previous position with *C-x r j a*.
 - Move point backward a few characters.
-- Add some charactrs.
+- Add some characters.
 - Jump back to position in register *a* with *C-x r j a*.
 - You see that point does not jump to original position, but away from
   the original position a number of characters that is equal to the
@@ -2342,17 +2342,17 @@ or subtract according to that number.
 | Key                      | Binding                                   |
 |--------------------------+-------------------------------------------|
 | *C-u number C-x r n REG* | Command: =number-to-register=             |
-|                          | Store /number/ into register /REG/        |
+|                          | Store /number/ into register *REG*        |
 |--------------------------+-------------------------------------------|
 | *C-u number C-x r + REG* | Command: =increment-register=             |
-|                          | If /REG/ contains a number, increment the |
-|                          | /number/ in that register by number.      |
+|                          | If *REG* contains a number, increment the |
+|                          | *number* in that register by number.      |
 |--------------------------+-------------------------------------------|
 
-You can insert the number from a register /REG/ with *C-x r i
+You can insert the number from a register *REG* with *C-x r i
 REG*. These numbers are handy when using with =Keyboard Macro=.
 
-*_Exericse_*:
+*_Exercise_*:
 
 - Save a few numbers into registers.
 - Add a number of your choice into numbers saved in the registers.
@@ -2876,7 +2876,17 @@ these macros into Emacs commands and put in all together in a macro.
 |                        | Treat the last 300 keystrokes as a keyboard macro |
 |------------------------+---------------------------------------------------|
 
-*_Exericse_*:
+It is useful to edit a keyboard macro when you run incorrect
+command. Instead of doing the whole thing again, you can edit the
+incorrect part. Note that, do not press *C-g* or you will kill your
+current recording macro; press *<f4>* instead to complete the macro,
+and edit it. After done editing, continue from the previous point
+where you left off with:
+
+- *C-u <f3>*: Re-execute last keyboard macro, then append keys to its
+  definition.
+- *C-u C-u <f3>*: Append keys to the last keyboard macro without
+  re-executing it.
 
 *** Interactive Keyboard Macro Editing:
 :PROPERTIES:
