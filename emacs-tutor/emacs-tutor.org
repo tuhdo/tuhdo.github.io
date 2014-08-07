@@ -156,7 +156,7 @@ drawn) the Self-Documenting Extensible Editor.
 Well, that's your choice. But I suggest that writing code without any
 support is harmful.
 
-If you are a programmer, you should automate thing as much as
+If you are a programmer, you should automate things as much as
 possible. One way to do this is using a good editor that automates
 many menial and tedious tasks. For example, one of the thing that
 annoys me is using the command *cd* to change into a deep directory 
