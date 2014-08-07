@@ -1669,7 +1669,7 @@ These are the key bindings for manipulating frames:
 Unlike other editors, Emacs can split your frame area into multiple smaller
 areas. Each such area is called a =window=. You can divide a frame
 into as many windows as you want and each window can have anything in
-it, i.e. your current editting buffer, file management buffer, help
+it, i.e. your current editing buffer, file management buffer, help
 buffer, a shell... Basically anything that Emacs can display. Let's try them out:
 
 *_Exercise_*:
@@ -1883,7 +1883,7 @@ C-f* variant.
 |-----------+----------------------------------------------------------|
 | =+=       | Prompts for a directory name and create one after *RET*. |
 |-----------+----------------------------------------------------------|
-| =C-x C-f= | Creat a new find. This is your regular =find-file=.      |
+| =C-x C-f= | Create a new file. This is your regular =find-file=.     |
 |-----------+----------------------------------------------------------|
 
 *_Exercise_*:
@@ -1926,7 +1926,7 @@ C-f* variant.
 
 - =M-x ibuffer= or =C-x C-b= if you already replace =list-buffers=.
 - =/ m= and select =dired-mode=. =/ g= and name the group =Dired= and
-  you have a separate grouop for managing directories. No more
+  you have a separate group for managing directories. No more
   cluttered view with other buffers. You can stop worrying now.
 
   [[file:static/ibuffer-dired-group.gif][file:static/ibuffer-dired-group.gif]]
@@ -3373,9 +3373,9 @@ different editor when you learn a random language.
 :ID:       2da15989-7cfe-414e-ad39-3c09098bf045
 :END:
 [[http://semantic.supelec.fr/popineau/programming-emacs.html#sec-1]["Why Emacs?"]] by Fabrice Popinea. He is the maintainer of Emacs 64
-bit on WIndows.
+bit on Windows.
 
-[[http://batsov.com/articles/2011/11/19/why-emacs/]["WHy Emacs?"]] by Bozhidar Batsov. He is the author of [[https://github.com/bbatsov/prelude][Emacs Prelude]],
+[[http://batsov.com/articles/2011/11/19/why-emacs/]["Why Emacs?"]] by Bozhidar Batsov. He is the author of [[https://github.com/bbatsov/prelude][Emacs Prelude]],
 an Emacs distribution with convenient packages for new people to get
 start with Emacs.
 
