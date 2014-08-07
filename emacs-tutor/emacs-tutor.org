@@ -1,4 +1,3 @@
-#+INFOJS_OPT: view:folding
 #+TITLE: Emacs Mini Manual (PART 1) - THE BASICS
 * Why Emacs?
 :PROPERTIES:
@@ -971,6 +970,34 @@ your screen.
 *_Exercise_*: execute the above commands using the key bindings at
 least 10 times or until you remember. You can perform these motion
 commands on any buffer.
+** Useful built-in key bindings for navigating pairs
+:PROPERTIES:
+:ID:       7522b365-52f4-4fa9-b316-7843b772c59a
+:END:
+
+- *C-M-f* binds to =forward-sexp=, move forward over a balanced
+  expression. Demo:
+
+  [[file:static/part3/forward-sexp.gif][file:static/part3/forward-sexp.gif]]
+
+- *C-M-b* binds to =backward-sexp=, move backward over a balanced
+  expression. Demo:
+  
+  [[file:static/part3/backward-sexp.gif][file:static/part3/backward-sexp.gif]]
+
+- *C-M-k* binds to =kill-sexp=, kill balanced expression
+  forward. Demo:
+  
+  [[file:static/part3/kill-sexp.gif][file:static/part3/kill-sexp.gif]]
+
+- *C-M-t* binds to =transpose-sexps=, transpose expressions. Demo:
+
+  [[file:static/part3/transpose-sexp.gif][file:static/part3/transpose-sexp.gif]]
+
+- *C-M-<SPC>* or *C-M-@* binds to =mark-sexp=, put mark after
+  following expression. Demo:
+
+  [[file:static/part3/mark-sexp.gif][file:static/part3/mark-sexp.gif]]
 
 ** Basic editing commands
 :PROPERTIES:
@@ -2280,10 +2307,32 @@ Insert the rectangle in register /REG/ by *C-x r i REG*.
 Saving positions are useful when it is used with Macro, which is
 discussed later.
 
+*_Important Note_*:
+
+When you jump to a position into a register, Emacs *always* jumps to
+that position, even if the content of the buffer is *changed. That is,
+if you already saved a position into a register and when the buffer
+that holds the position changes, the recorded position changes as
+well. For example, you save position 100 (it means the position of
+100th character) and you add or remove a number of characters before
+the 100th character, then the position in the saving register also add
+or subtract according to that number.
+
 *_Exercise_*:
 
-- Save a few buffer positions into registers.
-- Jump to the positions in registers.
+- Save a buffer position into register *a* with *C-x r SPC a*.
+- Move point else where.
+- Jump back to previous position with *C-x r j a*.
+- Move point backward a few characters.
+- Add some charactrs.
+- Jump back to position in register *a* with *C-x r j a*.
+- You see that point does not jump to original position, but away from
+  the original position a number of characters that is equal to the
+  number of your added characters.
+- Go to the beginning of line and *RET* to add a newline.
+- Jump back to position in register *a* with *C-x r j a*.
+- You see that point jumps to position in register *a*, but one line
+  below.
 
 *** Save numbers
 :PROPERTIES:
@@ -2330,30 +2379,30 @@ have to press many keys. To repeat a macro many times, use prefix
 argument. For example, =C-u 10 <f4>= executes a macro 10 times. If you
 want to cancel recording, *C-g*.
 
-*_Exercise_*:
+*_Exercise 1_*:
 
 Copy these lines into a buffer of your choice:
 
-#+BEGIN_HTML
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-aaaaabbbbbbbccccccdddddd <br >
-#+END_HTML
+#+begin_src fundamental
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+  aaaaabbbbbbbccccccdddddd
+#+end_src
 
 Now, you want to separate each line into different groups, each group
 contains their own character, line this:
-
+                        
 #+BEGIN_HTML
 aaaaa bbbbbbb cccccc dddddd
 #+END_HTML
@@ -2382,17 +2431,17 @@ which operate on the keyboard macro ring use the same *C-x C-k*
 prefix. Just remember the prefix *C-x C-k* = macro commands, and you
 won't find macro key bindings difficult to remember.
 
-*_Exercise 2_*:
+*_Exercise 2_*: Transform data from one format to another
 
 For example, I have this table with some data:
 
 #+begin_src fundamental
   machine1=(aa:bb:cc:dd:ee:a1 aa:bb:cc:dd:ee:a2 aa:bb:cc:dd:ee:a3)
-  machine3=(aa:bb:cc:dd:ee:b1 aa:bb:cc:dd:ee:b2 aa:bb:cc:dd:ee:b3)
-  machine4=(aa:bb:cc:dd:ee:c1 aa:bb:cc:dd:ee:c2 aa:bb:cc:dd:ee:c3)
-  machine5=(aa:bb:cc:dd:ee:d1 aa:bb:cc:dd:ee:d2 aa:bb:cc:dd:ee:d3)
-  machine6=(aa:bb:cc:dd:ee:e1 aa:bb:cc:dd:ee:e2 aa:bb:cc:dd:ee:e3)
-  machine7=(aa:bb:cc:dd:ee:f1 aa:bb:cc:dd:ee:f2 aa:bb:cc:dd:ee:f3)
+  machine2=(aa:bb:cc:dd:ee:b1 aa:bb:cc:dd:ee:b2 aa:bb:cc:dd:ee:b3)
+  machine3=(aa:bb:cc:dd:ee:c1 aa:bb:cc:dd:ee:c2 aa:bb:cc:dd:ee:c3)
+  machine4=(aa:bb:cc:dd:ee:d1 aa:bb:cc:dd:ee:d2 aa:bb:cc:dd:ee:d3)
+  machine5=(aa:bb:cc:dd:ee:e1 aa:bb:cc:dd:ee:e2 aa:bb:cc:dd:ee:e3)
+  machine6=(aa:bb:cc:dd:ee:f1 aa:bb:cc:dd:ee:f2 aa:bb:cc:dd:ee:f3)
 #+end_src
 
 Basically, each row contains the MAC addresses of Ethernet interfaces
@@ -2421,10 +2470,9 @@ problem with keyboard macro.
   - Yank the original data into =buf1=. Move point back to
     beginning of buffer.
 
-    That's set and done. Numbered registers are used for storing
-    buffer positions and uppercase-character register =A= is used for
-    storing text template. This convention helps us to remember which
-    register to save content into.
+    That's set and done. Here is how it should look like:
+
+    [[file:static/prepare_macro.gif][file:static/prepare_macro.gif]]
 
 - _Record_:
 
@@ -2433,31 +2481,44 @@ problem with keyboard macro.
   - Press *<f3>* to start.
   - *C-SPC* then *M-f*. This mark the word =machine1=. Store this word
     into register =a= with *C-x r s a*.
+
+    [[file:static/reg_a.gif][file:static/reg_a.gif]]
+
   - Move point to the beginning of the first MAC address. *C-SPC* then
     *C-s* and search to the first delimiter, which is an empty space "
     " in this case. *C-b* to move back to the end of the first MAC
     address. Store this region into register *b* with *C-x r s b*.
+
+    [[file:static/reg_b.gif][file:static/reg_b.gif]]
+
   - After that, move point to the beginning of the 2nd MAC address,
     *C-s* to space and *C-b* to go back one character. Save the region
     into register *c* with *C-x r s c*.
+
+    [[file:static/reg_c.gif][file:static/reg_c.gif]]
+
   - Repeat for the last MAC address and save it in register *d*.
-  - Switch to the second buffer with *C-x o*
+
+    [[file:static/reg_d.gif][file:static/reg_d.gif]]
+
+  - Switch to the second buffer with *C-x o*:        
   - Insert the register from =a= to =d= according to the template:
 
-    ...screenshot...
+    [[file:static/insert_buf2_macro.gif][file:static/insert_buf2_macro.gif]]
 
   - After inserting, move point to the next empty line.
-
   - Switch back to =buf1= with *C-x o*.
-
   - Move to the beginning of next line.
-
   - Press *<f4>* to stop.
 
 - _Play_:
 
   Now you can play back your new keyboard macro to transform the
   remaining entries.
+
+Here is the whole process:
+
+[[file:static/macro2_full.gif][file:static/macro2_full.gif]]
 
 *** Keyboard macro ring
 :PROPERTIES:
@@ -2492,8 +2553,8 @@ counter is inserted into the buffer, its value is incremented by 1.
 | Key           | Binding                                                     |
 |---------------+-------------------------------------------------------------|
 | *<f3>*        | Command: =kmacro-start-macro-or-insert-counter=             |
-|               | Insert the counter into the buffer and increase             |
-|               | the counter by 1                                            |
+|               | Insert the counter into the buffer and increase the counter |
+|               | by 1. This is only application when a macro is recording    |
 |---------------+-------------------------------------------------------------|
 | *C-x C-k C-i* | Command: =kmacro-insert-counter=                            |
 |               | Insert the counter of current macro into the buffer         |
@@ -2510,31 +2571,85 @@ counter is inserted into the buffer, its value is incremented by 1.
 |               | Specify the format for inserting the keyboard macro counter |
 |---------------+-------------------------------------------------------------|
 
-Valid format specifications:
+Valid format specifications for *C-x C-k C-f*:
 
-| Specification | Description                                                                            |
-|---------------+----------------------------------------------------------------------------------------|
-| =%o=          | Replace the specification with the base-eight representation of an integer.            |
-|---------------+----------------------------------------------------------------------------------------|
-| =%d=          | Replace the specification with the base-ten representation of an integer.              |
-|---------------+----------------------------------------------------------------------------------------|
-| =%x=          | Replace the specification with the base-sixteen representation of an integer.          |
-| =%X=          | ‘%x’ uses lower case and ‘%X’ uses upper case.                                         |
-|---------------+----------------------------------------------------------------------------------------|
-| =%c=          | Replace the specification with the character which is the value given.                 |
-|---------------+----------------------------------------------------------------------------------------|
-| =%e=          | Replace the specification with the exponential notation for a floating point number.   |
-|---------------+----------------------------------------------------------------------------------------|
-| =%f=          | Replace the specification with the decimal-point notation for a floating point number. |
-|---------------+----------------------------------------------------------------------------------------|
-| =%g=          | Replace the specification with notation for a floating point number, using either      |
-|               | exponential notation or decimal-point notation, whichever is shorter.                  |
-|---------------+----------------------------------------------------------------------------------------|
-| =%%=          | Replace the specification with a single ‘%’. This format specification is unusual in   |
-|               | in that it does not use a value. For example, (format "%% %d" 30) returns "% 30".      |
-|---------------+----------------------------------------------------------------------------------------|
+| Specification | Description                                                                          |
+|---------------+--------------------------------------------------------------------------------------|
+| =%o=          | Insert *base-eight* representation of an integer.                                    |
+|---------------+--------------------------------------------------------------------------------------|
+| =%d=          | Insert *base-ten* representation of an integer.                                      |
+|---------------+--------------------------------------------------------------------------------------|
+| =%x=          | Insert *base-sixteen* representation of an integer.                                  |
+| =%X=          | ‘%x’ uses lower case and ‘%X’ uses upper case.                                       |
+|---------------+--------------------------------------------------------------------------------------|
+| =%c=          | Insert the character which is the numerical value given.                             |
+|---------------+--------------------------------------------------------------------------------------|
+| =%e=          | Insert exponential notation for a floating point number.                             |
+|---------------+--------------------------------------------------------------------------------------|
+| =%f=          | Insert decimal-point notation for a floating point number.                           |
+|---------------+--------------------------------------------------------------------------------------|
+| =%g=          | Insert notation for a floating point number, using either exponential notation or    |
+|               | decimal-point notation, whichever is shorter.                                        |
+|---------------+--------------------------------------------------------------------------------------|
+| =%%=          | Insert a single ‘%’. This format specification is unusual in in that it does not use |
+|               | a value. For example, (format "%% %d" 30) returns "% 30".                            |
+|---------------+--------------------------------------------------------------------------------------|
 
-*_Exercise_*:
+The format must contain at least one of the valid specification above
+or combination with other text. For example, these are valid format:
+
+- =0x%x=
+- =Project %d:=
+- =Plain text=
+
+*_Exercise 1_*: Creating incremental header prefix
+
+Format specification is useful for making formatted output with macro,
+combine with the counter, it is useful for appending numbered prefix
+at beginning of line. For example: We usually write code comment that
+describes sequential steps in a high level point of view like this:
+
+#+begin_src fundamental
+  - Step 1 of 5: ...
+  - Step 2 of 5: ...
+  - Step 3 of 5: ...
+  - Step 4 of 5: ...
+  - Step 5 of 5: ...
+#+end_src
+
+Keyboard macro can help us generate such text pattern effortlessly.
+
+- *C-x C-k C-f* and enter this format: =- Step %d of 5:=
+- *<f3>* to start recording.
+- *<f3>* again to insert the first counter value, which is =- Step 0
+  of 5:=
+- *RET* to move to the next line.
+- *<f4>* to stop recording.
+- Now press *<f4>* as many time as you want and see header prefix got
+  inserted with incremental values.
+- You can insert the text any value by simply set the counter with
+  *C-x C-k C-c*.
+
+Remember to use this the next time you write comments for your code
+that need an ordered list to describe the steps of your algorithm.
+
+*_Exercise 2_*: Generate a list of numbers
+
+With macro counter, you can easily generate a list of number in
+supported base:
+
+- *C-x C-k C-f* and enter a format like this: =%d= (or a base number
+  of your choice).
+- Initialize the macro counter to a number of your choice.
+- *<f3>* to start recording.
+- If you want the numbers to be 5 units (or any number greater than 1)
+  apart from each other, *C-x  C-k a* to add a number to the
+  counter. If you only want to increase by 1, skip this step because
+  the default is 1.
+- *<f3>* to insert the first number.
+- *SPC* to create a separator.
+- *<f4>* to stop recording.
+- Now *<f4>* repeatedly to see numbers getting generated.
 
 *** Macros with Variations
 :PROPERTIES:
@@ -2563,13 +2678,38 @@ and reaches this point, it will ask to confirm:
 | *C-r*    | Start editing at point. *C-M-c* to go back to macro execution |
 |----------+---------------------------------------------------------------|
 
-*_Exercise_*:
+*_Exercise_*: Inserting interactive template
+
+Suppose you practice Agile and have to write a lot of user stories
+like this:
 
 #+BEGIN_QUOTE
 *As a* <type of user>, *I want* <some goal> *so that* <some reason>.
 #+END_QUOTE
 
-Obviously, you do not want to 
+Obviously, you do not want to repeat the template texts, such as "As
+a", "I want" or "so that". The only contents that varies are =<type of
+user>=, =<some goal>= and =<some reason>=. You can create a macro that
+stops and waits for your action at these checkpoints. *C-r* to start
+editing.
+
+- First, copy this template:
+
+#+begin_src fundamental
+  As a , I want , some reason
+#+end_src
+
+- *<f3>* to start recording.
+- *C-y* to yank the template.
+- Move point to positions that need modifications, then *C-x q*.
+- *<f4>* to stop recording.
+- Now *<f4>* and you will see the macro stops at the positions where
+  you pressed *C-x q* before and ask for your action.
+- *C-r* to edit. After done editing, *C-M-c* to go back.
+- You are asked the same question as before. If you still miss
+  something, *C-r* to edit again. Otherwise, press *y* to proceed to
+  the next point.
+- Continue until the end of macro.
 
 *** Naming and Saving Macro
 :PROPERTIES:
@@ -2601,7 +2741,7 @@ clashing with existing key bindings, you should use the prefix *C-x
 C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
 *C-x C-k 2*...
 
-*_Exercise_*:
+*_Exercise 1_*: Save your macro in a file
 
 - Record some keyboard macros.
 - Give the macros names with *C-x C-k n*.
@@ -2626,6 +2766,99 @@ C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
   =~/.emacs.d/init.el= when it starts. Since you put the above code in
   =init.el=, your =macros= file is also loaded.
 
+*_Exercise 2_*: Composable macros
+
+Back to exercise 2 at the beginning of Macro section, do you remember
+you have to create a big macro to convert text structures? Certainly
+it can be done more comfortably by spitting into smaller macros, saves
+these macros into Emacs commands and put in all together in a macro.
+
+- _Pre-recording setup_:
+  Before recording macro to automate this transformation, we need to
+  proper set things up:
+
+  - Create two buffers side by side with *C-x b*. Name the left buffer
+    =buf1= and right buffer =buf2=.
+  - Yank the original data into =buf1=, then move point back to
+    beginning of buffer:
+
+#+begin_src fundamental
+  machine1=(aa:bb:cc:dd:ee:a1 aa:bb:cc:dd:ee:a2 aa:bb:cc:dd:ee:a3)
+  machine2=(aa:bb:cc:dd:ee:b1 aa:bb:cc:dd:ee:b2 aa:bb:cc:dd:ee:b3)
+  machine3=(aa:bb:cc:dd:ee:c1 aa:bb:cc:dd:ee:c2 aa:bb:cc:dd:ee:c3)
+  machine4=(aa:bb:cc:dd:ee:d1 aa:bb:cc:dd:ee:d2 aa:bb:cc:dd:ee:d3)
+  machine5=(aa:bb:cc:dd:ee:e1 aa:bb:cc:dd:ee:e2 aa:bb:cc:dd:ee:e3)
+  machine6=(aa:bb:cc:dd:ee:f1 aa:bb:cc:dd:ee:f2 aa:bb:cc:dd:ee:f3)    
+#+end_src
+
+    That's set and done. Here is how it should look like:
+
+    [[file:static/prepare_macro.gif][file:static/prepare_macro.gif]]
+
+- _Record_:
+
+  Point should be at =buf1=, at the first line of the data. Let's
+  create the first macro command, =save-macs= that saves the
+  information of each entry into registers a,b,c,d:
+
+  - *<f3>* to start.
+  - *C-SPC* then *M-f*. This mark the word =machine1=. Store this word
+    into register =a= with *C-x r s a*.
+
+    [[file:static/reg_a.gif][file:static/reg_a.gif]]
+
+  - Move point to the beginning of the first MAC address. *C-SPC* then
+    *C-s* and search to the first delimiter, which is an empty space "
+    " in this case. *C-b* to move back to the end of the first MAC
+    address. Store this region into register *b* with *C-x r s b*.
+
+    [[file:static/reg_b.gif][file:static/reg_b.gif]]
+
+  - After that, move point to the beginning of the 2nd MAC address,
+    *C-s* to space and *C-b* to go back one character. Save the region
+    into register *c* with *C-x r s c*.
+
+    [[file:static/reg_c.gif][file:static/reg_c.gif]]
+
+  - Repeat for the last MAC address and save it in register *d*.
+
+    [[file:static/reg_d.gif][file:static/reg_d.gif]]
+
+  - Move point to the beginning of next line.
+
+  - *<f4>* to stop. *C-x C-k n* and save the macro with the name
+    =save-macs=.
+
+  Let's create the second macro command, =insert-macs=:
+
+  - Switch to the second buffer with *C-x o*:        
+  - *<f3>* to start recording.
+  - Insert the register from =a= to =d= according to the template:
+
+    [[file:static/insert_buf2_macro.gif][file:static/insert_buf2_macro.gif]]
+
+  - After inserting, move point to the next empty line.
+  - *<f4>* to stop. *C-x C-k n* and save the macro with the name =insert-macs=.
+
+ We have two important macros now. Let's put them back together:
+
+  - Switch back to =buf1= with *C-x o*. Point should be on the second
+    entry.
+  - *<f3>* to start recording.
+  - =M-x save-macs=; after executing this command, point moves to the
+    next line.
+  - *C-x o* to switch to =buf2=. Point should be after the first
+    insertion of =machine1=.
+  - =M-x insert-macs=; data get inserted into the buffer after this
+    command.
+  - *C-x o* to switch back to =buf1=.
+  - Press *<f4>* to stop.
+
+- _Play_:
+
+  You can play back your new keyboard macro to transform the
+  remaining entries.
+
 *** Edit Keyboard Macro
 :PROPERTIES:
 :ID:       e757ddcb-6453-4dad-b6a7-ce66ea6b4ffb
@@ -2645,8 +2878,6 @@ C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
 
 *_Exericse_*:
 
-
-
 *** Interactive Keyboard Macro Editing:
 :PROPERTIES:
 :ID:       03e7f694-5647-452b-8fc7-8f88180b29ab
@@ -2657,10 +2888,6 @@ debugger. When you enter this mode, you have a set of predefined
 commands to apply on each command. Press *?* for a list of available
 interactive commands and play with it.
 
-** Registers and Macros
-:PROPERTIES:
-:ID:       9ecc6b05-284e-48a3-b780-2b918ab63ee0
-:END:
 ** Version Control
 :PROPERTIES:
 :ID:       112710a7-779a-434c-ad23-e6a9a27aae82
