@@ -1,0 +1,551 @@
+#+TITLE: Setup C/C++ Development Environment for Emacs
+* Source code navigation
+:PROPERTIES:
+:ID:       2b850804-a33b-4f37-96fd-5bb4e422dbee
+:END:
+** Prerequisite:
+:PROPERTIES:
+:ID:       b1292347-d0ed-4421-9905-33f1050883b2
+:END:
+- [[https://github.com/leoliu/ggtags][ggtags]]. Add this code snippet to setup =ggtags= and key bindings:
+
+#+begin_src emacs-lisp
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+                (ggtags-mode 1))))
+
+  (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+  (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+  (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+  (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+  (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+  (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+  (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+#+end_src
+
+- Or, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. Helm is awesome and if you are going to use
+  Helm, please read the [[http://tuhdo.github.io/helm-intro.html][Helm guide]].
+
+#+begin_src emacs-lisp
+  ;; this variables must be set before load helm-gtags
+  ;; you can change to any prefix key of your choice
+  (setq helm-gtags-prefix-key "\C-cg")
+
+  (require 'helm-gtags)
+
+  (setq
+   helm-gtags-ignore-case t
+   helm-gtags-auto-update t
+   helm-gtags-use-input-at-cursor t
+   helm-gtags-pulse-at-cursor t
+
+   helm-gtags-suggested-key-mapping t
+   )
+
+  ;; Enable helm-gtags-mode in Dired so you can jump to any tag
+  ;; when navigate project tree with Dired
+  (add-hook 'dired-mode-hook 'helm-gtags-mode)
+
+  ;; Enable helm-gtags-mode in Eshell for the same reason as above
+  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
+
+  ;; Enable helm-gtags-mode in languages that GNU Global supports
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  (add-hook 'java-mode-hook 'helm-gtags-mode)
+  (add-hook 'asm-mode-hook 'helm-gtags-mode)
+
+  ;; key bindings
+  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
+  (define-key helm-gtags-mode-map (kbpd "M-.") 'helm-gtags-dwim)
+  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+  (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+  (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+#+end_src
+
+** Basic movements
+:PROPERTIES:
+:ID:       45f1bb42-08e5-43b9-8ea9-7b5e1124f89e
+:END:
+- *C-M-f* runs =forward-sexp=, move forward over a balanced
+  expression that can be a pair or a symbol. Demo:
+
+[screenshot]
+
+- *C-M-b* runs =backward-sexp=, move backward over a balanced
+  expression that can be a pair or a symbol. Demo:
+
+[screenshot]
+
+- *C-M-k* runs =kill-sexp=, kill balanced expression
+  forward that can be a pair or a symbol. Demo:
+
+[screnshot]
+
+- *C-M-t* runs =transpose-sexps=, transpose expressions that can be a
+  pair or a symbol. Demo:
+
+[screenshot]
+
+- *C-M-<SPC>* or *C-M-@* rusn =mark-sexp=, put mark after
+  following expression that can be a pair or a symbol. Demo:
+
+[screenshot]
+
+- *C-M-a* runs =beginning-of-defun=, which moves point to beginning of
+  a function
+
+[screenshot]
+
+- *C-M-e* runs =end-of-defun=, which moves point to end of a function.
+
+[screenshot]
+
+** Find definitions in current buffer
+:PROPERTIES:
+:ID:       3a64c7a4-e8a5-42b9-9476-28dff9e5cb96
+:END:
+The Imenu facility offers a way to find the major definitions, such as
+function definitions, variable definitions in a file by name. =ggtags=
+can integrate Imenu:
+
+#+begin_src emacs-lisp
+  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
+#+end_src
+
+If you use Helm, use [[http://tuhdo.github.io/helm-intro.html#sec-7][helm-semantic-or-imenu]].
+  
+** Find definitions in project
+:PROPERTIES:
+:ID:       0331265b-7c3f-457e-ba1d-ef6c3cd24208
+:END:
+- Using =gtags=: by default, =M-.= runs =ggtags-find-tag-dwim= when
+  =ggtags-mode= is enabled. The command =ggtags-find-tag-dwim= jump to
+  tag base on context:
+
+  - If the tag at point is a definition, =ggtags= jumps to a
+    reference. If there is more than one reference, it displays a list
+    of references.
+
+  - If the tag at point is a reference, =ggtags= jumps to tag
+    definition.
+
+  - If the tag at point is an include header, it jumps to that header.
+
+You can jump back to original location where you invoked
+=ggtags-find-tag-dwim= by =M-,=, which runs =pop-tag-mark= (if you
+follow my key bindings).
+
+You can also find arbitrary tag definition when invoking =M-.= on
+blank space. A prompt asks you for tag pattern, which is a regexp.
+
+If =ggtags= gives you a list of candidates, you can use =M-n= to move
+to next candidate and =M-p= to move back previous candidate. Use =M-g
+s= to invoke Isearch on candidate buffer list.
+
+[screenshot]
+
+- Using =helm-gtags=: If key bindings are properly setup as above,
+  =M-.= runs =helm-gtags-dwim=, which behaves the same as
+  =ggtags-find-tag-dwim=. Similarly, you jump back to original
+  location by using =M-,=, which runs =tags-loop-continue= (Emacs
+  default).
+
+You can also find arbitrary tag definition when invoking =M-.= on
+blank space. A prompt asks you for tag pattern, which is a regexp.
+
+[screenshot]
+
+** Find references in project
+:PROPERTIES:
+:ID:       410cfad4-a08d-4139-8c37-cb1bff5bd44e
+:END:
+- Using =ggtags=:  Either use =ggtags-find-tag-dwim= or
+  =ggtags-find-reference=, which only finds references.
+- Using =helm-gtags=: Either use =helm-gtags-dwim= or
+  =helm-gtags-find-rtag=, which only finds references.
+
+** Find files in project
+:PROPERTIES:
+:ID:       b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a
+:END:
+- Using =ggtags=
+- Using =helm-gtags=
+** View visited tags with tag stack
+:PROPERTIES:
+:ID:       db6bf87e-969d-42b8-ae60-b0b58f13e073
+:END:
+- Using =ggtags=: As you know that you can jump back with
+  =pop-tag-mark= (bound to =M-,=), you can also view a list of visited
+  tags using =ggtags-view-tag-history=, which is bound to =C-c g
+  h=. It displays visited tags from newest to oldest, that is from top
+  to bottom.
+
+- Using =helm-gtags=: Similarly, =helm-gtags= also has the command
+  =helm-gtags-show-stack= that shows visited tags from newest to
+  oldest, from top to bottom.
+** View past searches
+:PROPERTIES:
+:ID:       7e9592b3-3bb7-4d71-8981-13737677e8db
+:END:
+This feature is only available in =ggtags=. You can view past searches
+(not tags) in a list; each search entry includes previous position
+point was on in the tag list:
+
+[screenshot]
+
+* Source code completion
+:PROPERTIES:
+:ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
+:END:
+** Using CEDET
+:PROPERTIES:
+:ID:       60d03387-8a9b-42be-981c-58fca82d7a70
+:END:
+*** What is CEDET?
+:PROPERTIES:
+:ID:       5e06a903-4853-4093-a5b0-b5b28b3a6eaa
+:END:
+CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
+with the end goal of creating an advanced development environment in
+Emacs. CEDET includes common features such as intelligent completion,
+source code navigation, project management, code generation with
+templates . CEDET also provides a framework for working with
+programming languages; support for new programming languages can be
+added and use CEDET to provide IDE-like features.
+
+This tutorial only helps you use CEDET to get completion feature for C/C++.
+*** Why use CEDET?
+:PROPERTIES:
+:ID:       b8922b61-b52a-4690-8626-4ca463dd2f85
+:END:
+CEDET is simple to setup and portable (right winthin Emacs and written
+entirely with Emacs Lisp). Without CEDET, you have to use external
+tools and third party Emacs packages. The downside of external tools
+is that they are not specifically designed for Emacs. They have
+similar use cases, but not always satisfying. For example, source code
+indexing tools such as GNU Global and Exuberant Ctags are really good
+at working static source code, but they do not keep track changes in
+real time; CEDET does:
+
+...[screenshot]...
+
+As you can see, CEDET recognizes when =printk.h= is included and
+provides appropriate completion candidates. In constrast, non-context
+sentisve completion is like this:
+
+...[screenshot]...
+
+In this case, the completion system gets all candidates straight from
+GNU Global generated database without considering current context.
+
+The disadvantage is that CEDET is written in Emacs Lisp, and it is
+bound to the performance limitations of Emacs. Even though, CEDET is
+still really fast for moderate-size source files. CEDET also makes use
+of external tools like GNU Global or Cscope or Exuberant Ctags for
+finding symbol references/definition in a project to reduce its
+workload.
+*** Semantic minor modes
+:PROPERTIES:
+:ID:       e57ff2d7-623a-4feb-91ac-c69487996527
+:END:
+=Semantic= is a package that provides language-aware editing commands
+based on source code parsers. Parsing is a process of analyzing source
+code based on programming language syntax. Emacs understands your
+source code through this process to provides features such as
+contextual code completion, code navigation.
+***** Setup Semantic
+:PROPERTIES:
+:ID:       22bc4bb9-df93-4702-8b7d-9eb8b038059b
+:END:
+***** Command: =semantic-mode=
+:PROPERTIES:
+:ID:       8f24eec1-81f5-445b-bdc7-1b7e27943ce5
+:END:
+This command activates =semantic-mode=. In Semantic mode, Emacs parses
+the buffers you visit for their semantic content. The parsing looks
+like this:
+
+...[screenshot]...
+
+Notice that at the bottom, Emacs prints messages like this: =Parsing
+<file> (LL)...<progress in percentage>=. This is common behavior of
+=Semantic=: when you perform a jump to a symbol or perform a
+completion, =Semantic= tries to be accurate by parsing all the
+included files and all the included files in the included files and so
+on, until it reaches the end.
+
+You may worry that this process would take a long time. Indeed, it
+does. However, this is just a one time process. Once it is parsed,
+Semantic will cache the parsing result for future use. The next time
+you perform some action on the parsed code, you will get your desired
+output instantly.
+***** Command: =global-semanticdb-minor-mode=
+:PROPERTIES:
+:ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
+:END:
+As mentioned above, Semantic caches parsing output for future
+use. To do that, =semanticdb-minor-mode= must be activated. In
+Semantic DB mode, Semantic parsers store results in a database, which
+can be saved for future Emacs sessions. The cache is saved in
+directory specified by =semanticdb-default-save-directory=
+variable. The default directory is =~/.emacs.d/semanticdb=.
+***** Command: =global-semantic-idle-scheduler-mode=
+:PROPERTIES:
+:ID:       fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3
+:END:
+When =semantic-idle-scheduler-mode= is enabled, Emacs periodically
+checks to see if the buffer is out of date, and reparses while the
+user is idle (not typing). When this mode is off, a buffer is only
+reparsed when user explicitly issue some command.
+
+With =semantic-idle-scheduler-mode=, Emacs keeps track live changes of
+your source code.
+***** Package: =function-args=
+:PROPERTIES:
+:ID:       3e24664a-c6cc-44d5-b0ea-457a25590d38
+:END:
+***** The result
+:PROPERTIES:
+:ID:       6f6c7d5d-1b10-4586-8298-06494f727886
+:END:
+*** Project management with EDE
+:PROPERTIES:
+:ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
+:END:
+EDE is a generic interface for managing projects. In EDE, a project
+hierarchy matches a directory hierarchy. The project's topmost
+directory is called the project root, and its subdirectories are
+sub-projects.
+
+EDE can do many things but we will just use it for code completion at
+project level. To demonstrate the use of EDE, we will create a little
+project of our own.
+
+- First, create this directory structure (I assume you know how to
+  manage directory with Dired):
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  main.c
+                  lib.c
+                  lib2.c
+                  feature1/
+                      feature1.c
+                      helper.c
+              include1/
+                  lib.h
+                  feature1/
+                      feature1.h
+                      helper.h
+              include2/
+                  lib2.h
+#+end_src
+
+- Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
+- In this file, add a new =ede-cpp-root-project= in this form:
+
+#+begin_src emacs-lisp
+  (ede-cpp-root-project "project_root"
+                        :file "/dir/to/project_root/Makefile")
+#+end_src
+
+The first argument to =ede-cpp-root-project= is project name. =:file=
+argument specifies path to project root. You must create a file in the
+project root, since EDE uses that file as an "anchor" to project
+root; in our case, =Makefile= is the anchor file. Not sure why EDE
+just straightly uses root directory.
+
+- Add include directories specific to the project and in your system:
+
+#+begin_src emacs-lisp
+  (ede-cpp-root-project "project_root"
+                        :file "/dir/to/project_root/Makefile"
+                        :include-path '( "/include"
+                                         "../include")
+      :system-include-path '("~/linux"))
+#+end_src
+
+=:include-path= specifies directories local to your projects that EDE
+should search first when looking for a header file. =:incluide-path=
+is relative to project root specified in =:file=.
+
+=:system-include-path= specifies system include paths that do not
+belong to current project. Note that despite it is called
+=system-include-path=, it does not have to be in place like
+=/usr/include=. You can specify any include directories outside of
+your current project as "system headers".
+
+*** CEDET can do more
+:PROPERTIES:
+:ID:       a4605a59-5c3f-4604-84ce-6f22f15ea8bc
+:END:
+This guide only covers a portion of CEDET. CEDET also has features
+such as code navigation, jump to definition and gather
+references. These are cool features. For example, CEDET provide nice
+syntax highlighting for reference gathered:
+
+[screenshot]
+
+But, for navigating around the source tree, we already have =ggtags=
+and =helm-gtags=, which uses GNU Global for faster indexing. The only
+thing that other tools cannot do, is context-sensitive
+completion. That's why we use CEDET for code completion.
+
+Other solutions that use =clang= is quite good but not there yet. For
+example, [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]] is fine for getting system header
+candidates (since =clang= has system paths by default), but it has no
+concept of project and is not aware of project include path. You can
+add more arbitrary include paths to [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]], but it won't
+be pretty: once you add an include path for a project, it is visible
+to all other projects since the include path is treat as system
+include path. That means, whenever you try to complete something, you
+get irrelevant candidates from other projects as well. Quite
+annoying. =company-clang= also has the same problem. Another solution
+is [[https://github.com/Andersbakken/rtags][rtags]], but it is really complicated to setup, especially if you use
+=make=; I never succeed with it. =clang= based packages still have a
+long way to go. CEDET also supports =clang= for retrieving completion 
+candidates. It also has the limitations of other packages.
+
+CEDET is best used on new project, because Semantic parse code as you
+write. As a result, you won't have to wait for parsing unknown source
+files to get completion candidates.
+
+** Package: =company=
+:PROPERTIES:
+:ID:       3b617d5a-5957-4f87-be20-4241ba8b827a
+:END:
+You can also use =company= for code completion. After installing
+=company= from MELPA, activate it globally:
+
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+Please read the *Usage* section on [[http://company-mode.github.io/][company homepage]] to learn company
+general features. You have three commands for completing C/C++ code:
+
+- company-clang: use =clang= to retrieve completion candidates.
+- company-semantic: use =Semantic= to retrieve completion candidates.
+- company-gtags: use GTAGS database from =GNU Global= to retrieve
+  completion candidates.
+
+** Package: =company-c-headers=
+:PROPERTIES:
+:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
+:END:
+[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-backends 'company-c-headers)
+  (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
+#+end_src
+
+* Source code information
+:PROPERTIES:
+:ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
+:END:
+** Command: =global-semantic-idle-summary-mode=
+:PROPERTIES:
+:ID:       8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe
+:END:
+This mode, when enabled, displays function interface in the
+minibuffer:
+
+[screenshot]
+
+It works well for C but not C++, since C++ can overload function and
+=semantic-idle-summary-mode= can only display one interface at a
+time. Since this mode is part of Semantic, it also relies on
+SemanticDB that is created from parsing source files.
+
+** Using =ggtags= + =eldoc=
+:PROPERTIES:
+:ID:       81db4e8e-f913-4b5c-87e4-74d90e80aaa9
+:END:
+You can also use =ggtags= for displaying function interface at point
+in minibuffer:
+
+#+begin_src emacs-lisp
+  (setq-local eldoc-documentation-function #'ggtags-eldoc-function)
+#+end_src
+
+However, it won't have syntax highlighting.
+
+* Source code editing
+:PROPERTIES:
+:ID:       0fa2afe0-728c-49f6-86f1-7769cebc5de0
+:END:
+** Folding
+:PROPERTIES:
+:ID:       48b6ad5f-24e2-41c3-9a44-c1decdde6910
+:END:
+** Narrowing
+:PROPERTIES:
+:ID:       000644fa-84e8-42a2-b780-6ff1b0c84a5a
+:END:
+** Identation
+:PROPERTIES:
+:ID:       2c98c4cb-0db4-4f27-9b39-d5f972cbe51a
+:END:
+*** Setup default C style
+:PROPERTIES:
+:ID:       6dd8b948-f101-4a7c-8fd8-9b836474df17
+:END:
+*** Automatic indentation
+:PROPERTIES:
+:ID:       394da0e4-4995-4583-9b67-2611f3352d3b
+:END:
+*** Package: =dtrt-indent=
+:PROPERTIES:
+:ID:       ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0
+:END:
+*** Package: =ws-butler=
+:PROPERTIES:
+:ID:       65c42593-e1b3-4061-8ae8-276f29258d01
+:END:
+*** Package: =evail-nerd-commenter=
+:PROPERTIES:
+:ID:       55e690bf-78b1-44c4-b3ab-c1fe2b1caa63
+:END:
+** Code template using =yasnippet=
+:PROPERTIES:
+:ID:       3952aed5-31ed-4715-a892-9f55056fe98d
+:END:
+** Semantically kill/copy/yank (copy/cut/paste)
+:PROPERTIES:
+:ID:       21edcf89-82dc-476c-ae5d-714cdce1c7b4
+:END:
+** Package: =smartparens= for automatic pairing
+:PROPERTIES:
+:ID:       62b4b86b-222f-4915-834e-b3d79b73f9f0
+:END:
+** Package: =expand-region= for marking text semantically
+:PROPERTIES:
+:ID:       ee22993e-7afa-4bad-b68d-c8ff212bdf69
+:END:
+* Compilation Support
+:PROPERTIES:
+:ID:       28a612e9-d3f2-47be-acbb-91aeb9b32466
+:END:
+ Compilation mode turns each error message in the buffer into a
+ hyperlink. You can click on each error, or execute a key binding like
+ *RET* to jump to the location of that error.
+
+
+
+* Debugging with GDB Many Windows
+:PROPERTIES:
+:ID:       a13b3e48-d73c-4fc4-97c3-b9f1d5814e63
+:END:
+
+     | GUD interaction buffer | Locals/Registers buffer     |
+     |------------------------+-----------------------------|
+     | Primary Source buffer  | I/O buffer for debugged pgm |
+     |------------------------+-----------------------------|
+     | Stack buffer           | Breakpoints/Threads buffer  |
