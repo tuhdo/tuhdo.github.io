@@ -414,6 +414,14 @@ candidates. It also has the limitations of other packages.
 CEDET is best used with new project, because Semantic parse code as
 you write. As a result, you won't have to wait for parsing unknown
 source files to get completion candidates.
+* More source code navigation with Semantic Senator
+:PROPERTIES:
+:ID:       75622ca6-8863-4000-833b-a7f0fea485dc
+:END:
+ So that you learned the basics of CEDET and Semantic, it's time to
+ introduce how to navigate with Semantic. Some features are covered
+ and redundant with =helm-gtags= or =ggtags=. I will still cover
+ lightly those features in Senator to satisfy your curiosity.
 
 * Project management EDE and Projectile
 :PROPERTIES:
