@@ -277,11 +277,13 @@ completion, =Semantic= tries to be accurate by parsing all the
 included files and all the included files in the included files and so
 on, until it reaches the end.
 
-You may worry that this process would take a long time. Indeed, it
+You may worry that this process would take a long time. Sometimes, it
 does. However, this is just a one time process. Once it is parsed,
 Semantic will cache the parsing result for future use. The next time
-you perform some action on the parsed code, you will get your desired
-output instantly.
+you perform some action on the parsed code, such as code completion,
+you will get your desired output instantly. Syntactic analyzing takes
+time. Many people don't understand this process and assume that CEDET
+is slow.
 ***** Command: =global-semanticdb-minor-mode=
 :PROPERTIES:
 :ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
@@ -307,11 +309,87 @@ your source code.
 :PROPERTIES:
 :ID:       3e24664a-c6cc-44d5-b0ea-457a25590d38
 :END:
-***** The result
+=functions-args= is a GNU Emacs package for showing an inline
+arguments hint for the C/C++ function at point.
+
+Setup:
+
+#+begin_src emacs-lisp
+  (require 'function-args)
+  (fa-config-default)
+#+end_src
+
+- Helm support:
+
+[screenshot]
+***** Package: =company=
 :PROPERTIES:
-:ID:       6f6c7d5d-1b10-4586-8298-06494f727886
+:ID:       3b617d5a-5957-4f87-be20-4241ba8b827a
 :END:
-*** Project management with EDE
+You can also use =company= for code completion. After installing
+=company= from MELPA, activate it globally:
+
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+Please read the *Usage* section on [[http://company-mode.github.io/][company homepage]] to learn company
+general features. You have three commands for completing C/C++ code:
+
+- company-clang: use =clang= to retrieve completion candidates.
+- company-semantic: use =Semantic= to retrieve completion candidates.
+- company-gtags: use GTAGS database from =GNU Global= to retrieve
+  completion candidates.
+***** Package: =company-c-headers=
+:PROPERTIES:
+:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
+:END:
+[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-backends 'company-c-headers)
+  (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
+#+end_src
+
+[screenshot]
+
+*** CEDET can do more
+:PROPERTIES:
+:ID:       a4605a59-5c3f-4604-84ce-6f22f15ea8bc
+:END:
+This guide only covers a portion of CEDET. CEDET also has features
+such as code navigation, jump to definition and gather
+references. These are cool features. For example, CEDET provide nice
+syntax highlighting for reference gathered:
+
+[screenshot]
+
+But, for navigating around the source tree, we already have =ggtags=
+and =helm-gtags=, which uses GNU Global for faster indexing. The only
+thing that other tools cannot do, is context-sensitive
+completion. That's why we use CEDET for code completion in this guide.
+
+Other solutions that use =clang= is quite good but not there yet. For
+example, [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]] is fine for getting system header
+candidates (since =clang= has system paths by default), but it has no
+concept of project and is not aware of project include path. You can
+add more arbitrary include paths to [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]], but it won't
+be pretty: once you add an include path for a project, it is visible
+to all other projects since the include path is treat as system
+include path. That means, whenever you try to complete something, you
+get irrelevant candidates from other projects as well. Quite
+annoying. =company-clang= also has the same problem. Another solution
+is [[https://github.com/Andersbakken/rtags][rtags]], but it is really complicated to setup, especially if you use
+=make=; I never succeed with it. =clang= based packages still have a
+long way to go. CEDET also supports =clang= for retrieving completion 
+candidates. It also has the limitations of other packages.
+
+CEDET is best used with new project, because Semantic parse code as
+you write. As a result, you won't have to wait for parsing unknown
+source files to get completion candidates.
+
+* Project management EDE and Projectile
 :PROPERTIES:
 :ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
 :END:
@@ -379,73 +457,6 @@ belong to current project. Note that despite it is called
 =system-include-path=, it does not have to be in place like
 =/usr/include=. You can specify any include directories outside of
 your current project as "system headers".
-
-*** CEDET can do more
-:PROPERTIES:
-:ID:       a4605a59-5c3f-4604-84ce-6f22f15ea8bc
-:END:
-This guide only covers a portion of CEDET. CEDET also has features
-such as code navigation, jump to definition and gather
-references. These are cool features. For example, CEDET provide nice
-syntax highlighting for reference gathered:
-
-[screenshot]
-
-But, for navigating around the source tree, we already have =ggtags=
-and =helm-gtags=, which uses GNU Global for faster indexing. The only
-thing that other tools cannot do, is context-sensitive
-completion. That's why we use CEDET for code completion.
-
-Other solutions that use =clang= is quite good but not there yet. For
-example, [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]] is fine for getting system header
-candidates (since =clang= has system paths by default), but it has no
-concept of project and is not aware of project include path. You can
-add more arbitrary include paths to [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]], but it won't
-be pretty: once you add an include path for a project, it is visible
-to all other projects since the include path is treat as system
-include path. That means, whenever you try to complete something, you
-get irrelevant candidates from other projects as well. Quite
-annoying. =company-clang= also has the same problem. Another solution
-is [[https://github.com/Andersbakken/rtags][rtags]], but it is really complicated to setup, especially if you use
-=make=; I never succeed with it. =clang= based packages still have a
-long way to go. CEDET also supports =clang= for retrieving completion 
-candidates. It also has the limitations of other packages.
-
-CEDET is best used on new project, because Semantic parse code as you
-write. As a result, you won't have to wait for parsing unknown source
-files to get completion candidates.
-
-** Package: =company=
-:PROPERTIES:
-:ID:       3b617d5a-5957-4f87-be20-4241ba8b827a
-:END:
-You can also use =company= for code completion. After installing
-=company= from MELPA, activate it globally:
-
-#+begin_src emacs-lisp
-  (add-hook 'after-init-hook 'global-company-mode)
-#+end_src
-
-Please read the *Usage* section on [[http://company-mode.github.io/][company homepage]] to learn company
-general features. You have three commands for completing C/C++ code:
-
-- company-clang: use =clang= to retrieve completion candidates.
-- company-semantic: use =Semantic= to retrieve completion candidates.
-- company-gtags: use GTAGS database from =GNU Global= to retrieve
-  completion candidates.
-
-** Package: =company-c-headers=
-:PROPERTIES:
-:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
-:END:
-[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
-Company. After installing from MELPA, set it up:
-
-#+begin_src emacs-lisp
-  (add-to-list 'company-backends 'company-c-headers)
-  (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
-#+end_src
-
 * Source code information
 :PROPERTIES:
 :ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
@@ -537,7 +548,28 @@ However, it won't have syntax highlighting.
  hyperlink. You can click on each error, or execute a key binding like
  *RET* to jump to the location of that error.
 
+ The following key bindings are available:
 
+| Key     | Description                                                                     |
+|---------+---------------------------------------------------------------------------------|
+| *C-o*   | Display matched location, but *do not* switch point to matched buffer           |
+|---------+---------------------------------------------------------------------------------|
+| *M-n*   | Move to next error message, but *do not* visit error location                   |
+|---------+---------------------------------------------------------------------------------|
+| *M-p*   | Move to next previous message, but *do not* visit error location                |
+|---------+---------------------------------------------------------------------------------|
+| *M-g n* | Move to next error message, visit error location                                |
+|---------+---------------------------------------------------------------------------------|
+| *M-g p* | Move to previous error message, visit error location                            |
+|---------+---------------------------------------------------------------------------------|
+| *RET*   | Visit location of error at poiint                                               |
+|---------+---------------------------------------------------------------------------------|
+| *M-{*   | Move point to the next error message or match occurring in a different file     |
+|---------+---------------------------------------------------------------------------------|
+| *M-}*   | Move point to the previous error message or match occurring in a different file |
+|---------+---------------------------------------------------------------------------------|
+| *q*     | Quit =*compilation*= buffer                                                     |
+|---------+---------------------------------------------------------------------------------|
 
 * Debugging with GDB Many Windows
 :PROPERTIES:
