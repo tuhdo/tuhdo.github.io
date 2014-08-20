@@ -260,6 +260,15 @@ contextual code completion, code navigation.
 :PROPERTIES:
 :ID:       22bc4bb9-df93-4702-8b7d-9eb8b038059b
 :END:
+To enable code completion using Semantic, add the following code:
+
+#+begin_src emacs-lisp
+  (global-semanticdb-minor-mode 1)
+  (global-semantic-idle-scheduler-mode 1)
+
+  (semantic-mode 1)
+#+end_src
+
 ***** Command: =semantic-mode=
 :PROPERTIES:
 :ID:       8f24eec1-81f5-445b-bdc7-1b7e27943ce5
@@ -275,7 +284,9 @@ Notice that at the bottom, Emacs prints messages like this: =Parsing
 =Semantic=: when you perform a jump to a symbol or perform a
 completion, =Semantic= tries to be accurate by parsing all the
 included files and all the included files in the included files and so
-on, until it reaches the end.
+on, until it reaches the end:
+
+[screenshot]
 
 You may worry that this process would take a long time. Sometimes, it
 does. However, this is just a one time process. Once it is parsed,
@@ -284,6 +295,7 @@ you perform some action on the parsed code, such as code completion,
 you will get your desired output instantly. Syntactic analyzing takes
 time. Many people don't understand this process and assume that CEDET
 is slow.
+
 ***** Command: =global-semanticdb-minor-mode=
 :PROPERTIES:
 :ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
@@ -294,6 +306,7 @@ Semantic DB mode, Semantic parsers store results in a database, which
 can be saved for future Emacs sessions. The cache is saved in
 directory specified by =semanticdb-default-save-directory=
 variable. The default directory is =~/.emacs.d/semanticdb=.
+
 ***** Command: =global-semantic-idle-scheduler-mode=
 :PROPERTIES:
 :ID:       fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3
@@ -319,7 +332,17 @@ Setup:
   (fa-config-default)
 #+end_src
 
-- Helm support:
+=function-args= offers the following features:
+
+- Command: =fa-show=
+
+- Command: =fa-jump=
+
+- Command: =moo-complete= (must install =helm=)
+
+- Command: =moo-propose-virtual= (must install =helm=)
+
+- Command: =moo-propose-override= (must install =helm=)
 
 [screenshot]
 ***** Package: =company=
@@ -337,9 +360,12 @@ Please read the *Usage* section on [[http://company-mode.github.io/][company hom
 general features. You have three commands for completing C/C++ code:
 
 - company-clang: use =clang= to retrieve completion candidates.
-- company-semantic: use =Semantic= to retrieve completion candidates.
+- company-semantic: use =Semantic= to retrieve completion
+  candidates. Function interface of each candidate is shown in the
+  minibuffer.
 - company-gtags: use GTAGS database from =GNU Global= to retrieve
   completion candidates.
+
 ***** Package: =company-c-headers=
 :PROPERTIES:
 :ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
@@ -415,6 +441,68 @@ project of our own.
               include2/
 #+end_src
 
+Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
+=feature1.h=, =feature1.c= and =main.c=. For the =.h= files, create
+them using this template
+
+#+begin_src c
+  #ifndef FILENAME.H
+  #define FILENAME.H
+
+  void filename1();
+  int filename2(int a, int b);
+
+  #endif // FILENAME.H
+#+end_src
+
+Replace =filename= or =FILENAEM= with actual filename like =lib1=.
+
+For =.c= files, except for =main.c=, create them according to this
+template:
+
+#+begin_src c
+  #include "filename.h"
+
+  void filename1() { }
+
+  int filename2(int a, int b) { }
+#+end_src
+
+The files look silly but good enough for our learning purpose. Now, in
+=main.c=, let's test auto-completion by including appropriate header
+file:
+
+[screenshot]
+
+Everything works fine when all files are under the same
+directory. Let's split the files into different directories we created
+before, like this:
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  main.c
+                  lib.c
+                  lib2.c
+                  feature1/
+                      feature1.c
+              include1/
+                  lib.h
+                  feature1/
+                      feature1.h
+              include2/
+                  lib2.h
+#+end_src
+
+[screenshot]
+
+Try auto-completion again. This time, it won't work. No candidate is
+displayed. It is because Semantic only looks for header files in
+current directory by default. If you put it elsewhere, you have to
+tell Semantic where it is. This is not limited to only Semantic; you
+have to specify project include path in Eclipse as well.
+
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
 - In this file, add a new =ede-cpp-root-project= in this form:
 
@@ -435,7 +523,7 @@ just straightly uses root directory.
   (ede-cpp-root-project "project_root"
                         :file "/dir/to/project_root/Makefile"
                         :include-path '("/include"
-                                        "/include2")
+                                        "/include2") ;; add more include paths here
       :system-include-path '("~/linux"))
 #+end_src
 
@@ -449,25 +537,17 @@ belong to current project. Note that despite it is called
 =/usr/include=. You can specify any include directories outside of
 your current project as "system headers".
 
-Finally, create a few files in some directories to test them out:
+After done setting up your project, save the file and execute that
+=ede-cpp-root-project= expression with *C-x C-e*. Now, Semantic is
+aware of your project include paths. Try auto-completion and you will
+see everything is working fine again:
 
-#+begin_src fundamental
-  project_root/
-              Makefile
-              src/
-                  main.c
-                  lib.c
-                  lib2.c
-                  feature1/
-                      feature1.c
-              include1/
-                  lib.h
-                  feature1/
-                      feature1.h
-              include2/
-                  lib2.h
-#+end_src
+[screenshot]
 
+** Package: =Projectile=
+:PROPERTIES:
+:ID:       a623aaa6-1ddd-4d86-aade-20bbe5690b75
+:END:
 
 * Source code information
 :PROPERTIES:
@@ -480,7 +560,7 @@ Finally, create a few files in some directories to test them out:
 This mode, when enabled, displays function interface in the
 minibuffer:
 
-[screenshot]
+[[file:static/func_args.jpg][file:static/func_args.jpg]]
 
 It works well for C but not C++, since C++ can overload function and
 =semantic-idle-summary-mode= can only display one interface at a
@@ -508,10 +588,95 @@ However, it won't have syntax highlighting.
 :PROPERTIES:
 :ID:       48b6ad5f-24e2-41c3-9a44-c1decdde6910
 :END:
+Emacs has a minor mode called =hs-minor-mode= that allows users to
+fold and hide blocks of text. Blocks are defined by regular
+expressions which match the start and end of a text region. For
+example, anything in between ={= and =}= is a block. The regular
+expressions are defined in =hs-special-modes-alist=. 
+
+Setup for C/C++:
+
+#+begin_src emacs-lisp
+  (add-hook 'c-mode-common-hook   'hs-minor-mode)
+#+end_src
+
+Default key bindings:
+
+| Key           | Binding                                    |
+|---------------+--------------------------------------------|
+| *C-c @ C-c*   | Command: =hs-toggle-hiding=                |
+|               | Toggle hiding/showing of a block           |
+|---------------+--------------------------------------------|
+| *C-c @ C-h*   | Command: =hs-hide-block=                   |
+|               | Select current block at point and hide it  |
+|---------------+--------------------------------------------|
+| *C-c @ C-l*   | Command: =hs-hide-level=                   |
+|               | Hide all block levels below this block     |
+|---------------+--------------------------------------------|
+| *C-c @ C-s*   | Command: =hs-show-block=                   |
+|               | Select current block at point and show it. |
+|---------------+--------------------------------------------|
+| *C-c @ C-M-h* | Command: =hs-hide-all=                     |
+|               | Hide all top level blocks, displaying      |
+|               | only first and last lines.                 |
+|---------------+--------------------------------------------|
+| *C-c @ C-M-s* | Command: =hs-show-all=                     |
+|               | Show everything                            |
+|---------------+--------------------------------------------|
+
+Demo:
+
+- Command: =hs-toggle-hiding=
+
+[screenshto]
+
+- Command: =hs-hide-block=
+
+[screenshot]
+
+- Command: =hs-hide-level=
+
+[screenshot]
+
+- Command: =hs-show-block=
+
+[screnshot]
+
+- Command: =hs-hide-all=
+
+[screenshot]
+
+- Command: =hs-show-all=
+
+[screenshot]
+
 ** Narrowing
 :PROPERTIES:
 :ID:       000644fa-84e8-42a2-b780-6ff1b0c84a5a
 :END:
+Narrowing means making only a text portion in current buffer
+visible. Narrowing is useful when you want to perform text editing on
+a small part of the buffer without affecting the others. For example,
+you want to delete all =printf= statements in current functions, using
+=flush-lines= command. But if you do so, you will also delete =printf=
+outside the current function, which is undesirable. By narrowing, you
+can safely remove all those =printf= and be certain that nothing else
+is changed accidentally.
+
+Default key bindings:
+
+| Key       | Binding                                    |
+|-----------+--------------------------------------------|
+| *C-x n d* | Command: =narrow-to-defun=                 |
+|           | Narrow buffer to current function at point |
+|-----------+--------------------------------------------|
+| *C-x n r* | Command: =narrow-to-region=                |
+| *C-x n n* | Narrow buffer to active region             |
+|-----------+--------------------------------------------|
+| *C-x n w* | Command: =widen=                           |
+|           | Widen buffer                               |
+|-----------+--------------------------------------------|
+
 ** Identation
 :PROPERTIES:
 :ID:       2c98c4cb-0db4-4f27-9b39-d5f972cbe51a
@@ -520,22 +685,136 @@ However, it won't have syntax highlighting.
 :PROPERTIES:
 :ID:       6dd8b948-f101-4a7c-8fd8-9b836474df17
 :END:
-*** Automatic indentation
+Emacs offers some popular C coding styles. Select the one suitable for
+you:
+
+#+begin_src emacs-lisp
+    ;; Available C style:
+    ;; “gnu”: The default style for GNU projects
+    ;; “k&r”: What Kernighan and Ritchie, the authors of C used in their book
+    ;; “bsd”: What BSD developers use, aka “Allman style” after Eric Allman.
+    ;; “whitesmith”: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.
+    ;; “stroustrup”: What Stroustrup, the author of C++ used in his book
+    ;; “ellemtel”: Popular C++ coding standards as defined by “Programming in C++, Rules and Recommendations,” Erik Nyquist and Mats Henricson, Ellemtel
+    ;; “linux”: What the Linux developers use for kernel development
+    ;; “python”: What Python developers use for extension modules
+    ;; “java”: The default style for java-mode (see below)
+    ;; “user”: When you want to define your own style
+    (setq
+     c-default-style "linux" ;; set style to "linux"
+     )
+#+end_src
+
+*** Setup indentation
 :PROPERTIES:
 :ID:       394da0e4-4995-4583-9b67-2611f3352d3b
 :END:
+By default, Emacs won't indent when press *RET* because the command
+bound to *RET* is newline. You can enable automatic indentation by
+binding *RET* to =newline-and-indent=.
+
+#+begin_src emacs-lisp
+    (global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
+#+end_src
+
+When working with source code, we must pay attention to trailng
+whitespace. It is always useful to view whitespace in current buffer
+before committing your code.
+
+#+begin_src emacs-lisp
+  ;; activate whitespace-mode to view all whitespace characters
+  (global-set-key (kbd "C-c w") 'whitespace-mode)
+
+  ;; show unncessary whitespace that can mess up your diff
+  (add-hook 'prog-mode-hook (lambda () (interactive) (setq show-trailing-whitespace 1)))
+
+  ;; use space to indent by default
+  (setq-default indent-tabs-mode nil)
+
+  ;; set appearance of a tab that is represented by 4 spaces
+  (setq-default tab-width 4)
+#+end_src
+
+To clean up trailing whitespace, you can also run =whitespace-cleanup=
+command.
+
+To convert between *TAB* and *space*, you also have two commands:
+=tabify= to turn an active region to use *TAB* for indentation, and
+=untabify= to turn an active region to use *space* for indentation.
+
+*** Package: =clean-aindent-mode=
+:PROPERTIES:
+:ID:       12c0c0ee-66ea-411b-aa7c-0b437c4bc89d
+:END:
+When you press *RET* to create a newline and got indented by
+=eletric-indent-mode=, you have appropriate whitespace for
+indenting. But, if you leave the line blank and move to the next line,
+the whitespace becomes useless. This package helps clean up unused
+whitespace.
+
+View this [[http://www.emacswiki.org/emacs/CleanAutoIndent][Emacswiki page]] for more details.
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: clean-aindent-mode               ;;
+  ;;                                           ;;
+  ;; GROUP: Editing -> Indent -> Clean Aindent ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'clean-aindent-mode)
+  (add-hook 'prog-mode-hook 'clean-aindent-mode)
+#+end_src
+
 *** Package: =dtrt-indent=
 :PROPERTIES:
 :ID:       ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0
 :END:
+A minor mode that guesses the indentation offset originally used for
+creating source code files and transparently adjusts the corresponding
+settings in Emacs, making it more convenient to edit foreign files.
+
+This package is really useful when you have to work on many different
+projects (for example, your project consists of many git submodules)
+that use different indentation format. One project might use *TAB*
+for indentation; another project might use *space* for
+indentation. Having to manually switch between *TAB* and *space* is
+tiresome. We should let Emacs take care of it automatically. This
+package does exactly that. However, if a project mixes *TAB* and
+*space*, then the package will have a hard time to detect. But then
+again, if you work on such project, it doesn't matter anyway.
+
+Setup:
+
+#+begin_src emacs-lisp
+  (require 'dtrt-indent)
+  (dtrt-indent-mode 1)
+#+end_src
+
 *** Package: =ws-butler=
 :PROPERTIES:
 :ID:       65c42593-e1b3-4061-8ae8-276f29258d01
 :END:
-*** Package: =evail-nerd-commenter=
-:PROPERTIES:
-:ID:       55e690bf-78b1-44c4-b3ab-c1fe2b1caa63
-:END:
+=ws-butler= helps managing whitespace on every line of code written or
+edited, in an unobtrusive, help you write clean code without noisy
+whitespace effortlessly. That is:
+
+- Only lines touched get trimmed. If the white space at end of buffer
+  is changed, then blank lines at the end of buffer are truncated
+  respecting require-final-newline.
+
+- Trimming only happens when saving.
+
+With =clean-aindent-mode= and =dtrt-indent= and =ws-butler=, you
+could totally forget about whitespace. If you are careful, turn on
+=whitespace-mode= (bound to =C-c w= above) and check for whitespace
+before committing.
+
+Setup:
+
+#+begin_src emacs-lisp
+  (require 'ws-butler)
+  (add-hook 'prog-mode-hook 'ws-butler-mode)
+#+end_src
+
 ** Code template using =yasnippet=
 :PROPERTIES:
 :ID:       3952aed5-31ed-4715-a892-9f55056fe98d
