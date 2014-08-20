@@ -409,19 +409,10 @@ project of our own.
   project_root/
               Makefile
               src/
-                  main.c
-                  lib.c
-                  lib2.c
                   feature1/
-                      feature1.c
-                      helper.c
               include1/
-                  lib.h
                   feature1/
-                      feature1.h
-                      helper.h
               include2/
-                  lib2.h
 #+end_src
 
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
@@ -443,8 +434,8 @@ just straightly uses root directory.
 #+begin_src emacs-lisp
   (ede-cpp-root-project "project_root"
                         :file "/dir/to/project_root/Makefile"
-                        :include-path '( "/include"
-                                         "../include")
+                        :include-path '("/include"
+                                        "/include2")
       :system-include-path '("~/linux"))
 #+end_src
 
@@ -457,6 +448,27 @@ belong to current project. Note that despite it is called
 =system-include-path=, it does not have to be in place like
 =/usr/include=. You can specify any include directories outside of
 your current project as "system headers".
+
+Finally, create a few files in some directories to test them out:
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  main.c
+                  lib.c
+                  lib2.c
+                  feature1/
+                      feature1.c
+              include1/
+                  lib.h
+                  feature1/
+                      feature1.h
+              include2/
+                  lib2.h
+#+end_src
+
+
 * Source code information
 :PROPERTIES:
 :ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
