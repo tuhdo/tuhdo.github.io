@@ -498,13 +498,8 @@ Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
 them using this template
 
 #+begin_src c
-  #ifndef FILENAME.H
-  #define FILENAME.H
-
-  void filename1();
-  int filename2(int a, int b);
-
-  #endif // FILENAME.H
+  void filename_func1();
+  int filename_func2(int a, int b);
 #+end_src
 
 Replace =filename= or =FILENAEM= with actual filename like =lib1=.
@@ -515,9 +510,9 @@ template:
 #+begin_src c
   #include "filename.h"
 
-  void filename1() { }
+  void filename_func1() { }
 
-  int filename2(int a, int b) { }
+  int filename_func2(int a, int b) { }
 #+end_src
 
 The files look silly but good enough for our learning purpose. Now, in
@@ -549,13 +544,11 @@ before, like this:
 
 [[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
 
-Close Emacs and start again, otherwise Semantic still caches your old
-parsing result. Try auto-completion again. This time, it won't
-work. No candidate is displayed. It is because Semantic only looks for
-header files in current directory by default. If you put it elsewhere,
-you have to tell Semantic where it is. This is not limited to only
-Semantic; you have to specify project include path in Eclipse as
-well.
+Try auto-completion again. This time, it won't work. No candidate is
+displayed. It is because Semantic only looks for header files in
+current directory by default. If you put it elsewhere, you have to
+tell Semantic where it is. This is not limited to only Semantic; you
+have to specify project include path in Eclipse as well.
 
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
 - In this file, add a new =ede-cpp-root-project= in this form:
@@ -576,7 +569,7 @@ just straightly uses root directory.
 #+begin_src emacs-lisp
   (ede-cpp-root-project "project_root"
                         :file "/dir/to/project_root/Makefile"
-                        :include-path '("/include"
+                        :include-path '("/include1"
                                         "/include2") ;; add more include paths here
       :system-include-path '("~/linux"))
 #+end_src
@@ -593,10 +586,39 @@ your current project as "system headers".
 
 After done setting up your project, save the file and execute that
 =ede-cpp-root-project= expression with *C-x C-e*. Now, Semantic is
-aware of your project include paths. Try auto-completion and you will
-see everything is working fine again:
+aware of your project include paths. However, you have to do one last
+thing: either close the file =main.c= and reopen it or =M-x
+semantic-force-refresh= to tell Semantic to analyze =main.c=
+again. Otherwise, Semantic will still keep the previous parsing result
+of this file and completion candidates won't be available. As a
+result, it is important to load EDE projects defined by
+=ede-cpp-root-project= before opening any project file.
 
-[screenshot]
+After that, try auto-completion and you will see everything is working
+fine again:
+
+[[file:static/c-ide/ede-project.gif][file:static/c-ide/ede-project.gif]]
+
+Summary:
+
+- EDE, short for Emacs Development Environment, is a generic interface
+  for managing projects.
+- EDE enables Semantic to find sources and perform project level
+  completions.
+- To add a C/C++ project, simply create a project definition with this
+  template in a file, such as =ede-projects.el=:
+
+#+begin_src emacs-lisp
+  (ede-cpp-root-project "project_root"
+                        :file "/dir/to/project_root/Makefile"
+                        :include-path '("/include1"
+                                        "/include2") ;; add more include paths here
+      :system-include-path '("~/linux"))
+#+end_src
+
+- Load =ede-projects.el= when Emacs start.
+- If you have opening files, either close or refresh it with =M-x
+  semantic-force-refresh= to make Semantic aware of new changes.
 
 * Source code information
 :PROPERTIES:
@@ -660,7 +682,8 @@ Default key bindings:
 |               | Select current block at point and hide it  |
 |---------------+--------------------------------------------|
 | *C-c @ C-l*   | Command: =hs-hide-level=                   |
-|               | Hide all block levels below this block     |
+|               | Hide all block with indentation levels     |
+|               | below this block                           |
 |---------------+--------------------------------------------|
 | *C-c @ C-s*   | Command: =hs-show-block=                   |
 |               | Select current block at point and show it. |
@@ -677,27 +700,7 @@ Demo:
 
 - Command: =hs-toggle-hiding=
 
-[screenshto]
-
-- Command: =hs-hide-block=
-
-[screenshot]
-
-- Command: =hs-hide-level=
-
-[screenshot]
-
-- Command: =hs-show-block=
-
-[screnshot]
-
-- Command: =hs-hide-all=
-
-[screenshot]
-
-- Command: =hs-show-all=
-
-[screenshot]
+[[file:static/c-ide/hs-toggle-hiding.gif][file:static/c-ide/hs-toggle-hiding.gif]]
 
 ** Narrowing
 :PROPERTIES:
@@ -961,14 +964,22 @@ a command:
                                  (call-interactively 'compile)))
 #+end_src
 
-If you want to enter a new command, add prefix argument.
+If you want to enter a new command, add prefix argument before
+pressing =<f5>=.
 
 Demo:
 
-[screenshot]
+[[file:static/c-ide/compilation-mode.gif][file:static/c-ide/compilation-mode.gif]]
+
+As you can see, output in =*compilation*= buffer looks much better
+than in plain terminal with colors and you can also interact with it.
 
 You can also run other shell commands in here, not just compilation
-commands.
+commands. A really cool thing with =compilation-mode= is that it is
+asynchronous. That is, if your source files contain errors, you don't
+have to wait for the whole compilation process to finish. You can
+examine the errors right away in the =*compilation*= buffer, while the
+compilation process keeps going.
 
 * Debugging with GDB Many Windows
 :PROPERTIES:
@@ -977,7 +988,7 @@ commands.
 Emacs has built-in frontend support for GDB that provides IDE-like
 interface. It has a layout like this:
 
-[screenshot]
+[[file:static/c-ide/gdb-many-windows.gif][file:static/c-ide/gdb-many-windows.gif]]
 
 Stock Emacs doesn't enable this layout by default. You have to
 tell Emacs to always use =gdb-many-windows=:
@@ -996,7 +1007,7 @@ Now, find a binary built for debugging, and start GDB by =M-x
 gdb=. Emacs prompts asking you how to run =gdb=. By default, the
 prompt looks like this:
 
-[screenshot]
+[[file:static/c-ide/gdb-prompt.gif][file:static/c-ide/gdb-prompt.gif]]
 
 To use =gdb-many-windows=, you must always supply the *-i=mi* argument
 to gdb, otherwise =gdb-many-windows= won't work. By default, as you've
