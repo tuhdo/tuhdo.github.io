@@ -1,0 +1,1990 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Setup C/C++ Development Environment for Emacs</title>
+<!-- 2014-08-21 T5 22:45 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu Do" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="./static/worg.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9874755;
+var sc_invisible=1;
+var sc_security="c2028bb7";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/" target="_blank"><img
+class="statcounter" src="http://c.statcounter.com/9874755/0/c2028bb7/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+<h2><a href="index.html">Back</a></h2>
+</div>
+<div id="content">
+<h1 class="title">Setup C/C++ Development Environment for Emacs</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Source code navigation</a>
+<ul>
+<li><a href="#sec-1-1">Prerequisite:</a></li>
+<li><a href="#sec-1-2">Basic movements</a></li>
+<li><a href="#sec-1-3">Find definitions in current buffer</a></li>
+<li><a href="#sec-1-4">Find definitions in project</a></li>
+<li><a href="#sec-1-5">Find references in project</a></li>
+<li><a href="#sec-1-6">Find files in project</a></li>
+<li><a href="#sec-1-7">View visited tags with tag stack</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">Source code completion</a>
+<ul>
+<li><a href="#sec-2-1">Using CEDET</a>
+<ul>
+<li><a href="#sec-2-1-1">What is CEDET?</a></li>
+<li><a href="#sec-2-1-2">Why use CEDET?</a></li>
+<li><a href="#sec-2-1-3">Semantic minor modes</a></li>
+<li><a href="#sec-2-1-4">CEDET can do more</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-3">Project management with EDE</a></li>
+<li><a href="#sec-4">Source code information</a>
+<ul>
+<li><a href="#sec-4-1">Command: <code>global-semantic-idle-summary-mode</code></a></li>
+<li><a href="#sec-4-2">Command: <code>global-semantic-stickyfunc-mode</code></a></li>
+<li><a href="#sec-4-3">Using <code>ggtags</code> + <code>eldoc</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-5">Source code editing</a>
+<ul>
+<li><a href="#sec-5-1">Folding</a></li>
+<li><a href="#sec-5-2">Narrowing</a></li>
+<li><a href="#sec-5-3">Identation</a>
+<ul>
+<li><a href="#sec-5-3-1">Setup default C style</a></li>
+<li><a href="#sec-5-3-2">Setup indentation</a></li>
+<li><a href="#sec-5-3-3">Package: <code>clean-aindent-mode</code></a></li>
+<li><a href="#sec-5-3-4">Package: <code>dtrt-indent</code></a></li>
+<li><a href="#sec-5-3-5">Package: <code>ws-butler</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-5-4">Code template using <code>yasnippet</code></a></li>
+<li><a href="#sec-5-5">Package: <code>smartparens</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-6">Compilation Support</a></li>
+<li><a href="#sec-7">Debugging with GDB Many Windows</a></li>
+</ul>
+</div>
+</div>
+<p>
+In this guide, I will help you to setup an efficient working C/C++
+environment. Despite it looks long, the setup is short and easy
+(mostly copy/paste Emacs Lisp code into your <code>init.el</code>); most of the
+guide are explanations and demonstrations of many useful features.
+</p>
+
+<p>
+Please remember that there's a table of content on the top right
+corner and you can use it to navigate this guide. If you feel your
+internet connection is too slow for my guide, you can always clone and
+read it offline: <a href="https://github.com/tuhdo/tuhdo.github.io">https://github.com/tuhdo/tuhdo.github.io</a>
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><a id="ID-2b850804-a33b-4f37-96fd-5bb4e422dbee" name="ID-2b850804-a33b-4f37-96fd-5bb4e422dbee"></a>Source code navigation</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><a id="ID-b1292347-d0ed-4421-9905-33f1050883b2" name="ID-b1292347-d0ed-4421-9905-33f1050883b2"></a>Prerequisite:</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>Know how to use <code>package.el</code> and MELPA. If you don't know how to
+use, read the guide <a href="emacs-tutor3.html">How to use Emacs package manager</a>.
+</li>
+
+<li>Install <a href="https://github.com/leoliu/ggtags">ggtags</a>. After installing <code>ggtags</code> from MELPA, add this code
+snippet to setup <code>ggtags</code> and key bindings:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
+          (<span style="color: #a020f0;">lambda</span> ()
+            (<span style="color: #a020f0;">when</span> (<span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span>)
+              (<span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span>))))
+
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g s"</span>) '<span style="color: #784437;">ggtags-find-other-symbol</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g h"</span>) '<span style="color: #783778;">ggtags-view-tag-history</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g r"</span>) '<span style="color: #5e7837;">ggtags-find-reference</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g f"</span>) '<span style="color: #5e7837;">ggtags-find-file</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g c"</span>) '<span style="color: #4f7e67;">ggtags-create-tags</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g u"</span>) '<span style="color: #783778;">ggtags-update-tags</span>)
+
+(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span>) '<span style="color: #78683f;">pop-tag-mark</span>)
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Or, <a href="https://github.com/emacs-helm/helm">helm</a> + <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>. Helm is awesome and if you are going to use
+Helm, please read the <a href="http://tuhdo.github.io/helm-intro.html">Helm guide</a>.
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">this variables must be set before load helm-gtags</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">you can change to any prefix key of your choice</span>
+(<span style="color: #784437;">setq</span> <span style="color: #374478;">helm-gtags-prefix-key</span> <span style="color: #8b2252;">"\C-cg"</span>)
+
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-gtags</span>)
+
+(<span style="color: #784437;">setq</span>
+ <span style="color: #37785e;">helm-gtags-ignore-case</span> <span style="color: #4f5c7e;">t</span>
+ <span style="color: #374478;">helm-gtags-auto-update</span> <span style="color: #4f5c7e;">t</span>
+ <span style="color: #37785e;">helm-gtags-use-input-at-cursor</span> <span style="color: #4f5c7e;">t</span>
+ <span style="color: #5e7837;">helm-gtags-pulse-at-cursor</span> <span style="color: #4f5c7e;">t</span>
+
+ <span style="color: #5e7837;">helm-gtags-suggested-key-mapping</span> <span style="color: #4f5c7e;">t</span>
+ )
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in Dired so you can jump to any tag</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">when navigate project tree with Dired</span>
+(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in Eshell for the same reason as above</span>
+(<span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in languages that GNU Global supports</span>
+(<span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">c-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">c++-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">java-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #4f7e67;">asm-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">key bindings</span>
+(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-s"</span>) '<span style="color: #707e4f;">helm-gtags-select</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783778;">kbpd</span> <span style="color: #8b2252;">"M-."</span>) '<span style="color: #5e7837;">helm-gtags-dwim</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span>) '<span style="color: #78683f;">helm-gtags-pop-stack</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &lt;"</span>) '<span style="color: #7e544f;">helm-gtags-previous-history</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &gt;"</span>) '<span style="color: #43783f;">helm-gtags-next-history</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><a id="ID-45f1bb42-08e5-43b9-8ea9-7b5e1124f89e" name="ID-45f1bb42-08e5-43b9-8ea9-7b5e1124f89e"></a>Basic movements</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li><b>C-M-f</b> runs <code>forward-sexp</code>, move forward over a balanced
+expression that can be a pair or a symbol. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/forward-func.gif"><img src="static/c-ide/forward-func.gif" alt="forward-func.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-b</b> runs <code>backward-sexp</code>, move backward over a balanced
+expression that can be a pair or a symbol. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/backward-func.gif"><img src="static/c-ide/backward-func.gif" alt="backward-func.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-k</b> runs <code>kill-sexp</code>, kill balanced expression
+forward that can be a pair or a symbol. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/kill-func-body.gif"><img src="static/c-ide/kill-func-body.gif" alt="kill-func-body.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-&lt;SPC&gt;</b> or <b>C-M-@</b> rusn <code>mark-sexp</code>, put mark after
+following expression that can be a pair or a symbol. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/mark-func-body.gif"><img src="static/c-ide/mark-func-body.gif" alt="mark-func-body.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-a</b> runs <code>beginning-of-defun</code>, which moves point to beginning of
+a function. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/beginning-of-defun.gif"><img src="static/c-ide/beginning-of-defun.gif" alt="beginning-of-defun.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-e</b> runs <code>end-of-defun</code>, which moves point to end of a
+function. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/end-of-defun.gif"><img src="static/c-ide/end-of-defun.gif" alt="end-of-defun.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-h</b> runs <code>mark-defun</code>, which put a region around whole current
+or following function. Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/mark-defun.gif"><img src="static/c-ide/mark-defun.gif" alt="mark-defun.gif" /></a>
+</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><a id="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96" name="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96"></a>Find definitions in current buffer</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+The Imenu facility offers a way to find the major definitions, such as
+function definitions, variable definitions in a file by name. <code>ggtags</code>
+can integrate Imenu:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">setq-local</span> <span style="color: #374478;">imenu-create-index-function</span> #'<span style="color: #4f5c7e;">ggtags-build-imenu-index</span>)
+</pre>
+</div>
+
+<p>
+If you use Helm, use <a href="http://tuhdo.github.io/helm-intro.html#sec-7">helm-semantic-or-imenu</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><a id="ID-0331265b-7c3f-457e-ba1d-ef6c3cd24208" name="ID-0331265b-7c3f-457e-ba1d-ef6c3cd24208"></a>Find definitions in project</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>Using <code>gtags</code>: by default, <code>M-.</code> runs <code>ggtags-find-tag-dwim</code> when
+<code>ggtags-mode</code> is enabled. The command <code>ggtags-find-tag-dwim</code> jump to
+tag base on context:
+
+<ul class="org-ul">
+<li>If the tag at point is a definition, <code>ggtags</code> jumps to a
+reference. If there is more than one reference, it displays a list
+of references.
+</li>
+
+<li>If the tag at point is a reference, <code>ggtags</code> jumps to tag
+definition.
+</li>
+
+<li>If the tag at point is an include header, it jumps to that header.
+</li>
+</ul>
+</li>
+</ul>
+
+<p>
+You can jump back to original location where you invoked
+<code>ggtags-find-tag-dwim</code> by <code>M-,</code>, which runs <code>pop-tag-mark</code> (if you
+follow my key bindings).
+</p>
+
+<p>
+You can also find arbitrary tag definition when invoking <code>M-.</code> on
+blank space. A prompt asks you for tag pattern, which is a regexp.
+</p>
+
+<p>
+If <code>ggtags</code> gives you a list of candidates, you can use <code>M-n</code> to move
+to next candidate and <code>M-p</code> to move back previous candidate. Use <code>M-g
+s</code> to invoke Isearch on candidate buffer list.
+</p>
+
+<div class="center">
+
+<div class="figure">
+<p><a href="static/c-ide/ggtags-definitions.png"><img src="static/c-ide/ggtags-definitions.png" alt="ggtags-definitions.png" /></a>
+</p>
+</div>
+
+<p>
+(screenshot taken from <a href="https://github.com/leoliu/ggtags">ggtags</a>)
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Using <code>helm-gtags</code>: If key bindings are properly setup as above,
+<code>M-.</code> runs <code>helm-gtags-dwim</code>, which behaves the same as
+<code>ggtags-find-tag-dwim</code>. Similarly, you jump back to original
+location by using <code>M-,</code>, which runs <code>tags-loop-continue</code> (Emacs
+default).
+</li>
+</ul>
+
+<div class="center">
+
+<div class="figure">
+<p><a href="static/c-ide/helm-gtags-definitions.png"><img src="static/c-ide/helm-gtags-definitions.png" alt="helm-gtags-definitions.png" /></a>
+</p>
+</div>
+
+<p>
+(screenshot taken from <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>)
+</p>
+</div>
+
+<p>
+You can also find arbitrary tag definition when invoking <code>M-.</code> on
+blank space. A prompt asks you for tag pattern, which is a
+regexp. <code>helm-gtags</code> provides a really nice feature that uses Helm to
+display all tags in a project and incrementally filtering, and is
+really fast:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/helm-gtags-select.gif"><img src="static/c-ide/helm-gtags-select.gif" alt="helm-gtags-select.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><a id="ID-410cfad4-a08d-4139-8c37-cb1bff5bd44e" name="ID-410cfad4-a08d-4139-8c37-cb1bff5bd44e"></a>Find references in project</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li>Using <code>ggtags</code>:  Either run <code>ggtags-find-tag-dwim</code> or
+<code>ggtags-find-reference</code>, which only finds references.
+</li>
+
+<li>Using <code>helm-gtags</code>: Either run <code>helm-gtags-dwim</code> or
+<code>helm-gtags-find-rtag</code>, which only finds references.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><a id="ID-b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a" name="ID-b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a"></a>Find files in project</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li>Using <code>ggtags</code>: Run <code>ggtags-find-file</code> to find a file from all the
+files indexed.
+</li>
+
+<li>Using <code>helm-gtags</code>: Run <code>helm-gtags-find-files</code> to find files
+matching regexp.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><a id="ID-db6bf87e-969d-42b8-ae60-b0b58f13e073" name="ID-db6bf87e-969d-42b8-ae60-b0b58f13e073"></a>View visited tags with tag stack</h3>
+<div class="outline-text-3" id="text-1-7">
+<ul class="org-ul">
+<li>Using <code>ggtags</code>: As you know that you can jump back with
+<code>pop-tag-mark</code> (bound to <code>M-,</code>), you can also view a list of visited
+tags using <code>ggtags-view-tag-history</code>, which is bound to <code>C-c g
+  h</code>. It displays visited tags from newest to oldest, that is from top
+to bottom.
+</li>
+
+<li>Using <code>helm-gtags</code>: Similarly, <code>helm-gtags</code> also has the command
+<code>helm-gtags-show-stack</code> that shows visited tags from newest to
+oldest, from top to bottom.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><a id="ID-419c04f5-95b6-4457-83fe-9288361e7bcf" name="ID-419c04f5-95b6-4457-83fe-9288361e7bcf"></a>Source code completion</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><a id="ID-60d03387-8a9b-42be-981c-58fca82d7a70" name="ID-60d03387-8a9b-42be-981c-58fca82d7a70"></a>Using CEDET</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-sec-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><a id="ID-5e06a903-4853-4093-a5b0-b5b28b3a6eaa" name="ID-5e06a903-4853-4093-a5b0-b5b28b3a6eaa"></a>What is CEDET?</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
+with the end goal of creating an advanced development environment in
+Emacs. CEDET includes common features such as intelligent completion,
+source code navigation, project management, code generation with
+templates . CEDET also provides a framework for working with
+programming languages; support for new programming languages can be
+added and use CEDET to provide IDE-like features.
+</p>
+
+<p>
+This tutorial only helps you use CEDET to get completion feature for
+C/C++.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><a id="ID-b8922b61-b52a-4690-8626-4ca463dd2f85" name="ID-b8922b61-b52a-4690-8626-4ca463dd2f85"></a>Why use CEDET?</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+CEDET is simple to setup and portable (right winthin Emacs and written
+entirely with Emacs Lisp). Without CEDET, you have to use external
+tools and third party Emacs packages. The downside of external tools
+is that they are not specifically designed for Emacs. They have
+similar use cases, but not always satisfying. For example, source code
+indexing tools such as GNU Global and Exuberant Ctags are really good
+at working static source code, but they do not keep track changes in
+real time; CEDET does:
+</p>
+
+
+<div class="figure">
+<p><a href="static/auto_complete.gif"><img src="static/auto_complete.gif" alt="auto_complete.gif" /></a>
+</p>
+</div>
+
+<p>
+As you can see, CEDET recognizes when <code>printk.h</code> is included and
+provides appropriate completion candidates. In contrast, non-context
+sentisve completion is like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/company-clang-company-gtags.gif"><img src="static/c-ide/company-clang-company-gtags.gif" alt="company-clang-company-gtags.gif" /></a>
+</p>
+</div>
+
+<p>
+In this case, the completion system gets all candidates straight from
+GNU Global generated database without considering current context.
+</p>
+
+<p>
+The disadvantage is that CEDET is written in Emacs Lisp, and it is
+bound to the performance limitations of Emacs. Even though, CEDET is
+still really fast for moderate-size source files. CEDET also makes use
+of external tools like GNU Global or Cscope or Exuberant Ctags for
+finding symbol references/definition in a project to reduce its
+workload.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><a id="ID-e57ff2d7-623a-4feb-91ac-c69487996527" name="ID-e57ff2d7-623a-4feb-91ac-c69487996527"></a>Semantic minor modes</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+<code>Semantic</code> is a package that provides language-aware editing commands
+based on source code parsers. Parsing is a process of analyzing source
+code based on programming language syntax. Emacs understands your
+source code through this process to provides features such as
+contextual code completion, code navigation.
+</p>
+</div>
+<ul class="org-ul"><li>Setup Semantic<br  /><div class="outline-text-6" id="text-2-1-3-0-1">
+<p>
+To enable code completion using Semantic, add the following code:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #5e7837;">global-semanticdb-minor-mode</span> <span style="color: #008b8b;">1</span>)
+(<span style="color: #513f78;">global-semantic-idle-scheduler-mode</span> <span style="color: #008b8b;">1</span>)
+
+(<span style="color: #513f78;">semantic-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+</div>
+</li>
+
+<li>Command: <code>semantic-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-2">
+<p>
+This command activates <code>semantic-mode</code>. In Semantic mode, Emacs parses
+the buffers you visit for their semantic content. The parsing looks
+like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-parsing.gif"><img src="static/c-ide/semantic-parsing.gif" alt="semantic-parsing.gif" /></a>
+</p>
+</div>
+
+<p>
+Notice that at the bottom, Emacs prints messages like this: <code>Parsing
+&lt;file&gt; (LL)...&lt;progress in percentage&gt;</code>. This is common behavior of
+<code>Semantic</code>: when you perform a jump to a symbol or perform a
+completion, <code>Semantic</code> tries to be accurate by parsing all the
+included files and all the included files in the included files and so
+on, until it reaches the end:
+</p>
+
+<p>
+You may worry that this process takes a long time. Sometimes, it
+does. However, this is just a one time process. Once it is parsed,
+Semantic will cache the parsing result for future use. The next time
+you perform some action on the parsed code, such as code completion,
+you will get your desired output instantly. Syntactic analyzing takes
+time. Many people don't understand this process and assume that CEDET
+is slow.
+</p>
+</div>
+</li>
+
+<li>Command: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-3">
+<p>
+As mentioned above, Semantic caches parsing result for future
+use. To do that, <code>semanticdb-minor-mode</code> must be activated. In
+Semantic DB mode, Semantic parsers store results in a database, which
+can be saved for future Emacs sessions. The cache is saved in
+directory specified by <code>semanticdb-default-save-directory</code>
+variable. The default directory is <code>~/.emacs.d/semanticdb</code>.
+</p>
+</div>
+</li>
+
+<li>Command: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-4">
+<p>
+When <code>semantic-idle-scheduler-mode</code> is enabled, Emacs periodically
+checks to see if the buffer is out of date, and reparses while the
+user is idle (not typing). When this mode is off, a buffer is only
+reparsed when user explicitly issue some command.
+</p>
+
+<p>
+With <code>semantic-idle-scheduler-mode</code>, Emacs keeps track live changes of
+your source code.
+</p>
+</div>
+</li>
+
+<li>Package: <code>function-args</code><br  /><div class="outline-text-6" id="text-2-1-3-0-5">
+<p>
+<a href="https://github.com/abo-abo/function-args">function-args</a> is a GNU Emacs package for showing an inline
+arguments hint for the C/C++ function at point.
+</p>
+
+<p>
+Setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">function-args</span>)
+(<span style="color: #3f7178;">fa-config-default</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  [(<span style="color: #3f7178;">tab</span>)] '<span style="color: #78683f;">moo-complete</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  [(<span style="color: #3f7178;">tab</span>)] '<span style="color: #78683f;">moo-complete</span>)
+</pre>
+</div>
+
+<p>
+Basic Usage (taken from <code>function-args</code> homepage):
+</p>
+
+<ul class="org-ul">
+<li><code>fa-show</code>: Show an overlay hint with current function arguments like
+so:
+
+<p>
+<a href="static/c-ide/fa-show"><a href="static/c-ide/fa-show">static/c-ide/fa-show</a></a>
+</p>
+
+<p>
+The point position is tracked and the current hint argument is
+updated accordingly. After you've called it with <code>M-i</code>, you can cycle
+the overloaded functions with <code>M-n/M-h</code>. You can dismiss the hint with
+<code>M-u</code> or by editing anywhere outside the function arguments.
+</p>
+</li>
+
+<li><code>fa-jump</code>: While the overlay hint from <code>fa-show</code> is active, jump to
+the current function. The default shortcut is <code>M-j</code>. If the overlay
+isn't active, call whatever was bound to <code>M-j</code> before (usually it's
+<code>c-indent-new-comment-line</code>).
+</li>
+
+<li><code>moo-complete</code> (must install <code>helm</code>): It's essentially a
+c++-specific version of semantic-ia-complete-symbol. It behaves
+better, because it accounts more for function overloading and
+inheritance. Also it's prettier (type parts are fontified) and
+faster (helm is used for completion). You can invoke it with <code>M-o</code>
+by default.
+
+
+<div class="figure">
+<p><a href="static/c-ide/moo-complete.png"><img src="static/c-ide/moo-complete.png" alt="moo-complete.png" /></a>
+</p>
+</div>
+</li>
+</ul>
+
+<p>
+There are a few more commands. You can view all the descriptions for
+all commands <a href="https://github.com/abo-abo/function-args#main-functions">here</a>.
+</p>
+</div>
+</li>
+
+<li>Package: <code>company</code><br  /><div class="outline-text-6" id="text-2-1-3-0-6">
+<p>
+You can also use <code>company</code> for code completion. After installing
+<code>company</code> from MELPA, activate it globally:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #3f7178;">after-init-hook</span> '<span style="color: #374478;">global-company-mode</span>)
+</pre>
+</div>
+
+<p>
+Please read the <b>Usage</b> section on <a href="http://company-mode.github.io/">company homepage</a> to learn company
+general features. You have three commands for completing C/C++ code:
+</p>
+
+<ul class="org-ul">
+<li><code>company-clang</code>: use <code>clang</code> to retrieve completion candidates.
+</li>
+<li><code>company-semantic</code>: use <code>Semantic</code> to retrieve completion
+candidates. Function interface of each candidate is shown in the
+minibuffer.
+</li>
+<li><code>company-gtags</code>: use GTAGS database from <code>GNU Global</code> to retrieve
+completion candidates.
+</li>
+</ul>
+</div>
+</li>
+
+<li>Package: <code>company-c-headers</code><br  /><div class="outline-text-6" id="text-2-1-3-0-7">
+<p>
+<a href="https://github.com/randomphrase/company-c-headers">company-c-headers</a> provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #783f5a;">company-backends</span> '<span style="color: #4f7e67;">company-c-headers</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #3f7178;">c-mode-base-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-&lt;tab&gt;"</span>) '<span style="color: #4f7e67;">company-c-headers</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><a href="static/c-ide/company-c-header.png"><img src="static/c-ide/company-c-header.png" alt="company-c-header.png" /></a>
+</p>
+</div>
+</div>
+</li></ul>
+</div>
+
+<div id="outline-container-sec-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4"><a id="ID-a4605a59-5c3f-4604-84ce-6f22f15ea8bc" name="ID-a4605a59-5c3f-4604-84ce-6f22f15ea8bc"></a>CEDET can do more</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<p>
+This guide only covers a portion of CEDET. Since Semantic parses
+source code and creates a database for code  completion, it would be
+useful to reuse the database for other features such as code
+navigation, jump to definition and gather references. These are cool
+features. For example, CEDET provide nice syntax highlighting for
+gathering references:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-symref.gif"><img src="file:///home/tuhdo/Public/blog/publish/emacs-tutor/static/c-ide/semantic-symref.gif" alt="semantic-symref.gif" /></a>
+</p>
+</div>
+
+<p>
+The above feature is called Semantic Symref. It queries tag references
+from SemanticDB and display the result in another buffer. Please
+refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/semantic/SymRef.html">GNU Manual - Symbol References</a> for more info. If your project
+is only the size of Emacs or similar, then Semantic Symref is a viable
+choice. Remember that when entering new files, Semantic takes time to
+parse and if you gather references for the first time, you will have
+to wait for a while for Semantic doing its job. After the first time,
+subsequent uses of Semantic Symref happens instantly.
+</p>
+
+<p>
+But, for navigating around the source tree, we already have <code>ggtags</code>
+and <code>helm-gtags</code>, which uses GNU Global for much faster indexing for
+large project like Linux kernel. The only thing that other tools
+cannot do, is context-sensitive completion. That's why we only use
+CEDET for code completion in this guide. Nevertheless, Semantic Symref
+is still a viable choice for small to medium sized projects. Choose
+the one you prefer.
+</p>
+
+<p>
+Other solutions that use <code>clang</code> is quite good but not there yet. For
+example, <a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a> is fine for getting system header
+candidates (since <code>clang</code> has system paths by default), but it has no
+concept of project and is not aware of project include path. You can
+add more arbitrary include paths to <a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>, but it won't
+be pretty: once you add an include path for a project, it is visible
+to all other projects since the include path is treat as system
+include path. That means, whenever you try to complete something, you
+get irrelevant candidates from other projects as well. Quite
+annoying. <code>company-clang</code> also has the same problem. Another solution
+is <a href="https://github.com/Andersbakken/rtags">rtags</a>, but it is really complicated to setup, especially if you use
+<code>make</code>; I never succeed with it. <code>clang</code> based packages still have a
+long way to go. CEDET also supports <code>clang</code> for retrieving completion
+candidates. It also has the limitations of other packages.
+</p>
+
+<p>
+CEDET is best used with new project, because Semantic parse code as
+you write. As a result, you won't have to wait for parsing unknown
+source files to get completion candidates.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><a id="ID-d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd" name="ID-d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd"></a>Project management with EDE</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+EDE, short for Emacs Development Environment, is a generic interface
+for managing projects. In EDE, a project hierarchy matches a directory
+hierarchy. The project's topmost directory is called the project root,
+and its subdirectories are sub-projects.
+</p>
+
+<p>
+EDE can do many things but we will just use it for code completion at
+project level. To demonstrate the use of EDE, we will create a little
+project of our own.
+</p>
+
+<ul class="org-ul">
+<li>First, create this directory structure (I assume you know how to
+manage directory with Dired):
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-fundamental">project_root/
+            Makefile
+            src/
+                feature1/
+            include1/
+                feature1/
+            include2/
+</pre>
+</div>
+
+<p>
+Then, create files: <code>lib1.c</code>, <code>lib2.c</code>, <code>lib1.h</code>, <code>lib2.h</code>,
+<code>feature1.h</code>, <code>feature1.c</code> and <code>main.c</code>. For the <code>.h</code> files, create
+them using this template
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>();
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>);
+</pre>
+</div>
+
+<p>
+Replace <code>filename</code> or <code>FILENAEM</code> with actual filename like <code>lib1</code>.
+</p>
+
+<p>
+For <code>.c</code> files, except for <code>main.c</code>, create them according to this
+template:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"filename.h"</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>() { }
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>) { }
+</pre>
+</div>
+
+<p>
+The files look silly but good enough for our learning purpose. Now, in
+<code>main.c</code>, let's test auto-completion by including appropriate header
+file:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/ede-same-dir-completion.gif"><img src="static/c-ide/ede-same-dir-completion.gif" alt="ede-same-dir-completion.gif" /></a>
+</p>
+</div>
+
+<p>
+Everything works fine when all files are under the same
+directory. Let's split the files into different directories we created
+before, like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-fundamental">project_root/
+            Makefile
+            src/
+                main.c
+                lib.c
+                lib2.c
+                feature1/
+                    feature1.c
+            include1/
+                lib.h
+                feature1/
+                    feature1.h
+            include2/
+                lib2.h
+</pre>
+</div>
+
+
+<div class="figure">
+<p><a href="static/c-ide/ede-rearrange-project-dir.gif"><img src="static/c-ide/ede-rearrange-project-dir.gif" alt="ede-rearrange-project-dir.gif" /></a>
+</p>
+</div>
+
+<p>
+Try auto-completion again. This time, it won't work. No candidate is
+displayed. It is because Semantic only looks for header files in
+current directory by default. If you put it elsewhere, you have to
+tell Semantic where it is. This is not limited to only Semantic; you
+have to specify project include path in Eclipse as well.
+</p>
+
+<ul class="org-ul">
+<li>Create a new file called <code>cedet-projects.el</code> in <code>~/.emacs.d/</code>.
+</li>
+<li>In this file, add a new <code>ede-cpp-root-project</code> in this form:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
+                      <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>)
+</pre>
+</div>
+
+<p>
+The first argument to <code>ede-cpp-root-project</code> is project name. <code>:file</code>
+argument specifies path to project root. You must create a file in the
+project root, since EDE uses that file as an "anchor" to project
+root; in our case, <code>Makefile</code> is the anchor file. Not sure why EDE
+just straightly uses root directory.
+</p>
+
+<ul class="org-ul">
+<li>Add include directories specific to the project and in your system:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
+                      <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>
+                      <span style="color: #483d8b;">:include-path</span> '(<span style="color: #8b2252;">"/include1"</span>
+                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include paths here</span>
+    <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
+</pre>
+</div>
+
+<p>
+<code>:include-path</code> specifies directories local to your projects that EDE
+should search first when looking for a header file. <code>:incluide-path</code>
+is relative to project root specified in <code>:file</code>.
+</p>
+
+<p>
+<code>:system-include-path</code> specifies system include paths that do not
+belong to current project. Note that despite it is called
+<code>system-include-path</code>, it does not have to be in place like
+<code>/usr/include</code>. You can specify any include directories outside of
+your current project as "system headers".
+</p>
+
+<p>
+After done setting up your project, save the file and execute that
+<code>ede-cpp-root-project</code> expression with <b>C-x C-e</b>. Now, Semantic is
+aware of your project include paths. However, you have to do one last
+thing: either close the file <code>main.c</code> and reopen it or <code>M-x
+semantic-force-refresh</code> to tell Semantic to analyze <code>main.c</code>
+again. Otherwise, Semantic will still keep the previous parsing result
+of this file and completion candidates won't be available. As a
+result, it is important to load EDE projects defined by
+<code>ede-cpp-root-project</code> before opening any project file.
+</p>
+
+<p>
+After that, try auto-completion and you will see everything is working
+fine again:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/ede-project.gif"><img src="static/c-ide/ede-project.gif" alt="ede-project.gif" /></a>
+</p>
+</div>
+
+<p>
+Summary:
+</p>
+
+<ul class="org-ul">
+<li>EDE, short for Emacs Development Environment, is a generic interface
+for managing projects.
+</li>
+<li>EDE enables Semantic to find sources and perform project level
+completions.
+</li>
+<li>To add a C/C++ project, simply create a project definition with this
+template in a file, such as <code>ede-projects.el</code>:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
+                      <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>
+                      <span style="color: #483d8b;">:include-path</span> '(<span style="color: #8b2252;">"/include1"</span>
+                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include paths here</span>
+    <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Load <code>ede-projects.el</code> when Emacs start.
+</li>
+<li>If you have opening files, either close or refresh it with <code>M-x
+  semantic-force-refresh</code> to make Semantic aware of new changes.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><a id="ID-7401e60b-1f91-4697-814c-1e72f395dfdd" name="ID-7401e60b-1f91-4697-814c-1e72f395dfdd"></a>Source code information</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><a id="ID-8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe" name="ID-8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe"></a>Command: <code>global-semantic-idle-summary-mode</code></h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+This mode, when enabled, displays function interface in the
+minibuffer:
+</p>
+
+
+<div class="figure">
+<p><a href="static/func_args.jpg"><img src="static/func_args.jpg" alt="func_args.jpg" /></a>
+</p>
+</div>
+
+<p>
+It works well for C but not C++, since C++ can overload function and
+<code>semantic-idle-summary-mode</code> can only display one interface at a
+time. Since this mode is part of Semantic, it also relies on
+SemanticDB that is created from parsing source files.
+</p>
+
+<p>
+Setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #4f5c7e;">global-semantic-idle-summary-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><a id="ID-50dc542d-dca8-425d-9646-083ce3ca8ae8" name="ID-50dc542d-dca8-425d-9646-083ce3ca8ae8"></a>Command: <code>global-semantic-stickyfunc-mode</code></h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+When enable, this mode shows the function point is currently in at the
+first line of the current buffer. This is useful when you have a very
+long function that spreads more than a screen, and you don't have to
+scroll up to read the function name and then scroll down to original
+position.
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-sticky-func.gif"><img src="static/c-ide/semantic-sticky-func.gif" alt="semantic-sticky-func.gif" /></a>
+</p>
+</div>
+
+<p>
+Setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #707e4f;">global-semantic-stickyfunc-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><a id="ID-81db4e8e-f913-4b5c-87e4-74d90e80aaa9" name="ID-81db4e8e-f913-4b5c-87e4-74d90e80aaa9"></a>Using <code>ggtags</code> + <code>eldoc</code></h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+You can also use <code>ggtags</code> for displaying function interface at point
+in minibuffer:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">setq-local</span> <span style="color: #5e7837;">eldoc-documentation-function</span> #'<span style="color: #5e7837;">ggtags-eldoc-function</span>)
+</pre>
+</div>
+
+<p>
+However, it won't have syntax highlighting.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><a id="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0" name="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0"></a>Source code editing</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><a id="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910" name="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910"></a>Folding</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Emacs has a minor mode called <code>hs-minor-mode</code> that allows users to
+fold and hide blocks of text. Blocks are defined by regular
+expressions which match the start and end of a text region. For
+example, anything in between <code>{</code> and <code>}</code> is a block. The regular
+expressions are defined in <code>hs-special-modes-alist</code>.
+</p>
+
+<p>
+Setup for C/C++:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>   '<span style="color: #3f7178;">hs-minor-mode</span>)
+</pre>
+</div>
+
+<p>
+Default key bindings:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>C-c @ C-c</b></td>
+<td class="left">Command: <code>hs-toggle-hiding</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Toggle hiding/showing of a block</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-c @ C-h</b></td>
+<td class="left">Command: <code>hs-hide-block</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Select current block at point and hide it</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-c @ C-l</b></td>
+<td class="left">Command: <code>hs-hide-level</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Hide all block with indentation levels</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">below this block</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-c @ C-s</b></td>
+<td class="left">Command: <code>hs-show-block</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Select current block at point and show it.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-c @ C-M-h</b></td>
+<td class="left">Command: <code>hs-hide-all</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Hide all top level blocks, displaying</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">only first and last lines.</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-c @ C-M-s</b></td>
+<td class="left">Command: <code>hs-show-all</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Show everything</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Demo:
+</p>
+
+<ul class="org-ul">
+<li>Command: <code>hs-toggle-hiding</code>
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/hs-toggle-hiding.gif"><img src="static/c-ide/hs-toggle-hiding.gif" alt="hs-toggle-hiding.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><a id="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a" name="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a"></a>Narrowing</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Narrowing means making only a text portion in current buffer
+visible. Narrowing is useful when you want to perform text editing on
+a small part of the buffer without affecting the others. For example,
+you want to delete all <code>printf</code> statements in current functions, using
+<code>flush-lines</code> command. But if you do so, you will also delete <code>printf</code>
+outside the current function, which is undesirable. By narrowing, you
+can safely remove all those <code>printf</code> and be certain that nothing else
+is changed accidentally.
+</p>
+
+<p>
+Default key bindings:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>C-x n d</b></td>
+<td class="left">Command: <code>narrow-to-defun</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Narrow buffer to current function at point</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-x n r</b></td>
+<td class="left">Command: <code>narrow-to-region</code></td>
+</tr>
+
+<tr>
+<td class="left"><b>C-x n n</b></td>
+<td class="left">Narrow buffer to active region</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>C-x n w</b></td>
+<td class="left">Command: <code>widen</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">Widen buffer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><a id="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a" name="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a"></a>Identation</h3>
+<div class="outline-text-3" id="text-5-3">
+</div>
+<div id="outline-container-sec-5-3-1" class="outline-4">
+<h4 id="sec-5-3-1"><a id="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17" name="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17"></a>Setup default C style</h4>
+<div class="outline-text-4" id="text-5-3-1">
+<p>
+Emacs offers some popular C coding styles. Select the one suitable for
+you:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Available C style:</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;gnu&#8221;: The default style for GNU projects</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;k&amp;r&#8221;: What Kernighan and Ritchie, the authors of C used in their book</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;bsd&#8221;: What BSD developers use, aka &#8220;Allman style&#8221; after Eric Allman.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;whitesmith&#8221;: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;stroustrup&#8221;: What Stroustrup, the author of C++ used in his book</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;ellemtel&#8221;: Popular C++ coding standards as defined by &#8220;Programming in C++, Rules and Recommendations,&#8221; Erik Nyquist and Mats Henricson, Ellemtel</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;linux&#8221;: What the Linux developers use for kernel development</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;python&#8221;: What Python developers use for extension modules</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;java&#8221;: The default style for java-mode (see below)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;user&#8221;: When you want to define your own style</span>
+(<span style="color: #784437;">setq</span>
+ <span style="color: #4f5c7e;">c-default-style</span> <span style="color: #8b2252;">"linux"</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">set style to "linux"</span>
+ )
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3-2" class="outline-4">
+<h4 id="sec-5-3-2"><a id="ID-394da0e4-4995-4583-9b67-2611f3352d3b" name="ID-394da0e4-4995-4583-9b67-2611f3352d3b"></a>Setup indentation</h4>
+<div class="outline-text-4" id="text-5-3-2">
+<p>
+By default, Emacs won't indent when press <b>RET</b> because the command
+bound to <b>RET</b> is newline. You can enable automatic indentation by
+binding <b>RET</b> to <code>newline-and-indent</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"RET"</span>) '<span style="color: #7e544f;">newline-and-indent</span>)  <span style="color: #b22222;">; </span><span style="color: #b22222;">automatically indent when press RET</span>
+</pre>
+</div>
+
+<p>
+When working with source code, we must pay attention to trailng
+whitespace. It is always useful to view whitespace in current buffer
+before committing your code.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">activate whitespace-mode to view all whitespace characters</span>
+(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c w"</span>) '<span style="color: #784437;">whitespace-mode</span>)
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">show unncessary whitespace that can mess up your diff</span>
+(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> (<span style="color: #a020f0;">lambda</span> () (<span style="color: #78683f;">interactive</span>) (<span style="color: #784437;">setq</span> <span style="color: #78683f;">show-trailing-whitespace</span> <span style="color: #008b8b;">1</span>)))
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">use space to indent by default</span>
+(<span style="color: #3f7178;">setq-default</span> <span style="color: #3f7178;">indent-tabs-mode</span> <span style="color: #43783f;">nil</span>)
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">set appearance of a tab that is represented by 4 spaces</span>
+(<span style="color: #3f7178;">setq-default</span> <span style="color: #707e4f;">tab-width</span> <span style="color: #008b8b;">4</span>)
+</pre>
+</div>
+
+<p>
+To clean up trailing whitespace, you can also run <code>whitespace-cleanup</code>
+command.
+</p>
+
+<p>
+To convert between <b>TAB</b> and <b>space</b>, you also have two commands:
+<code>tabify</code> to turn an active region to use <b>TAB</b> for indentation, and
+<code>untabify</code> to turn an active region to use <b>space</b> for indentation.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3-3" class="outline-4">
+<h4 id="sec-5-3-3"><a id="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d" name="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d"></a>Package: <code>clean-aindent-mode</code></h4>
+<div class="outline-text-4" id="text-5-3-3">
+<p>
+When you press <b>RET</b> to create a newline and got indented by
+<code>eletric-indent-mode</code>, you have appropriate whitespace for
+indenting. But, if you leave the line blank and move to the next line,
+the whitespace becomes useless. This package helps clean up unused
+whitespace.
+</p>
+
+<p>
+View this <a href="http://www.emacswiki.org/emacs/CleanAutoIndent">Emacswiki page</a> for more details.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: clean-aindent-mode               ;;</span>
+<span style="color: #b22222;">;;                                           </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Indent -&gt; Clean Aindent ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">clean-aindent-mode</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #707e4f;">clean-aindent-mode</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3-4" class="outline-4">
+<h4 id="sec-5-3-4"><a id="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0" name="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0"></a>Package: <code>dtrt-indent</code></h4>
+<div class="outline-text-4" id="text-5-3-4">
+<p>
+A minor mode that guesses the indentation offset originally used for
+creating source code files and transparently adjusts the corresponding
+settings in Emacs, making it more convenient to edit foreign files.
+</p>
+
+<p>
+This package is really useful when you have to work on many different
+projects (for example, your project consists of many git submodules)
+that use different indentation format. One project might use <b>TAB</b>
+for indentation; another project might use <b>space</b> for
+indentation. Having to manually switch between <b>TAB</b> and <b>space</b> is
+tiresome. We should let Emacs take care of it automatically. This
+package does exactly that. However, if a project mixes <b>TAB</b> and
+<b>space</b>, then the package will have a hard time to detect. But then
+again, if you work on such project, it doesn't matter anyway.
+</p>
+
+<p>
+Setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dtrt-indent</span>)
+(<span style="color: #5e7837;">dtrt-indent-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-3-5" class="outline-4">
+<h4 id="sec-5-3-5"><a id="ID-65c42593-e1b3-4061-8ae8-276f29258d01" name="ID-65c42593-e1b3-4061-8ae8-276f29258d01"></a>Package: <code>ws-butler</code></h4>
+<div class="outline-text-4" id="text-5-3-5">
+<p>
+<code>ws-butler</code> helps managing whitespace on every line of code written or
+edited, in an unobtrusive, help you write clean code without noisy
+whitespace effortlessly. That is:
+</p>
+
+<ul class="org-ul">
+<li>Only lines touched get trimmed. If the white space at end of buffer
+is changed, then blank lines at the end of buffer are truncated
+respecting require-final-newline.
+</li>
+
+<li>Trimming only happens when saving.
+</li>
+</ul>
+
+<p>
+With <code>clean-aindent-mode</code> and <code>dtrt-indent</code> and <code>ws-butler</code>, you
+could totally forget about whitespace. If you are careful, turn on
+<code>whitespace-mode</code> (bound to <code>C-c w</code> above) and check for whitespace
+before committing.
+</p>
+
+<p>
+Setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ws-butler</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #513f78;">ws-butler-mode</span>)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4"><a id="ID-3952aed5-31ed-4715-a892-9f55056fe98d" name="ID-3952aed5-31ed-4715-a892-9f55056fe98d"></a>Code template using <code>yasnippet</code></h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+YASnippet is a template system for Emacs. It allows you to type an
+abbreviation and automatically expand it into function
+templates. Bundled language templates include: C, C++, C#, Perl,
+Python, Ruby, SQL, LaTeX, HTML, CSS and more. The snippet syntax is
+inspired from TextMate's syntax, you can even import most TextMate
+templates to YASnippet.
+</p>
+
+<p>
+Setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: yasnippet                 ;;</span>
+<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Yasnippet        ;;</span>
+<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">yasnippet</span>)
+(<span style="color: #783f5a;">yas-global-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+
+<p>
+<span class="underline">Usage</span>:
+</p>
+
+<p>
+In major modes where <b>yasnippet</b> has snippets available,
+typing a certain keyword and <b>TAB</b> insert a predefined snippet. For
+example, in a C buffer, if you type <code>for</code> and <b>TAB</b>, it expands to:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #a020f0;">for</span> (<span style="color: #7a4f7e;">i</span> = <span style="color: #008b8b;">0</span>; <span style="color: #7a4f7e;">i</span> &lt; <span style="color: #513f78;">N</span>; <span style="color: #7a4f7e;">i</span>++) {
+    ...<span style="color: #78683f;">point</span> <span style="color: #3f7178;">will</span> <span style="color: #374478;">be</span> <span style="color: #783778;">here</span>....
+}
+</pre>
+</div>
+
+<p>
+You can view supported snippets <a href="https://github.com/AndreaCrotti/yasnippet-snippets/tree/master">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5"><a id="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0" name="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0"></a>Package: <code>smartparens</code></h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+<code>smartparens</code> is a minor mode that provides many features for
+manipulating pairs. Pair can be simple as parentheses or brackets, or
+can be programming tokens such as <code>if</code> &#x2026; <code>fi</code> or <code>if</code> &#x2026; <code>end</code> in
+many languages. The most basic and essential feature is automatic
+closing of a pair when user inserts an opening one.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smartparens-config</span>)
+(<span style="color: #707e4f;">show-smartparens-global-mode</span> <span style="color: #008b8b;">+1</span>)
+(<span style="color: #43783f;">smartparens-global-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+
+<p>
+For complete documentation, please refer to <a href="https://github.com/Fuco1/smartparens/wiki#information-for-new-users">Smartparens manual</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><a id="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466" name="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466"></a>Compilation Support</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Compilation mode turns each error message in the buffer into a
+hyperlink. You can click on each error, or execute a key binding like
+<b>RET</b> to jump to the location of that error.
+</p>
+
+<p>
+The following key bindings are available:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>C-o</b></td>
+<td class="left">Display matched location, but <b>do not</b> switch point to matched buffer</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-n</b></td>
+<td class="left">Move to next error message, but <b>do not</b> visit error location</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-p</b></td>
+<td class="left">Move to next previous message, but <b>do not</b> visit error location</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-g n</b></td>
+<td class="left">Move to next error message, visit error location</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-g p</b></td>
+<td class="left">Move to previous error message, visit error location</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>RET</b></td>
+<td class="left">Visit location of error at poiint</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-{</b></td>
+<td class="left">Move point to the next error message or match occurring in a different file</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>M-}</b></td>
+<td class="left">Move point to the previous error message or match occurring in a different file</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left"><b>q</b></td>
+<td class="left">Quit <code>*compilation*</code> buffer</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+I usually execute the same compilation command many times. It's more
+convenient if Emacs doesn't ask us to confirm every time we re-execute
+a command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;f5&gt;"</span>) (<span style="color: #a020f0;">lambda</span> ()
+                               (<span style="color: #78683f;">interactive</span>)
+                               (<span style="color: #374478;">setq-local</span> <span style="color: #513f78;">compilation-read-command</span> <span style="color: #43783f;">nil</span>)
+                               (<span style="color: #707e4f;">call-interactively</span> '<span style="color: #374478;">compile</span>)))
+</pre>
+</div>
+
+<p>
+If you want to enter a new command, add prefix argument before
+pressing <code>&lt;f5&gt;</code>.
+</p>
+
+<p>
+Demo:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/compilation-mode.gif"><img src="static/c-ide/compilation-mode.gif" alt="compilation-mode.gif" /></a>
+</p>
+</div>
+
+<p>
+As you can see, output in <code>*compilation*</code> buffer looks much better
+than in plain terminal with colors and you can also interact with it.
+</p>
+
+<p>
+You can also run other shell commands in here, not just compilation
+commands. A really cool thing with <code>compilation-mode</code> is that it is
+asynchronous. That is, if your source files contain errors, you don't
+have to wait for the whole compilation process to finish. You can
+examine the errors right away in the <code>*compilation*</code> buffer, while the
+compilation process keeps going.
+</p>
+
+<p>
+<b>TIP</b>: It is useful to open a Dired buffer of the project root and
+store a window configuration that contains it into a register, so you
+can always jump back to project root any where, any time and run
+compilation command. If you do not use know how to use registers to
+store window configurations, read it <a href="emacs-tutor.html#sec-7-29">here</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><a id="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63" name="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63"></a>Debugging with GDB Many Windows</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Emacs has built-in frontend support for GDB that provides IDE-like
+interface. It has a layout like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/gdb-many-windows.gif"><img src="static/c-ide/gdb-many-windows.gif" alt="gdb-many-windows.gif" /></a>
+</p>
+</div>
+
+<p>
+Stock Emacs doesn't enable this layout by default. You have to
+tell Emacs to always use <code>gdb-many-windows</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span>
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">use gdb-many-windows by default</span>
+ <span style="color: #4f5c7e;">gdb-many-windows</span> <span style="color: #4f5c7e;">t</span>
+
+ <span style="color: #b22222;">;; </span><span style="color: #b22222;">Non-nil means display source file containing the main routine at startup</span>
+ <span style="color: #37785e;">gdb-show-main</span> <span style="color: #4f5c7e;">t</span>
+ )
+</pre>
+</div>
+
+<p>
+Now, find a binary built for debugging, and start GDB by <code>M-x
+gdb</code>. Emacs prompts asking you how to run <code>gdb</code>. By default, the
+prompt looks like this:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/gdb-prompt.gif"><img src="static/c-ide/gdb-prompt.gif" alt="gdb-prompt.gif" /></a>
+</p>
+</div>
+
+<p>
+To use <code>gdb-many-windows</code>, you must always supply the <b>-i=mi</b> argument
+to gdb, otherwise <code>gdb-many-windows</code> won't work. By default, as you've
+seen the layout of <code>gdb-many-windows</code> above, you have the following
+buffers visible on your screen:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">1. GUD interaction buffer</th>
+<th scope="col" class="left">2. Locals/Registers buffer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">3. Primary Source buffer</td>
+<td class="left">4. I/O buffer for debugging program</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">5. Stack buffer</td>
+<td class="left">6. Breakpoints/Threads buffer</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Each cell coressponds to the following commands:
+</p>
+
+<ul class="org-ul">
+<li><code>gdb-display-gdb-buffer</code> (Cell 1): This is where you enter <code>gdb</code>
+commands, the same as in terminal. When you kill this buffer, other
+GDb buffers are also killed and debugging session is terminated.
+</li>
+
+<li><code>gdb-display-locals-buffer</code> (Cell 2): display local variables and
+its values in current stack frame. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual -
+Other GDB Buffers</a> for usage of the buffer.
+</li>
+
+<li><code>gdb-display-registers-buffer</code> (Cell 2): registers values are
+displayed here. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual - Other GDB Buffers</a> for
+usage of the buffer.
+</li>
+
+<li>Your debugging source buffer (Cell 3): Your source code for stepping
+through out the debugging session. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual -
+Source Buffers</a> for usage of the buffer.
+</li>
+
+<li><code>gdb-display-io-buffer</code> (Cell 4): This is where your program
+displays output and accepts input. In stock GDB (Command Line
+Interface), you enter input whenever a program asks for one under
+GDB prompt. Using <code>gdb-many-windows</code>, <b>you must enter input here</b>.
+</li>
+
+<li><code>gdb-display-stack-buffer</code> (Cell 5): Display function call
+stack. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Stack-Buffer.html#Stack-Buffer">GNU Manual - Stack buffer</a> for usage.
+</li>
+
+<li><code>gdb-display-breakpoints-buffer</code> (Cell 6): Display a list of
+breakpoints. Please refere to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Breakpoints-Buffer.html#Breakpoints-Buffer">GNU Manual - Breakpoints Buffer</a> for
+usage of the buffer.
+</li>
+
+<li><code>gdb-display-threads-buffer</code> (Cell 6): Display running threads in
+your programs. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Threads-Buffer.html#Threads-Buffer">GNU Manual - Threads Buffer</a> and
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Multithreaded-Debugging.html#Multithreaded-Debugging">Multithreaded Debugging</a> for usage of the buffer. 
+</li>
+</ul>
+
+<p>
+There are two useful commands that are not visible in
+<code>gdb-many-windows</code>:
+</p>
+
+<ul class="org-ul">
+<li><code>gdb-display-disassembly-buffer</code>: displays the current frame as
+assembly code.
+</li>
+<li><code>gdb-display-memory-buffer</code>: displays a portion of program memory.
+</li>
+</ul>
+
+<p>
+There are another variants of the above buffers, with <code>gdb-frame</code>
+prefix instead of <code>gdb-display</code>. When you run commands with
+<code>gdb-frame</code> prefix, the buffers are opened in a new frame instead of
+occupying an existing window. This is useful when you have 2 monitors,
+one is for the standard <code>gdb-many-windows</code> layout and another one is
+for displaying disassembly buffer and memory buffer in a separate
+frame.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>

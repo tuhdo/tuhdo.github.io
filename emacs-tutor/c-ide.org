@@ -5,6 +5,11 @@ environment. Despite it looks long, the setup is short and easy
 (mostly copy/paste Emacs Lisp code into your =init.el=); most of the
 guide are explanations and demonstrations of many useful features.
 
+Please remember that there's a table of content on the top right
+corner and you can use it to navigate this guide. If you feel your
+internet connection is too slow for my guide, you can always clone and
+read it offline: https://github.com/tuhdo/tuhdo.github.io
+
 * Source code navigation
 :PROPERTIES:
 :ID:       2b850804-a33b-4f37-96fd-5bb4e422dbee
@@ -158,6 +163,7 @@ s= to invoke Isearch on candidate buffer list.
 
 #+BEGIN_CENTER
 [[file:static/c-ide/ggtags-definitions.png][file:static/c-ide/ggtags-definitions.png]]
+
 (screenshot taken from [[https://github.com/leoliu/ggtags][ggtags]])
 #+END_CENTER
 
@@ -169,6 +175,7 @@ s= to invoke Isearch on candidate buffer list.
 
 #+BEGIN_CENTER
 [[file:static/c-ide/helm-gtags-definitions.png][file:static/c-ide/helm-gtags-definitions.png]]
+
 (screenshot taken from [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]])
 #+END_CENTER
 
@@ -638,6 +645,30 @@ It works well for C but not C++, since C++ can overload function and
 time. Since this mode is part of Semantic, it also relies on
 SemanticDB that is created from parsing source files.
 
+Setup:
+
+#+begin_src emacs-lisp
+  (global-semantic-idle-summary-mode 1)
+#+end_src
+
+** Command: =global-semantic-stickyfunc-mode=
+:PROPERTIES:
+:ID:       50dc542d-dca8-425d-9646-083ce3ca8ae8
+:END:
+When enable, this mode shows the function point is currently in at the
+first line of the current buffer. This is useful when you have a very
+long function that spreads more than a screen, and you don't have to
+scroll up to read the function name and then scroll down to original
+position.
+
+[[file:static/c-ide/semantic-sticky-func.gif][file:static/c-ide/semantic-sticky-func.gif]]
+
+Setup:
+
+#+begin_src emacs-lisp
+  (global-semantic-stickyfunc-mode 1)
+#+end_src
+
 ** Using =ggtags= + =eldoc=
 :PROPERTIES:
 :ID:       81db4e8e-f913-4b5c-87e4-74d90e80aaa9
@@ -980,6 +1011,12 @@ asynchronous. That is, if your source files contain errors, you don't
 have to wait for the whole compilation process to finish. You can
 examine the errors right away in the =*compilation*= buffer, while the
 compilation process keeps going.
+
+*TIP*: It is useful to open a Dired buffer of the project root and
+store a window configuration that contains it into a register, so you
+can always jump back to project root any where, any time and run
+compilation command. If you do not use know how to use registers to
+store window configurations, read it [[file:emacs-tutor.org::*Registers][here]].
 
 * Debugging with GDB Many Windows
 :PROPERTIES:
