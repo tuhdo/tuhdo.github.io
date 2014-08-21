@@ -1,4 +1,10 @@
 #+TITLE: Setup C/C++ Development Environment for Emacs
+
+In this guide, I will help you to setup an efficient working C/C++
+environment. Despite it looks long, the setup is short and easy
+(mostly copy/paste Emacs Lisp code into your =init.el=); most of the
+guide are explanations and demonstrations of many useful features.
+
 * Source code navigation
 :PROPERTIES:
 :ID:       2b850804-a33b-4f37-96fd-5bb4e422dbee
@@ -7,7 +13,11 @@
 :PROPERTIES:
 :ID:       b1292347-d0ed-4421-9905-33f1050883b2
 :END:
-- [[https://github.com/leoliu/ggtags][ggtags]]. Add this code snippet to setup =ggtags= and key bindings:
+- Know how to use =package.el= and MELPA. If you don't know how to
+  use, read the guide [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]].
+
+- Install [[https://github.com/leoliu/ggtags][ggtags]]. After installing =ggtags= from MELPA, add this code
+  snippet to setup =ggtags= and key bindings:
 
 #+begin_src emacs-lisp
   (add-hook 'c-mode-common-hook
@@ -72,36 +82,37 @@
 - *C-M-f* runs =forward-sexp=, move forward over a balanced
   expression that can be a pair or a symbol. Demo:
 
-[screenshot]
+  [[file:static/c-ide/forward-func.gif][file:static/c-ide/forward-func.gif]]
 
 - *C-M-b* runs =backward-sexp=, move backward over a balanced
   expression that can be a pair or a symbol. Demo:
 
-[screenshot]
+  [[file:static/c-ide/backward-func.gif][file:static/c-ide/backward-func.gif]]
 
 - *C-M-k* runs =kill-sexp=, kill balanced expression
   forward that can be a pair or a symbol. Demo:
 
-[screnshot]
-
-- *C-M-t* runs =transpose-sexps=, transpose expressions that can be a
-  pair or a symbol. Demo:
-
-[screenshot]
+  [[file:static/c-ide/kill-func-body.gif][file:static/c-ide/kill-func-body.gif]]
 
 - *C-M-<SPC>* or *C-M-@* rusn =mark-sexp=, put mark after
   following expression that can be a pair or a symbol. Demo:
 
-[screenshot]
+  [[file:static/c-ide/mark-func-body.gif][file:static/c-ide/mark-func-body.gif]]
 
 - *C-M-a* runs =beginning-of-defun=, which moves point to beginning of
-  a function
+  a function. Demo:
 
-[screenshot]
+  [[file:static/c-ide/beginning-of-defun.gif][file:static/c-ide/beginning-of-defun.gif]]
 
-- *C-M-e* runs =end-of-defun=, which moves point to end of a function.
+- *C-M-e* runs =end-of-defun=, which moves point to end of a
+  function. Demo:
 
-[screenshot]
+  [[file:static/c-ide/end-of-defun.gif][file:static/c-ide/end-of-defun.gif]]
+
+- *C-M-h* runs =mark-defun=, which put a region around whole current
+  or following function. Demo:
+
+  [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]
 
 ** Find definitions in current buffer
 :PROPERTIES:
@@ -116,7 +127,7 @@ can integrate Imenu:
 #+end_src
 
 If you use Helm, use [[http://tuhdo.github.io/helm-intro.html#sec-7][helm-semantic-or-imenu]].
-  
+
 ** Find definitions in project
 :PROPERTIES:
 :ID:       0331265b-7c3f-457e-ba1d-ef6c3cd24208
@@ -145,7 +156,10 @@ If =ggtags= gives you a list of candidates, you can use =M-n= to move
 to next candidate and =M-p= to move back previous candidate. Use =M-g
 s= to invoke Isearch on candidate buffer list.
 
-[screenshot]
+#+BEGIN_CENTER
+[[file:static/c-ide/ggtags-definitions.png][file:static/c-ide/ggtags-definitions.png]]
+(screenshot taken from [[https://github.com/leoliu/ggtags][ggtags]])
+#+END_CENTER
 
 - Using =helm-gtags=: If key bindings are properly setup as above,
   =M-.= runs =helm-gtags-dwim=, which behaves the same as
@@ -153,26 +167,39 @@ s= to invoke Isearch on candidate buffer list.
   location by using =M-,=, which runs =tags-loop-continue= (Emacs
   default).
 
-You can also find arbitrary tag definition when invoking =M-.= on
-blank space. A prompt asks you for tag pattern, which is a regexp.
+#+BEGIN_CENTER
+[[file:static/c-ide/helm-gtags-definitions.png][file:static/c-ide/helm-gtags-definitions.png]]
+(screenshot taken from [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]])
+#+END_CENTER
 
-[screenshot]
+You can also find arbitrary tag definition when invoking =M-.= on
+blank space. A prompt asks you for tag pattern, which is a
+regexp. =helm-gtags= provides a really nice feature that uses Helm to
+display all tags in a project and incrementally filtering, and is
+really fast:
+
+[[file:static/c-ide/helm-gtags-select.gif][file:static/c-ide/helm-gtags-select.gif]]
 
 ** Find references in project
 :PROPERTIES:
 :ID:       410cfad4-a08d-4139-8c37-cb1bff5bd44e
 :END:
-- Using =ggtags=:  Either use =ggtags-find-tag-dwim= or
+- Using =ggtags=:  Either run =ggtags-find-tag-dwim= or
   =ggtags-find-reference=, which only finds references.
-- Using =helm-gtags=: Either use =helm-gtags-dwim= or
+
+- Using =helm-gtags=: Either run =helm-gtags-dwim= or
   =helm-gtags-find-rtag=, which only finds references.
 
 ** Find files in project
 :PROPERTIES:
 :ID:       b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a
 :END:
-- Using =ggtags=
-- Using =helm-gtags=
+- Using =ggtags=: Run =ggtags-find-file= to find a file from all the
+  files indexed.
+
+- Using =helm-gtags=: Run =helm-gtags-find-files= to find files
+  matching regexp.
+
 ** View visited tags with tag stack
 :PROPERTIES:
 :ID:       db6bf87e-969d-42b8-ae60-b0b58f13e073
@@ -186,15 +213,6 @@ blank space. A prompt asks you for tag pattern, which is a regexp.
 - Using =helm-gtags=: Similarly, =helm-gtags= also has the command
   =helm-gtags-show-stack= that shows visited tags from newest to
   oldest, from top to bottom.
-** View past searches
-:PROPERTIES:
-:ID:       7e9592b3-3bb7-4d71-8981-13737677e8db
-:END:
-This feature is only available in =ggtags=. You can view past searches
-(not tags) in a list; each search entry includes previous position
-point was on in the tag list:
-
-[screenshot]
 
 * Source code completion
 :PROPERTIES:
@@ -216,7 +234,9 @@ templates . CEDET also provides a framework for working with
 programming languages; support for new programming languages can be
 added and use CEDET to provide IDE-like features.
 
-This tutorial only helps you use CEDET to get completion feature for C/C++.
+This tutorial only helps you use CEDET to get completion feature for
+C/C++.
+
 *** Why use CEDET?
 :PROPERTIES:
 :ID:       b8922b61-b52a-4690-8626-4ca463dd2f85
@@ -230,13 +250,13 @@ indexing tools such as GNU Global and Exuberant Ctags are really good
 at working static source code, but they do not keep track changes in
 real time; CEDET does:
 
-...[screenshot]...
+[[file:static/auto_complete.gif][file:static/auto_complete.gif]]
 
 As you can see, CEDET recognizes when =printk.h= is included and
-provides appropriate completion candidates. In constrast, non-context
+provides appropriate completion candidates. In contrast, non-context
 sentisve completion is like this:
 
-...[screenshot]...
+[[file:static/c-ide/company-clang-company-gtags.gif][file:static/c-ide/company-clang-company-gtags.gif]]
 
 In this case, the completion system gets all candidates straight from
 GNU Global generated database without considering current context.
@@ -247,6 +267,7 @@ still really fast for moderate-size source files. CEDET also makes use
 of external tools like GNU Global or Cscope or Exuberant Ctags for
 finding symbol references/definition in a project to reduce its
 workload.
+
 *** Semantic minor modes
 :PROPERTIES:
 :ID:       e57ff2d7-623a-4feb-91ac-c69487996527
@@ -277,7 +298,7 @@ This command activates =semantic-mode=. In Semantic mode, Emacs parses
 the buffers you visit for their semantic content. The parsing looks
 like this:
 
-...[screenshot]...
+[[file:static/c-ide/semantic-parsing.gif][file:static/c-ide/semantic-parsing.gif]]
 
 Notice that at the bottom, Emacs prints messages like this: =Parsing
 <file> (LL)...<progress in percentage>=. This is common behavior of
@@ -286,9 +307,7 @@ completion, =Semantic= tries to be accurate by parsing all the
 included files and all the included files in the included files and so
 on, until it reaches the end:
 
-[screenshot]
-
-You may worry that this process would take a long time. Sometimes, it
+You may worry that this process takes a long time. Sometimes, it
 does. However, this is just a one time process. Once it is parsed,
 Semantic will cache the parsing result for future use. The next time
 you perform some action on the parsed code, such as code completion,
@@ -300,7 +319,7 @@ is slow.
 :PROPERTIES:
 :ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
 :END:
-As mentioned above, Semantic caches parsing output for future
+As mentioned above, Semantic caches parsing result for future
 use. To do that, =semanticdb-minor-mode= must be activated. In
 Semantic DB mode, Semantic parsers store results in a database, which
 can be saved for future Emacs sessions. The cache is saved in
@@ -318,11 +337,12 @@ reparsed when user explicitly issue some command.
 
 With =semantic-idle-scheduler-mode=, Emacs keeps track live changes of
 your source code.
+
 ***** Package: =function-args=
 :PROPERTIES:
 :ID:       3e24664a-c6cc-44d5-b0ea-457a25590d38
 :END:
-=functions-args= is a GNU Emacs package for showing an inline
+[[https://github.com/abo-abo/function-args][function-args]] is a GNU Emacs package for showing an inline
 arguments hint for the C/C++ function at point.
 
 Setup:
@@ -330,21 +350,39 @@ Setup:
 #+begin_src emacs-lisp
   (require 'function-args)
   (fa-config-default)
+  (define-key c-mode-map  [(tab)] 'moo-complete)
+  (define-key c++-mode-map  [(tab)] 'moo-complete)
 #+end_src
 
-=function-args= offers the following features:
+Basic Usage (taken from =function-args= homepage):
 
-- Command: =fa-show=
+- =fa-show=: Show an overlay hint with current function arguments like
+  so:
 
-- Command: =fa-jump=
+  [[file:static/c-ide/fa-show][file:static/c-ide/fa-show]]
 
-- Command: =moo-complete= (must install =helm=)
+  The point position is tracked and the current hint argument is
+  updated accordingly. After you've called it with =M-i=, you can cycle
+  the overloaded functions with =M-n/M-h=. You can dismiss the hint with
+  =M-u= or by editing anywhere outside the function arguments.
 
-- Command: =moo-propose-virtual= (must install =helm=)
+- =fa-jump=: While the overlay hint from =fa-show= is active, jump to
+  the current function. The default shortcut is =M-j=. If the overlay
+  isn't active, call whatever was bound to =M-j= before (usually it's
+  =c-indent-new-comment-line=).
 
-- Command: =moo-propose-override= (must install =helm=)
+- =moo-complete= (must install =helm=): It's essentially a
+  c++-specific version of semantic-ia-complete-symbol. It behaves
+  better, because it accounts more for function overloading and
+  inheritance. Also it's prettier (type parts are fontified) and
+  faster (helm is used for completion). You can invoke it with =M-o=
+  by default.
 
-[screenshot]
+  [[file:static/c-ide/moo-complete.png][file:static/c-ide/moo-complete.png]]
+
+There are a few more commands. You can view all the descriptions for
+all commands [[https://github.com/abo-abo/function-args#main-functions][here]].
+
 ***** Package: =company=
 :PROPERTIES:
 :ID:       3b617d5a-5957-4f87-be20-4241ba8b827a
@@ -359,11 +397,11 @@ You can also use =company= for code completion. After installing
 Please read the *Usage* section on [[http://company-mode.github.io/][company homepage]] to learn company
 general features. You have three commands for completing C/C++ code:
 
-- company-clang: use =clang= to retrieve completion candidates.
-- company-semantic: use =Semantic= to retrieve completion
+- =company-clang=: use =clang= to retrieve completion candidates.
+- =company-semantic=: use =Semantic= to retrieve completion
   candidates. Function interface of each candidate is shown in the
   minibuffer.
-- company-gtags: use GTAGS database from =GNU Global= to retrieve
+- =company-gtags=: use GTAGS database from =GNU Global= to retrieve
   completion candidates.
 
 ***** Package: =company-c-headers=
@@ -378,23 +416,37 @@ Company. After installing from MELPA, set it up:
   (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
 #+end_src
 
-[screenshot]
+[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
 
 *** CEDET can do more
 :PROPERTIES:
 :ID:       a4605a59-5c3f-4604-84ce-6f22f15ea8bc
 :END:
-This guide only covers a portion of CEDET. CEDET also has features
-such as code navigation, jump to definition and gather
-references. These are cool features. For example, CEDET provide nice
-syntax highlighting for reference gathered:
+This guide only covers a portion of CEDET. Since Semantic parses
+source code and creates a database for code  completion, it would be
+useful to reuse the database for other features such as code
+navigation, jump to definition and gather references. These are cool
+features. For example, CEDET provide nice syntax highlighting for
+gathering references:
 
-[screenshot]
+[[file:static/c-ide/semantic-symref.gif][file:~/Public/blog/publish/emacs-tutor/static/c-ide/semantic-symref.gif]]
+
+The above feature is called Semantic Symref. It queries tag references
+from SemanticDB and display the result in another buffer. Please
+refer to [[https://www.gnu.org/software/emacs/manual/html_node/semantic/SymRef.html][GNU Manual - Symbol References]] for more info. If your project
+is only the size of Emacs or similar, then Semantic Symref is a viable
+choice. Remember that when entering new files, Semantic takes time to
+parse and if you gather references for the first time, you will have
+to wait for a while for Semantic doing its job. After the first time,
+subsequent uses of Semantic Symref happens instantly.
 
 But, for navigating around the source tree, we already have =ggtags=
-and =helm-gtags=, which uses GNU Global for faster indexing. The only
-thing that other tools cannot do, is context-sensitive
-completion. That's why we use CEDET for code completion in this guide.
+and =helm-gtags=, which uses GNU Global for much faster indexing for
+large project like Linux kernel. The only thing that other tools
+cannot do, is context-sensitive completion. That's why we only use
+CEDET for code completion in this guide. Nevertheless, Semantic Symref
+is still a viable choice for small to medium sized projects. Choose
+the one you prefer.
 
 Other solutions that use =clang= is quite good but not there yet. For
 example, [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]] is fine for getting system header
@@ -408,29 +460,21 @@ get irrelevant candidates from other projects as well. Quite
 annoying. =company-clang= also has the same problem. Another solution
 is [[https://github.com/Andersbakken/rtags][rtags]], but it is really complicated to setup, especially if you use
 =make=; I never succeed with it. =clang= based packages still have a
-long way to go. CEDET also supports =clang= for retrieving completion 
+long way to go. CEDET also supports =clang= for retrieving completion
 candidates. It also has the limitations of other packages.
 
 CEDET is best used with new project, because Semantic parse code as
 you write. As a result, you won't have to wait for parsing unknown
 source files to get completion candidates.
-* More source code navigation with Semantic Senator
-:PROPERTIES:
-:ID:       75622ca6-8863-4000-833b-a7f0fea485dc
-:END:
- So that you learned the basics of CEDET and Semantic, it's time to
- introduce how to navigate with Semantic. Some features are covered
- and redundant with =helm-gtags= or =ggtags=. I will still cover
- lightly those features in Senator to satisfy your curiosity.
 
-* Project management EDE and Projectile
+* Project management with EDE
 :PROPERTIES:
 :ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
 :END:
-EDE is a generic interface for managing projects. In EDE, a project
-hierarchy matches a directory hierarchy. The project's topmost
-directory is called the project root, and its subdirectories are
-sub-projects.
+EDE, short for Emacs Development Environment, is a generic interface
+for managing projects. In EDE, a project hierarchy matches a directory
+hierarchy. The project's topmost directory is called the project root,
+and its subdirectories are sub-projects.
 
 EDE can do many things but we will just use it for code completion at
 project level. To demonstrate the use of EDE, we will create a little
@@ -480,7 +524,7 @@ The files look silly but good enough for our learning purpose. Now, in
 =main.c=, let's test auto-completion by including appropriate header
 file:
 
-[screenshot]
+[[file:static/c-ide/ede-same-dir-completion.gif][file:static/c-ide/ede-same-dir-completion.gif]]
 
 Everything works fine when all files are under the same
 directory. Let's split the files into different directories we created
@@ -503,13 +547,15 @@ before, like this:
                   lib2.h
 #+end_src
 
-[screenshot]
+[[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
 
-Try auto-completion again. This time, it won't work. No candidate is
-displayed. It is because Semantic only looks for header files in
-current directory by default. If you put it elsewhere, you have to
-tell Semantic where it is. This is not limited to only Semantic; you
-have to specify project include path in Eclipse as well.
+Close Emacs and start again, otherwise Semantic still caches your old
+parsing result. Try auto-completion again. This time, it won't
+work. No candidate is displayed. It is because Semantic only looks for
+header files in current directory by default. If you put it elsewhere,
+you have to tell Semantic where it is. This is not limited to only
+Semantic; you have to specify project include path in Eclipse as
+well.
 
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
 - In this file, add a new =ede-cpp-root-project= in this form:
@@ -551,11 +597,6 @@ aware of your project include paths. Try auto-completion and you will
 see everything is working fine again:
 
 [screenshot]
-
-** Package: =Projectile=
-:PROPERTIES:
-:ID:       a623aaa6-1ddd-4d86-aade-20bbe5690b75
-:END:
 
 * Source code information
 :PROPERTIES:
@@ -600,7 +641,7 @@ Emacs has a minor mode called =hs-minor-mode= that allows users to
 fold and hide blocks of text. Blocks are defined by regular
 expressions which match the start and end of a text region. For
 example, anything in between ={= and =}= is a block. The regular
-expressions are defined in =hs-special-modes-alist=. 
+expressions are defined in =hs-special-modes-alist=.
 
 Setup for C/C++:
 
@@ -827,18 +868,57 @@ Setup:
 :PROPERTIES:
 :ID:       3952aed5-31ed-4715-a892-9f55056fe98d
 :END:
-** Semantically kill/copy/yank (copy/cut/paste)
-:PROPERTIES:
-:ID:       21edcf89-82dc-476c-ae5d-714cdce1c7b4
-:END:
-** Package: =smartparens= for automatic pairing
+YASnippet is a template system for Emacs. It allows you to type an
+abbreviation and automatically expand it into function
+templates. Bundled language templates include: C, C++, C#, Perl,
+Python, Ruby, SQL, LaTeX, HTML, CSS and more. The snippet syntax is
+inspired from TextMate's syntax, you can even import most TextMate
+templates to YASnippet.
+
+Setup:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: yasnippet                 ;;
+  ;;                                    ;;
+  ;; GROUP: Editing -> Yasnippet        ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'yasnippet)
+  (yas-global-mode 1)
+#+end_src
+
+_Usage_:
+
+In major modes where *yasnippet* has snippets available,
+typing a certain keyword and *TAB* insert a predefined snippet. For
+example, in a C buffer, if you type =for= and *TAB*, it expands to:
+
+#+begin_src c
+  for (i = 0; i < N; i++) {
+      ...point will be here....
+  }
+#+end_src
+
+You can view supported snippets [[https://github.com/AndreaCrotti/yasnippet-snippets/tree/master][here]].
+
+** Package: =smartparens=
 :PROPERTIES:
 :ID:       62b4b86b-222f-4915-834e-b3d79b73f9f0
 :END:
-** Package: =expand-region= for marking text semantically
-:PROPERTIES:
-:ID:       ee22993e-7afa-4bad-b68d-c8ff212bdf69
-:END:
+=smartparens= is a minor mode that provides many features for
+manipulating pairs. Pair can be simple as parentheses or brackets, or
+can be programming tokens such as =if= ... =fi= or =if= ... =end= in
+many languages. The most basic and essential feature is automatic
+closing of a pair when user inserts an opening one.
+
+#+begin_src emacs-lisp
+  (require 'smartparens-config)
+  (show-smartparens-global-mode +1)
+  (smartparens-global-mode 1)
+#+end_src
+
+For complete documentation, please refer to [[https://github.com/Fuco1/smartparens/wiki#information-for-new-users][Smartparens manual]].
+
 * Compilation Support
 :PROPERTIES:
 :ID:       28a612e9-d3f2-47be-acbb-91aeb9b32466
@@ -870,13 +950,112 @@ Setup:
 | *q*     | Quit =*compilation*= buffer                                                     |
 |---------+---------------------------------------------------------------------------------|
 
+I usually execute the same compilation command many times. It's more
+convenient if Emacs doesn't ask us to confirm every time we re-execute
+a command:
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f5>") (lambda ()
+                                 (interactive)
+                                 (setq-local compilation-read-command nil)
+                                 (call-interactively 'compile)))
+#+end_src
+
+If you want to enter a new command, add prefix argument.
+
+Demo:
+
+[screenshot]
+
+You can also run other shell commands in here, not just compilation
+commands.
+
 * Debugging with GDB Many Windows
 :PROPERTIES:
 :ID:       a13b3e48-d73c-4fc4-97c3-b9f1d5814e63
 :END:
+Emacs has built-in frontend support for GDB that provides IDE-like
+interface. It has a layout like this:
 
-     | GUD interaction buffer | Locals/Registers buffer     |
-     |------------------------+-----------------------------|
-     | Primary Source buffer  | I/O buffer for debugged pgm |
-     |------------------------+-----------------------------|
-     | Stack buffer           | Breakpoints/Threads buffer  |
+[screenshot]
+
+Stock Emacs doesn't enable this layout by default. You have to
+tell Emacs to always use =gdb-many-windows=:
+
+#+begin_src emacs-lisp
+  (setq
+   ;; use gdb-many-windows by default
+   gdb-many-windows t
+
+   ;; Non-nil means display source file containing the main routine at startup
+   gdb-show-main t
+   )
+#+end_src
+
+Now, find a binary built for debugging, and start GDB by =M-x
+gdb=. Emacs prompts asking you how to run =gdb=. By default, the
+prompt looks like this:
+
+[screenshot]
+
+To use =gdb-many-windows=, you must always supply the *-i=mi* argument
+to gdb, otherwise =gdb-many-windows= won't work. By default, as you've
+seen the layout of =gdb-many-windows= above, you have the following
+buffers visible on your screen:
+
+|---------------------------+-------------------------------------|
+| 1. GUD interaction buffer | 2. Locals/Registers buffer          |
+|---------------------------+-------------------------------------|
+| 3. Primary Source buffer  | 4. I/O buffer for debugging program |
+|---------------------------+-------------------------------------|
+| 5. Stack buffer           | 6. Breakpoints/Threads buffer       |
+|---------------------------+-------------------------------------|
+
+Each cell coressponds to the following commands:
+
+- =gdb-display-gdb-buffer= (Cell 1): This is where you enter =gdb=
+  commands, the same as in terminal. When you kill this buffer, other
+  GDb buffers are also killed and debugging session is terminated.
+
+- =gdb-display-locals-buffer= (Cell 2): display local variables and
+  its values in current stack frame. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual -
+  Other GDB Buffers]] for usage of the buffer.
+
+- =gdb-display-registers-buffer= (Cell 2): registers values are
+  displayed here. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual - Other GDB Buffers]] for
+  usage of the buffer.
+
+- Your debugging source buffer (Cell 3): Your source code for stepping
+  through out the debugging session. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual -
+  Source Buffers]] for usage of the buffer.
+
+- =gdb-display-io-buffer= (Cell 4): This is where your program
+  displays output and accepts input. In stock GDB (Command Line
+  Interface), you enter input whenever a program asks for one under
+  GDB prompt. Using =gdb-many-windows=, *you must enter input here*.
+
+- =gdb-display-stack-buffer= (Cell 5): Display function call
+  stack. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Stack-Buffer.html#Stack-Buffer][GNU Manual - Stack buffer]] for usage.
+
+- =gdb-display-breakpoints-buffer= (Cell 6): Display a list of
+  breakpoints. Please refere to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Breakpoints-Buffer.html#Breakpoints-Buffer][GNU Manual - Breakpoints Buffer]] for
+  usage of the buffer.
+
+- =gdb-display-threads-buffer= (Cell 6): Display running threads in
+  your programs. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Threads-Buffer.html#Threads-Buffer][GNU Manual - Threads Buffer]] and
+  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Multithreaded-Debugging.html#Multithreaded-Debugging][Multithreaded Debugging]] for usage of the buffer. 
+
+There are two useful commands that are not visible in
+=gdb-many-windows=:
+
+- =gdb-display-disassembly-buffer=: displays the current frame as
+  assembly code.
+- =gdb-display-memory-buffer=: displays a portion of program memory.
+
+There are another variants of the above buffers, with =gdb-frame=
+prefix instead of =gdb-display=. When you run commands with
+=gdb-frame= prefix, the buffers are opened in a new frame instead of
+occupying an existing window. This is useful when you have 2 monitors,
+one is for the standard =gdb-many-windows= layout and another one is
+for displaying disassembly buffer and memory buffer in a separate
+frame.
