@@ -1,4 +1,4 @@
-#+TITLE: Setup C/C++ Development Environment for Emacs
+#+TITLE: C/C++ Development Environment for Emacs
 
 In this guide, I will help you to setup an efficient working C/C++
 environment. Despite it looks long, the setup is short and easy
