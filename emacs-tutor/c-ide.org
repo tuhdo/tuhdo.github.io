@@ -1049,8 +1049,9 @@ prompt looks like this:
 To use =gdb-many-windows=, you must always supply the *-i=mi* argument
 to gdb, otherwise =gdb-many-windows= won't work. By default, as you've
 seen the layout of =gdb-many-windows= above, you have the following
-buffers visible on your screen:
+buffers visible on your screen (ignore the first row):
 
+|                           |                                     |
 |---------------------------+-------------------------------------|
 | 1. GUD interaction buffer | 2. Locals/Registers buffer          |
 |---------------------------+-------------------------------------|

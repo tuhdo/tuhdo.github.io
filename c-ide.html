@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Setup C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-21 T5 22:45 -->
+<!-- 2014-08-21 T5 22:52 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -1867,7 +1867,7 @@ prompt looks like this:
 To use <code>gdb-many-windows</code>, you must always supply the <b>-i=mi</b> argument
 to gdb, otherwise <code>gdb-many-windows</code> won't work. By default, as you've
 seen the layout of <code>gdb-many-windows</code> above, you have the following
-buffers visible on your screen:
+buffers visible on your screen (ignore the first row):
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1880,10 +1880,16 @@ buffers visible on your screen:
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="left">1. GUD interaction buffer</th>
-<th scope="col" class="left">2. Locals/Registers buffer</th>
+<th scope="col" class="left">&#xa0;</th>
+<th scope="col" class="left">&#xa0;</th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td class="left">1. GUD interaction buffer</td>
+<td class="left">2. Locals/Registers buffer</td>
+</tr>
+</tbody>
 <tbody>
 <tr>
 <td class="left">3. Primary Source buffer</td>
