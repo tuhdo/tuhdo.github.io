@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Setup C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-21 T5 22:52 -->
+<!-- 2014-08-21 T5 22:54 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -1909,37 +1909,38 @@ Each cell coressponds to the following commands:
 </p>
 
 <ul class="org-ul">
-<li><code>gdb-display-gdb-buffer</code> (Cell 1): This is where you enter <code>gdb</code>
+<li><code>gdb-display-gdb-buffer</code> <b>(Cell 1)</b>: This is where you enter <code>gdb</code>
 commands, the same as in terminal. When you kill this buffer, other
 GDb buffers are also killed and debugging session is terminated.
 </li>
 
-<li><code>gdb-display-locals-buffer</code> (Cell 2): display local variables and
+<li><code>gdb-display-locals-buffer</code> <b>(Cell 2)</b>: display local variables and
 its values in current stack frame. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual -
 Other GDB Buffers</a> for usage of the buffer.
 </li>
 
-<li><code>gdb-display-registers-buffer</code> (Cell 2): registers values are
+<li><code>gdb-display-registers-buffer</code> <b>(Cell 2)</b>: registers values are
 displayed here. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual - Other GDB Buffers</a> for
 usage of the buffer.
 </li>
 
-<li>Your debugging source buffer (Cell 3): Your source code for stepping
-through out the debugging session. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual -
-Source Buffers</a> for usage of the buffer.
+<li>Your source buffer <b>(Cell 3)</b>: Your source code for stepping through
+out the debugging session. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers">GNU Manual - Source
+Buffers</a> for usage of the buffer.
 </li>
 
-<li><code>gdb-display-io-buffer</code> (Cell 4): This is where your program
+<li><code>gdb-display-io-buffer</code> <b>(Cell 4)</b>: This is where your program
 displays output and accepts input. In stock GDB (Command Line
 Interface), you enter input whenever a program asks for one under
-GDB prompt. Using <code>gdb-many-windows</code>, <b>you must enter input here</b>.
+GDB prompt. Using <code>gdb-many-windows</code>, <b>you must enter program input
+here</b>.
 </li>
 
-<li><code>gdb-display-stack-buffer</code> (Cell 5): Display function call
+<li><code>gdb-display-stack-buffer</code> <b>(Cell 5)</b>: Display function call
 stack. Please refer to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Stack-Buffer.html#Stack-Buffer">GNU Manual - Stack buffer</a> for usage.
 </li>
 
-<li><code>gdb-display-breakpoints-buffer</code> (Cell 6): Display a list of
+<li><code>gdb-display-breakpoints-buffer</code> <b>(Cell 6)</b>: Display a list of
 breakpoints. Please refere to <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Breakpoints-Buffer.html#Breakpoints-Buffer">GNU Manual - Breakpoints Buffer</a> for
 usage of the buffer.
 </li>

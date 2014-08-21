@@ -1062,31 +1062,32 @@ buffers visible on your screen (ignore the first row):
 
 Each cell coressponds to the following commands:
 
-- =gdb-display-gdb-buffer= (Cell 1): This is where you enter =gdb=
+- =gdb-display-gdb-buffer= *(Cell 1)*: This is where you enter =gdb=
   commands, the same as in terminal. When you kill this buffer, other
   GDb buffers are also killed and debugging session is terminated.
 
-- =gdb-display-locals-buffer= (Cell 2): display local variables and
+- =gdb-display-locals-buffer= *(Cell 2)*: display local variables and
   its values in current stack frame. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual -
   Other GDB Buffers]] for usage of the buffer.
 
-- =gdb-display-registers-buffer= (Cell 2): registers values are
+- =gdb-display-registers-buffer= *(Cell 2)*: registers values are
   displayed here. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual - Other GDB Buffers]] for
   usage of the buffer.
 
-- Your debugging source buffer (Cell 3): Your source code for stepping
-  through out the debugging session. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual -
-  Source Buffers]] for usage of the buffer.
+- Your source buffer *(Cell 3)*: Your source code for stepping through
+  out the debugging session. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Source-Buffers.html#Source-Buffers][GNU Manual - Source
+  Buffers]] for usage of the buffer.
 
-- =gdb-display-io-buffer= (Cell 4): This is where your program
+- =gdb-display-io-buffer= *(Cell 4)*: This is where your program
   displays output and accepts input. In stock GDB (Command Line
   Interface), you enter input whenever a program asks for one under
-  GDB prompt. Using =gdb-many-windows=, *you must enter input here*.
+  GDB prompt. Using =gdb-many-windows=, *you must enter program input
+  here*.
 
-- =gdb-display-stack-buffer= (Cell 5): Display function call
+- =gdb-display-stack-buffer= *(Cell 5)*: Display function call
   stack. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Stack-Buffer.html#Stack-Buffer][GNU Manual - Stack buffer]] for usage.
 
-- =gdb-display-breakpoints-buffer= (Cell 6): Display a list of
+- =gdb-display-breakpoints-buffer= *(Cell 6)*: Display a list of
   breakpoints. Please refere to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Breakpoints-Buffer.html#Breakpoints-Buffer][GNU Manual - Breakpoints Buffer]] for
   usage of the buffer.
 
