@@ -291,6 +291,9 @@ contextual code completion, code navigation.
 To enable code completion using Semantic, add the following code:
 
 #+begin_src emacs-lisp
+  (require 'cc-mode)
+  (require 'semantic)
+
   (global-semanticdb-minor-mode 1)
   (global-semantic-idle-scheduler-mode 1)
 
@@ -486,6 +489,14 @@ and its subdirectories are sub-projects.
 EDE can do many things but we will just use it for code completion at
 project level. To demonstrate the use of EDE, we will create a little
 project of our own.
+
+To setup EDE:
+
+#+begin_src emacs-lisp
+  (add-to-list 'c-mode-hook 'ede-minor-mode)
+  (add-to-list 'c++-mode-hook 'ede-minor-mode)
+#+end_src
+
 
 - First, create this directory structure (I assume you know how to
   manage directory with Dired):

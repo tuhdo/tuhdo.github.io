@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-21 T5 23:01 -->
+<!-- 2014-08-22 T6 01:47 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -642,7 +642,10 @@ To enable code completion using Semantic, add the following code:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #5e7837;">global-semanticdb-minor-mode</span> <span style="color: #008b8b;">1</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">cc-mode</span>)
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">semantic</span>)
+
+(<span style="color: #5e7837;">global-semanticdb-minor-mode</span> <span style="color: #008b8b;">1</span>)
 (<span style="color: #513f78;">global-semantic-idle-scheduler-mode</span> <span style="color: #008b8b;">1</span>)
 
 (<span style="color: #513f78;">semantic-mode</span> <span style="color: #008b8b;">1</span>)
@@ -913,6 +916,18 @@ EDE can do many things but we will just use it for code completion at
 project level. To demonstrate the use of EDE, we will create a little
 project of our own.
 </p>
+
+<p>
+To setup EDE:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #4f5c7e;">c-mode-hook</span> '<span style="color: #784437;">ede-minor-mode</span>)
+(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #43783f;">c++-mode-hook</span> '<span style="color: #784437;">ede-minor-mode</span>)
+</pre>
+</div>
+
 
 <ul class="org-ul">
 <li>First, create this directory structure (I assume you know how to
