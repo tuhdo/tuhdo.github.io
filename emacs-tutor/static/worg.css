@@ -323,6 +323,12 @@ content: "*** "
         text-decoration: underline;
     }
 
+    pre.src {
+        position: static;
+        overflow: visible;
+        padding-top: 1.2em;
+    }
+
     /* Styles for org-info.js */
 
     .org-info-js_info-navigation
