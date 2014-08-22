@@ -325,8 +325,11 @@ content: "*** "
 
     pre.src {
         position: static;
-        overflow: visible;
-        padding-top: 1.2em;
+    }
+
+    pre.src:before {
+        visibility: hidden;
+        display: none;
     }
 
     /* Styles for org-info.js */
