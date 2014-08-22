@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 T6 01:47 -->
+<!-- 2014-08-22 Fri 10:20 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -228,6 +228,42 @@ internet connection is too slow for my guide, you can always clone and
 read it offline: <a href="https://github.com/tuhdo/tuhdo.github.io">https://github.com/tuhdo/tuhdo.github.io</a>
 </p>
 
+<p>
+<b>Update 22 Aug 2014</b>: I added an Emacs repository that is properly
+configured for demonstration purpose. You can clone and play with it
+and you can ignore all the Elisp code for setting up throughout the
+guide:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell-script"><span style="color: #374478;">git</span> <span style="color: #784437;">clone</span> <span style="color: #78683f;">https://github.com/tuhdo/emacs-c-ide-demo.git</span> <span style="color: #78683f;">~/.emacs.d</span>
+</pre>
+</div>
+
+<p>
+Remember to backup your <code>~/.emacs.d</code> elsewhere. In the demo
+repository, I already installed both <code>ggtags</code> and
+<code>helm-gtags</code>. <code>helm-gtags</code> is enabled by default. If you want to use
+<code>ggtags</code>, comment this line in <code>init.el</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm-gtags</span>)
+</pre>
+</div>
+
+<p>
+And uncomment this line:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'setup-ggtags)</span>
+</pre>
+</div>
+
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><a id="ID-2b850804-a33b-4f37-96fd-5bb4e422dbee" name="ID-2b850804-a33b-4f37-96fd-5bb4e422dbee"></a>Source code navigation</h2>
 <div class="outline-text-2" id="text-1">
@@ -247,7 +283,8 @@ snippet to setup <code>ggtags</code> and key bindings:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ggtags</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
           (<span style="color: #a020f0;">lambda</span> ()
             (<span style="color: #a020f0;">when</span> (<span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span>)
               (<span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span>))))
@@ -301,7 +338,7 @@ Helm, please read the <a href="http://tuhdo.github.io/helm-intro.html">Helm guid
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">key bindings</span>
 (<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-s"</span>) '<span style="color: #707e4f;">helm-gtags-select</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783778;">kbpd</span> <span style="color: #8b2252;">"M-."</span>) '<span style="color: #5e7837;">helm-gtags-dwim</span>)
+(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-."</span>) '<span style="color: #5e7837;">helm-gtags-dwim</span>)
 (<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span>) '<span style="color: #78683f;">helm-gtags-pop-stack</span>)
 (<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &lt;"</span>) '<span style="color: #7e544f;">helm-gtags-previous-history</span>)
 (<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &gt;"</span>) '<span style="color: #43783f;">helm-gtags-next-history</span>)
@@ -790,7 +827,8 @@ You can also use <code>company</code> for code completion. After installing
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #3f7178;">after-init-hook</span> '<span style="color: #374478;">global-company-mode</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">company</span>)
+(<span style="color: #783778;">add-hook</span> '<span style="color: #3f7178;">after-init-hook</span> '<span style="color: #374478;">global-company-mode</span>)
 </pre>
 </div>
 
@@ -849,7 +887,7 @@ gathering references:
 
 
 <div class="figure">
-<p><a href="static/c-ide/semantic-symref.gif"><img src="file:///home/tuhdo/Public/blog/publish/emacs-tutor/static/c-ide/semantic-symref.gif" alt="semantic-symref.gif" /></a>
+<p><a href="static/c-ide/semantic-symref.gif"><img src="static/c-ide/semantic-symref.gif" alt="semantic-symref.gif" /></a>
 </p>
 </div>
 
@@ -923,8 +961,8 @@ To setup EDE:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #4f5c7e;">c-mode-hook</span> '<span style="color: #784437;">ede-minor-mode</span>)
-(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #43783f;">c++-mode-hook</span> '<span style="color: #784437;">ede-minor-mode</span>)
+<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ede</span>)
+(<span style="color: #4f5c7e;">global-ede-mode</span>)
 </pre>
 </div>
 
@@ -1534,11 +1572,7 @@ View this <a href="http://www.emacswiki.org/emacs/CleanAutoIndent">Emacswiki pag
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: clean-aindent-mode               ;;</span>
-<span style="color: #b22222;">;;                                           </span><span style="color: #b22222;">;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Indent -&gt; Clean Aindent ;;</span>
-<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: clean-aindent-mode</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">clean-aindent-mode</span>)
 (<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #707e4f;">clean-aindent-mode</span>)
 </pre>
@@ -1573,7 +1607,8 @@ Setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dtrt-indent</span>)
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: dtrt-indent</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dtrt-indent</span>)
 (<span style="color: #5e7837;">dtrt-indent-mode</span> <span style="color: #008b8b;">1</span>)
 </pre>
 </div>
@@ -1612,7 +1647,8 @@ Setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ws-butler</span>)
+<pre class="src src-emacs-lisp">  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: ws-butler</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ws-butler</span>)
 (<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #513f78;">ws-butler-mode</span>)
 </pre>
 </div>
@@ -1638,11 +1674,7 @@ Setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: yasnippet                 ;;</span>
-<span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Editing -&gt; Yasnippet        ;;</span>
-<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: yasnippet</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">yasnippet</span>)
 (<span style="color: #783f5a;">yas-global-mode</span> <span style="color: #008b8b;">1</span>)
 </pre>
@@ -1685,7 +1717,8 @@ closing of a pair when user inserts an opening one.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smartparens-config</span>)
+<pre class="src src-emacs-lisp">  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: smartparens</span>
+(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smartparens-config</span>)
 (<span style="color: #707e4f;">show-smartparens-global-mode</span> <span style="color: #008b8b;">+1</span>)
 (<span style="color: #43783f;">smartparens-global-mode</span> <span style="color: #008b8b;">1</span>)
 </pre>

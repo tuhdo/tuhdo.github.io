@@ -10,6 +10,30 @@ corner and you can use it to navigate this guide. If you feel your
 internet connection is too slow for my guide, you can always clone and
 read it offline: https://github.com/tuhdo/tuhdo.github.io
 
+*Update 22 Aug 2014*: I added an Emacs repository that is properly
+configured for demonstration purpose. You can clone and play with it
+and you can ignore all the Elisp code for setting up throughout the
+guide:
+
+#+begin_src shell-script
+  git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
+#+end_src
+
+Remember to backup your =~/.emacs.d= elsewhere. In the demo
+repository, I already installed both =ggtags= and
+=helm-gtags=. =helm-gtags= is enabled by default. If you want to use
+=ggtags=, comment this line in =init.el=:
+
+#+begin_src emacs-lisp
+  (require 'setup-helm-gtags)
+#+end_src
+
+And uncomment this line:
+
+#+begin_src emacs-lisp
+  ;; (require 'setup-ggtags)
+#+end_src
+
 * Source code navigation
 :PROPERTIES:
 :ID:       2b850804-a33b-4f37-96fd-5bb4e422dbee
@@ -25,6 +49,7 @@ read it offline: https://github.com/tuhdo/tuhdo.github.io
   snippet to setup =ggtags= and key bindings:
 
 #+begin_src emacs-lisp
+  (require 'ggtags)
   (add-hook 'c-mode-common-hook
             (lambda ()
               (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
@@ -74,7 +99,7 @@ read it offline: https://github.com/tuhdo/tuhdo.github.io
 
   ;; key bindings
   (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
-  (define-key helm-gtags-mode-map (kbpd "M-.") 'helm-gtags-dwim)
+  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
   (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
   (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
   (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
@@ -401,6 +426,7 @@ You can also use =company= for code completion. After installing
 =company= from MELPA, activate it globally:
 
 #+begin_src emacs-lisp
+  (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 
@@ -439,7 +465,7 @@ navigation, jump to definition and gather references. These are cool
 features. For example, CEDET provide nice syntax highlighting for
 gathering references:
 
-[[file:static/c-ide/semantic-symref.gif][file:~/Public/blog/publish/emacs-tutor/static/c-ide/semantic-symref.gif]]
+[[file:static/c-ide/semantic-symref.gif][file:static/c-ide/semantic-symref.gif]]
 
 The above feature is called Semantic Symref. It queries tag references
 from SemanticDB and display the result in another buffer. Please
@@ -493,8 +519,8 @@ project of our own.
 To setup EDE:
 
 #+begin_src emacs-lisp
-  (add-to-list 'c-mode-hook 'ede-minor-mode)
-  (add-to-list 'c++-mode-hook 'ede-minor-mode)
+  (require 'ede)
+  (global-ede-mode)
 #+end_src
 
 
@@ -849,11 +875,7 @@ whitespace.
 View this [[http://www.emacswiki.org/emacs/CleanAutoIndent][Emacswiki page]] for more details.
 
 #+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Package: clean-aindent-mode               ;;
-  ;;                                           ;;
-  ;; GROUP: Editing -> Indent -> Clean Aindent ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: clean-aindent-mode
   (require 'clean-aindent-mode)
   (add-hook 'prog-mode-hook 'clean-aindent-mode)
 #+end_src
@@ -879,6 +901,7 @@ again, if you work on such project, it doesn't matter anyway.
 Setup:
 
 #+begin_src emacs-lisp
+  ;; Package: dtrt-indent
   (require 'dtrt-indent)
   (dtrt-indent-mode 1)
 #+end_src
@@ -905,6 +928,7 @@ before committing.
 Setup:
 
 #+begin_src emacs-lisp
+    ;; Package: ws-butler
   (require 'ws-butler)
   (add-hook 'prog-mode-hook 'ws-butler-mode)
 #+end_src
@@ -923,11 +947,7 @@ templates to YASnippet.
 Setup:
 
 #+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Package: yasnippet                 ;;
-  ;;                                    ;;
-  ;; GROUP: Editing -> Yasnippet        ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Package: yasnippet
   (require 'yasnippet)
   (yas-global-mode 1)
 #+end_src
@@ -957,6 +977,7 @@ many languages. The most basic and essential feature is automatic
 closing of a pair when user inserts an opening one.
 
 #+begin_src emacs-lisp
+    ;; Package: smartparens
   (require 'smartparens-config)
   (show-smartparens-global-mode +1)
   (smartparens-global-mode 1)
