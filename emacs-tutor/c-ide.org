@@ -15,7 +15,7 @@ configured for demonstration purpose. You can clone and play with it
 and you can ignore all the Elisp code for setting up throughout the
 guide:
 
-#+begin_src shell-script
+#+begin_src sh
   git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
 #+end_src
 
