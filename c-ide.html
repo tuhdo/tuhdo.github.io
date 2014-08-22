@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 Fri 11:04 -->
+<!-- 2014-08-22 Fri 13:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -302,7 +302,10 @@ snippet to setup <code>ggtags</code> and key bindings:
 
 <ul class="org-ul">
 <li>Or, <a href="https://github.com/emacs-helm/helm">helm</a> + <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>. Helm is awesome and if you are going to use
-Helm, please read the <a href="http://tuhdo.github.io/helm-intro.html">Helm guide</a>.
+Helm, please read the <a href="http://tuhdo.github.io/helm-intro.html">Helm guide</a>. Remember to setup <code>Helm</code> before
+using <code>helm-gtags</code>. You can use this <a href="https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el">sample configuration</a>. When
+includes the above file in your <code>~/.emacs.d</code>, remember to add
+<code>(require 'setup-helm)</code> to your <code>init.el</code>.
 </li>
 </ul>
 

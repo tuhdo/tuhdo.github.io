@@ -66,7 +66,10 @@ And uncomment this line:
 #+end_src
 
 - Or, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. Helm is awesome and if you are going to use
-  Helm, please read the [[http://tuhdo.github.io/helm-intro.html][Helm guide]].
+  Helm, please read the [[http://tuhdo.github.io/helm-intro.html][Helm guide]]. Remember to setup =Helm= before
+  using =helm-gtags=. You can use this [[https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el][sample configuration]]. When
+  includes the above file in your =~/.emacs.d=, remember to add
+  =(require 'setup-helm)= to your =init.el=.
 
 #+begin_src emacs-lisp
   ;; this variables must be set before load helm-gtags
