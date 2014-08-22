@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 Fri 15:59 -->
+<!-- 2014-08-22 Fri 16:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -558,11 +558,13 @@ really fast:
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Using <code>ggtags</code>: Run <code>ggtags-find-file</code> to find a file from all the
-files indexed.
+files indexed. If point is on an included header file,
+<code>ggtags-find-tag-dwim</code> automatically jumps to the file.
 </li>
 
 <li>Using <code>helm-gtags</code>: Run <code>helm-gtags-find-files</code> to find files
-matching regexp.
+matching regexp. If point is on an included header file,
+<code>helm-gtags-dwim</code> automatically jumps to the file.
 </li>
 </ul>
 </div>

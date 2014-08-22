@@ -230,10 +230,12 @@ really fast:
 :ID:       b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a
 :END:
 - Using =ggtags=: Run =ggtags-find-file= to find a file from all the
-  files indexed.
+  files indexed. If point is on an included header file,
+  =ggtags-find-tag-dwim= automatically jumps to the file.
 
 - Using =helm-gtags=: Run =helm-gtags-find-files= to find files
-  matching regexp.
+  matching regexp. If point is on an included header file,
+  =helm-gtags-dwim= automatically jumps to the file.
 
 ** View visited tags with tag stack
 :PROPERTIES:
