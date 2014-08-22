@@ -614,8 +614,9 @@ just straightly uses root directory.
   (ede-cpp-root-project "project_root"
                         :file "/dir/to/project_root/Makefile"
                         :include-path '("/include1"
-                                        "/include2") ;; add more include paths here
-      :system-include-path '("~/linux"))
+                                        "/include2") ;; add more include
+                        ;; paths here
+                        :system-include-path '("~/linux"))
 #+end_src
 
 =:include-path= specifies directories local to your projects that EDE
@@ -656,8 +657,9 @@ Summary:
   (ede-cpp-root-project "project_root"
                         :file "/dir/to/project_root/Makefile"
                         :include-path '("/include1"
-                                        "/include2") ;; add more include paths here
-      :system-include-path '("~/linux"))
+                                        "/include2") ;; add more include
+                        ;; paths here
+                        :system-include-path '("~/linux"))
 #+end_src
 
 - Load =ede-projects.el= when Emacs start.

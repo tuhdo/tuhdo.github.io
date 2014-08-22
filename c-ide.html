@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 Fri 10:20 -->
+<!-- 2014-08-22 Fri 10:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -1100,8 +1100,9 @@ just straightly uses root directory.
 <pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
                       <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>
                       <span style="color: #483d8b;">:include-path</span> '(<span style="color: #8b2252;">"/include1"</span>
-                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include paths here</span>
-    <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
+                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include</span>
+                      <span style="color: #b22222;">;; </span><span style="color: #b22222;">paths here</span>
+                      <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
 </pre>
 </div>
 
@@ -1163,8 +1164,9 @@ template in a file, such as <code>ede-projects.el</code>:
 <pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
                       <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>
                       <span style="color: #483d8b;">:include-path</span> '(<span style="color: #8b2252;">"/include1"</span>
-                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include paths here</span>
-    <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
+                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include</span>
+                      <span style="color: #b22222;">;; </span><span style="color: #b22222;">paths here</span>
+                      <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
 </pre>
 </div>
 
