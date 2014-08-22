@@ -28,6 +28,11 @@ repository, I already installed both =ggtags= and
   (require 'setup-helm-gtags)
 #+end_src
 
+If you don't like to use Helm, also uncomment =(require 'setup-helm)=
+and restart Emacs, because I made some global key bindings to some
+commands that even if =helm-mode= is disabled, such commands still
+uses Helm interface.
+
 And uncomment this line:
 
 #+begin_src emacs-lisp
