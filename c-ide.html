@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 Fri 15:57 -->
+<!-- 2014-08-22 Fri 15:59 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -675,7 +675,7 @@ source code through this process to provides features such as
 contextual code completion, code navigation.
 </p>
 </div>
-<ul class="org-ul"><li>Setup Semantic<br  /><div class="outline-text-6" id="text-2-1-3-0-1">
+<ul class="org-ul"><li><b>Setup Semantic</b><br  /><div class="outline-text-6" id="text-2-1-3-0-1">
 <p>
 To enable code completion using Semantic, add the following code:
 </p>
@@ -694,7 +694,7 @@ To enable code completion using Semantic, add the following code:
 </div>
 </li>
 
-<li>Command: <code>semantic-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-2">
+<li><b>Command</b>: <code>semantic-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-2">
 <p>
 This command activates <code>semantic-mode</code>. In Semantic mode, Emacs parses
 the buffers you visit for their semantic content. The parsing looks
@@ -728,7 +728,7 @@ is slow.
 </div>
 </li>
 
-<li>Command: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-3">
+<li><b>Command</b>: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-3">
 <p>
 As mentioned above, Semantic caches parsing result for future
 use. To do that, <code>semanticdb-minor-mode</code> must be activated. In
@@ -740,7 +740,7 @@ variable. The default directory is <code>~/.emacs.d/semanticdb</code>.
 </div>
 </li>
 
-<li>Command: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-4">
+<li><b>Command</b>: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-6" id="text-2-1-3-0-4">
 <p>
 When <code>semantic-idle-scheduler-mode</code> is enabled, Emacs periodically
 checks to see if the buffer is out of date, and reparses while the
@@ -754,7 +754,7 @@ your source code.
 </p>
 </div>
 </li>
-<li>Add more system include paths<br  /><div class="outline-text-6" id="text-2-1-3-0-5">
+<li><b>Add more system include paths</b><br  /><div class="outline-text-6" id="text-2-1-3-0-5">
 <p>
 By default, Semantic automatically includes some default system
 include paths such as <code>/usr/include</code>, <code>/usr/local/include</code>&#x2026; You can
@@ -780,7 +780,7 @@ modes, then ignore the optional mode argument in
 </div>
 </li>
 
-<li>Package: <code>function-args</code><br  /><div class="outline-text-6" id="text-2-1-3-0-6">
+<li><b>Package</b>: <code>function-args</code><br  /><div class="outline-text-6" id="text-2-1-3-0-6">
 <p>
 <a href="https://github.com/abo-abo/function-args">function-args</a> is a GNU Emacs package for showing an inline
 arguments hint for the C/C++ function at point.
@@ -847,7 +847,7 @@ all commands <a href="https://github.com/abo-abo/function-args#main-functions">h
 </div>
 </li>
 
-<li>Package: <code>company</code><br  /><div class="outline-text-6" id="text-2-1-3-0-7">
+<li><b>Package</b>: <code>company</code><br  /><div class="outline-text-6" id="text-2-1-3-0-7">
 <p>
 You can also use <code>company</code> for code completion. After installing
 <code>company</code> from MELPA, activate it globally:
@@ -879,7 +879,7 @@ completion candidates.
 </div>
 </li>
 
-<li>Package: <code>company-c-headers</code><br  /><div class="outline-text-6" id="text-2-1-3-0-8">
+<li><b>Package</b>: <code>company-c-headers</code><br  /><div class="outline-text-6" id="text-2-1-3-0-8">
 <p>
 <a href="https://github.com/randomphrase/company-c-headers">company-c-headers</a> provides auto-completion for C/C++ headers using
 Company. After installing from MELPA, set it up:
