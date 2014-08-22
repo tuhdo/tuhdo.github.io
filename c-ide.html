@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 Fri 13:46 -->
+<!-- 2014-08-22 Fri 15:57 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -754,8 +754,33 @@ your source code.
 </p>
 </div>
 </li>
+<li>Add more system include paths<br  /><div class="outline-text-6" id="text-2-1-3-0-5">
+<p>
+By default, Semantic automatically includes some default system
+include paths such as <code>/usr/include</code>, <code>/usr/local/include</code>&#x2026; You can
+view the list of include paths in
+<code>semantic-dependency-system-include-path</code>. To add more include paths,
+for example Boost include paths, use the function
+<code>semantic-add-system-include</code> like this:
+</p>
 
-<li>Package: <code>function-args</code><br  /><div class="outline-text-6" id="text-2-1-3-0-5">
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"/usr/include/boost"</span> '<span style="color: #78683f;">c++-mode</span>)
+(<span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"~/linux/kernel"</span>)
+(<span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"~/linux/include"</span>)
+</pre>
+</div>
+
+<p>
+If you want the system include paths to be available on both C/C++
+modes, then ignore the optional mode argument in
+<code>semantic-add-system-include</code>.
+</p>
+</div>
+</li>
+
+<li>Package: <code>function-args</code><br  /><div class="outline-text-6" id="text-2-1-3-0-6">
 <p>
 <a href="https://github.com/abo-abo/function-args">function-args</a> is a GNU Emacs package for showing an inline
 arguments hint for the C/C++ function at point.
@@ -822,7 +847,7 @@ all commands <a href="https://github.com/abo-abo/function-args#main-functions">h
 </div>
 </li>
 
-<li>Package: <code>company</code><br  /><div class="outline-text-6" id="text-2-1-3-0-6">
+<li>Package: <code>company</code><br  /><div class="outline-text-6" id="text-2-1-3-0-7">
 <p>
 You can also use <code>company</code> for code completion. After installing
 <code>company</code> from MELPA, activate it globally:
@@ -854,7 +879,7 @@ completion candidates.
 </div>
 </li>
 
-<li>Package: <code>company-c-headers</code><br  /><div class="outline-text-6" id="text-2-1-3-0-7">
+<li>Package: <code>company-c-headers</code><br  /><div class="outline-text-6" id="text-2-1-3-0-8">
 <p>
 <a href="https://github.com/randomphrase/company-c-headers">company-c-headers</a> provides auto-completion for C/C++ headers using
 Company. After installing from MELPA, set it up:

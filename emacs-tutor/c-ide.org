@@ -375,6 +375,26 @@ reparsed when user explicitly issue some command.
 
 With =semantic-idle-scheduler-mode=, Emacs keeps track live changes of
 your source code.
+***** Add more system include paths
+:PROPERTIES:
+:ID:       5bd738d7-ccc7-412a-8414-45d7cc9e41aa
+:END:
+By default, Semantic automatically includes some default system
+include paths such as =/usr/include=, =/usr/local/include=... You can
+view the list of include paths in
+=semantic-dependency-system-include-path=. To add more include paths,
+for example Boost include paths, use the function
+=semantic-add-system-include= like this:
+
+#+begin_src emacs-lisp
+  (semantic-add-system-include "/usr/include/boost" 'c++-mode)
+  (semantic-add-system-include "~/linux/kernel")
+  (semantic-add-system-include "~/linux/include")
+#+end_src
+
+If you want the system include paths to be available on both C/C++
+modes, then ignore the optional mode argument in
+=semantic-add-system-include=.
 
 ***** Package: =function-args=
 :PROPERTIES:
