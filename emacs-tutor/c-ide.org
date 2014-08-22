@@ -251,15 +251,11 @@ really fast:
   =helm-gtags-show-stack= that shows visited tags from newest to
   oldest, from top to bottom.
 
-* Source code completion
+* Source code completion using CEDET
 :PROPERTIES:
 :ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
 :END:
-** Using CEDET
-:PROPERTIES:
-:ID:       60d03387-8a9b-42be-981c-58fca82d7a70
-:END:
-*** What is CEDET?
+** What is CEDET?
 :PROPERTIES:
 :ID:       5e06a903-4853-4093-a5b0-b5b28b3a6eaa
 :END:
@@ -274,7 +270,7 @@ added and use CEDET to provide IDE-like features.
 This tutorial only helps you use CEDET to get completion feature for
 C/C++.
 
-*** Why use CEDET?
+** Why use CEDET?
 :PROPERTIES:
 :ID:       b8922b61-b52a-4690-8626-4ca463dd2f85
 :END:
@@ -305,7 +301,7 @@ of external tools like GNU Global or Cscope or Exuberant Ctags for
 finding symbol references/definition in a project to reduce its
 workload.
 
-*** Semantic minor modes
+** Semantic minor modes
 :PROPERTIES:
 :ID:       e57ff2d7-623a-4feb-91ac-c69487996527
 :END:
@@ -314,7 +310,7 @@ based on source code parsers. Parsing is a process of analyzing source
 code based on programming language syntax. Emacs understands your
 source code through this process to provides features such as
 contextual code completion, code navigation.
-***** *Setup Semantic*
+**** *Setup Semantic*
 :PROPERTIES:
 :ID:       22bc4bb9-df93-4702-8b7d-9eb8b038059b
 :END:
@@ -330,7 +326,7 @@ To enable code completion using Semantic, add the following code:
   (semantic-mode 1)
 #+end_src
 
-***** *Command*: =semantic-mode=
+**** *Command*: =semantic-mode=
 :PROPERTIES:
 :ID:       8f24eec1-81f5-445b-bdc7-1b7e27943ce5
 :END:
@@ -355,7 +351,7 @@ you will get your desired output instantly. Syntactic analyzing takes
 time. Many people don't understand this process and assume that CEDET
 is slow.
 
-***** *Command*: =global-semanticdb-minor-mode=
+**** *Command*: =global-semanticdb-minor-mode=
 :PROPERTIES:
 :ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
 :END:
@@ -366,7 +362,7 @@ can be saved for future Emacs sessions. The cache is saved in
 directory specified by =semanticdb-default-save-directory=
 variable. The default directory is =~/.emacs.d/semanticdb=.
 
-***** *Command*: =global-semantic-idle-scheduler-mode=
+**** *Command*: =global-semantic-idle-scheduler-mode=
 :PROPERTIES:
 :ID:       fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3
 :END:
@@ -377,7 +373,7 @@ reparsed when user explicitly issue some command.
 
 With =semantic-idle-scheduler-mode=, Emacs keeps track live changes of
 your source code.
-***** *Add more system include paths*
+**** *Add more system include paths*
 :PROPERTIES:
 :ID:       5bd738d7-ccc7-412a-8414-45d7cc9e41aa
 :END:
@@ -398,7 +394,7 @@ If you want the system include paths to be available on both C/C++
 modes, then ignore the optional mode argument in
 =semantic-add-system-include=.
 
-***** *Package*: =function-args=
+**** *Package*: =function-args=
 :PROPERTIES:
 :ID:       3e24664a-c6cc-44d5-b0ea-457a25590d38
 :END:
@@ -443,7 +439,7 @@ Basic Usage (taken from =function-args= homepage):
 There are a few more commands. You can view all the descriptions for
 all commands [[https://github.com/abo-abo/function-args#main-functions][here]].
 
-***** *Package*: =company=
+**** *Package*: =company=
 :PROPERTIES:
 :ID:       3b617d5a-5957-4f87-be20-4241ba8b827a
 :END:
@@ -465,7 +461,7 @@ general features. You have three commands for completing C/C++ code:
 - =company-gtags=: use GTAGS database from =GNU Global= to retrieve
   completion candidates.
 
-***** *Package*: =company-c-headers=
+**** *Package*: =company-c-headers=
 :PROPERTIES:
 :ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
 :END:
@@ -479,7 +475,7 @@ Company. After installing from MELPA, set it up:
 
 [[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
 
-*** CEDET can do more
+** CEDET can do more
 :PROPERTIES:
 :ID:       a4605a59-5c3f-4604-84ce-6f22f15ea8bc
 :END:
@@ -690,7 +686,6 @@ Summary:
 - Load =ede-projects.el= when Emacs start.
 - If you have opening files, either close or refresh it with =M-x
   semantic-force-refresh= to make Semantic aware of new changes.
-
 * Source code information
 :PROPERTIES:
 :ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
