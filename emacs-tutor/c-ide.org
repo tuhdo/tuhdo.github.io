@@ -1,9 +1,9 @@
 #+TITLE: C/C++ Development Environment for Emacs
 
 In this guide, I will help you to setup an efficient working C/C++
-environment. Despite it looks long, the setup is short and easy
-(mostly copy/paste Emacs Lisp code into your =init.el=); most of the
-guide are explanations and demonstrations of many useful features.
+environment. Despite looking long, the setup is short and easy (mostly
+copy/paste Emacs Lisp code into your =init.el=); most of the guide are
+explanations and demonstrations of many useful features.
 
 Please remember that there's a table of content on the top right
 corner and you can use it to navigate this guide. If you feel your

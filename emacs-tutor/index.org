@@ -1,7 +1,7 @@
-#+TITLE: Table of Content
+#+TITLE: Table of Contents
 
    + [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - THE BASICS]]
    + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER]]
    + [[file:emacs-tutor3.org][Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS]]
    + [[file:c-ide.org][Setup C/C++ Development Environment for Emacs]]
-   + [[file:helm-intro.org][Appendix: A Package on a league of its own: =Helm=]]
+   + [[file:helm-intro.org][Appendix: A Package in a league of its own: =Helm=]]
