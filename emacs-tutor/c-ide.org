@@ -933,6 +933,15 @@ Setup:
   (dtrt-indent-mode 1)
 #+end_src
 
+If you use Semantic for code completion, you may one to turn off
+=dtrt-indent= messages since Semantic may visit many files for
+parsing, and each file entered a message from =dtrt-indent= is printed
+in echo area and might become a constant annoyance.
+
+#+begin_src emacs-lisp
+  (setq dtrt-indent-verbosity 0)
+#+end_src
+
 *** Package: =ws-butler=
 :PROPERTIES:
 :ID:       65c42593-e1b3-4061-8ae8-276f29258d01

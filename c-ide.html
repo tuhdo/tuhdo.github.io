@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-22 T6 23:24 -->
+<!-- 2014-08-23 T7 13:34 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -1639,6 +1639,19 @@ Setup:
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: dtrt-indent</span>
 (<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dtrt-indent</span>)
 (<span style="color: #5e7837;">dtrt-indent-mode</span> <span style="color: #008b8b;">1</span>)
+</pre>
+</div>
+
+<p>
+If you use Semantic for code completion, you may one to turn off
+<code>dtrt-indent</code> messages since Semantic may visit many files for
+parsing, and each file entered a message from <code>dtrt-indent</code> is printed
+in echo area and might become a constant annoyance.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span> <span style="color: #4f7e67;">dtrt-indent-verbosity</span> <span style="color: #008b8b;">0</span>)
 </pre>
 </div>
 </div>
