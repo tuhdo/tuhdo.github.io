@@ -370,7 +370,8 @@ checkout this branch:
   bzr checkout bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk cedet
 #+end_src
 
-Then compile it:
+Be sure to place the checked out =cedet= directory in your
+=~/.emacs.d=. Then compile it:
 
 #+begin_src sh
   cd cedet
