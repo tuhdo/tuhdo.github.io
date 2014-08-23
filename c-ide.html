@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-23 T7 13:34 -->
+<!-- 2014-08-23 T7 14:46 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -279,6 +279,11 @@ And uncomment this line:
 use, read the guide <a href="emacs-tutor3.html">How to use Emacs package manager</a>.
 </li>
 
+<li>Have <a href="http://www.gnu.org/software/global/">GNU Global</a> installed. Download the source <a href="http://www.gnu.org/software/global/download.html">here</a>, or you can
+install it from the package manager of your OS (Linux distribution
+or Mac OS). For Windows users, download the <a href="http://adoxa.altervista.org/global/">Win32 port</a>.
+</li>
+
 <li>Install <a href="https://github.com/leoliu/ggtags">ggtags</a>. After installing <code>ggtags</code> from MELPA, add this code
 snippet to setup <code>ggtags</code> and key bindings:
 </li>
@@ -350,6 +355,44 @@ includes the above file in your <code>~/.emacs.d</code>, remember to add
 (<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &gt;"</span>) '<span style="color: #43783f;">helm-gtags-next-history</span>)
 </pre>
 </div>
+
+<p>
+Before using the <code>ggtags</code> or <code>helm-gtags</code>, remember to create a GTAGS
+database by running <code>gtags</code> at your project root in terminal:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell-script">$ <span style="color: #7a4f7e;">cd</span> <span style="color: #784437;">/path/to/project/root</span>
+$ <span style="color: #784437;">gtags</span>
+</pre>
+</div>
+
+<p>
+After this, a few files are created:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-shell-script">$ <span style="color: #374478;">ls</span> <span style="color: #4f5c7e;">G*</span>
+<span style="color: #5e7837;">GPATH</span>   <span style="color: #784437;">GRTAGS</span>  <span style="color: #7e544f;">GTAGS</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li><b>GTAGS</b>: definition database
+</li>
+<li><b>GRTAGS</b>: reference database
+</li>
+<li><b>GPATH</b>:path name database 
+</li>
+</ul>
+
+<p>
+If you use <code>ggtags</code>, you have a command for creating GTAGS database,
+that is <code>ggtags-create-tags</code>; this is recommended way when using
+<code>ggtags</code>, to let it know where the project root is.
+</p>
 </div>
 </div>
 

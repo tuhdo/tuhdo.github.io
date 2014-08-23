@@ -50,6 +50,10 @@ And uncomment this line:
 - Know how to use =package.el= and MELPA. If you don't know how to
   use, read the guide [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]].
 
+- Have [[http://www.gnu.org/software/global/][GNU Global]] installed. Download the source [[http://www.gnu.org/software/global/download.html][here]], or you can
+  install it from the package manager of your OS (Linux distribution
+  or Mac OS). For Windows users, download the [[http://adoxa.altervista.org/global/][Win32 port]].
+
 - Install [[https://github.com/leoliu/ggtags][ggtags]]. After installing =ggtags= from MELPA, add this code
   snippet to setup =ggtags= and key bindings:
 
@@ -112,6 +116,29 @@ And uncomment this line:
   (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
   (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 #+end_src
+
+Before using the =ggtags= or =helm-gtags=, remember to create a GTAGS
+database by running =gtags= at your project root in terminal:
+
+#+begin_src shell-script
+  $ cd /path/to/project/root
+  $ gtags
+#+end_src
+
+After this, a few files are created:
+
+#+begin_src shell-script
+  $ ls G*
+  GPATH   GRTAGS  GTAGS
+#+end_src
+
+- *GTAGS*: definition database
+- *GRTAGS*: reference database
+- *GPATH*:path name database 
+ 
+If you use =ggtags=, you have a command for creating GTAGS database,
+that is =ggtags-create-tags=; this is recommended way when using
+=ggtags=, to let it know where the project root is.
 
 ** Basic movements
 :PROPERTIES:
