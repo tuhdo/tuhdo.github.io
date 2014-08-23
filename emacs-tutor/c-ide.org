@@ -10,10 +10,9 @@ corner and you can use it to navigate this guide. If you feel your
 internet connection is too slow for my guide, you can always clone and
 read it offline: https://github.com/tuhdo/tuhdo.github.io
 
-*Update 22 Aug 2014*: I added an Emacs repository that is properly
-configured for demonstration purpose. You can clone and play with it
-and you can ignore all the Elisp code for setting up throughout the
-guide:
+I added an Emacs repository that is properly configured for
+demonstration purpose. You can clone and play with it and you can
+ignore all the Elisp code for setting up throughout the guide:
 
 #+begin_src sh
   git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
@@ -134,7 +133,7 @@ After this, a few files are created:
 
 - *GTAGS*: definition database
 - *GRTAGS*: reference database
-- *GPATH*:path name database 
+- *GPATH*: path name database
  
 If you use =ggtags=, you have a command for creating GTAGS database,
 that is =ggtags-create-tags=; this is recommended way when using
@@ -178,6 +177,27 @@ that is =ggtags-create-tags=; this is recommended way when using
   or following function. Demo:
 
   [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]
+** Basic concepts of tag
+:PROPERTIES:
+:ID:       b4902a85-f303-4f5f-8c13-1eb3d2d2de73
+:END:
+A tag is a name of an entity in source code. An entity can be a
+variable, a method definition, an include-operator... A tag contains
+several information such as name of the tag (the name of the variable,
+class, method), location of this tag in source code and which file it
+belongs to. As an example, GNU Global generates three tag databases:
+
+- *GTAGS*: definition database
+- *GRTAGS*: reference database
+- *GPATH*: path name database
+
+A definition of a tag is where a tag is implemented. For example, a
+function definition is the body where it is actually implemented, or a
+variable definition is where the type and its property (i.e static) is
+specified.
+
+A reference of a tag is where a tag is used in a source tree, but not
+where it is defined.
 
 ** Find definitions in current buffer
 :PROPERTIES:
@@ -332,6 +352,40 @@ still really fast for moderate-size source files. CEDET also makes use
 of external tools like GNU Global or Cscope or Exuberant Ctags for
 finding symbol references/definition in a project to reduce its
 workload.
+
+** Installation
+:PROPERTIES:
+:ID:       d6418a70-0ef0-4e53-895f-cc5f85339392
+:END:
+CEDET was merged into Emacs since 23.2. You do not need to install
+CEDET manually. However, you can also use the development repository
+that contains latest bug fixes and more features. Nevertheless, the
+built-in Emacs is still adequate for daily usage and convenient for
+trying out before actually cloning and use the development version.
+
+If you really want to use the development version with latest feature,
+checkout this branch:
+
+#+begin_src sh
+  bzr checkout bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk cedet
+#+end_src
+
+Then compile it:
+
+#+begin_src sh
+  cd cedet
+  make # wait for it to complete
+  cd contrib
+  make
+#+end_src
+
+Finally, assume that you placed your newly cloned CEDET in
+=~/.emacs.d=, load it into your Emacs:
+
+#+begin_src emacs-lisp
+  (load-file (concat user-emacs-directory "/cedet/cedet-devel-load.el"))
+  (load-file (concat user-emacs-directory "cedet/contrib/cedet-contrib-load.el"))
+#+end_src
 
 ** Semantic minor modes
 :PROPERTIES:
@@ -555,6 +609,121 @@ candidates. It also has the limitations of other packages.
 CEDET is best used with new project, because Semantic parse code as
 you write. As a result, you won't have to wait for parsing unknown
 source files to get completion candidates.
+
+* Source code navigation using Senator
+:PROPERTIES:
+:ID:       56164139-be1c-41bd-9e1d-f55335341d80
+:END:
+ Senator is a part of CEDET. Senator stands for SEmantic
+ NAvigaTOR. Senator provides some useful commands for operating on
+ semantic tags in SemanticDB. As you can see, another utility makes
+ use of SemanticDB, aside from smart completion. It is like the heart
+ of CEDET: once Semantic fails to parse, tools centered around it fail
+ as well. If such situation happens, you always have a reserved and
+ simpler solution: use GNU Global with =ggtags= or =helm-gtags=
+ frontends. The following commands are provided by Senator:
+
+** Navigation
+:PROPERTIES:
+:ID:       09424bff-048a-41b1-91d5-6b0f692f8c05
+:END:
+
+Senator provides commands for navigating by tag.
+
+- *C-c , n* runs =senator-next-tag=, navigate to the next Semantic
+  tag.
+
+- *C-c , p* runs =senator-previous-tag=, navigate to the previous
+  Semantic tag.
+
+  Here is how both of those commands work:
+
+  [[file:static/c-ide/senator-next-previous-tag.gif][file:static/c-ide/senator-next-previous-tag.gif]]
+
+  As you see,the C macro (in the screenshot, its =DECLARE_COMPLETION=)
+  is not considered a tag.
+
+- =senator-jump= (only available in CEDET bzr), specify a tag to jump
+  to. *TAB* for a list of available Semantic tags in current buffer,
+  similar to *TAB* in *M-x* in stock Emacs. If you use Helm, use
+  =helm-semantic-or-imenu= instead.
+
+  Demo (=helm-mode= is disabled):
+
+  [[file:static/c-ide/senator-jump.gif][file:static/c-ide/senator-jump.gif]]
+
+- *C-c , u* runs =senator-go-to-up-reference=, move up one reference
+  level from current tag. An upper reference level of a tag is the
+  source that defines the tag or includes the tag. This is incredibly
+  useful when you want to jump from a function declaration in a class
+  to its definition, or jump to the class that a function belongs to,
+  quickly.
+
+  [[file:static/c-ide/senator-go-to-up-reference.gif][file:static/c-ide/senator-go-to-up-reference.gif]]
+
+  In the demo, I only use =senator-go-to-up-reference= to switch from
+  a declaration, that is =PIC32F42(string Name, short MemorySize);= in
+  =PIC32F42.h= to its implementation in =PIC32F42.c=. *C-c , u* again,
+  point jump is on the class =PIC32F42=, which is the class that the
+  function belongs. Class =PIC32F42= has its parent class
+  =Microcontrller=, and I run *C-c , u* again to move point to
+  =Microcontrller= class. At this point, I cannot move further.
+
+Semantic also provides a useful command for finding all references of
+a tag, that is =semantic-symref=, as demonstrated in previous
+section. On a symbol, *C-c , g* and a prompt appear asking for a tag
+for gathering references, with the default is the symbol at
+point. Leave prompt blank and *RET* to use the default or enter
+another symbol if you change your mind.
+** Copy/Paste
+:PROPERTIES:
+:ID:       a7861142-010c-4640-9ec7-d201dc918f92
+:END:
+
+- =C-c , M-w= runs =senator-copy-tag=, take the current tag, and place
+  it in the tag ring.
+
+- =C-c , C-w= runs =senator-kill-tag=, take the current tag, place it
+  in the tag ring, and kill it. Killing the tag removes the text for
+  that tag, and places it into the kill ring. Retrieve that text with
+  *C-y*.
+
+  The above commands are basically like normal =M-w= and =C-w=, but are
+  used for tags. For example, run =C-c , C-w= with point inside a
+  function definition kills the whole function body and its
+  interface, or you can kill function parameters, and can be yanked
+  back with *C-y*:
+
+  [[file:static/c-ide/senator-kill-yank-tag.gif][file:static/c-ide/senator-kill-yank-tag.gif]]
+
+  As you see, the function body and its interface is killed and yanked
+  back with *C-y*. You can also see that the function parameter, aside
+  from its name, its type is also removed when the command is executed.
+
+- =C-c , C-y= runs =senator-yank-tag=, yank a tag from the tag
+  ring. The form the tag takes is different depending on where it is
+  being yanked to. For example, in previous example with =C-c , C-w=,
+  when you run *C-y*, it yanks the whole thing including function
+  interface and its body. *C-c , C-y* only yanks the function
+  interface.
+
+  [[file:static/c-ide/senator-yank-tag.gif][file:static/c-ide/senator-yank-tag.gif]]
+
+- =C-c , r= runs =senator-copy-tag-to-register=, copy the current tag
+  into a register. With prefix argument will delete the text of the
+  tag to the kill ring.
+
+** Obsolete commands
+:PROPERTIES:
+:ID:       0545cf56-b2bc-4efa-80aa-eca9911bf32b
+:END:
+Senator also provides commands for code completion:
+=senator-complete-symbol= and =senator-completion-menu-popup=. Code
+completion provided by Senator is simpler than the actual completion
+provided by =semantic-ia-complete-symbol= command that is used by
+=moo-complete= for a list of candidates with full information, such as
+complete function interface is displayed correctly. These two
+completion commands are provided.
 
 * Project management with EDE
 :PROPERTIES:

@@ -277,3 +277,39 @@ and any other command cancels the completion:
 :PROPERTIES:
 :ID:       846ea88b-da99-4102-b909-136b9a6aefcd
 :END:
+
+* Senator
+:PROPERTIES:
+:ID:       1b5ad129-a77f-4dd5-b9de-97a16f0126d3
+:END:
+** Copy/Paste
+:PROPERTIES:
+:ID:       a7861142-010c-4640-9ec7-d201dc918f92
+:END:
+
+- =C-c , M-w= runs =senator-copy-tag=, take the current tag, and place
+  it in the tag ring.
+
+- =C-c , C-w= runs =senator-kill-tag=, take the current tag, place it
+  in the tag ring, and kill it. Killing the tag removes the text for
+  that tag, and places it into the kill ring. Retrieve that text with
+  *C-y*.
+
+  The above commands are basically like normal =M-w= and =C-w=, but are
+  used for tags. For example, run =C-c , C-w= with point inside a
+  function definition kills the whole function body and its
+  interface, and can be yanked back with *C-y*:
+
+  
+
+- =C-c , C-y= runs =senator-yank-tag=, yank a tag from the tag
+  ring. The form the tag takes is different depending on where it is
+  being yanked to.
+
+- =C-c , r= runs =senator-copy-tag-to-register=, copy the current tag
+  into a register. 
+
+  
+
+  with prefix argument will delete the text of the tag to the kill
+  ring.

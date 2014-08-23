@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-23 T7 14:46 -->
+<!-- 2014-08-24 CN 04:16 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -165,48 +165,57 @@ alt="hit counter"></a></div></noscript>
 <ul>
 <li><a href="#sec-1-1">Prerequisite:</a></li>
 <li><a href="#sec-1-2">Basic movements</a></li>
-<li><a href="#sec-1-3">Find definitions in current buffer</a></li>
-<li><a href="#sec-1-4">Find definitions in project</a></li>
-<li><a href="#sec-1-5">Find references in project</a></li>
-<li><a href="#sec-1-6">Find files in project</a></li>
-<li><a href="#sec-1-7">View visited tags with tag stack</a></li>
+<li><a href="#sec-1-3">Basic concepts of tag</a></li>
+<li><a href="#sec-1-4">Find definitions in current buffer</a></li>
+<li><a href="#sec-1-5">Find definitions in project</a></li>
+<li><a href="#sec-1-6">Find references in project</a></li>
+<li><a href="#sec-1-7">Find files in project</a></li>
+<li><a href="#sec-1-8">View visited tags with tag stack</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">Source code completion using CEDET</a>
 <ul>
 <li><a href="#sec-2-1">What is CEDET?</a></li>
 <li><a href="#sec-2-2">Why use CEDET?</a></li>
-<li><a href="#sec-2-3">Semantic minor modes</a></li>
-<li><a href="#sec-2-4">CEDET can do more</a></li>
+<li><a href="#sec-2-3">Installation</a></li>
+<li><a href="#sec-2-4">Semantic minor modes</a></li>
+<li><a href="#sec-2-5">CEDET can do more</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Project management with EDE</a></li>
-<li><a href="#sec-4">Source code information</a>
+<li><a href="#sec-3">Source code navigation using Senator</a>
 <ul>
-<li><a href="#sec-4-1">Command: <code>global-semantic-idle-summary-mode</code></a></li>
-<li><a href="#sec-4-2">Command: <code>global-semantic-stickyfunc-mode</code></a></li>
-<li><a href="#sec-4-3">Using <code>ggtags</code> + <code>eldoc</code></a></li>
+<li><a href="#sec-3-1">Navigation</a></li>
+<li><a href="#sec-3-2">Copy/Paste</a></li>
+<li><a href="#sec-3-3">Obsolete commands</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">Source code editing</a>
+<li><a href="#sec-4">Project management with EDE</a></li>
+<li><a href="#sec-5">Source code information</a>
 <ul>
-<li><a href="#sec-5-1">Folding</a></li>
-<li><a href="#sec-5-2">Narrowing</a></li>
-<li><a href="#sec-5-3">Identation</a>
+<li><a href="#sec-5-1">Command: <code>global-semantic-idle-summary-mode</code></a></li>
+<li><a href="#sec-5-2">Command: <code>global-semantic-stickyfunc-mode</code></a></li>
+<li><a href="#sec-5-3">Using <code>ggtags</code> + <code>eldoc</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-6">Source code editing</a>
 <ul>
-<li><a href="#sec-5-3-1">Setup default C style</a></li>
-<li><a href="#sec-5-3-2">Setup indentation</a></li>
-<li><a href="#sec-5-3-3">Package: <code>clean-aindent-mode</code></a></li>
-<li><a href="#sec-5-3-4">Package: <code>dtrt-indent</code></a></li>
-<li><a href="#sec-5-3-5">Package: <code>ws-butler</code></a></li>
+<li><a href="#sec-6-1">Folding</a></li>
+<li><a href="#sec-6-2">Narrowing</a></li>
+<li><a href="#sec-6-3">Identation</a>
+<ul>
+<li><a href="#sec-6-3-1">Setup default C style</a></li>
+<li><a href="#sec-6-3-2">Setup indentation</a></li>
+<li><a href="#sec-6-3-3">Package: <code>clean-aindent-mode</code></a></li>
+<li><a href="#sec-6-3-4">Package: <code>dtrt-indent</code></a></li>
+<li><a href="#sec-6-3-5">Package: <code>ws-butler</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-5-4">Code template using <code>yasnippet</code></a></li>
-<li><a href="#sec-5-5">Package: <code>smartparens</code></a></li>
+<li><a href="#sec-6-4">Code template using <code>yasnippet</code></a></li>
+<li><a href="#sec-6-5">Package: <code>smartparens</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-6">Compilation Support</a></li>
-<li><a href="#sec-7">Debugging with GDB Many Windows</a></li>
+<li><a href="#sec-7">Compilation Support</a></li>
+<li><a href="#sec-8">Debugging with GDB Many Windows</a></li>
 </ul>
 </div>
 </div>
@@ -225,10 +234,9 @@ read it offline: <a href="https://github.com/tuhdo/tuhdo.github.io">https://gith
 </p>
 
 <p>
-<b>Update 22 Aug 2014</b>: I added an Emacs repository that is properly
-configured for demonstration purpose. You can clone and play with it
-and you can ignore all the Elisp code for setting up throughout the
-guide:
+I added an Emacs repository that is properly configured for
+demonstration purpose. You can clone and play with it and you can
+ignore all the Elisp code for setting up throughout the guide:
 </p>
 
 <div class="org-src-container">
@@ -384,7 +392,7 @@ After this, a few files are created:
 </li>
 <li><b>GRTAGS</b>: reference database
 </li>
-<li><b>GPATH</b>:path name database 
+<li><b>GPATH</b>: path name database
 </li>
 </ul>
 
@@ -472,10 +480,43 @@ or following function. Demo:
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96" name="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96"></a>Find definitions in current buffer</h3>
+<h3 id="sec-1-3"><a id="ID-b4902a85-f303-4f5f-8c13-1eb3d2d2de73" name="ID-b4902a85-f303-4f5f-8c13-1eb3d2d2de73"></a>Basic concepts of tag</h3>
 <div class="outline-text-3" id="text-1-3">
+<p>
+A tag is a name of an entity in source code. An entity can be a
+variable, a method definition, an include-operator&#x2026; A tag contains
+several information such as name of the tag (the name of the variable,
+class, method), location of this tag in source code and which file it
+belongs to. As an example, GNU Global generates three tag databases:
+</p>
+
+<ul class="org-ul">
+<li><b>GTAGS</b>: definition database
+</li>
+<li><b>GRTAGS</b>: reference database
+</li>
+<li><b>GPATH</b>: path name database
+</li>
+</ul>
+
+<p>
+A definition of a tag is where a tag is implemented. For example, a
+function definition is the body where it is actually implemented, or a
+variable definition is where the type and its property (i.e static) is
+specified.
+</p>
+
+<p>
+A reference of a tag is where a tag is used in a source tree, but not
+where it is defined.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><a id="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96" name="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96"></a>Find definitions in current buffer</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 The Imenu facility offers a way to find the major definitions, such as
 function definitions, variable definitions in a file by name. <code>ggtags</code>
@@ -494,9 +535,9 @@ If you use Helm, use <a href="http://tuhdo.github.io/helm-intro.html#sec-7">helm
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><a id="ID-0331265b-7c3f-457e-ba1d-ef6c3cd24208" name="ID-0331265b-7c3f-457e-ba1d-ef6c3cd24208"></a>Find definitions in project</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><a id="ID-0331265b-7c3f-457e-ba1d-ef6c3cd24208" name="ID-0331265b-7c3f-457e-ba1d-ef6c3cd24208"></a>Find definitions in project</h3>
+<div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li>Using <code>gtags</code>: by default, <code>M-.</code> runs <code>ggtags-find-tag-dwim</code> when
 <code>ggtags-mode</code> is enabled. The command <code>ggtags-find-tag-dwim</code> jump to
@@ -584,9 +625,9 @@ really fast:
 </div>
 </div>
 
-<div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><a id="ID-410cfad4-a08d-4139-8c37-cb1bff5bd44e" name="ID-410cfad4-a08d-4139-8c37-cb1bff5bd44e"></a>Find references in project</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><a id="ID-410cfad4-a08d-4139-8c37-cb1bff5bd44e" name="ID-410cfad4-a08d-4139-8c37-cb1bff5bd44e"></a>Find references in project</h3>
+<div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li>Using <code>ggtags</code>:  Either run <code>ggtags-find-tag-dwim</code> or
 <code>ggtags-find-reference</code>, which only finds references.
@@ -599,9 +640,9 @@ really fast:
 </div>
 </div>
 
-<div id="outline-container-sec-1-6" class="outline-3">
-<h3 id="sec-1-6"><a id="ID-b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a" name="ID-b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a"></a>Find files in project</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><a id="ID-b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a" name="ID-b6c7d5a9-2fce-4488-a7d5-3eb301b6b89a"></a>Find files in project</h3>
+<div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
 <li>Using <code>ggtags</code>: Run <code>ggtags-find-file</code> to find a file from all the
 files indexed. If point is on an included header file,
@@ -616,9 +657,9 @@ matching regexp. If point is on an included header file,
 </div>
 </div>
 
-<div id="outline-container-sec-1-7" class="outline-3">
-<h3 id="sec-1-7"><a id="ID-db6bf87e-969d-42b8-ae60-b0b58f13e073" name="ID-db6bf87e-969d-42b8-ae60-b0b58f13e073"></a>View visited tags with tag stack</h3>
-<div class="outline-text-3" id="text-1-7">
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><a id="ID-db6bf87e-969d-42b8-ae60-b0b58f13e073" name="ID-db6bf87e-969d-42b8-ae60-b0b58f13e073"></a>View visited tags with tag stack</h3>
+<div class="outline-text-3" id="text-1-8">
 <ul class="org-ul">
 <li>Using <code>ggtags</code>: As you know that you can jump back with
 <code>pop-tag-mark</code> (bound to <code>M-,</code>), you can also view a list of visited
@@ -709,8 +750,57 @@ workload.
 </div>
 
 <div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><a id="ID-e57ff2d7-623a-4feb-91ac-c69487996527" name="ID-e57ff2d7-623a-4feb-91ac-c69487996527"></a>Semantic minor modes</h3>
+<h3 id="sec-2-3"><a id="ID-d6418a70-0ef0-4e53-895f-cc5f85339392" name="ID-d6418a70-0ef0-4e53-895f-cc5f85339392"></a>Installation</h3>
 <div class="outline-text-3" id="text-2-3">
+<p>
+CEDET was merged into Emacs since 23.2. You do not need to install
+CEDET manually. However, you can also use the development repository
+that contains latest bug fixes and more features. Nevertheless, the
+built-in Emacs is still adequate for daily usage and convenient for
+trying out before actually cloning and use the development version.
+</p>
+
+<p>
+If you really want to use the development version with latest feature,
+checkout this branch:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #783f5a;">bzr</span> <span style="color: #37785e;">checkout</span> <span style="color: #4f5c7e;">bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk</span> <span style="color: #5e7837;">cedet</span>
+</pre>
+</div>
+
+<p>
+Then compile it:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #483d8b;">cd</span> <span style="color: #5e7837;">cedet</span>
+<span style="color: #513f78;">make</span> <span style="color: #b22222;"># </span><span style="color: #b22222;">wait for it to complete</span>
+<span style="color: #483d8b;">cd</span> <span style="color: #78683f;">contrib</span>
+<span style="color: #513f78;">make</span>
+</pre>
+</div>
+
+<p>
+Finally, assume that you placed your newly cloned CEDET in
+<code>~/.emacs.d</code>, load it into your Emacs:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #7e544f;">load-file</span> (<span style="color: #5e7837;">concat</span> <span style="color: #37785e;">user-emacs-directory</span> <span style="color: #8b2252;">"/cedet/cedet-devel-load.el"</span>))
+(<span style="color: #7e544f;">load-file</span> (<span style="color: #5e7837;">concat</span> <span style="color: #37785e;">user-emacs-directory</span> <span style="color: #8b2252;">"cedet/contrib/cedet-contrib-load.el"</span>))
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><a id="ID-e57ff2d7-623a-4feb-91ac-c69487996527" name="ID-e57ff2d7-623a-4feb-91ac-c69487996527"></a>Semantic minor modes</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 <code>Semantic</code> is a package that provides language-aware editing commands
 based on source code parsers. Parsing is a process of analyzing source
@@ -719,7 +809,7 @@ source code through this process to provides features such as
 contextual code completion, code navigation.
 </p>
 </div>
-<ul class="org-ul"><li><b>Setup Semantic</b><br  /><div class="outline-text-5" id="text-2-3-0-1">
+<ul class="org-ul"><li><b>Setup Semantic</b><br  /><div class="outline-text-5" id="text-2-4-0-1">
 <p>
 To enable code completion using Semantic, add the following code:
 </p>
@@ -738,7 +828,7 @@ To enable code completion using Semantic, add the following code:
 </div>
 </li>
 
-<li><b>Command</b>: <code>semantic-mode</code><br  /><div class="outline-text-5" id="text-2-3-0-2">
+<li><b>Command</b>: <code>semantic-mode</code><br  /><div class="outline-text-5" id="text-2-4-0-2">
 <p>
 This command activates <code>semantic-mode</code>. In Semantic mode, Emacs parses
 the buffers you visit for their semantic content. The parsing looks
@@ -772,7 +862,7 @@ is slow.
 </div>
 </li>
 
-<li><b>Command</b>: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-5" id="text-2-3-0-3">
+<li><b>Command</b>: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-5" id="text-2-4-0-3">
 <p>
 As mentioned above, Semantic caches parsing result for future
 use. To do that, <code>semanticdb-minor-mode</code> must be activated. In
@@ -784,7 +874,7 @@ variable. The default directory is <code>~/.emacs.d/semanticdb</code>.
 </div>
 </li>
 
-<li><b>Command</b>: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-5" id="text-2-3-0-4">
+<li><b>Command</b>: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-5" id="text-2-4-0-4">
 <p>
 When <code>semantic-idle-scheduler-mode</code> is enabled, Emacs periodically
 checks to see if the buffer is out of date, and reparses while the
@@ -798,7 +888,7 @@ your source code.
 </p>
 </div>
 </li>
-<li><b>Add more system include paths</b><br  /><div class="outline-text-5" id="text-2-3-0-5">
+<li><b>Add more system include paths</b><br  /><div class="outline-text-5" id="text-2-4-0-5">
 <p>
 By default, Semantic automatically includes some default system
 include paths such as <code>/usr/include</code>, <code>/usr/local/include</code>&#x2026; You can
@@ -824,7 +914,7 @@ modes, then ignore the optional mode argument in
 </div>
 </li>
 
-<li><b>Package</b>: <code>function-args</code><br  /><div class="outline-text-5" id="text-2-3-0-6">
+<li><b>Package</b>: <code>function-args</code><br  /><div class="outline-text-5" id="text-2-4-0-6">
 <p>
 <a href="https://github.com/abo-abo/function-args">function-args</a> is a GNU Emacs package for showing an inline
 arguments hint for the C/C++ function at point.
@@ -891,7 +981,7 @@ all commands <a href="https://github.com/abo-abo/function-args#main-functions">h
 </div>
 </li>
 
-<li><b>Package</b>: <code>company</code><br  /><div class="outline-text-5" id="text-2-3-0-7">
+<li><b>Package</b>: <code>company</code><br  /><div class="outline-text-5" id="text-2-4-0-7">
 <p>
 You can also use <code>company</code> for code completion. After installing
 <code>company</code> from MELPA, activate it globally:
@@ -923,7 +1013,7 @@ completion candidates.
 </div>
 </li>
 
-<li><b>Package</b>: <code>company-c-headers</code><br  /><div class="outline-text-5" id="text-2-3-0-8">
+<li><b>Package</b>: <code>company-c-headers</code><br  /><div class="outline-text-5" id="text-2-4-0-8">
 <p>
 <a href="https://github.com/randomphrase/company-c-headers">company-c-headers</a> provides auto-completion for C/C++ headers using
 Company. After installing from MELPA, set it up:
@@ -945,9 +1035,9 @@ Company. After installing from MELPA, set it up:
 </li></ul>
 </div>
 
-<div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><a id="ID-a4605a59-5c3f-4604-84ce-6f22f15ea8bc" name="ID-a4605a59-5c3f-4604-84ce-6f22f15ea8bc"></a>CEDET can do more</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><a id="ID-a4605a59-5c3f-4604-84ce-6f22f15ea8bc" name="ID-a4605a59-5c3f-4604-84ce-6f22f15ea8bc"></a>CEDET can do more</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 This guide only covers a portion of CEDET. Since Semantic parses
 source code and creates a database for code  completion, it would be
@@ -1011,8 +1101,179 @@ source files to get completion candidates.
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><a id="ID-d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd" name="ID-d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd"></a>Project management with EDE</h2>
+<h2 id="sec-3"><a id="ID-56164139-be1c-41bd-9e1d-f55335341d80" name="ID-56164139-be1c-41bd-9e1d-f55335341d80"></a>Source code navigation using Senator</h2>
 <div class="outline-text-2" id="text-3">
+<p>
+Senator is a part of CEDET. Senator stands for SEmantic
+NAvigaTOR. Senator provides some useful commands for operating on
+semantic tags in SemanticDB. As you can see, another utility makes
+use of SemanticDB, aside from smart completion. It is like the heart
+of CEDET: once Semantic fails to parse, tools centered around it fail
+as well. If such situation happens, you always have a reserved and
+simpler solution: use GNU Global with <code>ggtags</code> or <code>helm-gtags</code>
+frontends. The following commands are provided by Senator:
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><a id="ID-09424bff-048a-41b1-91d5-6b0f692f8c05" name="ID-09424bff-048a-41b1-91d5-6b0f692f8c05"></a>Navigation</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<p>
+Senator provides commands for navigating by tag.
+</p>
+
+<ul class="org-ul">
+<li><b>C-c , n</b> runs <code>senator-next-tag</code>, navigate to the next Semantic
+tag.
+</li>
+
+<li><b>C-c , p</b> runs <code>senator-previous-tag</code>, navigate to the previous
+Semantic tag.
+
+<p>
+Here is how both of those commands work:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/senator-next-previous-tag.gif"><img src="static/c-ide/senator-next-previous-tag.gif" alt="senator-next-previous-tag.gif" /></a>
+</p>
+</div>
+
+<p>
+As you see,the C macro (in the screenshot, its <code>DECLARE_COMPLETION</code>)
+is not considered a tag.
+</p>
+</li>
+
+<li><code>senator-jump</code> (only available in CEDET bzr), specify a tag to jump
+to. <b>TAB</b> for a list of available Semantic tags in current buffer,
+similar to <b>TAB</b> in <b>M-x</b> in stock Emacs. If you use Helm, use
+<code>helm-semantic-or-imenu</code> instead.
+
+<p>
+Demo (<code>helm-mode</code> is disabled):
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/senator-jump.gif"><img src="static/c-ide/senator-jump.gif" alt="senator-jump.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-c , u</b> runs <code>senator-go-to-up-reference</code>, move up one reference
+level from current tag. An upper reference level of a tag is the
+source that defines the tag or includes the tag. This is incredibly
+useful when you want to jump from a function declaration in a class
+to its definition, or jump to the class that a function belongs to,
+quickly.
+
+
+<div class="figure">
+<p><a href="static/c-ide/senator-go-to-up-reference.gif"><img src="static/c-ide/senator-go-to-up-reference.gif" alt="senator-go-to-up-reference.gif" /></a>
+</p>
+</div>
+
+<p>
+In the demo, I only use <code>senator-go-to-up-reference</code> to switch from
+a declaration, that is <code>PIC32F42(string Name, short MemorySize);</code> in
+<code>PIC32F42.h</code> to its implementation in <code>PIC32F42.c</code>. <b>C-c , u</b> again,
+point jump is on the class <code>PIC32F42</code>, which is the class that the
+function belongs. Class <code>PIC32F42</code> has its parent class
+<code>Microcontrller</code>, and I run <b>C-c , u</b> again to move point to
+<code>Microcontrller</code> class. At this point, I cannot move further.
+</p>
+</li>
+</ul>
+
+<p>
+Semantic also provides a useful command for finding all references of
+a tag, that is <code>semantic-symref</code>, as demonstrated in previous
+section. On a symbol, <b>C-c , g</b> and a prompt appear asking for a tag
+for gathering references, with the default is the symbol at
+point. Leave prompt blank and <b>RET</b> to use the default or enter
+another symbol if you change your mind.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><a id="ID-a7861142-010c-4640-9ec7-d201dc918f92" name="ID-a7861142-010c-4640-9ec7-d201dc918f92"></a>Copy/Paste</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<ul class="org-ul">
+<li><code>C-c , M-w</code> runs <code>senator-copy-tag</code>, take the current tag, and place
+it in the tag ring.
+</li>
+
+<li><code>C-c , C-w</code> runs <code>senator-kill-tag</code>, take the current tag, place it
+in the tag ring, and kill it. Killing the tag removes the text for
+that tag, and places it into the kill ring. Retrieve that text with
+<b>C-y</b>.
+
+<p>
+The above commands are basically like normal <code>M-w</code> and <code>C-w</code>, but are
+used for tags. For example, run <code>C-c , C-w</code> with point inside a
+function definition kills the whole function body and its
+interface, or you can kill function parameters, and can be yanked
+back with <b>C-y</b>:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/senator-kill-yank-tag.gif"><img src="static/c-ide/senator-kill-yank-tag.gif" alt="senator-kill-yank-tag.gif" /></a>
+</p>
+</div>
+
+<p>
+As you see, the function body and its interface is killed and yanked
+back with <b>C-y</b>. You can also see that the function parameter, aside
+from its name, its type is also removed when the command is executed.
+</p>
+</li>
+
+<li><code>C-c , C-y</code> runs <code>senator-yank-tag</code>, yank a tag from the tag
+ring. The form the tag takes is different depending on where it is
+being yanked to. For example, in previous example with <code>C-c , C-w</code>,
+when you run <b>C-y</b>, it yanks the whole thing including function
+interface and its body. <b>C-c , C-y</b> only yanks the function
+interface.
+
+
+<div class="figure">
+<p><a href="static/c-ide/senator-yank-tag.gif"><img src="static/c-ide/senator-yank-tag.gif" alt="senator-yank-tag.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><code>C-c , r</code> runs <code>senator-copy-tag-to-register</code>, copy the current tag
+into a register. With prefix argument will delete the text of the
+tag to the kill ring.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><a id="ID-0545cf56-b2bc-4efa-80aa-eca9911bf32b" name="ID-0545cf56-b2bc-4efa-80aa-eca9911bf32b"></a>Obsolete commands</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Senator also provides commands for code completion:
+<code>senator-complete-symbol</code> and <code>senator-completion-menu-popup</code>. Code
+completion provided by Senator is simpler than the actual completion
+provided by <code>semantic-ia-complete-symbol</code> command that is used by
+<code>moo-complete</code> for a list of candidates with full information, such as
+complete function interface is displayed correctly. These two
+completion commands are provided.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><a id="ID-d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd" name="ID-d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd"></a>Project management with EDE</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 EDE, short for Emacs Development Environment, is a generic interface
 for managing projects. In EDE, a project hierarchy matches a directory
@@ -1250,13 +1511,13 @@ template in a file, such as <code>ede-projects.el</code>:
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-7401e60b-1f91-4697-814c-1e72f395dfdd" name="ID-7401e60b-1f91-4697-814c-1e72f395dfdd"></a>Source code information</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><a id="ID-7401e60b-1f91-4697-814c-1e72f395dfdd" name="ID-7401e60b-1f91-4697-814c-1e72f395dfdd"></a>Source code information</h2>
+<div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><a id="ID-8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe" name="ID-8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe"></a>Command: <code>global-semantic-idle-summary-mode</code></h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1"><a id="ID-8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe" name="ID-8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe"></a>Command: <code>global-semantic-idle-summary-mode</code></h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
 This mode, when enabled, displays function interface in the
 minibuffer:
@@ -1287,9 +1548,9 @@ Setup:
 </div>
 </div>
 
-<div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><a id="ID-50dc542d-dca8-425d-9646-083ce3ca8ae8" name="ID-50dc542d-dca8-425d-9646-083ce3ca8ae8"></a>Command: <code>global-semantic-stickyfunc-mode</code></h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2"><a id="ID-50dc542d-dca8-425d-9646-083ce3ca8ae8" name="ID-50dc542d-dca8-425d-9646-083ce3ca8ae8"></a>Command: <code>global-semantic-stickyfunc-mode</code></h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 When enable, this mode shows the function point is currently in at the
 first line of the current buffer. This is useful when you have a very
@@ -1316,9 +1577,9 @@ Setup:
 </div>
 </div>
 
-<div id="outline-container-sec-4-3" class="outline-3">
-<h3 id="sec-4-3"><a id="ID-81db4e8e-f913-4b5c-87e4-74d90e80aaa9" name="ID-81db4e8e-f913-4b5c-87e4-74d90e80aaa9"></a>Using <code>ggtags</code> + <code>eldoc</code></h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3"><a id="ID-81db4e8e-f913-4b5c-87e4-74d90e80aaa9" name="ID-81db4e8e-f913-4b5c-87e4-74d90e80aaa9"></a>Using <code>ggtags</code> + <code>eldoc</code></h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
 You can also use <code>ggtags</code> for displaying function interface at point
 in minibuffer:
@@ -1337,13 +1598,13 @@ However, it won't have syntax highlighting.
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><a id="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0" name="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0"></a>Source code editing</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><a id="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0" name="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0"></a>Source code editing</h2>
+<div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><a id="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910" name="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910"></a>Folding</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><a id="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910" name="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910"></a>Folding</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 Emacs has a minor mode called <code>hs-minor-mode</code> that allows users to
 fold and hide blocks of text. Blocks are defined by regular
@@ -1475,9 +1736,9 @@ Demo:
 </div>
 </div>
 
-<div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><a id="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a" name="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a"></a>Narrowing</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><a id="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a" name="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a"></a>Narrowing</h3>
+<div class="outline-text-3" id="text-6-2">
 <p>
 Narrowing means making only a text portion in current buffer
 visible. Narrowing is useful when you want to perform text editing on
@@ -1544,13 +1805,13 @@ Default key bindings:
 </div>
 </div>
 
-<div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><a id="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a" name="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a"></a>Identation</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><a id="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a" name="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a"></a>Identation</h3>
+<div class="outline-text-3" id="text-6-3">
 </div>
-<div id="outline-container-sec-5-3-1" class="outline-4">
-<h4 id="sec-5-3-1"><a id="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17" name="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17"></a>Setup default C style</h4>
-<div class="outline-text-4" id="text-5-3-1">
+<div id="outline-container-sec-6-3-1" class="outline-4">
+<h4 id="sec-6-3-1"><a id="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17" name="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17"></a>Setup default C style</h4>
+<div class="outline-text-4" id="text-6-3-1">
 <p>
 Emacs offers some popular C coding styles. Select the one suitable for
 you:
@@ -1577,9 +1838,9 @@ you:
 </div>
 </div>
 
-<div id="outline-container-sec-5-3-2" class="outline-4">
-<h4 id="sec-5-3-2"><a id="ID-394da0e4-4995-4583-9b67-2611f3352d3b" name="ID-394da0e4-4995-4583-9b67-2611f3352d3b"></a>Setup indentation</h4>
-<div class="outline-text-4" id="text-5-3-2">
+<div id="outline-container-sec-6-3-2" class="outline-4">
+<h4 id="sec-6-3-2"><a id="ID-394da0e4-4995-4583-9b67-2611f3352d3b" name="ID-394da0e4-4995-4583-9b67-2611f3352d3b"></a>Setup indentation</h4>
+<div class="outline-text-4" id="text-6-3-2">
 <p>
 By default, Emacs won't indent when press <b>RET</b> because the command
 bound to <b>RET</b> is newline. You can enable automatic indentation by
@@ -1627,9 +1888,9 @@ To convert between <b>TAB</b> and <b>space</b>, you also have two commands:
 </div>
 </div>
 
-<div id="outline-container-sec-5-3-3" class="outline-4">
-<h4 id="sec-5-3-3"><a id="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d" name="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d"></a>Package: <code>clean-aindent-mode</code></h4>
-<div class="outline-text-4" id="text-5-3-3">
+<div id="outline-container-sec-6-3-3" class="outline-4">
+<h4 id="sec-6-3-3"><a id="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d" name="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d"></a>Package: <code>clean-aindent-mode</code></h4>
+<div class="outline-text-4" id="text-6-3-3">
 <p>
 When you press <b>RET</b> to create a newline and got indented by
 <code>eletric-indent-mode</code>, you have appropriate whitespace for
@@ -1652,9 +1913,9 @@ View this <a href="http://www.emacswiki.org/emacs/CleanAutoIndent">Emacswiki pag
 </div>
 </div>
 
-<div id="outline-container-sec-5-3-4" class="outline-4">
-<h4 id="sec-5-3-4"><a id="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0" name="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0"></a>Package: <code>dtrt-indent</code></h4>
-<div class="outline-text-4" id="text-5-3-4">
+<div id="outline-container-sec-6-3-4" class="outline-4">
+<h4 id="sec-6-3-4"><a id="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0" name="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0"></a>Package: <code>dtrt-indent</code></h4>
+<div class="outline-text-4" id="text-6-3-4">
 <p>
 A minor mode that guesses the indentation offset originally used for
 creating source code files and transparently adjusts the corresponding
@@ -1700,9 +1961,9 @@ in echo area and might become a constant annoyance.
 </div>
 </div>
 
-<div id="outline-container-sec-5-3-5" class="outline-4">
-<h4 id="sec-5-3-5"><a id="ID-65c42593-e1b3-4061-8ae8-276f29258d01" name="ID-65c42593-e1b3-4061-8ae8-276f29258d01"></a>Package: <code>ws-butler</code></h4>
-<div class="outline-text-4" id="text-5-3-5">
+<div id="outline-container-sec-6-3-5" class="outline-4">
+<h4 id="sec-6-3-5"><a id="ID-65c42593-e1b3-4061-8ae8-276f29258d01" name="ID-65c42593-e1b3-4061-8ae8-276f29258d01"></a>Package: <code>ws-butler</code></h4>
+<div class="outline-text-4" id="text-6-3-5">
 <p>
 <code>ws-butler</code> helps managing whitespace on every line of code written or
 edited, in an unobtrusive, help you write clean code without noisy
@@ -1741,9 +2002,9 @@ Setup:
 </div>
 </div>
 
-<div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><a id="ID-3952aed5-31ed-4715-a892-9f55056fe98d" name="ID-3952aed5-31ed-4715-a892-9f55056fe98d"></a>Code template using <code>yasnippet</code></h3>
-<div class="outline-text-3" id="text-5-4">
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><a id="ID-3952aed5-31ed-4715-a892-9f55056fe98d" name="ID-3952aed5-31ed-4715-a892-9f55056fe98d"></a>Code template using <code>yasnippet</code></h3>
+<div class="outline-text-3" id="text-6-4">
 <p>
 YASnippet is a template system for Emacs. It allows you to type an
 abbreviation and automatically expand it into function
@@ -1789,9 +2050,9 @@ You can view supported snippets <a href="https://github.com/AndreaCrotti/yasnipp
 </div>
 </div>
 
-<div id="outline-container-sec-5-5" class="outline-3">
-<h3 id="sec-5-5"><a id="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0" name="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0"></a>Package: <code>smartparens</code></h3>
-<div class="outline-text-3" id="text-5-5">
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5"><a id="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0" name="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0"></a>Package: <code>smartparens</code></h3>
+<div class="outline-text-3" id="text-6-5">
 <p>
 <code>smartparens</code> is a minor mode that provides many features for
 manipulating pairs. Pair can be simple as parentheses or brackets, or
@@ -1816,9 +2077,9 @@ For complete documentation, please refer to <a href="https://github.com/Fuco1/sm
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><a id="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466" name="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466"></a>Compilation Support</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><a id="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466" name="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466"></a>Compilation Support</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 Compilation mode turns each error message in the buffer into a
 hyperlink. You can click on each error, or execute a key binding like
@@ -1953,9 +2214,9 @@ store window configurations, read it <a href="emacs-tutor.html#sec-7-29">here</a
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><a id="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63" name="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63"></a>Debugging with GDB Many Windows</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><a id="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63" name="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63"></a>Debugging with GDB Many Windows</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 Emacs has built-in frontend support for GDB that provides IDE-like
 interface. It has a layout like this:
