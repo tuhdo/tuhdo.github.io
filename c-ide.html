@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-24 CN 13:25 -->
+<!-- 2014-08-24 CN 17:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -530,8 +530,15 @@ can integrate Imenu:
 </div>
 
 <p>
-If you use Helm, use <a href="http://tuhdo.github.io/helm-intro.html#sec-7">helm-semantic-or-imenu</a>.
+If you use Helm, use <a href="http://tuhdo.github.io/helm-intro.html#sec-7">helm-semantic-or-imenu</a>. You can use it as an
+outline tree like in other IDEs. Here is a demo:
 </p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-semantic-or-imenu.gif"><img src="static/part3/helm-semantic-or-imenu.gif" alt="helm-semantic-or-imenu.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 
@@ -807,9 +814,17 @@ Finally, assume that you placed your newly cloned CEDET in
 based on source code parsers. Parsing is a process of analyzing source
 code based on programming language syntax. Emacs understands your
 source code through this process to provides features such as
-contextual code completion, code navigation.
+contextual code completion, code navigation. Here is an example how
+Semantic helps you provides completion for Boost:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-boost-demo.gif"><img src="static/c-ide/semantic-boost-demo.gif" alt="semantic-boost-demo.gif" /></a>
 </p>
 </div>
+</div>
+
 <ul class="org-ul"><li><b>Setup Semantic</b><br  /><div class="outline-text-5" id="text-2-4-0-1">
 <p>
 To enable code completion using Semantic, add the following code:

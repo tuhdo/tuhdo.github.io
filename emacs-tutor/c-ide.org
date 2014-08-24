@@ -211,7 +211,10 @@ can integrate Imenu:
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 #+end_src
 
-If you use Helm, use [[http://tuhdo.github.io/helm-intro.html#sec-7][helm-semantic-or-imenu]].
+If you use Helm, use [[http://tuhdo.github.io/helm-intro.html#sec-7][helm-semantic-or-imenu]]. You can use it as an
+outline tree like in other IDEs. Here is a demo:
+
+[[file:static/part3/helm-semantic-or-imenu.gif][file:static/part3/helm-semantic-or-imenu.gif]]
 
 ** Find definitions in project
 :PROPERTIES:
@@ -396,7 +399,11 @@ Finally, assume that you placed your newly cloned CEDET in
 based on source code parsers. Parsing is a process of analyzing source
 code based on programming language syntax. Emacs understands your
 source code through this process to provides features such as
-contextual code completion, code navigation.
+contextual code completion, code navigation. Here is an example how
+Semantic helps you provides completion for Boost:
+
+[[file:static/c-ide/semantic-boost-demo.gif][file:static/c-ide/semantic-boost-demo.gif]]
+
 **** *Setup Semantic*
 :PROPERTIES:
 :ID:       22bc4bb9-df93-4702-8b7d-9eb8b038059b
