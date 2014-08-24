@@ -1163,7 +1163,7 @@ Setup:
 #+begin_src emacs-lisp
     ;; Package: ws-butler
   (require 'ws-butler)
-  (add-hook 'prog-mode-hook 'ws-butler-mode)
+  (add-hook 'c-mode-common-hook 'ws-butler-mode)
 #+end_src
 
 ** Code template using =yasnippet=
