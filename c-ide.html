@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-24 CN 17:23 -->
+<!-- 2014-08-26 Tue 10:39 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -215,7 +215,11 @@ alt="hit counter"></a></div></noscript>
 </ul>
 </li>
 <li><a href="#sec-7">Compilation Support</a></li>
-<li><a href="#sec-8">Debugging with GDB Many Windows</a></li>
+<li><a href="#sec-8">Debugging with GDB Many Windows</a>
+<ul>
+<li><a href="#sec-8-1">With Grand Unified Debugger - GUD</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -2383,6 +2387,55 @@ one is for the standard <code>gdb-many-windows</code> layout and another one is
 for displaying disassembly buffer and memory buffer in a separate
 frame.
 </p>
+</div>
+
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><a id="ID-79a0ad5b-3978-48f2-9bcc-f961af81bb36" name="ID-79a0ad5b-3978-48f2-9bcc-f961af81bb36"></a>With Grand Unified Debugger - GUD</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+The <b>Grand Unified Debugger</b>, or GUD for short, is an Emacs major mode
+for debugging. It works on top of command line debuggers. GUD handles
+interaction with gdb, dbx, xdb, sdb, perldb, jdb, and pdb, by
+default. Emacs provides unified key bindings for those debuggers. We
+only concern about GDB in this guide.
+</p>
+
+<p>
+GUD works by sending text commands to a debugger subprocess, and
+record its output. As you debug the program, Emacs displays relevant
+source files with an arrow in the left fringe indicating the current
+execution line. GUD is simple and stable. When starting GUD, you only
+have a GDB command buffer and your source file. If you like
+simplicity, you can use GUD. However, you can still use other
+<code>gdb-display-</code> or <code>gdb-frame-</code> variants listed in previous section
+when needed.
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/gud.gif"><img src="static/c-ide/gud.gif" alt="gud.gif" /></a>
+</p>
+</div>
+
+<p>
+As you can see, the default Emacs interface also includes a menu for
+regular debugging operations, such as Stop, Run, Continue, Next Line,
+Up/Down Stack&#x2026;
+</p>
+
+<p>
+Refer to a list of commands supported by GUD at <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Commands-of-GUD.html#Commands-of-GUD">GNU Emacs Manual -
+Commands of GUD</a>. Note that these key bindings not only work with GDB,
+but any debuggers supported by GUD, since it's a <b>Grand Unified
+Debugger</b>.
+</p>
+
+<p>
+There's an Emacs packages that offers support for more debuggers:
+<a href="https://github.com/rocky/emacs-dbgr">emacs-dbgr</a>. Here is <a href="https://github.com/rocky/emacs-dbgr/wiki/Debuggers-Supported">the list of supported debuggers</a>. If you have to
+work with many languages, use <b>GUD</b>.
+</p>
+</div>
 </div>
 </div>
 </div>
