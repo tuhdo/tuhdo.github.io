@@ -1344,10 +1344,15 @@ can always jump back to project root any where, any time and run
 compilation command. If you do not use know how to use registers to
 store window configurations, read it [[file:emacs-tutor.org::*Registers][here]].
 
-* Debugging with GDB Many Windows
+* Debugging
 :PROPERTIES:
 :ID:       a13b3e48-d73c-4fc4-97c3-b9f1d5814e63
 :END:
+** With GDB Many Windows
+:PROPERTIES:
+:ID:       57c853c1-60f7-4ec7-adc5-9eee095d302e
+:END:
+
 Emacs has built-in frontend support for GDB that provides IDE-like
 interface. It has a layout like this:
 
