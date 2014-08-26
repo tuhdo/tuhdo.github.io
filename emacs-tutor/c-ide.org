@@ -500,8 +500,8 @@ Setup:
 #+begin_src emacs-lisp
   (require 'function-args)
   (fa-config-default)
-  (define-key c-mode-map  [(tab)] 'moo-complete)
-  (define-key c++-mode-map  [(tab)] 'moo-complete)
+  (define-key c-mode-map  [(contrl tab)] 'moo-complete)
+  (define-key c++-mode-map  [(control tab)] 'moo-complete)
 #+end_src
 
 Basic Usage (taken from =function-args= homepage):
@@ -895,6 +895,60 @@ Summary:
 - Load =ede-projects.el= when Emacs start.
 - If you have opening files, either close or refresh it with =M-x
   semantic-force-refresh= to make Semantic aware of new changes.
+* Project management with Projectile
+:PROPERTIES:
+:ID:       c5b93bb9-1b91-4c94-aa55-9a86976ccf88
+:END:
+You may ask, why another project management tool? The differences are:
+
+- EDE is older, Projectile appears recently.
+- EDE manages project files to integrate with specific build system
+  and generate corresponding build file (such as Makefile; these
+  features are not covered in this guide). Projectile provides generic
+  file management operations such as quickly jump to file/directory in
+  project, list buffers that belong to current project...
+- EDE is part of CEDET suite; it is geared toward Semantic. For
+  example, we used EDE to tell Semantic where to retrieve correct
+  include paths for current project to perform smart completion in
+  previous section. Projectile provides a generic interface for
+  managing your project under a VCS or some supported build system.
+- Projectile is easier to learn than EDE.
+
+Both have some overlapping in features, such as Projectile provides
+basic tag navigation in project, but in general they support each
+other. For our basic usage, we use EDE for smart completion as in
+previous section and Projectile to navigate our project
+effortlessly
+
+By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
+projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
+=bundler=. If you want to mark a folder manually as a project just
+create an empty =.projectile= file in it: 
+
+By default, prefix key of Projectile is *C-c p*. Some notable
+features:
+
+- Jump to any file in the project: *C-c p f*.
+- Jump to any directory in the project: *C-c p d*.
+- List buffers local to current project: *C-c p b*.
+- Jump to recently visited files in project: *C-c p e*.
+- Grep in project: *C-c p g s*
+- Multi-occur in project buffers: *C-c p o*.
+- Simple refactoring with text replace in current project: *C-c p r*.
+- Switch visited projects (visited once an Projectile remembers): *C-c p p*.
+
+Useful commands for working with C/C++ projects:
+
+- Run compilation command at project root: *C-c p c*. By default,
+  Projectile prompts the =make= command.
+- Switch between =.h= and =.c= or =.cpp=: *C-c p a*. If the filename -
+  without file extension - of current editing buffer is part of other
+  files, those files are listed as well. If there is only one file
+  with the same name but different extension, switch immediately.
+
+There are more. You can see all the commands [[https://github.com/bbatsov/projectile#interactive-commands][here]]. Or, simply run *C-c
+p C-h* for a list of commands with *C-c p* prefix.
+
 * Source code information
 :PROPERTIES:
 :ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
