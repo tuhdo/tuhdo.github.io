@@ -686,8 +686,8 @@ Setup:
 #+begin_src emacs-lisp
   (require 'function-args)
   (fa-config-default)
-  (define-key c-mode-map  [(tab)] 'moo-complete)
-  (define-key c++-mode-map  [(tab)] 'moo-complete)
+  (define-key c-mode-map  [(contrl tab)] 'moo-complete)
+  (define-key c++-mode-map  [(control tab)] 'moo-complete)
 #+end_src
 
 Basic Usage (taken from =function-args= homepage):
@@ -981,6 +981,60 @@ Summary:
 - Load =ede-projects.el= when Emacs start.
 - If you have opening files, either close or refresh it with =M-x
   semantic-force-refresh= to make Semantic aware of new changes.
+* Project management with Projectile
+:PROPERTIES:
+:ID:       c5b93bb9-1b91-4c94-aa55-9a86976ccf88
+:END:
+You may ask, why another project management tool? The differences are:
+
+- EDE is older, Projectile appears recently.
+- EDE manages project files to integrate with specific build system
+  and generate corresponding build file (such as Makefile; these
+  features are not covered in this guide). Projectile provides generic
+  file management operations such as quickly jump to file/directory in
+  project, list buffers that belong to current project...
+- EDE is part of CEDET suite; it is geared toward Semantic. For
+  example, we used EDE to tell Semantic where to retrieve correct
+  include paths for current project to perform smart completion in
+  previous section. Projectile provides a generic interface for
+  managing your project under a VCS or some supported build system.
+- Projectile is easier to learn than EDE.
+
+Both have some overlapping in features, such as Projectile provides
+basic tag navigation in project, but in general they support each
+other. For our basic usage, we use EDE for smart completion as in
+previous section and Projectile to navigate our project
+effortlessly
+
+By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
+projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
+=bundler=. If you want to mark a folder manually as a project just
+create an empty =.projectile= file in it: 
+
+By default, prefix key of Projectile is *C-c p*. Some notable
+features:
+
+- Jump to any file in the project: *C-c p f*.
+- Jump to any directory in the project: *C-c p d*.
+- List buffers local to current project: *C-c p b*.
+- Jump to recently visited files in project: *C-c p e*.
+- Grep in project: *C-c p g s*
+- Multi-occur in project buffers: *C-c p o*.
+- Simple refactoring with text replace in current project: *C-c p r*.
+- Switch visited projects (visited once an Projectile remembers): *C-c p p*.
+
+Useful commands for working with C/C++ projects:
+
+- Run compilation command at project root: *C-c p c*. By default,
+  Projectile prompts the =make= command.
+- Switch between =.h= and =.c= or =.cpp=: *C-c p a*. If the filename -
+  without file extension - of current editing buffer is part of other
+  files, those files are listed as well. If there is only one file
+  with the same name but different extension, switch immediately.
+
+There are more. You can see all the commands [[https://github.com/bbatsov/projectile#interactive-commands][here]]. Or, simply run *C-c
+p C-h* for a list of commands with *C-c p* prefix.
+
 * Source code information
 :PROPERTIES:
 :ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
@@ -1376,10 +1430,15 @@ can always jump back to project root any where, any time and run
 compilation command. If you do not use know how to use registers to
 store window configurations, read it [[file:emacs-tutor.org::*Registers][here]].
 
-* Debugging with GDB Many Windows
+* Debugging
 :PROPERTIES:
 :ID:       a13b3e48-d73c-4fc4-97c3-b9f1d5814e63
 :END:
+** With GDB Many Windows
+:PROPERTIES:
+:ID:       57c853c1-60f7-4ec7-adc5-9eee095d302e
+:END:
+
 Emacs has built-in frontend support for GDB that provides IDE-like
 interface. It has a layout like this:
 
@@ -1467,3 +1526,37 @@ occupying an existing window. This is useful when you have 2 monitors,
 one is for the standard =gdb-many-windows= layout and another one is
 for displaying disassembly buffer and memory buffer in a separate
 frame.
+
+** With Grand Unified Debugger - GUD
+:PROPERTIES:
+:ID:       79a0ad5b-3978-48f2-9bcc-f961af81bb36
+:END:
+The *Grand Unified Debugger*, or GUD for short, is an Emacs major mode
+for debugging. It works on top of command line debuggers. GUD handles
+interaction with gdb, dbx, xdb, sdb, perldb, jdb, and pdb, by
+default. Emacs provides unified key bindings for those debuggers. We
+only concern about GDB in this guide.
+
+GUD works by sending text commands to a debugger subprocess, and
+record its output. As you debug the program, Emacs displays relevant
+source files with an arrow in the left fringe indicating the current
+execution line. GUD is simple and stable. When starting GUD, you only
+have a GDB command buffer and your source file. If you like
+simplicity, you can use GUD. However, you can still use other
+=gdb-display-= or =gdb-frame-= variants listed in previous section
+when needed.
+
+[[file:static/c-ide/gud.gif][file:static/c-ide/gud.gif]]
+
+As you can see, the default Emacs interface also includes a menu for
+regular debugging operations, such as Stop, Run, Continue, Next Line,
+Up/Down Stack...
+
+Refer to a list of commands supported by GUD at [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Commands-of-GUD.html#Commands-of-GUD][GNU Emacs Manual -
+Commands of GUD]]. Note that these key bindings not only work with GDB,
+but any debuggers supported by GUD, since it's a *Grand Unified
+Debugger*.
+
+There's an Emacs packages that offers support for more debuggers:
+[[https://github.com/rocky/emacs-dbgr][emacs-dbgr]]. Here is [[https://github.com/rocky/emacs-dbgr/wiki/Debuggers-Supported][the list of supported debuggers]]. If you have to
+work with many languages, use *GUD*.
