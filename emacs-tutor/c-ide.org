@@ -305,8 +305,163 @@ really fast:
 - Using =helm-gtags=: Similarly, =helm-gtags= also has the command
   =helm-gtags-show-stack= that shows visited tags from newest to
   oldest, from top to bottom.
+* Source code completion using Clang
+:PROPERTIES:
+:ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
+:END:
+You can use =company-mode= for code completion. After installing
+=company-mode= from MELPA, activate it globally:
 
-* Source code completion using CEDET
+#+begin_src emacs-lisp
+  (require 'company)
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+
+*General Usage*: Completion will start automatically after you type a
+few letters. Use *M-n* and *M-p* to select, *<return>* to complete or
+*<tab>* to complete the common part. Search through the completions
+with *C-s*, *C-r* and *C-o*. Press *M-(digit)* to quickly complete
+with one of the first 10 candidates. When the completion candidates
+are shown, press *<f1>* to display the documentation for the selected
+candidate, or *C-w* to see its source. Not all back-ends support
+this.
+
+You have two commands for completing C/C++ code:
+
+- =company-clang=: use =clang= to retrieve completion candidates. You
+  will have completion with system header files, but not your
+  project. To use it, bind it to a key such as *TAB*:
+
+#+begin_src emacs-lisp
+  (define-key c-mode-map  [(tab)] 'company-clang)
+  (define-key c++-mode-map  [(control tab)] 'company-clang)
+#+end_src
+
+  To retrieve completion candidates for your projects, you will have
+  to tell Clang where your include paths are. Create a file named
+  =.dir-locals.el= at your project root:
+
+  #+begin_src emacs-lisp
+    ((nil . ((company-clang-arguments . ("-I/home/tuhdo/workspace/project_root/include1/"
+                                         "-I/home/tuhdo/workspace/project_root/include2/")))))
+  #+end_src
+  
+If you put a file with a special name .dir-locals.el in a directory,
+Emacs will read it when it visits any file in that directory or any of
+its subdirectories, and apply the settings it specifies to the file’s
+buffer. If you want to know more, read [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][GNU Emacs Manual -
+Per-Directory Local Variables]].
+
+In the above example, =nil= means apply the settings to any file or
+sub-directory visited. If =non-nil=, you have to specify a major mode
+and the settings are applied to major modes only. You set
+=company-clang= to =c-mode= and =c++-mode= anyway, so there's no
+problem setting major mode to nil. The remaining is a key-value pair
+of variable and value of that variable. =company-clang-arguments= is
+where you can tell include paths, and it takes a list of strings of
+include paths, as you can see above. After that, =company-clang= can
+see include paths in your project.
+ 
+- Optional =company-gtags=: use GTAGS database from =GNU Global= to
+  retrieve completion candidates. It displays ALL completion
+  candidates in GTAGS database regarding of scope. Use =company-gtags=
+  to provide code completion in your current project.
+
+#+begin_src emacs-lisp
+  (define-key c++-mode-map  [(tab)] 'company-gtags)
+  (define-key c++-mode-map  [(control tab)] 'company-gtags)
+#+end_src
+
+*_Exercise_*:
+
+- First, create this directory structure (I assume you know how to
+  manage directory with Dired):
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  feature1/
+              include1/
+                  feature1/
+              include2/
+#+end_src
+
+Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
+=feature1.h=, =feature1.c= and =main.c=. For the =.h= files, create
+them using this template
+
+#+begin_src c
+  void filename_func1();
+  int filename_func2(int a, int b);
+#+end_src
+
+Replace =filename= or =FILENAEM= with actual filename like =lib1=.
+
+For =.c= files, except for =main.c=, create them according to this
+template:
+
+#+begin_src c
+  #include "filename.h"
+
+  void filename_func1() { }
+
+  int filename_func2(int a, int b) { }
+#+end_src
+
+The files look silly but good enough for our learning purpose. Now, in
+=main.c=, let's test auto-completion by including appropriate header
+file. Everything works fine when all files are under the same
+directory. Let's split the files into different directories we created
+before, like this:
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  main.c
+                  lib.c
+                  lib2.c
+                  feature1/
+                      feature1.c
+              include1/
+                  lib.h
+                  feature1/
+                      feature1.h
+              include2/
+                  lib2.h
+#+end_src
+
+[[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
+
+Try auto-completion again. This time, it won't work. No candidate is
+displayed. Now, create the =.dir-locals.el= at project root and add
+this content:
+
+  #+begin_src emacs-lisp
+    ((nil . ((company-clang-arguments . ("-I/home/tuhdo/workspace/project_root/include1/"
+                                         "-I/home/tuhdo/workspace/project_root/include2/")))))
+  #+end_src
+
+Now, everything should works fine:
+
+[[file:static/c-ide/company-clang-project-completion.gif][file:static/c-ide/company-clang-project-completion.gif]]
+
+** *Package*: =company-c-headers=
+:PROPERTIES:
+:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
+:END:
+[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-backends 'company-c-headers)
+  (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
+#+end_src
+
+[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
+
+* OPTIONAL ALTERNATIVE: Source code completion using CEDET
 :PROPERTIES:
 :ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
 :END:
@@ -323,7 +478,26 @@ programming languages; support for new programming languages can be
 added and use CEDET to provide IDE-like features.
 
 This tutorial only helps you use CEDET to get completion feature for
-C/C++.
+C/C++. Finally, why is this part option? CEDET has a limitation that
+people don't like: Syntax analyzing takes time. Many people don't
+understand this process and assume that CEDET is slow. It is not that
+the fault of CEDET. Because real parsing takes time and such a task,
+while possible using Emacs Lisp, but is too much for current Emacs
+implementation. CEDET does some nice optimizations to speed it up as
+fast as it can: idle parsing, caching and incremental parsing to
+reduce computational time. Consider a project called [[https://github.com/drothlis/clang-ctags#performance][clang-ctags]] using
+Clang to generate tag database: 
+
+#+BEGIN_QUOTE
+"Running clang-ctags over a much larger input, such as the entire llvm
+C/C++ sources (7k files, 1.8 million lines of code) took 98 minutes
+and a peak memory usage of 140MB."
+#+END_QUOTE
+
+The more accurate to analyze the source code, the more time the parser
+needs to spend. *If you don't like to wait, skip this section and use
+=company-clang= instead*. At least you will have completion with
+system header files, but not your project.
 
 ** Why use CEDET?
 :PROPERTIES:
@@ -364,7 +538,9 @@ CEDET was merged into Emacs since 23.2. You do not need to install
 CEDET manually. However, you can also use the development repository
 that contains latest bug fixes and more features. Nevertheless, the
 built-in Emacs is still adequate for daily usage and convenient for
-trying out before actually cloning and use the development version.
+trying out before actually cloning and use the development
+version. Skip this section if you only want to try Emacs. Come back
+later if you really like it.
 
 If you really want to use the development version with latest feature,
 checkout this branch:
@@ -441,9 +617,7 @@ You may worry that this process takes a long time. Sometimes, it
 does. However, this is just a one time process. Once it is parsed,
 Semantic will cache the parsing result for future use. The next time
 you perform some action on the parsed code, such as code completion,
-you will get your desired output instantly. Syntactic analyzing takes
-time. Many people don't understand this process and assume that CEDET
-is slow.
+you will get your desired output instantly.
 
 **** *Command*: =global-semanticdb-minor-mode=
 :PROPERTIES:
@@ -487,6 +661,18 @@ for example Boost include paths, use the function
 If you want the system include paths to be available on both C/C++
 modes, then ignore the optional mode argument in
 =semantic-add-system-include=.
+**** Completion using =company-mode=
+:PROPERTIES:
+:ID:       05364ae1-6c0c-48b9-8759-823e70d9f320
+:END:
+=companh-mode= provides a command called =company-semantic= that uses
+SemanticDB to retrieve completion candidates. Function interface of
+each candidate is shown in the minibuffer. One nice thing of
+=company-semantic= is that it fixed an issue of original Semantic
+completion =semantic-ia-complete-symbol=: it can show you completions
+even if there's no prefix. The original =semantic-ia-complete-symbol=
+requires to have at least one character as a prefix for finding
+completions.
 
 **** *Package*: =function-args=
 :PROPERTIES:
@@ -532,42 +718,6 @@ Basic Usage (taken from =function-args= homepage):
 
 There are a few more commands. You can view all the descriptions for
 all commands [[https://github.com/abo-abo/function-args#main-functions][here]].
-
-**** *Package*: =company=
-:PROPERTIES:
-:ID:       3b617d5a-5957-4f87-be20-4241ba8b827a
-:END:
-You can also use =company= for code completion. After installing
-=company= from MELPA, activate it globally:
-
-#+begin_src emacs-lisp
-  (require 'company)
-  (add-hook 'after-init-hook 'global-company-mode)
-#+end_src
-
-Please read the *Usage* section on [[http://company-mode.github.io/][company homepage]] to learn company
-general features. You have three commands for completing C/C++ code:
-
-- =company-clang=: use =clang= to retrieve completion candidates.
-- =company-semantic=: use =Semantic= to retrieve completion
-  candidates. Function interface of each candidate is shown in the
-  minibuffer.
-- =company-gtags=: use GTAGS database from =GNU Global= to retrieve
-  completion candidates.
-
-**** *Package*: =company-c-headers=
-:PROPERTIES:
-:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
-:END:
-[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
-Company. After installing from MELPA, set it up:
-
-#+begin_src emacs-lisp
-  (add-to-list 'company-backends 'company-c-headers)
-  (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
-#+end_src
-
-[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
 
 ** CEDET can do more
 :PROPERTIES:
@@ -733,7 +883,7 @@ provided by =semantic-ia-complete-symbol= command that is used by
 complete function interface is displayed correctly. These two
 completion commands are provided.
 
-* Project management with EDE
+* OPTIONAL: Project management with EDE
 :PROPERTIES:
 :ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
 :END:
@@ -753,76 +903,12 @@ To setup EDE:
   (global-ede-mode)
 #+end_src
 
-
-- First, create this directory structure (I assume you know how to
-  manage directory with Dired):
-
-#+begin_src fundamental
-  project_root/
-              Makefile
-              src/
-                  feature1/
-              include1/
-                  feature1/
-              include2/
-#+end_src
-
-Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
-=feature1.h=, =feature1.c= and =main.c=. For the =.h= files, create
-them using this template
-
-#+begin_src c
-  void filename_func1();
-  int filename_func2(int a, int b);
-#+end_src
-
-Replace =filename= or =FILENAEM= with actual filename like =lib1=.
-
-For =.c= files, except for =main.c=, create them according to this
-template:
-
-#+begin_src c
-  #include "filename.h"
-
-  void filename_func1() { }
-
-  int filename_func2(int a, int b) { }
-#+end_src
-
-The files look silly but good enough for our learning purpose. Now, in
-=main.c=, let's test auto-completion by including appropriate header
-file:
-
-[[file:static/c-ide/ede-same-dir-completion.gif][file:static/c-ide/ede-same-dir-completion.gif]]
-
-Everything works fine when all files are under the same
-directory. Let's split the files into different directories we created
-before, like this:
-
-#+begin_src fundamental
-  project_root/
-              Makefile
-              src/
-                  main.c
-                  lib.c
-                  lib2.c
-                  feature1/
-                      feature1.c
-              include1/
-                  lib.h
-                  feature1/
-                      feature1.h
-              include2/
-                  lib2.h
-#+end_src
-
-[[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
-
-Try auto-completion again. This time, it won't work. No candidate is
-displayed. It is because Semantic only looks for header files in
-current directory by default. If you put it elsewhere, you have to
-tell Semantic where it is. This is not limited to only Semantic; you
-have to specify project include path in Eclipse as well.
+Now, let's try completion =main.c= in the project tree you created in
+the section [[*Source%20code%20completion%20using%20Clang][Source code completion using Clang]]. Nothing also
+happens. It is because Semantic only looks for header files in current
+directory by default. If you put it elsewhere, you have to tell
+Semantic where it is. This is not limited to only Semantic; you have
+to specify project include path in Eclipse as well.
 
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
 - In this file, add a new =ede-cpp-root-project= in this form:
