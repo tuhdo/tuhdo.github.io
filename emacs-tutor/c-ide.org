@@ -443,6 +443,12 @@ this content:
                                          "-I/home/tuhdo/workspace/project_root/include2/")))))
   #+end_src
 
+If you use Helm, you can easily insert absolute path by *C-c i* at the
+current path in =helm-find-files= (bound to *C-x C-f* by default in my
+demo =.emacs.d= at the beginning):
+
+[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]]
+
 Now, everything should works fine:
 
 [[file:static/c-ide/company-clang-project-completion.gif][file:static/c-ide/company-clang-project-completion.gif]]

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-28 T5 00:34 -->
+<!-- 2014-08-28 T5 00:55 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -884,6 +884,18 @@ this content:
 <pre class="src src-emacs-lisp">((<span style="color: #43783f;">nil</span> <span style="color: #374478;">.</span> ((<span style="color: #707e4f;">company-clang-arguments</span> <span style="color: #374478;">.</span> (<span style="color: #8b2252;">"-I/home/tuhdo/workspace/project_root/include1/"</span>
                                      <span style="color: #8b2252;">"-I/home/tuhdo/workspace/project_root/include2/"</span>)))))
 </pre>
+</div>
+
+<p>
+If you use Helm, you can easily insert absolute path by <b>C-c i</b> at the
+current path in <code>helm-find-files</code> (bound to <b>C-x C-f</b> by default in my
+demo <code>.emacs.d</code> at the beginning):
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/helm-files-insertion.gif"><img src="static/c-ide/helm-files-insertion.gif" alt="helm-files-insertion.gif" /></a>
+</p>
 </div>
 
 <p>
