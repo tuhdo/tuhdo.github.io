@@ -305,19 +305,23 @@ really fast:
 - Using =helm-gtags=: Similarly, =helm-gtags= also has the command
   =helm-gtags-show-stack= that shows visited tags from newest to
   oldest, from top to bottom.
-* OPTION 1: Source code completion using Clang
+* General completion with =company-mode=
 :PROPERTIES:
-:ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
+:ID:       26a77004-9171-4b04-bea7-28a6089de586
 :END:
-You can use =company-mode= for code completion. After installing
-=company-mode= from MELPA, activate it globally:
+=company-mode= is a text completion framework for Emacs. The name
+stands for "complete anything". It uses pluggable back-ends and
+front-ends to retrieve and display completion candidates.
+
+It comes with several back-ends such as Elisp, Clang, Semantic, Eclim,
+Ropemacs, Ispell, CMake, BBDB, Yasnippet, dabbrev, etags, gtags,
+files, keywords and a few others.
+
+After installing =company-mode= from MELPA, activate it globally:
 
 #+begin_src emacs-lisp
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
-  (setq company-backends (delete 'company-semantic company-backends))
-  (define-key c-mode-map  [(tab)] 'company-complete)
-  (define-key c++-mode-map  [(tab)] 'company-complete)
 #+end_src
 
 *General Usage*: Completion will start automatically after you type a
@@ -332,67 +336,10 @@ this.
 The variable =company-backends= specifies a list of backends that
 =company-mode= uses to retrieves completion candidates for you.
 
-You have two commands for completing C/C++ code:
+That's the basic. In the later sections, you will configure
+=company-mode= to provide completion candidates.
 
-- =company-clang=: use =clang= to retrieve completion candidates. You
-  will have completion with system header files, but not your
-  project. By default, =company-complete= already includes
-  =company-clang= backend, so you can use =company-complete= to
-  complete for many thing. Note that in the configuration for
-  =company-mode= above, we have to delete =company-semantic=,
-  otherwise =company-complete= will use =company-semantic= instead of
-  =company-clang=, because it has higher precedence in
-  =company-backends=. =company-semantic= will be discuss in the CEDET
-  section.
-
-  To retrieve completion candidates for your projects, you will have
-  to tell Clang where your include paths are. Create a file named
-  =.dir-locals.el= at your project root:
-
-  #+begin_src emacs-lisp
-    ((nil . ((company-clang-arguments . ("-I/home/tuhdo/workspace/project_root/include1/"
-                                         "-I/home/tuhdo/workspace/project_root/include2/")))))
-  #+end_src
-  
-If you put a file with a special name .dir-locals.el in a directory,
-Emacs will read it when it visits any file in that directory or any of
-its subdirectories, and apply the settings it specifies to the file’s
-buffer. If you want to know more, read [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][GNU Emacs Manual -
-Per-Directory Local Variables]]. If you use Helm, you can easily insert
-absolute path by *C-c i* at the current path in =helm-find-files=
-(bound to *C-x C-f* by default in my demo =.emacs.d= at the beginning):
-
-[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]] 
-
-In the above example, =nil= means apply the settings to any file or
-sub-directory visited. If =non-nil=, you have to specify a major mode
-and the settings are applied to major modes only. You set
-=company-clang= to =c-mode= and =c++-mode= anyway, so there's no
-problem setting major mode to nil. The remaining is a key-value pair
-of variable and value of that variable. =company-clang-arguments= is
-where you can tell include paths, and it takes a list of strings of
-include paths, as you can see above. After that, =company-clang= can
-see include paths in your project.
- 
-- =company-gtags=: use GTAGS database from =GNU Global= to retrieve
-  completion candidates. It displays ALL completion candidates in
-  GTAGS database regarding of scope. Use =company-gtags= to provide
-  code completion in your current project.
-
-** *Package*: =company-c-headers=
-:PROPERTIES:
-:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
-:END:
-[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
-Company. After installing from MELPA, set it up:
-
-#+begin_src emacs-lisp
-  (add-to-list 'company-backends 'company-c-headers)
-#+end_src
-
-[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
-
-* OPTION 2: Source code completion using CEDET
+* OPTION 1: Source code completion using CEDET
 :PROPERTIES:
 :ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
 :END:
@@ -973,6 +920,78 @@ provided by =semantic-ia-complete-symbol= command that is used by
 =moo-complete= for a list of candidates with full information, such as
 complete function interface is displayed correctly. These two
 completion commands are provided.
+
+** *Package*: =company-c-headers=
+:PROPERTIES:
+:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
+:END:
+[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-backends 'company-c-headers)
+#+end_src
+
+[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
+
+* OPTION 2: Source code completion using Clang
+:PROPERTIES:
+:ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
+:END:
+To use =company-mode= with Clang, add this configuration:
+
+#+begin_src emacs-lisp
+  (setq company-backends (delete 'company-semantic company-backends))
+  (define-key c-mode-map  [(tab)] 'company-complete)
+  (define-key c++-mode-map  [(tab)] 'company-complete)
+#+end_src
+
+You have two commands for completing C/C++ code:
+
+- =company-clang=: use =clang= to retrieve completion candidates. You
+  will have completion with system header files, but not your
+  project. By default, =company-complete= already includes
+  =company-clang= backend, so you can use =company-complete= to
+  complete for many thing. Note that in the configuration for
+  =company-mode= above, we have to delete =company-semantic=,
+  otherwise =company-complete= will use =company-semantic= instead of
+  =company-clang=, because it has higher precedence in
+  =company-backends=. =company-semantic= will be discuss in the CEDET
+  section.
+
+  To retrieve completion candidates for your projects, you will have
+  to tell Clang where your include paths are. Create a file named
+  =.dir-locals.el= at your project root:
+
+  #+begin_src emacs-lisp
+    ((nil . ((company-clang-arguments . ("-I/home/tuhdo/workspace/project_root/include1/"
+                                         "-I/home/tuhdo/workspace/project_root/include2/")))))
+  #+end_src
+  
+If you put a file with a special name .dir-locals.el in a directory,
+Emacs will read it when it visits any file in that directory or any of
+its subdirectories, and apply the settings it specifies to the file’s
+buffer. If you want to know more, read [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][GNU Emacs Manual -
+Per-Directory Local Variables]]. If you use Helm, you can easily insert
+absolute path by *C-c i* at the current path in =helm-find-files=
+(bound to *C-x C-f* by default in my demo =.emacs.d= at the beginning):
+
+[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]] 
+
+In the above example, =nil= means apply the settings to any file or
+sub-directory visited. If =non-nil=, you have to specify a major mode
+and the settings are applied to major modes only. You set
+=company-clang= to =c-mode= and =c++-mode= anyway, so there's no
+problem setting major mode to nil. The remaining is a key-value pair
+of variable and value of that variable. =company-clang-arguments= is
+where you can tell include paths, and it takes a list of strings of
+include paths, as you can see above. After that, =company-clang= can
+see include paths in your project.
+ 
+- =company-gtags=: use GTAGS database from =GNU Global= to retrieve
+  completion candidates. It displays ALL completion candidates in
+  GTAGS database regarding of scope. Use =company-gtags= to provide
+  code completion in your current project.
 
 ** *Package*: =company-c-headers=
 :PROPERTIES:
