@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-28 Thu 11:02 -->
+<!-- 2014-08-28 Thu 11:20 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -765,8 +765,16 @@ If you put a file with a special name .dir-locals.el in a directory,
 Emacs will read it when it visits any file in that directory or any of
 its subdirectories, and apply the settings it specifies to the file’s
 buffer. If you want to know more, read <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html">GNU Emacs Manual -
-Per-Directory Local Variables</a>.
+Per-Directory Local Variables</a>. If you use Helm, you can easily insert
+absolute path by <b>C-c i</b> at the current path in <code>helm-find-files</code>
+(bound to <b>C-x C-f</b> by default in my demo <code>.emacs.d</code> at the beginning):
 </p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/helm-files-insertion.gif"><img src="static/c-ide/helm-files-insertion.gif" alt="helm-files-insertion.gif" /></a> 
+</p>
+</div>
 
 <p>
 In the above example, <code>nil</code> means apply the settings to any file or
@@ -1277,8 +1285,8 @@ manage directory with Dired):
 
 <p>
 Then, create files: <code>lib1.c</code>, <code>lib2.c</code>, <code>lib1.h</code>, <code>lib2.h</code>,
-<code>feature1.h</code>, <code>feature1.c</code> and <code>main.c</code>. For the <code>.h</code> files, create
-them using this template
+<code>feature1.h</code>, <code>feature1.c</code> and <code>main.c</code> in the same <code>src/</code>
+directory. For the <code>.h</code> files, create them using this template
 </p>
 
 <div class="org-src-container">
@@ -1653,7 +1661,6 @@ Company. After installing from MELPA, set it up:
 </div>
 </div>
 </div>
-
 
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><a id="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88" name="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88"></a>Project management with Projectile</h2>

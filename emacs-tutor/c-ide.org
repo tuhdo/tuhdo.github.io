@@ -358,7 +358,11 @@ If you put a file with a special name .dir-locals.el in a directory,
 Emacs will read it when it visits any file in that directory or any of
 its subdirectories, and apply the settings it specifies to the file’s
 buffer. If you want to know more, read [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][GNU Emacs Manual -
-Per-Directory Local Variables]].
+Per-Directory Local Variables]]. If you use Helm, you can easily insert
+absolute path by *C-c i* at the current path in =helm-find-files=
+(bound to *C-x C-f* by default in my demo =.emacs.d= at the beginning):
+
+[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]] 
 
 In the above example, =nil= means apply the settings to any file or
 sub-directory visited. If =non-nil=, you have to specify a major mode
@@ -731,8 +735,8 @@ To setup EDE:
 #+end_src
 
 Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
-=feature1.h=, =feature1.c= and =main.c=. For the =.h= files, create
-them using this template
+=feature1.h=, =feature1.c= and =main.c= in the same =src/=
+directory. For the =.h= files, create them using this template
 
 #+begin_src c
   void filename_func1();
@@ -982,7 +986,6 @@ Company. After installing from MELPA, set it up:
 #+end_src
 
 [[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
-
 
 * Project management with Projectile
 :PROPERTIES:
