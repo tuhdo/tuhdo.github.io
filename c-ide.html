@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-28 Thu 14:28 -->
+<!-- 2014-08-28 Thu 14:32 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -1502,6 +1502,39 @@ template in a file, such as <code>ede-projects.el</code>:
   semantic-force-refresh</code> to make Semantic aware of new changes.
 </li>
 </ul>
+
+<p>
+Later, you will also learn another project management tool called
+<code>Projectile</code>. You may ask, why another project management tool? The
+differences are:
+</p>
+
+<ul class="org-ul">
+<li>EDE is older, Projectile appears recently.
+</li>
+<li>EDE manages project files to integrate with specific build system
+and generate corresponding build file (such as Makefile; these
+features are not covered in this guide). Projectile provides generic
+file management operations such as quickly jump to file/directory in
+project, list buffers that belong to current project&#x2026;
+</li>
+<li>EDE is part of CEDET suite; it is geared toward Semantic. For
+example, we used EDE to tell Semantic where to retrieve correct
+include paths for current project to perform smart completion in
+previous section. Projectile provides a generic interface for
+managing your project under a VCS or some supported build system.
+</li>
+<li>Projectile is easier to learn than EDE.
+</li>
+</ul>
+
+<p>
+Both have some overlapping in features, such as Projectile provides
+basic tag navigation in project, but in general they support each
+other. For our basic usage, we use EDE for smart completion as in
+previous section and Projectile to navigate our project
+effortlessly.
+</p>
 </div>
 </div>
 
@@ -1703,37 +1736,6 @@ Company. After installing from MELPA, set it up:
 <h2 id="sec-6"><a id="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88" name="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88"></a>Project management with Projectile</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-You may ask, why another project management tool? The differences are:
-</p>
-
-<ul class="org-ul">
-<li>EDE is older, Projectile appears recently.
-</li>
-<li>EDE manages project files to integrate with specific build system
-and generate corresponding build file (such as Makefile; these
-features are not covered in this guide). Projectile provides generic
-file management operations such as quickly jump to file/directory in
-project, list buffers that belong to current project&#x2026;
-</li>
-<li>EDE is part of CEDET suite; it is geared toward Semantic. For
-example, we used EDE to tell Semantic where to retrieve correct
-include paths for current project to perform smart completion in
-previous section. Projectile provides a generic interface for
-managing your project under a VCS or some supported build system.
-</li>
-<li>Projectile is easier to learn than EDE.
-</li>
-</ul>
-
-<p>
-Both have some overlapping in features, such as Projectile provides
-basic tag navigation in project, but in general they support each
-other. For our basic usage, we use EDE for smart completion as in
-previous section and Projectile to navigate our project
-effortlessly
-</p>
-
-<p>
 By default, <code>git</code>, <code>mercurial</code>, <code>darcs</code> and <code>bazaar</code> are considered
 projects. So are <code>lein</code>, <code>maven</code>, <code>sbt</code>, <code>scons</code>, <code>rebar</code> and
 <code>bundler</code>. If you want to mark a folder manually as a project just
@@ -1741,8 +1743,7 @@ create an empty <code>.projectile</code> file in it:
 </p>
 
 <p>
-By default, prefix key of Projectile is <b>C-c p</b>. Some notable
-features:
+Prefix key of Projectile is <b>C-c p</b>. Some notable features:
 </p>
 
 <ul class="org-ul">

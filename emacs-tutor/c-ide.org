@@ -878,6 +878,29 @@ Summary:
 - If you have opening files, either close or refresh it with =M-x
   semantic-force-refresh= to make Semantic aware of new changes.
 
+Later, you will also learn another project management tool called
+=Projectile=. You may ask, why another project management tool? The
+differences are:
+
+- EDE is older, Projectile appears recently.
+- EDE manages project files to integrate with specific build system
+  and generate corresponding build file (such as Makefile; these
+  features are not covered in this guide). Projectile provides generic
+  file management operations such as quickly jump to file/directory in
+  project, list buffers that belong to current project...
+- EDE is part of CEDET suite; it is geared toward Semantic. For
+  example, we used EDE to tell Semantic where to retrieve correct
+  include paths for current project to perform smart completion in
+  previous section. Projectile provides a generic interface for
+  managing your project under a VCS or some supported build system.
+- Projectile is easier to learn than EDE.
+
+Both have some overlapping in features, such as Projectile provides
+basic tag navigation in project, but in general they support each
+other. For our basic usage, we use EDE for smart completion as in
+previous section and Projectile to navigate our project
+effortlessly.
+
 ** Source code navigation using Senator
 :PROPERTIES:
 :ID:       56164139-be1c-41bd-9e1d-f55335341d80
@@ -1010,34 +1033,12 @@ Company. After installing from MELPA, set it up:
 :PROPERTIES:
 :ID:       c5b93bb9-1b91-4c94-aa55-9a86976ccf88
 :END:
-You may ask, why another project management tool? The differences are:
-
-- EDE is older, Projectile appears recently.
-- EDE manages project files to integrate with specific build system
-  and generate corresponding build file (such as Makefile; these
-  features are not covered in this guide). Projectile provides generic
-  file management operations such as quickly jump to file/directory in
-  project, list buffers that belong to current project...
-- EDE is part of CEDET suite; it is geared toward Semantic. For
-  example, we used EDE to tell Semantic where to retrieve correct
-  include paths for current project to perform smart completion in
-  previous section. Projectile provides a generic interface for
-  managing your project under a VCS or some supported build system.
-- Projectile is easier to learn than EDE.
-
-Both have some overlapping in features, such as Projectile provides
-basic tag navigation in project, but in general they support each
-other. For our basic usage, we use EDE for smart completion as in
-previous section and Projectile to navigate our project
-effortlessly
-
 By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
 projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
 =bundler=. If you want to mark a folder manually as a project just
 create an empty =.projectile= file in it: 
 
-By default, prefix key of Projectile is *C-c p*. Some notable
-features:
+Prefix key of Projectile is *C-c p*. Some notable features:
 
 - Jump to any file in the project: *C-c p f*.
 - Jump to any directory in the project: *C-c p d*.
