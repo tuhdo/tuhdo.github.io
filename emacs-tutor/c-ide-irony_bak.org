@@ -314,7 +314,7 @@ stands for "complete anything". It uses pluggable back-ends and
 front-ends to retrieve and display completion candidates.
 
 It comes with several back-ends such as Elisp, Clang, Semantic, Eclim,
-Ropemacs, Ispell, CMake, BBDB, Yasnippet, dabbrev, etags, gtags,
+Ropemacs, Ispell, CMake, BBDB, Ya snippet, dabbrev, etags, gtags,
 files, keywords and a few others.
 
 After installing =company-mode= from MELPA, activate it globally:
@@ -338,12 +338,110 @@ The variable =company-backends= specifies a list of backends that
 
 That's the basic. In the later sections, you will configure
 =company-mode= to provide completion candidates.
-* Demo project
+* Demo projec
 :PROPERTIES:
-:ID:       11373e80-b396-4218-a5c8-cd7a4f146b19
+:ID:       4b22b03c-0bd2-4773-9a04-571e7f0ed648
 :END:
-I uploaded a demo project for you to play with completion feature
-[[https://github.com/tuhdo/c-demo-project][here]]. The project has this structure:
+I uploaded a sample project for you to play with: [add later]. It has
+this directory structure:
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  feature1/
+              include1/
+                  feature1/
+              include2/
+#+end_src
+
+The following files are in =src/= directory: =lib1.c=, =lib2.c=,
+=lib1.h=, =lib2.h=, =feature1.h=, =feature1.c= and =main.c=. For the
+=.h= files, it has this template:
+
+#+begin_src c
+  void filename_func1();
+  int filename_func2(int a, int b);
+#+end_src
+
+=filename= or =FILENAME= is actual filename like =lib1=.
+
+For =.c= files, except for =main.c=, create them according to this
+template:
+
+#+begin_src c
+  #include "filename.h"
+
+  void filename_func1() { }
+
+  int filename_func2(int a, int b) { }
+#+end_src
+
+* OPTION 1: Source code completion using Clang
+:PROPERTIES:
+:ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
+:END:
+Emacs has a package named [[https://github.com/Sarcasm/irony-mode][irony-mode]]. =irony-mode= includes a server
+that provides the libclang interface.
+
+Prerequisite:
+
+- CMake >= 2.8.3
+- libclang
+
+If you don't have those dependencies, install it to your system. Then
+install =irony-mode= from MELPA, as you did with =company-mode=. You
+should also install =company-irony= as well.
+
+After that, =M-x irony-install-server= to compile the =irony-server=
+written in C++ and comes with the installation of =irony-mode=. Wait
+until the =irony-mode= finishes compiling.
+
+Setup:
+
+#+begin_src emacs-lisp
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'objc-mode-hook 'irony-mode)
+
+  (add-to-list 'company-backends 'company-irony)
+  (define-key c-mode-map  [(tab)] 'company-irony)
+  (define-key c++-mode-map  [(tab)] 'company-irony)
+#+end_src
+
+In the above configuration, you add =company-irony= to a list of
+=company-backends=, so the next time you execute the generic
+completion command =company-complete=, it will use =company-irony=
+backend for complete. =company-backends=, as its name suggested,
+contains many different backends. The backend that got added later
+will have higher precedence. If a backend fails, =company-complete=
+uses the next backend until all backends are tried. You can view a
+list of backend by *C-h v*, then enter =company-backends=.
+
+To provide completion for your project, you have to tell where your
+include paths are. Create a file =.clang_complete= at your project
+root containing the compilation flags, one per line. An example of
+=.clang_complete= file:
+
+#+begin_src fundamental
+  -I./include
+  -I/usr/include
+#+end_src
+
+In the above example, =-I./include= specifies the include paths relative
+to your project. =-I/usr/include= specifies your system header files
+at =/usr/include=. After that, run the command =irony-cdb-menu=. It
+will ask which compilation database to choose. Since you use
+=.clang_complete=, press *l*, which loads =.clang_complete=. After
+that, you can use =company-complete= that includes =company-irony=
+backend to complete your code.
+
+*_Exercise_*:
+
+Now it's time to use the demo project. Let's test auto-completion by
+including appropriate header file. Everything should work fine when
+all files are under the same directory. Let's split the files into
+different directories we created before, like this:
 
 #+begin_src fundamental
   project_root/
@@ -364,103 +462,26 @@ I uploaded a demo project for you to play with completion feature
 
 [[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
 
-For the =.h= files, all have this content:
+Now, =company-irony= won't see anything related to your project
+anymore. To fix this, at the file =.clang_complete= under your
+=project_root= with the following content:
 
-#+begin_src c
-  void filename_func1();
-  int filename_func2(int a, int b);
+#+begin_src fundamental
+  -I./include1
+  -I./include2p
 #+end_src
 
-For =.c= files, except for =main.c=, all have this template:
+That's it! Now, run =irony-cdb-menu= and press *l* to load the new
+=.clang_complete= file. Everything should work now.
 
-#+begin_src c
-  #include "filename.h"
-
-  void filename_func1() { }
-
-  int filename_func2(int a, int b) { }
-#+end_src
-
-=filename= or =FILENAME= is actual filename like =lib1=, =lib2=...
-
-The files look silly but good enough for our learning purpose.
-
-* OPTION 1: Source code completion using Clang
+** Command: =company-gtags=
 :PROPERTIES:
-:ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
+:ID:       fd219ce1-3d64-42ec-8050-70a2c0ecbf23
 :END:
-To use =company-mode= with Clang, add this configuration:
-
-#+begin_src emacs-lisp
-  (setq company-backends (delete 'company-semantic company-backends))
-  (define-key c-mode-map  [(tab)] 'company-complete)
-  (define-key c++-mode-map  [(tab)] 'company-complete)
-#+end_src
-
-You have two commands for completing C/C++ code:
-
-- =company-clang=: use =clang= to retrieve completion candidates. You
-  will have completion with system header files, but not your
-  project. By default, =company-complete= already includes
-  =company-clang= backend, so you can use =company-complete= to
-  complete for many thing. Note that in the configuration for
-  =company-mode= above, we have to delete =company-semantic=,
-  otherwise =company-complete= will use =company-semantic= instead of
-  =company-clang=, because it has higher precedence in
-  =company-backends=. =company-semantic= will be discuss in the CEDET
-  section.
-
-  To retrieve completion candidates for your projects, you will have
-  to tell Clang where your include paths are. Create a file named
-  =.dir-locals.el= at your project root:
-
-  #+begin_src emacs-lisp
-    ((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
-                                         "-I/home/<user>/project_root/include2/")))))
-  #+end_src
-  
-If you put a file with a special name .dir-locals.el in a directory,
-Emacs will read it when it visits any file in that directory or any of
-its subdirectories, and apply the settings it specifies to the file’s
-buffer. If you want to know more, read [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Directory-Variables.html][GNU Emacs Manual -
-Per-Directory Local Variables]]. If you use Helm, you can easily insert
-absolute path by *C-c i* at the current path in =helm-find-files=
-(bound to *C-x C-f* by default in my demo =.emacs.d= at the beginning):
-
-[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]] 
-
-In the above example, =nil= means apply the settings to any file or
-sub-directory visited. If =non-nil=, you have to specify a major mode
-and the settings are applied to major modes only. You set
-=company-clang= to =c-mode= and =c++-mode= anyway, so there's no
-problem setting major mode to nil. The remaining is a key-value pair
-of variable and value of that variable. =company-clang-arguments= is
-where you can tell include paths, and it takes a list of strings of
-include paths, as you can see above. After that, =company-clang= can
-see include paths in your project. If you add something new, like an
-include path, to your =.dir-locals.el= and is editing some source
-file, reopen the file for the new values to take effect.
-
-- =company-gtags=: use GTAGS database from =GNU Global= to retrieve
-  completion candidates. It displays ALL completion candidates in
-  GTAGS database regarding of scope. Use =company-gtags= to provide
-  code completion in your current project.
-
-*_Exercise_*:
-
-- Create a =.dir-locals.el= at =project_root=.
-- Add this Emacs Lisp code:
-
-  #+begin_src emacs-lisp
-    ((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
-                                         "-I/home/<user>/project_root/include2/")))))
-  #+end_src
-
-Replace =<user>= with your username.
-
-- Enter any source file and start completion. You will see that
-  =company-clang= correctly retrieves completion candidates in those directories.
- 
+This command uses GTAGS database from =GNU Global= to retrieve
+completion candidates. It displays ALL completion candidates in GTAGS
+database regarding of scope. Use =company-gtags= to provide code
+completion in your current project.
 ** *Package*: =company-c-headers=
 :PROPERTIES:
 :ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
@@ -801,12 +822,13 @@ To setup EDE:
   (global-ede-mode)
 #+end_src
 
-Now, let's try completion in =main.c= using =moo-complete= or
-=company-semantic=. Nothing also happens. It is because Semantic only
-looks for header files in current directory by default. If you put it
-elsewhere, you have to tell Semantic where it is. This is not limited
-to only Semantic; you have to specify project include path in Eclipse
-as well.
+*_Exercise_*:
+
+Now, let's try completion =main.c=. Nothing also happens as in the
+case of =company-irony=. It is because Semantic only looks for header
+files in current directory by default. If you put it elsewhere, you
+have to tell Semantic where it is. This is not limited to only
+Semantic; you have to specify project include path in Eclipse as well.
 
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
 - In this file, add a new =ede-cpp-root-project= in this form:
