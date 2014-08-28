@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-28 Thu 10:23 -->
+<!-- 2014-08-28 Thu 11:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -186,10 +186,14 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-3-4">Semantic minor modes</a></li>
 <li><a href="#sec-3-5">CEDET can do more</a></li>
 <li><a href="#sec-3-6">Project management with EDE</a></li>
-<li><a href="#sec-3-7">Source code navigation using Senator</a></li>
-<li><a href="#sec-3-8">Navigation</a></li>
-<li><a href="#sec-3-9">Copy/Paste</a></li>
-<li><a href="#sec-3-10">Obsolete commands</a></li>
+<li><a href="#sec-3-7">Source code navigation using Senator</a>
+<ul>
+<li><a href="#sec-3-7-1">Navigation</a></li>
+<li><a href="#sec-3-7-2">Copy/Paste</a></li>
+<li><a href="#sec-3-7-3">Obsolete commands</a></li>
+</ul>
+</li>
+<li><a href="#sec-3-8"><b>Package</b>: <code>company-c-headers</code></a></li>
 </ul>
 </li>
 <li><a href="#sec-4">Project management with Projectile</a></li>
@@ -703,7 +707,7 @@ You can use <code>company-mode</code> for code completion. After installing
 
 <pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">company</span>)
 (<span style="color: #783778;">add-hook</span> '<span style="color: #3f7178;">after-init-hook</span> '<span style="color: #374478;">global-company-mode</span>)
-(<span style="color: #7e544f;">delete</span> '<span style="color: #7a4f7e;">company-semantic</span> <span style="color: #783f5a;">company-backends</span>)
+(<span style="color: #784437;">setq</span> <span style="color: #783f5a;">company-backends</span> (<span style="color: #7e544f;">delete</span> '<span style="color: #7a4f7e;">company-semantic</span> <span style="color: #783f5a;">company-backends</span>))
 (<span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  [(<span style="color: #3f7178;">tab</span>)] '<span style="color: #783f5a;">company-complete</span>)
 (<span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  [(<span style="color: #3f7178;">tab</span>)] '<span style="color: #783f5a;">company-complete</span>)
 </pre>
@@ -777,134 +781,12 @@ see include paths in your project.
 </p>
 
 <ul class="org-ul">
-<li>Optional <code>company-gtags</code>: use GTAGS database from <code>GNU Global</code> to
-retrieve completion candidates. It displays ALL completion
-candidates in GTAGS database regarding of scope. Use <code>company-gtags</code>
-to provide code completion in your current project.
+<li><code>company-gtags</code>: use GTAGS database from <code>GNU Global</code> to retrieve
+completion candidates. It displays ALL completion candidates in
+GTAGS database regarding of scope. Use <code>company-gtags</code> to provide
+code completion in your current project.
 </li>
 </ul>
-
-<p>
-<b><span class="underline">Exercise</span></b>:
-</p>
-
-<ul class="org-ul">
-<li>First, create this directory structure (I assume you know how to
-manage directory with Dired):
-</li>
-</ul>
-
-<div class="org-src-container">
-
-<pre class="src src-fundamental">project_root/
-            Makefile
-            src/
-                feature1/
-            include1/
-                feature1/
-            include2/
-</pre>
-</div>
-
-<p>
-Then, create files: <code>lib1.c</code>, <code>lib2.c</code>, <code>lib1.h</code>, <code>lib2.h</code>,
-<code>feature1.h</code>, <code>feature1.c</code> and <code>main.c</code>. For the <code>.h</code> files, create
-them using this template
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>();
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>);
-</pre>
-</div>
-
-<p>
-Replace <code>filename</code> or <code>FILENAEM</code> with actual filename like <code>lib1</code>.
-</p>
-
-<p>
-For <code>.c</code> files, except for <code>main.c</code>, create them according to this
-template:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"filename.h"</span>
-
-<span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>() { }
-
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>) { }
-</pre>
-</div>
-
-<p>
-The files look silly but good enough for our learning purpose. Now, in
-<code>main.c</code>, let's test auto-completion by including appropriate header
-file. Everything works fine when all files are under the same
-directory. Let's split the files into different directories we created
-before, like this:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-fundamental">project_root/
-            Makefile
-            src/
-                main.c
-                lib.c
-                lib2.c
-                feature1/
-                    feature1.c
-            include1/
-                lib.h
-                feature1/
-                    feature1.h
-            include2/
-                lib2.h
-</pre>
-</div>
-
-
-<div class="figure">
-<p><a href="static/c-ide/ede-rearrange-project-dir.gif"><img src="static/c-ide/ede-rearrange-project-dir.gif" alt="ede-rearrange-project-dir.gif" /></a>
-</p>
-</div>
-
-<p>
-Try auto-completion again. This time, it won't work. No candidate is
-displayed. Now, create the <code>.dir-locals.el</code> at project root and add
-this content:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">((<span style="color: #43783f;">nil</span> <span style="color: #374478;">.</span> ((<span style="color: #707e4f;">company-clang-arguments</span> <span style="color: #374478;">.</span> (<span style="color: #8b2252;">"-I/home/tuhdo/workspace/project_root/include1/"</span>
-                                     <span style="color: #8b2252;">"-I/home/tuhdo/workspace/project_root/include2/"</span>)))))
-</pre>
-</div>
-
-<p>
-If you use Helm, you can easily insert absolute path by <b>C-c i</b> at the
-current path in <code>helm-find-files</code> (bound to <b>C-x C-f</b> by default in my
-demo <code>.emacs.d</code> at the beginning):
-</p>
-
-
-<div class="figure">
-<p><a href="static/c-ide/helm-files-insertion.gif"><img src="static/c-ide/helm-files-insertion.gif" alt="helm-files-insertion.gif" /></a>
-</p>
-</div>
-
-<p>
-Now, everything should works fine:
-</p>
-
-
-<div class="figure">
-<p><a href="static/c-ide/company-clang-project-completion.gif"><img src="static/c-ide/company-clang-project-completion.gif" alt="company-clang-project-completion.gif" /></a>
-</p>
-</div>
 </div>
 
 <div id="outline-container-sec-2-1" class="outline-3">
@@ -1372,12 +1254,98 @@ To setup EDE:
 </div>
 
 <p>
-Now, let's try completion <code>main.c</code> in the project tree you created in
-the section <i>Source code completion using Clang</i>. Nothing also
-happens. It is because Semantic only looks for header files in current
-directory by default. If you put it elsewhere, you have to tell
-Semantic where it is. This is not limited to only Semantic; you have
-to specify project include path in Eclipse as well.
+<b><span class="underline">Exercise</span></b>:
+</p>
+
+<ul class="org-ul">
+<li>First, create this directory structure (I assume you know how to
+manage directory with Dired):
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-fundamental">project_root/
+            Makefile
+            src/
+                feature1/
+            include1/
+                feature1/
+            include2/
+</pre>
+</div>
+
+<p>
+Then, create files: <code>lib1.c</code>, <code>lib2.c</code>, <code>lib1.h</code>, <code>lib2.h</code>,
+<code>feature1.h</code>, <code>feature1.c</code> and <code>main.c</code>. For the <code>.h</code> files, create
+them using this template
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>();
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>);
+</pre>
+</div>
+
+<p>
+Replace <code>filename</code> or <code>FILENAEM</code> with actual filename like <code>lib1</code>.
+</p>
+
+<p>
+For <code>.c</code> files, except for <code>main.c</code>, create them according to this
+template:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"filename.h"</span>
+
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>() { }
+
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>) { }
+</pre>
+</div>
+
+<p>
+The files look silly but good enough for our learning purpose. Now, in
+<code>main.c</code>, let's test auto-completion by including appropriate header
+file. Everything works fine when all files are under the same
+directory. Let's split the files into different directories we created
+before, like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-fundamental">project_root/
+            Makefile
+            src/
+                main.c
+                lib.c
+                lib2.c
+                feature1/
+                    feature1.c
+            include1/
+                lib.h
+                feature1/
+                    feature1.h
+            include2/
+                lib2.h
+</pre>
+</div>
+
+
+<div class="figure">
+<p><a href="static/c-ide/ede-rearrange-project-dir.gif"><img src="static/c-ide/ede-rearrange-project-dir.gif" alt="ede-rearrange-project-dir.gif" /></a>
+</p>
+</div>
+
+<p>
+Now, let's try completion <code>main.c</code>. Nothing also happens. It is
+because Semantic only looks for header files in current directory by
+default. If you put it elsewhere, you have to tell Semantic where it
+is. This is not limited to only Semantic; you have to specify project
+include path in Eclipse as well.
 </p>
 
 <ul class="org-ul">
@@ -1506,11 +1474,10 @@ simpler solution: use GNU Global with <code>ggtags</code> or <code>helm-gtags</c
 frontends. The following commands are provided by Senator:
 </p>
 </div>
-</div>
 
-<div id="outline-container-sec-3-8" class="outline-3">
-<h3 id="sec-3-8"><a id="ID-09424bff-048a-41b1-91d5-6b0f692f8c05" name="ID-09424bff-048a-41b1-91d5-6b0f692f8c05"></a>Navigation</h3>
-<div class="outline-text-3" id="text-3-8">
+<div id="outline-container-sec-3-7-1" class="outline-4">
+<h4 id="sec-3-7-1"><a id="ID-09424bff-048a-41b1-91d5-6b0f692f8c05" name="ID-09424bff-048a-41b1-91d5-6b0f692f8c05"></a>Navigation</h4>
+<div class="outline-text-4" id="text-3-7-1">
 
 <p>
 Senator provides commands for navigating by tag.
@@ -1591,9 +1558,9 @@ another symbol if you change your mind.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-3-9" class="outline-3">
-<h3 id="sec-3-9"><a id="ID-a7861142-010c-4640-9ec7-d201dc918f92" name="ID-a7861142-010c-4640-9ec7-d201dc918f92"></a>Copy/Paste</h3>
-<div class="outline-text-3" id="text-3-9">
+<div id="outline-container-sec-3-7-2" class="outline-4">
+<h4 id="sec-3-7-2"><a id="ID-a7861142-010c-4640-9ec7-d201dc918f92" name="ID-a7861142-010c-4640-9ec7-d201dc918f92"></a>Copy/Paste</h4>
+<div class="outline-text-4" id="text-3-7-2">
 
 <ul class="org-ul">
 <li><code>C-c , M-w</code> runs <code>senator-copy-tag</code>, take the current tag, and place
@@ -1648,9 +1615,9 @@ tag to the kill ring.
 </div>
 </div>
 
-<div id="outline-container-sec-3-10" class="outline-3">
-<h3 id="sec-3-10"><a id="ID-0545cf56-b2bc-4efa-80aa-eca9911bf32b" name="ID-0545cf56-b2bc-4efa-80aa-eca9911bf32b"></a>Obsolete commands</h3>
-<div class="outline-text-3" id="text-3-10">
+<div id="outline-container-sec-3-7-3" class="outline-4">
+<h4 id="sec-3-7-3"><a id="ID-0545cf56-b2bc-4efa-80aa-eca9911bf32b" name="ID-0545cf56-b2bc-4efa-80aa-eca9911bf32b"></a>Obsolete commands</h4>
+<div class="outline-text-4" id="text-3-7-3">
 <p>
 Senator also provides commands for code completion:
 <code>senator-complete-symbol</code> and <code>senator-completion-menu-popup</code>. Code
@@ -1663,6 +1630,30 @@ completion commands are provided.
 </div>
 </div>
 </div>
+
+<div id="outline-container-sec-3-8" class="outline-3">
+<h3 id="sec-3-8"><a id="ID-6e05e8a5-04a3-4279-bf99-22fd627c0e92" name="ID-6e05e8a5-04a3-4279-bf99-22fd627c0e92"></a><b>Package</b>: <code>company-c-headers</code></h3>
+<div class="outline-text-3" id="text-3-8">
+<p>
+<a href="https://github.com/randomphrase/company-c-headers">company-c-headers</a> provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #783f5a;">company-backends</span> '<span style="color: #4f7e67;">company-c-headers</span>)
+</pre>
+</div>
+
+
+<div class="figure">
+<p><a href="static/c-ide/company-c-header.png"><img src="static/c-ide/company-c-header.png" alt="company-c-header.png" /></a>
+</p>
+</div>
+</div>
+</div>
+</div>
+
 
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><a id="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88" name="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88"></a>Project management with Projectile</h2>

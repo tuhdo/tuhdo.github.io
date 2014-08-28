@@ -315,7 +315,7 @@ You can use =company-mode= for code completion. After installing
 #+begin_src emacs-lisp
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
-  (delete 'company-semantic company-backends)
+  (setq company-backends (delete 'company-semantic company-backends))
   (define-key c-mode-map  [(tab)] 'company-complete)
   (define-key c++-mode-map  [(tab)] 'company-complete)
 #+end_src
@@ -370,91 +370,10 @@ where you can tell include paths, and it takes a list of strings of
 include paths, as you can see above. After that, =company-clang= can
 see include paths in your project.
  
-- Optional =company-gtags=: use GTAGS database from =GNU Global= to
-  retrieve completion candidates. It displays ALL completion
-  candidates in GTAGS database regarding of scope. Use =company-gtags=
-  to provide code completion in your current project.
-
-*_Exercise_*:
-
-- First, create this directory structure (I assume you know how to
-  manage directory with Dired):
-
-#+begin_src fundamental
-  project_root/
-              Makefile
-              src/
-                  feature1/
-              include1/
-                  feature1/
-              include2/
-#+end_src
-
-Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
-=feature1.h=, =feature1.c= and =main.c=. For the =.h= files, create
-them using this template
-
-#+begin_src c
-  void filename_func1();
-  int filename_func2(int a, int b);
-#+end_src
-
-Replace =filename= or =FILENAEM= with actual filename like =lib1=.
-
-For =.c= files, except for =main.c=, create them according to this
-template:
-
-#+begin_src c
-  #include "filename.h"
-
-  void filename_func1() { }
-
-  int filename_func2(int a, int b) { }
-#+end_src
-
-The files look silly but good enough for our learning purpose. Now, in
-=main.c=, let's test auto-completion by including appropriate header
-file. Everything works fine when all files are under the same
-directory. Let's split the files into different directories we created
-before, like this:
-
-#+begin_src fundamental
-  project_root/
-              Makefile
-              src/
-                  main.c
-                  lib.c
-                  lib2.c
-                  feature1/
-                      feature1.c
-              include1/
-                  lib.h
-                  feature1/
-                      feature1.h
-              include2/
-                  lib2.h
-#+end_src
-
-[[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
-
-Try auto-completion again. This time, it won't work. No candidate is
-displayed. Now, create the =.dir-locals.el= at project root and add
-this content:
-
-  #+begin_src emacs-lisp
-    ((nil . ((company-clang-arguments . ("-I/home/tuhdo/workspace/project_root/include1/"
-                                         "-I/home/tuhdo/workspace/project_root/include2/")))))
-  #+end_src
-
-If you use Helm, you can easily insert absolute path by *C-c i* at the
-current path in =helm-find-files= (bound to *C-x C-f* by default in my
-demo =.emacs.d= at the beginning):
-
-[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]]
-
-Now, everything should works fine:
-
-[[file:static/c-ide/company-clang-project-completion.gif][file:static/c-ide/company-clang-project-completion.gif]]
+- =company-gtags=: use GTAGS database from =GNU Global= to retrieve
+  completion candidates. It displays ALL completion candidates in
+  GTAGS database regarding of scope. Use =company-gtags= to provide
+  code completion in your current project.
 
 ** *Package*: =company-c-headers=
 :PROPERTIES:
@@ -796,12 +715,73 @@ To setup EDE:
   (global-ede-mode)
 #+end_src
 
-Now, let's try completion =main.c= in the project tree you created in
-the section [[*Source%20code%20completion%20using%20Clang][Source code completion using Clang]]. Nothing also
-happens. It is because Semantic only looks for header files in current
-directory by default. If you put it elsewhere, you have to tell
-Semantic where it is. This is not limited to only Semantic; you have
-to specify project include path in Eclipse as well.
+*_Exercise_*:
+
+- First, create this directory structure (I assume you know how to
+  manage directory with Dired):
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  feature1/
+              include1/
+                  feature1/
+              include2/
+#+end_src
+
+Then, create files: =lib1.c=, =lib2.c=, =lib1.h=, =lib2.h=,
+=feature1.h=, =feature1.c= and =main.c=. For the =.h= files, create
+them using this template
+
+#+begin_src c
+  void filename_func1();
+  int filename_func2(int a, int b);
+#+end_src
+
+Replace =filename= or =FILENAEM= with actual filename like =lib1=.
+
+For =.c= files, except for =main.c=, create them according to this
+template:
+
+#+begin_src c
+  #include "filename.h"
+
+  void filename_func1() { }
+
+  int filename_func2(int a, int b) { }
+#+end_src
+
+The files look silly but good enough for our learning purpose. Now, in
+=main.c=, let's test auto-completion by including appropriate header
+file. Everything works fine when all files are under the same
+directory. Let's split the files into different directories we created
+before, like this:
+
+#+begin_src fundamental
+  project_root/
+              Makefile
+              src/
+                  main.c
+                  lib.c
+                  lib2.c
+                  feature1/
+                      feature1.c
+              include1/
+                  lib.h
+                  feature1/
+                      feature1.h
+              include2/
+                  lib2.h
+#+end_src
+
+[[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
+
+Now, let's try completion =main.c=. Nothing also happens. It is
+because Semantic only looks for header files in current directory by
+default. If you put it elsewhere, you have to tell Semantic where it
+is. This is not limited to only Semantic; you have to specify project
+include path in Eclipse as well.
 
 - Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
 - In this file, add a new =ede-cpp-root-project= in this form:
@@ -888,7 +868,7 @@ Summary:
  simpler solution: use GNU Global with =ggtags= or =helm-gtags=
  frontends. The following commands are provided by Senator:
 
-** Navigation
+*** Navigation
 :PROPERTIES:
 :ID:       09424bff-048a-41b1-91d5-6b0f692f8c05
 :END:
@@ -940,7 +920,7 @@ section. On a symbol, *C-c , g* and a prompt appear asking for a tag
 for gathering references, with the default is the symbol at
 point. Leave prompt blank and *RET* to use the default or enter
 another symbol if you change your mind.
-** Copy/Paste
+*** Copy/Paste
 :PROPERTIES:
 :ID:       a7861142-010c-4640-9ec7-d201dc918f92
 :END:
@@ -978,7 +958,7 @@ another symbol if you change your mind.
   into a register. With prefix argument will delete the text of the
   tag to the kill ring.
 
-** Obsolete commands
+*** Obsolete commands
 :PROPERTIES:
 :ID:       0545cf56-b2bc-4efa-80aa-eca9911bf32b
 :END:
@@ -989,6 +969,20 @@ provided by =semantic-ia-complete-symbol= command that is used by
 =moo-complete= for a list of candidates with full information, such as
 complete function interface is displayed correctly. These two
 completion commands are provided.
+
+** *Package*: =company-c-headers=
+:PROPERTIES:
+:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
+:END:
+[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
+Company. After installing from MELPA, set it up:
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-backends 'company-c-headers)
+#+end_src
+
+[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
+
 
 * Project management with Projectile
 :PROPERTIES:
