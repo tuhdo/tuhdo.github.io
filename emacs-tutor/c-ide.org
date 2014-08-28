@@ -875,7 +875,7 @@ Summary:
 - If you have opening files, either close or refresh it with =M-x
   semantic-force-refresh= to make Semantic aware of new changes.
 
-* Source code navigation using Senator
+** Source code navigation using Senator
 :PROPERTIES:
 :ID:       56164139-be1c-41bd-9e1d-f55335341d80
 :END:
