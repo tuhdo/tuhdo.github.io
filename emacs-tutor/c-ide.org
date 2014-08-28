@@ -305,7 +305,7 @@ really fast:
 - Using =helm-gtags=: Similarly, =helm-gtags= also has the command
   =helm-gtags-show-stack= that shows visited tags from newest to
   oldest, from top to bottom.
-* Source code completion using Clang
+* OPTION 1: Source code completion using Clang
 :PROPERTIES:
 :ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
 :END:
@@ -315,6 +315,9 @@ You can use =company-mode= for code completion. After installing
 #+begin_src emacs-lisp
   (require 'company)
   (add-hook 'after-init-hook 'global-company-mode)
+  (delete 'company-semantic company-backends)
+  (define-key c-mode-map  [(tab)] 'company-complete)
+  (define-key c++-mode-map  [(tab)] 'company-complete)
 #+end_src
 
 *General Usage*: Completion will start automatically after you type a
@@ -326,16 +329,21 @@ are shown, press *<f1>* to display the documentation for the selected
 candidate, or *C-w* to see its source. Not all back-ends support
 this.
 
+The variable =company-backends= specifies a list of backends that
+=company-mode= uses to retrieves completion candidates for you.
+
 You have two commands for completing C/C++ code:
 
 - =company-clang=: use =clang= to retrieve completion candidates. You
   will have completion with system header files, but not your
-  project. To use it, bind it to a key such as *TAB*:
-
-#+begin_src emacs-lisp
-  (define-key c-mode-map  [(tab)] 'company-clang)
-  (define-key c++-mode-map  [(control tab)] 'company-clang)
-#+end_src
+  project. By default, =company-complete= already includes
+  =company-clang= backend, so you can use =company-complete= to
+  complete for many thing. Note that in the configuration for
+  =company-mode= above, we have to delete =company-semantic=,
+  otherwise =company-complete= will use =company-semantic= instead of
+  =company-clang=, because it has higher precedence in
+  =company-backends=. =company-semantic= will be discuss in the CEDET
+  section.
 
   To retrieve completion candidates for your projects, you will have
   to tell Clang where your include paths are. Create a file named
@@ -366,11 +374,6 @@ see include paths in your project.
   retrieve completion candidates. It displays ALL completion
   candidates in GTAGS database regarding of scope. Use =company-gtags=
   to provide code completion in your current project.
-
-#+begin_src emacs-lisp
-  (define-key c++-mode-map  [(tab)] 'company-gtags)
-  (define-key c++-mode-map  [(control tab)] 'company-gtags)
-#+end_src
 
 *_Exercise_*:
 
@@ -462,12 +465,11 @@ Company. After installing from MELPA, set it up:
 
 #+begin_src emacs-lisp
   (add-to-list 'company-backends 'company-c-headers)
-  (define-key c-mode-base-map (kbd "C-<tab>") 'company-c-headers)
 #+end_src
 
 [[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
 
-* OPTIONAL ALTERNATIVE: Source code completion using CEDET
+* OPTION 2: Source code completion using CEDET
 :PROPERTIES:
 :ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
 :END:
@@ -774,6 +776,105 @@ CEDET is best used with new project, because Semantic parse code as
 you write. As a result, you won't have to wait for parsing unknown
 source files to get completion candidates.
 
+** Project management with EDE
+:PROPERTIES:
+:ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
+:END:
+EDE, short for Emacs Development Environment, is a generic interface
+for managing projects. In EDE, a project hierarchy matches a directory
+hierarchy. The project's topmost directory is called the project root,
+and its subdirectories are sub-projects.
+
+EDE can do many things but we will just use it for code completion at
+project level. To demonstrate the use of EDE, we will create a little
+project of our own.
+
+To setup EDE:
+
+#+begin_src emacs-lisp
+  (require 'ede)
+  (global-ede-mode)
+#+end_src
+
+Now, let's try completion =main.c= in the project tree you created in
+the section [[*Source%20code%20completion%20using%20Clang][Source code completion using Clang]]. Nothing also
+happens. It is because Semantic only looks for header files in current
+directory by default. If you put it elsewhere, you have to tell
+Semantic where it is. This is not limited to only Semantic; you have
+to specify project include path in Eclipse as well.
+
+- Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
+- In this file, add a new =ede-cpp-root-project= in this form:
+
+#+begin_src emacs-lisp
+  (ede-cpp-root-project "project_root"
+                        :file "/dir/to/project_root/Makefile")
+#+end_src
+
+The first argument to =ede-cpp-root-project= is project name. =:file=
+argument specifies path to project root. You must create a file in the
+project root, since EDE uses that file as an "anchor" to project
+root; in our case, =Makefile= is the anchor file. Not sure why EDE
+just straightly uses root directory.
+
+- Add include directories specific to the project and in your system:
+
+#+begin_src emacs-lisp
+  (ede-cpp-root-project "project_root"
+                        :file "/dir/to/project_root/Makefile"
+                        :include-path '("/include1"
+                                        "/include2") ;; add more include
+                        ;; paths here
+                        :system-include-path '("~/linux"))
+#+end_src
+
+=:include-path= specifies directories local to your projects that EDE
+should search first when looking for a header file. =:incluide-path=
+is relative to project root specified in =:file=.
+
+=:system-include-path= specifies system include paths that do not
+belong to current project. Note that despite it is called
+=system-include-path=, it does not have to be in place like
+=/usr/include=. You can specify any include directories outside of
+your current project as "system headers".
+
+After done setting up your project, save the file and execute that
+=ede-cpp-root-project= expression with *C-x C-e*. Now, Semantic is
+aware of your project include paths. However, you have to do one last
+thing: either close the file =main.c= and reopen it or =M-x
+semantic-force-refresh= to tell Semantic to analyze =main.c=
+again. Otherwise, Semantic will still keep the previous parsing result
+of this file and completion candidates won't be available. As a
+result, it is important to load EDE projects defined by
+=ede-cpp-root-project= before opening any project file.
+
+After that, try auto-completion and you will see everything is working
+fine again:
+
+[[file:static/c-ide/ede-project.gif][file:static/c-ide/ede-project.gif]]
+
+Summary:
+
+- EDE, short for Emacs Development Environment, is a generic interface
+  for managing projects.
+- EDE enables Semantic to find sources and perform project level
+  completions.
+- To add a C/C++ project, simply create a project definition with this
+  template in a file, such as =ede-projects.el=:
+
+#+begin_src emacs-lisp
+  (ede-cpp-root-project "project_root"
+                        :file "/dir/to/project_root/Makefile"
+                        :include-path '("/include1"
+                                        "/include2") ;; add more include
+                        ;; paths here
+                        :system-include-path '("~/linux"))
+#+end_src
+
+- Load =ede-projects.el= when Emacs start.
+- If you have opening files, either close or refresh it with =M-x
+  semantic-force-refresh= to make Semantic aware of new changes.
+
 * Source code navigation using Senator
 :PROPERTIES:
 :ID:       56164139-be1c-41bd-9e1d-f55335341d80
@@ -889,104 +990,6 @@ provided by =semantic-ia-complete-symbol= command that is used by
 complete function interface is displayed correctly. These two
 completion commands are provided.
 
-* OPTIONAL: Project management with EDE
-:PROPERTIES:
-:ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
-:END:
-EDE, short for Emacs Development Environment, is a generic interface
-for managing projects. In EDE, a project hierarchy matches a directory
-hierarchy. The project's topmost directory is called the project root,
-and its subdirectories are sub-projects.
-
-EDE can do many things but we will just use it for code completion at
-project level. To demonstrate the use of EDE, we will create a little
-project of our own.
-
-To setup EDE:
-
-#+begin_src emacs-lisp
-  (require 'ede)
-  (global-ede-mode)
-#+end_src
-
-Now, let's try completion =main.c= in the project tree you created in
-the section [[*Source%20code%20completion%20using%20Clang][Source code completion using Clang]]. Nothing also
-happens. It is because Semantic only looks for header files in current
-directory by default. If you put it elsewhere, you have to tell
-Semantic where it is. This is not limited to only Semantic; you have
-to specify project include path in Eclipse as well.
-
-- Create a new file called =cedet-projects.el= in =~/.emacs.d/=.
-- In this file, add a new =ede-cpp-root-project= in this form:
-
-#+begin_src emacs-lisp
-  (ede-cpp-root-project "project_root"
-                        :file "/dir/to/project_root/Makefile")
-#+end_src
-
-The first argument to =ede-cpp-root-project= is project name. =:file=
-argument specifies path to project root. You must create a file in the
-project root, since EDE uses that file as an "anchor" to project
-root; in our case, =Makefile= is the anchor file. Not sure why EDE
-just straightly uses root directory.
-
-- Add include directories specific to the project and in your system:
-
-#+begin_src emacs-lisp
-  (ede-cpp-root-project "project_root"
-                        :file "/dir/to/project_root/Makefile"
-                        :include-path '("/include1"
-                                        "/include2") ;; add more include
-                        ;; paths here
-                        :system-include-path '("~/linux"))
-#+end_src
-
-=:include-path= specifies directories local to your projects that EDE
-should search first when looking for a header file. =:incluide-path=
-is relative to project root specified in =:file=.
-
-=:system-include-path= specifies system include paths that do not
-belong to current project. Note that despite it is called
-=system-include-path=, it does not have to be in place like
-=/usr/include=. You can specify any include directories outside of
-your current project as "system headers".
-
-After done setting up your project, save the file and execute that
-=ede-cpp-root-project= expression with *C-x C-e*. Now, Semantic is
-aware of your project include paths. However, you have to do one last
-thing: either close the file =main.c= and reopen it or =M-x
-semantic-force-refresh= to tell Semantic to analyze =main.c=
-again. Otherwise, Semantic will still keep the previous parsing result
-of this file and completion candidates won't be available. As a
-result, it is important to load EDE projects defined by
-=ede-cpp-root-project= before opening any project file.
-
-After that, try auto-completion and you will see everything is working
-fine again:
-
-[[file:static/c-ide/ede-project.gif][file:static/c-ide/ede-project.gif]]
-
-Summary:
-
-- EDE, short for Emacs Development Environment, is a generic interface
-  for managing projects.
-- EDE enables Semantic to find sources and perform project level
-  completions.
-- To add a C/C++ project, simply create a project definition with this
-  template in a file, such as =ede-projects.el=:
-
-#+begin_src emacs-lisp
-  (ede-cpp-root-project "project_root"
-                        :file "/dir/to/project_root/Makefile"
-                        :include-path '("/include1"
-                                        "/include2") ;; add more include
-                        ;; paths here
-                        :system-include-path '("~/linux"))
-#+end_src
-
-- Load =ede-projects.el= when Emacs start.
-- If you have opening files, either close or refresh it with =M-x
-  semantic-force-refresh= to make Semantic aware of new changes.
 * Project management with Projectile
 :PROPERTIES:
 :ID:       c5b93bb9-1b91-4c94-aa55-9a86976ccf88
