@@ -362,8 +362,6 @@ I uploaded a demo project for you to play with completion feature
                   lib2.h
 #+end_src
 
-[[file:static/c-ide/ede-rearrange-project-dir.gif][file:static/c-ide/ede-rearrange-project-dir.gif]]
-
 For the =.h= files, all have this content:
 
 #+begin_src c
