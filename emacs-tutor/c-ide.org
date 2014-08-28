@@ -1033,10 +1033,27 @@ Company. After installing from MELPA, set it up:
 :PROPERTIES:
 :ID:       c5b93bb9-1b91-4c94-aa55-9a86976ccf88
 :END:
+=Projectile= is a project interaction library for Emacs. Its goal is to
+provide a nice set of features operating on a project level without
+introducing external dependencies(when feasible). For instance -
+finding project files has a portable implementation written in pure
+Emacs Lisp without the use of GNU find (but for performance sake an
+indexing mechanism backed by external commands exists as well).
+
+Projectile tries to be practical - portability is great, but if some
+external tools could speed up some task substantially and the tools
+are available, Projectile will leverage them.
+
 By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
 projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
 =bundler=. If you want to mark a folder manually as a project just
-create an empty =.projectile= file in it: 
+create an empty =.projectile= file in it.
+
+You also install =Projectile= using MELPA and setup:
+
+#+begin_src emacs-lisp
+  (projectile-global-mode)
+#+end_src
 
 Prefix key of Projectile is *C-c p*. Some notable features:
 

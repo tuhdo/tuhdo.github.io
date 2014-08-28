@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-28 Thu 14:32 -->
+<!-- 2014-08-28 Thu 14:35 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -1736,11 +1736,36 @@ Company. After installing from MELPA, set it up:
 <h2 id="sec-6"><a id="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88" name="ID-c5b93bb9-1b91-4c94-aa55-9a86976ccf88"></a>Project management with Projectile</h2>
 <div class="outline-text-2" id="text-6">
 <p>
+<code>Projectile</code> is a project interaction library for Emacs. Its goal is to
+provide a nice set of features operating on a project level without
+introducing external dependencies(when feasible). For instance -
+finding project files has a portable implementation written in pure
+Emacs Lisp without the use of GNU find (but for performance sake an
+indexing mechanism backed by external commands exists as well).
+</p>
+
+<p>
+Projectile tries to be practical - portability is great, but if some
+external tools could speed up some task substantially and the tools
+are available, Projectile will leverage them.
+</p>
+
+<p>
 By default, <code>git</code>, <code>mercurial</code>, <code>darcs</code> and <code>bazaar</code> are considered
 projects. So are <code>lein</code>, <code>maven</code>, <code>sbt</code>, <code>scons</code>, <code>rebar</code> and
 <code>bundler</code>. If you want to mark a folder manually as a project just
-create an empty <code>.projectile</code> file in it: 
+create an empty <code>.projectile</code> file in it.
 </p>
+
+<p>
+You also install <code>Projectile</code> using MELPA and setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp">(<span style="color: #374478;">projectile-global-mode</span>)
+</pre>
+</div>
 
 <p>
 Prefix key of Projectile is <b>C-c p</b>. Some notable features:
