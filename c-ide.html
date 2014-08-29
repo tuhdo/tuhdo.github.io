@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-08-28 Thu 14:35 -->
+<!-- 2014-08-29 T6 22:07 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -268,7 +268,7 @@ repository, I already installed both <code>ggtags</code> and
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm-gtags</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm-gtags</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -313,20 +313,20 @@ snippet to setup <code>ggtags</code> and key bindings:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ggtags</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
-          (<span style="color: #a020f0;">lambda</span> ()
-            (<span style="color: #a020f0;">when</span> (<span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span>)
-              (<span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span>))))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ggtags</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
+          <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
+            <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span><span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span><span style="color: #709870;">)</span>
+              <span style="color: #709870;">(</span><span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g s"</span>) '<span style="color: #784437;">ggtags-find-other-symbol</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g h"</span>) '<span style="color: #783778;">ggtags-view-tag-history</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g r"</span>) '<span style="color: #5e7837;">ggtags-find-reference</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g f"</span>) '<span style="color: #5e7837;">ggtags-find-file</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g c"</span>) '<span style="color: #4f7e67;">ggtags-create-tags</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g u"</span>) '<span style="color: #783778;">ggtags-update-tags</span>)
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g s"</span><span style="color: #7388d6;">)</span> '<span style="color: #784437;">ggtags-find-other-symbol</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g h"</span><span style="color: #7388d6;">)</span> '<span style="color: #783778;">ggtags-view-tag-history</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g r"</span><span style="color: #7388d6;">)</span> '<span style="color: #5e7837;">ggtags-find-reference</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g f"</span><span style="color: #7388d6;">)</span> '<span style="color: #5e7837;">ggtags-find-file</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g c"</span><span style="color: #7388d6;">)</span> '<span style="color: #4f7e67;">ggtags-create-tags</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g u"</span><span style="color: #7388d6;">)</span> '<span style="color: #783778;">ggtags-update-tags</span><span style="color: #707183;">)</span>
 
-(<span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span>) '<span style="color: #78683f;">pop-tag-mark</span>)
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #374478;">ggtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span><span style="color: #7388d6;">)</span> '<span style="color: #78683f;">pop-tag-mark</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -343,38 +343,38 @@ includes the above file in your <code>~/.emacs.d</code>, remember to add
 
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">this variables must be set before load helm-gtags</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">you can change to any prefix key of your choice</span>
-(<span style="color: #784437;">setq</span> <span style="color: #374478;">helm-gtags-prefix-key</span> <span style="color: #8b2252;">"\C-cg"</span>)
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #374478;">helm-gtags-prefix-key</span> <span style="color: #8b2252;">"\C-cg"</span><span style="color: #707183;">)</span>
 
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-gtags</span>)
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-gtags</span><span style="color: #707183;">)</span>
 
-(<span style="color: #784437;">setq</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
  <span style="color: #37785e;">helm-gtags-ignore-case</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #374478;">helm-gtags-auto-update</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #37785e;">helm-gtags-use-input-at-cursor</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #5e7837;">helm-gtags-pulse-at-cursor</span> <span style="color: #4f5c7e;">t</span>
 
  <span style="color: #5e7837;">helm-gtags-suggested-key-mapping</span> <span style="color: #4f5c7e;">t</span>
- )
+ <span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in Dired so you can jump to any tag</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">when navigate project tree with Dired</span>
-(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in Eshell for the same reason as above</span>
-(<span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in languages that GNU Global supports</span>
-(<span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">c-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">c++-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">java-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #4f7e67;">asm-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">c-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">c++-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">java-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f7e67;">asm-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">key bindings</span>
-(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-s"</span>) '<span style="color: #707e4f;">helm-gtags-select</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-."</span>) '<span style="color: #5e7837;">helm-gtags-dwim</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span>) '<span style="color: #78683f;">helm-gtags-pop-stack</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &lt;"</span>) '<span style="color: #7e544f;">helm-gtags-previous-history</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &gt;"</span>) '<span style="color: #43783f;">helm-gtags-next-history</span>)
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-s"</span><span style="color: #7388d6;">)</span> '<span style="color: #707e4f;">helm-gtags-select</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-."</span><span style="color: #7388d6;">)</span> '<span style="color: #5e7837;">helm-gtags-dwim</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span><span style="color: #7388d6;">)</span> '<span style="color: #78683f;">helm-gtags-pop-stack</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &lt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #7e544f;">helm-gtags-previous-history</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &gt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #43783f;">helm-gtags-next-history</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -539,7 +539,7 @@ can integrate Imenu:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">setq-local</span> <span style="color: #374478;">imenu-create-index-function</span> #'<span style="color: #4f5c7e;">ggtags-build-imenu-index</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">setq-local</span> <span style="color: #374478;">imenu-create-index-function</span> #'<span style="color: #4f5c7e;">ggtags-build-imenu-index</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -718,8 +718,8 @@ After installing <code>company-mode</code> from MELPA, activate it globally:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">company</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #3f7178;">after-init-hook</span> '<span style="color: #374478;">global-company-mode</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">company</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #3f7178;">after-init-hook</span> '<span style="color: #374478;">global-company-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -778,8 +778,8 @@ For the <code>.h</code> files, all have this content:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>();
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>);
+<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span><span style="color: #707183;">()</span>;
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span><span style="color: #707183;">(</span><span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span><span style="color: #707183;">)</span>;
 </pre>
 </div>
 
@@ -791,9 +791,9 @@ For <code>.c</code> files, except for <code>main.c</code>, all have this templat
 
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">"filename.h"</span>
 
-<span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span>() { }
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">filename_func1</span><span style="color: #707183;">()</span> <span style="color: #707183;">{</span> <span style="color: #707183;">}</span>
 
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span>(<span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span>) { }
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">filename_func2</span><span style="color: #707183;">(</span><span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span> <span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -816,9 +816,9 @@ To use <code>company-mode</code> with Clang, add this configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span> <span style="color: #783f5a;">company-backends</span> (<span style="color: #7e544f;">delete</span> '<span style="color: #7a4f7e;">company-semantic</span> <span style="color: #783f5a;">company-backends</span>))
-(<span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  [(<span style="color: #3f7178;">tab</span>)] '<span style="color: #783f5a;">company-complete</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  [(<span style="color: #3f7178;">tab</span>)] '<span style="color: #783f5a;">company-complete</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #783f5a;">company-backends</span> <span style="color: #7388d6;">(</span><span style="color: #7e544f;">delete</span> '<span style="color: #7a4f7e;">company-semantic</span> <span style="color: #783f5a;">company-backends</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span><span style="color: #3f7178;">tab</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> '<span style="color: #783f5a;">company-complete</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span><span style="color: #3f7178;">tab</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> '<span style="color: #783f5a;">company-complete</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -846,8 +846,8 @@ to tell Clang where your include paths are. Create a file named
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">((<span style="color: #43783f;">nil</span> <span style="color: #374478;">.</span> ((<span style="color: #707e4f;">company-clang-arguments</span> <span style="color: #374478;">.</span> (<span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include1/"</span>
-                                     <span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include2/"</span>)))))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span><span style="color: #43783f;">nil</span> <span style="color: #374478;">.</span> <span style="color: #909183;">(</span><span style="color: #709870;">(</span><span style="color: #707e4f;">company-clang-arguments</span> <span style="color: #374478;">.</span> <span style="color: #907373;">(</span><span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include1/"</span>
+                                     <span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include2/"</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </li>
@@ -902,8 +902,8 @@ code completion in your current project.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">((<span style="color: #43783f;">nil</span> <span style="color: #374478;">.</span> ((<span style="color: #707e4f;">company-clang-arguments</span> <span style="color: #374478;">.</span> (<span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include1/"</span>
-                                     <span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include2/"</span>)))))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7388d6;">(</span><span style="color: #43783f;">nil</span> <span style="color: #374478;">.</span> <span style="color: #909183;">(</span><span style="color: #709870;">(</span><span style="color: #707e4f;">company-clang-arguments</span> <span style="color: #374478;">.</span> <span style="color: #907373;">(</span><span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include1/"</span>
+                                     <span style="color: #8b2252;">"-I/home/&lt;user&gt;/project_root/include2/"</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </li>
@@ -930,7 +930,7 @@ Company. After installing from MELPA, set it up:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #783f5a;">company-backends</span> '<span style="color: #4f7e67;">company-c-headers</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #783f5a;">company-backends</span> '<span style="color: #4f7e67;">company-c-headers</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1083,8 +1083,8 @@ Finally, assume that you placed your newly cloned CEDET in
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #7e544f;">load-file</span> (<span style="color: #5e7837;">concat</span> <span style="color: #37785e;">user-emacs-directory</span> <span style="color: #8b2252;">"/cedet/cedet-devel-load.el"</span>))
-(<span style="color: #7e544f;">load-file</span> (<span style="color: #5e7837;">concat</span> <span style="color: #37785e;">user-emacs-directory</span> <span style="color: #8b2252;">"cedet/contrib/cedet-contrib-load.el"</span>))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7e544f;">load-file</span> <span style="color: #7388d6;">(</span><span style="color: #5e7837;">concat</span> <span style="color: #37785e;">user-emacs-directory</span> <span style="color: #8b2252;">"/cedet/cedet-devel-load.el"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #7e544f;">load-file</span> <span style="color: #7388d6;">(</span><span style="color: #5e7837;">concat</span> <span style="color: #37785e;">user-emacs-directory</span> <span style="color: #8b2252;">"cedet/contrib/cedet-contrib-load.el"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1116,13 +1116,13 @@ To enable code completion using Semantic, add the following code:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">cc-mode</span>)
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">semantic</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">cc-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">semantic</span><span style="color: #707183;">)</span>
 
-(<span style="color: #5e7837;">global-semanticdb-minor-mode</span> <span style="color: #008b8b;">1</span>)
-(<span style="color: #513f78;">global-semantic-idle-scheduler-mode</span> <span style="color: #008b8b;">1</span>)
+<span style="color: #707183;">(</span><span style="color: #5e7837;">global-semanticdb-minor-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #513f78;">global-semantic-idle-scheduler-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 
-(<span style="color: #513f78;">semantic-mode</span> <span style="color: #008b8b;">1</span>)
+<span style="color: #707183;">(</span><span style="color: #513f78;">semantic-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1198,9 +1198,9 @@ for example Boost include paths, use the function
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"/usr/include/boost"</span> '<span style="color: #78683f;">c++-mode</span>)
-(<span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"~/linux/kernel"</span>)
-(<span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"~/linux/include"</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"/usr/include/boost"</span> '<span style="color: #78683f;">c++-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"~/linux/kernel"</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #374478;">semantic-add-system-include</span> <span style="color: #8b2252;">"~/linux/include"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1237,10 +1237,10 @@ Setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">function-args</span>)
-(<span style="color: #3f7178;">fa-config-default</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  [(<span style="color: #43783f;">contrl</span> <span style="color: #3f7178;">tab</span>)] '<span style="color: #78683f;">moo-complete</span>)
-(<span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  [(<span style="color: #7a4f7e;">control</span> <span style="color: #3f7178;">tab</span>)] '<span style="color: #78683f;">moo-complete</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">function-args</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #3f7178;">fa-config-default</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span><span style="color: #43783f;">contrl</span> <span style="color: #3f7178;">tab</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> '<span style="color: #78683f;">moo-complete</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span><span style="color: #7a4f7e;">control</span> <span style="color: #3f7178;">tab</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> '<span style="color: #78683f;">moo-complete</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1379,8 +1379,8 @@ To setup EDE:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ede</span>)
-(<span style="color: #4f5c7e;">global-ede-mode</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ede</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #4f5c7e;">global-ede-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1402,8 +1402,8 @@ as well.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
-                      <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
+                      <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1422,12 +1422,12 @@ just straightly uses root directory.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
                       <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>
-                      <span style="color: #483d8b;">:include-path</span> '(<span style="color: #8b2252;">"/include1"</span>
-                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include</span>
+                      <span style="color: #483d8b;">:include-path</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"/include1"</span>
+                                      <span style="color: #8b2252;">"/include2"</span><span style="color: #7388d6;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include</span>
                       <span style="color: #b22222;">;; </span><span style="color: #b22222;">paths here</span>
-                      <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
+                      <span style="color: #483d8b;">:system-include-path</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"~/linux"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1486,12 +1486,12 @@ template in a file, such as <code>ede-projects.el</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">ede-cpp-root-project</span> <span style="color: #8b2252;">"project_root"</span>
                       <span style="color: #483d8b;">:file</span> <span style="color: #8b2252;">"/dir/to/project_root/Makefile"</span>
-                      <span style="color: #483d8b;">:include-path</span> '(<span style="color: #8b2252;">"/include1"</span>
-                                      <span style="color: #8b2252;">"/include2"</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include</span>
+                      <span style="color: #483d8b;">:include-path</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"/include1"</span>
+                                      <span style="color: #8b2252;">"/include2"</span><span style="color: #7388d6;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">add more include</span>
                       <span style="color: #b22222;">;; </span><span style="color: #b22222;">paths here</span>
-                      <span style="color: #483d8b;">:system-include-path</span> '(<span style="color: #8b2252;">"~/linux"</span>))
+                      <span style="color: #483d8b;">:system-include-path</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"~/linux"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1719,7 +1719,7 @@ Company. After installing from MELPA, set it up:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #783f5a;">company-backends</span> '<span style="color: #4f7e67;">company-c-headers</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #783f5a;">company-backends</span> '<span style="color: #4f7e67;">company-c-headers</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1763,7 +1763,7 @@ You also install <code>Projectile</code> using MELPA and setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">projectile-global-mode</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">projectile-global-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1843,7 +1843,7 @@ Setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #4f5c7e;">global-semantic-idle-summary-mode</span> <span style="color: #008b8b;">1</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #4f5c7e;">global-semantic-idle-summary-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1872,7 +1872,7 @@ Setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #707e4f;">global-semantic-stickyfunc-mode</span> <span style="color: #008b8b;">1</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #707e4f;">global-semantic-stickyfunc-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1888,7 +1888,7 @@ in minibuffer:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">setq-local</span> <span style="color: #5e7837;">eldoc-documentation-function</span> #'<span style="color: #5e7837;">ggtags-eldoc-function</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">setq-local</span> <span style="color: #5e7837;">eldoc-documentation-function</span> #'<span style="color: #5e7837;">ggtags-eldoc-function</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1920,7 +1920,7 @@ Setup for C/C++:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>   '<span style="color: #3f7178;">hs-minor-mode</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>   '<span style="color: #3f7178;">hs-minor-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2131,9 +2131,9 @@ you:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;python&#8221;: What Python developers use for extension modules</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;java&#8221;: The default style for java-mode (see below)</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;user&#8221;: When you want to define your own style</span>
-(<span style="color: #784437;">setq</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
  <span style="color: #4f5c7e;">c-default-style</span> <span style="color: #8b2252;">"linux"</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">set style to "linux"</span>
- )
+ <span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2150,7 +2150,7 @@ binding <b>RET</b> to <code>newline-and-indent</code>.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"RET"</span>) '<span style="color: #7e544f;">newline-and-indent</span>)  <span style="color: #b22222;">; </span><span style="color: #b22222;">automatically indent when press RET</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"RET"</span><span style="color: #7388d6;">)</span> '<span style="color: #7e544f;">newline-and-indent</span><span style="color: #707183;">)</span>  <span style="color: #b22222;">; </span><span style="color: #b22222;">automatically indent when press RET</span>
 </pre>
 </div>
 
@@ -2163,16 +2163,16 @@ before committing your code.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">activate whitespace-mode to view all whitespace characters</span>
-(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c w"</span>) '<span style="color: #784437;">whitespace-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c w"</span><span style="color: #7388d6;">)</span> '<span style="color: #784437;">whitespace-mode</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">show unncessary whitespace that can mess up your diff</span>
-(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> (<span style="color: #a020f0;">lambda</span> () (<span style="color: #78683f;">interactive</span>) (<span style="color: #784437;">setq</span> <span style="color: #78683f;">show-trailing-whitespace</span> <span style="color: #008b8b;">1</span>)))
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span> <span style="color: #909183;">(</span><span style="color: #78683f;">interactive</span><span style="color: #909183;">)</span> <span style="color: #909183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">show-trailing-whitespace</span> <span style="color: #008b8b;">1</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">use space to indent by default</span>
-(<span style="color: #3f7178;">setq-default</span> <span style="color: #3f7178;">indent-tabs-mode</span> <span style="color: #43783f;">nil</span>)
+<span style="color: #707183;">(</span><span style="color: #3f7178;">setq-default</span> <span style="color: #3f7178;">indent-tabs-mode</span> <span style="color: #43783f;">nil</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">set appearance of a tab that is represented by 4 spaces</span>
-(<span style="color: #3f7178;">setq-default</span> <span style="color: #707e4f;">tab-width</span> <span style="color: #008b8b;">4</span>)
+<span style="color: #707183;">(</span><span style="color: #3f7178;">setq-default</span> <span style="color: #707e4f;">tab-width</span> <span style="color: #008b8b;">4</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2207,8 +2207,8 @@ View this <a href="http://www.emacswiki.org/emacs/CleanAutoIndent">Emacswiki pag
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: clean-aindent-mode</span>
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">clean-aindent-mode</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #707e4f;">clean-aindent-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">clean-aindent-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #707e4f;">clean-aindent-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2242,8 +2242,8 @@ Setup:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: dtrt-indent</span>
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dtrt-indent</span>)
-(<span style="color: #5e7837;">dtrt-indent-mode</span> <span style="color: #008b8b;">1</span>)
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">dtrt-indent</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #5e7837;">dtrt-indent-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2256,7 +2256,7 @@ in echo area and might become a constant annoyance.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span> <span style="color: #4f7e67;">dtrt-indent-verbosity</span> <span style="color: #008b8b;">0</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">dtrt-indent-verbosity</span> <span style="color: #008b8b;">0</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2295,8 +2295,8 @@ Setup:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: ws-butler</span>
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ws-butler</span>)
-(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span> '<span style="color: #513f78;">ws-butler-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">ws-butler</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span> '<span style="color: #513f78;">ws-butler-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2322,8 +2322,8 @@ Setup:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: yasnippet</span>
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">yasnippet</span>)
-(<span style="color: #783f5a;">yas-global-mode</span> <span style="color: #008b8b;">1</span>)
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">yasnippet</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783f5a;">yas-global-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2339,9 +2339,9 @@ example, in a C buffer, if you type <code>for</code> and <b>TAB</b>, it expands 
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #a020f0;">for</span> (<span style="color: #7a4f7e;">i</span> = <span style="color: #008b8b;">0</span>; <span style="color: #7a4f7e;">i</span> &lt; <span style="color: #513f78;">N</span>; <span style="color: #7a4f7e;">i</span>++) {
+<pre class="src src-c"><span style="color: #a020f0;">for</span> <span style="color: #707183;">(</span><span style="color: #7a4f7e;">i</span> = <span style="color: #008b8b;">0</span>; <span style="color: #7a4f7e;">i</span> &lt; <span style="color: #513f78;">N</span>; <span style="color: #7a4f7e;">i</span>++<span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
     ...<span style="color: #78683f;">point</span> <span style="color: #3f7178;">will</span> <span style="color: #374478;">be</span> <span style="color: #783778;">here</span>....
-}
+<span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -2365,9 +2365,9 @@ closing of a pair when user inserts an opening one.
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: smartparens</span>
-(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smartparens-config</span>)
-(<span style="color: #707e4f;">show-smartparens-global-mode</span> <span style="color: #008b8b;">+1</span>)
-(<span style="color: #43783f;">smartparens-global-mode</span> <span style="color: #008b8b;">1</span>)
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smartparens-config</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #707e4f;">show-smartparens-global-mode</span> <span style="color: #008b8b;">+1</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #43783f;">smartparens-global-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2469,10 +2469,10 @@ a command:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;f5&gt;"</span>) (<span style="color: #a020f0;">lambda</span> ()
-                               (<span style="color: #78683f;">interactive</span>)
-                               (<span style="color: #374478;">setq-local</span> <span style="color: #513f78;">compilation-read-command</span> <span style="color: #43783f;">nil</span>)
-                               (<span style="color: #707e4f;">call-interactively</span> '<span style="color: #374478;">compile</span>)))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;f5&gt;"</span><span style="color: #7388d6;">)</span> <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
+                               <span style="color: #909183;">(</span><span style="color: #78683f;">interactive</span><span style="color: #909183;">)</span>
+                               <span style="color: #909183;">(</span><span style="color: #374478;">setq-local</span> <span style="color: #513f78;">compilation-read-command</span> <span style="color: #43783f;">nil</span><span style="color: #909183;">)</span>
+                               <span style="color: #909183;">(</span><span style="color: #707e4f;">call-interactively</span> '<span style="color: #374478;">compile</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2541,13 +2541,13 @@ tell Emacs to always use <code>gdb-many-windows</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
  <span style="color: #b22222;">;; </span><span style="color: #b22222;">use gdb-many-windows by default</span>
  <span style="color: #4f5c7e;">gdb-many-windows</span> <span style="color: #4f5c7e;">t</span>
 
  <span style="color: #b22222;">;; </span><span style="color: #b22222;">Non-nil means display source file containing the main routine at startup</span>
  <span style="color: #37785e;">gdb-show-main</span> <span style="color: #4f5c7e;">t</span>
- )
+ <span style="color: #707183;">)</span>
 </pre>
 </div>
 
