@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-08-07 T5 22:34 -->
+<!-- 2014-08-29 T6 22:21 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -322,9 +322,6 @@ alt="hit counter"></a></div></noscript>
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-76607dbd-b97c-43dd-975b-3236192408b6" name="ID-76607dbd-b97c-43dd-975b-3236192408b6"></a>Why Emacs?</h2>
-<div class="outline-text-2" id="text-1">
 <p>
 <b><span class="underline">Before we start</span></b>: 
 </p>
@@ -341,12 +338,16 @@ to PDF, it is more than 40 pages. However, this manual is "mini"
 relative to the size of the official Emacs manual, which is more
 than 600 pages. That's why.
 </li>
+
+<li>If you find the page is loading to slow for you, you can always
+clone the git repo of this mini manual and read it offline:
+<a href="https://github.com/tuhdo/tuhdo.github.io">https://github.com/tuhdo/tuhdo.github.io</a>
+</li>
 </ul>
 
-<p>
-<b><span class="underline">Let's start your Emacs journey</span></b>:
-</p>
-
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><a id="ID-76607dbd-b97c-43dd-975b-3236192408b6" name="ID-76607dbd-b97c-43dd-975b-3236192408b6"></a>Why Emacs?</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 In Emacs, you can do many things aside from editing. Emacs is a
 programming platform, not just another editor in the sense that people
@@ -1453,7 +1454,7 @@ replace <code>list-buffers</code> with <code>ibuffer</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #374478;">global-set-key</span> (<span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x C-b"</span>) '<span style="color: #783f5a;">ibuffer</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x C-b"</span><span style="color: #7388d6;">)</span> '<span style="color: #783f5a;">ibuffer</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -4754,9 +4755,9 @@ you are new:
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = <span style="color: #513f78;">find_if</span> (<span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">begin</span>(), <span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">end</span>(), [&amp;<span style="color: #707e4f;">v_idx</span>] (<span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #783f5a;">o</span>) -&gt; <span style="color: #228b22;">bool</span> {
+<pre class="src src-c++"><span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = <span style="color: #513f78;">find_if</span> <span style="color: #707183;">(</span><span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">begin</span><span style="color: #7388d6;">()</span>, <span style="color: #374478;">vertices</span>.<span style="color: #4f5c7e;">end</span><span style="color: #7388d6;">()</span>, <span style="color: #7388d6;">[</span>&amp;<span style="color: #707e4f;">v_idx</span><span style="color: #7388d6;">]</span> <span style="color: #7388d6;">(</span><span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #783f5a;">o</span><span style="color: #7388d6;">)</span> -&gt; <span style="color: #228b22;">bool</span> <span style="color: #7388d6;">{</span>
         <span style="color: #a020f0;">return</span> <span style="color: #783f5a;">o</span>.<span style="color: #7a4f7e;">id</span> == <span style="color: #707e4f;">v_idx</span>;
-    });
+    <span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>;
 </pre>
 </div>
 
@@ -5850,7 +5851,7 @@ Emacs Lisp code inside <code>~/.emacs.d/init.el</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #7e544f;">load-file</span> <span style="color: #8b2252;">"~/.emacs.d/macros"</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7e544f;">load-file</span> <span style="color: #8b2252;">"~/.emacs.d/macros"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6503,9 +6504,9 @@ Paste the following code into the <code>*scratch*</code> buffer:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span>)
-(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">package-archives</span>
-             '(<span style="color: #8b2252;">"melpa"</span> <span style="color: #374478;">.</span> <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span>) <span style="color: #4f5c7e;">t</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">package-archives</span>
+             '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"melpa"</span> <span style="color: #374478;">.</span> <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span><span style="color: #7388d6;">)</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6543,10 +6544,10 @@ b</b>. Paste the following code using <b>C-y</b>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
-          (<span style="color: #a020f0;">lambda</span> ()
-            (<span style="color: #a020f0;">when</span> (<span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span>)
-              (<span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span>))))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
+          <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
+            <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span><span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span><span style="color: #709870;">)</span>
+              <span style="color: #709870;">(</span><span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6661,7 +6662,7 @@ available in <b>ggtags</b>. You see a function declaration like this:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #a020f0;">static</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">kernel_init</span>(<span style="color: #228b22;">void</span> *);
+<pre class="src src-c"><span style="color: #a020f0;">static</span> <span style="color: #228b22;">int</span> <span style="color: #0000ff;">kernel_init</span><span style="color: #707183;">(</span><span style="color: #228b22;">void</span> *<span style="color: #707183;">)</span>;
 </pre>
 </div>
 
@@ -6802,17 +6803,17 @@ the Linux kernel browsing project, you have these configurations:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span>)
-(<span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">package-archives</span>
-             '(<span style="color: #8b2252;">"melpa"</span> <span style="color: #374478;">.</span> <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span>) <span style="color: #4f5c7e;">t</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">package-archives</span>
+             '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"melpa"</span> <span style="color: #374478;">.</span> <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span><span style="color: #7388d6;">)</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
 
-(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
-          (<span style="color: #a020f0;">lambda</span> ()
-            (<span style="color: #a020f0;">when</span> (<span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span>)
-              (<span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span>))))
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
+          <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
+            <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span><span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span><span style="color: #709870;">)</span>
+              <span style="color: #709870;">(</span><span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 
-(<span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #78683f;">ggtags-mode</span>)
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #78683f;">ggtags-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6823,9 +6824,9 @@ If you like Ido, put the following configuration inside your
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #784437;">setq</span> <span style="color: #783f5a;">ido-enable-flex-matching</span> <span style="color: #4f5c7e;">t</span>)
-(<span style="color: #784437;">setq</span> <span style="color: #784437;">ido-everywhere</span> <span style="color: #4f5c7e;">t</span>)
-(<span style="color: #4f7e67;">ido-mode</span> <span style="color: #008b8b;">1</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #783f5a;">ido-enable-flex-matching</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #784437;">ido-everywhere</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #4f7e67;">ido-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6905,9 +6906,9 @@ visible on your screen. To illustrate my point, here is an example:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">hello</span> ()
-  (<span style="color: #78683f;">interactive</span>)
-  (<span style="color: #783f5a;">message</span> <span style="color: #8b2252;">"Hello World"</span>))
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">hello</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #7388d6;">(</span><span style="color: #78683f;">interactive</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span><span style="color: #783f5a;">message</span> <span style="color: #8b2252;">"Hello World"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
