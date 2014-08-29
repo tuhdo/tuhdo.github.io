@@ -296,6 +296,9 @@ to =C:\Program Files\Emacs\bin\emacsclientw.exe= on desktop.
 :END:
 Download compiled Emacs for Mac OS X: http://emacsformacosx.com/.
 
+You can also use this version that is more integrated with Mac OSX:
+https://github.com/railwaycat/emacs-mac-port
+
 * Swap Control and Capslock
 :PROPERTIES:
 :ID:       4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5
