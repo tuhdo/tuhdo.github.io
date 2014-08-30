@@ -380,8 +380,8 @@ you can mark buffers to search by *C-SPC*; note that even if you mark
 buffers with *C-SPC*, content search using =@= still lists all buffers
 that contain the pattern; only when you switch to =helm-moccur=,
 matches that are in selected buffers are displayed. You can also
-perform =occur= only on the current buffer with prefix argument: =C-u
-C-s=.
+perform =occur= only on the current buffer with prefix argument: *C-u
+C-s*.
 
 Meaning of colors and prefixes for buffers:
 
@@ -390,7 +390,7 @@ Meaning of colors and prefixes for buffers:
   process.
 - Indianred2 => Buffer exists but its file have been deleted.
 - Orange => Buffer is modified and its file not saved to disk.
-- Italic => A non--file buffer.
+- Italic => A non-file buffer.
 
 Some Emacs themes change the colors. You should check the
 corresponding colour in your color themes.
@@ -419,11 +419,33 @@ Example:
 
 _Demo_:
 
-Search for buffers that contain string "Answer", and transfer the
-search patterns to =helm-moccur= for the exact matches (the demo
-starts when you see START in the minibuffer):
-
 [[file:static/part3/helm-mini.gif][file:static/part3/helm-mini.gif]]
+
+The demo starts when you see Eval: START in the minibuffer. Note that
+the demo used =helm-buffers-list=, but it's almost the same as
+=helm-mini=. The only difference is that =helm-buffers-list= uses
+=ido-virtual-buffers= for listing recently used files, while
+=helm-mini= uses =recentf=.
+
+- All the C buffers are selected using the pattern =*C=. In the demo,
+  I also select Tcl buffers with *Tcl and then switched back to C 
+  buffers with =*C=.
+
+- I only want to have buffers that contains only the string
+  =crash=. To do that, I add a space, then add the pattern
+  =@crash=. After the initial search pattern, I hand over the current
+  matching buffers to =helm-moccur= - =moccur= with Helm 
+  interface using *C-s*. Candidates can be filtered gradually by
+  adding more pattern, i.e. I added memory to filtered down to buffers
+  that contain the string "memory" among the buffers that are
+  containing =crash=.
+
+- As you can see, as you filtered out, the number of candidates
+  decreases, as displayed in the modeline. At the end, there were 12
+  buffers remained as the result of filtering, down from the total 253
+  buffers.
+
+The demo above is part of [[https://github.com/emacs-helm/helm#advanced-usage][Helm's homepage]] now.
 
 _Similar Commands_:
 

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-08-30 T7 16:39 -->
+<!-- 2014-08-30 T7 21:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu Do" />
@@ -3188,8 +3188,8 @@ you can mark buffers to search by <b>C-SPC</b>; note that even if you mark
 buffers with <b>C-SPC</b>, content search using <code>@</code> still lists all buffers
 that contain the pattern; only when you switch to <code>helm-moccur</code>,
 matches that are in selected buffers are displayed. You can also
-perform <code>occur</code> only on the current buffer with prefix argument: <code>C-u
-C-s</code>.
+perform <code>occur</code> only on the current buffer with prefix argument: <b>C-u
+C-s</b>.
 </p>
 
 <p>
@@ -3206,7 +3206,7 @@ process.
 </li>
 <li>Orange =&gt; Buffer is modified and its file not saved to disk.
 </li>
-<li>Italic =&gt; A non&#x2013;file buffer.
+<li>Italic =&gt; A non-file buffer.
 </li>
 </ul>
 
@@ -3252,17 +3252,46 @@ buffers that are in any "helm" sub-directory and matching w3.
 <span class="underline">Demo</span>:
 </p>
 
-<p>
-Search for buffers that contain string "Answer", and transfer the
-search patterns to <code>helm-moccur</code> for the exact matches (the demo
-starts when you see START in the minibuffer):
-</p>
-
 
 <div class="figure">
 <p><a href="static/part3/helm-mini.gif"><img src="static/part3/helm-mini.gif" alt="helm-mini.gif" /></a>
 </p>
 </div>
+
+<p>
+The demo starts when you see Eval: START in the minibuffer. Note that
+the demo used <code>helm-buffers-list</code>, but it's almost the same as
+<code>helm-mini</code>. The only difference is that <code>helm-buffers-list</code> uses
+<code>ido-virtual-buffers</code> for listing recently used files, while
+<code>helm-mini</code> uses <code>recentf</code>.
+</p>
+
+<ul class="org-ul">
+<li>All the C buffers are selected using the pattern <code>*C</code>. In the demo,
+I also select Tcl buffers with *Tcl and then switched back to C 
+buffers with <code>*C</code>.
+</li>
+
+<li>I only want to have buffers that contains only the string
+<code>crash</code>. To do that, I add a space, then add the pattern
+<code>@crash</code>. After the initial search pattern, I hand over the current
+matching buffers to <code>helm-moccur</code> - <code>moccur</code> with Helm 
+interface using <b>C-s</b>. Candidates can be filtered gradually by
+adding more pattern, i.e. I added memory to filtered down to buffers
+that contain the string "memory" among the buffers that are
+containing <code>crash</code>.
+</li>
+
+<li>As you can see, as you filtered out, the number of candidates
+decreases, as displayed in the modeline. At the end, there were 12
+buffers remained as the result of filtering, down from the total 253
+buffers.
+</li>
+</ul>
+
+<p>
+The demo above is part of <a href="https://github.com/emacs-helm/helm#advanced-usage">Helm's homepage</a> now.
+</p>
 
 <p>
 <span class="underline">Similar Commands</span>:
