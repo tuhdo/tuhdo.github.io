@@ -21,9 +21,12 @@ modular tool, that's not tied in the trap of backward compatibility.
 
 _Installation_:
 
-=M-x list-packages= and select *helm* package, then
-install it. After finish installing, add this code snippet to activate
-the package:
+You can use [[https://github.com/bbatsov/prelude][Emacs Prelude]] that is already setup properly according to
+this guide to try out Helm and skip the rest of the installation.
+
+If you have your own Emacs configuration, =M-x list-packages= and
+select *helm* package, then install it. After finish installing, add
+this code snippet to activate the package:
 
 Minimal config:
 
