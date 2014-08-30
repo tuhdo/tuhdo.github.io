@@ -179,8 +179,6 @@ to help you using Helm productively.
 :PROPERTIES:
 :ID:       260dfe60-eb43-4d20-b1c4-b51af5133a32
 :END:
-Helm's strengths:
-
 - /_Simple and Consistent interface_/: Every Helm session starts with
   a same simple interface: a prompt for entering search patterns and
   a Helm buffer for displying results as a user types. Because of the
