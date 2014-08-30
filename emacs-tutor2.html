@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-07-08 Tue 17:18 -->
+<!-- 2014-08-30 T7 16:17 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="Tu Do" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -182,7 +182,7 @@ alt="hit counter"></a></div></noscript>
 </div>
 </div>
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-267fa5b6-b998-42c6-8ec0-382035284873"></a>Introduction - and why you should learn Lisp</h2>
+<h2 id="sec-1"><a id="ID-267fa5b6-b998-42c6-8ec0-382035284873" name="ID-267fa5b6-b998-42c6-8ec0-382035284873"></a>Introduction - and why you should learn Lisp</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 In this section, you can try out code by <code>M-x ielm</code>, then paste code
@@ -194,7 +194,7 @@ fun to see your Emacs "evolves" gradually.
 </div>
 
 <div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><a id="ID-24b6798b-24de-45dc-94ce-cd2dddf55255"></a>Before we start</h3>
+<h3 id="sec-1-1"><a id="ID-24b6798b-24de-45dc-94ce-cd2dddf55255" name="ID-24b6798b-24de-45dc-94ce-cd2dddf55255"></a>Before we start</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Please be aware that although I intentionally emphasize the importance
@@ -216,10 +216,10 @@ language".
 </div>
 </div>
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><a id="ID-71c4974f-42b4-4a29-93bd-b823688ea024"></a>A bit of history</h3>
+<h3 id="sec-1-2"><a id="ID-71c4974f-42b4-4a29-93bd-b823688ea024" name="ID-71c4974f-42b4-4a29-93bd-b823688ea024"></a>A bit of history</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-Lisp has a long history. Lisp was designed by computer scientist <a href="http://en.wikipedia.org/wiki/John_McCarthy_%28computer_scientist%29">John
+Lisp has a long history. Lisp was designed by computer scientist <a href="http://en.wikipedia.org/wiki/John_McCarthy_%2528computer_scientist%2529">John
 McCarthy</a>. Lisp first appeared in 1958 and Lisp is still with us up to
 this day with various dialects: Common Lisp, newLisp, Emacs Lisp, Racket,
 Clojure&#x2026; Lisp is short for (<b>LIS</b>)t (<b>P</b>)rocessing.
@@ -242,7 +242,7 @@ History</a>.
 </div>
 
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
+<h3 id="sec-1-3"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d" name="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Lisp syntax is minimal and simple. At its core, you only need to
@@ -250,44 +250,32 @@ remember these syntax constructs to use any Lisp:
 </p>
 
 <ol class="org-ol">
-<li><p>
-Data:
-</p>
+<li>Data:
 
 <ul class="org-ul">
-<li><p>
-Atomic-data, or <b>Atom</b>: It is the same as primitives in other
+<li>Atomic-data, or <b>Atom</b>: It is the same as primitives in other
 languages, meaning the most basic construct and indivisible. Atoms
 include following basic types, you should try in IELM:
-</p>
 
 <ul class="org-ul">
-<li><p>
-<b>Number</b>: integer like 1, 2, 3&#x2026; or floating point numbers like
+<li><b>Number</b>: integer like 1, 2, 3&#x2026; or floating point numbers like
 1.5, 3.14&#x2026;
-</p>
 </li>
 
-<li><p>
-<b>String</b>: strings like "a", "string", "this is a string"&#x2026; Is
+<li><b>String</b>: strings like "a", "string", "this is a string"&#x2026; Is
 also an atom. String is immutable.
-</p>
 </li>
 
-<li><p>
-<code>NIL</code> or <code>()</code>: NIL means <code>null</code> in other languages. <code>()</code> means
+<li><code>NIL</code> or <code>()</code>: NIL means <code>null</code> in other languages. <code>()</code> means
 empty list, which is equivalent to <code>NIL</code>. When using with a true
 or false test, usch as an if statement, <code>NIL</code> or the empty list
 <code>()</code> means the value <code>false</code>; all other non-empty values in Lisp
 are true.
-</p>
 </li>
 
-<li><p>
-<b>Symbol</b>: A symbol is an object with a name. You can think of
+<li><b>Symbol</b>: A symbol is an object with a name. You can think of
 symbol as pointer or reference in other language. Each symbol
 has 4 components:
-</p>
 
 <ul class="org-ul">
 <li>Print name: symbol's name as string
@@ -312,10 +300,10 @@ a function. You can check by using <code>symbol-value</code> and
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #5e7837;">symbol-value</span> '<span style="color: #7e544f;">buffer-file-name</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">check the value of buffer-file-name; if you try it in IELM,</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #5e7837;">symbol-value</span> '<span style="color: #7e544f;">buffer-file-name</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">check the value of buffer-file-name; if you try it in IELM,</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">the value is NIL because the buffer is not associated with any file</span>
 
-(<span style="color: #513f78;">symbol-function</span> '<span style="color: #7e544f;">buffer-file-name</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">return the function buffer-file-name; </span>
+<span style="color: #707183;">(</span><span style="color: #513f78;">symbol-function</span> '<span style="color: #7e544f;">buffer-file-name</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">return the function buffer-file-name; </span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">IELM should display something like this: #&lt;subr buffer-file-name&gt;</span>
 </pre>
 </div>
@@ -323,16 +311,14 @@ a function. You can check by using <code>symbol-value</code> and
 </ul>
 </li>
 
-<li><p>
-Non-atomic: There's a reason Lisp is called (<b>LIS</b>)t
+<li>Non-atomic: There's a reason Lisp is called (<b>LIS</b>)t
 (<b>P</b>)rocessing. In other languages, list is just another data
 type; but in Lisp, because of Lisp syntax, list is really
 special. Basically, this is a list:
-</p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">&#8217;(<span style="color: #78683f;">...</span>)
+<pre class="src src-emacs-lisp">&#8217;<span style="color: #707183;">(</span><span style="color: #78683f;">...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -345,12 +331,10 @@ data. List elements are separated by whitespace.
 </ul>
 </li>
 
-<li><p>
-Code: If you want to run code to be executed, here is the syntax:
-</p>
+<li>Code: If you want to run code to be executed, here is the syntax:
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #78683f;">...</span>)
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #78683f;">...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -370,21 +354,21 @@ to hold data.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">&#8217;(<span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span> <span style="color: #008b8b;">4</span>) <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 numbers from 1 to 4</span>
+<pre class="src src-emacs-lisp">&#8217;<span style="color: #707183;">(</span><span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span> <span style="color: #008b8b;">4</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 numbers from 1 to 4</span>
 
-&#8217;(<span style="color: #8b2252;">"aa"</span> <span style="color: #8b2252;">"bb"</span> <span style="color: #8b2252;">"cc"</span> <span style="color: #8b2252;">"dd"</span>) <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 strings: "aa", "bb", "cc", "dd"</span>
+&#8217;<span style="color: #707183;">(</span><span style="color: #8b2252;">"aa"</span> <span style="color: #8b2252;">"bb"</span> <span style="color: #8b2252;">"cc"</span> <span style="color: #8b2252;">"dd"</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;;</span><span style="color: #b22222;">is a list that holds 4 strings: "aa", "bb", "cc", "dd"</span>
 
- '() <span style="color: #b22222;">;; </span><span style="color: #b22222;">an empty list, which is also an atom</span>
+ '<span style="color: #707183;">()</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">an empty list, which is also an atom</span>
 
-&#8217;(<span style="color: #a020f0;">if</span> <span style="color: #78683f;">a</span> <span style="color: #78683f;">b</span> <span style="color: #7a4f7e;">c</span>) <span style="color: #b22222;">;;  </span><span style="color: #b22222;">a list that hold 4 symbol: if, a, b and c</span>
+&#8217;<span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #78683f;">a</span> <span style="color: #78683f;">b</span> <span style="color: #7a4f7e;">c</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;;  </span><span style="color: #b22222;">a list that hold 4 symbol: if, a, b and c</span>
 
- (<span style="color: #a020f0;">if</span> <span style="color: #78683f;">a</span> <span style="color: #78683f;">b</span> <span style="color: #7a4f7e;">c</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">is an if expression that executes if..then..else</span>
+ <span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #78683f;">a</span> <span style="color: #78683f;">b</span> <span style="color: #7a4f7e;">c</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">is an if expression that executes if..then..else</span>
            <span style="color: #b22222;">;; </span><span style="color: #b22222;">logic in common programming languages. Expressions like if are</span>
            <span style="color: #b22222;">;; </span><span style="color: #b22222;">called *special form*</span>
 
-&#8217;(<span style="color: #707e4f;">+</span> <span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span>) <span style="color: #b22222;">;; </span><span style="color: #b22222;">is a list consists of 4 elements: +, 1, 2 and 3</span>
+&#8217;<span style="color: #707183;">(</span><span style="color: #707e4f;">+</span> <span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">is a list consists of 4 elements: +, 1, 2 and 3</span>
 
- (<span style="color: #707e4f;">+</span> <span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span>)  <span style="color: #b22222;">;; </span><span style="color: #b22222;">is a function call to function "+" (yes, "+" is a function)</span>
+ <span style="color: #707183;">(</span><span style="color: #707e4f;">+</span> <span style="color: #008b8b;">1</span> <span style="color: #008b8b;">2</span> <span style="color: #008b8b;">3</span><span style="color: #707183;">)</span>  <span style="color: #b22222;">;; </span><span style="color: #b22222;">is a function call to function "+" (yes, "+" is a function)</span>
 </pre>
 </div>
 
@@ -419,11 +403,11 @@ look at an example; this is typical <code>if..then..else</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #a020f0;">if</span> (<span style="color: #4f7e67;">condition</span>) {
+<pre class="src src-c"><span style="color: #a020f0;">if</span> <span style="color: #707183;">(</span><span style="color: #4f7e67;">condition</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
     ...<span style="color: #784437;">statements</span>...
-} <span style="color: #a020f0;">else</span> {
+<span style="color: #707183;">}</span> <span style="color: #a020f0;">else</span> <span style="color: #707183;">{</span>
     ...<span style="color: #784437;">statements</span>...
-}
+<span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -451,10 +435,10 @@ be enclosed within a Lisp form like this:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">'(<span style="color: #a020f0;">if</span> <span style="color: #707e4f;">condition:</span>
+<pre class="src src-emacs-lisp">'<span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #707e4f;">condition:</span>
     <span style="color: #4f7e67;">...statements</span>
   <span style="color: #784437;">else:</span>
-    <span style="color: #707e4f;">...statements...</span>)
+    <span style="color: #707e4f;">...statements...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -485,14 +469,12 @@ Lisp forms are classified into 3 types:
 </p>
 
 <ul class="org-ul">
-<li><p>
-<b>Function form</b>:
+<li><b>Function form</b>:
 Function form is the most common form. Function form is equivalent
 to a function call in other languages. If the first element in the
 list is a function that exists, that function will be called along
 with its arguments. The remaining elements in the list are function
 arguments. All arguments are evaluated before the function is called.
-</p>
 
 <p>
 <span class="underline">Example</span>:
@@ -510,17 +492,15 @@ called to produce the final result 20.
 </p>
 </li>
 
-<li><p>
-<b>Special form</b>:
+<li><b>Special form</b>:
 Special form has special evaluation rules or special syntax or
 both. For example, this is <code>if..then..else</code> in Lisp:
-</p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> <span style="color: #4f7e67;">condition</span>  <span style="color: #b22222;">;; </span><span style="color: #b22222;">condition is a valid Lisp form</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #4f7e67;">condition</span>  <span style="color: #b22222;">;; </span><span style="color: #b22222;">condition is a valid Lisp form</span>
     <span style="color: #783778;">...do</span> <span style="color: #37785e;">something</span> <span style="color: #783778;">if</span> <span style="color: #783778;">true...</span>
-  <span style="color: #783778;">...do</span> <span style="color: #37785e;">something</span> <span style="color: #783778;">if</span> <span style="color: #37785e;">false...</span>)
+  <span style="color: #783778;">...do</span> <span style="color: #37785e;">something</span> <span style="color: #783778;">if</span> <span style="color: #37785e;">false...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -542,8 +522,7 @@ forms. That's why they are special.
 </p>
 </li>
 
-<li><p>
-<b>Macro form</b>:
+<li><b>Macro form</b>:
 Macro form is a function, but different: When you call a macro, the
 macro function generated regular Lisp code; the generated code then
 is executed. Macro is what makes Lisp so special: it allows Lisp to
@@ -551,14 +530,13 @@ have any syntax anyone wishes for. The Python syntax enclosed in a
 Lisp form you saw earlier is an example. But now, instead of having
 to quote, you won't have to with a macro form. Instead of writing
 like this:
-</p>
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">'(<span style="color: #a020f0;">if</span> <span style="color: #707e4f;">condition:</span>
+<pre class="src src-emacs-lisp">'<span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #707e4f;">condition:</span>
      <span style="color: #707e4f;">...statements...</span>
   <span style="color: #784437;">else:</span>
-     <span style="color: #707e4f;">...statements...</span>)
+     <span style="color: #707e4f;">...statements...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </li>
@@ -571,10 +549,10 @@ Lisp:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> <span style="color: #707e4f;">condition:</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #707e4f;">condition:</span>
      <span style="color: #707e4f;">...statements...</span>
  <span style="color: #784437;">else:</span>
-     <span style="color: #707e4f;">...statements...</span>)
+     <span style="color: #707e4f;">...statements...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -585,9 +563,9 @@ first transform to a valid Lisp form:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #a020f0;">if</span> <span style="color: #4f7e67;">condition</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">if</span> <span style="color: #4f7e67;">condition</span>
      <span style="color: #707e4f;">...statements...</span>
-     <span style="color: #707e4f;">...statements...</span>)
+     <span style="color: #707e4f;">...statements...</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -626,7 +604,7 @@ Lispers can:
 </div>
 </div>
 <div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><a id="ID-e06ce975-464b-495e-8c40-88f62656a70a"></a>Beyond parentheses</h3>
+<h3 id="sec-1-4"><a id="ID-e06ce975-464b-495e-8c40-88f62656a70a" name="ID-e06ce975-464b-495e-8c40-88f62656a70a"></a>Beyond parentheses</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 You may ask, can you to create syntax without parentheses in Lisp? Of
@@ -657,7 +635,7 @@ getting to it.
 </div>
 </div>
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><a id="ID-f81bda6e-00ea-47ee-8250-308ec8109f47"></a>Syntax error</h2>
+<h2 id="sec-2"><a id="ID-f81bda6e-00ea-47ee-8250-308ec8109f47" name="ID-f81bda6e-00ea-47ee-8250-308ec8109f47"></a>Syntax error</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Lisp syntax is simple: it's just a pair of parentheses, with things in
@@ -666,7 +644,7 @@ two cases:
 </p>
 </div>
 <div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><a id="ID-64829a4d-b80d-4bac-9941-f45367d7edc3"></a>Unbalanced parentheses:</h3>
+<h3 id="sec-2-1"><a id="ID-64829a4d-b80d-4bac-9941-f45367d7edc3" name="ID-64829a4d-b80d-4bac-9941-f45367d7edc3"></a>Unbalanced parentheses:</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Do you miss an opening or closing parentheses, or do you insert
@@ -677,9 +655,9 @@ in Tcl, you have to write like this to make it valid
 </p>
 <div class="org-src-container">
 
-<pre class="src src-tcl"><span style="color: #a020f0;">for</span> {<span style="color: #483d8b;">set</span> <span style="color: #7a4f7e;">i</span> <span style="color: #008b8b;">0</span>} {<span style="color: #43783f;">$</span><span style="color: #a0522d;">i</span> <span style="color: #43783f;">&lt;</span> <span style="color: #5e7837;">$</span><span style="color: #a0522d;">n</span>} {<span style="color: #483d8b;">incr</span> <span style="color: #7a4f7e;">i</span>} {
+<pre class="src src-tcl"><span style="color: #a020f0;">for</span> <span style="color: #707183;">{</span><span style="color: #483d8b;">set</span> <span style="color: #7a4f7e;">i</span> <span style="color: #008b8b;">0</span><span style="color: #707183;">}</span> <span style="color: #707183;">{</span><span style="color: #43783f;">$</span><span style="color: #43783f;">i</span> <span style="color: #43783f;">&lt;</span> <span style="color: #5e7837;">$</span><span style="color: #5e7837;">n</span><span style="color: #707183;">}</span> <span style="color: #707183;">{</span><span style="color: #483d8b;">incr</span> <span style="color: #7a4f7e;">i</span><span style="color: #707183;">}</span> <span style="color: #707183;">{</span>
     <span style="color: #783778;">...do</span> <span style="color: #707e4f;">something...</span>
-}
+<span style="color: #707183;">}</span>
 </pre>
 </div>
 <p>
@@ -691,7 +669,7 @@ context, you must not insert dollar before:
 
 <div class="org-src-container">
 
-<pre class="src src-tcl"><span style="color: #483d8b;">array</span> <span style="color: #483d8b;">set</span> <span style="color: #a0522d;">balloon</span> {<span style="color: #784437;">color</span> <span style="color: #707e4f;">red</span>}
+<pre class="src src-tcl"><span style="color: #483d8b;">array</span> <span style="color: #483d8b;">set</span> <span style="color: #783778;">balloon</span> <span style="color: #707183;">{</span><span style="color: #784437;">color</span> <span style="color: #707e4f;">red</span><span style="color: #707183;">}</span>
 <span style="color: #483d8b;">array</span> <span style="color: #5e7837;">get</span> <span style="color: #783778;">balloon</span>
 </pre>
 </div>
@@ -704,7 +682,7 @@ sign before. It's annoying to remember trivial details like this.
 </div>
 
 <div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><a id="ID-e98cbd6b-60c8-447e-bf1d-e567b4d200c9"></a>Mini-language syntax error:</h3>
+<h3 id="sec-2-2"><a id="ID-e98cbd6b-60c8-447e-bf1d-e567b4d200c9" name="ID-e98cbd6b-60c8-447e-bf1d-e567b4d200c9"></a>Mini-language syntax error:</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 If you create a mini language, then you must follow its syntax
@@ -717,7 +695,7 @@ at this stage.
 </div>
 </div>
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><a id="ID-a36aca24-f1ba-4371-8e5e-12d545337e78"></a>Semantic error</h2>
+<h2 id="sec-3"><a id="ID-a36aca24-f1ba-4371-8e5e-12d545337e78" name="ID-a36aca24-f1ba-4371-8e5e-12d545337e78"></a>Semantic error</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 You might wonder, parentheses cannot be the only source of
@@ -735,10 +713,10 @@ For example, this is syntax error:
 
 <pre class="src src-c"><span style="color: #483d8b;">#include</span> <span style="color: #8b2252;">&lt;stdio.h&gt;</span>
 
-<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span> (<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>* <span style="color: #a0522d;">argv</span>[]) {
-    <span style="color: #a020f0;">if</span> <span style="color: #783f5a;">argc</span> == <span style="color: #008b8b;">1</span> { <span style="color: #374478;">exit</span>(<span style="color: #008b8b;">1</span>) }
-    <span style="color: #3f7178;">printf</span>(<span style="color: #8b2252;">"Hello world"</span>)
-}
+<span style="color: #228b22;">int</span> <span style="color: #0000ff;">main</span> <span style="color: #707183;">(</span><span style="color: #228b22;">int</span> <span style="color: #783f5a;">argc</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>* <span style="color: #3f7178;">argv</span><span style="color: #7388d6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #a020f0;">if</span> <span style="color: #783f5a;">argc</span> == <span style="color: #008b8b;">1</span> <span style="color: #7388d6;">{</span> <span style="color: #374478;">exit</span><span style="color: #909183;">(</span><span style="color: #008b8b;">1</span><span style="color: #909183;">)</span> <span style="color: #7388d6;">}</span>
+    <span style="color: #3f7178;">printf</span><span style="color: #7388d6;">(</span><span style="color: #8b2252;">"Hello world"</span><span style="color: #7388d6;">)</span>
+<span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -754,9 +732,9 @@ parentheses. <code>if</code> statement in C requires this generic form:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #a020f0;">if</span> (<span style="color: #513f78;">expression</span>) {
+<pre class="src src-c"><span style="color: #a020f0;">if</span> <span style="color: #707183;">(</span><span style="color: #513f78;">expression</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
     ...<span style="color: #784437;">statements</span> <span style="color: #78683f;">separated</span> <span style="color: #5e7837;">by</span> <span style="color: #4f7e67;">semicolon</span>...
-}
+<span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -771,16 +749,16 @@ In contrast, this is semantic error:
 
 <div class="org-src-container">
 
-<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">add</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #a0522d;">b</span>) {
+<pre class="src src-c"><span style="color: #228b22;">void</span> <span style="color: #0000ff;">add</span><span style="color: #707183;">(</span><span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span>, <span style="color: #228b22;">int</span> <span style="color: #78683f;">b</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
     <span style="color: #a020f0;">return</span> <span style="color: #78683f;">a</span> + <span style="color: #78683f;">b</span>;
-}
+<span style="color: #707183;">}</span>
 
-<span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span>(<span style="color: #228b22;">int</span> <span style="color: #a0522d;">argc</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>* <span style="color: #a0522d;">argv</span>[]) {
-    <span style="color: #228b22;">int</span> <span style="color: #a0522d;">a</span> = <span style="color: #008b8b;">1</span>;
+<span style="color: #228b22;">void</span> <span style="color: #0000ff;">main</span><span style="color: #707183;">(</span><span style="color: #228b22;">int</span> <span style="color: #783f5a;">argc</span>, <span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span>* <span style="color: #3f7178;">argv</span><span style="color: #7388d6;">[]</span><span style="color: #707183;">)</span> <span style="color: #707183;">{</span>
+    <span style="color: #228b22;">int</span> <span style="color: #78683f;">a</span> = <span style="color: #008b8b;">1</span>;
 
-    <span style="color: #4f7e67;">add</span>(<span style="color: #78683f;">a</span>);
-    <span style="color: #4f7e67;">add</span>(<span style="color: #78683f;">a</span>,<span style="color: #78683f;">b</span>);
-}
+    <span style="color: #4f7e67;">add</span><span style="color: #7388d6;">(</span><span style="color: #78683f;">a</span><span style="color: #7388d6;">)</span>;
+    <span style="color: #4f7e67;">add</span><span style="color: #7388d6;">(</span><span style="color: #78683f;">a</span>,<span style="color: #78683f;">b</span><span style="color: #7388d6;">)</span>;
+<span style="color: #707183;">}</span>
 </pre>
 </div>
 
@@ -798,7 +776,7 @@ since syntax errors in Lisp have only to do with parentheses.
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-b82bfb73-1af9-48d1-9565-0b8541e27487"></a>Lisp Machine</h2>
+<h2 id="sec-4"><a id="ID-b82bfb73-1af9-48d1-9565-0b8541e27487" name="ID-b82bfb73-1af9-48d1-9565-0b8541e27487"></a>Lisp Machine</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It would be a mistake when mention about history of Lisp without
@@ -864,7 +842,7 @@ PC.
 </p>
 
 <p>
-<a href="http://en.wikipedia.org/wiki/Genera_%28operating_system%29">Lisp OS: Genera</a>: The OS is written entirely in Lisp, both the
+<a href="http://en.wikipedia.org/wiki/Genera_%2528operating_system%2529">Lisp OS: Genera</a>: The OS is written entirely in Lisp, both the
 Operating System and the high-level applications.
 </p>
 
@@ -903,7 +881,7 @@ Operating System and the high-level applications.
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><a id="ID-125d8641-5327-4169-94c5-969e06d4bf69"></a>Conclusion</h2>
+<h2 id="sec-5"><a id="ID-125d8641-5327-4169-94c5-969e06d4bf69" name="ID-125d8641-5327-4169-94c5-969e06d4bf69"></a>Conclusion</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 You won't find any language with such a minimal syntax and unifomity,

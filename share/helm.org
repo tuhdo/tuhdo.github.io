@@ -79,8 +79,6 @@ Extended config:
                                        '(picture-mode artist-mode))
    helm-candidate-number-limit 200 ; limit the number of displayed canidates
    helm-M-x-requires-pattern 0     ; show all candidates when set to 0
-   helm-boring-file-regexp-list
-   '("\\.git$" "\\.hg$" "\\.svn$" "\\.CVS$" "\\._darcs$" "\\.la$" "\\.o$" "\\.i$") ; do not show these files in helm buffer
    helm-ff-file-name-history-use-recentf t
    helm-move-to-line-cycle-in-source t ; move to end or beginning of source
                                           ; when reaching top or bottom of source.
