@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-04 T5 00:04 -->
+<!-- 2014-09-04 T5 00:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="tuhdo" />
@@ -431,7 +431,7 @@ use <b>helm-execute-persistent-action</b> more than
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebihnd tab to do persistent action</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebind tab to do persistent action</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-i"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-z"</span><span style="color: #7388d6;">)</span>  '<span style="color: #783f5a;">helm-select-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
 </pre>
@@ -916,16 +916,22 @@ use this command in place of <code>helm-mini</code>.
 directory. e.g "fob" or "fbr" will complete "foobar".
 </li>
 
-<li>You can also execute persistent action, which binds to <b>C-z</b> (by
-default), or <b>TAB</b> if you use my configuration to view content of
-the buffer. Move the buffer up/down by <b>M-&lt;next&gt;</b> and
+<li>You can also execute persistent action, which is bound to <b>C-z</b> (by
+default) or <b>TAB</b> if you use my configuration, to narrow the current
+highlighting candidate; <b>C-z</b> or <b>TAB</b> again to view content of the
+buffer. You can scroll the other buffer up/down by <b>M-&lt;next&gt;</b> and
 <b>M-&lt;prior&gt;</b>.
 </li>
 
-<li>You can go up one directory level with <b>C-l</b>. <b><span class="underline">NOTE</span></b>: if you
+<li>Alternatively, you can <b>C-j</b> to narrow to the highlighting candidate
+and <b>C-j</b> again to view the content of other buffer. <b>C-l</b> to go
+back.
+</li>
+
+<li>You can also go up one directory level with <b>C-l</b>. <b><span class="underline">NOTE</span></b>: if you
 use <b>C-l</b>, Helm goes up one level and the cursor is on the directory
 you've just got out. If you want to go up and have the cursors on
-the parent directory, in Helm prompt, enter <code>../</code>.
+the parent directory, in Helm prompt, enter <code>../</code>. 
 </li>
 
 <li>To create a directory, enter a new name that does not exist in the

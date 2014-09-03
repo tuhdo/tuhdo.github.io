@@ -178,7 +178,7 @@ use *helm-execute-persistent-action* more than
 *helm-select-action* by adding the code snippet below:
 
 #+begin_src emacs-lisp
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 #+end_src
@@ -496,15 +496,20 @@ _Description_:
 - =helm-find-files= can fuzzy match candidates in current
   directory. e.g "fob" or "fbr" will complete "foobar".
 
-- You can also execute persistent action, which binds to *C-z* (by
-  default), or *TAB* if you use my configuration to view content of
-  the buffer. Move the buffer up/down by *M-<next>* and
+- You can also execute persistent action, which is bound to *C-z* (by
+  default) or *TAB* if you use my configuration, to narrow the current
+  highlighting candidate; *C-z* or *TAB* again to view content of the
+  buffer. You can scroll the other buffer up/down by *M-<next>* and
   *M-<prior>*.
 
-- You can go up one directory level with *C-l*. *_NOTE_*: if you
+- Alternatively, you can *C-j* to narrow to the highlighting candidate
+  and *C-j* again to view the content of other buffer. *C-l* to go
+  back.
+
+- You can also go up one directory level with *C-l*. *_NOTE_*: if you
   use *C-l*, Helm goes up one level and the cursor is on the directory
   you've just got out. If you want to go up and have the cursors on
-  the parent directory, in Helm prompt, enter =../=.
+  the parent directory, in Helm prompt, enter =../=. 
 
 - To create a directory, enter a new name that does not exist in the
   current directory and append =/= at the end. After you created a
