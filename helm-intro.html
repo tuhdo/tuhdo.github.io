@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-04 T5 00:13 -->
+<!-- 2014-09-04 T5 00:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="tuhdo" />
@@ -740,13 +740,13 @@ You can even use <code>helm-mini</code> to narrow to buffers that contains a
 regexp in their contents, by appending <code>@</code> before the search
 pattern. For example, you can select buffers that only contain the
 string "test": <code>@test</code>. If you want to see the locations of the string
-in the buffers,  <b>C-s</b> while in <code>helm-mini</code> session to switch to
-<code>helm-moccur</code>. By default, <code>helm-mini</code> searches all opening buffers;
-you can mark buffers to search by <b>C-SPC</b>; note that even if you mark
-buffers with <b>C-SPC</b>, content search using <code>@</code> still lists all buffers
-that contain the pattern; only when you switch to <code>helm-moccur</code>,
-matches that are in selected buffers are displayed. You can also
-perform <code>occur</code> only on the current buffer with prefix argument: <b>C-u
+in the buffers, mark all the buffer with <b>M-a</b> and <b>C-s</b> while in
+<code>helm-mini</code> session, to switch to <code>helm-moccur</code>. You can mark buffers
+to search by <b>C-SPC</b>. When you switch to <code>helm-moccur</code>, matches that
+are in selected buffers are displayed. You can also perform <code>occur</code>
+only on the current buffer with prefix argument: <b>C-u C-s</b>; this is
+useful when you already marked buffers but don't want to unmark just
+to view only in a buffer. However, in general, you won't need <b>C-u
 C-s</b>.
 </p>
 
@@ -833,11 +833,12 @@ buffers with <code>*C</code>.
 <li>I only want to have buffers that contains only the string
 <code>crash</code>. To do that, I add a space, then add the pattern
 <code>@crash</code>. After the initial search pattern, I hand over the current
-matching buffers to <code>helm-moccur</code> - <code>moccur</code> with Helm 
-interface using <b>C-s</b>. Candidates can be filtered gradually by
-adding more pattern, i.e. I added memory to filtered down to buffers
-that contain the string "memory" among the buffers that are
-containing <code>crash</code>.
+highlighting  buffer to <code>helm-moccur</code> (<code>moccur</code> with Helm interface)
+using <b>C-s</b>. Candidates can be filtered gradually by adding more
+pattern, i.e. I added memory to filtered down to buffers that
+contain the string "memory" among the buffers that are containing
+<code>crash</code>. You can also mark multiple with <b>C-SPC</b> or mark all buffers
+with <b>M-a</b> to search all listing buffers in <code>helm-mini</code>.
 </li>
 
 <li>As you can see, as you filtered out, the number of candidates

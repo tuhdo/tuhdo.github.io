@@ -383,13 +383,13 @@ You can even use =helm-mini= to narrow to buffers that contains a
 regexp in their contents, by appending =@= before the search
 pattern. For example, you can select buffers that only contain the
 string "test": =@test=. If you want to see the locations of the string
-in the buffers,  *C-s* while in =helm-mini= session to switch to
-=helm-moccur=. By default, =helm-mini= searches all opening buffers;
-you can mark buffers to search by *C-SPC*; note that even if you mark
-buffers with *C-SPC*, content search using =@= still lists all buffers
-that contain the pattern; only when you switch to =helm-moccur=,
-matches that are in selected buffers are displayed. You can also
-perform =occur= only on the current buffer with prefix argument: *C-u
+in the buffers, mark all the buffer with *M-a* and *C-s* while in
+=helm-mini= session, to switch to =helm-moccur=. You can mark buffers
+to search by *C-SPC*. When you switch to =helm-moccur=, matches that
+are in selected buffers are displayed. You can also perform =occur=
+only on the current buffer with prefix argument: *C-u C-s*; this is
+useful when you already marked buffers but don't want to unmark just
+to view only in a buffer. However, in general, you won't need *C-u
 C-s*.
 
 Meaning of colors and prefixes for buffers:
@@ -443,11 +443,12 @@ the demo used =helm-buffers-list=, but it's almost the same as
 - I only want to have buffers that contains only the string
   =crash=. To do that, I add a space, then add the pattern
   =@crash=. After the initial search pattern, I hand over the current
-  matching buffers to =helm-moccur= - =moccur= with Helm 
-  interface using *C-s*. Candidates can be filtered gradually by
-  adding more pattern, i.e. I added memory to filtered down to buffers
-  that contain the string "memory" among the buffers that are
-  containing =crash=.
+  highlighting  buffer to =helm-moccur= (=moccur= with Helm interface)
+  using *C-s*. Candidates can be filtered gradually by adding more
+  pattern, i.e. I added memory to filtered down to buffers that
+  contain the string "memory" among the buffers that are containing
+  =crash=. You can also mark multiple with *C-SPC* or mark all buffers
+  with *M-a* to search all listing buffers in =helm-mini=.
 
 - As you can see, as you filtered out, the number of candidates
   decreases, as displayed in the modeline. At the end, there were 12
