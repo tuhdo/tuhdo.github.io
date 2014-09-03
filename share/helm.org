@@ -98,7 +98,7 @@ Extended config:
   (helm-mode 1)
 #+end_src
 
-* _Usage_:
+* Usage:
 :PROPERTIES:
 :ID:       07fe976f-bf1e-4c16-afb3-b108059921b1
 :END:
@@ -131,6 +131,10 @@ completion:
 - You can also mark candidates with *C-SPC*; this is useful when you
   need to perform an action on many candidates of your choice. *M-a*
   to select all.
+
+- You can also insert marked candidates into current buffer with *C-c
+  C-i*. This is useful when you narrow to a list of candidates,
+  i.e. files, then you want to save such candidates.
 
 You can practice the above commands with *C-x b*, whicn runs
 =helm-mini=. If you mark more than one buffers, *RET* opens the

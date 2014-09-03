@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-02 T3 23:43 -->
+<!-- 2014-09-04 T5 00:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu Do" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -161,7 +161,7 @@ alt="hit counter"></a></div></noscript>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1"><span class="underline">Usage</span>:</a></li>
+<li><a href="#sec-1">Usage:</a></li>
 <li><a href="#sec-2">Why is Helm poweful?</a></li>
 <li><a href="#sec-3">Operate on text at point:</a></li>
 <li><a href="#sec-4">Command: <code>helm-M-x</code></a></li>
@@ -327,7 +327,7 @@ Extended config:
 </div>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-07fe976f-bf1e-4c16-afb3-b108059921b1" name="ID-07fe976f-bf1e-4c16-afb3-b108059921b1"></a><span class="underline">Usage</span>:</h2>
+<h2 id="sec-1"><a id="ID-07fe976f-bf1e-4c16-afb3-b108059921b1" name="ID-07fe976f-bf1e-4c16-afb3-b108059921b1"></a>Usage:</h2>
 <div class="outline-text-2" id="text-1">
 
 <p>
@@ -367,6 +367,11 @@ buffer.
 <li>You can also mark candidates with <b>C-SPC</b>; this is useful when you
 need to perform an action on many candidates of your choice. <b>M-a</b>
 to select all.
+</li>
+
+<li>You can also insert marked candidates into current buffer with <b>C-c
+C-i</b>. This is useful when you narrow to a list of candidates,
+i.e. files, then you want to save such candidates.
 </li>
 </ul>
 
