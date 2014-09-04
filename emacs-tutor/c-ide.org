@@ -1467,6 +1467,11 @@ have to wait for the whole compilation process to finish. You can
 examine the errors right away in the =*compilation*= buffer, while the
 compilation process keeps going.
 
+When you compile with =compilation-mode=, your shell output is
+processed and highlighted with beautiful colors to easy your reading:
+
+[[file:static/c-ide/compilation-compile.gif][file:static/c-ide/compilation-compile.gif]]
+
 *TIP*: It is useful to open a Dired buffer of the project root and
 store a window configuration that contains it into a register, so you
 can always jump back to project root any where, any time and run
