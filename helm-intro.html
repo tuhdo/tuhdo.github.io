@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-04 T5 00:45 -->
+<!-- 2014-09-04 Thu 11:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="tuhdo" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -188,8 +188,10 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-25">Command: <code>helm-eval-expression-with-eldoc</code></a></li>
 <li><a href="#sec-26">Command: <code>helm-calcul-expression</code></a></li>
 <li><a href="#sec-27">Command: <code>helm-eshell-history</code></a></li>
-<li><a href="#sec-28">Package: <code>helm-projectile</code></a></li>
-<li><a href="#sec-29">Package: <code>helm-descbind</code></a></li>
+<li><a href="#sec-28">Command: <code>helm-comint-input-ring</code></a></li>
+<li><a href="#sec-29">Command: <code>helm-mini-buffer-history</code></a></li>
+<li><a href="#sec-30">Package: <code>helm-projectile</code></a></li>
+<li><a href="#sec-31">Package: <code>helm-descbind</code></a></li>
 </ul>
 </div>
 </div>
@@ -1105,6 +1107,11 @@ default.
 </p>
 
 <p>
+<code>helm-semantic-or-imenu</code> works with many modes like C/C++, Python,
+Ruby, Emacs Lisp and Lisp in general, Shell script, Org&#x2026;
+</p>
+
+<p>
 <span class="underline">Demo</span>:
 </p>
 
@@ -1311,7 +1318,12 @@ convenient key sequence:
 
 <p>
 Similar to <code>occur</code>, but using Helm interface. As you type, matching
-lines are updated immediately.
+lines are updated immediately. This is convenient when you want to
+have a list of matches in the current buffer to jump back and
+forth. <b>TAB</b> to temporary move point to the location of current
+highlighting match. <b>C-g</b> cancels current Helm session and returns to
+the original location where <code>helm-occur</code> is invoked. <b>RET</b> on a match
+jumps to that match.
 </p>
 
 <p>
@@ -2256,10 +2268,42 @@ remember which command exists. Let Helm handles that problem for you.
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-28" class="outline-2">
-<h2 id="sec-28"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b" name="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h2>
+<h2 id="sec-28"><a id="ID-2c28164f-ddff-4733-8dc1-cddb0b121b4a" name="ID-2c28164f-ddff-4733-8dc1-cddb0b121b4a"></a>Command: <code>helm-comint-input-ring</code></h2>
 <div class="outline-text-2" id="text-28">
+<p>
+Similar to <code>helm-eshell-history</code>, but is used for <code>M-x shell</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #513f78;">shell-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #7388d6;">)</span> '<span style="color: #43783f;">helm-comint-input-ring</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-29" class="outline-2">
+<h2 id="sec-29"><a id="ID-2bc57adc-953f-4760-ae6d-330600e46da2" name="ID-2bc57adc-953f-4760-ae6d-330600e46da2"></a>Command: <code>helm-mini-buffer-history</code></h2>
+<div class="outline-text-2" id="text-29">
+<p>
+Do you ever feel uneasy to operate with the minibuffer history when
+it's getting large? Like, hundreds of history items? If so, Helm can
+help you easily manage a large amount of commands with ease using Helm
+interface.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #5e7837;">minibuffer-local-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #7388d6;">)</span> '<span style="color: #783f5a;">helm-minibuffer-history</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-30" class="outline-2">
+<h2 id="sec-30"><a id="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b" name="ID-50cc1f5e-022d-4818-bedf-0a52e7e4615b"></a>Package: <code>helm-projectile</code></h2>
+<div class="outline-text-2" id="text-30">
 <p>
 <span class="underline">Author</span>:  <a href="https://github.com/bbatsov">Bozhidar Batsov</a>, <code>bozhidar@batsov.com</code>
 </p>
@@ -2303,9 +2347,9 @@ immediately.
 </div>
 </div>
 
-<div id="outline-container-sec-29" class="outline-2">
-<h2 id="sec-29"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc" name="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h2>
-<div class="outline-text-2" id="text-29">
+<div id="outline-container-sec-31" class="outline-2">
+<h2 id="sec-31"><a id="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc" name="ID-3a128b01-725f-4142-bd0d-f9bbd4b715cc"></a>Package: <code>helm-descbind</code></h2>
+<div class="outline-text-2" id="text-31">
 <p>
 <span class="underline">Author</span>
 </p>

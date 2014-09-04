@@ -624,6 +624,9 @@ semantic for generating tags, otherwise fall back to =imenu=. If
 point is on a symbol, helm feeds the symbol into input prompt by
 default.
 
+=helm-semantic-or-imenu= works with many modes like C/C++, Python,
+Ruby, Emacs Lisp and Lisp in general, Shell script, Org...
+
 _Demo_:
 
 Here is =helm-semantic-or-imenu= in action, please notice the
@@ -752,7 +755,12 @@ convenient key sequence:
 _Description_:
 
 Similar to =occur=, but using Helm interface. As you type, matching
-lines are updated immediately.
+lines are updated immediately. This is convenient when you want to
+have a list of matches in the current buffer to jump back and
+forth. *TAB* to temporary move point to the location of current
+highlighting match. *C-g* cancels current Helm session and returns to
+the original location where =helm-occur= is invoked. *RET* on a match
+jumps to that match.
 
 _Demo_:
 
@@ -1202,6 +1210,28 @@ remember which command exists. Let Helm handles that problem for you.
 _Demo_:
 
 [[file:static/part3/helm-eshell-history.gif][file:static/part3/helm-eshell-history.gif]]
+* Command: =helm-comint-input-ring=
+:PROPERTIES:
+:ID:       2c28164f-ddff-4733-8dc1-cddb0b121b4a
+:END:
+ Similar to =helm-eshell-history=, but is used for =M-x shell=.
+
+ #+begin_src emacs-lisp
+   (define-key shell-mode-map (kbd "C-c C-l") 'helm-comint-input-ring)
+ #+end_src
+
+* Command: =helm-mini-buffer-history=
+:PROPERTIES:
+:ID:       2bc57adc-953f-4760-ae6d-330600e46da2
+:END:
+Do you ever feel uneasy to operate with the minibuffer history when
+it's getting large? Like, hundreds of history items? If so, Helm can
+help you easily manage a large amount of commands with ease using Helm
+interface.
+
+#+begin_src emacs-lisp
+  (define-key minibuffer-local-map (kbd "C-c C-l") 'helm-minibuffer-history)
+#+end_src
 
 * Package: =helm-projectile=
 :PROPERTIES:
