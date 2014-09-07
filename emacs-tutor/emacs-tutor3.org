@@ -2656,32 +2656,32 @@ Sample configuration:
                       :family "Inconsolata-Italic")
 #+end_src
 
-*** Package: =number-font-lock=
+*** Package: =highlight-numbers=
 :PROPERTIES:
 :ID:       26a9a3fb-b564-4827-81f1-c82c2809c73e
 :END:
 _Author_: [[https://github.com/Fanael][Fanael Linithien]], =fanael4@gmail.com=
 
-_Homepage_: [[https://github.com/Fanael/number-font-lock-mode][Github]]
+_Homepage_: [[https://github.com/Fanael/highlight-numbers][Github]]
 
 _Features_:
 
-=number-font-lock-mode= is an Emacs minor mode that highlights numeric
+=highlight-numbers= is an Emacs minor mode that highlights numeric
 literals in source code.
 
 _Installation_:
 
-=M-x list-packages= and select *number-font-lock* package, then
+=M-x list-packages= and select *highlight-numbers* package, then
 install it. After finish installing, add this code snippet to activate
 the package:
 
 #+begin_src emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGE: number-font-lock          ;;
+  ;; PACKAGE: highlight-numbers         ;;
   ;;                                    ;;
   ;; GROUP: Faces -> Number Font Lock   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (add-hook 'prog-mode-hook 'number-font-lock-mode)
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 #+end_src
 
 _Usage_: 

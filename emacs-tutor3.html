@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS </title>
-<!-- 2014-09-04 Thu 11:08 -->
+<!-- 2014-09-08 T2 00:35 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -277,7 +277,7 @@ alt="hit counter"></a></div></noscript>
 </li>
 <li><a href="#sec-4-16">setup-faces-and-ui.el</a>
 <ul>
-<li><a href="#sec-4-16-1">Package: <code>number-font-lock</code></a></li>
+<li><a href="#sec-4-16-1">Package: <code>highlight-numbers</code></a></li>
 <li><a href="#sec-4-16-2">Package: <code>highlight-symbol</code></a></li>
 <li><a href="#sec-4-16-3">Change Emacs appearance by using color theme</a></li>
 </ul>
@@ -490,7 +490,7 @@ for changing setting, but <code>setq</code> a variable is also equivalent.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">global-mark-ring-max</span> <span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold; text-decoration: underline;">50</span><span style="color: #008b8b;">000</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">global-mark-ring-max</span> <span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold;">50</span><span style="color: #008b8b;">000</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2709,12 +2709,7 @@ Minimal config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm              ;;</span>
-<span style="color: #b22222;">;;                            </span><span style="color: #b22222;">;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
-<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #4f5c7e;">helm-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
@@ -2725,16 +2720,11 @@ Extended config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm              ;;</span>
-<span style="color: #b22222;">;;                            </span><span style="color: #b22222;">;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
-  <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">must set before helm-config,  otherwise helm use default</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">prefix "C-x c", which is inconvenient because you can</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">accidentially pressed "C-x C-c"</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">accidentally pressed "C-x C-c"</span>
 <span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #37785e;">helm-command-prefix-key</span> <span style="color: #8b2252;">"C-c h"</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
@@ -2750,24 +2740,17 @@ Extended config:
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f5c7e;">helm-grep-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"n"</span><span style="color: #7388d6;">)</span>  '<span style="color: #43783f;">helm-grep-mode-jump-other-window-forward</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f5c7e;">helm-grep-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"p"</span><span style="color: #7388d6;">)</span>  '<span style="color: #37785e;">helm-grep-mode-jump-other-window-backward</span><span style="color: #707183;">)</span>
 
+<span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span><span style="color: #4f5c7e;">executable-find</span> <span style="color: #8b2252;">"curl"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span><span style="color: #784437;">setq</span> <span style="color: #783778;">helm-google-suggest-use-curl-p</span> <span style="color: #4f5c7e;">t</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
 <span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
- <span style="color: #783778;">helm-google-suggest-use-curl-p</span> <span style="color: #4f5c7e;">t</span>
- <span style="color: #707e4f;">helm-scroll-amount</span> <span style="color: #008b8b;">4</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+ <span style="color: #707e4f;">helm-scroll-amount</span> <span style="color: #008b8b;">8</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
  <span style="color: #7a4f7e;">helm-quick-update</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">do not display invisible candidates</span>
- <span style="color: #7a4f7e;">helm-idle-delay</span> <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating in delayed sources.</span>
- <span style="color: #78683f;">helm-input-idle-delay</span> <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating candidate buffer</span>
  <span style="color: #3f7178;">helm-ff-search-library-in-sexp</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
 
- <span style="color: #43783f;">helm-split-window-default-side</span> '<span style="color: #374478;">other</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer in another window</span>
  <span style="color: #37785e;">helm-split-window-in-side-p</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
- <span style="color: #374478;">helm-buffers-favorite-modes</span> <span style="color: #7388d6;">(</span><span style="color: #784437;">append</span> <span style="color: #374478;">helm-buffers-favorite-modes</span>
-                                     '<span style="color: #909183;">(</span><span style="color: #78683f;">picture-mode</span> <span style="color: #3f7178;">artist-mode</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
- <span style="color: #783778;">helm-candidate-number-limit</span> <span style="color: #008b8b;">200</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">limit the number of displayed canidates</span>
- <span style="color: #4f7e67;">helm-M-x-requires-pattern</span> <span style="color: #008b8b;">0</span>     <span style="color: #b22222;">; </span><span style="color: #b22222;">show all candidates when set to 0</span>
  <span style="color: #4f7e67;">helm-ff-file-name-history-use-recentf</span> <span style="color: #4f5c7e;">t</span>
- <span style="color: #783778;">helm-move-to-line-cycle-in-source</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source</span>
-                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">when reaching top or bottom of source.</span>
- <span style="color: #783f5a;">ido-use-virtual-buffers</span> <span style="color: #4f5c7e;">t</span>      <span style="color: #b22222;">; </span><span style="color: #b22222;">Needed in helm-buffers-list</span>
+ <span style="color: #783778;">helm-move-to-line-cycle-in-source</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source when reaching top or bottom of source.</span>
  <span style="color: #783f5a;">helm-buffers-fuzzy-matching</span> <span style="color: #4f5c7e;">t</span>          <span style="color: #b22222;">; </span><span style="color: #b22222;">fuzzy matching buffer names when non--nil</span>
                                         <span style="color: #b22222;">; </span><span style="color: #b22222;">useful in helm-mini that lists buffers</span>
  <span style="color: #707183;">)</span>
@@ -5088,7 +5071,7 @@ My sample customization:
 <pre class="src src-emacs-lisp"> <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files                      ;;</span>
  <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #3f7178;">large-file-warning-threshold</span> <span style="color: #008b8b;">100</span><span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold; text-decoration: underline;">000</span><span style="color: #008b8b;">000</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">size in bytes</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #3f7178;">large-file-warning-threshold</span> <span style="color: #008b8b;">100</span><span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold;">000</span><span style="color: #008b8b;">000</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">size in bytes</span>
 
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Files -&gt; Back up            ;;</span>
@@ -6062,7 +6045,7 @@ Sample configuration:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Development -&gt; Internal     ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Start garbage collection every 100MB</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #707e4f;">gc-cons-threshold</span> <span style="color: #008b8b;">100</span><span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold; text-decoration: underline;">000</span><span style="color: #008b8b;">000</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #707e4f;">gc-cons-threshold</span> <span style="color: #008b8b;">100</span><span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold;">000</span><span style="color: #008b8b;">000</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -6308,7 +6291,7 @@ Sample configuration:
 <span style="color: #707183;">(</span><span style="color: #7a4f7e;">blink-cursor-mode</span> <span style="color: #008b8b;">-1</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">scroll-margin</span> <span style="color: #008b8b;">0</span>
-      <span style="color: #374478;">scroll-conservatively</span> <span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold; text-decoration: underline;">100</span><span style="color: #008b8b;">000</span>
+      <span style="color: #374478;">scroll-conservatively</span> <span style="color: #008b8b; background-color: #4F4F4F; font-weight: bold;">100</span><span style="color: #008b8b;">000</span>
       <span style="color: #37785e;">scroll-preserve-screen-position</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #7a4f7e;">size-indication-mode</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
@@ -6333,14 +6316,14 @@ Sample configuration:
 </div>
 
 <div id="outline-container-sec-4-16-1" class="outline-4">
-<h4 id="sec-4-16-1"><a id="ID-26a9a3fb-b564-4827-81f1-c82c2809c73e" name="ID-26a9a3fb-b564-4827-81f1-c82c2809c73e"></a>Package: <code>number-font-lock</code></h4>
+<h4 id="sec-4-16-1"><a id="ID-26a9a3fb-b564-4827-81f1-c82c2809c73e" name="ID-26a9a3fb-b564-4827-81f1-c82c2809c73e"></a>Package: <code>highlight-numbers</code></h4>
 <div class="outline-text-4" id="text-4-16-1">
 <p>
 <span class="underline">Author</span>: <a href="https://github.com/Fanael">Fanael Linithien</a>, <code>fanael4@gmail.com</code>
 </p>
 
 <p>
-<span class="underline">Homepage</span>: <a href="https://github.com/Fanael/number-font-lock-mode">Github</a>
+<span class="underline">Homepage</span>: <a href="https://github.com/Fanael/highlight-numbers">Github</a>
 </p>
 
 <p>
@@ -6348,7 +6331,7 @@ Sample configuration:
 </p>
 
 <p>
-<code>number-font-lock-mode</code> is an Emacs minor mode that highlights numeric
+<code>highlight-numbers</code> is an Emacs minor mode that highlights numeric
 literals in source code.
 </p>
 
@@ -6357,7 +6340,7 @@ literals in source code.
 </p>
 
 <p>
-<code>M-x list-packages</code> and select <b>number-font-lock</b> package, then
+<code>M-x list-packages</code> and select <b>highlight-numbers</b> package, then
 install it. After finish installing, add this code snippet to activate
 the package:
 </p>
@@ -6365,11 +6348,11 @@ the package:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: number-font-lock          ;;</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: highlight-numbers         ;;</span>
 <span style="color: #b22222;">;;                                    </span><span style="color: #b22222;">;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Faces -&gt; Number Font Lock   ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #5e7837;">number-font-lock-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">prog-mode-hook</span> '<span style="color: #784437;">highlight-numbers-mode</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
