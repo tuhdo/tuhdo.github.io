@@ -1620,8 +1620,7 @@ using them in later Emacs sessions.
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
 :END:
-
-#+INCLUDE: ../share/helm.org
+Helm is an awesome package. Please refer to [[file:helm-intro.org][the whole guide]].
 
 ** Alternative to Helm: =ido= + =ido-ubiquitous= + =flx-ido= + =smex=
 :PROPERTIES:
