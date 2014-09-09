@@ -3,7 +3,53 @@
 In this guide, I will help you to setup an efficient working C/C++
 environment. Despite looking long, the setup is short and easy (mostly
 copy/paste Emacs Lisp code into your =init.el=); most of the guide are
-explanations and demonstrations of many useful features.
+explanations and demonstrations of many useful features. Following
+this guide, you should be able to browse the Linux kernel source tree
+inside Emacs effortlessly, such as jump to definition/references at
+cursor, go back and forth between jumping points, finding any file
+instantly, switching between .h and .c/.cpp.
+
+A few demos:
+
+- Switching between .h and .c/.cpp:
+
+[[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
+
+- Interactive outline tree using =helm-semantic-or-imenu=:
+
+[[file:static/c-ide/helm-semantic-or-imenu-with-struct.gif][file:static/c-ide/helm-semantic-or-imenu-with-struct.gif]]
+
+- Symbol references:
+
+[[file:static/c-ide/semantic-symref.gif][file:static/c-ide/semantic-symref.gif]]
+
+- Code completion:
+
+[[file:static/c-ide/semantic-boost-demo.gif][file:static/c-ide/semantic-boost-demo.gif]]
+
+- Header completion:
+
+[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
+
+- Show function interface at the bottom:
+
+[[file:static/func_args.jpg][file:static/func_args.jpg]]
+
+- Show current function your cursor is inside at the top:
+
+[[file:static/c-ide/semantic-sticky-func.gif][file:static/c-ide/semantic-sticky-func.gif]]
+
+- Compilation support:
+
+[[file:static/c-ide/compilation-mode.gif][file:static/c-ide/compilation-mode.gif]]
+
+- Beautiful compile output:
+
+[[file:static/c-ide/compilation-compile.gif][file:static/c-ide/compilation-compile.gif]]
+
+- Fancy GDB debugging:
+
+[[file:static/c-ide/gdb-many-windows.gif][file:static/c-ide/gdb-many-windows.gif]]
 
 Please remember that there's a table of content on the top right
 corner and you can use it to navigate this guide. If you feel your
@@ -1070,10 +1116,14 @@ Useful commands for working with C/C++ projects:
 
 - Run compilation command at project root: *C-c p c*. By default,
   Projectile prompts the =make= command.
+
 - Switch between =.h= and =.c= or =.cpp=: *C-c p a*. If the filename -
   without file extension - of current editing buffer is part of other
   files, those files are listed as well. If there is only one file
-  with the same name but different extension, switch immediately.
+  with the same name but different extension, switch immediately. Here
+  is a demo:
+
+[[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
 There are more. You can see all the commands [[https://github.com/bbatsov/projectile#interactive-commands][here]]. Or, simply run *C-c
 p C-h* for a list of commands with *C-c p* prefix.

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-09-04 Thu 15:20 -->
+<!-- 2014-09-09 Tue 17:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -237,8 +237,126 @@ alt="hit counter"></a></div></noscript>
 In this guide, I will help you to setup an efficient working C/C++
 environment. Despite looking long, the setup is short and easy (mostly
 copy/paste Emacs Lisp code into your <code>init.el</code>); most of the guide are
-explanations and demonstrations of many useful features.
+explanations and demonstrations of many useful features. Following
+this guide, you should be able to browse the Linux kernel source tree
+inside Emacs effortlessly, such as jump to definition/references at
+cursor, go back and forth between jumping points, finding any file
+instantly, switching between .h and .c/.cpp.
 </p>
+
+<p>
+A few demos:
+</p>
+
+<ul class="org-ul">
+<li>Switching between .h and .c/.cpp:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/projectile-find-other-file.gif"><img src="static/c-ide/projectile-find-other-file.gif" alt="projectile-find-other-file.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Interactive outline tree using <code>helm-semantic-or-imenu</code>:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/helm-semantic-or-imenu-with-struct.gif"><img src="static/c-ide/helm-semantic-or-imenu-with-struct.gif" alt="helm-semantic-or-imenu-with-struct.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Symbol references:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-symref.gif"><img src="static/c-ide/semantic-symref.gif" alt="semantic-symref.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Code completion:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-boost-demo.gif"><img src="static/c-ide/semantic-boost-demo.gif" alt="semantic-boost-demo.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Header completion:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/company-c-header.png"><img src="static/c-ide/company-c-header.png" alt="company-c-header.png" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Show function interface at the bottom:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/func_args.jpg"><img src="static/func_args.jpg" alt="func_args.jpg" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Show current function your cursor is inside at the top:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/semantic-sticky-func.gif"><img src="static/c-ide/semantic-sticky-func.gif" alt="semantic-sticky-func.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Compilation support:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/compilation-mode.gif"><img src="static/c-ide/compilation-mode.gif" alt="compilation-mode.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Beautiful compile output:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/compilation-compile.gif"><img src="static/c-ide/compilation-compile.gif" alt="compilation-compile.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Fancy GDB debugging:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/gdb-many-windows.gif"><img src="static/c-ide/gdb-many-windows.gif" alt="gdb-many-windows.gif" /></a>
+</p>
+</div>
 
 <p>
 Please remember that there's a table of content on the top right
@@ -1798,12 +1916,20 @@ Useful commands for working with C/C++ projects:
 <li>Run compilation command at project root: <b>C-c p c</b>. By default,
 Projectile prompts the <code>make</code> command.
 </li>
+
 <li>Switch between <code>.h</code> and <code>.c</code> or <code>.cpp</code>: <b>C-c p a</b>. If the filename -
 without file extension - of current editing buffer is part of other
 files, those files are listed as well. If there is only one file
-with the same name but different extension, switch immediately.
+with the same name but different extension, switch immediately. Here
+is a demo:
 </li>
 </ul>
+
+
+<div class="figure">
+<p><a href="static/c-ide/projectile-find-other-file.gif"><img src="static/c-ide/projectile-find-other-file.gif" alt="projectile-find-other-file.gif" /></a>
+</p>
+</div>
 
 <p>
 There are more. You can see all the commands <a href="https://github.com/bbatsov/projectile#interactive-commands">here</a>. Or, simply run <b>C-c
