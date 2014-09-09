@@ -23,9 +23,13 @@ A few demos:
 
 [[file:static/c-ide/semantic-symref.gif][file:static/c-ide/semantic-symref.gif]]
 
-- Code completion:
+- Code completion 1:
 
 [[file:static/c-ide/semantic-boost-demo.gif][file:static/c-ide/semantic-boost-demo.gif]]
+
+- Code completion 2:
+
+[[file:static/auto_complete.gif][file:static/auto_complete.gif]]
 
 - Header completion:
 
@@ -517,6 +521,20 @@ Company. After installing from MELPA, set it up:
 #+end_src
 
 [[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
+
+*_IMPORTANT_*: If you want to complete C++ header files, you have to
+add its paths since by default =company-c-headers= only includes these
+two system include paths: =/usr/include/= and
+=/usr/local/include/=. To enable C++ header completion for standard
+libraries, you have to add its path, for example, like this: 
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
+#+end_src
+
+After that, you can complete C++ header files. To complete project
+local, use =company-c-headers-path-user= and put it in
+=.dir-locals.el=.
 
 * OPTION 2: Source code completion using CEDET
 :PROPERTIES:
@@ -1074,6 +1092,20 @@ Company. After installing from MELPA, set it up:
 #+end_src
 
 [[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
+
+*_IMPORTANT_*: If you want to complete C++ header files, you have to
+add its paths since by default =company-c-headers= only includes these
+two system include paths: =/usr/include/= and
+=/usr/local/include/=. To enable C++ header completion for standard
+libraries, you have to add its path, for example, like this: 
+
+#+begin_src emacs-lisp
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
+#+end_src
+
+After that, you can complete C++ header files. To complete project
+local, use =company-c-headers-path-user= and put it in
+=.dir-locals.el=.
 
 * Project management with Projectile
 :PROPERTIES:

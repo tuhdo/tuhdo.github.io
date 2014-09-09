@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-09-09 Tue 17:15 -->
+<!-- 2014-09-10 T4 00:30 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -282,13 +282,24 @@ A few demos:
 </div>
 
 <ul class="org-ul">
-<li>Code completion:
+<li>Code completion 1:
 </li>
 </ul>
 
 
 <div class="figure">
 <p><a href="static/c-ide/semantic-boost-demo.gif"><img src="static/c-ide/semantic-boost-demo.gif" alt="semantic-boost-demo.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Code completion 2:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/auto_complete.gif"><img src="static/auto_complete.gif" alt="auto_complete.gif" /></a>
 </p>
 </div>
 
@@ -1057,6 +1068,26 @@ Company. After installing from MELPA, set it up:
 <p><a href="static/c-ide/company-c-header.png"><img src="static/c-ide/company-c-header.png" alt="company-c-header.png" /></a>
 </p>
 </div>
+
+<p>
+<b><span class="underline">IMPORTANT</span></b>: If you want to complete C++ header files, you have to
+add its paths since by default <code>company-c-headers</code> only includes these
+two system include paths: <code>/usr/include/</code> and
+<code>/usr/local/include/</code>. To enable C++ header completion for standard
+libraries, you have to add its path, for example, like this: 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #37785e;">company-c-headers-path-system</span> <span style="color: #8b2252;">"/usr/include/c++/4.8/"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+After that, you can complete C++ header files. To complete project
+local, use <code>company-c-headers-path-user</code> and put it in
+<code>.dir-locals.el</code>.
+</p>
 </div>
 </div>
 </div>
@@ -1846,6 +1877,26 @@ Company. After installing from MELPA, set it up:
 <p><a href="static/c-ide/company-c-header.png"><img src="static/c-ide/company-c-header.png" alt="company-c-header.png" /></a>
 </p>
 </div>
+
+<p>
+<b><span class="underline">IMPORTANT</span></b>: If you want to complete C++ header files, you have to
+add its paths since by default <code>company-c-headers</code> only includes these
+two system include paths: <code>/usr/include/</code> and
+<code>/usr/local/include/</code>. To enable C++ header completion for standard
+libraries, you have to add its path, for example, like this: 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #37785e;">company-c-headers-path-system</span> <span style="color: #8b2252;">"/usr/include/c++/4.8/"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+After that, you can complete C++ header files. To complete project
+local, use <code>company-c-headers-path-user</code> and put it in
+<code>.dir-locals.el</code>.
+</p>
 </div>
 </div>
 </div>
