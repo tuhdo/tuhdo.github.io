@@ -41,16 +41,16 @@ Extended config:
 
 #+begin_src emacs-lisp
   (require 'helm)
-
-  ;; must set before helm-config,  otherwise helm use default
-  ;; prefix "C-x c", which is inconvenient because you can
-  ;; accidentally pressed "C-x C-c"
-  (setq helm-command-prefix-key "C-c h")
-
   (require 'helm-config)
   (require 'helm-eshell)
   (require 'helm-files)
   (require 'helm-grep)
+
+  ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+  ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+  ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+  (global-set-key (kbd "C-c h") 'helm-command-prefix)
+  (global-unset-key (kbd "C-x c"))
 
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebihnd tab to do persistent action
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
@@ -63,20 +63,13 @@ Extended config:
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
 
-  (setq
-   helm-scroll-amount 8 ; scroll 8 lines other window using M-<next>/M-<prior>
-   helm-quick-update t ; do not display invisible candidates
-   helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-
-   helm-split-window-in-side-p t ;; open helm buffer inside current window, not occupy whole other window
-   helm-ff-file-name-history-use-recentf t
-   helm-move-to-line-cycle-in-source t ; move to end or beginning of source when reaching top or bottom of source.
-   helm-buffers-fuzzy-matching t          ; fuzzy matching buffer names when non--nil
-                                          ; useful in helm-mini that lists buffers
-   )
-
-  ;; Save current position to mark ring when jumping to a different place
-  (add-hook 'helm-goto-line-before-hook 'helm-save-current-pos-to-mark-ring)
+  (setq helm-quick-update                     t ; do not display invisible candidates
+        helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+        helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
+        helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+        helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+        helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+        helm-ff-file-name-history-use-recentf t)
 
   (helm-mode 1)
 #+end_src
@@ -111,13 +104,17 @@ completion:
   pages, and *M-<* and *M->* to move to top and bottom of the Helm
   buffer.
 
-- You can also mark candidates with *C-SPC*; this is useful when you
-  need to perform an action on many candidates of your choice. *M-a*
-  to select all.
+- You can mark candidates with *C-SPC*; this is useful when you need
+  to perform an action on many candidates of your choice. *M-a* to
+  select all.
 
-- You can also insert marked candidates into current buffer with *C-c
+- You can insert marked candidates into current buffer with *C-c
   C-i*. This is useful when you narrow to a list of candidates,
   i.e. files, then you want to save such candidates.
+
+- If you find the current horizontal Helm window is small, you can
+  always switch it to vertical window with *C-t*. Running *C-t* again
+  returns the Helm window back to horizontal and so on.
 
 You can practice the above commands with *C-x b*, whicn runs
 =helm-mini=. If you mark more than one buffers, *RET* opens the

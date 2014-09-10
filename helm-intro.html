@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-04 Thu 11:08 -->
+<!-- 2014-09-11 T5 01:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -258,12 +258,7 @@ Minimal config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm              ;;</span>
-<span style="color: #b22222;">;;                            </span><span style="color: #b22222;">;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
-<span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #4f5c7e;">helm-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
@@ -274,22 +269,17 @@ Extended config:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">  <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">PACKAGE: helm              ;;</span>
-<span style="color: #b22222;">;;                            </span><span style="color: #b22222;">;;</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm ;;</span>
-  <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span><span style="color: #707183;">)</span>
-
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">must set before helm-config,  otherwise helm use default</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">prefix "C-x c", which is inconvenient because you can</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">accidentially pressed "C-x C-c"</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #37785e;">helm-command-prefix-key</span> <span style="color: #8b2252;">"C-c h"</span><span style="color: #707183;">)</span>
-
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-eshell</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-files</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-grep</span><span style="color: #707183;">)</span>
+
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">The default "C-x c" is quite close to "C-x C-c", which quits Emacs.</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Changed to "C-c h". Note: We must set "C-c h" globally, because we</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">cannot change `</span><span style="color: #008b8b;">helm-command-prefix-key</span><span style="color: #b22222;">' once `</span><span style="color: #008b8b;">helm-config</span><span style="color: #b22222;">' is loaded.</span>
+<span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h"</span><span style="color: #7388d6;">)</span> '<span style="color: #3f7178;">helm-command-prefix</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #43783f;">global-unset-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x c"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebihnd tab to do persistent action</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-i"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
@@ -299,30 +289,16 @@ Extended config:
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f5c7e;">helm-grep-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"n"</span><span style="color: #7388d6;">)</span>  '<span style="color: #43783f;">helm-grep-mode-jump-other-window-forward</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f5c7e;">helm-grep-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"p"</span><span style="color: #7388d6;">)</span>  '<span style="color: #37785e;">helm-grep-mode-jump-other-window-backward</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
- <span style="color: #783778;">helm-google-suggest-use-curl-p</span> <span style="color: #4f5c7e;">t</span>
- <span style="color: #707e4f;">helm-scroll-amount</span> <span style="color: #008b8b;">4</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 4 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
- <span style="color: #7a4f7e;">helm-quick-update</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">do not display invisible candidates</span>
- <span style="color: #7a4f7e;">helm-idle-delay</span> <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating in delayed sources.</span>
- <span style="color: #78683f;">helm-input-idle-delay</span> <span style="color: #008b8b;">0.01</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">be idle for this many seconds, before updating candidate buffer</span>
- <span style="color: #3f7178;">helm-ff-search-library-in-sexp</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span><span style="color: #4f5c7e;">executable-find</span> <span style="color: #8b2252;">"curl"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span><span style="color: #784437;">setq</span> <span style="color: #783778;">helm-google-suggest-use-curl-p</span> <span style="color: #4f5c7e;">t</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
- <span style="color: #43783f;">helm-split-window-default-side</span> '<span style="color: #374478;">other</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer in another window</span>
- <span style="color: #37785e;">helm-split-window-in-side-p</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
- <span style="color: #374478;">helm-buffers-favorite-modes</span> <span style="color: #7388d6;">(</span><span style="color: #784437;">append</span> <span style="color: #374478;">helm-buffers-favorite-modes</span>
-                                     '<span style="color: #909183;">(</span><span style="color: #78683f;">picture-mode</span> <span style="color: #3f7178;">artist-mode</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
- <span style="color: #783778;">helm-candidate-number-limit</span> <span style="color: #008b8b;">200</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">limit the number of displayed canidates</span>
- <span style="color: #4f7e67;">helm-M-x-requires-pattern</span> <span style="color: #008b8b;">0</span>     <span style="color: #b22222;">; </span><span style="color: #b22222;">show all candidates when set to 0</span>
- <span style="color: #4f7e67;">helm-ff-file-name-history-use-recentf</span> <span style="color: #4f5c7e;">t</span>
- <span style="color: #783778;">helm-move-to-line-cycle-in-source</span> <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source</span>
-                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">when reaching top or bottom of source.</span>
- <span style="color: #783f5a;">ido-use-virtual-buffers</span> <span style="color: #4f5c7e;">t</span>      <span style="color: #b22222;">; </span><span style="color: #b22222;">Needed in helm-buffers-list</span>
- <span style="color: #783f5a;">helm-buffers-fuzzy-matching</span> <span style="color: #4f5c7e;">t</span>          <span style="color: #b22222;">; </span><span style="color: #b22222;">fuzzy matching buffer names when non--nil</span>
-                                        <span style="color: #b22222;">; </span><span style="color: #b22222;">useful in helm-mini that lists buffers</span>
- <span style="color: #707183;">)</span>
-
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">Save current position to mark ring when jumping to a different place</span>
-<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">helm-goto-line-before-hook</span> '<span style="color: #3f7178;">helm-save-current-pos-to-mark-ring</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">helm-quick-update</span>                     <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">do not display invisible candidates</span>
+      <span style="color: #37785e;">helm-split-window-in-side-p</span>           <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
+      <span style="color: #783f5a;">helm-buffers-fuzzy-matching</span>           <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">fuzzy matching buffer names when non--nil</span>
+      <span style="color: #783778;">helm-move-to-line-cycle-in-source</span>     <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source when reaching top or bottom of source.</span>
+      <span style="color: #3f7178;">helm-ff-search-library-in-sexp</span>        <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
+      <span style="color: #707e4f;">helm-scroll-amount</span>                    <span style="color: #008b8b;">8</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+      <span style="color: #4f7e67;">helm-ff-file-name-history-use-recentf</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #4f5c7e;">helm-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
@@ -366,14 +342,19 @@ pages, and <b>M-&lt;</b> and <b>M-&gt;</b> to move to top and bottom of the Helm
 buffer.
 </li>
 
-<li>You can also mark candidates with <b>C-SPC</b>; this is useful when you
-need to perform an action on many candidates of your choice. <b>M-a</b>
-to select all.
+<li>You can mark candidates with <b>C-SPC</b>; this is useful when you need
+to perform an action on many candidates of your choice. <b>M-a</b> to
+select all.
 </li>
 
-<li>You can also insert marked candidates into current buffer with <b>C-c
+<li>You can insert marked candidates into current buffer with <b>C-c
 C-i</b>. This is useful when you narrow to a list of candidates,
 i.e. files, then you want to save such candidates.
+</li>
+
+<li>If you find the current horizontal Helm window is small, you can
+always switch it to vertical window with <b>C-t</b>. Running <b>C-t</b> again
+returns the Helm window back to horizontal and so on.
 </li>
 </ul>
 
