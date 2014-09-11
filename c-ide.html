@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-09-10 T4 00:30 -->
+<!-- 2014-09-11 Thu 10:38 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="tuhdo" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -1390,6 +1390,8 @@ Setup:
 <span style="color: #707183;">(</span><span style="color: #3f7178;">fa-config-default</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span>  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span><span style="color: #43783f;">contrl</span> <span style="color: #3f7178;">tab</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> '<span style="color: #78683f;">moo-complete</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span>  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span><span style="color: #7a4f7e;">control</span> <span style="color: #3f7178;">tab</span><span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> '<span style="color: #78683f;">moo-complete</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7a4f7e;">c-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-o"</span><span style="color: #7388d6;">)</span>  '<span style="color: #783778;">fa-show</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #7e544f;">c++-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-o"</span><span style="color: #7388d6;">)</span>  '<span style="color: #783778;">fa-show</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1401,13 +1403,15 @@ Basic Usage (taken from <code>function-args</code> homepage):
 <li><code>fa-show</code>: Show an overlay hint with current function arguments like
 so:
 
-<p>
-<a href="static/c-ide/fa-show"><a href="static/c-ide/fa-show">static/c-ide/fa-show</a></a>
+
+<div class="figure">
+<p><a href="static/c-ide/function-args-demo.gif"><img src="static/c-ide/function-args-demo.gif" alt="function-args-demo.gif" /></a>
 </p>
+</div>
 
 <p>
 The point position is tracked and the current hint argument is
-updated accordingly. After you've called it with <code>M-i</code>, you can cycle
+updated accordingly. After you've called it with <code>M-o</code>, you can cycle
 the overloaded functions with <code>M-n/M-h</code>. You can dismiss the hint with
 <code>M-u</code> or by editing anywhere outside the function arguments.
 </p>
@@ -1416,7 +1420,13 @@ the overloaded functions with <code>M-n/M-h</code>. You can dismiss the hint wit
 <li><code>fa-jump</code>: While the overlay hint from <code>fa-show</code> is active, jump to
 the current function. The default shortcut is <code>M-j</code>. If the overlay
 isn't active, call whatever was bound to <code>M-j</code> before (usually it's
-<code>c-indent-new-comment-line</code>).
+<code>c-indent-new-comment-line</code>). Demo:
+
+
+<div class="figure">
+<p><a href="static/c-ide/function-args-jump.gif"><img src="static/c-ide/function-args-jump.gif" alt="function-args-jump.gif" /></a>
+</p>
+</div>
 </li>
 
 <li><code>moo-complete</code> (must install <code>helm</code>): It's essentially a
@@ -1425,12 +1435,6 @@ better, because it accounts more for function overloading and
 inheritance. Also it's prettier (type parts are fontified) and
 faster (helm is used for completion). You can invoke it with <code>M-o</code>
 by default.
-
-
-<div class="figure">
-<p><a href="static/c-ide/moo-complete.png"><img src="static/c-ide/moo-complete.png" alt="moo-complete.png" /></a>
-</p>
-</div>
 </li>
 </ul>
 
