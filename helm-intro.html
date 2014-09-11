@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-11 T5 01:09 -->
+<!-- 2014-09-11 Thu 14:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="tuhdo" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -1161,8 +1161,25 @@ because <code>u16</code> and <code>u32</code> are defined by typedef.
 <p>
 With <code>helm-man-woman</code>, you can quickly jump to any man entry using
 Helm interface, either by typing in Helm prompt or if point is on a
-symbol, get a man page at point.
+symbol, get a man page at point. To enable man page at point, add the
+following code:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #78683f;">helm-sources-using-default-as-input</span> '<span style="color: #4f5c7e;">helm-source-man-pages</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Demo:
+</p>
+
+
+<div class="figure">
+<p><img src="static/part3/helm-man-woman.gif" alt="helm-man-woman.gif" />
+</p>
+</div>
 </div>
 </div>
 

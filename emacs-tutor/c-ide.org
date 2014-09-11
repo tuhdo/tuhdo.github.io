@@ -55,6 +55,10 @@ A few demos:
 
 [[file:static/c-ide/gdb-many-windows.gif][file:static/c-ide/gdb-many-windows.gif]]
 
+- Getting man pages for symbol at cursor:
+
+[[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
+
 Please remember that there's a table of content on the top right
 corner and you can use it to navigate this guide. If you feel your
 internet connection is too slow for my guide, you can always clone and
@@ -1216,7 +1220,24 @@ in minibuffer:
 #+end_src
 
 However, it won't have syntax highlighting.
+* Source code documentation
+:PROPERTIES:
+:ID:       8801e667-e274-414e-a195-91a8e308d177
+:END:
+** Command: =man=
+:PROPERTIES:
+:ID:       a9d99b08-0599-4d53-83be-9064bcda2d7e
+:END:
+To read the documentation for symbol at point or a man entry of your
+choice, invoke =M-x man=.
+** Command: =helm-man-woman=
+:PROPERTIES:
+:ID:       e4a004f5-8b2d-46c7-b9c4-f9912154745f
+:END:
+If you use Helm, you should be able to use the command
+=helm-man-woman=, which is bound to *C-c h m* if you follow [[file:~/Public/blog/publish/share/helm.org][my guide]].
 
+[[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
 * Source code editing
 :PROPERTIES:
 :ID:       0fa2afe0-728c-49f6-86f1-7769cebc5de0

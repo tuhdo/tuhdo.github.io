@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-09-11 Thu 10:38 -->
+<!-- 2014-09-11 Thu 14:09 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -206,28 +206,34 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-7-3">Using <code>ggtags</code> + <code>eldoc</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-8">Source code editing</a>
+<li><a href="#sec-8">Source code documentation</a>
 <ul>
-<li><a href="#sec-8-1">Folding</a></li>
-<li><a href="#sec-8-2">Narrowing</a></li>
-<li><a href="#sec-8-3">Identation</a>
-<ul>
-<li><a href="#sec-8-3-1">Setup default C style</a></li>
-<li><a href="#sec-8-3-2">Setup indentation</a></li>
-<li><a href="#sec-8-3-3">Package: <code>clean-aindent-mode</code></a></li>
-<li><a href="#sec-8-3-4">Package: <code>dtrt-indent</code></a></li>
-<li><a href="#sec-8-3-5">Package: <code>ws-butler</code></a></li>
+<li><a href="#sec-8-1">Command: <code>man</code></a></li>
+<li><a href="#sec-8-2">Command: <code>helm-man-woman</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-8-4">Code template using <code>yasnippet</code></a></li>
-<li><a href="#sec-8-5">Package: <code>smartparens</code></a></li>
+<li><a href="#sec-9">Source code editing</a>
+<ul>
+<li><a href="#sec-9-1">Folding</a></li>
+<li><a href="#sec-9-2">Narrowing</a></li>
+<li><a href="#sec-9-3">Identation</a>
+<ul>
+<li><a href="#sec-9-3-1">Setup default C style</a></li>
+<li><a href="#sec-9-3-2">Setup indentation</a></li>
+<li><a href="#sec-9-3-3">Package: <code>clean-aindent-mode</code></a></li>
+<li><a href="#sec-9-3-4">Package: <code>dtrt-indent</code></a></li>
+<li><a href="#sec-9-3-5">Package: <code>ws-butler</code></a></li>
 </ul>
 </li>
-<li><a href="#sec-9">Compilation Support</a></li>
-<li><a href="#sec-10">Debugging</a>
+<li><a href="#sec-9-4">Code template using <code>yasnippet</code></a></li>
+<li><a href="#sec-9-5">Package: <code>smartparens</code></a></li>
+</ul>
+</li>
+<li><a href="#sec-10">Compilation Support</a></li>
+<li><a href="#sec-11">Debugging</a>
 <ul>
-<li><a href="#sec-10-1">With GDB Many Windows</a></li>
-<li><a href="#sec-10-2">With Grand Unified Debugger - GUD</a></li>
+<li><a href="#sec-11-1">With GDB Many Windows</a></li>
+<li><a href="#sec-11-2">With Grand Unified Debugger - GUD</a></li>
 </ul>
 </li>
 </ul>
@@ -366,6 +372,17 @@ A few demos:
 
 <div class="figure">
 <p><a href="static/c-ide/gdb-many-windows.gif"><img src="static/c-ide/gdb-many-windows.gif" alt="gdb-many-windows.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Getting man pages for symbol at cursor:
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-man-woman.gif"><img src="static/part3/helm-man-woman.gif" alt="helm-man-woman.gif" /></a>
 </p>
 </div>
 
@@ -2079,14 +2096,42 @@ However, it won't have syntax highlighting.
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><a id="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0" name="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0"></a>Source code editing</h2>
+<h2 id="sec-8"><a id="ID-8801e667-e274-414e-a195-91a8e308d177" name="ID-8801e667-e274-414e-a195-91a8e308d177"></a>Source code documentation</h2>
 <div class="outline-text-2" id="text-8">
 </div>
 <div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><a id="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910" name="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910"></a>Folding</h3>
+<h3 id="sec-8-1"><a id="ID-a9d99b08-0599-4d53-83be-9064bcda2d7e" name="ID-a9d99b08-0599-4d53-83be-9064bcda2d7e"></a>Command: <code>man</code></h3>
 <div class="outline-text-3" id="text-8-1">
+<p>
+To read the documentation for symbol at point or a man entry of your
+choice, invoke <code>M-x man</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2"><a id="ID-e4a004f5-8b2d-46c7-b9c4-f9912154745f" name="ID-e4a004f5-8b2d-46c7-b9c4-f9912154745f"></a>Command: <code>helm-man-woman</code></h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+If you use Helm, you should be able to use the command
+<code>helm-man-woman</code>, which is bound to <b>C-c h m</b> if you follow <a href="file:///home/xtuudoo/Public/blog/publish/share/helm.html">my guide</a>.
+</p>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-man-woman.gif"><img src="static/part3/helm-man-woman.gif" alt="helm-man-woman.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><a id="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0" name="ID-0fa2afe0-728c-49f6-86f1-7769cebc5de0"></a>Source code editing</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><a id="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910" name="ID-48b6ad5f-24e2-41c3-9a44-c1decdde6910"></a>Folding</h3>
+<div class="outline-text-3" id="text-9-1">
 <p>
 Emacs has a minor mode called <code>hs-minor-mode</code> that allows users to
 fold and hide blocks of text. Blocks are defined by regular
@@ -2218,9 +2263,9 @@ Demo:
 </div>
 </div>
 
-<div id="outline-container-sec-8-2" class="outline-3">
-<h3 id="sec-8-2"><a id="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a" name="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a"></a>Narrowing</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><a id="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a" name="ID-000644fa-84e8-42a2-b780-6ff1b0c84a5a"></a>Narrowing</h3>
+<div class="outline-text-3" id="text-9-2">
 <p>
 Narrowing means making only a text portion in current buffer
 visible. Narrowing is useful when you want to perform text editing on
@@ -2287,13 +2332,13 @@ Default key bindings:
 </div>
 </div>
 
-<div id="outline-container-sec-8-3" class="outline-3">
-<h3 id="sec-8-3"><a id="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a" name="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a"></a>Identation</h3>
-<div class="outline-text-3" id="text-8-3">
+<div id="outline-container-sec-9-3" class="outline-3">
+<h3 id="sec-9-3"><a id="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a" name="ID-2c98c4cb-0db4-4f27-9b39-d5f972cbe51a"></a>Identation</h3>
+<div class="outline-text-3" id="text-9-3">
 </div>
-<div id="outline-container-sec-8-3-1" class="outline-4">
-<h4 id="sec-8-3-1"><a id="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17" name="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17"></a>Setup default C style</h4>
-<div class="outline-text-4" id="text-8-3-1">
+<div id="outline-container-sec-9-3-1" class="outline-4">
+<h4 id="sec-9-3-1"><a id="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17" name="ID-6dd8b948-f101-4a7c-8fd8-9b836474df17"></a>Setup default C style</h4>
+<div class="outline-text-4" id="text-9-3-1">
 <p>
 Emacs offers some popular C coding styles. Select the one suitable for
 you:
@@ -2320,9 +2365,9 @@ you:
 </div>
 </div>
 
-<div id="outline-container-sec-8-3-2" class="outline-4">
-<h4 id="sec-8-3-2"><a id="ID-394da0e4-4995-4583-9b67-2611f3352d3b" name="ID-394da0e4-4995-4583-9b67-2611f3352d3b"></a>Setup indentation</h4>
-<div class="outline-text-4" id="text-8-3-2">
+<div id="outline-container-sec-9-3-2" class="outline-4">
+<h4 id="sec-9-3-2"><a id="ID-394da0e4-4995-4583-9b67-2611f3352d3b" name="ID-394da0e4-4995-4583-9b67-2611f3352d3b"></a>Setup indentation</h4>
+<div class="outline-text-4" id="text-9-3-2">
 <p>
 By default, Emacs won't indent when press <b>RET</b> because the command
 bound to <b>RET</b> is newline. You can enable automatic indentation by
@@ -2370,9 +2415,9 @@ To convert between <b>TAB</b> and <b>space</b>, you also have two commands:
 </div>
 </div>
 
-<div id="outline-container-sec-8-3-3" class="outline-4">
-<h4 id="sec-8-3-3"><a id="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d" name="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d"></a>Package: <code>clean-aindent-mode</code></h4>
-<div class="outline-text-4" id="text-8-3-3">
+<div id="outline-container-sec-9-3-3" class="outline-4">
+<h4 id="sec-9-3-3"><a id="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d" name="ID-12c0c0ee-66ea-411b-aa7c-0b437c4bc89d"></a>Package: <code>clean-aindent-mode</code></h4>
+<div class="outline-text-4" id="text-9-3-3">
 <p>
 When you press <b>RET</b> to create a newline and got indented by
 <code>eletric-indent-mode</code>, you have appropriate whitespace for
@@ -2395,9 +2440,9 @@ View this <a href="http://www.emacswiki.org/emacs/CleanAutoIndent">Emacswiki pag
 </div>
 </div>
 
-<div id="outline-container-sec-8-3-4" class="outline-4">
-<h4 id="sec-8-3-4"><a id="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0" name="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0"></a>Package: <code>dtrt-indent</code></h4>
-<div class="outline-text-4" id="text-8-3-4">
+<div id="outline-container-sec-9-3-4" class="outline-4">
+<h4 id="sec-9-3-4"><a id="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0" name="ID-ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0"></a>Package: <code>dtrt-indent</code></h4>
+<div class="outline-text-4" id="text-9-3-4">
 <p>
 A minor mode that guesses the indentation offset originally used for
 creating source code files and transparently adjusts the corresponding
@@ -2443,9 +2488,9 @@ in echo area and might become a constant annoyance.
 </div>
 </div>
 
-<div id="outline-container-sec-8-3-5" class="outline-4">
-<h4 id="sec-8-3-5"><a id="ID-65c42593-e1b3-4061-8ae8-276f29258d01" name="ID-65c42593-e1b3-4061-8ae8-276f29258d01"></a>Package: <code>ws-butler</code></h4>
-<div class="outline-text-4" id="text-8-3-5">
+<div id="outline-container-sec-9-3-5" class="outline-4">
+<h4 id="sec-9-3-5"><a id="ID-65c42593-e1b3-4061-8ae8-276f29258d01" name="ID-65c42593-e1b3-4061-8ae8-276f29258d01"></a>Package: <code>ws-butler</code></h4>
+<div class="outline-text-4" id="text-9-3-5">
 <p>
 <code>ws-butler</code> helps managing whitespace on every line of code written or
 edited, in an unobtrusive, help you write clean code without noisy
@@ -2484,9 +2529,9 @@ Setup:
 </div>
 </div>
 
-<div id="outline-container-sec-8-4" class="outline-3">
-<h3 id="sec-8-4"><a id="ID-3952aed5-31ed-4715-a892-9f55056fe98d" name="ID-3952aed5-31ed-4715-a892-9f55056fe98d"></a>Code template using <code>yasnippet</code></h3>
-<div class="outline-text-3" id="text-8-4">
+<div id="outline-container-sec-9-4" class="outline-3">
+<h3 id="sec-9-4"><a id="ID-3952aed5-31ed-4715-a892-9f55056fe98d" name="ID-3952aed5-31ed-4715-a892-9f55056fe98d"></a>Code template using <code>yasnippet</code></h3>
+<div class="outline-text-3" id="text-9-4">
 <p>
 YASnippet is a template system for Emacs. It allows you to type an
 abbreviation and automatically expand it into function
@@ -2532,9 +2577,9 @@ You can view supported snippets <a href="https://github.com/AndreaCrotti/yasnipp
 </div>
 </div>
 
-<div id="outline-container-sec-8-5" class="outline-3">
-<h3 id="sec-8-5"><a id="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0" name="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0"></a>Package: <code>smartparens</code></h3>
-<div class="outline-text-3" id="text-8-5">
+<div id="outline-container-sec-9-5" class="outline-3">
+<h3 id="sec-9-5"><a id="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0" name="ID-62b4b86b-222f-4915-834e-b3d79b73f9f0"></a>Package: <code>smartparens</code></h3>
+<div class="outline-text-3" id="text-9-5">
 <p>
 <code>smartparens</code> is a minor mode that provides many features for
 manipulating pairs. Pair can be simple as parentheses or brackets, or
@@ -2559,9 +2604,9 @@ For complete documentation, please refer to <a href="https://github.com/Fuco1/sm
 </div>
 </div>
 
-<div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9"><a id="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466" name="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466"></a>Compilation Support</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><a id="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466" name="ID-28a612e9-d3f2-47be-acbb-91aeb9b32466"></a>Compilation Support</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 Compilation mode turns each error message in the buffer into a
 hyperlink. You can click on each error, or execute a key binding like
@@ -2707,13 +2752,13 @@ store window configurations, read it <a href="emacs-tutor.html#sec-7-29">here</a
 </div>
 </div>
 
-<div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><a id="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63" name="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63"></a>Debugging</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-sec-11" class="outline-2">
+<h2 id="sec-11"><a id="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63" name="ID-a13b3e48-d73c-4fc4-97c3-b9f1d5814e63"></a>Debugging</h2>
+<div class="outline-text-2" id="text-11">
 </div>
-<div id="outline-container-sec-10-1" class="outline-3">
-<h3 id="sec-10-1"><a id="ID-57c853c1-60f7-4ec7-adc5-9eee095d302e" name="ID-57c853c1-60f7-4ec7-adc5-9eee095d302e"></a>With GDB Many Windows</h3>
-<div class="outline-text-3" id="text-10-1">
+<div id="outline-container-sec-11-1" class="outline-3">
+<h3 id="sec-11-1"><a id="ID-57c853c1-60f7-4ec7-adc5-9eee095d302e" name="ID-57c853c1-60f7-4ec7-adc5-9eee095d302e"></a>With GDB Many Windows</h3>
+<div class="outline-text-3" id="text-11-1">
 
 <p>
 Emacs has built-in frontend support for GDB that provides IDE-like
@@ -2868,9 +2913,9 @@ frame.
 </div>
 </div>
 
-<div id="outline-container-sec-10-2" class="outline-3">
-<h3 id="sec-10-2"><a id="ID-79a0ad5b-3978-48f2-9bcc-f961af81bb36" name="ID-79a0ad5b-3978-48f2-9bcc-f961af81bb36"></a>With Grand Unified Debugger - GUD</h3>
-<div class="outline-text-3" id="text-10-2">
+<div id="outline-container-sec-11-2" class="outline-3">
+<h3 id="sec-11-2"><a id="ID-79a0ad5b-3978-48f2-9bcc-f961af81bb36" name="ID-79a0ad5b-3978-48f2-9bcc-f961af81bb36"></a>With Grand Unified Debugger - GUD</h3>
+<div class="outline-text-3" id="text-11-2">
 <p>
 The <b>Grand Unified Debugger</b>, or GUD for short, is an Emacs major mode
 for debugging. It works on top of command line debuggers. GUD handles

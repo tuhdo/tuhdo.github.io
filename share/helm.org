@@ -650,7 +650,16 @@ _Description_:
 
 With =helm-man-woman=, you can quickly jump to any man entry using
 Helm interface, either by typing in Helm prompt or if point is on a
-symbol, get a man page at point.
+symbol, get a man page at point. To enable man page at point, add the
+following code:
+
+#+begin_src emacs-lisp
+  (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+#+end_src
+
+Demo:
+
+[[file:static/part3/helm-man-woman.gif]]
 
 * Command: =helm-find=
 :PROPERTIES:
