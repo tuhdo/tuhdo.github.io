@@ -18,6 +18,10 @@ A few demos:
 
 [[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
+- Jump around Linux kernel source with ease using =helm-gtags=:
+
+[[file:static/c-ide/helm-gtags-jump-dwim.gif][file:static/c-ide/helm-gtags-jump-dwim.gif]]
+
 - Interactive outline tree using =helm-semantic-or-imenu=:
 
 [[file:static/c-ide/helm-semantic-or-imenu-with-struct.gif][file:static/c-ide/helm-semantic-or-imenu-with-struct.gif]]
