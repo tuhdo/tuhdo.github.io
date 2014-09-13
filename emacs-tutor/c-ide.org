@@ -18,7 +18,8 @@ A few demos:
 
 [[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
-- Jump around Linux kernel source with ease using =helm-gtags=:
+- Jump around Linux kernel source with ease using =helm-gtags=. The
+  demo begins when "START" appears at the bottom:
 
 [[file:static/c-ide/helm-gtags-jump-dwim.gif][file:static/c-ide/helm-gtags-jump-dwim.gif]]
 
