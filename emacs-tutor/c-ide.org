@@ -11,7 +11,10 @@ instantly, switching between .h and .c/.cpp.
 
 A few demos:
 
-- Switching between .h and .c/.cpp:
+- Switching between .h and .c/.cpp anywhere in the project like Linux
+  kernel. If more than one file exists, it displays a list of
+  possible candidates. The command collects files of the same names
+  but different across the project:
 
 [[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
