@@ -89,7 +89,7 @@ repository, I already installed both =ggtags= and
 If you don't like to use Helm, also uncomment =(require 'setup-helm)=
 and restart Emacs, because I made some global key bindings to some
 commands that even if =helm-mode= is disabled, such commands still
-uses Helm interface. If you want to learn Helm, follow my [[http://tuhdo.github.io/helm-intro.html][my guide]].
+uses Helm interface. If you want to learn Helm, follow [[http://tuhdo.github.io/helm-intro.html][my guide]].
 
 And uncomment this line:
 
