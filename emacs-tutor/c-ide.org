@@ -345,7 +345,29 @@ really fast:
   =ggtags-find-reference=, which only finds references.
 
 - Using =helm-gtags=: Either run =helm-gtags-dwim= or
-  =helm-gtags-find-rtag=, which only finds references.
+  =helm-gtags-find-rtags=, bound to *C-c g r*, which only finds
+  references. Note that for =helm-gtags-find-rtags=: 
+
+  - if point is inside a function, the prompt will be default to the
+    function name.
+
+  - If point is on a function, it lists references of that functions
+    immediately.
+
+  - If point is on a variable, =helm-gtags-find-rtags= won't have any
+    effect. You should use =helm-gtags-find-symbol=, which is bound to
+    *C-c g s*.
+
+Find functions that calls function is actually a special case of
+finding references. That is, you gather references for a function.
+
+** Find functions that current functions call
+:PROPERTIES:
+:ID:       793aa930-0586-4dbe-9a10-55407be888f3
+:END:
+If you want to list all the functions that the current function - the
+function that point is inside - calls, you can do that with
+=helm-gtags-tags-in-this-function=.
 
 ** Find files in project
 :PROPERTIES:
@@ -358,6 +380,12 @@ really fast:
 - Using =helm-gtags=: Run =helm-gtags-find-files= to find files
   matching regexp. If point is on an included header file,
   =helm-gtags-dwim= automatically jumps to the file.
+
+Alternatively, you have a more generic solution, that is using
+Projectile. Projectile is a generic project management tool that you
+learn later. With Projectile, jumping around version controlled
+project like Linux kernel is a breeze, since you can jump to any file
+regardless of where you are standing in the project.
 
 ** View visited tags with tag stack
 :PROPERTIES:
