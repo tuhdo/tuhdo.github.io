@@ -89,7 +89,7 @@ repository, I already installed both =ggtags= and
 If you don't like to use Helm, also uncomment =(require 'setup-helm)=
 and restart Emacs, because I made some global key bindings to some
 commands that even if =helm-mode= is disabled, such commands still
-uses Helm interface.
+uses Helm interface. If you want to learn Helm, follow my [[http://tuhdo.github.io/helm-intro.html][my guide]].
 
 And uncomment this line:
 
@@ -1240,7 +1240,8 @@ choice, invoke =M-x man=.
 :ID:       e4a004f5-8b2d-46c7-b9c4-f9912154745f
 :END:
 If you use Helm, you should be able to use the command
-=helm-man-woman=, which is bound to *C-c h m* if you follow [[file:~/Public/blog/publish/share/helm.org][my guide]].
+=helm-man-woman=, which is bound to *C-c h m* if you follow [[http://tuhdo.github.io/helm-intro.html][my Helm
+guide]]. The full guide for the command is [[http://tuhdo.github.io/helm-intro.html#sec-10][here]].
 
 [[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
 * Source code editing
