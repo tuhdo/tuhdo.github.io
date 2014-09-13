@@ -35,9 +35,14 @@ A few demos:
 
 [[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
 
-- Show function interface at the bottom:
+- Show function interface and variable definition at the bottom:
 
 [[file:static/func_args.jpg][file:static/func_args.jpg]]
+
+[[file:static/c-ide/semantic-idle-summary-lambda.gif][file:static/c-ide/semantic-idle-summary-lambda.gif]]
+
+[[file:static/c-ide/semantic-idle-summary-variable.gif][file:static/c-ide/semantic-idle-summary-variable.gif]]
+
 
 - Show current function your cursor is inside at the top:
 
