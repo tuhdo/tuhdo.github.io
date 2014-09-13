@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-09-14 CN 02:27 -->
+<!-- 2014-09-14 CN 02:40 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="tuhdo" />
@@ -516,35 +516,24 @@ includes the above file in your <code>~/.emacs.d</code>, remember to add
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">this variables must be set before load helm-gtags</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">you can change to any prefix key of your choice</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #374478;">helm-gtags-prefix-key</span> <span style="color: #8b2252;">"\C-cg"</span><span style="color: #707183;">)</span>
-
-<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-gtags</span><span style="color: #707183;">)</span>
-
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
  <span style="color: #37785e;">helm-gtags-ignore-case</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #374478;">helm-gtags-auto-update</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #37785e;">helm-gtags-use-input-at-cursor</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #5e7837;">helm-gtags-pulse-at-cursor</span> <span style="color: #4f5c7e;">t</span>
-
+ <span style="color: #374478;">helm-gtags-prefix-key</span> <span style="color: #8b2252;">"\C-cg"</span>
  <span style="color: #5e7837;">helm-gtags-suggested-key-mapping</span> <span style="color: #4f5c7e;">t</span>
  <span style="color: #707183;">)</span>
 
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in Dired so you can jump to any tag</span>
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">when navigate project tree with Dired</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-gtags</span><span style="color: #707183;">)</span>
+<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode</span>
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
-
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in Eshell for the same reason as above</span>
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
-
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">Enable helm-gtags-mode in languages that GNU Global supports</span>
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">c-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #43783f;">c++-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f5c7e;">java-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f7e67;">asm-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 
-<span style="color: #b22222;">;; </span><span style="color: #b22222;">key bindings</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g a"</span><span style="color: #7388d6;">)</span> '<span style="color: #513f78;">helm-gtags-tags-in-this-function</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-s"</span><span style="color: #7388d6;">)</span> '<span style="color: #707e4f;">helm-gtags-select</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-."</span><span style="color: #7388d6;">)</span> '<span style="color: #5e7837;">helm-gtags-dwim</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span><span style="color: #7388d6;">)</span> '<span style="color: #78683f;">helm-gtags-pop-stack</span><span style="color: #707183;">)</span>
@@ -789,7 +778,7 @@ s</code> to invoke Isearch on candidate buffer list.
 <code>M-.</code> runs <code>helm-gtags-dwim</code>, which behaves the same as
 <code>ggtags-find-tag-dwim</code>. Similarly, you jump back to original
 location by using <code>M-,</code>, which runs <code>tags-loop-continue</code> (Emacs
-default).
+default). 
 </li>
 </ul>
 
@@ -808,9 +797,15 @@ default).
 <p>
 You can also find arbitrary tag definition when invoking <code>M-.</code> on
 blank space. A prompt asks you for tag pattern, which is a
-regexp. <code>helm-gtags</code> provides a really nice feature that uses Helm to
-display all tags in a project and incrementally filtering, and is
-really fast:
+regexp.
+</p>
+
+<p>
+<code>helm-gtags</code> provides a really nice feature that uses Helm to display
+all available tags in a project and incrementally filtering, and is really 
+fast using <code>helm-gtags-select</code>, which is bound to <code>M-s</code> in my setup
+above. This is useful when you want to explore tags in unfamiliar
+project. Demo: 
 </p>
 
 
@@ -863,7 +858,8 @@ finding references. That is, you gather references for a function.
 <p>
 If you want to list all the functions that the current function - the
 function that point is inside - calls, you can do that with
-<code>helm-gtags-tags-in-this-function</code>.
+<code>helm-gtags-tags-in-this-function</code>, which is bound to <b>C-c g a</b> in my
+setup.
 </p>
 </div>
 </div>

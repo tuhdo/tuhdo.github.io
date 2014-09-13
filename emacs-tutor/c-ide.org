@@ -147,35 +147,24 @@ And uncomment this line:
   =(require 'setup-helm)= to your =init.el=.
 
 #+begin_src emacs-lisp
-  ;; this variables must be set before load helm-gtags
-  ;; you can change to any prefix key of your choice
-  (setq helm-gtags-prefix-key "\C-cg")
-
-  (require 'helm-gtags)
-
   (setq
    helm-gtags-ignore-case t
    helm-gtags-auto-update t
    helm-gtags-use-input-at-cursor t
    helm-gtags-pulse-at-cursor t
-
+   helm-gtags-prefix-key "\C-cg"
    helm-gtags-suggested-key-mapping t
    )
 
-  ;; Enable helm-gtags-mode in Dired so you can jump to any tag
-  ;; when navigate project tree with Dired
+  (require 'helm-gtags)
+  ;; Enable helm-gtags-mode
   (add-hook 'dired-mode-hook 'helm-gtags-mode)
-
-  ;; Enable helm-gtags-mode in Eshell for the same reason as above
   (add-hook 'eshell-mode-hook 'helm-gtags-mode)
-
-  ;; Enable helm-gtags-mode in languages that GNU Global supports
   (add-hook 'c-mode-hook 'helm-gtags-mode)
   (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'java-mode-hook 'helm-gtags-mode)
   (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
-  ;; key bindings
+  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
   (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
   (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
   (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
@@ -321,7 +310,7 @@ s= to invoke Isearch on candidate buffer list.
   =M-.= runs =helm-gtags-dwim=, which behaves the same as
   =ggtags-find-tag-dwim=. Similarly, you jump back to original
   location by using =M-,=, which runs =tags-loop-continue= (Emacs
-  default).
+  default). 
 
 #+BEGIN_CENTER
 [[file:static/c-ide/helm-gtags-definitions.png][file:static/c-ide/helm-gtags-definitions.png]]
@@ -331,9 +320,13 @@ s= to invoke Isearch on candidate buffer list.
 
 You can also find arbitrary tag definition when invoking =M-.= on
 blank space. A prompt asks you for tag pattern, which is a
-regexp. =helm-gtags= provides a really nice feature that uses Helm to
-display all tags in a project and incrementally filtering, and is
-really fast:
+regexp.
+
+=helm-gtags= provides a really nice feature that uses Helm to display
+all available tags in a project and incrementally filtering, and is really 
+fast using =helm-gtags-select=, which is bound to =M-s= in my setup
+above. This is useful when you want to explore tags in unfamiliar
+project. Demo: 
 
 [[file:static/c-ide/helm-gtags-select.gif][file:static/c-ide/helm-gtags-select.gif]]
 
@@ -367,7 +360,8 @@ finding references. That is, you gather references for a function.
 :END:
 If you want to list all the functions that the current function - the
 function that point is inside - calls, you can do that with
-=helm-gtags-tags-in-this-function=.
+=helm-gtags-tags-in-this-function=, which is bound to *C-c g a* in my
+setup.
 
 ** Find files in project
 :PROPERTIES:
