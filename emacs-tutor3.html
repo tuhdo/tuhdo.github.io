@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-09-08 T2 00:39 -->
+<!-- 2014-09-14 CN 12:05 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="tuhdo" />
@@ -2847,7 +2847,7 @@ My sample customization:
     <span style="color: #7388d6;">(</span><span style="color: #5e7837;">make-directory</span> <span style="color: #78683f;">backup-directory</span> <span style="color: #4f5c7e;">t</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #784437;">setq</span>
  <span style="color: #3f7178;">make-backup-files</span> <span style="color: #4f5c7e;">t</span>        <span style="color: #b22222;">; </span><span style="color: #b22222;">backup a file the first time it is saved</span>
- <span style="color: #7a4f7e;">backup-directory-alist</span> '<span style="color: #7388d6;">(</span><span style="color: #909183;">(</span><span style="color: #8b2252;">".*"</span> <span style="color: #374478;">.</span> <span style="color: #78683f;">backup-directory</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">save backup files in ~/.backups</span>
+ <span style="color: #7a4f7e;">backup-directory-alist</span> `<span style="color: #7388d6;">(</span><span style="color: #909183;">(</span><span style="color: #8b2252;">".*"</span> <span style="color: #374478;">.</span> ,<span style="color: #78683f;">backup-directory</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">save backup files in ~/.backups</span>
  <span style="color: #4f5c7e;">backup-by-copying</span> <span style="color: #4f5c7e;">t</span>     <span style="color: #b22222;">; </span><span style="color: #b22222;">copy the current file into backup directory</span>
  <span style="color: #7e544f;">version-control</span> <span style="color: #4f5c7e;">t</span>   <span style="color: #b22222;">; </span><span style="color: #b22222;">version numbers for backup files</span>
  <span style="color: #3f7178;">delete-old-versions</span> <span style="color: #4f5c7e;">t</span>   <span style="color: #b22222;">; </span><span style="color: #b22222;">delete unnecessary versions</span>
