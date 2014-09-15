@@ -27,6 +27,10 @@ A few demos:
 
 [[file:static/c-ide/helm-semantic-or-imenu-with-struct.gif][file:static/c-ide/helm-semantic-or-imenu-with-struct.gif]]
 
+- Static outline tree as a file browser:
+
+[[file:static/c-ide/sr-speedbar.gif][file:static/c-ide/sr-speedbar.gif]]
+
 - Symbol references:
 
 [[file:static/c-ide/semantic-symref.gif][file:static/c-ide/semantic-symref.gif]]
@@ -394,6 +398,77 @@ regardless of where you are standing in the project.
 - Using =helm-gtags=: Similarly, =helm-gtags= also has the command
   =helm-gtags-show-stack= that shows visited tags from newest to
   oldest, from top to bottom.
+* Browse source tree with =Speedbar= file browser
+:PROPERTIES:
+:ID:       315bd019-f3b2-4d9e-a4b4-6b9dbfa7abde
+:END:
+If you want a static outline tree, Emacs also has a more one:
+=Speedbar=. To use Speed bar, =M-x speedbar= and a frame that contains
+a directory tree appear. In this directory, to the left of a file or
+directory name is an icon with =+= sign in it. You can click the icon
+to open the content of a node. If the node is a file, the children of
+the files are tags (variable and function definitions) of the file; if
+the node is a directory, the children of the node are files in that
+directory. One important thing to remember, Speedbar only lists files
+that match =speedbar-file-regexp=, that contains the extensions for
+common programming languages. If you don't see files in your
+programming languages listed, consider adding it the regexp list.
+
+*Basic usage*:
+
+- Use *SPC* to open the children of a node.
+
+- *RET* to open the node in another window. If node is a file, open
+  that file; if node is a directory, enter that directory; if node is
+  a tag in a file, jump to the location of that tag in the file.
+
+- *n* or *p* moves to next or previous node.
+
+- *M-n* or *M-p* moves to next or previous node at the current level.
+
+- *b* switches to buffer list using Speedbar presentation. You can
+  also open children of each buffer.
+
+- *f* switches back to file list.
+
+** Package: =sr-speedbar=
+:PROPERTIES:
+:ID:       1824d791-2592-4efa-90b7-845e6a68681d
+:END:
+
+However, you may feel that a frame is difficult to use. To solve this
+issue, you need =sr-speedbar=, which can be installed via
+MELPA.
+
+- To open =sr-speedbar=, execute the command =sr-speedbar-open= or
+  =sr-speedbar-toggle=.
+
+- To close =sr-speedbar=, execute the command =sr-speedbar-close= or
+  =sr-speedbar-toggle= again.
+
+Best is to use =sr-speedbar-toggle= only, for simplicity.
+
+=sr-speedbar= gives the following improvements:
+
+- Use an Emacs window instead of frame, make it easier to use.
+- Automatically switches to the directory of the current buffer.
+- *C-x 1* deletes every window except Speedbar, so you won't have to
+  open again.
+- You can prevent *C-x o* to jump to =sr-speedbar= window by setting
+  =sr-speedbar-skip-other-window-p= to `t`. You can still move to
+  =sr-speedbar= window using either the mouse or [[http://www.emacswiki.org/emacs-en/WindMove][windmove]].
+
+_Demo_: In the demo, you can see that the function =set-cpu-active= is
+being highlighted. That's what happens when you press *RET* on a tag:
+Speedbar moves to the location of that tag and highlight it. Looking
+at the Speedbar, under =set-cpu-active= node, it contains these
+children:
+
+- The first child is always the return type, =void=.
+- The subsequent children are function parameters. Inside each
+  function parameter node is its type.
+
+[[file:static/c-ide/sr-speedbar.gif][file:static/c-ide/sr-speedbar.gif]]
 * General completion with =company-mode=
 :PROPERTIES:
 :ID:       26a77004-9171-4b04-bea7-28a6089de586
