@@ -826,6 +826,12 @@ customize=:
 - setup-multimedia.el for =Multimedia= group.
 - setup-local.el for =Local= group.
 
+Please note that even though you may see some packages are inside a
+group in =customize= GUI, I still put in another group since I feel
+such packages are more appropriate. So, if you see packages in my
+setup are in different groups, don't be surprise. But it's just my
+personal opinion. You can move it where you want.
+
 *_Exercise_*: 
 
 - Create a directory: =~/.emacs.d/custom/=
@@ -1306,6 +1312,51 @@ _Usage_:
 
 When you yank (paste) something, the yanked (pasted) region will be
 highlighted.
+*** Package: =smartparens=
+:PROPERTIES:
+:ID:       d09ed441-ea40-4d3d-b96f-f20003af9272
+:END:
+_Author_: Matus Goljer, =matus.goljer@gmail.com=
+
+_Homepage_: [[https://github.com/Fuco1/smartparens][Github]]
+
+_Features_:
+
+Smartparens is minor mode for Emacs that deals with parens pairs and
+tries to be smart about it. It started as a unification effort to
+combine functionality of several existing packages in a single,
+compatible and extensible way to deal with parentheses, delimiters,
+tags and the like. Some of these packages include autopair, textmate,
+wrap-region, electric-pair-mode, paredit and others. With the basic
+features found in other packages it also brings many improvements as
+well as completely new features. Here's a highlight of some features,
+for a complete list and detailed documentation look in the [[https://github.com/Fuco1/smartparens/wiki#wiki-information-for-new-users][manual]].
+
+For the complete documentation visit the [[https://github.com/Fuco1/smartparens/wiki][documentation wiki]].
+
+_Installation_:
+
+=M-x list-packages= and select *smartparens* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;; Package: smartparens
+  (require 'smartparens-config)
+  (setq sp-base-key-bindings 'paredit)
+  (setq sp-autoskip-closing-pair 'always)
+  (setq sp-hybrid-kill-entire-symbol nil)
+  (sp-use-paredit-bindings)
+#+end_src
+
+_Usage_:
+
+If =smartparens= sees a opening/closing of  pair, either the default
+supported ones or customized by users, it will complete the pair. You
+can even highlight a block of text (region) and enter a pair
+character, =smartparens= will wraps the region around the
+pair. =smartparens= can also highlight pairs, even pairs with escape
+characters.
 
 *** Package: =clean-aindent-mode=
 :PROPERTIES:

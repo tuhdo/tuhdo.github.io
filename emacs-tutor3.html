@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-09-18 Thu 15:41 -->
+<!-- 2014-09-18 Thu 16:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -197,9 +197,10 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-4-4-1">Customize built-in functions</a></li>
 <li><a href="#sec-4-4-2">Package: <code>duplicate-thing</code></a></li>
 <li><a href="#sec-4-4-3">Package: <code>volatile-highlights</code></a></li>
-<li><a href="#sec-4-4-4">Package: <code>clean-aindent-mode</code></a></li>
-<li><a href="#sec-4-4-5">Package: <code>undo-tree</code></a></li>
-<li><a href="#sec-4-4-6">Package: <code>yasnippet</code></a></li>
+<li><a href="#sec-4-4-4">Package: <code>smartparens</code></a></li>
+<li><a href="#sec-4-4-5">Package: <code>clean-aindent-mode</code></a></li>
+<li><a href="#sec-4-4-6">Package: <code>undo-tree</code></a></li>
+<li><a href="#sec-4-4-7">Package: <code>yasnippet</code></a></li>
 </ul>
 </li>
 <li><a href="#sec-4-5">setup-convenience.el</a>
@@ -1538,6 +1539,14 @@ customize</code>:
 </ul>
 
 <p>
+Please note that even though you may see some packages are inside a
+group in <code>customize</code> GUI, I still put in another group since I feel
+such packages are more appropriate. So, if you see packages in my
+setup are in different groups, don't be surprise. But it's just my
+personal opinion. You can move it where you want.
+</p>
+
+<p>
 <b><span class="underline">Exercise</span></b>: 
 </p>
 
@@ -2132,10 +2141,76 @@ highlighted.
 </p>
 </div>
 </div>
-
 <div id="outline-container-sec-4-4-4" class="outline-4">
-<h4 id="sec-4-4-4"><a id="ID-49958ce7-6af0-47ac-b309-6ea75833f0e1" name="ID-49958ce7-6af0-47ac-b309-6ea75833f0e1"></a>Package: <code>clean-aindent-mode</code></h4>
+<h4 id="sec-4-4-4"><a id="ID-d09ed441-ea40-4d3d-b96f-f20003af9272" name="ID-d09ed441-ea40-4d3d-b96f-f20003af9272"></a>Package: <code>smartparens</code></h4>
 <div class="outline-text-4" id="text-4-4-4">
+<p>
+<span class="underline">Author</span>: Matus Goljer, <code>matus.goljer@gmail.com</code>
+</p>
+
+<p>
+<span class="underline">Homepage</span>: <a href="https://github.com/Fuco1/smartparens">Github</a>
+</p>
+
+<p>
+<span class="underline">Features</span>:
+</p>
+
+<p>
+Smartparens is minor mode for Emacs that deals with parens pairs and
+tries to be smart about it. It started as a unification effort to
+combine functionality of several existing packages in a single,
+compatible and extensible way to deal with parentheses, delimiters,
+tags and the like. Some of these packages include autopair, textmate,
+wrap-region, electric-pair-mode, paredit and others. With the basic
+features found in other packages it also brings many improvements as
+well as completely new features. Here's a highlight of some features,
+for a complete list and detailed documentation look in the <a href="https://github.com/Fuco1/smartparens/wiki#wiki-information-for-new-users">manual</a>.
+</p>
+
+<p>
+For the complete documentation visit the <a href="https://github.com/Fuco1/smartparens/wiki">documentation wiki</a>.
+</p>
+
+<p>
+<span class="underline">Installation</span>:
+</p>
+
+<p>
+<code>M-x list-packages</code> and select <b>smartparens</b> package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">Package: smartparens</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">smartparens-config</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">sp-base-key-bindings</span> '<span style="color: #783f5a;">paredit</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #513f78;">sp-autoskip-closing-pair</span> '<span style="color: #7e544f;">always</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #374478;">sp-hybrid-kill-entire-symbol</span> <span style="color: #43783f;">nil</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #3f7178;">sp-use-paredit-bindings</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+<span class="underline">Usage</span>:
+</p>
+
+<p>
+If <code>smartparens</code> sees a opening/closing of  pair, either the default
+supported ones or customized by users, it will complete the pair. You
+can even highlight a block of text (region) and enter a pair
+character, <code>smartparens</code> will wraps the region around the
+pair. <code>smartparens</code> can also highlight pairs, even pairs with escape
+characters.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-4-5" class="outline-4">
+<h4 id="sec-4-4-5"><a id="ID-49958ce7-6af0-47ac-b309-6ea75833f0e1" name="ID-49958ce7-6af0-47ac-b309-6ea75833f0e1"></a>Package: <code>clean-aindent-mode</code></h4>
+<div class="outline-text-4" id="text-4-4-5">
 <p>
 <span class="underline">Author</span>: <a href="https://github.com/pmarinov">Peter Marinov</a>
 </p>
@@ -2192,9 +2267,9 @@ Automatically cleanup useless whitespaced on moving up/down.
 </div>
 </div>
 
-<div id="outline-container-sec-4-4-5" class="outline-4">
-<h4 id="sec-4-4-5"><a id="ID-03030916-bb5c-4966-8fa1-68807b60bec2" name="ID-03030916-bb5c-4966-8fa1-68807b60bec2"></a>Package: <code>undo-tree</code></h4>
-<div class="outline-text-4" id="text-4-4-5">
+<div id="outline-container-sec-4-4-6" class="outline-4">
+<h4 id="sec-4-4-6"><a id="ID-03030916-bb5c-4966-8fa1-68807b60bec2" name="ID-03030916-bb5c-4966-8fa1-68807b60bec2"></a>Package: <code>undo-tree</code></h4>
+<div class="outline-text-4" id="text-4-4-6">
 <p>
 <span class="underline">Author</span>: Toby Cubitt, <code>toby-undo-tree@dr-qubit.org</code>
 </p>
@@ -2253,9 +2328,9 @@ redo, <b>C-_</b>. To open the undo tree, <b>C-x u</b>.
 </div>
 </div>
 
-<div id="outline-container-sec-4-4-6" class="outline-4">
-<h4 id="sec-4-4-6"><a id="ID-bb1ea352-f9ea-47fe-bb3e-5727e542c481" name="ID-bb1ea352-f9ea-47fe-bb3e-5727e542c481"></a>Package: <code>yasnippet</code></h4>
-<div class="outline-text-4" id="text-4-4-6">
+<div id="outline-container-sec-4-4-7" class="outline-4">
+<h4 id="sec-4-4-7"><a id="ID-bb1ea352-f9ea-47fe-bb3e-5727e542c481" name="ID-bb1ea352-f9ea-47fe-bb3e-5727e542c481"></a>Package: <code>yasnippet</code></h4>
+<div class="outline-text-4" id="text-4-4-7">
 <p>
 <span class="underline">Author</span>: <a href="https://github.com/capitaomorte">João Távora</a>
 </p>
