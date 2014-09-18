@@ -209,6 +209,10 @@ to load it:
   (require 'volatile-highlights)
 #+end_src
 
+Later in the guide, you will create your own custom modules that uses
+=provide= function to provide new feature to Emacs. To use a feature,
+the module must be activated with =require=.
+
 _Built-in Documentation_:
 
 #+BEGIN_QUOTE
@@ -223,6 +227,35 @@ If the optional third argument /NOERROR/ is non-nil,
 then return nil if the file is not found instead of signaling an error.
 Normally the return value is /FEATURE/.
 The normal messages at start and end of loading /FILENAME/ are suppressed.
+#+END_QUOTE
+
+** Function: *(provide /FEATURE/ &optional /SUBFEATURES/)*
+:PROPERTIES:
+:ID:       8adc5418-4ddc-4755-9ed6-f10cc96cfdb2
+:END:
+_Comment_: You can use this function at the end of a file to turn the
+file into a loadable module that is only loaded when called with
+=require=.
+
+_Example_:
+
+Suppose that in a file =setup-editing.el=, you put this line at the
+bottom:
+
+#+begin_src emacs-lisp
+  (provide 'setup-editing)
+#+end_src
+
+Then, even if you load it with =load= function, it won't be
+activated. To activate, you have to execute =(require
+'setup-editing)=.
+
+_Built-in Documentation_:
+
+#+BEGIN_QUOTE
+Announce that /FEATURE/ is a feature of the current Emacs. The optional
+argument /SUBFEATURES/ should be a list of symbols listing particular
+subfeatures supported in this version of /FEATURE/.
 #+END_QUOTE
 ** Function: *(add-to-list /LIST-VAR/ /ELEMENT/ &optional /APPEND/ /COMPARE-FN/)*
 :PROPERTIES:
@@ -657,18 +690,17 @@ of packages.
 - To unmark a package, press *u*.
 - To execute the marked packages (either for install or delete), press *x*.
 - To refresh and update the latest package list, press *r*.
+- To update all packages, press *U*.
+- To filter to a group of packages, press *f*. Press *TAB* to display
+  possible groups.
 - To display these key bindings, press *h*.
   
-That's that.
-
 *_Exercise_*: Let's install a few packages in advance, so you won't
 have to install the packages later. Install these packages:
 
 - volatile-highlights
-- clean-aindent-mode
 - undo-tree
 - yasnippet
-- rebox2
   
 ** Customize Emacs
 :PROPERTIES:
@@ -824,6 +856,115 @@ customizations. You can use it either way:
   actually yours, by reading the customization code and understand
   what it does.
 
+** init.el
+:PROPERTIES:
+:ID:       61eb2c5e-e953-45b3-a09a-d04aeef0b14e
+:END:
+Sample =init.el=:
+
+
+#+begin_src emacs-lisp
+  ;; Add and enable MELPA
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize)
+
+  ;; add your modules path
+  (add-to-list 'load-path "~/.emacs.d/custom/")
+
+  ;; load your modules
+  (require 'setup-applications)
+  (require 'setup-communication)
+  (require 'setup-convenience)
+  (require 'setup-data)
+  (require 'setup-development)
+  (require 'setup-editing)
+  (require 'setup-environment)
+  (require 'setup-external)
+  (require 'setup-faces-and-ui)
+  (require 'setup-files)
+  (require 'setup-help)
+  (require 'setup-programming)
+  (require 'setup-text)
+  (require 'setup-local)
+#+end_src
+
+*** Package: =workgroups2=
+:PROPERTIES:
+:ID:       8860083f-a522-4249-847a-6d31317fce80
+:END:
+
+_Author_:
+
+[[http://pashinin.com/en/][Sergey Pashinin]], =sergey@pashinin.com=
+
+Based on the original [[https://github.com/tlh/workgroups.el][workgroups]], created by tlh, =thunkout@gmail.com=.
+
+_Homepage_: [[https://github.com/pashinin/workgroups2][Github]]
+
+_Features_:
+
+Workgroups is a session manager for Emacs.
+
+- It saves all your opened buffers, their location and sizes on disk
+  to restore later.
+
+- You can create several workspaces.
+
+You can also restore such buffers as: org-agenda, shell, magit-status,
+help.
+
+_Installation_:
+
+=M-x list-packages= and select *workgroups2* package, then install
+it. After finish installing, add this code snippet to activate the
+package:
+
+#+begin_src emacs-lisp
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; PACKAGE: workgroups2               ;;
+  ;;                                    ;;
+  ;; GROUP: Convenience -> Workgroups   ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (require 'workgroups2)
+  ;; Change some settings
+  (workgroups-mode 1)
+#+end_src
+
+Remember to put the code at the bottom of =init.el=, after everything
+is properly initialized.
+
+_Usage_:
+
+Most commands are bound to both <prefix> <key> and <prefix> C-<key>.
+
+By default prefix is: "C-c z" (To change it - see settings below)
+
+#+BEGIN_QUOTE
+<prefix> <key>
+<prefix> c    - create workgroup
+<prefix> A    - rename workgroup
+<prefix> k    - kill workgroup
+<prefix> v    - switch to workgroup
+<prefix> C-s  - save session
+<prefix> C-f  - load session
+<prefix> 0..9 - switch to workgroup at index 0..9
+#+END_QUOTE
+
+Do you remember [[http://tuhdo.github.io/emacs-tutor.html#sec-7-28][how to use registers to store window configurations]]?
+Registers are good, but it does not allow you to name window
+configurations. It would be trouble when the number of window
+configurations getting large. You will have to tediously remember
+which register stores which configuration.
+
+With =workgroups2=, each window configuration is a workgroup, and you
+can create as many workgroups and named it with =<prefix> c=; later,
+you can switch back by =<prefix> v=. Because you can name your window
+configurations, you don't have the burden to remember which to which
+in registers. You can also save your window configurations to continue
+using them in later Emacs sessions.
+
 ** setup-editing.el
 :PROPERTIES:
 :ID:       bd536b4e-fdcf-465c-af88-d86c36502c8a
@@ -831,58 +972,50 @@ customizations. You can use it either way:
 
   Let's use =setq= to change Emacs the way we want. You should type in
   the snippet below and use the completion key bindings until you get
-  used to it.
+  used to it. Remember to include the line =(provide 'setup-editing)=,
+  otherwise Emacs won't be able to load your module.
 
   #+begin_src emacs-lisp
-    ;,--------------------------------------
-    ;| MAIN GROUP: Editing
-    ;`--------------------------------------
+    (provide 'setup-editing)
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; GROUP: Editing -> Editing Basics   ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; GROUP: Editing -> Editing Basics
+    (setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
+          mark-ring-max 5000                ; increase kill ring to contains 5000 entries
+          mode-require-final-newline t      ; add a newline to end of file
+          tab-width 4                       ; default to 4 visible spaces to display a tab
+          )
 
-    ;; you can set a value to one variablea
-    (setq
-     global-mark-ring-max 5000
-     mark-ring-max 5000
-     mode-require-final-newline t
-     tab-width 4)
+    (set-terminal-coding-system 'utf-8)
+    (set-keyboard-coding-system 'utf-8)
+    (set-language-environment "UTF-8")
+    (prefer-coding-system 'utf-8)
 
+    (setq-default indent-tabs-mode nil)
     (delete-selection-mode)
-    (global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
+    (global-set-key (kbd "RET") 'newline-and-indent)
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; GROUP: Editing -> Electricity      ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;
-    ;; you can see these variables Eletricity group. However, these variables
-    ;; are not for setting because setting them have no effect. You have to activate
-    ;; command of the same name. If some variables are required to be activated through
-    ;; commands, the description of those variables explicitly say so.
-    (electric-indent-mode) ;; activate automatic indent when press RET
-    (electric-pair-mode) ;; activate automatic paring
-
-    ;; an example of association list, also an example of how to write a character
-    ;; add more pairs if you want
-    ;; (setq electric-pair-pairs '(( ?\< . ?\>)))
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; GROUP: Editing -> Killing          ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; GROUP: Editing -> Killing
     (setq
-     kill-ring-max 5000 ;; increase kill-ring capacity
-     kill-whole-line t  ;; if NIL, kill whole line and move the next line up
+     kill-ring-max 5000 ; increase kill-ring capacity
+     kill-whole-line t  ; if NIL, kill whole line and move the next line up
      )
 
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; GROUP: Editing -> Matching         ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; As you can see, I only use a single option in the inner sub-group
-    ;; It's not worth to create a file
-    (setq show-paren-delay 0) ; highlight parentheses immediately
-    (show-paren-mode) ; activate show-paren-mode
+    ;; show important whitespace in diff-mode
+    (add-hook 'diff-mode-hook (lambda ()
+                                (setq-local whitespace-style
+                                            '(face
+                                              tabs
+                                              tab-mark
+                                              spaces
+                                              space-mark
+                                              trailing
+                                              indentation::space
+                                              indentation::tab
+                                              newline
+                                              newline-mark))
+                                (whitespace-mode 1)))
   #+end_src
+
 *** Customize built-in functions
 :PROPERTIES:
 :ID:       a46d3a98-d481-41a3-8b15-50eb98c2e4ac
@@ -1008,20 +1141,25 @@ line, but move to the first non-whitespace character of that line.
       (goto-char (+ origin (* (length region) arg) arg))))
 
   ;; prelude-core.el
-  (defun prelude-indent-buffer ()
+  (defun indent-buffer ()
     "Indent the currently visited buffer."
     (interactive)
     (indent-region (point-min) (point-max)))
 
-  ;; prelude-core.el
-  (defun prelude-cleanup-buffer ()
-    "Perform a bunch of operations on the whitespace content of a buffer."
+  ;; prelude-editing.el
+  (defcustom prelude-indent-sensitive-modes
+    '(coffee-mode python-mode slim-mode haml-mode yaml-mode)
+    "Modes for which auto-indenting is suppressed."
+    :type 'list)
+
+  (defun prelude-cleanup-buffer-or-region ()
+    "Cleanup a region if selected, otherwise the whole buffer."
     (interactive)
-    ;; (prelude-untabify-buffer) ;; leave the buffer format alone
-    (prelude-indent-buffer)
+    (unless (member major-mode prelude-indent-sensitive-modes)
+      (call-interactively 'indent-region))
     (whitespace-cleanup))
 
-  (global-set-key (kbd "C-c i") 'prelude-cleanup-buffer)
+  (global-set-key (kbd "C-c i") 'prelude-cleanup-buffer-or-region)
 
   ;; add duplicate line function from Prelude
   ;; taken from prelude-core.el
@@ -1037,23 +1175,37 @@ line, but move to the first non-whitespace character of that line.
       (setq end (line-end-position))
       (cons beg end)))
 
-  (defun prelude-duplicate-current-line-or-region (arg)
-    "Duplicates the current line or region ARG times.
-  If there's no region, the current line will be duplicated. However, if
-  there's a region, all lines that region covers will be duplicated."
-    (interactive "p")
-    (pcase-let* ((origin (point))
-                 (`(,beg . ,end) (prelude-get-positions-of-line-or-region))
-                 (region (buffer-substring-no-properties beg end)))
-      (-dotimes arg
-        (lambda (n)
-          (goto-char end)
-          (newline)
-          (insert region)
-          (setq end (point))))
-      (goto-char (+ origin (* (length region) arg) arg))))
+  (defun kill-default-buffer ()
+    "Kill the currently active buffer -- set to C-x k so that users are not asked which buffer they want to kill."
+    (interactive)
+    (let (kill-buffer-query-functions) (kill-buffer)))
 
-  (global-set-key (kbd "M-c") 'prelude-duplicate-current-line-or-region)
+  (global-set-key (kbd "C-x k") 'kill-default-buffer)
+
+  ;; smart openline
+  (defun prelude-smart-open-line (arg)
+    "Insert an empty line after the current line.
+  Position the cursor at its beginning, according to the current mode.
+  With a prefix ARG open line above the current line."
+    (interactive "P")
+    (if arg
+        (prelude-smart-open-line-above)
+      (progn
+        (move-end-of-line nil)
+        (newline-and-indent))))
+
+  (defun prelude-smart-open-line-above ()
+    "Insert an empty line above the current line.
+  Position the cursor at it's beginning, according to the current mode."
+    (interactive)
+    (move-beginning-of-line nil)
+    (newline-and-indent)
+    (forward-line -1)
+    (indent-according-to-mode))
+
+  (global-set-key (kbd "C-o") 'prelude-smart-open-line)
+  (global-set-key (kbd "M-o") 'open-line)
+
 #+end_src
 
 The code above is taken from this article: [[http://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/][Smarter Navigation to the
@@ -1091,13 +1243,41 @@ Beginning of a Line]].
 
 #+end_src
 
+*** Package: =duplicate-thing=
+:PROPERTIES:
+:ID:       213c7156-25f7-4c5e-ba76-44dac627c0ef
+:END:
+_Author_: ongaeshi, =ongaeshi0621@gmail.com=
+
+_Homepage_: [[https://github.com/ongaeshi/duplicate-thing][Github]]
+
+_Features_:
+
+ Easy duplicate line or region, with comment out.
+
+ - Duplicate current line.
+ - Duplicate a selection when selection is active.
+ - Only C-u, replicate, comment out the range.
+ - Numerical prefix is specified as 'C-u 5': do multiple times repeatedly.
+
+_Installation_:
+
+#+begin_src emacs-lisp
+  (require 'duplicate-thing)
+  (global-set-key (kbd "M-c") 'duplicate-thing)
+#+end_src
+
+_Usage_:
+If point is on a line, the command duplicates the current line. If
+region is active, duplicates region instead.
+
 *** Package: =volatile-highlights=
 :PROPERTIES:
 :ID:       f8441653-b68d-4c18-8eb4-28ceff5739fc
 :END:
 _Author_: Keitalo Miyazaki, =Keitaro.Miyazaki@gmail.com=
 
-_Homepa0ge_: [[http://www.emacswiki.org/emacs/VolatileHighlights][Emacswiki]]
+_Homepage_: [[http://www.emacswiki.org/emacs/VolatileHighlights][Emacswiki]]
 
 _Features_:
 
@@ -1254,12 +1434,12 @@ You can view supported snippets [[https://github.com/AndreaCrotti/yasnippet-snip
 :PROPERTIES:
 :ID:       475adb79-c675-457d-b1ae-b0540313d642
 :END:
-Here is my sample customization:
+Remember to include the line =(provide 'setup-convenience)=, otherwise
+Emacs won't be able to load your module. Here is my sample
+customization:
 
 #+begin_src emacs-lisp
-  ;;
-  ;; MAIN GROUP: Convenience
-  ;;
+  (provide 'setup-convenience)
 
   ;; GROUP: Convenience -> Revert
 
@@ -1437,51 +1617,6 @@ _Usage_:
 When you use =ibuffer=, it will automatically group buffers by version
 control system.
 
-*** Package: =rebox2=
-:PROPERTIES:
-:ID:       54921b8d-80fb-4b7d-b8d4-e47a90496af0
-:END:
-_Author_: [[https://github.com/lewang][Le Wang]]
-
-_Homepage_: [[https://github.com/lewang/rebox2][Github]]
-
-_Features_: 
-
-Fancy box quoting I n comment.
-
-- auto-fill boxes (install filladapt for optimal filling)
-- motion (beginning-of-line, end-of-line) within box
-- S-return rebox-newline
-- kill/yank (within box) only text, not box borders
-- move box by using space, backspace / center with M-c
-- point has to be to the left of the border
-
-_Installation_:
-
-=M-x list-packages= and select *rebox2* package, then install
-it. After finish installing, add this code snippet to activate the
-package:
-
-#+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGE: rebox2             ;;
-  ;;                             ;;
-  ;; GROUP: Convenience -> Rebox ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (require 'rebox2)
-  (global-set-key [(meta q)] 'rebox-dwim)
-  (global-set-key [(shift meta q)] 'rebox-cycle)
-  (add-hook 'prog-mode-hook (lambda ()
-                              (set (make-local-variable 'rebox-style-loop) '(25 17 21))
-                              (set (make-local-variable 'rebox-min-fill-column) 40)
-                              (rebox-mode 1)))
-#+end_src
-
-_Usage_:
-
-- Mark a region.
-- *M-q* to cycle between box styles.
-
 *** Package: =projectile=
 :PROPERTIES:
 :ID:       f6ec9632-9fa5-477b-bf34-5975b760577a
@@ -1545,109 +1680,33 @@ _Usage_:
 
 Please refer to the [[https://github.com/bbatsov/projectile#usage][usage]] on the homepage.
 
-*** Package: =workgroups2=
-:PROPERTIES:
-:ID:       8860083f-a522-4249-847a-6d31317fce80
-:END:
-
-_Author_: 
-
-[[http://pashinin.com/en/][Sergey Pashinin]], =sergey@pashinin.com=
-
-Based on the original [[https://github.com/tlh/workgroups.el][workgroups]], created by tlh, =thunkout@gmail.com=.
-
-_Homepage_: [[https://github.com/pashinin/workgroups2][Github]]
-
-_Features_:
-
-Workgroups is a session manager for Emacs.
-
-- It saves all your opened buffers, their location and sizes on disk
-  to restore later 
-
-- You can create several workspaces
-
-You can also restore such buffers as: org-agenda, shell, magit-status,
-help.
-
-_Installation_:
-
-=M-x list-packages= and select *workgroups2* package, then install
-it. After finish installing, add this code snippet to activate the
-package:
-
-#+begin_src emacs-lisp
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; PACKAGE: workgroups2               ;;
-  ;;                                    ;;
-  ;; GROUP: Convenience -> Workgroups   ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (require 'workgroups2)
-  ;; Change some settings
-  (workgroups-mode 1)
-#+end_src
-
-_Usage_:
-
-Most commands are bound to both <prefix> <key> and <prefix> C-<key>.
-
-By default prefix is: "C-c z" (To change it - see settings below)
-
-#+BEGIN_QUOTE
-<prefix> <key>
-<prefix> c    - create workgroup
-<prefix> A    - rename workgroup
-<prefix> k    - kill workgroup
-<prefix> v    - switch to workgroup
-<prefix> C-s  - save session
-<prefix> C-f  - load session
-<prefix> 0..9 - switch to workgroup at index 0..9
-#+END_QUOTE
-
-Do you remember [[http://tuhdo.github.io/emacs-tutor.html#sec-7-28][how to use registers to store window configurations]]?
-Registers are good, but it does not allow you to name window
-configurations. It would be trouble when the number of window
-configurations getting large. You will have to tediously remember
-which register stores which configuration.
-
-With =workgroups2=, each window configuration is a workgroup, and you
-can create as many workgroups and named it with =<prefix> c=; later,
-you can switch back by =<prefix> v=. Because you can name your window
-configurations, you don't have the burden to remember which to which
-in registers. You can also save your window configurations to continue
-using them in later Emacs sessions.
-** Package on a league of its own: =helm=
+** Package in a league of its own: =helm=
 :PROPERTIES:
 :ID:       55f16efe-8346-419a-bbc6-899b8fbb76f5
 :END:
-Helm is an awesome package. Please refer to [[file:helm-intro.org][the whole guide]].
+Helm is an awesome package. Please refer to [[file:helm-intro.org][the whole guide]]. You
+should give Helm its own file: =setup-helm.el=.
 
 ** Alternative to Helm: =ido= + =ido-ubiquitous= + =flx-ido= + =smex=
 :PROPERTIES:
 :ID:       28093c3d-795a-484f-9801-95237f99fc20
 :END:
 If you want to use Ido, at replace Helm configuration with this sample
-configuration:
+configuration that you can place in =setup-environment.el=:
 
 #+begin_src emacs-lisp
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Development -> Extensions -> Ido ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Uncomment if you want to use Ido
-  ;; I am going to introduce a tool, argurably better, that
-  ;; replaces Ido: Helm
-
   (require 'ido)
 
-  (setq
-   ido-enable-prefix nil
-   ido-enable-flex-matching t
-   ido-create-new-buffer 'always
-   ido-use-filename-at-point 'guess
-   ido-max-prospects 10
-   ido-default-file-method 'selected-window
-   ido-auto-merge-work-directories-length -1
-   )
+  (setq ido-enable-prefix nil
+        ido-enable-flex-matching t
+        ido-create-new-buffer 'always
+        ido-use-filename-at-point 'guess
+        ido-max-prospects 10
+        ido-default-file-method 'selected-window
+        ido-auto-merge-work-directories-length -1)
 
   (ido-mode +1)
 #+end_src
@@ -1765,12 +1824,15 @@ _Usage_:
 :PROPERTIES:
 :ID:       1b1d3e93-3ebc-437a-b20d-f6d880d02ba1
 :END:
-My sample customization:
+Remember to include the line =(provide 'setup-files)=, otherwise Emacs
+won't be able to load your module. My sample customization:
 
 #+begin_src emacs-lisp
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Files                      ;;
-   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (provide 'setup-files)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; group: Files                      ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (setq large-file-warning-threshold 100000000) ;; size in bytes
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2036,72 +2098,148 @@ I only use default configuration for "Text" group. You can customize
 it if you want or leave this file blank, so you can add customizations
 when needed. This group is useful if you edit text frequently and need
 bibliography, or you want to write Latex.
+
+#+begin_src emacs-lisp
+  (provide 'setup-text)
+#+end_src
+
 ** setup-data.el
 :PROPERTIES:
 :ID:       1147c642-b1c9-4faf-ad98-cd4611bf4b5a
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-data)=, otherwise
+Emacs won't be able to load your module. Sample configuration:
 
 #+begin_src emacs-lisp
+  (provide 'setup-data)
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Data -> Saveplace ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;; saveplace remembers your location in a file when saving files
   (require 'saveplace)
+  (setq-default save-place t)
+  ;; use (toggle-save-place-globally 1) in Emacs above 24.4
 #+end_src
 
 ** setup-external.el
 :PROPERTIES:
 :ID:       0131a13d-b070-48f8-910a-f63b35b93984
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-external)=,  otherwise
+Emacs won't be able to load your module. Sample configuration:
 
 #+begin_src emacs-lisp
-  ;,--------------------------------------
-  ;| MAIN GROUP: Flyspell
-  ;`--------------------------------------
+  (provide 'setup-external)
 
+  ;; GROUP: Processes -> Flyspell
+  (if (executable-find "aspell")
+      (progn
+        (setq ispell-program-name "aspell")
+        (setq ispell-extra-args '("--sug-mode=ultra")))
+    (setq ispell-program-name "ispell"))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Processes -> Flyspell       ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (setq
-   ispell-program-name "aspell"   ; use aspell instead of ispell
-   ispell-extra-args '("--sug-mode=ultra") ; check as fast as
-                      ; possible
-   )
   (add-hook 'text-mode-hook 'flyspell-mode)
-  (flyspell-prog-mode)
+  (add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Processes -> Gud            ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (setq gud-chdir-before-run nil
-  (gud-tooltip-mode)
+  (setq gud-chdir-before-run nil)
+
+  ;; term-mode, used in M-x term
+  (defun my-term-setup ()
+    (interactive)
+    (define-key term-raw-map (kbd "C-y") 'term-send-raw)
+    (define-key term-raw-map (kbd "C-p") 'term-send-raw)
+    (define-key term-raw-map (kbd "C-n") 'term-send-raw)
+    (define-key term-raw-map (kbd "C-s") 'term-send-raw)
+    (define-key term-raw-map (kbd "C-r") 'term-send-raw)
+    (define-key term-raw-map (kbd "M-w") 'kill-ring-save)
+    (define-key term-raw-map (kbd "M-y") 'helm-show-kill-ring)
+    (define-key term-raw-map (kbd "M-d") (lambda () (interactive) (term-send-raw-string "\ed")))
+    (define-key term-raw-map (kbd "<C-backspace>") (lambda () (interactive) (term-send-raw-string "\e\C-?")))
+    (define-key term-raw-map (kbd "M-p") (lambda () (interactive) (term-send-raw-string "\ep")))
+    (define-key term-raw-map (kbd "M-n") (lambda () (interactive) (term-send-raw-string "\en")))
+    (define-key term-raw-map (kbd "M-,") 'term-send-input)
+    (define-key term-raw-map (kbd "C-c y") 'term-paste)
+    (define-key term-raw-map (kbd "C-S-y") 'term-paste)
+    (define-key term-raw-map (kbd "C-h") nil) ; unbind C-h
+    (define-key term-raw-map (kbd "M-x") nil) ; unbind M-x
+    (define-key term-raw-map (kbd "C-c C-b") 'helm-mini)
+    (define-key term-raw-map (kbd "C-1") 'zygospore-toggle-delete-other-windows)
+    (define-key term-raw-map (kbd "C-2") 'split-window-below)
+    (define-key term-raw-map (kbd "C-3") 'split-window-right)
+    (define-key term-mode-map (kbd "C-0") 'delete-window))
+  (add-hook 'term-mode-hook 'my-term-setup t)
+  (setq term-buffer-maximum-size 0)
+
+  (require 'term)
+
+  ;; taken from here: http://www.enigmacurry.com/2008/12/26/emacs-ansi-term-tricks/
+  (defun visit-ansi-term ()
+    "If the current buffer is:
+       1) a running ansi-term named *ansi-term*, rename it.
+       2) a stopped ansi-term, kill it and create a new one.
+       3) a non ansi-term, go to an already running ansi-term
+          or start a new one while killing a defunt one"
+    (interactive)
+    (let ((is-term (string= "term-mode" major-mode))
+          (is-running (term-check-proc (buffer-name)))
+          (term-cmd "/bin/zsh")
+          (anon-term (get-buffer "*ansi-term*")))
+      (if is-term
+          (if is-running
+              (if (string= "*ansi-term*" (buffer-name))
+                  ;; (call-interactively 'rename-buffer)
+                  (ansi-term term-cmd)
+                (if anon-term
+                    (switch-to-buffer "*ansi-term*")
+                  (ansi-term term-cmd)))
+            (kill-buffer (buffer-name))
+            (ansi-term term-cmd))
+        (if anon-term
+            (if (term-check-proc "*ansi-term*")
+                (switch-to-buffer "*ansi-term*")
+              (kill-buffer "*ansi-term*")
+              (ansi-term term-cmd))
+          (ansi-term term-cmd)))))
+
+  (global-set-key (kbd "<f2>") 'visit-ansi-term)
+
+  ;; PACKAGE: shell-pop
+  ;; GROUP: Processes -> Shell -> Shell Pop
+  (require 'shell-pop)
+  (global-set-key (kbd "C-c t") 'shell-pop)
 #+end_src
 ** setup-communication.el
 :PROPERTIES:
 :ID:       d8f077a9-f7cb-4fdb-b587-461a2327fd1d
 :END:
 This group allows to customize communications, networking, and remote
-access to files. For example, ftp, ldap, dig, whois, netstat... I am
-find with the defaults. Customize more if you want and add to this
-file.
+access to files. For example, ftp, ldap, dig, whois, netstat... I only
+enable =goto-address-mode= to enable URL highlighting and able to
+click on it in an buffer. Very useful. Sample configuration:
+
+#+begin_src emacs-lisp
+  (provide 'setup-communication)
+
+  ;; go-to-address-mode
+  (add-hook 'prog-mode-hook 'goto-address-mode)
+  (add-hook 'text-mode-hook 'goto-address-mode)
+#+end_src
+
 ** setup-programming.el
 :PROPERTIES:
 :ID:       c8702833-48cf-4cf8-b2e6-0f4ef7f4c8ab
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-programming)=, otherwise
+Emacs won't be able to load your module. Sample configuration: 
 
 #+begin_src emacs-lisp
-  ;,--------------------------------------
-  ;| MAIN GROUP: Programming
-  ;`--------------------------------------
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Programming -> Languages -> C  ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (provide 'setup-programming)
+  ;; GROUP: Programming -> Languages -> C
 
   ;; Available C style:
   ;; “gnu”: The default style for GNU projects
@@ -2114,27 +2252,19 @@ Sample configuration:
   ;; “python”: What Python developers use for extension modules
   ;; “java”: The default style for java-mode (see below)
   ;; “user”: When you want to define your own style
-  (setq
-   c-default-style "linux" ;; set style to "linux"
-   c-basic-offset 4
-   )
+  (setq c-default-style "linux" ; set style to "linux"
+        c-basic-offset 4)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Programming -> Tools -> Gdb ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (setq
-   gdb-many-windows t             ; use gdb-many-windows by default
-   gdb-show-main t            ;Non-nil means display source
-                      ;file containing the main
-                      ;routine at startup
-   )
-
+  (setq gdb-many-windows t        ; use gdb-many-windows by default
+        gdb-show-main t)          ; Non-nil means display source file containing the main routine at startup
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Programming -> Tools -> Compilation ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Compilation from Emacs
-
   (defun prelude-colorize-compilation-buffer ()
     "Colorize a compilation mode buffer."
     (interactive)
@@ -2143,16 +2273,14 @@ Sample configuration:
       (let ((inhibit-read-only t))
         (ansi-color-apply-on-region (point-min) (point-max)))))
 
+  ;; setup compilation-mode used by `compile' command
   (require 'compile)
-  (setq compilation-ask-about-save nil ; Just save before compiling
-        compilation-always-kill t ; Just kill old compile processes before
-                                          ; starting the new one
-        compilation-scroll-output 'first-error ; Automatically scroll to first
-                                          ; error
-        )
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Programming -> Tools -> Makefile ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (setq compilation-ask-about-save nil          ; Just save before compiling
+        compilation-always-kill t               ; Just kill old compile processes before starting the new one
+        compilation-scroll-output 'first-error) ; Automatically scroll to first
+  (global-set-key (kbd "<f5>") 'compile)
+
+  ;; GROUP: Programming -> Tools -> Makefile
   ;; takenn from prelude-c.el:48: https://github.com/bbatsov/prelude/blob/master/modules/prelude-c.el
   (defun prelude-makefile-mode-defaults ()
     (whitespace-toggle-options '(tabs))
@@ -2162,14 +2290,12 @@ Sample configuration:
 
   (add-hook 'makefile-mode-hook (lambda ()
                                   (run-hooks 'prelude-makefile-mode-hook)))
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; GROUP: Programming -> Tools -> Ediff ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (setq
-   ediff-diff-options "-w"
-   ediff-split-window-function 'split-window-horizontally
-   ediff-window-setup-function 'ediff-setup-windows-plain
-   )
+
+  ;; GROUP: Programming -> Tools -> Ediff
+  (setq ediff-diff-options "-w"
+        ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain)
+
 #+end_src
 
 *** Package: =diff-hl=
@@ -2397,9 +2523,12 @@ echo area. Echo area should be preserved for other things like
 :PROPERTIES:
 :ID:       eba1989e-6113-4ac4-ba44-17094418f080
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-applications)=, otherwise
+Emacs won't be able to load your module.Sample configuration:
 
 #+begin_src emacs-lisp
+  (provide 'setup-applications)
+
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Applications-> Eshell       ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2421,28 +2550,28 @@ Sample configuration:
   (eshell/alias "o" "find-file-other-window $*")
   (eshell/alias "vi" "find-file-other-window $*")
   (eshell/alias "vim" "find-file-other-window $*")
-  (eshell/alias "emacs" "find-file-other-window $*")
+  (eshell/alias "emacs" "find-file-other-windpow $*")
   (eshell/alias "em" "find-file-other-window $*")
+
+  (add-hook
+   'eshell-mode-hook
+   (lambda ()
+     (setq pcomplete-cycle-completions nil)))
 
   ;; change listing switches based on OS
   (when (not (eq system-type 'windows-nt))
     (eshell/alias "ls" "ls --color -h --group-directories-first $*"))
-
-  (add-hook 'eshell-mode-hook 'electric-pair-mode)
 #+end_src
-
-I only use Eshell. You should modify others if you need.
 
 ** setup-development.el
 :PROPERTIES:
 :ID:       7b8b3b61-ae0e-4ae4-b998-165a78a8512d
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-development)=, otherwise
+Emacs won't be able to load your module. Sample configuration:
 
 #+begin_src emacs-lisp
-  ;,--------------------------------------
-  ;| MAIN GROUP: Development
-  ;`--------------------------------------
+  (provide 'setup-development)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Development -> Extensions -> Eldoc  ;;
@@ -2454,7 +2583,7 @@ Sample configuration:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Development -> Internal     ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Start garbage collection every 100MB
+  ;; Start garbage collection every 100MB to improve Emacs performance
   (setq gc-cons-threshold 100000000)
 #+end_src
 
@@ -2462,12 +2591,11 @@ Sample configuration:
 :PROPERTIES:
 :ID:       052d0e7c-f8c3-4288-9eb1-57cee9c63dab
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-environment)=, otherwise
+Emacs won't be able to load your module. Sample configuration:
 
 #+begin_src emacs-lisp
-  ;,--------------------------------------
-  ;| MAIN GROUP: Environment
-  ;`--------------------------------------
+  (provide 'setup-environment)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Environment -> Initialization ;;
@@ -2479,22 +2607,25 @@ Sample configuration:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Environment -> Minibuffer   ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (icomplete-mode)
+  ;; (icomplete-mode)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Environment -> Minibuffer -> Savehist ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; savehist saves minibuffer history by defaults
-  (setq
-   savehist-additional-variables '(search ring regexp-search-ring) ;; also save your regexp search queries
-   savehist-autosave-interval 60 ;; save every minute
-   )
-  (savehist-mode) ;; enable savehist
+  (setq savehist-additional-variables '(search ring regexp-search-ring) ; also save your regexp search queries
+        savehist-autosave-interval 60     ; save every minute
+        )
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; GROUP: Environment -> Windows -> Winner ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (winner-mode 1)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Environment -> Mode Line    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (column-number-mode)
+  (column-number-mode)p
 #+end_src
 
 *** Package: =nyan-mode=
@@ -2581,33 +2712,35 @@ package:
   ;;                                               ;;
   ;; GROUP: Environment -> Windows -> Golden Ratio ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (eval-after-load "golden-ratio"
-    '(progn
-       (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
-       (add-to-list 'golden-ratio-exclude-modes "helm-mode")
-       (add-to-list 'golden-ratio-exclude-modes "dired-mode")
-       (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
-       (add-to-list 'golden-ratio-inhibit-functions 'pl/ediff-comparison-buffer-p)))
+  (require 'golden-ratio)
 
-  (defun pl/ediff-comparison-buffer-p ()
-    ediff-this-buffer-ediff-sessions)
+  (add-to-list 'golden-ratio-exclude-modes "ediff-mode")
+  (add-to-list 'golden-ratio-exclude-modes "helm-mode")
+  (add-to-list 'golden-ratio-exclude-modes "dired-mode")
+  (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 
   (defun pl/helm-alive-p ()
     (if (boundp 'helm-alive-p)
         (symbol-value 'helm-alive-p)))
+
   ;; do not enable golden-raio in thses modes
-  (setq golden-ratio-exclude-modes
-        '("ediff-mode"
-          "gdb-locals-mode"
-          "gdb-breakpoints-mode"
-          "gdb-frames-mode"
-          "gud-mode"
-          "gdb-inferior-io-mode"
-          "magit-log-mode"
-          "magit-reflog-mode"
-          "magit-status-mode"
-          "eshell-mode"
-          "dired-mode"))
+  (setq golden-ratio-exclude-modes '("ediff-mode"
+                                     "gud-mode"
+                                     "gdb-locals-mode"
+                                     "gdb-registers-mode"
+                                     "gdb-breakpoints-mode"
+                                     "gdb-threads-mode"
+                                     "gdb-frames-mode"
+                                     "gdb-inferior-io-mode"
+                                     "gud-mode"
+                                     "gdb-inferior-io-mode"
+                                     "gdb-disassembly-mode"
+                                     "gdb-memory-mode"
+                                     "magit-log-mode"
+                                     "magit-reflog-mode"
+                                     "magit-status-mode"
+                                     "IELM"
+                                     "eshell-mode" "dired-mode"))
 
   (golden-ratio-mode)
 #+end_src
@@ -2620,9 +2753,12 @@ _Usage_:
 :PROPERTIES:
 :ID:       ee26ceb9-d308-4ea5-a96c-a805b33079a0
 :END:
-Sample configuration:
+Remember to include the line =(provide 'setup-faces-and-ui)=, otherwise
+Emacs won't be able to load your module. Sample configuration:
 
 #+begin_src emacs-lisp
+  (provide 'setup-faces-and-ui)
+
   ;; you won't need any of the bar thingies
   ;; turn it off to save screen estate
   (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -2712,7 +2848,9 @@ package:
 
   (add-hook 'prog-mode-hook (lambda () (highlight-symbol-mode)))
   (add-hook 'org-mode-hook (lambda () (highlight-symbol-mode)))
-  (setq highlight-symbol-on-navigation-p t) ; enable highlighting symbol at point automatically
+
+  (setq highlight-symbol-idle-delay 0.2
+        highlight-symbol-on-navigation-p t)
 
   (global-set-key [(control shift mouse-1)]
                   (lambda (event)
@@ -2742,6 +2880,13 @@ is [[https://github.com/purcell/color-theme-sanityinc-tomorrow][color-theme-sani
 :PROPERTIES:
 :ID:       0b7ba2b9-8cce-4516-b7ad-ff351b30994b
 :END:
+Remember to include the line =(provide 'setup-help)=, otherwise Emacs
+won't be able to load your module.
+
+#+begin_src emacs-lisp
+  (provide 'setup-help)
+#+end_src
+
 *** Package: =info+=
 :PROPERTIES:
 :ID:       d9f960bc-0ef7-49df-b7d8-4c98f99893ac
@@ -2789,7 +2934,8 @@ package:
 
 #+begin_src emacs-lisp
   ;; A quick major mode help with discover-my-major
-  (define-key 'help-command (kbd "C-m") 'discover-my-major)
+  (global-unset-key (kbd "C-h h"))        ; original "C-h h" displays "hello world" in different languages
+  (define-key 'help-command (kbd "h m") 'discover-my-major)
 #+end_src
 
 _Usage_:
@@ -2987,7 +3133,8 @@ automatically becomes links to jump to.
 If you define your own Customization Group locally to your
 computer, your Customization Group should be added under =Local=
 parent and customize it here. The only sub-group in =Local= group is
-=holidy=, and I do not use it, so I leave this file blank.
+=holiday=, and I do not use it, so I leave this file blank.
+
 * More Emacs Lisp resources
 :PROPERTIES:
 :ID:       8f4d8185-04b5-4e2b-8ff4-7a03cbe1f9f4
