@@ -53,10 +53,6 @@ Extended config:
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
   (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
-  (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
-  (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
-  (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
-
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
 
@@ -219,7 +215,8 @@ to help you using Helm productively.
   since the source tree contains a large amount of files, and many of
   these files have same prefix.
 
-- /Performance/: Helm can work with over 10000 candidates no problem.
+- /Performance/: Helm can work with over 30000 candidates or more no
+  problem.
 
 * Operate on text at point:
 :PROPERTIES:
@@ -565,6 +562,21 @@ From within a =helm-find-files= session, you can invoke
 =helm-ff-run-grep= with *C-s* to search a file/directory on
 highlighted entry in the Helm buffer. With prefix argument,
 recursively grep a selected directory.
+
+You can also save the result into a Grep buffer using the action
+=Save results in Grep buffer=. Note that this Grep buffer is created
+by Helm, not the default Emacs grep buffer. It has minimal key
+bindings. Adding these key bindings will make navigation easier:
+
+#+begin_src emacs-lisp
+  (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
+  (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
+  (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
+#+end_src
+
+*p* and *n* allows you to move back and forth between matches without
+visiting other window. Only when you press *RET*, it visits other
+window.
 
 _Description_:
 
@@ -1242,7 +1254,8 @@ immediately.
 
 _Usage_:
 
-*C-c p h* to run =helm-projectile= and select files in your project.
+*C-c p h* to run =helm-projectile= and select files in your
+project. Please refer to the [[https://github.com/bbatsov/projectile#helm-integration][full guide]].
 
 * Package: =helm-descbind=
 :PROPERTIES:
