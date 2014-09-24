@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-09-22 Mon 09:56 -->
+<!-- 2014-09-24 Wed 10:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -1019,7 +1019,7 @@ visited directory.
 <p>
 From within a <code>helm-find-files</code> session, you can invoke
 <code>helm-ff-run-grep</code> with <b>C-s</b> to search a file/directory on
-highlighted entry in the Helm buffer. With prefix argument,
+highlighted entry in the Helm buffer. With prefix argument <b>C-u</b>,
 recursively grep a selected directory.
 </p>
 
@@ -1050,8 +1050,17 @@ window.
 
 <p>
 Every time you type in a character, <code>helm</code> updates <code>grep</code> result at
-that very moment.
+that very moment. You can use <code>ack-grep</code> to replace <code>grep</code> with this
+setting:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span><span style="color: #4f5c7e;">executable-find</span> <span style="color: #8b2252;">"ack-grep"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">helm-grep-default-command</span> <span style="color: #8b2252;">"ack-grep -Hn --no-group --no-color %e %p %f"</span>
+        <span style="color: #4f5c7e;">helm-grep-default-recurse-command</span> <span style="color: #8b2252;">"ack-grep -H --no-group --no-color %e %p %f"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
 
 <p>
 <span class="underline">Demo</span>:

@@ -560,7 +560,7 @@ _Key binding_:
 
 From within a =helm-find-files= session, you can invoke
 =helm-ff-run-grep= with *C-s* to search a file/directory on
-highlighted entry in the Helm buffer. With prefix argument,
+highlighted entry in the Helm buffer. With prefix argument *C-u*,
 recursively grep a selected directory.
 
 You can also save the result into a Grep buffer using the action
@@ -581,7 +581,14 @@ window.
 _Description_:
 
 Every time you type in a character, =helm= updates =grep= result at
-that very moment.
+that very moment. You can use =ack-grep= to replace =grep= with this
+setting:
+
+#+begin_src emacs-lisp
+  (when (executable-find "ack-grep")
+    (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
+          helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
+#+end_src
 
 _Demo_:
 
