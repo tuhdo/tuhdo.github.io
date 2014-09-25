@@ -1158,14 +1158,21 @@ line, but move to the first non-whitespace character of that line.
     "Modes for which auto-indenting is suppressed."
     :type 'list)
 
-  (defun prelude-cleanup-buffer-or-region ()
-    "Cleanup a region if selected, otherwise the whole buffer."
+  (defun indent-region-or-buffer ()
+    "Indent a region if selected, otherwise the whole buffer."
     (interactive)
     (unless (member major-mode prelude-indent-sensitive-modes)
-      (call-interactively 'indent-region))
-    (whitespace-cleanup))
+      (save-excursion
+        (if (region-active-p)
+            (progn
+              (indent-region (region-beginning) (region-end))
+              (message "Indented selected region."))
+          (progn
+            (indent-buffer)
+            (message "Indented buffer.")))
+        (whitespace-cleanup))))
 
-  (global-set-key (kbd "C-c i") 'prelude-cleanup-buffer-or-region)
+  (global-set-key (kbd "C-c i") 'indent-region-or-buffer)
 
   ;; add duplicate line function from Prelude
   ;; taken from prelude-core.el

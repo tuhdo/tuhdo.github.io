@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-09-18 Thu 16:29 -->
+<!-- 2014-09-25 Thu 10:02 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -1942,14 +1942,21 @@ line, but move to the first non-whitespace character of that line.
   <span style="color: #8b2252;">"Modes for which auto-indenting is suppressed."</span>
   <span style="color: #483d8b;">:type</span> '<span style="color: #374478;">list</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">prelude-cleanup-buffer-or-region</span> <span style="color: #7388d6;">()</span>
-  <span style="color: #8b2252;">"Cleanup a region if selected, otherwise the whole buffer."</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">indent-region-or-buffer</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #8b2252;">"Indent a region if selected, otherwise the whole buffer."</span>
   <span style="color: #7388d6;">(</span><span style="color: #78683f;">interactive</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #a020f0;">unless</span> <span style="color: #909183;">(</span><span style="color: #513f78;">member</span> <span style="color: #43783f;">major-mode</span> <span style="color: #43783f;">prelude-indent-sensitive-modes</span><span style="color: #909183;">)</span>
-    <span style="color: #909183;">(</span><span style="color: #707e4f;">call-interactively</span> '<span style="color: #513f78;">indent-region</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #374478;">whitespace-cleanup</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+    <span style="color: #909183;">(</span><span style="color: #a020f0;">save-excursion</span>
+      <span style="color: #709870;">(</span><span style="color: #a020f0;">if</span> <span style="color: #907373;">(</span><span style="color: #784437;">region-active-p</span><span style="color: #907373;">)</span>
+          <span style="color: #907373;">(</span><span style="color: #a020f0;">progn</span>
+            <span style="color: #6276ba;">(</span><span style="color: #513f78;">indent-region</span> <span style="color: #858580;">(</span><span style="color: #7a4f7e;">region-beginning</span><span style="color: #858580;">)</span> <span style="color: #858580;">(</span><span style="color: #5e7837;">region-end</span><span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+            <span style="color: #6276ba;">(</span><span style="color: #783f5a;">message</span> <span style="color: #8b2252;">"Indented selected region."</span><span style="color: #6276ba;">)</span><span style="color: #907373;">)</span>
+        <span style="color: #907373;">(</span><span style="color: #a020f0;">progn</span>
+          <span style="color: #6276ba;">(</span><span style="color: #783778;">indent-buffer</span><span style="color: #6276ba;">)</span>
+          <span style="color: #6276ba;">(</span><span style="color: #783f5a;">message</span> <span style="color: #8b2252;">"Indented buffer."</span><span style="color: #6276ba;">)</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span><span style="color: #374478;">whitespace-cleanup</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c i"</span><span style="color: #7388d6;">)</span> '<span style="color: #707e4f;">prelude-cleanup-buffer-or-region</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c i"</span><span style="color: #7388d6;">)</span> '<span style="color: #707e4f;">indent-region-or-buffer</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">add duplicate line function from Prelude</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">taken from prelude-core.el</span>
