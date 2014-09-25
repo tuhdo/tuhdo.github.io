@@ -3408,10 +3408,10 @@ visible on your screen. To illustrate my point, here is an example:
     (message "Hello World"))
 #+end_src
 
-You can paste that code snippet *anywhere* - yes,*anywhere* - in Emacs
-and tell Emacs to execute that code. If the code snippet has valid
-syntax, Emacs executes successfully and you will have command to print
-"Hello World" at the bottom of screen.
+You can paste that code snippet *anywhere* - yes, *anywhere* - in
+Emacs and tell Emacs to execute that code. If the code snippet has
+valid syntax, Emacs executes successfully and you will have command to
+print "Hello World" at the bottom of screen.
 
 A great advantage of this approach is, if you want to change
 behaviours of Emacs, you write some Emacs Lisp code and execute and
