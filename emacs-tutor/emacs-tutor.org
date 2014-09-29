@@ -995,7 +995,7 @@ These key bindings are in Emacs only:
 - Move to top of the buffer: *M-<*
 - Move to end of the buffer: *M->*
 - Move to the nth character: *M-g c* (c stands for =character=)
-- Move to the nth line: *M-g l* (l stands for =line=)
+- Move to the nth line: *M-g l* (*M-g g* for emacs >= 23.2) (l/g stands for =line=)
 
 Recenter means making the current line point is on the center of
 your screen.
