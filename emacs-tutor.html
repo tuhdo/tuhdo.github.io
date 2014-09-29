@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-09-29 Mon 15:51 -->
+<!-- 2014-09-29 T2 23:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -945,7 +944,12 @@ Taken from here: <a href="http://www.emacswiki.org/emacs/EmacsKeyNotation">Emacs
 <tbody>
 <tr>
 <td class="left"><code>DEL</code></td>
-<td class="left">the Backspace key (not the Delete key)</td>
+<td class="left">the Backspace key (not the Delete key). Inside Emacs, <code>DEL</code></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">is written as <code>&lt;backspace&gt;</code>.</td>
 </tr>
 </tbody>
 <tbody>
@@ -1494,7 +1498,7 @@ manage buffers when it's getting large? <b>C-x C-b</b> executes
 search. However, <code>list-buffers</code> is a simple command for buffer
 management. Emacs also provides <code>ibuffer</code>, which is a superior
 alternative. You will surely want to use <code>ibuffer</code>, but first let's
-replace <code>list-buffers</code> with <code>ibuffer</code>:
+replace <code>list-buffers</code> with <code>ibuffer</code> (by placing next directive to your <code>~/.emacs</code> file):
 </p>
 
 <div class="org-src-container">
@@ -2135,7 +2139,8 @@ screen: <b>M-r</b>
 </li>
 <li>Move to the nth character: <b>M-g c</b> (c stands for <code>character</code>)
 </li>
-<li>Move to the nth line: <b>M-g l</b> (l stands for <code>line</code>)
+<li>Move to the nth line: <b>M-g l</b> for Emacs &lt; 23.2, <b>M-g g</b> for emacs &gt;=
+23.2) (l/g stands for <code>line</code>)
 </li>
 </ul>
 
@@ -2218,6 +2223,8 @@ work under the terminal.
 
 <ul class="org-ul">
 <li>Kill a character at the point: <b>C-d</b>
+</li>
+<li>Kill entire line: <b>C-S-DEL</b> (remember, <b>DEL</b> is your <b>&lt;backspace&gt;</b> key)
 </li>
 <li>Kill forward to the end of a word from current point: <b>M-d</b>
 </li>
