@@ -552,7 +552,7 @@ example, if your directory contains these file:
 
 Then in *find-file* prompt, you can open all file with extension =.c=
 like this: =file*.c=. Or if you only want to select file with character
-=a= in it: =*a*.c=. Of if you only want to select file with =1= and
+=a= in it: =*a*.c=. Or if you only want to select file with =1= and
 extension =.c.= in it: =*1.c=. Basically, wildcard expression =*=
 accepts anything.
 
