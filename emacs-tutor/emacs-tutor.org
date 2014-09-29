@@ -1040,6 +1040,7 @@ In Emacs, =kill= means =Cut= in other editors. these key bindings also
 work under the terminal.
 
 - Kill a character at the point: *C-d*
+- Kill entire line: *C-S-DEL*
 - Kill forward to the end of a word from current point: *M-d*
 - Kill backward to the beginning of a word from the current point:
   *M-DEL*
