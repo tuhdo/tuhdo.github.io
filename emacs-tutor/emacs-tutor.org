@@ -718,7 +718,7 @@ manage buffers when it's getting large? *C-x C-b* executes
 search. However, =list-buffers= is a simple command for buffer
 management. Emacs also provides =ibuffer=, which is a superior
 alternative. You will surely want to use =ibuffer=, but first let's
-replace =list-buffers= with =ibuffer=:
+replace =list-buffers= with =ibuffer= (by placing next directive to your =~/.emacs= file):
 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-x C-b") 'ibuffer)
