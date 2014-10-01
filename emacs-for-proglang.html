@@ -218,7 +218,7 @@ first. Racket and Ruby will come later.
 <h2 id="sec-1"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5" name="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Before using Emacs: Swap Control and Capslock</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Swapping Control and Capslock, in general, not required to make the
+Swapping Control and Capslock, in general, is not required to make the
 best out of Emacs, if you at least use regular key PC keyboard or
 better. However, it is not nice at all on a laptop keyboard. If you
 use a laptop keyboard for writing code, I strongly recommended to swap
@@ -228,7 +228,7 @@ Control and Capslock for better Emacs experience.
 <p>
 Swapping Control and Caplocks will not only benefit for using Emacs,
 it is beneficial in general, as Control is a much more frequently used
-key than Capslocks. Popular shells like Bash or Zsh use Control a lot
+key than Capslock. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
 </p>
 </div>
@@ -399,7 +399,7 @@ prefix <b>C-x r</b>.
 </p>
 
 <p>
-Finally ,*C-g* executes the command <code>keyboard-quit</code>, which cancels anything
+Finally, <b>C-g</b> executes the command <code>keyboard-quit</code>, which cancels anything
 Emacs is executing. If you press any key sequence wrongly, <b>C-g</b> to
 cancel that incorrectly pressed key sequence and start again.
 </p>
@@ -445,7 +445,7 @@ section.
 </p>
 
 <p>
-Most commands can be organized in an easy and remember way. For
+Most commands can be organized in an easy to remember way. For
 example, command like <code>helm-do-grep</code> (the command belongs to <code>Helm</code>, a
 3rd party extension to Emacs) can have a key binding like <b>C-c h
 g</b>. The <b>h</b> stands for <code>Helm</code> and <b>g</b> stands for <code>grep</code>. So, key
@@ -460,7 +460,7 @@ bindings are not difficult to remember.
 
 <ul class="org-ul">
 <li>Open file: <b>C-x C-f</b> and browse to the file. You can fuzzy match
-candidates in current directory. e.g "fob" or "fbr" will complete
+candidates in current directory, e.g "fob" or "fbr" will complete
 "foobar". 
 
 <p>
@@ -483,15 +483,15 @@ is called <b>window</b>).
 </p>
 </li>
 
-<li>Open recently files: <b>C-x b</b> contains a list of opening files and
+<li>Open recently opened files: <b>C-x b</b> contains a list of opened files and
 <b>recently</b> opened files. To move between these lists, use left/right
 arrow keys or use <b>C-o</b>. You can type part of a desired filename and
 narrow down.
 </li>
 
-<li>Close file: <b>C-x k</b>, select a buffer to close. A buffer is simply
-your openning files, for now. By default, your current editing
-buffer is the top. Press <b>RET</b> to confirm killing the buffer.
+<li>Close file: <b>C-x k</b>, select a buffer to close. Buffers are simply
+your opened files, for now. By default, your current editing
+buffer is at the top. Press <b>RET</b> to confirm killing the buffer.
 </li>
 </ul>
 </div>
@@ -583,7 +583,7 @@ commands on any buffer.
 <p>
 So, you want to look for something in the buffer? <b>C-s</b> invokes
 <code>isearch-forward</code>, allows you to look forward from the current point
-for something. After <b>C-s</b>, you are prompt to enter the content to
+for something. After <b>C-s</b>, you are prompted to enter the content to
 search for. Enter the content, and press <b>C-s</b> repeatedly to travel
 through the matches forward.
 </p>
@@ -604,7 +604,7 @@ through the matches backward.
 <h4 id="sec-2-3-3"><a id="ID-32f76107-37b6-4ce4-b4ca-2fe106e768be" name="ID-32f76107-37b6-4ce4-b4ca-2fe106e768be"></a>Basic editing commands:</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <p>
-In Emacs, <code>kill</code> means <code>Cut</code> in other editors. these key bindings also
+In Emacs, <code>kill</code> means <code>Cut</code> in other editors. These key bindings also
 work under the terminal.
 </p>
 
@@ -649,7 +649,7 @@ comment/uncomment code with <b>M-;</b>:
 </p>
 
 <ul class="org-ul">
-<li>If you do not highlight a text region, <b>M-;</b> add a comment to the
+<li>If you do not highlight a text region, <b>M-;</b> adds a comment to the
 end of line.
 </li>
 <li>If you do not highlight a text region and comment is at the end of
@@ -802,8 +802,8 @@ Emacs, a window layout is called a <b>window configuration</b>.
 </p>
 
 <p>
-To navigate through the windows, <b>C-x o</b> which runs the command
-<code>other-window</code>. Try cycle around the windows a few times to get used
+To navigate through the windows, use <b>C-x o</b> which runs the command
+<code>other-window</code>. Try cycling around the windows a few times to get used
 to it.
 </p>
 
@@ -820,7 +820,7 @@ when <b>C-x o</b>.
 </p>
 
 <p>
-<b>C-x 1</b> closes all other windows except the current selected
+<b>C-x 1</b> closes all other windows except the currently selected
 one. Try creating another window, try <b>C-x 1</b>. Only in my
 distribution: <b>C-x 1</b> again opens previous window layout.
 </p>
@@ -834,7 +834,7 @@ distribution: <b>C-x 1</b> again opens previous window layout.
 <div class="outline-text-2" id="text-3">
 <p>
 You need these three essential commands to work with your SML
-assignments. All the demos begins when you see <code>START</code> at the bottom:
+assignments. All the demos begin when you see <code>START</code> at the bottom:
 </p>
 
 <ul class="org-ul">
@@ -861,7 +861,7 @@ evaluation. Here is an example of evaluating an SML test file:
 
 <li><b>C-c C-r</b> runs Command: <code>sml-prog-proc-send-region</code> 
 <span class="underline">Description</span>: Similar to <code>sml-prog-proc-send-buffer</code>, but instead
-of sending buffer to the REPL, send a highlighting region. This is
+of sending buffer to the REPL, send a highlighted region. This is
 useful when you want to evaluate individual expressions.
 
 
