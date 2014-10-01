@@ -256,7 +256,8 @@ In Emacs, =kill= means =Cut= in other editors. these key bindings also
 work under the terminal.
 
 - Kill a character at the cursor: *C-d*
-- Kill entire line: *C-S-DEL* (remember, *DEL* is your *<backspace>* key)
+- Kill entire line: *C-S-DEL* (remember, *DEL* is your *<backspace>*
+  key), or *C-w* (not in stock Emacs)
 - Kill forward to the end of a word from current cursor: *M-d*
 - Kill backward to the beginning of a word from the current cursor:
   *M-DEL*
@@ -267,6 +268,8 @@ work under the terminal.
 - Undo: *C-/*
 - Redo: *C-?*
 - Open a list of killed texts: *M-y* (not in stock Emacs)
+- Duplicate line/region: *M-c* (not in stock Emacs)
+- Indent whole buffer: *C-c i* (not in stock Emacs)
 
 When you kill something, the killed content is put into the Kill Ring.
 
