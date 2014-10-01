@@ -4,9 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2014-09-29 T2 23:29 -->
+<!-- 2014-10-01 Wed 16:18 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -809,7 +810,7 @@ You can also use this version that is more integrated with Mac OSX:
 <h2 id="sec-6"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5" name="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Swap Control and Capslock</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-Swapping Control and Capslock, in general, not required to make the
+Swapping Control and Capslock, in general, is not required to make the
 best out of Emacs, if you at least use regular key PC keyboard or
 better. However, it is not nice at all on a laptop keyboard. If you
 use a laptop keyboard for writing code, I strongly recommended to swap
@@ -817,7 +818,7 @@ Control and Capslock for better Emacs experience.
 </p>
 
 <p>
-Swapping Control and Caplocks will not only benefit for using Emacs,
+Swapping Control and Caplock will not only benefit for using Emacs,
 it is beneficial in general, as Control is a much more frequently used
 key than Capslocks. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
@@ -1013,7 +1014,7 @@ prefix <b>C-x r</b>.
 </p>
 
 <p>
-Finally ,*C-g* executes the command <code>keyboard-quit</code>, which cancels anything
+Finally, <b>C-g</b> executes the command <code>keyboard-quit</code>, which cancels anything
 Emacs is executing. If you press any key sequence wrongly, <b>C-g</b> to
 cancel that incorrectly pressed key sequence and start again.
 </p>
@@ -1059,7 +1060,7 @@ section.
 </p>
 
 <p>
-Most commands can be organized in an easy and remember way. For
+Most commands can be organized in an easy to remember way. For
 example, command like <code>helm-do-grep</code> (the command belongs to <code>Helm</code>, a
 3rd party extension to Emacs) can have a key binding like <b>C-c h
 g</b>. The <b>h</b> stands for <code>Helm</code> and <b>g</b> stands for <code>grep</code>. So, key
@@ -2217,7 +2218,7 @@ following expression. Demo:
 <h3 id="sec-7-15"><a id="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7" name="ID-11496600-7D09-468D-A6BC-C6113ACCCAC7"></a>Basic editing commands</h3>
 <div class="outline-text-3" id="text-7-15">
 <p>
-In Emacs, <code>kill</code> means <code>Cut</code> in other editors. these key bindings also
+In Emacs, <code>kill</code> means <code>Cut</code> in other editors. These key bindings also
 work under the terminal.
 </p>
 
@@ -2251,7 +2252,7 @@ comment/uncomment code with <b>M-;</b>:
 </p>
 
 <ul class="org-ul">
-<li>If you do not highlight a text region, <b>M-;</b> add a comment to the
+<li>If you do not highlight a text region, <b>M-;</b> adds a comment to the
 end of line.
 </li>
 <li>If you highlight a region (i.e. with a mouse), <b>M-;</b> comments out
@@ -2611,7 +2612,7 @@ built-in tools for this problem.
 <p>
 So, you want to look for something in the buffer? <b>C-s</b> invokes
 <code>isearch-forward</code>, allows you to look forward from the current point
-for something. After <b>C-s</b>, you are prompt to enter the content to
+for something. After <b>C-s</b>, you are prompted to enter the content to
 search for. Enter the content, and press <b>C-s</b> repeatedly to travel
 through the matches forward.
 </p>
@@ -3535,7 +3536,7 @@ Emacs, a window layout is called a <b>window configuration</b>.
 </p>
 
 <p>
-To navigate through the windows, <b>C-x o</b> which runs the command
+To navigate through the windows, use <b>C-x o</b> which runs the command
 <code>other-window</code>. Try cycle around the windows a few times to get used
 to it.
 </p>

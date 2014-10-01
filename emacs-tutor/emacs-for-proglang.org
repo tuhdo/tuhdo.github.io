@@ -23,15 +23,15 @@ first. Racket and Ruby will come later.
 :PROPERTIES:
 :ID:       4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5
 :END:
-Swapping Control and Capslock, in general, not required to make the
+Swapping Control and Capslock, in general, is not required to make the
 best out of Emacs, if you at least use regular key PC keyboard or
 better. However, it is not nice at all on a laptop keyboard. If you
 use a laptop keyboard for writing code, I strongly recommended to swap
 Control and Capslock for better Emacs experience.
 
-Swapping Control and Caplocks will not only benefit for using Emacs,
+Swapping Control and Caplock will not only benefit for using Emacs,
 it is beneficial in general, as Control is a much more frequently used
-key than Capslocks. Popular shells like Bash or Zsh use Control a lot
+key than Capslock. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
 
 ** Windows
@@ -122,7 +122,7 @@ commands in Emacs. However, you forget a specific key binding for a
 command in those features. *C-x r C-h* list all key bindings that have
 prefix *C-x r*.
 
-Finally ,*C-g* executes the command =keyboard-quit=, which cancels anything
+Finally, *C-g* executes the command =keyboard-quit=, which cancels anything
 Emacs is executing. If you press any key sequence wrongly, *C-g* to
 cancel that incorrectly pressed key sequence and start again.
 
@@ -153,7 +153,7 @@ The key bindings have a few simple and easy to remember rules:
 You will learn about *C-u* and *C-<number>* in =Prefix Arguments=
 section.
 
-Most commands can be organized in an easy and remember way. For
+Most commands can be organized in an easy to remember way. For
 example, command like =helm-do-grep= (the command belongs to =Helm=, a
 3rd party extension to Emacs) can have a key binding like *C-c h
 g*. The *h* stands for =Helm= and *g* stands for =grep=. So, key
@@ -165,7 +165,7 @@ bindings are not difficult to remember.
 :END:
 
 - Open file: *C-x C-f* and browse to the file. You can fuzzy match
-  candidates in current directory. e.g "fob" or "fbr" will complete
+  candidates in current directory, e.g "fob" or "fbr" will complete
   "foobar". 
 
   *C-l* to go back to parent directory and *C-j* to go down to current
@@ -179,14 +179,14 @@ bindings are not difficult to remember.
   
   *C-c d* on a file to delete it.
 
-- Open recently files: *C-x b* contains a list of opening files and
+- Open recently opened files: *C-x b* contains a list of opened files and
   *recently* opened files. To move between these lists, use left/right
   arrow keys or use *C-o*. You can type part of a desired filename and
   narrow down.
 
-- Close file: *C-x k*, select a buffer to close. A buffer is simply
-  your openning files, for now. By default, your current editing
-  buffer is the top. Press *RET* to confirm killing the buffer.
+- Close file: *C-x k*, select a buffer to close. Buffers are simply
+  your opened files, for now. By default, your current editing
+  buffer is at the top. Press *RET* to confirm killing the buffer.
 
 *** Basic motion commands
 :PROPERTIES:
@@ -238,7 +238,7 @@ commands on any buffer.
 :END:
 So, you want to look for something in the buffer? *C-s* invokes
 =isearch-forward=, allows you to look forward from the current point
-for something. After *C-s*, you are prompt to enter the content to
+for something. After *C-s*, you are prompted to enter the content to
 search for. Enter the content, and press *C-s* repeatedly to travel
 through the matches forward.
 
@@ -252,7 +252,7 @@ through the matches backward.
 :PROPERTIES:
 :ID:       32f76107-37b6-4ce4-b4ca-2fe106e768be
 :END:
-In Emacs, =kill= means =Cut= in other editors. these key bindings also
+In Emacs, =kill= means =Cut= in other editors. These key bindings also
 work under the terminal.
 
 - Kill a character at the cursor: *C-d*
@@ -276,7 +276,7 @@ When you kill something, the killed content is put into the Kill Ring.
 If you write code, you can also quickly add comments or
 comment/uncomment code with *M-;*:
 
-- If you do not highlight a text region, *M-;* add a comment to the
+- If you do not highlight a text region, *M-;* adds a comment to the
   end of line.
 - If you do not highlight a text region and comment is at the end of
   line, *M-;* comments the whole line (not in stock Emacs).
@@ -352,8 +352,8 @@ windows: two above and one below. Each window can hold a buffer. With
 the above two commands ,you can create arbitrary window layout. In
 Emacs, a window layout is called a *window configuration*.
 
-To navigate through the windows, *C-x o* which runs the command
-=other-window=. Try cycle around the windows a few times to get used
+To navigate through the windows, use *C-x o* which runs the command
+=other-window=. Try cycling around the windows a few times to get used
 to it.
 
 In Emacs, =<next>= is the *PageDown* key, =<prior>= is the *PageUp*
@@ -364,7 +364,7 @@ when *C-x o*.
 
 *C-x 0* closes the window at point.
 
-*C-x 1* closes all other windows except the current selected
+*C-x 1* closes all other windows except the currently selected
 one. Try creating another window, try *C-x 1*. Only in my
 distribution: *C-x 1* again opens previous window layout.
 
@@ -373,7 +373,7 @@ distribution: *C-x 1* again opens previous window layout.
 :ID:       842df7b1-185f-4176-b024-4174e737b28a
 :END:
 You need these three essential commands to work with your SML
-assignments. All the demos begins when you see =START= at the bottom:
+assignments. All the demos begin when you see =START= at the bottom:
 
 - *C-c C-s* runs command  =sml-prog-proc-switch-to= 
   _Description_: Start SML REPL.
@@ -388,7 +388,7 @@ assignments. All the demos begins when you see =START= at the bottom:
 
 - *C-c C-r* runs Command: =sml-prog-proc-send-region= 
   _Description_: Similar to =sml-prog-proc-send-buffer=, but instead
-  of sending buffer to the REPL, send a highlighting region. This is
+  of sending buffer to the REPL, send a highlighted region. This is
   useful when you want to evaluate individual expressions.
 
   [[file:static/proglang/sml-send-region.gif][file:static/proglang/sml-send-region.gif]]

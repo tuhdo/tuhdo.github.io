@@ -303,13 +303,13 @@ https://github.com/railwaycat/emacs-mac-port
 :PROPERTIES:
 :ID:       4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5
 :END:
-Swapping Control and Capslock, in general, not required to make the
+Swapping Control and Capslock, in general, is not required to make the
 best out of Emacs, if you at least use regular key PC keyboard or
 better. However, it is not nice at all on a laptop keyboard. If you
 use a laptop keyboard for writing code, I strongly recommended to swap
 Control and Capslock for better Emacs experience.
 
-Swapping Control and Caplocks will not only benefit for using Emacs,
+Swapping Control and Caplock will not only benefit for using Emacs,
 it is beneficial in general, as Control is a much more frequently used
 key than Capslocks. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
@@ -418,7 +418,7 @@ commands in Emacs. However, you forget a specific key binding for a
 command in those features. *C-x r C-h* list all key bindings that have
 prefix *C-x r*.
 
-Finally ,*C-g* executes the command =keyboard-quit=, which cancels anything
+Finally, *C-g* executes the command =keyboard-quit=, which cancels anything
 Emacs is executing. If you press any key sequence wrongly, *C-g* to
 cancel that incorrectly pressed key sequence and start again.
 
@@ -449,7 +449,7 @@ The key bindings have a few simple and easy to remember rules:
 You will learn about *C-u* and *C-<number>* in =Prefix Arguments=
 section.
 
-Most commands can be organized in an easy and remember way. For
+Most commands can be organized in an easy to remember way. For
 example, command like =helm-do-grep= (the command belongs to =Helm=, a
 3rd party extension to Emacs) can have a key binding like *C-c h
 g*. The *h* stands for =Helm= and *g* stands for =grep=. So, key
@@ -1038,7 +1038,7 @@ commands on any buffer.
 :PROPERTIES:
 :ID:       11496600-7D09-468D-A6BC-C6113ACCCAC7
 :END:
-In Emacs, =kill= means =Cut= in other editors. these key bindings also
+In Emacs, =kill= means =Cut= in other editors. These key bindings also
 work under the terminal.
 
 - Kill a character at the point: *C-d*
@@ -1056,7 +1056,7 @@ When you kill something, the killed content is put into the Kill Ring.
 If you write code, you can also quickly add comments or
 comment/uncomment code with *M-;*:
 
-- If you do not highlight a text region, *M-;* add a comment to the
+- If you do not highlight a text region, *M-;* adds a comment to the
   end of line.
 - If you highlight a region (i.e. with a mouse), *M-;* comments out
   the region.
@@ -1295,7 +1295,7 @@ built-in tools for this problem.
 :END:
 So, you want to look for something in the buffer? *C-s* invokes
 =isearch-forward=, allows you to look forward from the current point
-for something. After *C-s*, you are prompt to enter the content to
+for something. After *C-s*, you are prompted to enter the content to
 search for. Enter the content, and press *C-s* repeatedly to travel
 through the matches forward.
 
@@ -1723,7 +1723,7 @@ windows: two above and one below. Each window can hold a buffer. With
 the above two commands ,you can create arbitrary window layout. In
 Emacs, a window layout is called a *window configuration*.
 
-To navigate through the windows, *C-x o* which runs the command
+To navigate through the windows, use *C-x o* which runs the command
 =other-window=. Try cycle around the windows a few times to get used
 to it.
 
