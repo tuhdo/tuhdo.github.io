@@ -29,7 +29,7 @@ better. However, it is not nice at all on a laptop keyboard. If you
 use a laptop keyboard for writing code, I strongly recommended to swap
 Control and Capslock for better Emacs experience.
 
-Swapping Control and Caplock will not only benefit for using Emacs,
+Swapping Control and Caplsock will not only benefit for using Emacs,
 it is beneficial in general, as Control is a much more frequently used
 key than Capslock. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
