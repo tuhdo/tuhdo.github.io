@@ -1447,7 +1447,7 @@ two inputs:
 Supply the inputs and *RET*.
 
 Emacs will asks your confirmation to replace a matched string. If you
-want to replace all, press *!* instead of answer yes or no.
+want to replace all, press *!* instead of answer yes or no (*Note:* it will replace ocurrences only *beneath* your current point).
 
 If you want to query and replace with regexp, *C-M-%*. *Tip*: this
 command is a bit hard to press; to make it easy, use both of your
