@@ -369,7 +369,8 @@ distribution: *C-x 1* again opens previous window layout.
 :PROPERTIES:
 :ID:       842df7b1-185f-4176-b024-4174e737b28a
 :END:
-You only need these three commands to work with your SML assignments:
+You need these three essential commands to work with your SML
+assignments. All the demos begins when you see =START= at the bottom:
 
 - *C-c C-s* runs command  =sml-prog-proc-switch-to= 
   _Description_: Start SML REPL.
@@ -388,6 +389,19 @@ You only need these three commands to work with your SML assignments:
   useful when you want to evaluate individual expressions.
 
   [[file:static/proglang/sml-send-region.gif][file:static/proglang/sml-send-region.gif]]
+
+Other useful commands
+
+- *C-c h i* runs command =helm-semantic-or-imenu= that lists variable
+  and function definitions in current buffer.
+
+  [[file:static/proglang/sml-helm-imenu.gif][file:static/proglang/sml-helm-imenu.gif]]
+
+- Auto-completion: pressing *TAB* brings up an interface for
+  identifier completion. If you type a few characters and stop for a
+  little moment, a completion popup appears with suitable candidates.
+
+  [[file:static/proglang/sml-completion.gif][file:static/proglang/sml-completion.gif]]
 
 * Conclusion
 :PROPERTIES:
