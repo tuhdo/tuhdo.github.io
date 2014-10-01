@@ -1,0 +1,398 @@
+#+TITLE: Emacs for Programming Languages course on Coursera
+
+I wrote this tutorial for those who are learning [[https://www.coursera.org/course/proglang][Programming Languages]]
+course on Coursera. The course suggests students to use Emacs, but a
+stock one. This can cause confusion for new users since it does not
+include =sml-mode= by default. I made a distribution of Emacs
+specialized for this course here, with external common packages used
+by the Emacs community to empower Emacs:
+
+#+begin_src shell-script
+  git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
+#+end_src
+
+The repository is originally used for my [[file:c-ide.org][C/C++ guide]], and I added
+=sml-mode= to make it usable with SML source files. When you start
+Emacs with the =.emacs.d= I provide, you need to wait for awhile to
+let Emacs download all needed external packages. I assume you know
+nothing about Emacs and I will provide a basic workflow for you to use
+Emacs through the course. Currently, I will write a guide for SML
+first. Racket and Ruby will come later.
+
+* Before using Emacs: Swap Control and Capslock
+:PROPERTIES:
+:ID:       4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5
+:END:
+Swapping Control and Capslock, in general, not required to make the
+best out of Emacs, if you at least use regular key PC keyboard or
+better. However, it is not nice at all on a laptop keyboard. If you
+use a laptop keyboard for writing code, I strongly recommended to swap
+Control and Capslock for better Emacs experience.
+
+Swapping Control and Caplocks will not only benefit for using Emacs,
+it is beneficial in general, as Control is a much more frequently used
+key than Capslocks. Popular shells like Bash or Zsh use Control a lot
+for quick cursor movement.
+
+** Windows
+:PROPERTIES:
+:ID:       eb9ffe1f-f726-4b15-8431-b075e9ba234d
+:END:
+Follow this guide: [[http://www.kodiva.com/post/swapping-caps-lock-and-control-keys][Swapping Capslock and Control keys]]
+** Linux
+:PROPERTIES:
+:ID:       32a786e9-ae18-4c7b-9d12-1940e4f2d301
+:END:
+Put this in your shell init file (.bashrc, .zshrc...):
+
+#+begin_src shell-script
+  /usr/bin/setxkbmap -option "ctrl:swapcaps"
+#+end_src
+
+If you use Ubuntu, follow this guide: [[http://askubuntu.com/a/412622/13847][Swap caps lock and ctrl in
+ubuntu 13.10]].
+** Mac OS X
+:PROPERTIES:
+:ID:       dc1f00fd-29a6-45e0-8398-211418cba728
+:END:
+Follow this answer on StackOverflow: [[http://stackoverflow.com/a/162907/496700][Emacs on Mac OS X Leopard key
+bindings]]
+** If you don't like to swap Capslock and Control...
+:PROPERTIES:
+:ID:       cefa92ca-8234-44bf-9ae5-66dc76aadd0d
+:END:
+You can use your palm to press Control in standard PC keyboard.
+
+* General basic Emacs commands
+:PROPERTIES:
+:ID:       4630f65a-b6c6-4ad2-813b-829d44477bca
+:END:
+I took some parts from my other guide [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - THE
+BASICS]]. I recommend you to follow the mini manual when you have time.
+
+** Emacs Key Notation
+:PROPERTIES:
+:ID:       c428fffd-3636-43e4-916e-9bc67c48db4e
+:END:
+Taken from here: [[http://www.emacswiki.org/emacs/EmacsKeyNotation][EmacsWiki]]
+
+| Prefix | Meaning                                                     |
+|--------+-------------------------------------------------------------|
+| =C-=   | (press and hold) the Control key                            |
+|--------+-------------------------------------------------------------|
+| =M-=   | the Meta key (the Alt key, on most keyboards)               |
+|--------+-------------------------------------------------------------|
+| =S-=   | the Shift key (e.g.‘S-TAB’ means Shift Tab)                 |
+|--------+-------------------------------------------------------------|
+| =DEL=  | the Backspace key (not the Delete key). Inside Emacs, =DEL= |
+|        | is written as =<backspace>=.                                |
+|--------+-------------------------------------------------------------|
+| =RET=  | the Return or Enter key                                     |
+|--------+-------------------------------------------------------------|
+| =SPC=  | the Space bar key                                           |
+|--------+-------------------------------------------------------------|
+| =ESC=  | the Escape key                                              |
+|--------+-------------------------------------------------------------|
+| =TAB=  | the TAB key                                                 |
+|--------+-------------------------------------------------------------|
+
+A notation such as *C-M-x* (or, equivalently, *M-C-x*) means press and
+hold both Control and Meta (Alt) keys while hitting the *x* key. From
+now on, I won't say something like "Press *M-x*" anymore. For example,
+if I say "*C-x C-f* your files", you should replace *C-x C-f* with its
+command like this in your head: "=find-file= your files". All commands
+use verbs, I think, so don't worry. Try to recall the command from the
+key binding; it will help you get used to Emacs quicker. One exception
+though, I only say "press *key*" if *key* is a single character on the
+keyboard.
+
+If you see =M-x command=, it means you need to *M-x* and type
+*command*.
+
+A prefix key is a part of a full key binding. For example, a full key
+binding is *C-x r l* to run the command =bookmark-bmenu-list=, then
+*C-x* and *C-x r* are its prefixes. Note that key sequence such as
+*C-x* and *M-x* are considered a single character. Knowing prefix key
+is handy: if you forget key bindings of some commands that use the
+same prefix key, and remember the prefix, you can press the prefix key
+and *C-h* to get a list of commands with that prefix.
+
+For example, *C-x r* is the prefix for /register/ and /bookmark/
+commands in Emacs. However, you forget a specific key binding for a
+command in those features. *C-x r C-h* list all key bindings that have
+prefix *C-x r*.
+
+Finally ,*C-g* executes the command =keyboard-quit=, which cancels anything
+Emacs is executing. If you press any key sequence wrongly, *C-g* to
+cancel that incorrectly pressed key sequence and start again.
+
+As you gradually learn Emacs, you will see the key bindings are really
+systematically organized and mnemonic. Whenever you see key bindings
+end with *n* and *p*, it usually means *next* and *previous*; *o*
+means *open*; *h* means *help*; *C-h* is standard prefix for help
+commands; key bindings such as *o* and *C-o* are frequently used in
+many built-in tools such as /Dired/, /Ibuffer/, /Occur/...
+
+** Emacs Keys are easy to remember
+:PROPERTIES:
+:ID:       f9a9dca0-7c8f-45bd-9ace-da5d6bb27577
+:END:
+The key bindings have a few simple and easy to remember rules:
+
+- *C-x* prefix is for default and global bindings that comes with
+  Emacs.
+- *C-c* prefix is for users to define.
+- *C-u* is for altering behaviors of commands. That is, one command
+  can behave differently depend on how many *C-u* you pressed
+  first before executing a command. Mostly you just have to hit *C-u*
+  once.
+- *C-<number>* like *C-1*, *C-2*... is similar to *C-u*, but passing a
+  number to a command. Usually, the number specifies how many times
+  you want to repeat a command.
+
+You will learn about *C-u* and *C-<number>* in =Prefix Arguments=
+section.
+
+Most commands can be organized in an easy and remember way. For
+example, command like =helm-do-grep= (the command belongs to =Helm=, a
+3rd party extension to Emacs) can have a key binding like *C-c h
+g*. The *h* stands for =Helm= and *g* stands for =grep=. So, key
+bindings are not difficult to remember. 
+
+** Some basic commands
+:PROPERTIES:
+:ID:       9f33c953-75d4-4418-a1fb-7a27ff17c276
+:END:
+
+- Open file: *C-x C-f* and browse to the file. You can fuzzy match
+  candidates in current directory. e.g "fob" or "fbr" will complete
+  "foobar". 
+
+  *C-l* to go back to parent directory and *C-j* to go down to current
+  highlighting file/directory; alternatively, you can use arrow keys.
+ 
+  *C-z* to see a list of actions that you can apply on highlighting
+  candidate, *TAB* to view a file content without visiting it. 
+
+  *C-c o* on a file to open that file in another pane (in Emacs, pane
+  is called *window*).
+  
+  *C-c d* on a file to delete it.
+
+- Open recently files: *C-x b* contains a list of opening files and
+  *recently* opened files. To move between these lists, use left/right
+  arrow keys or use *C-o*. You can type part of a desired filename and
+  narrow down.
+
+- Close file: *C-x k*, select a buffer to close. A buffer is simply
+  your openning files, for now. By default, your current editing
+  buffer is the top. Press *RET* to confirm killing the buffer.
+
+*** Basic motion commands
+:PROPERTIES:
+:ID:       C405EA55-1F5B-4828-A83D-4EC96C5B6AD1
+:END:
+These key bindings are also used by popular shells such as *bash* or
+*zsh*. I highly recommended you to master these key bindings.
+
+- Move forward one char: *C-f* (f stands for *forward*)
+- Move backward one char: *C-b* (b stands for *backward*)
+- Move upward one line: *C-p* (p stands for *previous*)
+- Move downward one line: *C-n* (n stands for *next*)
+
+The above operations can also be done with arrow keys. if you don't
+like the above key bindings, the arrow keys offers equivalent features.
+
+- Move to beginning of line: *C-a*
+- Move to end of line: *C-e*
+- Move forward one word, *M-f*.
+- Move backward one word, *M-b*.
+
+These key bindings are in Emacs only:
+
+- Scroll forward one screen: *C-v*, *page down*
+- Scroll backward one screen: *M-v*, *page up*
+- Move to the beginning of a sentence: *M-a*
+- Move to the end of a sentence: *M-e*
+- Recenter a screen: *M-l*
+- Re-position cursor to the top, middle and bottom of the current
+  screen: *M-r*
+- Move to top of the buffer: *M-<*
+- Move to end of the buffer: *M->*
+- Move to the nth character: *M-g c* (c stands for =character=)
+- Move to the nth line: *M-g l* for Emacs < 23.2, *M-g g* for emacs >=
+  23.2) (l/g stands for =line=)
+
+Recenter means making the current line the cursor is on the center of
+your screen.
+
+You can quickly highlight a region by pressing *C-SPC* and use motion
+commands to select a region.
+
+*_Exercise_*: execute the above commands using the key bindings at
+least 10 times or until you remember. You can perform these motion
+commands on any buffer.
+*** Incremental search
+:PROPERTIES:
+:ID:       84B3D9CC-C246-4D3C-9022-49CB47813094
+:END:
+So, you want to look for something in the buffer? *C-s* invokes
+=isearch-forward=, allows you to look forward from the current point
+for something. After *C-s*, you are prompt to enter the content to
+search for. Enter the content, and press *C-s* repeatedly to travel
+through the matches forward.
+
+Similarly, *C-r* invokes =isearch-backward=, allows you to look
+backward from the current point. Press *C-r* repeatedly to travel
+through the matches backward.
+
+=isearch= can be invoked from any valid buffer.
+
+*** Basic editing commands:
+:PROPERTIES:
+:ID:       32f76107-37b6-4ce4-b4ca-2fe106e768be
+:END:
+In Emacs, =kill= means =Cut= in other editors. these key bindings also
+work under the terminal.
+
+- Kill a character at the cursor: *C-d*
+- Kill entire line: *C-S-DEL* (remember, *DEL* is your *<backspace>* key)
+- Kill forward to the end of a word from current cursor: *M-d*
+- Kill backward to the beginning of a word from the current cursor:
+  *M-DEL*
+- Kill all spaces at cursor: *M-\*
+- Kill all spaces except one at cursor: *M-SPC*
+- Kill to the end of line: *C-k*
+- Kill a sentence: *M-k*
+- Undo: *C-/*
+- Redo: *C-?*
+- Open a list of killed texts: *M-y* (not in stock Emacs)
+
+When you kill something, the killed content is put into the Kill Ring.
+
+If you write code, you can also quickly add comments or
+comment/uncomment code with *M-;*:
+
+- If you do not highlight a text region, *M-;* add a comment to the
+  end of line.
+- If you do not highlight a text region and comment is at the end of
+  line, *M-;* comments the whole line (not in stock Emacs).
+- If you do not highlight a text region and your current line is being
+  commented, *M-;* uncomments the whole line (not in stock Emacs).
+- If you highlight a region (i.e. with a mouse), *M-;* comments out
+  the region.
+
+*** Buffer commands
+:PROPERTIES:
+:ID:       839730d6-81a3-46df-89df-f96d2df4d624
+:END:
+Buffer is where you edit your file content. Buffer holds content
+of a file temporarily. Anything you write into the buffer won't make
+it into file until you explicitly save it with =save-buffer=
+command. *C-x C-s* executes the command =save-buffer=, so you can *C-x
+C-s* your files. You can also execute this from =M-x*=
+
+To save a buffer as other file ("Save As" in other editors), *C-x
+C-w*, which runs the commands =write-file=.
+
+To kill a buffer, *C-x k*. If you want to kill the current buffer,
+*RET* immediately. Otherwise, type into the prompt the buffer name you
+want to kill.
+
+In the above section, I said that point is in your file,
+well, actually point is not in a file but a buffer. From now on,
+keep file and buffer two separate and distinct concepts. When I say
+file, I refer to physical file and when I say buffer, I refer to the
+temporary content of the file that is being displayed.
+
+*_Exercise_*: Practice *C-x b* to get used to it.
+
+
+| Key       | Binding                             |
+|-----------+-------------------------------------|
+| =C-x C-s= | *Command*: =save-buffer=            |
+|           | Save the buffer at point            |
+|-----------+-------------------------------------|
+| =C-x C-w= | *Command*: =write-file=             |
+|           | Save the buffer to a different file |
+|-----------+-------------------------------------|
+| =C-x b=   | *Command*: =switch-to-buffer=       |
+|           | Switch to a different buffer        |
+|-----------+-------------------------------------|
+| =C-x k=   | *Command*: =kill-buffer=            |
+|           | Kill a buffer. *RET* to kill the    |
+|           | currently  active one               |
+|-----------+-------------------------------------|
+
+*** Window commands
+:PROPERTIES:
+:ID:       f988d119-d683-4568-8b38-cb3b700b7abf
+:END:
+Unlike other editors, Emacs can split your frame area into multiple smaller
+areas. Each such area is called a =window=. You can divide a frame
+into as many windows as you want and each window can have anything in
+it, i.e. your current editing buffer, file management buffer, help
+buffer, a shell... Basically anything that Emacs can display. Let's try them out:
+
+*_Exercise_*:
+
+*C-x 2* to split the current window into two horizontal windows. After
+splitting, you will have the exact duplicate of your current editing
+buffer. =split-window-below= is bound to *C-x 2*.
+
+*C-x 3* to split your current window into two vertical windows. After
+splitting, you will have the exact duplicate of your current editing
+buffer. =split-window-right= is bound to *C-x 3*.
+
+Now, after you execute the two commands above, you will have three
+windows: two above and one below. Each window can hold a buffer. With
+the above two commands ,you can create arbitrary window layout. In
+Emacs, a window layout is called a *window configuration*.
+
+To navigate through the windows, *C-x o* which runs the command
+=other-window=. Try cycle around the windows a few times to get used
+to it.
+
+In Emacs, =<next>= is the *PageDown* key, =<prior>= is the *PageUp*
+key. *M-<next>* runs =scroll-other-window= and scroll the other
+window forward; *M-<prior>* runs =scroll-other-window-down= and scroll
+the other window backward. Other window is the window that you visit
+when *C-x o*.
+
+*C-x 0* closes the window at point.
+
+*C-x 1* closes all other windows except the current selected
+one. Try creating another window, try *C-x 1*. Only in my
+distribution: *C-x 1* again opens previous window layout.
+
+* SML commands
+:PROPERTIES:
+:ID:       842df7b1-185f-4176-b024-4174e737b28a
+:END:
+You only need these three commands to work with your SML assignments:
+
+- *C-c C-s* runs command  =sml-prog-proc-switch-to= 
+  _Description_: Start SML REPL.
+
+  [[file:static/proglang/sml-start-proc.gif][file:static/proglang/sml-start-proc.gif]]
+
+- *C-c C-b* runs command =sml-prog-proc-send-buffer= 
+  _Description_: Send the current editing buffer to SML REPL for
+  evaluation. Here is an example of evaluating an SML test file:
+
+  [[file:static/proglang/sml-send-buffer.gif][file:static/proglang/sml-send-buffer.gif]]
+
+- *C-c C-r* runs Command: =sml-prog-proc-send-region= 
+  _Description_: Similar to =sml-prog-proc-send-buffer=, but instead
+  of sending buffer to the REPL, send a highlighting region. This is
+  useful when you want to evaluate individual expressions.
+
+  [[file:static/proglang/sml-send-region.gif][file:static/proglang/sml-send-region.gif]]
+
+* Conclusion
+:PROPERTIES:
+:ID:       97ffd86f-d638-4237-808c-94b139047d0d
+:END:
+That's it for the basics. I hope it provides you a much better
+experience with SML for the course. You can learn more about Emacs in
+my [[file:index.org][other guides]].

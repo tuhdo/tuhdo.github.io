@@ -4,4 +4,5 @@
    + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER]]
    + [[file:emacs-tutor3.org][Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS]]
    + [[file:c-ide.org][Setup C/C++ Development Environment for Emacs]]
-   + [[file:helm-intro.org][Appendix: A Package in a league of its own: =Helm=]]
+   + [[file:helm-intro.org][A Package in a league of its own: =Helm=]]
+   + [[file:emacs-for-proglang.org][Emacs for Programming Languages course on Coursera]]
