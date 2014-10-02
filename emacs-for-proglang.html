@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs for Programming Languages course on Coursera</title>
-<!-- 2014-10-02 T5 19:20 -->
+<!-- 2014-10-03 T6 00:07 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -134,6 +134,48 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="preamble" class="status">
@@ -160,12 +202,18 @@ alt="hit counter"></a></div></noscript>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Before using Emacs: Swap Control and Capslock</a>
+<li><a href="#sec-1">Before using Emacs:</a>
 <ul>
-<li><a href="#sec-1-1">Windows</a></li>
-<li><a href="#sec-1-2">Linux</a></li>
-<li><a href="#sec-1-3">Mac OS X</a></li>
-<li><a href="#sec-1-4">If you don't like to swap Capslock and Control&#x2026;</a></li>
+<li><a href="#sec-1-1">Emacs and SML in Linux:</a></li>
+<li><a href="#sec-1-2">Emacs and SML Installation on Windows</a></li>
+<li><a href="#sec-1-3">Optional but recommended: Swap Control and Capslock</a>
+<ul>
+<li><a href="#sec-1-3-1">Windows</a></li>
+<li><a href="#sec-1-3-2">Linux</a></li>
+<li><a href="#sec-1-3-3">Mac OS X</a></li>
+<li><a href="#sec-1-3-4">If you don't like to swap Capslock and Control&#x2026;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#sec-2">General basic Emacs commands</a>
@@ -194,14 +242,8 @@ course on Coursera. The course suggests students to use Emacs, but a
 stock one. This can cause confusion for new users since it does not
 include <code>sml-mode</code> by default. I made a Emacs kit specialized for this
 course here, with external common packages used by the Emacs community
-to empower Emacs:
+to empower Emacs: <a href="https://github.com/tuhdo/emacs-proglang.git">https://github.com/tuhdo/emacs-proglang.git</a>
 </p>
-
-<div class="org-src-container">
-
-<pre class="src src-shell-script"><span style="color: #374478;">git</span> <span style="color: #784437;">clone</span> <span style="color: #78683f;">https://github.com/tuhdo/emacs-proglang.git</span> <span style="color: #78683f;">~/.emacs.d</span>
-</pre>
-</div>
 
 <p>
 The kit is battery included: after cloning it, just open your Emacs
@@ -212,8 +254,98 @@ first. Racket and Ruby will come later.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5" name="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Before using Emacs: Swap Control and Capslock</h2>
+<h2 id="sec-1"><a id="ID-c638e266-96e3-4a18-be73-d51ea0481775" name="ID-c638e266-96e3-4a18-be73-d51ea0481775"></a>Before using Emacs:</h2>
 <div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><a id="ID-8acc1c68-72e7-4116-8afd-2265dda008d2" name="ID-8acc1c68-72e7-4116-8afd-2265dda008d2"></a>Emacs and SML in Linux:</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Easy way to install if you are using Ubuntu: <code>sudo apt-get install
+emacs smlnj</code>. If you use other Linux distributions, use the package
+manager of your distribution and install Emacs.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><a id="ID-51a50976-16db-4d0c-b736-4494fa57c2a7" name="ID-51a50976-16db-4d0c-b736-4494fa57c2a7"></a>Emacs and SML Installation on Windows</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>If you don't have Emacs yet, download the 64 bit version here:
+<a href="http://sourceforge.net/projects/emacsbinw64/">http://sourceforge.net/projects/emacsbinw64/</a>, unpackage it to
+<b>C:\Program Files\</b> , then create a shortcut in your desktop to
+<b>runemacs.exe</b>, an executable in the <b>emacs\bin</b> directory.
+</li>
+
+<li>Now, clone my Emacs kit:
+</li>
+</ul>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="color: #374478;">git</span> <span style="color: #784437;">clone</span> <span style="color: #78683f;">https://github.com/tuhdo/emacs-proglang.git</span> <span style="color: #78683f;">~/.emacs.d</span>
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>Or, if you don't have git, download release package in either zip or
+tar.gz format at: <a href="https://github.com/tuhdo/emacs-proglang/releases">https://github.com/tuhdo/emacs-proglang/releases</a>.
+</li>
+
+<li>You should unpackage into <b>~/.emacs.d</b>. But before that, you must
+define your <b>HOME</b> and <b>PATH</b> directory.The path <b>~/</b> stands for <b>$HOME</b>
+path in Linux, and is the default directory allocate for each user
+and the user can put whatever he/she wants there. <b>PATH</b> is an
+environment variable in Linux that makes the shell see executable
+programs, so you can execute them by specifying the program name
+only. We can use the same thing in Windows.
+</li>
+
+<li>In Windows, to set your <b>HOME</b> variable: left clicking <b>My Computer</b>
+-&gt; <b>Properties</b> -&gt; <b>Advanced System Settings</b> -&gt; <b>Advanced</b> -&gt;
+<b>Environment Variables</b> -&gt; <b>New</b>. Then enter <b>HOME</b> in <code>Variable
+  name</code>, and a path of your choice in <code>Variable value</code>. After this,
+Emacs can see the init file <code>init.el</code> in you <code>.emacs.d</code>
+directory. Remember, you have to put <b>.emacs.d</b> in your home
+directory. For example, if you home directory that you assigned to
+the <b>HOME</b> variable is <b>C:\home\</b>, then you must put <b>.emacs.d</b>
+there.
+
+
+<div class="figure">
+<p><a href="static/proglang/emacs_home.png"><img src="static/proglang/emacs_home.png" alt="emacs_home.png" /></a>
+</p>
+</div>
+</li>
+
+<li>Now that you created a <b>HOME</b> variable, you need to create one more:
+<b>PATH</b> variable. Emacs searches for any program in <b>PATH</b>
+variable. Click <b>New</b>, then enter <b>PATH</b> into <code>Variable name</code>. In
+<code>Variable value</code>, if you install SML using the standard installer,
+then it should be at <b>C:\Program Files (x86)\SMLNJ</b>. Paste that path
+into the text field. In the future, if you want to add more
+locations that contain programs Emacs can see, add more path and
+separate each path by a semicolon.
+
+
+<div class="figure">
+<p><a href="static/proglang/emacs_path.png"><img src="static/proglang/emacs_path.png" alt="emacs_path.png" /></a>
+</p>
+</div>
+</li>
+</ul>
+
+<p>
+After you finish these two important steps, try running SML inside
+Emacs by press <b>M-x (Alt + x)</b> then enter <b>run-sml</b>. Press Enter to
+confirm program to run. A REPL should appear. Congratulation, you
+succeeded.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><a id="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5" name="ID-4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5"></a>Optional but recommended: Swap Control and Capslock</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
 Swapping Control and Capslock, in general, is not required to make the
 best out of Emacs, if you at least use regular key PC keyboard or
@@ -230,17 +362,17 @@ for quick cursor movement.
 </p>
 </div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><a id="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d" name="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d"></a>Windows</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><a id="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d" name="ID-eb9ffe1f-f726-4b15-8431-b075e9ba234d"></a>Windows</h4>
+<div class="outline-text-4" id="text-1-3-1">
 <p>
 Follow this guide: <a href="http://www.kodiva.com/post/swapping-caps-lock-and-control-keys">Swapping Capslock and Control keys</a>
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><a id="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301" name="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301"></a>Linux</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><a id="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301" name="ID-32a786e9-ae18-4c7b-9d12-1940e4f2d301"></a>Linux</h4>
+<div class="outline-text-4" id="text-1-3-2">
 <p>
 Put this in your shell init file (.bashrc, .zshrc&#x2026;):
 </p>
@@ -257,21 +389,22 @@ ubuntu 13.10</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-dc1f00fd-29a6-45e0-8398-211418cba728" name="ID-dc1f00fd-29a6-45e0-8398-211418cba728"></a>Mac OS X</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><a id="ID-dc1f00fd-29a6-45e0-8398-211418cba728" name="ID-dc1f00fd-29a6-45e0-8398-211418cba728"></a>Mac OS X</h4>
+<div class="outline-text-4" id="text-1-3-3">
 <p>
 Follow this answer on StackOverflow: <a href="http://stackoverflow.com/a/162907/496700">Emacs on Mac OS X Leopard key
 bindings</a>
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><a id="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d" name="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d"></a>If you don't like to swap Capslock and Control&#x2026;</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-1-3-4" class="outline-4">
+<h4 id="sec-1-3-4"><a id="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d" name="ID-cefa92ca-8234-44bf-9ae5-66dc76aadd0d"></a>If you don't like to swap Capslock and Control&#x2026;</h4>
+<div class="outline-text-4" id="text-1-3-4">
 <p>
 You can use your palm to press Control in standard PC keyboard.
 </p>
+</div>
 </div>
 </div>
 </div>

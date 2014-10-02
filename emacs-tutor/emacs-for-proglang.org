@@ -5,11 +5,7 @@ course on Coursera. The course suggests students to use Emacs, but a
 stock one. This can cause confusion for new users since it does not
 include =sml-mode= by default. I made a Emacs kit specialized for this
 course here, with external common packages used by the Emacs community
-to empower Emacs:
-
-#+begin_src shell-script
-  git clone https://github.com/tuhdo/emacs-proglang.git ~/.emacs.d
-#+end_src
+to empower Emacs: https://github.com/tuhdo/emacs-proglang.git
 
 The kit is battery included: after cloning it, just open your Emacs
 and use it. You don't have to do anything else. I assume you know
@@ -17,7 +13,71 @@ nothing about Emacs and I will provide a basic workflow for you to use
 Emacs through the course. Currently, I will write a guide for SML
 first. Racket and Ruby will come later.
 
-* Before using Emacs: Swap Control and Capslock
+* Before using Emacs:
+:PROPERTIES:
+:ID:       c638e266-96e3-4a18-be73-d51ea0481775
+:END:
+** Emacs and SML in Linux:
+:PROPERTIES:
+:ID:       8acc1c68-72e7-4116-8afd-2265dda008d2
+:END:
+Easy way to install if you are using Ubuntu: =sudo apt-get install
+emacs smlnj=. If you use other Linux distributions, use the package
+manager of your distribution and install Emacs.
+** Emacs and SML Installation on Windows
+:PROPERTIES:
+:ID:       51a50976-16db-4d0c-b736-4494fa57c2a7
+:END:
+- If you don't have Emacs yet, download the 64 bit version here:
+  http://sourceforge.net/projects/emacsbinw64/, unpackage it to
+  *C:\Program Files\* , then create a shortcut in your desktop to
+  *runemacs.exe*, an executable in the *emacs\bin* directory.
+
+- Now, clone my Emacs kit:
+
+#+begin_src sh
+  git clone https://github.com/tuhdo/emacs-proglang.git ~/.emacs.d
+#+end_src
+
+- Or, if you don't have git, download release package in either zip or
+  tar.gz format at: https://github.com/tuhdo/emacs-proglang/releases.
+
+- You should unpackage into *~/.emacs.d*. But before that, you must
+  define your *HOME* and *PATH* directory.The path *~/* stands for *$HOME*
+  path in Linux, and is the default directory allocate for each user
+  and the user can put whatever he/she wants there. *PATH* is an
+  environment variable in Linux that makes the shell see executable
+  programs, so you can execute them by specifying the program name
+  only. We can use the same thing in Windows.
+
+- In Windows, to set your *HOME* variable: left clicking *My Computer*
+  -> *Properties* -> *Advanced System Settings* -> *Advanced* ->
+  *Environment Variables* -> *New*. Then enter *HOME* in =Variable
+  name=, and a path of your choice in =Variable value=. After this,
+  Emacs can see the init file =init.el= in you =.emacs.d=
+  directory. Remember, you have to put *.emacs.d* in your home
+  directory. For example, if you home directory that you assigned to
+  the *HOME* variable is *C:\home\*, then you must put *.emacs.d*
+  there.
+
+  [[file:static/proglang/emacs_home.png][file:static/proglang/emacs_home.png]]
+
+- Now that you created a *HOME* variable, you need to create one more:
+  *PATH* variable. Emacs searches for any program in *PATH*
+  variable. Click *New*, then enter *PATH* into =Variable name=. In
+  =Variable value=, if you install SML using the standard installer,
+  then it should be at *C:\Program Files (x86)\SMLNJ*. Paste that path
+  into the text field. In the future, if you want to add more
+  locations that contain programs Emacs can see, add more path and
+  separate each path by a semicolon.
+
+  [[file:static/proglang/emacs_path.png][file:static/proglang/emacs_path.png]]
+
+After you finish these two important steps, try running SML inside
+Emacs by press *M-x (Alt + x)* then enter *run-sml*. Press Enter to
+confirm program to run. A REPL should appear. Congratulation, you
+succeeded.
+** Optional but recommended: Swap Control and Capslock
 :PROPERTIES:
 :ID:       4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5
 :END:
@@ -32,12 +92,12 @@ it is beneficial in general, as Control is a much more frequently used
 key than Capslock. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
 
-** Windows
+*** Windows
 :PROPERTIES:
 :ID:       eb9ffe1f-f726-4b15-8431-b075e9ba234d
 :END:
 Follow this guide: [[http://www.kodiva.com/post/swapping-caps-lock-and-control-keys][Swapping Capslock and Control keys]]
-** Linux
+*** Linux
 :PROPERTIES:
 :ID:       32a786e9-ae18-4c7b-9d12-1940e4f2d301
 :END:
@@ -49,13 +109,13 @@ Put this in your shell init file (.bashrc, .zshrc...):
 
 If you use Ubuntu, follow this guide: [[http://askubuntu.com/a/412622/13847][Swap caps lock and ctrl in
 ubuntu 13.10]].
-** Mac OS X
+*** Mac OS X
 :PROPERTIES:
 :ID:       dc1f00fd-29a6-45e0-8398-211418cba728
 :END:
 Follow this answer on StackOverflow: [[http://stackoverflow.com/a/162907/496700][Emacs on Mac OS X Leopard key
 bindings]]
-** If you don't like to swap Capslock and Control...
+*** If you don't like to swap Capslock and Control...
 :PROPERTIES:
 :ID:       cefa92ca-8234-44bf-9ae5-66dc76aadd0d
 :END:
