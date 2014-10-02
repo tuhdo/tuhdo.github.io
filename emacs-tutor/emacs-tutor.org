@@ -3000,7 +3000,7 @@ VC provides other commands for version control-related tasks:
 | =C-x v g= | *Command*: =vc-annotate=                                                   |
 |           | Displays an annotated version of the file showing, for each line,          |
 |           | the commit where that line was last changed and by whom. On any            |
-|           | line you can press L to view the log message for that commit or D          |
+|           | line you can press =l= to view the log message for that commit or =d=      |
 |           | to view the associated diff.                                               |
 |-----------+----------------------------------------------------------------------------|
 | =C-x v l= | *Command*: =vc-print-log=                                                  |
