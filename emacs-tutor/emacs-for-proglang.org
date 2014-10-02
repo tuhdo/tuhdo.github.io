@@ -3,18 +3,16 @@
 I wrote this tutorial for those who are learning [[https://www.coursera.org/course/proglang][Programming Languages]]
 course on Coursera. The course suggests students to use Emacs, but a
 stock one. This can cause confusion for new users since it does not
-include =sml-mode= by default. I made a distribution of Emacs
-specialized for this course here, with external common packages used
-by the Emacs community to empower Emacs:
+include =sml-mode= by default. I made a Emacs kit specialized for this
+course here, with external common packages used by the Emacs community
+to empower Emacs:
 
 #+begin_src shell-script
-  git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
+  git clone https://github.com/tuhdo/emacs-proglang.git ~/.emacs.d
 #+end_src
 
-The repository is originally used for my [[file:c-ide.org][C/C++ guide]], and I added
-=sml-mode= to make it usable with SML source files. When you start
-Emacs with the =.emacs.d= I provide, you need to wait for awhile to
-let Emacs download all needed external packages. I assume you know
+The kit is battery included: after cloning it, just open your Emacs
+and use it. You don't have to do anything else. I assume you know
 nothing about Emacs and I will provide a basic workflow for you to use
 Emacs through the course. Currently, I will write a guide for SML
 first. Racket and Ruby will come later.

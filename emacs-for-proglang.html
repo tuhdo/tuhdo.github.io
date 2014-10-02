@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs for Programming Languages course on Coursera</title>
-<!-- 2014-10-01 Wed 16:50 -->
+<!-- 2014-10-02 T5 19:20 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -193,22 +192,20 @@ alt="hit counter"></a></div></noscript>
 I wrote this tutorial for those who are learning <a href="https://www.coursera.org/course/proglang">Programming Languages</a>
 course on Coursera. The course suggests students to use Emacs, but a
 stock one. This can cause confusion for new users since it does not
-include <code>sml-mode</code> by default. I made a distribution of Emacs
-specialized for this course here, with external common packages used
-by the Emacs community to empower Emacs:
+include <code>sml-mode</code> by default. I made a Emacs kit specialized for this
+course here, with external common packages used by the Emacs community
+to empower Emacs:
 </p>
 
 <div class="org-src-container">
 
-<pre class="src src-shell-script"><span style="color: #374478;">git</span> <span style="color: #784437;">clone</span> <span style="color: #78683f;">https://github.com/tuhdo/emacs-c-ide-demo.git</span> <span style="color: #78683f;">~/.emacs.d</span>
+<pre class="src src-shell-script"><span style="color: #374478;">git</span> <span style="color: #784437;">clone</span> <span style="color: #78683f;">https://github.com/tuhdo/emacs-proglang.git</span> <span style="color: #78683f;">~/.emacs.d</span>
 </pre>
 </div>
 
 <p>
-The repository is originally used for my <a href="c-ide.html">C/C++ guide</a>, and I added
-<code>sml-mode</code> to make it usable with SML source files. When you start
-Emacs with the <code>.emacs.d</code> I provide, you need to wait for awhile to
-let Emacs download all needed external packages. I assume you know
+The kit is battery included: after cloning it, just open your Emacs
+and use it. You don't have to do anything else. I assume you know
 nothing about Emacs and I will provide a basic workflow for you to use
 Emacs through the course. Currently, I will write a guide for SML
 first. Racket and Ruby will come later.
