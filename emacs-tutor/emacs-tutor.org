@@ -2264,9 +2264,6 @@ You can also save a region in registers.
 | *C-x r i REG* | *Command*: =insert-register=    |
 |               | Insert text from register *REG* |
 |---------------+---------------------------------|
-| *C-x r j REG* | *Command*: =jump-to-register=   |
-|               | Jump to a register *REG*.       |
-|---------------+---------------------------------|
 
 *REG* can be a letter (such as ‘a’) or a number (such as ‘1’); case
  matters, so register ‘a’ is not the same as register ‘A’.
