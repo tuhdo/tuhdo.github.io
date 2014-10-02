@@ -1508,6 +1508,7 @@ The following key bindings are available:
 | *}*     | Go to next file, *do not* display matched buffer                      |
 |---------+-----------------------------------------------------------------------|
 | *C-o*   | Display matched location, but *do not* switch point to matched buffer |
+|         | (Only available in Emacs > 24.3)                                              |
 |---------+-----------------------------------------------------------------------|
 | *n*     | Display next matched buffer, but *do not* switch point                |
 |---------+-----------------------------------------------------------------------|
