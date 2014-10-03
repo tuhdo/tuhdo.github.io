@@ -2302,7 +2302,6 @@ you got a kill ring? Here are the reasons:
 
 - Copy a few text snippets into registers.
 - Re-insert it in a buffer.
-- Jump to the location of the text in registers.
 
 *** Save rectangles
 :PROPERTIES:
