@@ -127,7 +127,32 @@ bindings]]
 :ID:       cefa92ca-8234-44bf-9ae5-66dc76aadd0d
 :END:
 You can use your palm to press Control in standard PC keyboard.
+** Optional: changing Emacs look and feel
+:PROPERTIES:
+:ID:       f0615620-f034-4adc-be6c-64de90576d12
+:END:
+You can change Emacs look and feel easily:
 
+- Press *Alt + x*.
+- Type *customize-theme* (you can press *TAB* to complete).
+- There are some default themes there, select the one you want.
+
+You can preview the themes at these two pages:
+
+- [[http://pawelbx.github.io/emacs-theme-gallery/]]
+- http://emacsthemes.caisah.info/
+
+To install the themes:
+
+- Press *Alt + x*.
+- Type *list-packages*.
+- Search for the theme names using *Control + s*. After you press
+  *Control + s*, enter the theme name and press *Control + s* again
+  for it to jump to the matched text. The theme names are above the
+  preview picture in the first website; for the second website, you
+  replace the space by dash character. For example, if a theme named
+  "Lush Theme", to search for this theme in package list, enter
+  "lush-theme".
 * General basic Emacs commands
 :PROPERTIES:
 :ID:       4630f65a-b6c6-4ad2-813b-829d44477bca
