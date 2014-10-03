@@ -153,6 +153,17 @@ To install the themes:
   replace the space by dash character. For example, if a theme named
   "Lush Theme", to search for this theme in package list, enter
   "lush-theme".
+
+Currently, my kit comes with two popular and nice Emacs themes:
+
+- Zenburn theme: This is the default theme in this Emacs kit.
+
+[[file:static/proglang/zenburn.png][file:static/proglang/zenburn.png]]
+
+- Monokai theme:
+
+[[file:static/proglang/monokai.png][file:static/proglang/monokai.png]]
+
 * General basic Emacs commands
 :PROPERTIES:
 :ID:       4630f65a-b6c6-4ad2-813b-829d44477bca
