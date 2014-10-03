@@ -24,6 +24,13 @@ first. Racket and Ruby will come later.
 Easy way to install if you are using Ubuntu: =sudo apt-get install
 emacs smlnj=. If you use other Linux distributions, use the package
 manager of your distribution and install Emacs.
+
+After that, clone the Emacs kit to your =~/.emacs.d=:
+
+#+begin_src sh
+  git clone https://github.com/tuhdo/emacs-proglang.git ~/.emacs.d
+#+end_src
+
 ** Emacs and SML Installation on Windows
 :PROPERTIES:
 :ID:       51a50976-16db-4d0c-b736-4494fa57c2a7
