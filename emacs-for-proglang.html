@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs for Programming Languages course on Coursera</title>
-<!-- 2014-10-03 Fri 12:39 -->
+<!-- 2014-10-04 T7 21:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -220,15 +219,16 @@ alt="hit counter"></a></div></noscript>
 </li>
 <li><a href="#sec-2">General basic Emacs commands</a>
 <ul>
-<li><a href="#sec-2-1">Emacs Key Notation</a></li>
-<li><a href="#sec-2-2">Emacs Keys are easy to remember</a></li>
-<li><a href="#sec-2-3">Some basic commands</a>
+<li><a href="#sec-2-1">Command</a></li>
+<li><a href="#sec-2-2">Emacs Key Notation</a></li>
+<li><a href="#sec-2-3">Emacs Keys are easy to remember</a></li>
+<li><a href="#sec-2-4">Some basic commands</a>
 <ul>
-<li><a href="#sec-2-3-1">Basic motion commands</a></li>
-<li><a href="#sec-2-3-2">Incremental search</a></li>
-<li><a href="#sec-2-3-3">Basic editing commands:</a></li>
-<li><a href="#sec-2-3-4">Buffer commands</a></li>
-<li><a href="#sec-2-3-5">Window commands</a></li>
+<li><a href="#sec-2-4-1">Basic motion commands</a></li>
+<li><a href="#sec-2-4-2">Incremental search</a></li>
+<li><a href="#sec-2-4-3">Basic editing commands:</a></li>
+<li><a href="#sec-2-4-4">Buffer commands</a></li>
+<li><a href="#sec-2-4-5">Window commands</a></li>
 </ul>
 </li>
 </ul>
@@ -503,10 +503,38 @@ I took some parts from my other guide <a href="emacs-tutor.html">Emacs Mini Manu
 BASICS</a>. I recommend you to follow the mini manual when you have time.
 </p>
 </div>
-
 <div id="outline-container-sec-2-1" class="outline-3">
-<h3 id="sec-2-1"><a id="ID-c428fffd-3636-43e4-916e-9bc67c48db4e" name="ID-c428fffd-3636-43e4-916e-9bc67c48db4e"></a>Emacs Key Notation</h3>
+<h3 id="sec-2-1"><a id="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e" name="ID-4bb52c4a-1d30-42e0-999b-b18d8831997e"></a>Command</h3>
 <div class="outline-text-3" id="text-2-1">
+<p>
+In Emacs, every user interaction is a function. You press a key to
+insert a character, Emacs runs <code>self-insert-command</code>. There are two
+types of functions in Emacs:
+</p>
+
+<ul class="org-ul">
+<li><b>Normal functions</b>: These are like functions in other
+programming languages, and are used for implementing features in
+Emacs. Users do not need to care about these functions, unless
+they want to implement something or modifying the
+implementations.
+</li>
+
+<li><b>Commands</b>: Commands are like functions, but interactive. It
+means, commands are features provided to users and users
+directly use them.
+</li>
+</ul>
+
+<p>
+<code>execute-extended-command</code> is bound to <b>M-x</b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><a id="ID-c428fffd-3636-43e4-916e-9bc67c48db4e" name="ID-c428fffd-3636-43e4-916e-9bc67c48db4e"></a>Emacs Key Notation</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 Taken from here: <a href="http://www.emacswiki.org/emacs/EmacsKeyNotation">EmacsWiki</a>
 </p>
@@ -631,9 +659,9 @@ many built-in tools such as <i>Dired</i>, <i>Ibuffer</i>, <i>Occur</i>&#x2026;
 </div>
 </div>
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h3 id="sec-2-2"><a id="ID-f9a9dca0-7c8f-45bd-9ace-da5d6bb27577" name="ID-f9a9dca0-7c8f-45bd-9ace-da5d6bb27577"></a>Emacs Keys are easy to remember</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><a id="ID-f9a9dca0-7c8f-45bd-9ace-da5d6bb27577" name="ID-f9a9dca0-7c8f-45bd-9ace-da5d6bb27577"></a>Emacs Keys are easy to remember</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 The key bindings have a few simple and easy to remember rules:
 </p>
@@ -670,9 +698,9 @@ bindings are not difficult to remember.
 </div>
 </div>
 
-<div id="outline-container-sec-2-3" class="outline-3">
-<h3 id="sec-2-3"><a id="ID-9f33c953-75d4-4418-a1fb-7a27ff17c276" name="ID-9f33c953-75d4-4418-a1fb-7a27ff17c276"></a>Some basic commands</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><a id="ID-9f33c953-75d4-4418-a1fb-7a27ff17c276" name="ID-9f33c953-75d4-4418-a1fb-7a27ff17c276"></a>Some basic commands</h3>
+<div class="outline-text-3" id="text-2-4">
 
 <ul class="org-ul">
 <li>Open file: <b>C-x C-f</b> and browse to the file. You can fuzzy match
@@ -712,9 +740,9 @@ buffer is at the top. Press <b>RET</b> to confirm killing the buffer.
 </ul>
 </div>
 
-<div id="outline-container-sec-2-3-1" class="outline-4">
-<h4 id="sec-2-3-1"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1" name="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<div id="outline-container-sec-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1"><a id="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1" name="ID-C405EA55-1F5B-4828-A83D-4EC96C5B6AD1"></a>Basic motion commands</h4>
+<div class="outline-text-4" id="text-2-4-1">
 <p>
 These key bindings are also used by popular shells such as <b>bash</b> or
 <b>zsh</b>. I highly recommended you to master these key bindings.
@@ -793,9 +821,9 @@ commands on any buffer.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-2-3-2" class="outline-4">
-<h4 id="sec-2-3-2"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094" name="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h4>
-<div class="outline-text-4" id="text-2-3-2">
+<div id="outline-container-sec-2-4-2" class="outline-4">
+<h4 id="sec-2-4-2"><a id="ID-84B3D9CC-C246-4D3C-9022-49CB47813094" name="ID-84B3D9CC-C246-4D3C-9022-49CB47813094"></a>Incremental search</h4>
+<div class="outline-text-4" id="text-2-4-2">
 <p>
 So, you want to look for something in the buffer? <b>C-s</b> invokes
 <code>isearch-forward</code>, allows you to look forward from the current point
@@ -816,9 +844,9 @@ through the matches backward.
 </div>
 </div>
 
-<div id="outline-container-sec-2-3-3" class="outline-4">
-<h4 id="sec-2-3-3"><a id="ID-32f76107-37b6-4ce4-b4ca-2fe106e768be" name="ID-32f76107-37b6-4ce4-b4ca-2fe106e768be"></a>Basic editing commands:</h4>
-<div class="outline-text-4" id="text-2-3-3">
+<div id="outline-container-sec-2-4-3" class="outline-4">
+<h4 id="sec-2-4-3"><a id="ID-32f76107-37b6-4ce4-b4ca-2fe106e768be" name="ID-32f76107-37b6-4ce4-b4ca-2fe106e768be"></a>Basic editing commands:</h4>
+<div class="outline-text-4" id="text-2-4-3">
 <p>
 In Emacs, <code>kill</code> means <code>Cut</code> in other editors. These key bindings also
 work under the terminal.
@@ -881,9 +909,9 @@ the region.
 </div>
 </div>
 
-<div id="outline-container-sec-2-3-4" class="outline-4">
-<h4 id="sec-2-3-4"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624" name="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer commands</h4>
-<div class="outline-text-4" id="text-2-3-4">
+<div id="outline-container-sec-2-4-4" class="outline-4">
+<h4 id="sec-2-4-4"><a id="ID-839730d6-81a3-46df-89df-f96d2df4d624" name="ID-839730d6-81a3-46df-89df-f96d2df4d624"></a>Buffer commands</h4>
+<div class="outline-text-4" id="text-2-4-4">
 <p>
 Buffer is where you edit your file content. Buffer holds content
 of a file temporarily. Anything you write into the buffer won't make
@@ -983,9 +1011,9 @@ temporary content of the file that is being displayed.
 </div>
 </div>
 
-<div id="outline-container-sec-2-3-5" class="outline-4">
-<h4 id="sec-2-3-5"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf" name="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window commands</h4>
-<div class="outline-text-4" id="text-2-3-5">
+<div id="outline-container-sec-2-4-5" class="outline-4">
+<h4 id="sec-2-4-5"><a id="ID-f988d119-d683-4568-8b38-cb3b700b7abf" name="ID-f988d119-d683-4568-8b38-cb3b700b7abf"></a>Window commands</h4>
+<div class="outline-text-4" id="text-2-4-5">
 <p>
 Unlike other editors, Emacs can split your frame area into multiple smaller
 areas. Each such area is called a <code>window</code>. You can divide a frame

@@ -170,6 +170,25 @@ Currently, my kit comes with two popular and nice Emacs themes:
 :END:
 I took some parts from my other guide [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - THE
 BASICS]]. I recommend you to follow the mini manual when you have time.
+** Command
+:PROPERTIES:
+:ID:       4bb52c4a-1d30-42e0-999b-b18d8831997e
+:END:
+In Emacs, every user interaction is a function. You press a key to
+insert a character, Emacs runs =self-insert-command=. There are two
+types of functions in Emacs:
+
+    - *Normal functions*: These are like functions in other
+      programming languages, and are used for implementing features in
+      Emacs. Users do not need to care about these functions, unless
+      they want to implement something or modifying the
+      implementations.
+
+    - *Commands*: Commands are like functions, but interactive. It
+      means, commands are features provided to users and users
+      directly use them.
+
+=execute-extended-command= is bound to *M-x*.
 
 ** Emacs Key Notation
 :PROPERTIES:
