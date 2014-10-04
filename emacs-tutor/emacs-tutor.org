@@ -350,9 +350,9 @@ You can use your palm to press Control in standard PC keyboard.
 :PROPERTIES:
 :ID:       4bb52c4a-1d30-42e0-999b-b18d8831997e
 :END:
-In Emacs, every user interaction is a function. You press a key to
-insert a character, Emacs runs =self-insert-command=. There are two
-types of functions in Emacs:
+In Emacs, every user interaction is a function execution. You press a
+key to insert a character, Emacs runs =self-insert-command=. There are
+two types of functions in Emacs:
 
     - *Normal functions*: These are like functions in other
       programming languages, and are used for implementing features in
