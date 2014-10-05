@@ -247,7 +247,7 @@ To use Emacs with GUI:
 - =./autogen.sh=
 - Add prefix and path to where you want to install. This is useful if
   you work on remote server without root access: =./configure
-  --with-x-tookit=gtk3 [--prefix=/path/to/dir]=
+  --with-x-toolkit=gtk3 [--prefix=/path/to/dir]=
 
   You should use GTKx 3, so you will be able to use true type fonts
   such as Inconsolata for better Emacs experience.
