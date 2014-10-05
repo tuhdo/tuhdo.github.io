@@ -2998,8 +2998,8 @@ package:
 
 _Usage_:
 
-The above setup binds *C-h C-m* to =discover-my-major=. In a buffer,
-*C-h C-m* and you will see key bindings of that major mode and its
+The above setup binds *C-h h m* to =discover-my-major=. In a buffer,
+*C-h h m* and you will see key bindings of that major mode and its
 description, as opposed to usual *C-h m* which gives mappings between
 keys and commands.
 
