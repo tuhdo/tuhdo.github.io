@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-09-25 Thu 10:02 -->
+<!-- 2014-10-06 T2 01:15 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -4087,7 +4086,7 @@ Emacs won't be able to load your module. Sample configuration:
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Environment -&gt; Mode Line    ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
-<span style="color: #707183;">(</span><span style="color: #5e7837;">column-number-mode</span><span style="color: #707183;">)</span><span style="color: #7e544f;">p</span>
+<span style="color: #707183;">(</span><span style="color: #5e7837;">column-number-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -4546,8 +4545,8 @@ package:
 </p>
 
 <p>
-The above setup binds <b>C-h C-m</b> to <code>discover-my-major</code>. In a buffer,
-<b>C-h C-m</b> and you will see key bindings of that major mode and its
+The above setup binds <b>C-h h m</b> to <code>discover-my-major</code>. In a buffer,
+<b>C-h h m</b> and you will see key bindings of that major mode and its
 description, as opposed to usual <b>C-h m</b> which gives mappings between
 keys and commands.
 </p>
