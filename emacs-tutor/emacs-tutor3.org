@@ -2683,7 +2683,7 @@ Emacs won't be able to load your module. Sample configuration:
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; GROUP: Environment -> Mode Line    ;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (column-number-mode)p
+  (column-number-mode 1)
 #+end_src
 
 *** Package: =nyan-mode=
