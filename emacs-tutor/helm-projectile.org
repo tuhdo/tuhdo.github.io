@@ -1,40 +1,70 @@
-#+TITLE: Easy project management with Projectile and Helm Projectile
+#+TITLE: Large project amangement with Projectile and Helm Projectile
+
+From the homepage:
+
+#+BEGIN_QUOTE
+=Projectile= is a project interaction library for Emacs. Its goal is to
+provide a nice set of features operating on a project level without
+introducing external dependencies(when feasible). For instance -
+finding project files has a portable implementation written in pure
+Emacs Lisp without the use of GNU find (but for performance sake an
+indexing mechanism backed by external commands exists as well).
+
+Projectile tries to be practical - portability is great, but if some
+external tools could speed up some task substantially and the tools
+are available, Projectile will leverage them.
+
+By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
+projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
+=bundler=. If you want to mark a folder manually as a project just
+create an empty =.projectile= file in it.
+#+END_QUOTE
 
 This tutorial will help you quickly benefit from =projectile= and
 =helm-projectile= - an extension of =projectile= that uses =helm=
 interface for many =projectile= commands that provides even more
-features not available in stock =projectile=. Let's start with a few
-demos.
+features not available in stock =projectile= - in a practical task like
+exploring the Linux kernel. 
+
+This tutorial is about how to use Projectile along with Helm. There
+are other completion systems such as =grizzl= or =ido= with =flx=, both use
+fuzzy finding. Helm also does almost the same thing, except instead of
+fuzzy matching, Helm uses regex matching and provides more features
+beyond matching. If you do not like Helm, just follow this tutorial,
+then change completion system to your preference later.
+
+Let's start with a few demos.
 
 * Demos
 :PROPERTIES:
 :ID:       0d349662-dba2-423b-bd99-d23c9f45cb3a
 :END:
-
-** Select and open multiple files:
+** Select and open multiple files
 :PROPERTIES:
 :ID:       9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d
 :END:
 
 [screenshot]
 
-** Open file at point anywhere, based on context (do what you mean):
+** Open file at point anywhere
 :PROPERTIES:
 :ID:       ddf35ac3-6090-4f49-a358-8085ad30000f
 :END:
 
 [screenshot]
 
-As you can see in the
+As you can see in the demo, Projectile can jump anywhere, even if
+there's only a filename without path. It works everywhere, even in
+text file.
 
-** Switch between projects with or without leaving current project:
+** Switch between projects with or without leaving current project
 :PROPERTIES:
 :ID:       d7b2632e-dac4-4452-bb5e-342848a51989
 :END:
 
 [screenshot] 
 
-** Switch between current file and other file with same names but  different extensions (customizable):
+** Switch between current file and other file with same names but different extensions (customizable)
 :PROPERTIES:
 :ID:       37f4d587-ab1f-417b-a949-b7e5ac6041c0
 :END:
@@ -43,75 +73,193 @@ As you can see in the
 :PROPERTIES:
 :ID:       c85c6d2f-d00d-41ef-8f07-3d52d23c92a6
 :END:
+You also install =Projectile= via MELPA and setup:
+
+#+begin_src emacs-lisp
+  (projectile-global-mode)
+
+  (setq projectile-completion-system 'helm
+        projectile-switch-project-action 'helm-projectile)
+
+  (helm-projectile-on)
+#+end_src
+
+All Projectile commands has prefix =C-c p=.
 * All-in-one command: =helm-projectile=, *C-c p h*
 :PROPERTIES:
 :ID:       cd4cc853-affb-4b2a-a894-55a583c9b756
 :END:
 
+* Enter project portal: =helm-projectile-switch-project=, *C-c p p*
+:PROPERTIES:
+:ID:       8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded
+:END:
+This is the very first command you need to use before using other
+commands, because this is the entrance to all of your projects and
+this is the only command that can be used outside of a project. The
+command lists all visited projects. If you first use Projectile, you
+have to visit at least a project supported by Projectile to let it
+remember the location of this project. The next time you won't have to
+manually navigate that project but jump to it instantly using
+=helm-projectile-switch-project=.
+
+[screenshot]
+
+Available actions:
+
+- =Switch to project= (default action bound to *RET*):
+
+[screenshot]
+
+- =Open Dired in project's directory= (*C-d* or *f1*):
+- =Open project root in vc-dir or magit= (*M-g* or *f2*):
+- =Switch to Eshell= (*M-e* or *f3*):
+- =Grep in projects= (*C-s* or *f4*):
+- =Compile project= (*C-c* or *f5*):
+
 * File management
 :PROPERTIES:
 :ID:       b217795d-c945-4a63-8f22-ce7eaf7ebc5d
 :END:
-** Command: =helm-projectile-find-file= or =projectile-find-file=, *C-c p f*
+** Command: =helm-projectile-find-file=, *C-c p f*
 :PROPERTIES:
 :ID:       d5bf76c1-08af-4429-83bf-18615cbafb95
 :END:
+This command lists all files in a project for users to narrow 
+down to wanted files. Some frequently used actions that cover open,
+rename, copy, delete and search operations:
 
-** Command: =helm-projectile-find-file-dwim= or =projectile-find-file-dwim=, *C-c p g*
+*** Open 
+:PROPERTIES:
+:ID:       400557f8-b7a0-4ea7-9744-3d9d3356867d
+:END:
+
+- =Find File= (default action bound to *RET*): open files; if multiple
+  files are marked, open them all.
+
+  [screenshot]
+
+- =Find file other window= (*C-c o*)
+  
+  [screenshot]
+
+- =Find file other frame= (*C-c C-o*)
+
+- =Find File in Dired= (*f2*): 
+
+  [screenshot]
+
+- =Find file as root= (*C-x @*)
+
+  [screenshot]
+
+*** Rename 
+:PROPERTIES:
+:ID:       df231b0d-9a59-45b0-9b29-6f47ff19ff55
+:END:
+
+- =Rename file(s)= (*M-R*): Rename selected files. You must have two
+  buffers side by side: one is a buffer that is running current
+  =helm-projectile-find-file= command and another is destination
+  buffer. When this action is executed, it copies marked files to the
+  directory of destination buffers.
+
+  [screenshot]
+
+- =Serial rename files= (*f6*):
+- =Serial rename by symlinking files= (*f7*):
+
+*** Copy and Delete
+:PROPERTIES:
+:ID:       0276d133-1547-4c46-a598-324add5eeb27
+:END:
+
+
+- =Copy file(s)= (*M-C*): similar to =Rename File(s)= action but copy
+  files instead.
+- =Delete File(s)= (*C-c d* or *M-D*): delete marked file(s).
+
+*** Search and Replace
+:PROPERTIES:
+:ID:       bb0e3512-f3f1-42c2-80ec-50d47fc7ba57
+:END:
+
+- =Grep File(s)= (*C-s*; adding *C-u* before *C-s* for recursive
+  grep):
+- =Zgrep=
+
+*** Miscelaneous
+:PROPERTIES:
+:ID:       3822d245-6836-469d-bc2f-45a0a6e4b941
+:END:
+
+** Command: =helm-projectile-find-file-dwim=, *C-c p g*
 :PROPERTIES:
 :ID:       5fcd616f-a139-4c0a-a4ff-5e2c435d08a3
 :END:
+Find file based on context at point (do what you mean):
 
-** Command: =helm-projectile-find-dir= or =projectile-find-dir=, *C-c p d*
+- If it finds just a file, it switches to that file instantly.  This
+  works even if the filename is incomplete, but there's only a single
+  file in the current project that matches the filename at point. For
+  example, if there's only a single file named
+  "projectile/projectile.el" but the current filename is
+  "projectile/proj" (incomplete), the command still switches
+  to "projectile/projectile.el" immediately because this is the only
+  filename that matches.
+
+- If it finds a list of files, the list is displayed for selecting. A
+  list of files is displayed when a filename appears more than one in
+  the project or the filename at point is a prefix of more than two
+  files in a project. For example, if `projectile-find-file' is
+  executed on a path like "projectile/", it lists the content of that
+  directory. If it is executed on a partial filename like
+  "projectile/a", a list of files with character 'a' in that directory
+  is presented.
+
+- If it finds nothing, display a list of all files in project for
+  selecting.
+
+This command is demonstrated at the beginning [[*Open%20file%20at%20point%20anywhere,%20based%20on%20context%20(do%20what%20you%20mean):][Open file at point
+anywhere, based on context (do what you mean)]]. 
+
+** Command: =helm-projectile-find-dir=, *C-c p d*
 :PROPERTIES:
 :ID:       ff87062c-1e31-4601-89fb-19df0dd01e7b
 :END:
+List of available directories in the current project. Available
+actions:
 
-** Command: =helm-projectile-recentf= or =projectile-recentf=, *C-c p e*
+- =Open Dired in project's directory=: Open the directory in a Dired
+  buffer.
+- =Switch to Eshell= (*M-e*): Open the directory in Eshell.
+- =Grep in projects= (*C-s*; add prefix *C-u* for recurse Grep): Run
+  =grep= on selected directory.
+
+** Command: =helm-projectile-recentf=, *C-c p e*
 :PROPERTIES:
 :ID:       e6e3eb34-1de4-4d4c-875d-47e94503f572
 :END:
+List recently visited files in *current project*.
 
-** Command: =projectile-find-other-file=, *C-c p a*
+** Command: =helm-projectile-find-other-file=, *C-c p a*
 :PROPERTIES:
 :ID:       74179568-a5b0-4a8f-8f30-b75959d4e190
 :END:
 
-** Command: =projectile-find-test-file=, *C-c p T*
-:PROPERTIES:
-:ID:       920991dd-99d9-4753-b5d1-fd517b50ea9d
-:END:
+Switch between files with the same name but different extensions. With
+prefix argument *C-u*, enable flex-matching that match any file that
+contains the name of current file.
 
-** Command: =projectile-find-file-in-directory=, *C-c p l*
-:PROPERTIES:
-:ID:       f336de08-1127-49eb-9ece-f2cfbd8e76a2
-:END:
+Other file extensions can be customized with the variable
+=projectile-other-file-alist=.
 
-** Command: =projectile-toggle-between-implementation-and-test=, *C-c p t*
-:PROPERTIES:
-:ID:       316546d3-0019-4c7f-8fd8-dbe01262b810
-:END:
-
-** Command: =projectile-find-file-in-known-projects=, *C-c p F*
-:PROPERTIES:
-:ID:       7a3f7dc3-57ea-45c9-818b-49252cf5f0a0
-:END:
-
-** Command: =projectile-dired=, *C-c p D*
-:PROPERTIES:
-:ID:       0698a04a-7d27-41cc-997a-0bf2224b54e2
-:END:
-
-** Command: =projectile-vc=, *C-c p v*
-:PROPERTIES:
-:ID:       069873f6-b9cb-4eab-924d-c6f58f95e101
-:END:
+[screenshot]
 
 ** Caching
 :PROPERTIES:
 :ID:       5a69b97f-e61f-4633-b6c8-9dc6cc1ac751
 :END:
-
 *** Command: =projectile-invalidate-cache=
 :PROPERTIES:
 :ID:       e33dd757-4594-466a-b194-ceba73f16b44
@@ -130,79 +278,5 @@ As you can see in the
 :PROPERTIES:
 :ID:       d6eea79b-d77a-43e0-84ef-a5d7a157f7b6
 :END:
-
-** Command: =projectile-ibuffer=, *C-c p I*
-:PROPERTIES:
-:ID:       c3246135-f5a1-49aa-b98a-3087f6fb297c
-:END:
-
-** Command: =projectile-save-project-buffers=, *C-c p S*
-:PROPERTIES:
-:ID:       43b54f92-6ef8-4d14-91a4-834c0bf6789d
-:END:
-
-** Command: =projectile-project-buffers-other-buffer=, *C-c p ESC*
-:PROPERTIES:
-:ID:       c5d157c7-0af8-4214-9271-e98be90e0cde
-:END:
-
-* Search and replace
-:PROPERTIES:
-:ID:       3ebbe03a-30b2-4698-ac54-fcdef1e05609
-:END:
-** Command: =projectile-grep= or =projectile-ack= or =projectile-ag=
-:PROPERTIES:
-:ID:       ffd90259-73d5-4a06-81f5-2e6799614d45
-:END:
-
-** Command: =projectile-multi-occur=
-:PROPERTIES:
-:ID:       4995514b-8b51-473a-a0ab-064feed52e19
-:END:
-
-** Command: =projectile-replace=, *C-c p r*
-:PROPERTIES:
-:ID:       ef2422b7-42ed-4766-9017-f4fc38935d1c
-:END:
-
-** Command: =projectile-find-tag=, *C-c p j*
-:PROPERTIES:
-:ID:       e76f1651-dd9e-4739-9d90-d2008e4b6755
-:END:
-
-** Command: =projectile-regenerate-tags=, *C-c p R*
-:PROPERTIES:
-:ID:       89c3cbb2-4054-4c61-9c2f-94571eb00ec2
-:END:
-
-** Command: =projectile-kill-buffers=, *C-c p k*
-:PROPERTIES:
-:ID:       debf0965-21e7-4b8c-922c-4a249cec409b
-:END:
-
-** Command: =projectile-display-buffer=, *C-c p 4 C-o*
-:PROPERTIES:
-:ID:       34e0cd6a-b4d6-4d72-ab5b-9b0269676b58
-:END:
-
-* Run external commands
-:PROPERTIES:
-:ID:       fef6b304-9257-49ca-b23e-e9caa744749c
-:END:
-** Command: =projectile-compile-project=, *C-c p c*
-:PROPERTIES:
-:ID:       f90bb620-70cf-4962-a71b-f242e1013c13
-:END:
-** Command: =projectile-test-project=, *C-c p P*
-:PROPERTIES:
-:ID:       0cd4ce1c-c419-4fae-9e12-76131a1f1cb8
-:END:
-** Command: =projectile-run-shell-command-in-root=, *C-c p !*
-:PROPERTIES:
-:ID:       4cf5ae5e-438e-4209-90fb-5023f7a85378
-:END:
-** Command: =projectile-run-async-shell-command-in-root=, *C-c p &*
-:PROPERTIES:
-:ID:       1bb9511e-ca77-4911-ae70-3c914a397781
-:END:
+List all opened buffers in *current project*.
 
