@@ -1,4 +1,4 @@
-#+TITLE: An introduction to projectile and Helm Projectile
+#+TITLE: An introduction to Projectile and Helm Projectile
 
 Let's start with a few demos.
 
