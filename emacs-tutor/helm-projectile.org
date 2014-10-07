@@ -1,4 +1,4 @@
-#+TITLE: Large project amangement with Projectile and Helm Projectile
+#+TITLE: An introduction to Projectile and Helm Projectile
 
 From the homepage:
 
@@ -85,6 +85,7 @@ You also install =Projectile= via MELPA and setup:
 #+end_src
 
 All Projectile commands has prefix =C-c p=.
+
 * All-in-one command: =helm-projectile=, *C-c p h*
 :PROPERTIES:
 :ID:       cd4cc853-affb-4b2a-a894-55a583c9b756
@@ -127,37 +128,57 @@ Available actions:
 :END:
 This command lists all files in a project for users to narrow 
 down to wanted files. Some frequently used actions that cover open,
-rename, copy, delete and search operations:
+rename, copy, delete,search and other miscelaneous operations. Once
+you mastered the actions of =helm-projectile-find-file=, you master
+the actions of other commands as well since the actions of other
+commands are just a subset of =helm-projectile-find-file= actions. All
+the key bindings associated with actions are only available while a
+Helm buffer is active. You can think of actions as an mini version of
+*M-x*: only applicable commands are listed, and even those commands
+have key bindings. Prefix argument can be applied, when possible.
+
+The same Helm interface can be used to search for an action. The first
+12 actions are bound from *<f1>* to *<f12>*. You can type the index
+number to instantly narrow to that action, or simply press respective
+key.
 
 *** Open 
 :PROPERTIES:
 :ID:       400557f8-b7a0-4ea7-9744-3d9d3356867d
 :END:
 
-- =Find File= (default action bound to *RET*): open files; if multiple
++ =Find File= (default action bound to *RET*): open files; if multiple
   files are marked, open them all.
 
   [screenshot]
 
-- =Find file other window= (*C-c o*)
++ =Find file other window= (*C-c o*)
   
   [screenshot]
 
-- =Find file other frame= (*C-c C-o*)
++ =Find file other frame= (*C-c C-o*)
 
-- =Find File in Dired= (*f2*): 
++ =Find File in Dired=: 
+
+  [screenshot]
+
++ =Find file as root= (*C-x @*)
 
   [screenshot]
 
-- =Find file as root= (*C-x @*)
++ =Find file in hex dump=: Open file using [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html][hexl]].
 
-  [screenshot]
++ =View file=: Open file for read-only.
+
++ =Open file externally= (*C-c C-x*, add prefix *C-u* to choose a
+  program): Open file using external applications. Once an application
+  is selected, it is remembered as default application for the
+  selected file type.
 
 *** Rename 
 :PROPERTIES:
 :ID:       df231b0d-9a59-45b0-9b29-6f47ff19ff55
 :END:
-
 - =Rename file(s)= (*M-R*): Rename selected files. You must have two
   buffers side by side: one is a buffer that is running current
   =helm-projectile-find-file= command and another is destination
@@ -166,17 +187,21 @@ rename, copy, delete and search operations:
 
   [screenshot]
 
-- =Serial rename files= (*f6*):
-- =Serial rename by symlinking files= (*f7*):
+- =Serial rename files=: Rename multiple files at once.
+
+[screenshot]
+
+- =Serial rename by symlinking files=:
+
+- =Serial rename by copying files=:
 
 *** Copy and Delete
 :PROPERTIES:
 :ID:       0276d133-1547-4c46-a598-324add5eeb27
 :END:
-
-
 - =Copy file(s)= (*M-C*): similar to =Rename File(s)= action but copy
   files instead.
+
 - =Delete File(s)= (*C-c d* or *M-D*): delete marked file(s).
 
 *** Search and Replace
@@ -184,14 +209,40 @@ rename, copy, delete and search operations:
 :ID:       bb0e3512-f3f1-42c2-80ec-50d47fc7ba57
 :END:
 
-- =Grep File(s)= (*C-s*; adding *C-u* before *C-s* for recursive
+- =Grep File(s)= (*C-s*; add *C-u* before *C-s* for recursive
   grep):
+
 - =Zgrep=
+
+- =Locate= (*C-x C-f*, add *C-u* to specify locate db):
 
 *** Miscelaneous
 :PROPERTIES:
 :ID:       3822d245-6836-469d-bc2f-45a0a6e4b941
 :END:
+- =Switch to history= (*M-p*): 
+
+- =Ediff File= (*C-=*):
+
+- =Ediff Merge File= (*C-c =*):
+
+- =Symlink files(s)= (*M-S): Create symbolic link, using absolute
+  path. If another buffer is available, choose the directory of that
+  buffer as destination, similar to =Rename files(s)= action.
+
+- =Relsymlink file(s)=: Create symbolic link, using relative path. If
+  another buffer is available, choose the directory of that buffer as
+  destination, similar to =Rename files(s)= action.
+
+- =Hardlink file(s)= (*M-H*): Create hard link. If another buffer is
+  available, choose the directory of that buffer as destination,
+  similar to =Rename files(s)= action.
+
+- 
+
+- =Checksum File=:
+
+- =Print File= (*C-c p*, add *C-u* to refresh): 
 
 ** Command: =helm-projectile-find-file-dwim=, *C-c p g*
 :PROPERTIES:
@@ -240,16 +291,20 @@ actions:
 :PROPERTIES:
 :ID:       e6e3eb34-1de4-4d4c-875d-47e94503f572
 :END:
-List recently visited files in *current project*.
+List recently visited files in *current project*. The command has a
+subset of actions in =helm-projectile-find-file=, so once you mastered
+the actions in =helm-projectile-find-file=, you don't need to learn
+anything else.
 
 ** Command: =helm-projectile-find-other-file=, *C-c p a*
 :PROPERTIES:
 :ID:       74179568-a5b0-4a8f-8f30-b75959d4e190
 :END:
-
 Switch between files with the same name but different extensions. With
 prefix argument *C-u*, enable flex-matching that match any file that
-contains the name of current file.
+contains the name of current file. The command has a subset of actions
+in =helm-projectile-find-file=, so once you mastered the actions in
+=helm-projectile-find-file=, you don't need to learn anything else.
 
 Other file extensions can be customized with the variable
 =projectile-other-file-alist=.
@@ -278,5 +333,7 @@ Other file extensions can be customized with the variable
 :PROPERTIES:
 :ID:       d6eea79b-d77a-43e0-84ef-a5d7a157f7b6
 :END:
-List all opened buffers in *current project*.
-
+List all opened buffers in *current project*. The command has a
+similar subset of actions in =helm-projectile-find-file=, so once you
+mastered the actions in =helm-projectile-find-file=, except instead of
+opening files, you open buffers instead.
