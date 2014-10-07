@@ -299,7 +299,8 @@ key.
 
 - ~Serial rename files~: Rename multiple files at once to the same
   name differentiated by the index at the end, and move files to a
-  prompted directory.
+  prompted directory. If there is a buffer in other window, default to
+  the directory of that buffer.
 
   Demo (begins when ~START DEMO~ appears in minibuffer):
 
