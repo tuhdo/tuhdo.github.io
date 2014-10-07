@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>An introduction to projectile and Helm Projectile</title>
+<!-- 2014-10-08 T4 01:13 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="./static/worg.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9874755;
+var sc_invisible=1;
+var sc_security="c2028bb7";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/" target="_blank"><img
+class="statcounter" src="http://c.statcounter.com/9874755/0/c2028bb7/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+<h2><a href="index.html">Back</a></h2>
+</div>
+<div id="content">
+<h1 class="title">An introduction to projectile and Helm Projectile</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Demos</a>
+<ul>
+<li><a href="#sec-1-1">Select and open multiple files</a></li>
+<li><a href="#sec-1-2">Open file at point anywhere</a></li>
+<li><a href="#sec-1-3">Switch between current file and other files with same names but different extensions</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">What is <code>projectile</code>?</a></li>
+<li><a href="#sec-3">Installation and configuration</a></li>
+<li><a href="#sec-4">All-in-one command: <code>helm-projectile</code>, <b>C-c p h</b></a></li>
+<li><a href="#sec-5">Enter project portal: <code>helm-projectile-switch-project</code>, <b>C-c p p</b></a></li>
+<li><a href="#sec-6">File management</a>
+<ul>
+<li><a href="#sec-6-1">Command: <code>helm-projectile-find-file</code>, <b>C-c p f</b></a>
+<ul>
+<li><a href="#sec-6-1-1">Open</a></li>
+<li><a href="#sec-6-1-2">Move and Rename</a></li>
+<li><a href="#sec-6-1-3">Copy and Delete</a></li>
+<li><a href="#sec-6-1-4">Search and Replace</a></li>
+<li><a href="#sec-6-1-5">Miscelaneous</a></li>
+</ul>
+</li>
+<li><a href="#sec-6-2">Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></a></li>
+<li><a href="#sec-6-3">Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></a></li>
+<li><a href="#sec-6-4">Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></a></li>
+<li><a href="#sec-6-5">Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></a></li>
+<li><a href="#sec-6-6">Caching</a>
+<ul>
+<li><a href="#sec-6-6-1">Command: <code>projectile-invalidate-cache</code></a></li>
+<li><a href="#sec-6-6-2">Command: <code>projectile-cache-current-file</code></a></li>
+<li><a href="#sec-6-6-3">Command: <code>projectile-purge-file-from-cache</code></a></li>
+<li><a href="#sec-6-6-4">Command: <code>projectile-purge-dir-from-cache</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-7">Buffer management</a>
+<ul>
+<li><a href="#sec-7-1">Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+Let's start with a few demos.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><a id="ID-0d349662-dba2-423b-bd99-d23c9f45cb3a" name="ID-0d349662-dba2-423b-bd99-d23c9f45cb3a"></a>Demos</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><a id="ID-9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d" name="ID-9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d"></a>Select and open multiple files</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-files-1.gif"><img src="static/helm-projectile/helm-projectile-find-files-1.gif" alt="helm-projectile-find-files-1.gif" /></a>
+</p>
+</div>
+
+<p>
+In the demo, a few files are narrowed and marked, then opened. I ran
+<code>helm-mini</code> to display a list of opened <code>txt</code> files.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><a id="ID-ddf35ac3-6090-4f49-a358-8085ad30000f" name="ID-ddf35ac3-6090-4f49-a358-8085ad30000f"></a>Open file at point anywhere</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-files-dwim-1.gif"><img src="static/helm-projectile/helm-projectile-find-files-dwim-1.gif" alt="helm-projectile-find-files-dwim-1.gif" /></a>
+</p>
+</div>
+
+<p>
+As you can see in the demo, <code>projectile</code> can jump anywhere, even if
+there's only a filename without path. It works everywhere, even in
+text file.
+</p>
+
+<ul class="org-ul">
+<li>In the demo, the first path is a file that I opened using a command
+from <b>M-x</b>.
+</li>
+<li>The second path is a directory that I opened using a key binding.
+</li>
+<li>The third path is highlighted in a region and I opened using command
+history in Helm, so no need to type anything.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a>Switch between current file and other files with same names but different extensions</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-other-file.gif"><img src="static/helm-projectile/helm-projectile-find-other-file.gif" alt="helm-projectile-find-other-file.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>First, I select <code>helm-projectile-find-other-file</code> and a list of
+other files displayed.
+</li>
+<li>Then, I marked a few files and press <b>RET</b> to open all.
+</li>
+<li>Finally, I use <code>helm-mini</code> to open a list of opened buffers and
+the files I marked and opened are there.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><a id="ID-eb1ca7ff-0aa6-499b-91ff-42f1f4003784" name="ID-eb1ca7ff-0aa6-499b-91ff-42f1f4003784"></a>What is <code>projectile</code>?</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+From the homepage:
+</p>
+
+<blockquote>
+<p>
+<code>Projectile</code> is a project interaction library for Emacs. Its goal is to
+provide a nice set of features operating on a project level without
+introducing external dependencies(when feasible). For instance -
+finding project files has a portable implementation written in pure
+Emacs Lisp without the use of GNU find (but for performance sake an
+indexing mechanism backed by external commands exists as well).
+</p>
+
+<p>
+<code>projectile</code> tries to be practical - portability is great, but if some
+external tools could speed up some task substantially and the tools
+are available, <code>projectile</code> will leverage them.
+</p>
+
+<p>
+By default, <code>git</code>, <code>mercurial</code>, <code>darcs</code> and <code>bazaar</code> are considered
+projects. So are <code>lein</code>, <code>maven</code>, <code>sbt</code>, <code>scons</code>, <code>rebar</code> and
+<code>bundler</code>. If you want to mark a folder manually as a project just
+create an empty <code>.projectile</code> file in it.
+</p>
+</blockquote>
+
+<p>
+I will help you quickly benefit from <code>projectile</code> and
+<code>helm-projectile</code> - an extension of <code>projectile</code> that uses <code>helm</code>
+interface for many <code>projectile</code> commands that provides even more
+features not available in stock <code>projectile</code> - in a practical task
+like exploring the Linux kernel.
+</p>
+
+<p>
+This tutorial is about how to use <code>projectile</code> along with Helm. There
+are other completion systems such as <code>grizzl</code> or <code>ido</code> with <code>flx</code>, both use
+fuzzy finding. Helm also does almost the same thing, except instead of
+fuzzy matching, Helm uses regex matching and provides more features
+beyond matching. If you do not like Helm, just follow this tutorial,
+then change completion system to your preference later.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><a id="ID-c85c6d2f-d00d-41ef-8f07-3d52d23c92a6" name="ID-c85c6d2f-d00d-41ef-8f07-3d52d23c92a6"></a>Installation and configuration</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+You also install <code>Projectile</code> via MELPA and setup:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">projectile-global-mode</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #707e4f;">projectile-completion-system</span> '<span style="color: #783f5a;">helm</span><span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #37785e;">helm-projectile-on</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+All <code>projectile</code> commands has prefix <code>C-c p</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><a id="ID-cd4cc853-affb-4b2a-a894-55a583c9b756" name="ID-cd4cc853-affb-4b2a-a894-55a583c9b756"></a>All-in-one command: <code>helm-projectile</code>, <b>C-c p h</b></h2>
+<div class="outline-text-2" id="text-4">
+<p>
+<b>Usage</b>: This command, by default, is the combination of these 5 commands:
+</p>
+
+<ul class="org-ul">
+<li><code>helm-projectile-switch-project</code>
+</li>
+<li><code>helm-projectile-switch-to-buffer</code>
+</li>
+<li><code>helm-projectile-recentf</code>
+</li>
+<li><code>helm-projectile-find-file</code>
+</li>
+<li><code>helm-projectile-find-dir</code>
+</li>
+</ul>
+
+<p>
+It's really convenient when you have an all-in-one command, so you
+don't have to remember many different key bindings. However, in large
+projects, displaying all listings for commands can be slow.  If you
+work with large projects, displaying all sources in <code>helm-projectile</code>
+can be slow. In that case, you should only use two sources:
+<code>helm-source-projectile-projects</code> and
+<code>helm-source-projectile-files-list</code>. The first display a list of
+projects and the second displays the current files in the selected
+project.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">helm-projectile-sources-list</span> '<span style="color: #7388d6;">(</span><span style="color: #707e4f;">helm-source-projectile-projects</span>
+                                     <span style="color: #374478;">helm-source-projectile-files-list</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><a id="ID-8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded" name="ID-8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded"></a>Enter project portal: <code>helm-projectile-switch-project</code>, <b>C-c p p</b></h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<b>Usage</b>: This is the very first command you need to use before using other
+commands, because it is the entrance to all of your projects and the
+only command that can be used outside of a project. The command 
+lists all visited projects. If you first use <code>projectile</code>, you have to
+visit at least a project supported by <code>projectile</code> to let it remember
+the location of this project. The next time you won't have to manually
+navigate to that project but jump to it instantly using
+<code>helm-projectile-switch-project</code>.
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-switch-project.gif"><img src="static/helm-projectile/helm-projectile-switch-project.gif" alt="helm-projectile-switch-project.gif" /></a>
+</p>
+</div>
+
+<p>
+Available actions:
+</p>
+
+<ul class="org-ul">
+<li><code>Switch to project</code> (default action, bound to <b>RET</b>): Switch to a
+project and execute an action specified in
+<code>projectile-switch-project-action</code> variable. This variable stores a
+command to be executed after a project is selected. The default is
+<code>projectile-find-file</code>. My suggestion is to bind it to
+<code>helm-projectile-find-file</code>, as it provides the same thing as
+<code>projectile-find-file</code> but with more feature:
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">projectile-switch-project-action</span> '<span style="color: #513f78;">helm-projectile-find-file</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Even better, you should bind it to <code>helm-projectile</code>. When the action
+is <code>helm-projectile</code>, this can be done: <b>open files in other
+projects without ever leaving current working project</b>. It is 
+achieved by opening another <code>helm-projectile</code> session, but for
+another project, because <code>helm-projectile</code> always includes a list of
+projects, and makes <code>helm-projectile</code> list files in that project.
+This is not possible with normal <code>projectile</code> with other completion
+systems, because other completion systems can only display one list
+at a time:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">projectile-switch-project-action</span> '<span style="color: #5e7837;">helm-projectile</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+Demo (begin when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-1.gif"><img src="static/helm-projectile/helm-projectile-1.gif" alt="helm-projectile-1.gif" /></a>
+</p>
+</div>
+
+<ul class="org-ul">
+<li>First, from the file <code>MAINTAINERS</code>, I ran
+<code>helm-projectile</code>. Notice that the current project I'm working is
+at the top of project list.
+</li>
+
+<li>Then, I moved the highlight bar to <code>~/.emacs.d</code> project and press
+<b>RET</b>. Now, <code>~/.emacs.d</code> is at the top of project list, indicating
+it is inside that project. Normal <code>projectile-switch-project</code>
+command does not display the current project, but Helm version
+displays it because you can perform many other useful actions with
+project root directory, such as <code>grep</code> the whole project or any
+other actions you learn in this section.
+</li>
+</ul>
+</li>
+
+<li><code>Open Dired in project's directory</code> (<b>C-d</b>)
+</li>
+
+<li><code>Open project root in vc-dir or magit</code> (<b>M-g</b>)
+</li>
+
+<li><code>Switch to Eshell</code> (<b>M-e</b>): Open a projectin Eshell.
+</li>
+
+<li><code>Grep in projects</code> (<b>C-s</b>; add prefix <b>C-u</b> to recursive grep): As
+you type the regexp in the mini buffer, the live grep results will
+be displayed incrementally.
+</li>
+
+<li><code>Compile project</code> (<b>C-c</b>): Run a <code>compile</code> command at the project
+root.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6"><a id="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d" name="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d"></a>File management</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1"><a id="ID-d5bf76c1-08af-4429-83bf-18615cbafb95" name="ID-d5bf76c1-08af-4429-83bf-18615cbafb95"></a>Command: <code>helm-projectile-find-file</code>, <b>C-c p f</b></h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+<b>Usage</b>: This command lists all files in a project for users to narrow 
+down to wanted files. Some frequently used actions that cover open,
+rename, copy, delete,search and other miscelaneous operations. Once
+you mastered the actions of <code>helm-projectile-find-file</code>, you master
+the actions of other commands as well since the actions of other
+commands are just a subset of <code>helm-projectile-find-file</code> actions. All
+the key bindings associated with actions are only available while a
+Helm buffer is active. You can think of actions as an mini version of
+<b>M-x</b>: only applicable commands are listed, and even those commands
+have key bindings. Prefix argument can be applied, when possible.
+</p>
+
+<p>
+The same Helm interface can be used to search for an action. The first
+12 actions are bound from <b>&lt;f1&gt;</b> to <b>&lt;f12&gt;</b>. You can type the index
+number to instantly narrow to that action, or simply press respective
+key.
+</p>
+</div>
+
+<div id="outline-container-sec-6-1-1" class="outline-4">
+<h4 id="sec-6-1-1"><a id="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d" name="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d"></a>Open</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<ul class="org-ul">
+<li><code>Find File</code> (default action bound to <b>RET</b>): open files; if multiple
+files are marked, using either <b>M-SPC</b> to mark specific files or all
+marked using <b>M-a</b>, all marked files are opened, as in the <i>first demo</i>. 
+</li>
+
+<li><code>Find file other window</code> (<b>C-c o</b>): Open file in other window. Very
+useful action and is used in many Helm commands.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-file-other-window.gif"><img src="static/helm-projectile/helm-projectile-find-file-other-window.gif" alt="helm-projectile-find-file-other-window.gif" /></a>
+</p>
+</div>
+
+<p>
+Normal <code>projectile</code> commands have variants for opening
+file/directory/buffer in other window with prefix <b>C-c 4
+p</b>. However, you have to make a mental choice which variant to
+use. If you already execute <code>projectile-find-file</code> command, and
+suddenly you decided to open in other window, you have to cancel
+current command and execute the whole thing with the other window
+variant <code>projectile-find-file-other-window</code> again. Using Helm, you
+don't have to worry about open in current window or other window
+first; you worry about that later when you already decided exact
+files to open.
+</p>
+</li>
+
+<li><code>Find file as root</code> (<b>C-x @</b>): Another really useful action. With
+this command, you don't have to use <a href="http://www.gnu.org/software/tramp/#Running-eshell-on-a-remote-host">Tramp syntax</a> to open file as
+root. Just browse file to anywhere, and when needed, open it as root
+instantly. 
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-file-as-root.gif"><img src="static/helm-projectile/helm-projectile-find-file-as-root.gif" alt="helm-projectile-find-file-as-root.gif" /></a>
+</p>
+</div>
+
+<p>
+In the demo, I opened directory <code>/etc</code> <b>after</b> I move to it. No need
+to enter Tramp syntax for <code>sudo</code>.
+</p>
+</li>
+
+<li><code>Find file other frame</code> (<b>C-c C-o</b>): Open file in another frame.
+</li>
+
+<li><code>Find File in Dired</code>: Open file directory in Dired.
+</li>
+
+<li><code>Find file in hex dump</code>: Open file using <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html">hexl</a>.
+</li>
+
+<li><code>View file</code>: Open file for read-only.
+</li>
+
+<li><code>Open file externally</code> (<b>C-c C-x</b>, add prefix <b>C-u</b> to choose a
+program): Open file using external applications. Once an application
+is selected, it is remembered as default application for the
+selected file type.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-1-2" class="outline-4">
+<h4 id="sec-6-1-2"><a id="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55" name="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55"></a>Move and Rename</h4>
+<div class="outline-text-4" id="text-6-1-2">
+<ul class="org-ul">
+<li><code>Rename file(s)</code> (<b>M-R</b>): Rename marked files. To mark files, press
+<b>M-SPC</b>. You must have two buffers side by side: one is a buffer
+that is running current <code>helm-projectile-find-file</code> command and
+another is destination buffer. When this action is executed, it
+copies marked files to the directory of destination buffers.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-rename-file.gif"><img src="static/helm-projectile/helm-projectile-rename-file.gif" alt="helm-projectile-rename-file.gif" /></a>
+</p>
+</div>
+
+<p>
+In the demo, I selected a set of files in
+<code>helm-projectile-find-file</code> then press <b>M-R</b> to rename files to the
+directory of the right buffer, <code>~/test_dir</code>.
+</p>
+</li>
+
+<li><code>Serial rename files</code>: Rename multiple files at once to the same
+name differentiated by the index at the end, and move files to a
+prompted directory.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-serial-rename-file.gif"><img src="static/helm-projectile/helm-projectile-serial-rename-file.gif" alt="helm-projectile-serial-rename-file.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><code>Serial rename by symlinking files</code>: Similar to <code>Serial rename
+  files</code> but create symbolic links instead.
+</li>
+
+<li><code>Serial rename by copying files</code>: Similar to <code>Serial rename files</code>
+  but copy files instead.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-1-3" class="outline-4">
+<h4 id="sec-6-1-3"><a id="ID-0276d133-1547-4c46-a598-324add5eeb27" name="ID-0276d133-1547-4c46-a598-324add5eeb27"></a>Copy and Delete</h4>
+<div class="outline-text-4" id="text-6-1-3">
+<ul class="org-ul">
+<li><code>Copy file(s)</code> (<b>M-C</b>): similar to <code>Rename File(s)</code> action but copy
+marked files.
+</li>
+
+<li><code>Delete File(s)</code> (<b>M-D</b> or <b>C-c d</b>): similar to <code>Rename File(s)</code>
+  action delete marked files.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-1-4" class="outline-4">
+<h4 id="sec-6-1-4"><a id="ID-bb0e3512-f3f1-42c2-80ec-50d47fc7ba57" name="ID-bb0e3512-f3f1-42c2-80ec-50d47fc7ba57"></a>Search and Replace</h4>
+<div class="outline-text-4" id="text-6-1-4">
+
+<ul class="org-ul">
+<li><code>Grep File(s)</code> (<b>C-s</b>; add prefix <b>C-u</b> for recursive grep): <code>grep</code>
+current highlighted file or marked files. With prefix <b>C-u</b>,
+recursively <code>grep</code> parent directories of marked files. Remember, it
+only works on marked files, or the current file the highlight bar is
+on.
+</li>
+
+<li><code>Zgrep</code> (<b>M-g z</b>; add prefix <b>C-u</b> for recursive zgrep): Similar to
+<code>grep</code> but invokes <code>grep</code> on compressed or gzipped files.
+</li>
+
+<li><code>Locate</code> (<b>C-x C-f</b>, add <b>C-u</b> to specify locate db): Search using
+<code>locate</code>, the same as <a href="file:///home/tudo/Public/blog/publish/share/helm.html">helm-locate</a>.
+</li>
+
+<li><code>Query replaced on marked</code>: 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-1-5" class="outline-4">
+<h4 id="sec-6-1-5"><a id="ID-3822d245-6836-469d-bc2f-45a0a6e4b941" name="ID-3822d245-6836-469d-bc2f-45a0a6e4b941"></a>Miscelaneous</h4>
+<div class="outline-text-4" id="text-6-1-5">
+<ul class="org-ul">
+<li><code>Ediff File</code> (<b>C-=</b>): If only a file is marked (that is the line
+your Helm highlight bar is on), it prompts for another file to
+compare. If two files are marked, starts an Ediff session between
+two files. More than two files are marked, you are prompted for
+another file to compare again.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-file-ediff.gif"><img src="static/helm-projectile/helm-projectile-find-file-ediff.gif" alt="helm-projectile-find-file-ediff.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><code>Ediff Merge File</code> (<b>C-c =</b>): Start an Emerge session between
+selected files. Similar to <code>Ediff file</code> action: if one or more than
+two file are marked, prompts for another file. If exactly two files
+are selected, start an <code>Emerge</code> session.
+</li>
+
+<li><code>Symlink files(s)</code> (*M-S): Create symbolic link, using absolute
+path. If another buffer is available, choose the directory of that
+buffer as destination, similar to <code>Rename files(s)</code> action.
+</li>
+
+<li><code>Relsymlink file(s)</code>: Create symbolic link, using relative path. If
+another buffer is available, choose the directory of that buffer as
+destination, similar to <code>Rename files(s)</code> action.
+</li>
+
+<li><code>Hardlink file(s)</code> (<b>M-H</b>): Create hard link. If another buffer is
+available, choose the directory of that buffer as destination,
+similar to <code>Rename files(s)</code> action.
+</li>
+
+<li><code>Checksum File</code>: Generate file checksum and insert the checksum
+<code>kill-ring</code>.
+</li>
+
+<li><code>Print File</code> (<b>C-c p</b>, add <b>C-u</b> to refresh): Print marked files.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2"><a id="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3" name="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3"></a>Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<b>Usage</b>: Find file based on context at point (do what you mean):
+</p>
+
+<ul class="org-ul">
+<li>If the command finds just a file, it switches to that file
+instantly. This works even if the filename is incomplete, but
+there's only a single file in the current project that matches the
+filename at point. For example, if there's only a single file named
+"projectile/projectile.el" but the current filename is
+"projectile/proj" (incomplete), the command still switches to
+"projectile/projectile.el" immediately because this is the only
+filename that matches.
+</li>
+
+<li>If it finds a list of files, the list is displayed for selecting. A
+list of files is displayed when a filename appears more than one in
+the project or the filename at point is a prefix of more than two
+files in a project. For example, if `projectile-find-file' is
+executed on a path like "projectile/", it lists the content of that
+directory. If it is executed on a partial filename like
+"projectile/a", a list of files with character 'a' in that directory
+is presented.
+</li>
+
+<li>If it finds nothing, display a list of all files in project for
+selecting.
+</li>
+</ul>
+
+<p>
+This command is demonstrated at the beginning: <i>Open file at point
+anywhere, based on context (do what you mean)</i>. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><a id="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b" name="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b"></a>Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+<b>Usage</b>: List available directories in the current project. 
+</p>
+
+<p>
+Available actions:
+</p>
+
+<ul class="org-ul">
+<li><code>Open Dired in project's directory</code>: Open the directory in a Dired
+buffer.
+</li>
+<li><code>Switch to Eshell</code> (<b>M-e</b>): Open the directory in Eshell.
+</li>
+<li><code>Grep in projects</code> (<b>C-s</b>; add prefix <b>C-u</b> for recurse Grep): Run
+<code>grep</code> on selected directory.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><a id="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572" name="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572"></a>Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+<b>Usage</b>: List recently visited files in <b>current project</b>. The command has a
+subset of actions in <code>helm-projectile-find-file</code>, so once you mastered
+the actions in <code>helm-projectile-find-file</code>, you can reuse your
+knowledge here.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5"><a id="ID-74179568-a5b0-4a8f-8f30-b75959d4e190" name="ID-74179568-a5b0-4a8f-8f30-b75959d4e190"></a>Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+<b>Usage</b>: Switch between files with the same name but different extensions. With
+prefix argument <b>C-u</b>, enable flex-matching that match any file that
+contains the name of current file. The command has a subset of actions
+in <code>helm-projectile-find-file</code>, so once you mastered the actions in
+<code>helm-projectile-find-file</code>, you don't need to learn anything else.
+</p>
+
+<p>
+Other file extensions can be customized with the variable
+<code>projectile-other-file-alist</code>.
+</p>
+
+<p>
+The command is already demonstrated in the section <i>Switch between
+current file and other files with same names but different extensions</i>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-6" class="outline-3">
+<h3 id="sec-6-6"><a id="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751" name="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751"></a>Caching</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+<b>Usage</b>: In large projects, caching can significantly speedup file and
+directory listings, making it display instantly. Caching is enabled
+by:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #3f7178;">projectile-enable-caching</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+</div>
+
+<div id="outline-container-sec-6-6-1" class="outline-4">
+<h4 id="sec-6-6-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a>Command: <code>projectile-invalidate-cache</code></h4>
+<div class="outline-text-4" id="text-6-6-1">
+<p>
+<b>Usage</b>: As the command name suggests, it invalidates the current cache and
+retrieves everything as new.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-6-2" class="outline-4">
+<h4 id="sec-6-6-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a>Command: <code>projectile-cache-current-file</code></h4>
+<div class="outline-text-4" id="text-6-6-2">
+<p>
+<b>Usage</b>: Add the file of current selected buffer to cache.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-6-3" class="outline-4">
+<h4 id="sec-6-6-3"><a id="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8" name="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8"></a>Command: <code>projectile-purge-file-from-cache</code></h4>
+<div class="outline-text-4" id="text-6-6-3">
+<p>
+<b>Usage</b>: Remove a file from the cache.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-6-4" class="outline-4">
+<h4 id="sec-6-6-4"><a id="ID-2cf595ee-dab6-449a-ba49-98094f724ee1" name="ID-2cf595ee-dab6-449a-ba49-98094f724ee1"></a>Command: <code>projectile-purge-dir-from-cache</code></h4>
+<div class="outline-text-4" id="text-6-6-4">
+<p>
+<b>Usage</b>: Remove a directory from the cache.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7"><a id="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f" name="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f"></a>Buffer management</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-sec-7-1" class="outline-3">
+<h3 id="sec-7-1"><a id="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6" name="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6"></a>Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+<b>Usage</b>: List all opened buffers in <b>current project</b>. The command has a
+similar subset of actions in <code>helm-projectile-find-file</code>, so once you
+mastered the actions in <code>helm-projectile-find-file</code>, except instead of
+opening files, you open buffers instead.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>
