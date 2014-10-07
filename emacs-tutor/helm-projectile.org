@@ -1,38 +1,5 @@
 #+TITLE: An introduction to Projectile and Helm Projectile
 
-From the homepage:
-
-#+BEGIN_QUOTE
-=Projectile= is a project interaction library for Emacs. Its goal is to
-provide a nice set of features operating on a project level without
-introducing external dependencies(when feasible). For instance -
-finding project files has a portable implementation written in pure
-Emacs Lisp without the use of GNU find (but for performance sake an
-indexing mechanism backed by external commands exists as well).
-
-Projectile tries to be practical - portability is great, but if some
-external tools could speed up some task substantially and the tools
-are available, Projectile will leverage them.
-
-By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
-projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
-=bundler=. If you want to mark a folder manually as a project just
-create an empty =.projectile= file in it.
-#+END_QUOTE
-
-This tutorial will help you quickly benefit from =projectile= and
-=helm-projectile= - an extension of =projectile= that uses =helm=
-interface for many =projectile= commands that provides even more
-features not available in stock =projectile= - in a practical task like
-exploring the Linux kernel. 
-
-This tutorial is about how to use Projectile along with Helm. There
-are other completion systems such as =grizzl= or =ido= with =flx=, both use
-fuzzy finding. Helm also does almost the same thing, except instead of
-fuzzy matching, Helm uses regex matching and provides more features
-beyond matching. If you do not like Helm, just follow this tutorial,
-then change completion system to your preference later.
-
 Let's start with a few demos.
 
 * Demos
@@ -69,6 +36,43 @@ text file.
 :ID:       37f4d587-ab1f-417b-a949-b7e5ac6041c0
 :END:
 
+* What is Projectile?
+:PROPERTIES:
+:ID:       eb1ca7ff-0aa6-499b-91ff-42f1f4003784
+:END:
+From the homepage:
+
+#+BEGIN_QUOTE
+=Projectile= is a project interaction library for Emacs. Its goal is to
+provide a nice set of features operating on a project level without
+introducing external dependencies(when feasible). For instance -
+finding project files has a portable implementation written in pure
+Emacs Lisp without the use of GNU find (but for performance sake an
+indexing mechanism backed by external commands exists as well).
+
+Projectile tries to be practical - portability is great, but if some
+external tools could speed up some task substantially and the tools
+are available, Projectile will leverage them.
+
+By default, =git=, =mercurial=, =darcs= and =bazaar= are considered
+projects. So are =lein=, =maven=, =sbt=, =scons=, =rebar= and
+=bundler=. If you want to mark a folder manually as a project just
+create an empty =.projectile= file in it.
+#+END_QUOTE
+
+I will help you quickly benefit from =projectile= and
+=helm-projectile= - an extension of =projectile= that uses =helm=
+interface for many =projectile= commands that provides even more
+features not available in stock =projectile= - in a practical task
+like exploring the Linux kernel.
+
+This tutorial is about how to use Projectile along with Helm. There
+are other completion systems such as =grizzl= or =ido= with =flx=, both use
+fuzzy finding. Helm also does almost the same thing, except instead of
+fuzzy matching, Helm uses regex matching and provides more features
+beyond matching. If you do not like Helm, just follow this tutorial,
+then change completion system to your preference later.
+
 * Installation and configuration
 :PROPERTIES:
 :ID:       c85c6d2f-d00d-41ef-8f07-3d52d23c92a6
@@ -90,6 +94,27 @@ All Projectile commands has prefix =C-c p=.
 :PROPERTIES:
 :ID:       cd4cc853-affb-4b2a-a894-55a583c9b756
 :END:
+This command, by default, is the combination of these 5 commands:
+
+- =helm-projectile-switch-project=
+- =helm-projectile-switch-to-buffer=
+- =helm-projectile-recentf=
+- =helm-projectile-find-file=
+- =helm-projectile-find-dir=
+
+It's really convenient when you have an all-in-one command, so you
+don't have to remember many different key bindings. However, in large
+projects, displaying all listings for commands can be slow.  If you
+work with large projects, displaying all sources in =helm-projectile=
+can be slow. In that case, you should only use two sources:
+=helm-source-projectile-projects= and
+=helm-source-projectile-files-list=. The first display a list of
+projects and the second displays the current files in the selected
+project.
+
+#+begin_src emacs-lisp
+  (setq helm-projectile-sources-list '(helm-source-projectile-projects helm-source-projectile-files-list))
+#+end_src
 
 * Enter project portal: =helm-projectile-switch-project=, *C-c p p*
 :PROPERTIES:
@@ -97,26 +122,57 @@ All Projectile commands has prefix =C-c p=.
 :END:
 This is the very first command you need to use before using other
 commands, because this is the entrance to all of your projects and
-this is the only command that can be used outside of a project. The
-command lists all visited projects. If you first use Projectile, you
-have to visit at least a project supported by Projectile to let it
-remember the location of this project. The next time you won't have to
-manually navigate that project but jump to it instantly using
+the only command that can be used outside of a project. The command
+lists all visited projects. If you first use Projectile, you have to
+visit at least a project supported by Projectile to let it remember
+the location of this project. The next time you won't have to manually
+navigate that project but jump to it instantly using
 =helm-projectile-switch-project=.
 
 [screenshot]
 
 Available actions:
 
-- =Switch to project= (default action bound to *RET*):
+- =Switch to project= (default action bound to *RET*): Switch to a
+  project and execute an action specified in
+  =projectile-switch-project-action= variable. This variable is a
+  command to be executed after a project is selected. The default is
+  =projectile-find-file=. My suggestion is to bind it to
+  =helm-projectile-find-file=, as it provides the same thing as
+  =projectile-find-file= but with more feature:
+
+  #+begin_src emacs-lisp
+    (setq projectile-switch-project-action 'helm-projectile-find-file)
+  #+end_src
+
+  Even better, you should bind it to =helm-projectile=. When the action
+  is =helm-projectile=, this can be done: *open files in another
+  projects without ever leaving current working project*. It is
+  achieved by opening another =helm-projectile= session, but for
+  another project, Since =helm-project= includes project list. This is
+  not possible with normal Projectile with other completion systems,
+  because other completion systems can only display one list at a time:
+
+  #+begin_src emacs-lisp
+    (setq projectile-switch-project-action 'helm-projectile)
+  #+end_src
+
+  Demo (begin when "START DEMO" appears in minibuffer):
 
 [screenshot]
 
-- =Open Dired in project's directory= (*C-d* or *f1*):
-- =Open project root in vc-dir or magit= (*M-g* or *f2*):
-- =Switch to Eshell= (*M-e* or *f3*):
-- =Grep in projects= (*C-s* or *f4*):
-- =Compile project= (*C-c* or *f5*):
+- =Open Dired in project's directory= (*C-d*)
+
+- =Open project root in vc-dir or magit= (*M-g*)
+
+- =Switch to Eshell= (*M-e*): Open a projectin Eshell.
+
+- =Grep in projects= (*C-s*; add prefix *C-u* to recursive grep): As
+  you type the regexp in the mini buffer, the live grep results will
+  be displayed incrementally.
+
+- =Compile project= (*C-c*): Run a =compile= command at the project
+  root.
 
 * File management
 :PROPERTIES:
@@ -147,53 +203,63 @@ key.
 :ID:       400557f8-b7a0-4ea7-9744-3d9d3356867d
 :END:
 
-+ =Find File= (default action bound to *RET*): open files; if multiple
+- =Find File= (default action bound to *RET*): open files; if multiple
   files are marked, open them all.
 
   [screenshot]
 
-+ =Find file other window= (*C-c o*)
+- =Find file other window= (*C-c o*): Open file in other window. Very
+  useful action and is used in many Helm commands.
   
   [screenshot]
 
-+ =Find file other frame= (*C-c C-o*)
-
-+ =Find File in Dired=: 
-
-  [screenshot]
-
-+ =Find file as root= (*C-x @*)
+- =Find file as root= (*C-x @*): Another really useful action. With
+  this command, you don't have to use [[http://www.gnu.org/software/tramp/#Running-eshell-on-a-remote-host][Tramp syntax]] to open file as
+  root. Just browse file to anywhere, and when needed, open it as root
+  instantly.
 
   [screenshot]
 
-+ =Find file in hex dump=: Open file using [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html][hexl]].
+- =Find file other frame= (*C-c C-o*): Open file in another frame.
 
-+ =View file=: Open file for read-only.
+- =Find File in Dired=: Open file directory in Dired.
 
-+ =Open file externally= (*C-c C-x*, add prefix *C-u* to choose a
+- =Find file in hex dump=: Open file using [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html][hexl]].
+
+- =View file=: Open file for read-only.
+
+- =Open file externally= (*C-c C-x*, add prefix *C-u* to choose a
   program): Open file using external applications. Once an application
   is selected, it is remembered as default application for the
   selected file type.
 
-*** Rename 
+*** Move and Rename
 :PROPERTIES:
 :ID:       df231b0d-9a59-45b0-9b29-6f47ff19ff55
 :END:
-- =Rename file(s)= (*M-R*): Rename selected files. You must have two
-  buffers side by side: one is a buffer that is running current
-  =helm-projectile-find-file= command and another is destination
-  buffer. When this action is executed, it copies marked files to the
-  directory of destination buffers.
+- =Rename file(s)= (*M-R*): Rename marked files. To mark files, press
+  *M-SPC*. You must have two buffers side by side: one is a buffer
+  that is running current =helm-projectile-find-file= command and
+  another is destination buffer. When this action is executed, it
+  copies marked files to the directory of destination buffers.
+
+  Demo (begins when "START DEMO" appears in minibuffer):
 
   [screenshot]
 
-- =Serial rename files=: Rename multiple files at once.
+- =Serial rename files=: Rename multiple files at once to the same
+  name differentiated by the index at the end, and move files to a
+  prompted directory.
 
-[screenshot]
+  Demo (begins when "START DEMO" appears in minibuffer):
 
-- =Serial rename by symlinking files=:
+  [screenshot]
 
-- =Serial rename by copying files=:
+- =Serial rename by symlinking files=: Similar to =Serial rename
+  files= but create symbolic links instead.
+
+- =Serial rename by copying files=: Similar to =Serial rename files=
+  but copy files instead.
 
 *** Copy and Delete
 :PROPERTIES:
@@ -202,26 +268,31 @@ key.
 - =Copy file(s)= (*M-C*): similar to =Rename File(s)= action but copy
   files instead.
 
-- =Delete File(s)= (*C-c d* or *M-D*): delete marked file(s).
+- =Delete File(s)= (*M-D* or *C-c d*): delete marked file(s).
 
 *** Search and Replace
 :PROPERTIES:
 :ID:       bb0e3512-f3f1-42c2-80ec-50d47fc7ba57
 :END:
 
-- =Grep File(s)= (*C-s*; add *C-u* before *C-s* for recursive
-  grep):
+- =Grep File(s)= (*C-s*; add prefix *C-u* for recursive grep): =grep=
+  current highlighted file or marked files. With prefix *C-u*,
+  recursively =grep= parent directories of marked files.
 
-- =Zgrep=
+  Demo (begins when "START DEMO" appears in minibuffer):
 
-- =Locate= (*C-x C-f*, add *C-u* to specify locate db):
+[screenshot]
+
+- =Zgrep= (*M-g z*; add prefix *C-u* for recursive zgrep): Similar to
+  =grep= but invokes =grep= on compressed or gzipped files.
+
+- =Locate= (*C-x C-f*, add *C-u* to specify locate db): Search using
+  =locate=, the same as [[file:~/Public/blog/publish/share/helm.org::*Command:%20%3Dhelm-locate%3D][helm-locate]].
 
 *** Miscelaneous
 :PROPERTIES:
 :ID:       3822d245-6836-469d-bc2f-45a0a6e4b941
 :END:
-- =Switch to history= (*M-p*): 
-
 - =Ediff File= (*C-=*):
 
 - =Ediff Merge File= (*C-c =*):
