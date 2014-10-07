@@ -231,7 +231,8 @@ key.
 :END:
 - ~Find File~ (default action bound to *RET*): open files; if multiple
   files are marked, using either *M-SPC* to mark specific files or all
-  marked using *M-a*, all marked files are opened, as in the [[*Select%20and%20open%20multiple%20files][first demo]]. 
+  marked using *M-a*, all marked files are opened, as in the [[*Select%20and%20open%20multiple%20files][Select
+  and open multiple files]] section.
 
 - ~Find file other window~ (*C-c o*): Open file in other window. Very
   useful action and is used in many Helm commands.
@@ -239,6 +240,8 @@ key.
   Demo (begins when ~START DEMO~ appears in minibuffer):
 
   [[file:static/helm-projectile/helm-projectile-find-file-other-window.gif][file:static/helm-projectile/helm-projectile-find-file-other-window.gif]]
+
+  Notice the filename in other window.
   
   Normal =projectile= commands have variants for opening
   file/directory/buffer in other window with prefix *C-c 4
