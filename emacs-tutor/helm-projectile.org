@@ -106,7 +106,7 @@ All Projectile commands has prefix ~C-c p~.
 :PROPERTIES:
 :ID:       cd4cc853-affb-4b2a-a894-55a583c9b756
 :END:
-Usage: This command, by default, is the combination of these 5 commands:
+_Usage_: This command, by default, is the combination of these 5 commands:
 
 - ~helm-projectile-switch-project~
 - ~helm-projectile-switch-to-buffer~
@@ -133,7 +133,7 @@ project.
 :PROPERTIES:
 :ID:       8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded
 :END:
-Usage: This is the very first command you need to use before using other
+_Usage_: This is the very first command you need to use before using other
 commands, because it is the entrance to all of your projects and the
 only command that can be used outside of a project. The command 
 lists all visited projects. If you first use Projectile, you have to
@@ -209,7 +209,7 @@ Available actions:
 :PROPERTIES:
 :ID:       d5bf76c1-08af-4429-83bf-18615cbafb95
 :END:
-Usage: This command lists all files in a project for users to narrow 
+_Usage_: This command lists all files in a project for users to narrow 
 down to wanted files. Some frequently used actions that cover open,
 rename, copy, delete,search and other miscelaneous operations. Once
 you mastered the actions of ~helm-projectile-find-file~, you master
@@ -380,7 +380,7 @@ key.
 :PROPERTIES:
 :ID:       5fcd616f-a139-4c0a-a4ff-5e2c435d08a3
 :END:
-Usage: Find file based on context at point (do what you mean):
+_Usage_: Find file based on context at point (do what you mean):
 
 - If the command finds just a file, it switches to that file
   instantly. This works even if the filename is incomplete, but
@@ -410,7 +410,7 @@ anywhere]].
 :PROPERTIES:
 :ID:       ff87062c-1e31-4601-89fb-19df0dd01e7b
 :END:
-Usage: List available directories in the current project. 
+_Usage_: List available directories in the current project. 
 
 Available actions:
 
@@ -424,7 +424,7 @@ Available actions:
 :PROPERTIES:
 :ID:       e6e3eb34-1de4-4d4c-875d-47e94503f572
 :END:
-Usage: List recently visited files in *current project*. The command has a
+_Usage_: List recently visited files in *current project*. The command has a
 subset of actions in ~helm-projectile-find-file~, so once you mastered
 the actions in ~helm-projectile-find-file~, you can reuse your
 knowledge here.
@@ -433,7 +433,7 @@ knowledge here.
 :PROPERTIES:
 :ID:       74179568-a5b0-4a8f-8f30-b75959d4e190
 :END:
-Usage: Switch between files with the same name but different extensions. With
+_Usage_: Switch between files with the same name but different extensions. With
 prefix argument *C-u*, enable flex-matching that match any file that
 contains the name of current file. The command has a subset of actions
 in ~helm-projectile-find-file~, so once you mastered the actions in
@@ -449,7 +449,7 @@ current file and other files with same names but different extensions]].
 :PROPERTIES:
 :ID:       5a69b97f-e61f-4633-b6c8-9dc6cc1ac751
 :END:
-Usage: In large projects, caching can significantly speedup file and
+_Usage_: In large projects, caching can significantly speedup file and
 directory listings, making it display instantly. Caching is enabled
 by:
 
@@ -461,26 +461,26 @@ by:
 :PROPERTIES:
 :ID:       e33dd757-4594-466a-b194-ceba73f16b44
 :END:
-Usage: As the command name suggests, it invalidates the current cache and
+_Usage_: As the command name suggests, it invalidates the current cache and
 retrieves everything as new.
 
 *** Command: ~projectile-cache-current-file~
 :PROPERTIES:
 :ID:       ca3915b7-2dc7-49c4-bd7a-194121936f91
 :END:
-Usage: Add the file of current selected buffer to cache.
+_Usage_: Add the file of current selected buffer to cache.
 
 *** Command: ~projectile-purge-file-from-cache~
 :PROPERTIES:
 :ID:       d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8
 :END:
-Usage: Remove a file from the cache.
+_Usage_: Remove a file from the cache.
 
 *** Command: ~projectile-purge-dir-from-cache~
 :PROPERTIES:
 :ID:       2cf595ee-dab6-449a-ba49-98094f724ee1
 :END:
-Usage: Remove a directory from the cache.
+_Usage_: Remove a directory from the cache.
 
 * Buffer management
 :PROPERTIES:
@@ -490,7 +490,7 @@ Usage: Remove a directory from the cache.
 :PROPERTIES:
 :ID:       d6eea79b-d77a-43e0-84ef-a5d7a157f7b6
 :END:
-Usage: List all opened buffers in *current project*. The command has a
+_Usage_: List all opened buffers in *current project*. The command has a
 similar subset of actions in ~helm-projectile-find-file~, so once you
 mastered the actions in ~helm-projectile-find-file~, except instead of
 opening files, you open buffers instead.
