@@ -403,8 +403,8 @@ key.
 - If it finds nothing, display a list of all files in project for
   selecting.
 
-This command is demonstrated at the beginning: [[*Open%20file%20at%20point%20anywhere,%20based%20on%20context%20(do%20what%20you%20mean):][Open file at point
-anywhere, based on context (do what you mean)]]. 
+This command is demonstrated at the beginning: [[*Open%20file%20at%20point%20anywhere][Open file at point
+anywhere]].
 
 ** Command: ~helm-projectile-find-dir~, *C-c p d*
 :PROPERTIES:
