@@ -26,7 +26,7 @@ Demo (begins when ~START DEMO~ appears in minibuffer):
 
 [[file:static/helm-projectile/helm-projectile-find-files-dwim-1.gif][file:static/helm-projectile/helm-projectile-find-files-dwim-1.gif]]
 
-As you can see in the demo, =projectile= can jump anywhere, even if
+As you can see in the demo, Projectile can jump anywhere, even if
 there's only a filename without path. It works everywhere, even in
 text file.
 
@@ -51,23 +51,23 @@ Demo (begins when ~START DEMO~ appears in minibuffer):
 - Finally, I use =helm-mini= to open a list of opened buffers and
   the files I marked and opened are there.
 
-* What is =projectile=?
+* What is Projectile?
 :PROPERTIES:
 :ID:       eb1ca7ff-0aa6-499b-91ff-42f1f4003784
 :END:
 From the homepage:
 
 #+BEGIN_QUOTE
-~Projectile~ is a project interaction library for Emacs. Its goal is to
+Projectile is a project interaction library for Emacs. Its goal is to
 provide a nice set of features operating on a project level without
 introducing external dependencies(when feasible). For instance -
 finding project files has a portable implementation written in pure
 Emacs Lisp without the use of GNU find (but for performance sake an
 indexing mechanism backed by external commands exists as well).
 
-=projectile= tries to be practical - portability is great, but if some
+Projectile tries to be practical - portability is great, but if some
 external tools could speed up some task substantially and the tools
-are available, =projectile= will leverage them.
+are available, Projectile will leverage them.
 
 By default, ~git~, ~mercurial~, ~darcs~ and ~bazaar~ are considered
 projects. So are ~lein~, ~maven~, ~sbt~, ~scons~, ~rebar~ and
@@ -75,13 +75,13 @@ projects. So are ~lein~, ~maven~, ~sbt~, ~scons~, ~rebar~ and
 create an empty ~.projectile~ file in it.
 #+END_QUOTE
 
-I will help you quickly benefit from ~projectile~ and
-~helm-projectile~ - an extension of ~projectile~ that uses ~helm~
-interface for many ~projectile~ commands that provides even more
-features not available in stock ~projectile~ - in a practical task
+I will help you quickly benefit from Projectile and
+~helm-projectile~ - an extension of Projectile that uses ~helm~
+interface for many Projectile commands that provides even more
+features not available in stock Projectile - in a practical task
 like exploring the Linux kernel.
 
-This tutorial is about how to use =projectile= along with Helm. There
+This tutorial is about how to use Projectile along with Helm. There
 are other completion systems such as ~grizzl~ or ~ido~ with ~flx~, both use
 fuzzy finding. Helm also does almost the same thing, except instead of
 fuzzy matching, Helm uses regex matching and provides more features
@@ -92,7 +92,7 @@ then change completion system to your preference later.
 :PROPERTIES:
 :ID:       c85c6d2f-d00d-41ef-8f07-3d52d23c92a6
 :END:
-You also install ~Projectile~ via MELPA and setup:
+You also install Projectile via MELPA and setup:
 
 #+begin_src emacs-lisp
   (projectile-global-mode)
@@ -100,13 +100,13 @@ You also install ~Projectile~ via MELPA and setup:
   (helm-projectile-on)
 #+end_src
 
-All =projectile= commands has prefix ~C-c p~.
+All Projectile commands has prefix ~C-c p~.
 
 * All-in-one command: ~helm-projectile~, *C-c p h*
 :PROPERTIES:
 :ID:       cd4cc853-affb-4b2a-a894-55a583c9b756
 :END:
-*Usage*: This command, by default, is the combination of these 5 commands:
+Usage: This command, by default, is the combination of these 5 commands:
 
 - ~helm-projectile-switch-project~
 - ~helm-projectile-switch-to-buffer~
@@ -133,11 +133,11 @@ project.
 :PROPERTIES:
 :ID:       8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded
 :END:
-*Usage*: This is the very first command you need to use before using other
+Usage: This is the very first command you need to use before using other
 commands, because it is the entrance to all of your projects and the
 only command that can be used outside of a project. The command 
-lists all visited projects. If you first use =projectile=, you have to
-visit at least a project supported by =projectile= to let it remember
+lists all visited projects. If you first use Projectile, you have to
+visit at least a project supported by Projectile to let it remember
 the location of this project. The next time you won't have to manually
 navigate to that project but jump to it instantly using
 ~helm-projectile-switch-project~.
@@ -164,7 +164,7 @@ Available actions:
   achieved by opening another ~helm-projectile~ session, but for
   another project, because ~helm-projectile~ always includes a list of
   projects, and makes ~helm-projectile~ list files in that project.
-  This is not possible with normal =projectile= with other completion
+  This is not possible with normal Projectile with other completion
   systems, because other completion systems can only display one list
   at a time:
 
@@ -209,7 +209,7 @@ Available actions:
 :PROPERTIES:
 :ID:       d5bf76c1-08af-4429-83bf-18615cbafb95
 :END:
-*Usage*: This command lists all files in a project for users to narrow 
+Usage: This command lists all files in a project for users to narrow 
 down to wanted files. Some frequently used actions that cover open,
 rename, copy, delete,search and other miscelaneous operations. Once
 you mastered the actions of ~helm-projectile-find-file~, you master
@@ -231,7 +231,7 @@ key.
 :END:
 - ~Find File~ (default action bound to *RET*): open files; if multiple
   files are marked, using either *M-SPC* to mark specific files or all
-  marked using *M-a*, all marked files are opened, as in the [[*Select%20and%20open%20multiple%20files][Select
+  marked using *M-a*, all marked files are opened, as in the [[http://tuhdo.github.io/helm-projectile.html#sec-1-1][Select
   and open multiple files]] section.
 
 - ~Find file other window~ (*C-c o*): Open file in other window. Very
@@ -243,7 +243,7 @@ key.
 
   Notice the filename in other window.
   
-  Normal =projectile= commands have variants for opening
+  Normal Projectile commands have variants for opening
   file/directory/buffer in other window with prefix *C-c 4
   p*. However, you have to make a mental choice which variant to
   use. If you already execute =projectile-find-file= command, and
@@ -336,7 +336,7 @@ key.
   ~grep~ but invokes ~grep~ on compressed or gzipped files.
 
 - ~Locate~ (*C-x C-f*, add *C-u* to specify locate db): Search using
-  ~locate~, the same as [[file:~/Public/blog/publish/share/helm.org::*Command:%20%3Dhelm-locate%3D][helm-locate]].
+  ~locate~, the same as [[http://tuhdo.github.io/helm-intro.html#sec-12][helm-locate]].
 
 - ~Query replaced on marked~: 
 
@@ -380,7 +380,7 @@ key.
 :PROPERTIES:
 :ID:       5fcd616f-a139-4c0a-a4ff-5e2c435d08a3
 :END:
-*Usage*: Find file based on context at point (do what you mean):
+Usage: Find file based on context at point (do what you mean):
 
 - If the command finds just a file, it switches to that file
   instantly. This works even if the filename is incomplete, but
@@ -403,14 +403,14 @@ key.
 - If it finds nothing, display a list of all files in project for
   selecting.
 
-This command is demonstrated at the beginning: [[*Open%20file%20at%20point%20anywhere][Open file at point
+This command is demonstrated at the beginning: [[http://tuhdo.github.io/helm-projectile.html#sec-1-2][Open file at point
 anywhere]].
 
 ** Command: ~helm-projectile-find-dir~, *C-c p d*
 :PROPERTIES:
 :ID:       ff87062c-1e31-4601-89fb-19df0dd01e7b
 :END:
-*Usage*: List available directories in the current project. 
+Usage: List available directories in the current project. 
 
 Available actions:
 
@@ -424,7 +424,7 @@ Available actions:
 :PROPERTIES:
 :ID:       e6e3eb34-1de4-4d4c-875d-47e94503f572
 :END:
-*Usage*: List recently visited files in *current project*. The command has a
+Usage: List recently visited files in *current project*. The command has a
 subset of actions in ~helm-projectile-find-file~, so once you mastered
 the actions in ~helm-projectile-find-file~, you can reuse your
 knowledge here.
@@ -433,7 +433,7 @@ knowledge here.
 :PROPERTIES:
 :ID:       74179568-a5b0-4a8f-8f30-b75959d4e190
 :END:
-*Usage*: Switch between files with the same name but different extensions. With
+Usage: Switch between files with the same name but different extensions. With
 prefix argument *C-u*, enable flex-matching that match any file that
 contains the name of current file. The command has a subset of actions
 in ~helm-projectile-find-file~, so once you mastered the actions in
@@ -449,7 +449,7 @@ current file and other files with same names but different extensions]].
 :PROPERTIES:
 :ID:       5a69b97f-e61f-4633-b6c8-9dc6cc1ac751
 :END:
-*Usage*: In large projects, caching can significantly speedup file and
+Usage: In large projects, caching can significantly speedup file and
 directory listings, making it display instantly. Caching is enabled
 by:
 
@@ -461,26 +461,26 @@ by:
 :PROPERTIES:
 :ID:       e33dd757-4594-466a-b194-ceba73f16b44
 :END:
-*Usage*: As the command name suggests, it invalidates the current cache and
+Usage: As the command name suggests, it invalidates the current cache and
 retrieves everything as new.
 
 *** Command: ~projectile-cache-current-file~
 :PROPERTIES:
 :ID:       ca3915b7-2dc7-49c4-bd7a-194121936f91
 :END:
-*Usage*: Add the file of current selected buffer to cache.
+Usage: Add the file of current selected buffer to cache.
 
 *** Command: ~projectile-purge-file-from-cache~
 :PROPERTIES:
 :ID:       d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8
 :END:
-*Usage*: Remove a file from the cache.
+Usage: Remove a file from the cache.
 
 *** Command: ~projectile-purge-dir-from-cache~
 :PROPERTIES:
 :ID:       2cf595ee-dab6-449a-ba49-98094f724ee1
 :END:
-*Usage*: Remove a directory from the cache.
+Usage: Remove a directory from the cache.
 
 * Buffer management
 :PROPERTIES:
@@ -490,7 +490,7 @@ retrieves everything as new.
 :PROPERTIES:
 :ID:       d6eea79b-d77a-43e0-84ef-a5d7a157f7b6
 :END:
-*Usage*: List all opened buffers in *current project*. The command has a
+Usage: List all opened buffers in *current project*. The command has a
 similar subset of actions in ~helm-projectile-find-file~, so once you
 mastered the actions in ~helm-projectile-find-file~, except instead of
 opening files, you open buffers instead.
