@@ -96,9 +96,7 @@ You also install ~Projectile~ via MELPA and setup:
 
 #+begin_src emacs-lisp
   (projectile-global-mode)
-
   (setq projectile-completion-system 'helm)
-
   (helm-projectile-on)
 #+end_src
 
