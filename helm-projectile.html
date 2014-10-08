@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-10-08 Wed 15:58 -->
+<!-- 2014-10-08 Wed 17:44 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -165,8 +165,9 @@ alt="hit counter"></a></div></noscript>
 <ul>
 <li><a href="#sec-1-1">Select and open multiple files</a></li>
 <li><a href="#sec-1-2">Open file at point anywhere</a></li>
-<li><a href="#sec-1-3">Delete files anywhere</a></li>
-<li><a href="#sec-1-4">Switch between current file and other files with same names but different extensions</a></li>
+<li><a href="#sec-1-3">Copy files anywhere</a></li>
+<li><a href="#sec-1-4">Delete files anywhere</a></li>
+<li><a href="#sec-1-5">Switch between current file and other files with same names but different extensions</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">What is Projectile?</a></li>
@@ -266,9 +267,35 @@ history in Helm, so no need to type anything.
 </ul>
 </div>
 </div>
+
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5" name="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5"></a>Delete files anywhere</h3>
+<h3 id="sec-1-3"><a id="ID-67488464-03a4-4312-acd0-0850841067cf" name="ID-67488464-03a4-4312-acd0-0850841067cf"></a>Copy files anywhere</h3>
 <div class="outline-text-3" id="text-1-3">
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-file-copy.gif"><img src="static/helm-projectile/helm-projectile-find-file-copy.gif" alt="helm-projectile-find-file-copy.gif" /></a>
+</p>
+</div>
+
+<p>
+In the demo, I marked a few files with <code>helm-projectile-find-file</code>,
+then switched to action menu and selected <code>Copy file(s)</code> action (it
+can be executed with a key binding, but I want to show you the action
+as a proof). Then, I copy to the directory <code>~/test</code>. Notice that I got
+prompted to that directory immediately, because another Dired buffer
+is below. After I confirmed the action, 4 files got copied and
+displayed at the lower Dired buffer of <code>~/test</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><a id="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5" name="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5"></a>Delete files anywhere</h3>
+<div class="outline-text-3" id="text-1-4">
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
 </p>
@@ -286,9 +313,9 @@ project files are always at your finger tip for you to delete!
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a>Switch between current file and other files with same names but different extensions</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a>Switch between current file and other files with same names but different extensions</h3>
+<div class="outline-text-3" id="text-1-5">
 
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
@@ -701,13 +728,16 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 <div class="outline-text-4" id="text-6-1-3">
 <ul class="org-ul">
 <li><i>Copy file(s)</i> (<b>M-C</b>): similar to <code>Rename File(s)</code> action but copy
-marked files.
+marked files. You can stay where you are and select any project
+files from anywhere to copy to somewhere! The files are always at
+your finger tips. This is demonstrated at the beginning: <a href="http://tuhdo.github.io/helm-projectile.html#sec-1-3">Copy files
+anywhere</a>.
 </li>
 
 <li><i>Delete File(s)</i> (<b>M-D</b> or <b>C-c d</b>): similar to <code>Rename File(s)</code>
-action but delete marked files. With <code>helm-projectile</code>, you can stay
-where you are and delete files anywhere in your project. This is
-demonstrated at the beginning: <a href="http://tuhdo.github.io/helm-projectile.html#sec-1-3">Delete files anywhere</a>.
+action but delete marked files. You can stay where you are and
+delete any file anywhere in your project. This is demonstrated at
+the beginning: <a href="http://tuhdo.github.io/helm-projectile.html#sec-1-3">Delete files anywhere</a>.
 </li>
 </ul>
 </div>

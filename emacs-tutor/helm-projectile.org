@@ -35,6 +35,23 @@ text file.
 - The second path is a directory that I opened using a key binding.
 - The third path is highlighted in a region and I opened using command
   history in Helm, so no need to type anything.
+
+** Copy files anywhere
+:PROPERTIES:
+:ID:       67488464-03a4-4312-acd0-0850841067cf
+:END:
+Demo (begins when ~START DEMO~ appears in minibuffer):
+
+[[file:static/helm-projectile/helm-projectile-find-file-copy.gif][file:static/helm-projectile/helm-projectile-find-file-copy.gif]]
+
+In the demo, I marked a few files with =helm-projectile-find-file=,
+then switched to action menu and selected =Copy file(s)= action (it
+can be executed with a key binding, but I want to show you the action
+as a proof). Then, I copy to the directory =~/test=. Notice that I got
+prompted to that directory immediately, because another Dired buffer
+is below. After I confirmed the action, 4 files got copied and
+displayed at the lower Dired buffer of =~/test=.
+
 ** Delete files anywhere
 :PROPERTIES:
 :ID:       96a4698b-c043-4bdb-9a45-2415ad1d3bb5
@@ -327,12 +344,15 @@ key.
 :ID:       0276d133-1547-4c46-a598-324add5eeb27
 :END:
 - /Copy file(s)/ (*M-C*): similar to ~Rename File(s)~ action but copy
-  marked files.
+  marked files. You can stay where you are and select any project
+  files from anywhere to copy to somewhere! The files are always at
+  your finger tips. This is demonstrated at the beginning: [[http://tuhdo.github.io/helm-projectile.html#sec-1-3][Copy files
+  anywhere]].
 
 - /Delete File(s)/ (*M-D* or *C-c d*): similar to ~Rename File(s)~
-  action but delete marked files. With =helm-projectile=, you can stay
-  where you are and delete files anywhere in your project. This is
-  demonstrated at the beginning: [[http://tuhdo.github.io/helm-projectile.html#sec-1-3][Delete files anywhere]].
+  action but delete marked files. You can stay where you are and
+  delete any file anywhere in your project. This is demonstrated at
+  the beginning: [[http://tuhdo.github.io/helm-projectile.html#sec-1-3][Delete files anywhere]].
 
 *** Search and Replace
 :PROPERTIES:
