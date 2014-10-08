@@ -492,7 +492,43 @@ in ~helm-projectile-find-file~, so once you mastered the actions in
 ~helm-projectile-find-file~, you don't need to learn anything else.
 
 Other file extensions can be customized with the variable
-~projectile-other-file-alist~.
+~projectile-other-file-alist~. The variable looks like this:
+
+#+begin_src emacs-lisp
+  '(("cpp" "h" "hpp" "ipp")
+    ("ipp" "h" "hpp" "cpp")
+    ("hpp" "h" "ipp" "cpp")
+    ("cxx" "hxx" "ixx")
+    ("ixx" "cxx" "hxx")
+    ("hxx" "ixx" "cxx")
+    ("c" "h")
+    ("m" "h")
+    ("mm" "h")
+    ("h" "c" "cpp" "ipp" "hpp" "m" "mm")
+    ("cc" "hh")
+    ("hh" "cc")
+    ("vert" "frag")
+    ("frag" "vert")
+    (nil "lock" "gpg")
+    ("lock" "")
+    ("gpg" ""))
+#+end_src
+
+Basically just a list of lists. Each lists hold the current file
+extension as first element and other files' extensions to switch
+to. For example, the list =("cpp" "h" "hpp" "ipp")= means that if your
+current file is =foo.cpp=, the command will search for other files
+with =foo= as exact name (add prefix *C-u* for any file that contains
+=foo=) and with extensions =.h=, =.hpp= and =.ipp=; anything but =.cpp=.
+
+If you want to add more, for example, to switch between =html= <->
+=js=, add to your init file like this:
+
+#+begin_src emacs-lisp
+  (add-to-list 'projectile-other-file-alist '("html" "js")) ;; switch from html -> js
+  (add-to-list 'projectile-other-file-alist '("js" "html")) ;; switch from js -> html
+#+end_src
+
 
 The command is already demonstrated in the section [[*Switch%20between%20current%20file%20and%20other%20files%20with%20same%20names%20but%20different%20extensions][Switch between
 current file and other files with same names but different extensions]].
