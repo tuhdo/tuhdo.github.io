@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-10-08 Wed 09:56 -->
+<!-- 2014-10-08 Wed 15:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -165,7 +165,8 @@ alt="hit counter"></a></div></noscript>
 <ul>
 <li><a href="#sec-1-1">Select and open multiple files</a></li>
 <li><a href="#sec-1-2">Open file at point anywhere</a></li>
-<li><a href="#sec-1-3">Switch between current file and other files with same names but different extensions</a></li>
+<li><a href="#sec-1-3">Delete files anywhere</a></li>
+<li><a href="#sec-1-4">Switch between current file and other files with same names but different extensions</a></li>
 </ul>
 </li>
 <li><a href="#sec-2">What is Projectile?</a></li>
@@ -265,10 +266,29 @@ history in Helm, so no need to type anything.
 </ul>
 </div>
 </div>
-
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a>Switch between current file and other files with same names but different extensions</h3>
+<h3 id="sec-1-3"><a id="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5" name="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5"></a>Delete files anywhere</h3>
 <div class="outline-text-3" id="text-1-3">
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-find-file-delete.gif"><img src="static/helm-projectile/helm-projectile-find-file-delete.gif" alt="helm-projectile-find-file-delete.gif" /></a>
+</p>
+</div>
+
+<p>
+As you see, you don't have to navigate to a file to delete it. All
+project files are always at your finger tip for you to delete!
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a>Switch between current file and other files with same names but different extensions</h3>
+<div class="outline-text-3" id="text-1-4">
 
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
@@ -685,7 +705,9 @@ marked files.
 </li>
 
 <li><i>Delete File(s)</i> (<b>M-D</b> or <b>C-c d</b>): similar to <code>Rename File(s)</code>
-  action delete marked files.
+action but delete marked files. With <code>helm-projectile</code>, you can stay
+where you are and delete files anywhere in your project. This is
+demonstrated at the beginning: <i>Delete files anywhere</i>.
 </li>
 </ul>
 </div>

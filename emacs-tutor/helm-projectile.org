@@ -35,6 +35,16 @@ text file.
 - The second path is a directory that I opened using a key binding.
 - The third path is highlighted in a region and I opened using command
   history in Helm, so no need to type anything.
+** Delete files anywhere
+:PROPERTIES:
+:ID:       96a4698b-c043-4bdb-9a45-2415ad1d3bb5
+:END:
+Demo (begins when ~START DEMO~ appears in minibuffer):
+
+[[file:static/helm-projectile/helm-projectile-find-file-delete.gif][file:static/helm-projectile/helm-projectile-find-file-delete.gif]]
+
+As you see, you don't have to navigate to a file to delete it. All
+project files are always at your finger tip for you to delete!
 
 ** Switch between current file and other files with same names but different extensions
 :PROPERTIES:
@@ -320,7 +330,9 @@ key.
   marked files.
 
 - /Delete File(s)/ (*M-D* or *C-c d*): similar to ~Rename File(s)~
-  action delete marked files.
+  action but delete marked files. With =helm-projectile=, you can stay
+  where you are and delete files anywhere in your project. This is
+  demonstrated at the beginning: [[*Delete%20files%20anywhere][Delete files anywhere]].
 
 *** Search and Replace
 :PROPERTIES:
