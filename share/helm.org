@@ -175,6 +175,22 @@ to help you using Helm productively.
   commmands that do not exist outside of Helm. For example,
   =helm-ff-run-grep=, update grep results as you type.
 
+- /_Focus on finding what you want first, decide to do with it
+  later_/: With Helm, you don't have to think about what you are going
+  to do with a candidate once you found it. For example, you need
+  decide whether you should open a file in the current window or in
+  other window *before* opening a file, then find the file and open 
+  it. In contrast, Helm helps you focus on what you want to find; once
+  you found your desired object (such as a file or directory), then
+  decide what to do with it *later*, like open the file in other
+  window or open the file as root. This has an advantage that you
+  don't have to cancel your executing key binding when you decide that
+  the action you are taking is not appropriate anymore. For example,
+  you are executed *C-x C-f* to open a file, but have a second thought
+  that open the file in another window is better. Than you press *C-g*
+  to cancel the command and re-execute the *C-x 4 C-f* version and
+  have to start your navigating session all over again!
+
 - /_Matching mechanism_/: This is a powerful feature in Helm that I
   hvaen't seen in other packages: out of order matching, *with regular
   expression*. That's right, you can enter every search pattern as
@@ -653,6 +669,24 @@ fine.
 
 In the demo, you see things like =class u16= and =class u32=; that is
 because =u16= and =u32= are defined by typedef.
+
+=helm-semantic= provides these types of tags: 
+
+- =Dependencies=: the dependencies of the current file as defined by
+  the current major mode. For example, =Dependencies= in C/C++ are
+  header files and when execute persistent action on a dependency,
+  point moves to the location of that include header file in the
+  current  buffer.
+
+- =Variables=: variables defined in current buffer.
+- =Functions=: function defined in current buffer
+- =Provides=: module that this buffer provides; for example, =(provide
+  ...)= expression in Emacs Lisp.
+
+If you want to filter a type of tags, enter caret character =^=
+(beginning of line in regex) and follow the first character of that
+type. For example, if I want to see only function tags, type =^f= in
+the prompt.
 
 * Command: =helm-man-woman=
 :PROPERTIES:
