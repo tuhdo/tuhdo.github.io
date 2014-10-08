@@ -3,10 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>An introduction to Projectile and Helm Projectile</title>
-<!-- 2014-10-08 T4 01:41 -->
+<title>Exploring large projects with Projectile and Helm Projectile</title>
+<!-- 2014-10-08 Wed 09:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -155,7 +156,7 @@ alt="hit counter"></a></div></noscript>
 <h2><a href="index.html">Back</a></h2>
 </div>
 <div id="content">
-<h1 class="title">An introduction to Projectile and Helm Projectile</h1>
+<h1 class="title">Exploring large projects with Projectile and Helm Projectile</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -430,7 +431,7 @@ Available actions:
 </p>
 
 <ul class="org-ul">
-<li><code>Switch to project</code> (default action, bound to <b>RET</b>): Switch to a
+<li><i>Switch to project</i> (default action, bound to <b>RET</b>): Switch to a
 project and execute an action specified in
 <code>projectile-switch-project-action</code> variable. This variable stores a
 command to be executed after a project is selected. The default is
@@ -489,21 +490,21 @@ other actions you learn in this section.
 </ul>
 </li>
 
-<li><code>Open Dired in project's directory</code> (<b>C-d</b>)
+<li><i>Open Dired in project's directory</i> (<b>C-d</b>)
 </li>
 
-<li><code>Open project root in vc-dir or magit</code> (<b>M-g</b>)
+<li><i>Open project root in vc-dir or magit</i> (<b>M-g</b>)
 </li>
 
-<li><code>Switch to Eshell</code> (<b>M-e</b>): Open a projectin Eshell.
+<li><i>Switch to Eshell</i> (<b>M-e</b>): Open a projectin Eshell.
 </li>
 
-<li><code>Grep in projects</code> (<b>C-s</b>; add prefix <b>C-u</b> to recursive grep): As
+<li><i>Grep in projects</i> (<b>C-s</b>; add prefix <b>C-u</b> to recursive grep): As
 you type the regexp in the mini buffer, the live grep results will
 be displayed incrementally.
 </li>
 
-<li><code>Compile project</code> (<b>C-c</b>): Run a <code>compile</code> command at the project
+<li><i>Compile project</i> (<b>C-c</b>): Run a <code>compile</code> command at the project
 root.
 </li>
 </ul>
@@ -542,13 +543,13 @@ key.
 <h4 id="sec-6-1-1"><a id="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d" name="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d"></a>Open</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <ul class="org-ul">
-<li><code>Find File</code> (default action bound to <b>RET</b>): open files; if multiple
+<li><i>Find File</i> (default action bound to <b>RET</b>): open files; if multiple
 files are marked, using either <b>M-SPC</b> to mark specific files or all
 marked using <b>M-a</b>, all marked files are opened, as in the <a href="http://tuhdo.github.io/helm-projectile.html#sec-1-1">Select
 and open multiple files</a> section.
 </li>
 
-<li><code>Find file other window</code> (<b>C-c o</b>): Open file in other window. Very
+<li><i>Find file other window</i> (<b>C-c o</b>): Open file in other window. Very
 useful action and is used in many Helm commands.
 
 <p>
@@ -579,7 +580,7 @@ files to open.
 </p>
 </li>
 
-<li><code>Find file as root</code> (<b>C-x @</b>): Another really useful action. With
+<li><i>Find file as root</i> (<b>C-x @</b>): Another really useful action. With
 this command, you don't have to use <a href="http://www.gnu.org/software/tramp/#Running-eshell-on-a-remote-host">Tramp syntax</a> to open file as
 root. Just browse file to anywhere, and when needed, open it as root
 instantly. 
@@ -600,19 +601,19 @@ to enter Tramp syntax for <code>sudo</code>.
 </p>
 </li>
 
-<li><code>Find file other frame</code> (<b>C-c C-o</b>): Open file in another frame.
+<li><i>Find file other frame</i> (<b>C-c C-o</b>): Open file in another frame.
 </li>
 
-<li><code>Find File in Dired</code>: Open file directory in Dired.
+<li><i>Find File in Dired</i>: Open file directory in Dired.
 </li>
 
-<li><code>Find file in hex dump</code>: Open file using <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html">hexl</a>.
+<li><i>Find file in hex dump</i>: Open file using <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html">hexl</a>.
 </li>
 
-<li><code>View file</code>: Open file for read-only.
+<li><i>View file</i>: Open file for read-only.
 </li>
 
-<li><code>Open file externally</code> (<b>C-c C-x</b>, add prefix <b>C-u</b> to choose a
+<li><i>Open file externally</i> (<b>C-c C-x</b>, add prefix <b>C-u</b> to choose a
 program): Open file using external applications. Once an application
 is selected, it is remembered as default application for the
 selected file type.
@@ -625,7 +626,7 @@ selected file type.
 <h4 id="sec-6-1-2"><a id="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55" name="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55"></a>Move and Rename</h4>
 <div class="outline-text-4" id="text-6-1-2">
 <ul class="org-ul">
-<li><code>Rename file(s)</code> (<b>M-R</b>): Rename marked files. To mark files, press
+<li><i>Rename file(s)</i> (<b>M-R</b>): Rename marked files. To mark files, press
 <b>M-SPC</b>. You must have two buffers side by side: one is a buffer
 that is running current <code>helm-projectile-find-file</code> command and
 another is destination buffer. When this action is executed, it
@@ -648,7 +649,7 @@ directory of the right buffer, <code>~/test_dir</code>.
 </p>
 </li>
 
-<li><code>Serial rename files</code>: Rename multiple files at once to the same
+<li><i>Serial rename files</i>: Rename multiple files at once to the same
 name differentiated by the index at the end, and move files to a
 prompted directory. If there is a buffer in other window, default to
 the directory of that buffer.
@@ -664,11 +665,11 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 </div>
 </li>
 
-<li><code>Serial rename by symlinking files</code>: Similar to <code>Serial rename
+<li><i>Serial rename by symlinking files</i>: Similar to <code>Serial rename
   files</code> but create symbolic links instead.
 </li>
 
-<li><code>Serial rename by copying files</code>: Similar to <code>Serial rename files</code>
+<li><i>Serial rename by copying files</i>: Similar to <code>Serial rename files</code>
   but copy files instead.
 </li>
 </ul>
@@ -679,11 +680,11 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 <h4 id="sec-6-1-3"><a id="ID-0276d133-1547-4c46-a598-324add5eeb27" name="ID-0276d133-1547-4c46-a598-324add5eeb27"></a>Copy and Delete</h4>
 <div class="outline-text-4" id="text-6-1-3">
 <ul class="org-ul">
-<li><code>Copy file(s)</code> (<b>M-C</b>): similar to <code>Rename File(s)</code> action but copy
+<li><i>Copy file(s)</i> (<b>M-C</b>): similar to <code>Rename File(s)</code> action but copy
 marked files.
 </li>
 
-<li><code>Delete File(s)</code> (<b>M-D</b> or <b>C-c d</b>): similar to <code>Rename File(s)</code>
+<li><i>Delete File(s)</i> (<b>M-D</b> or <b>C-c d</b>): similar to <code>Rename File(s)</code>
   action delete marked files.
 </li>
 </ul>
@@ -695,22 +696,19 @@ marked files.
 <div class="outline-text-4" id="text-6-1-4">
 
 <ul class="org-ul">
-<li><code>Grep File(s)</code> (<b>C-s</b>; add prefix <b>C-u</b> for recursive grep): <code>grep</code>
+<li><i>Grep File(s)</i> (<b>C-s</b>; add prefix <b>C-u</b> for recursive grep): <code>grep</code>
 current highlighted file or marked files. With prefix <b>C-u</b>,
 recursively <code>grep</code> parent directories of marked files. Remember, it
 only works on marked files, or the current file the highlight bar is
 on.
 </li>
 
-<li><code>Zgrep</code> (<b>M-g z</b>; add prefix <b>C-u</b> for recursive zgrep): Similar to
+<li><i>Zgrep</i> (<b>M-g z</b>; add prefix <b>C-u</b> for recursive zgrep): Similar to
 <code>grep</code> but invokes <code>grep</code> on compressed or gzipped files.
 </li>
 
-<li><code>Locate</code> (<b>C-x C-f</b>, add <b>C-u</b> to specify locate db): Search using
+<li><i>Locate</i> (<b>C-x C-f</b>, add <b>C-u</b> to specify locate db): Search using
 <code>locate</code>, the same as <a href="http://tuhdo.github.io/helm-intro.html#sec-12">helm-locate</a>.
-</li>
-
-<li><code>Query replaced on marked</code>: 
 </li>
 </ul>
 </div>
@@ -720,7 +718,11 @@ on.
 <h4 id="sec-6-1-5"><a id="ID-3822d245-6836-469d-bc2f-45a0a6e4b941" name="ID-3822d245-6836-469d-bc2f-45a0a6e4b941"></a>Miscelaneous</h4>
 <div class="outline-text-4" id="text-6-1-5">
 <ul class="org-ul">
-<li><code>Ediff File</code> (<b>C-=</b>): If only a file is marked (that is the line
+<li><i>Insert as org link</i> (<b>C-c @</b>): Insert the current file that
+highlight bar is on as an Org link.
+</li>
+
+<li><i>Ediff File</i> (<b>C-=</b>): If only a file is marked (that is the line
 your Helm highlight bar is on), it prompts for another file to
 compare. If two files are marked, starts an Ediff session between
 two files. More than two files are marked, you are prompted for
@@ -737,32 +739,59 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 </div>
 </li>
 
-<li><code>Ediff Merge File</code> (<b>C-c =</b>): Start an Emerge session between
+<li><i>Ediff Merge File</i> (<b>C-c =</b>): Start an Emerge session between
 selected files. Similar to <code>Ediff file</code> action: if one or more than
 two file are marked, prompts for another file. If exactly two files
 are selected, start an <code>Emerge</code> session.
 </li>
 
-<li><code>Symlink files(s)</code> (*M-S): Create symbolic link, using absolute
+<li><i>Etags</i> (<b>M-.</b>): Invoke Etags using Helm. You can switch back to
+<code>helm-projectile-find-file</code> by pressing <b>C-c p f</b> while inside a
+Helm Etags session. If exists a symbol at point, only lists matches
+that contain the symbol.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-etags.gif"><img src="static/helm-projectile/helm-projectile-etags.gif" alt="helm-projectile-etags.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><i>Switch to Eshell</i> (<b>M-e</b>): Open Eshell in directory of the
+currently selected candidate. If selected candidate is a file, open
+the directory of that file; if selected candidate is a
+directory. open that directory.
+</li>
+
+<li><i>Eshell command on file(s)</i> (<b>M-!</b>): Run an Eshell command on a
+marked candidates. If Eshell aliases exist, provides completion for
+those aliases.
+</li>
+
+<li><i>Symlink files(s)</i> (*M-S): Create symbolic link, using absolute
 path. If another buffer is available, choose the directory of that
 buffer as destination, similar to <code>Rename files(s)</code> action.
 </li>
 
-<li><code>Relsymlink file(s)</code>: Create symbolic link, using relative path. If
+<li><i>Relsymlink file(s)</i>: Create symbolic link, using relative path. If
 another buffer is available, choose the directory of that buffer as
 destination, similar to <code>Rename files(s)</code> action.
 </li>
 
-<li><code>Hardlink file(s)</code> (<b>M-H</b>): Create hard link. If another buffer is
+<li><i>Hardlink file(s)</i> (<b>M-H</b>): Create hard link. If another buffer is
 available, choose the directory of that buffer as destination,
 similar to <code>Rename files(s)</code> action.
 </li>
 
-<li><code>Checksum File</code>: Generate file checksum and insert the checksum
+<li><i>Checksum File</i>: Generate file checksum and insert the checksum
 <code>kill-ring</code>.
 </li>
 
-<li><code>Print File</code> (<b>C-c p</b>, add <b>C-u</b> to refresh): Print marked files.
+<li><i>Print File</i> (<b>C-c p</b>, add <b>C-u</b> to refresh): Print marked files.
 </li>
 </ul>
 </div>
@@ -821,12 +850,12 @@ Available actions:
 </p>
 
 <ul class="org-ul">
-<li><code>Open Dired in project's directory</code>: Open the directory in a Dired
+<li><i>Open Dired in project's directory</i>: Open the directory in a Dired
 buffer.
 </li>
-<li><code>Switch to Eshell</code> (<b>M-e</b>): Open the directory in Eshell.
+<li><i>Switch to Eshell</i> (<b>M-e</b>): Open the directory in Eshell.
 </li>
-<li><code>Grep in projects</code> (<b>C-s</b>; add prefix <b>C-u</b> for recurse Grep): Run
+<li><i>Grep in projects</i> (<b>C-s</b>; add prefix <b>C-u</b> for recurse Grep): Run
 <code>grep</code> on selected directory.
 </li>
 </ul>
@@ -882,6 +911,11 @@ by:
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #3f7178;">projectile-enable-caching</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
 </pre>
 </div>
+
+<p>
+With caching enabled, even if you use Projectile on your home
+directory with 30GB, it lists files instantly.
+</p>
 </div>
 
 <div id="outline-container-sec-6-6-1" class="outline-4">

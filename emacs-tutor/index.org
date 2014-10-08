@@ -5,6 +5,6 @@
    + [[file:emacs-tutor3.org][Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS]]
    + [[file:c-ide.org][Setup C/C++ Development Environment for Emacs]]
    + [[file:helm-intro.org][A Package in a league of its own: =Helm=]]
-   + [[file:helm-projectile.org][An introduction to Projectile and Helm Projectile]]
+   + [[file:helm-projectile.org][Exploring large projects with Projectile and Helm Projectile]]
    + [[file:emacs-for-proglang.org][Emacs for Programming Languages course on Coursera]]
 

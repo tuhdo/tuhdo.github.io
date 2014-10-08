@@ -1,4 +1,4 @@
-#+TITLE: An introduction to Projectile and Helm Projectile
+#+TITLE: Exploring large projects with Projectile and Helm Projectile
 
 Let's start with a few demos.
 
@@ -146,7 +146,7 @@ navigate to that project but jump to it instantly using
 
 Available actions:
 
-- ~Switch to project~ (default action, bound to *RET*): Switch to a
+- /Switch to project/ (default action, bound to *RET*): Switch to a
   project and execute an action specified in
   ~projectile-switch-project-action~ variable. This variable stores a
   command to be executed after a project is selected. The default is
@@ -188,17 +188,17 @@ Available actions:
     project root directory, such as =grep= the whole project or any
     other actions you learn in this section.
 
-- ~Open Dired in project's directory~ (*C-d*)
+- /Open Dired in project's directory/ (*C-d*)
 
-- ~Open project root in vc-dir or magit~ (*M-g*)
+- /Open project root in vc-dir or magit/ (*M-g*)
 
-- ~Switch to Eshell~ (*M-e*): Open a projectin Eshell.
+- /Switch to Eshell/ (*M-e*): Open a projectin Eshell.
 
-- ~Grep in projects~ (*C-s*; add prefix *C-u* to recursive grep): As
+- /Grep in projects/ (*C-s*; add prefix *C-u* to recursive grep): As
   you type the regexp in the mini buffer, the live grep results will
   be displayed incrementally.
 
-- ~Compile project~ (*C-c*): Run a ~compile~ command at the project
+- /Compile project/ (*C-c*): Run a ~compile~ command at the project
   root.
 
 * File management
@@ -229,12 +229,12 @@ key.
 :PROPERTIES:
 :ID:       400557f8-b7a0-4ea7-9744-3d9d3356867d
 :END:
-- ~Find File~ (default action bound to *RET*): open files; if multiple
+- /Find File/ (default action bound to *RET*): open files; if multiple
   files are marked, using either *M-SPC* to mark specific files or all
   marked using *M-a*, all marked files are opened, as in the [[http://tuhdo.github.io/helm-projectile.html#sec-1-1][Select
   and open multiple files]] section.
 
-- ~Find file other window~ (*C-c o*): Open file in other window. Very
+- /Find file other window/ (*C-c o*): Open file in other window. Very
   useful action and is used in many Helm commands.
 
   Demo (begins when ~START DEMO~ appears in minibuffer):
@@ -254,7 +254,7 @@ key.
   first; you worry about that later when you already decided exact
   files to open.
 
-- ~Find file as root~ (*C-x @*): Another really useful action. With
+- /Find file as root/ (*C-x @*): Another really useful action. With
   this command, you don't have to use [[http://www.gnu.org/software/tramp/#Running-eshell-on-a-remote-host][Tramp syntax]] to open file as
   root. Just browse file to anywhere, and when needed, open it as root
   instantly. 
@@ -266,15 +266,15 @@ key.
   In the demo, I opened directory ~/etc~ *after* I move to it. No need
   to enter Tramp syntax for =sudo=.
 
-- ~Find file other frame~ (*C-c C-o*): Open file in another frame.
+- /Find file other frame/ (*C-c C-o*): Open file in another frame.
 
-- ~Find File in Dired~: Open file directory in Dired.
+- /Find File in Dired/: Open file directory in Dired.
 
-- ~Find file in hex dump~: Open file using [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html][hexl]].
+- /Find file in hex dump/: Open file using [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Editing-Binary-Files.html][hexl]].
 
-- ~View file~: Open file for read-only.
+- /View file/: Open file for read-only.
 
-- ~Open file externally~ (*C-c C-x*, add prefix *C-u* to choose a
+- /Open file externally/ (*C-c C-x*, add prefix *C-u* to choose a
   program): Open file using external applications. Once an application
   is selected, it is remembered as default application for the
   selected file type.
@@ -283,7 +283,7 @@ key.
 :PROPERTIES:
 :ID:       df231b0d-9a59-45b0-9b29-6f47ff19ff55
 :END:
-- ~Rename file(s)~ (*M-R*): Rename marked files. To mark files, press
+- /Rename file(s)/ (*M-R*): Rename marked files. To mark files, press
   *M-SPC*. You must have two buffers side by side: one is a buffer
   that is running current ~helm-projectile-find-file~ command and
   another is destination buffer. When this action is executed, it
@@ -297,7 +297,7 @@ key.
   =helm-projectile-find-file= then press *M-R* to rename files to the
   directory of the right buffer, =~/test_dir=.
 
-- ~Serial rename files~: Rename multiple files at once to the same
+- /Serial rename files/: Rename multiple files at once to the same
   name differentiated by the index at the end, and move files to a
   prompted directory. If there is a buffer in other window, default to
   the directory of that buffer.
@@ -306,20 +306,20 @@ key.
 
   [[file:static/helm-projectile/helm-projectile-serial-rename-file.gif][file:static/helm-projectile/helm-projectile-serial-rename-file.gif]]
 
-- ~Serial rename by symlinking files~: Similar to ~Serial rename
+- /Serial rename by symlinking files/: Similar to ~Serial rename
   files~ but create symbolic links instead.
 
-- ~Serial rename by copying files~: Similar to ~Serial rename files~
+- /Serial rename by copying files/: Similar to ~Serial rename files~
   but copy files instead.
 
 *** Copy and Delete
 :PROPERTIES:
 :ID:       0276d133-1547-4c46-a598-324add5eeb27
 :END:
-- ~Copy file(s)~ (*M-C*): similar to ~Rename File(s)~ action but copy
+- /Copy file(s)/ (*M-C*): similar to ~Rename File(s)~ action but copy
   marked files.
 
-- ~Delete File(s)~ (*M-D* or *C-c d*): similar to ~Rename File(s)~
+- /Delete File(s)/ (*M-D* or *C-c d*): similar to ~Rename File(s)~
   action delete marked files.
 
 *** Search and Replace
@@ -327,25 +327,26 @@ key.
 :ID:       bb0e3512-f3f1-42c2-80ec-50d47fc7ba57
 :END:
 
-- ~Grep File(s)~ (*C-s*; add prefix *C-u* for recursive grep): ~grep~
+- /Grep File(s)/ (*C-s*; add prefix *C-u* for recursive grep): ~grep~
   current highlighted file or marked files. With prefix *C-u*,
   recursively ~grep~ parent directories of marked files. Remember, it
   only works on marked files, or the current file the highlight bar is
   on.
 
-- ~Zgrep~ (*M-g z*; add prefix *C-u* for recursive zgrep): Similar to
+- /Zgrep/ (*M-g z*; add prefix *C-u* for recursive zgrep): Similar to
   ~grep~ but invokes ~grep~ on compressed or gzipped files.
 
-- ~Locate~ (*C-x C-f*, add *C-u* to specify locate db): Search using
+- /Locate/ (*C-x C-f*, add *C-u* to specify locate db): Search using
   ~locate~, the same as [[http://tuhdo.github.io/helm-intro.html#sec-12][helm-locate]].
-
-- ~Query replaced on marked~: 
 
 *** Miscelaneous
 :PROPERTIES:
 :ID:       3822d245-6836-469d-bc2f-45a0a6e4b941
 :END:
-- ~Ediff File~ (*C-=*): If only a file is marked (that is the line
+- /Insert as org link/ (*C-c @*): Insert the current file that
+  highlight bar is on as an Org link.
+
+- /Ediff File/ (*C-=*): If only a file is marked (that is the line
   your Helm highlight bar is on), it prompts for another file to
   compare. If two files are marked, starts an Ediff session between
   two files. More than two files are marked, you are prompted for
@@ -355,27 +356,45 @@ key.
   
   [[file:static/helm-projectile/helm-projectile-find-file-ediff.gif][file:static/helm-projectile/helm-projectile-find-file-ediff.gif]]
 
-- ~Ediff Merge File~ (*C-c =*): Start an Emerge session between
+- /Ediff Merge File/ (*C-c =*): Start an Emerge session between
   selected files. Similar to ~Ediff file~ action: if one or more than
   two file are marked, prompts for another file. If exactly two files
   are selected, start an ~Emerge~ session.
 
-- ~Symlink files(s)~ (*M-S): Create symbolic link, using absolute
+- /Etags/ (*M-.*): Invoke Etags using Helm. You can switch back to
+  =helm-projectile-find-file= by pressing *C-c p f* while inside a
+  Helm Etags session. If exists a symbol at point, only lists matches
+  that contain the symbol.
+
+  Demo (begins when ~START DEMO~ appears in minibuffer):
+
+  [[file:static/helm-projectile/helm-projectile-etags.gif][file:static/helm-projectile/helm-projectile-etags.gif]]
+
+- /Switch to Eshell/ (*M-e*): Open Eshell in directory of the
+  currently selected candidate. If selected candidate is a file, open
+  the directory of that file; if selected candidate is a
+  directory. open that directory.
+
+- /Eshell command on file(s)/ (*M-!*): Run an Eshell command on a
+  marked candidates. If Eshell aliases exist, provides completion for
+  those aliases.
+
+- /Symlink files(s)/ (*M-S): Create symbolic link, using absolute
   path. If another buffer is available, choose the directory of that
   buffer as destination, similar to ~Rename files(s)~ action.
 
-- ~Relsymlink file(s)~: Create symbolic link, using relative path. If
+- /Relsymlink file(s)/: Create symbolic link, using relative path. If
   another buffer is available, choose the directory of that buffer as
   destination, similar to ~Rename files(s)~ action.
 
-- ~Hardlink file(s)~ (*M-H*): Create hard link. If another buffer is
+- /Hardlink file(s)/ (*M-H*): Create hard link. If another buffer is
   available, choose the directory of that buffer as destination,
   similar to ~Rename files(s)~ action.
 
-- ~Checksum File~: Generate file checksum and insert the checksum
+- /Checksum File/: Generate file checksum and insert the checksum
   ~kill-ring~.
 
-- ~Print File~ (*C-c p*, add *C-u* to refresh): Print marked files.
+- /Print File/ (*C-c p*, add *C-u* to refresh): Print marked files.
 
 ** Command: ~helm-projectile-find-file-dwim~, *C-c p g*
 :PROPERTIES:
@@ -415,10 +434,10 @@ _Usage_: List available directories in the current project.
 
 Available actions:
 
-- ~Open Dired in project's directory~: Open the directory in a Dired
+- /Open Dired in project's directory/: Open the directory in a Dired
   buffer.
-- ~Switch to Eshell~ (*M-e*): Open the directory in Eshell.
-- ~Grep in projects~ (*C-s*; add prefix *C-u* for recurse Grep): Run
+- /Switch to Eshell/ (*M-e*): Open the directory in Eshell.
+- /Grep in projects/ (*C-s*; add prefix *C-u* for recurse Grep): Run
   ~grep~ on selected directory.
 
 ** Command: ~helm-projectile-recentf~, *C-c p e*
@@ -457,6 +476,9 @@ by:
 #+begin_src emacs-lisp
   (setq projectile-enable-caching t)
 #+end_src
+
+With caching enabled, even if you use Projectile on your home
+directory with 30GB, it lists files instantly.
 
 *** Command: ~projectile-invalidate-cache~
 :PROPERTIES:
