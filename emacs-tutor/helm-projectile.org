@@ -391,7 +391,7 @@ key.
   marked candidates. If Eshell aliases exist, provides completion for
   those aliases.
 
-- /Symlink files(s)/ (*M-S): Create symbolic link, using absolute
+- /Symlink files(s)/ (*M-S*): Create symbolic link, using absolute
   path. If another buffer is available, choose the directory of that
   buffer as destination, similar to ~Rename files(s)~ action.
 
