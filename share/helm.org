@@ -41,7 +41,6 @@ Extended config:
 
 #+begin_src emacs-lisp
   (require 'helm-config)
-  (require 'helm-grep)
 
   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
   ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -582,17 +581,12 @@ recursively grep a selected directory.
 You can also save the result into a Grep buffer using the action
 =Save results in Grep buffer=. Note that this Grep buffer is created
 by Helm, not the default Emacs grep buffer. It has minimal key
-bindings. Adding these key bindings will make navigation easier:
-
-#+begin_src emacs-lisp
-  (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
-  (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
-  (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
-#+end_src
+bindings.
 
 *p* and *n* allows you to move back and forth between matches without
-visiting other window. Only when you press *RET*, it visits other
-window.
+visiting other window. Only when you press *RET*, it visits quit
+=*hgrep*= buffer and enter that file.  In ~*hgrep*~ buffer, press *C-h
+m* to view all key bindings.
 
 _Description_:
 
