@@ -581,12 +581,8 @@ recursively grep a selected directory.
 You can also save the result into a Grep buffer using the action
 =Save results in Grep buffer=. Note that this Grep buffer is created
 by Helm, not the default Emacs grep buffer. It has minimal key
+bindings. In ~*hgrep*~ buffer, press *C-h m* to view all key
 bindings.
-
-*p* and *n* allows you to move back and forth between matches without
-visiting other window. Only when you press *RET*, it visits quit
-=*hgrep*= buffer and enter that file.  In ~*hgrep*~ buffer, press *C-h
-m* to view all key bindings.
 
 _Description_:
 

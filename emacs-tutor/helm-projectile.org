@@ -6,6 +6,17 @@ Let's start with a few demos.
 :PROPERTIES:
 :ID:       0d349662-dba2-423b-bd99-d23c9f45cb3a
 :END:
+*NOTE*: In the demo, you can see me narrow to a small set of files,
+then  mark them and perform some action (such as copy or
+delete). However, if you want to continue to mark other files, you can
+delete the previous search pattern and enter another search pattern to
+narrow to another set of files and continue marking those files
+without losing your old marks. For example, at the beginning I want to
+mark files with the string "aaaa" in it; after done marking those
+files, I delete "aaaa" and enter "bbbb" to narrow to this set of
+files and mark the needed files, without losing the marking on the
+files that contains "aaaa".
+
 ** Select and open multiple files
 :PROPERTIES:
 :ID:       9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d
@@ -128,6 +139,31 @@ You also install Projectile via MELPA and setup:
 #+end_src
 
 All Projectile commands has prefix ~C-c p~.
+
+*FOR WINDOWS USERS*:
+
+According to Projectile homepage:
+
+#+BEGIN_QUOTE
+Projectile has two modes of operation - one is portable and is
+implemented in Emacs Lisp(therefore it's native to Emacs and is known
+as the native indexing method) and the other relies on external
+commands like find, git, etc to obtain the list of files in a
+project. 
+
+Since the native indexing mode is much slower, by default the second
+method is used on all operating systems except Windows.
+#+END_QUOTE
+
+Using Emacs Lisp for indexing files is really slow on Windows. To
+enable external indexing, add this setting:
+
+#+begin_src emacs-lisp
+  (setq projectile-indexing-method 'alien)
+#+end_src
+
+The alien indexing method uses external tools (e.g. git, find, etc) to
+speed up the indexing process.
 
 * All-in-one command: ~helm-projectile~, *C-c p h*
 :PROPERTIES:
