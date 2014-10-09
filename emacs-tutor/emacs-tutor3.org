@@ -3197,9 +3197,5 @@ parent and customize it here. The only sub-group in =Local= group is
 :PROPERTIES:
 :ID:       8f4d8185-04b5-4e2b-8ff4-7a03cbe1f9f4
 :END:
-If you want to learn more about Emacs Lisp programming, [[http://ergoemacs.org/emacs/elisp.html][Xah Lee's
-Emacs Lisp tutorial is a good start]].
-
-After that, you can start writing some package, up to your
-imagination! During your Emacs Lisp programming session, please refer
-to the Emacs Lisp manual as much as you could.
+If you want to learn more about Emacs Lisp programming, [[http://www.gnu.org/software/emacs/manual/html_node/elisp/][GNU Emacs Lisp
+Manual]] is great to start real Lisp programming.
