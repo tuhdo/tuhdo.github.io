@@ -6,17 +6,6 @@ Let's start with a few demos.
 :PROPERTIES:
 :ID:       0d349662-dba2-423b-bd99-d23c9f45cb3a
 :END:
-*NOTE*: In the demo, you can see me narrow to a small set of files,
-then  mark them and perform some action (such as copy or
-delete). However, if you want to continue to mark other files, you can
-delete the previous search pattern and enter another search pattern to
-narrow to another set of files and continue marking those files
-without losing your old marks. For example, at the beginning I want to
-mark files with the string "aaaa" in it; after done marking those
-files, I delete "aaaa" and enter "bbbb" to narrow to this set of
-files and mark the needed files, without losing the marking on the
-files that contains "aaaa".
-
 ** Select and open multiple files
 :PROPERTIES:
 :ID:       9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d
@@ -88,6 +77,18 @@ Demo (begins when ~START DEMO~ appears in minibuffer):
 - Then, I marked a few files and press *RET* to open all.
 - Finally, I use =helm-mini= to open a list of opened buffers and
   the files I marked and opened are there.
+
+
+*NOTE*: In the demo, you can see me narrow to a small set of files,
+then  mark them and perform some action (such as copy or
+delete). However, if you want to continue to mark other files, you can
+delete the previous search pattern and enter another search pattern to
+narrow to another set of files and continue marking those files
+without losing your old markings. For example, at the beginning I want to
+mark files with the string "aaaa" in it; after done marking those
+files, I delete "aaaa" and enter "bbbb" to narrow to this set of
+files and mark the needed files, without losing the markings on the
+files contains "aaaa".
 
 * What is Projectile?
 :PROPERTIES:
