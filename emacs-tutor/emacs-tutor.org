@@ -93,6 +93,12 @@ kernel source tree with ease.
 
   [[file:static/helm-buffer-list.gif][file:static/helm-buffer-list.gif]]
 
+- Emacs is a PDF Reader: I can search text in the PDF file with
+  highlighting and a table of content side by side. All can be
+  controlled with keyboard.
+
+  [[file:static/emacs-read-pdf.gif][file:static/emacs-read-pdf.gif]]/
+
 Finally, [[http://jtnimoy.net/workviewer.php?q%3D178][Emacs is featured in Tron Legacy]].
   
 * Why this guide?
