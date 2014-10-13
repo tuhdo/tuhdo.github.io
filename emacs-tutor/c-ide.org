@@ -1222,6 +1222,35 @@ libraries, you have to add its path, for example, like this:
 After that, you can complete C++ header files. To complete project
 local, use =company-c-headers-path-user= and put it in
 =.dir-locals.el=.
+* Navigate system include path
+:PROPERTIES:
+:ID:       b07dd821-77f5-4158-81e2-234d99b54b90
+:END:
+Up until now we were only navigating code in a project using =GNU
+Global=. How about jumping to *system include headers*? You have a few
+options that I know:
+
+** Using =Semantic= with =semantic-ia-fast-jump= command
+:PROPERTIES:
+:ID:       ecceaa7c-6e0e-477a-b59c-3c636b4afe1d
+:END:
+Semantic provides a jump command based on the parsed tags produced by
+the Semantic C/C++ parser. To jump to any code in system include path,
+you must first tell Semantic where it is:
+
+#+begin_src emacs-lisp
+  (semantic-add-system-include "/usr/local/include")
+  (semantic-add-system-include "~/linux/include")
+#+end_src
+
+The function =semantic-add-system-include= will add your include paths
+to =semantic-c-dependency-system-include-path=. By default, it
+only contains =/usr/include=.
+
+** Using generated database from =GNU Global=
+:PROPERTIES:
+:ID:       ba935604-930b-4e12-b2a4-673cedc3453b
+:END:
 
 * Project management with Projectile
 :PROPERTIES:
