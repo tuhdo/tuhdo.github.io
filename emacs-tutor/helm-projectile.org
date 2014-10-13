@@ -583,16 +583,23 @@ by:
 #+end_src
 
 With caching enabled, even if you use Projectile on your home
-directory with 30GB, it lists files instantly.
+directory with 30GB, it lists files instantly. Cache is a way to speed
+up getting files because Projectile only needs to index your project
+once and reuses this result future usages. In case if your project has
+new files, you have to add *C-u* before executing any command to
+invalidate the cache (except for ~helm-projectile-find-other-file~ and
+~projectile-find-other-file~, *C-u* is reserved for different
+behaviour), or using standalone command invalidate *C-c p i* to
+refresh the whole cache.
 
-*** Command: ~projectile-invalidate-cache~
+*** Command: ~projectile-invalidate-cache~, *C-c p i*
 :PROPERTIES:
 :ID:       e33dd757-4594-466a-b194-ceba73f16b44
 :END:
 _Usage_: As the command name suggests, it invalidates the current cache and
 retrieves everything as new.
 
-*** Command: ~projectile-cache-current-file~
+*** Command: ~projectile-cache-current-file~, *C-c p z*
 :PROPERTIES:
 :ID:       ca3915b7-2dc7-49c4-bd7a-194121936f91
 :END:
@@ -602,7 +609,9 @@ _Usage_: Add the file of current selected buffer to cache.
 :PROPERTIES:
 :ID:       d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8
 :END:
-_Usage_: Remove a file from the cache.
+_Usage_: Remove a file from the cache. Once removed, you won't see it
+appear the next time using file related commands. If you delete a
+file, Projectile automatically removes the file from the cache.
 
 *** Command: ~projectile-purge-dir-from-cache~
 :PROPERTIES:

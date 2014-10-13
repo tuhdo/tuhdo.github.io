@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-10-09 Thu 13:54 -->
+<!-- 2014-10-13 Mon 11:08 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -191,8 +191,8 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-6-5">Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></a></li>
 <li><a href="#sec-6-6">Caching</a>
 <ul>
-<li><a href="#sec-6-6-1">Command: <code>projectile-invalidate-cache</code></a></li>
-<li><a href="#sec-6-6-2">Command: <code>projectile-cache-current-file</code></a></li>
+<li><a href="#sec-6-6-1">Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></a></li>
+<li><a href="#sec-6-6-2">Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></a></li>
 <li><a href="#sec-6-6-3">Command: <code>projectile-purge-file-from-cache</code></a></li>
 <li><a href="#sec-6-6-4">Command: <code>projectile-purge-dir-from-cache</code></a></li>
 </ul>
@@ -1063,12 +1063,19 @@ by:
 
 <p>
 With caching enabled, even if you use Projectile on your home
-directory with 30GB, it lists files instantly.
+directory with 30GB, it lists files instantly. Cache is a way to speed
+up getting files because Projectile only needs to index your project
+once and reuses this result future usages. In case if your project has
+new files, you have to add <b>C-u</b> before executing any command to
+invalidate the cache (except for <code>helm-projectile-find-other-file</code> and
+<code>projectile-find-other-file</code>, <b>C-u</b> is reserved for different
+behaviour), or using standalone command invalidate <b>C-c p i</b> to
+refresh the whole cache.
 </p>
 </div>
 
 <div id="outline-container-sec-6-6-1" class="outline-4">
-<h4 id="sec-6-6-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a>Command: <code>projectile-invalidate-cache</code></h4>
+<h4 id="sec-6-6-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a>Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></h4>
 <div class="outline-text-4" id="text-6-6-1">
 <p>
 <span class="underline">Usage</span>: As the command name suggests, it invalidates the current cache and
@@ -1078,7 +1085,7 @@ retrieves everything as new.
 </div>
 
 <div id="outline-container-sec-6-6-2" class="outline-4">
-<h4 id="sec-6-6-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a>Command: <code>projectile-cache-current-file</code></h4>
+<h4 id="sec-6-6-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a>Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></h4>
 <div class="outline-text-4" id="text-6-6-2">
 <p>
 <span class="underline">Usage</span>: Add the file of current selected buffer to cache.
@@ -1090,7 +1097,9 @@ retrieves everything as new.
 <h4 id="sec-6-6-3"><a id="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8" name="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8"></a>Command: <code>projectile-purge-file-from-cache</code></h4>
 <div class="outline-text-4" id="text-6-6-3">
 <p>
-<span class="underline">Usage</span>: Remove a file from the cache.
+<span class="underline">Usage</span>: Remove a file from the cache. Once removed, you won't see it
+appear the next time using file related commands. If you delete a
+file, Projectile automatically removes the file from the cache.
 </p>
 </div>
 </div>
