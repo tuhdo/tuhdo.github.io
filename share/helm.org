@@ -520,9 +520,14 @@ _Description_:
   (initial start of session). If you are in `default-directory' move
   cursor on top.
 
-You can perform more actions on the highlighting entry by running
+You can perform more actions on the highlighted entry by running
 =helm-select-action=, which is bound to *TAB* by default and *C-z* in
-my configuration.
+my configuration. The guide for each action in the action menu is
+written in the guide [[http://tuhdo.github.io/helm-projectile.html][Exploring large projects with Projectile and Helm
+Projectile]]. It is written there because you will end up using
+[[https://github.com/bbatsov/projectile][Projectile]] (a project manage for Emacs, introduced in later section)
+to navigate to files much more efficient, anywhere and anytime you
+need.
 
 _Demo_: 
 
@@ -1285,8 +1290,8 @@ immediately.
 
 _Usage_:
 
-*C-c p h* to run =helm-projectile= and select files in your
-project. Please refer to the [[https://github.com/bbatsov/projectile#helm-integration][full guide]].
+For basic usage, *C-c p h* to run =helm-projectile= and select files
+in your project. Please refer to the [[http://tuhdo.github.io/helm-projectile.html][full guide]].
 
 * Package: =helm-descbind=
 :PROPERTIES:

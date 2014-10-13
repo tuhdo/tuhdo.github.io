@@ -1243,14 +1243,80 @@ you must first tell Semantic where it is:
   (semantic-add-system-include "~/linux/include")
 #+end_src
 
+Then, if point is on an include header like =#include <iostream>= or a
+tag inside =iostream=, executing the command =semantic-ia-fast-jump=
+will jump to into header file or jump to the tag at point earlier that
+is inside =iostream=. If the tag is actually within =iostream= but you
+do not include =iostream=, Semantic won't be able to jump because it
+sees no appropriate header that contains the tag.
+
 The function =semantic-add-system-include= will add your include paths
-to =semantic-c-dependency-system-include-path=. By default, it
-only contains =/usr/include=.
+to =semantic-c-dependency-system-include-path= variable. By default,
+it only contains =/usr/include=. You can add more such as
+=/usr/local/include= or your own project, such as
+=~/linux/include=.
+
+The disadvantage of using Semantic is that for it may take brief while
+to parse, but for once; the next time you can jump to parsed source
+instantly.
 
 ** Using generated database from =GNU Global=
 :PROPERTIES:
 :ID:       ba935604-930b-4e12-b2a4-673cedc3453b
 :END:
+=GNU Global= has an environment variable named =GTAGSLIBPATH=. This
+variable holds GTAGS database of external libraries that your project
+depends on but not inside your project. For example, your project may
+rely on system headers such as =stdio.h=, =stdlib.h=... but these
+headers are internal to your project. However, remember that you can
+only jump to tag definitions of external dependencies, and nothing
+else (such as files or references). But, again, once you are inside
+the external library, you can start jumping around sicne it becomes
+your current project.
+
+To make =GNU Global= sees your system headers, follow these steps:
+
+- Export this environment variable in your shell init file, such as
+  =.bashrc= or =.zshrc=:
+
+#+begin_src sh
+  export GTAGSLIBPATH=$HOME/.gtags/
+#+end_src
+
+- Execute these commands in your terminal:
+
+#+begin_src sh
+  # Create a directory for holding database, since
+  # you cannot create a database in your system paths
+  mkdir ~/.gtag
+
+  # Create symbolic links to your external libraries
+  ln -s /usr/include usr-include
+  ln -s /usr/local/include/ usr-local-include
+
+  # Generate GNU Global database
+  gtags -c
+#+end_src
+
+The =-c= option tells GNU Global to generate tag database in compact
+format. It is necessary because if your project contains C++ headers like
+=Boost=, without =-c= your GTAGS database can be more than 1 GB. Same
+goes for =ctags=. The =GNU Global= devs explained that it is because
+the GTGAS database includes the image of tagged line, and the =Boost=
+headers have a lot of very long lines.
+
+After all the above steps, restart with a shell loaded with that
+variable. To verify Emacs gets the variable, =M-x getenv= and enter
+=GTAGSLIBPATH= and see if your predefined value is
+available. Executing =ggtags-find-tag-dwim= or =helm-gtags-dwim= jumps
+to the definition of a system tag like a normal tag.
+
+The disadvantage of using =GNU Global= is that currently it cannot
+include files without extension. In the C++ system include directory
+like =/usr/include/c++/4.8/=, it contains files without extension such
+as =iostream=, =string=, =set=, =map=.... so you can write =#include=
+directives without having to append =.h= at the end. =GNU Global= devs
+are considering to add support for this use case.
 
 * Project management with Projectile
 :PROPERTIES:
