@@ -61,15 +61,7 @@ kernel source tree with ease.
   - GDB:
 
     #+BEGIN_CENTER
-    (screenshot from this website:
-    http://everet.org/2013/01/customize-emacs-gud-many-windows.html)
-
-    [[file:static/gdb-many-windows1.png][file:static/gdb-many-windows1.png]]
-
-    (screenshot from this website:
-    https://wiki.kldp.org/wiki.php/EmacsGDBQuickNote)
-
-    [[file:static/gdb-many-windows2.png][file:static/gdb-many-windows2.png]]
+    [[file:static/c-ide/gdb-many-windows.gif][file:static/c-ide/gdb-many-windows.gif]]
     #+END_CENTER
 
 - Diff between current editing file and latest file revision:
