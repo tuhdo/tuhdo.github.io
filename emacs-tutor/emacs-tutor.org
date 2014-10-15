@@ -77,9 +77,12 @@ kernel source tree with ease.
   [[file:static/live_grep.gif][file:static/live_grep.gif]]
 
 - Quickly select any file in a directory under a Version Control
-  System, for example, Linux kernel:
+  System, for example, Linux kernel. Note that in the demos you may
+  see me type in the commands. You can think of it like the start menu
+  in Windows, but actually those commands can be executed quickly with
+  a shortcut.
 
-  [[file:static/helm_projectile.gif][file:static/helm_projectile.gif]]
+  [[file:static/helm-projectile/helm-projectile-find-files-1.gif][file:static/helm-projectile/helm-projectile-find-files-1.gif]]
 
 - Quickly select any file/directory in previous working session:
 
