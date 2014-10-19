@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-10-13 Mon 11:08 -->
+<!-- 2014-10-20 T2 00:39 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -185,16 +184,17 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-6-1-5">Miscelaneous</a></li>
 </ul>
 </li>
-<li><a href="#sec-6-2">Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></a></li>
-<li><a href="#sec-6-3">Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></a></li>
-<li><a href="#sec-6-4">Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></a></li>
-<li><a href="#sec-6-5">Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></a></li>
-<li><a href="#sec-6-6">Caching</a>
+<li><a href="#sec-6-2">Command: <code>helm-projectile-find-file-in-known-projects~</code>, <b>C-c p F</b></a></li>
+<li><a href="#sec-6-3">Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></a></li>
+<li><a href="#sec-6-4">Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></a></li>
+<li><a href="#sec-6-5">Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></a></li>
+<li><a href="#sec-6-6">Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></a></li>
+<li><a href="#sec-6-7">Caching</a>
 <ul>
-<li><a href="#sec-6-6-1">Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></a></li>
-<li><a href="#sec-6-6-2">Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></a></li>
-<li><a href="#sec-6-6-3">Command: <code>projectile-purge-file-from-cache</code></a></li>
-<li><a href="#sec-6-6-4">Command: <code>projectile-purge-dir-from-cache</code></a></li>
+<li><a href="#sec-6-7-1">Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></a></li>
+<li><a href="#sec-6-7-2">Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></a></li>
+<li><a href="#sec-6-7-3">Command: <code>projectile-purge-file-from-cache</code></a></li>
+<li><a href="#sec-6-7-4">Command: <code>projectile-purge-dir-from-cache</code></a></li>
 </ul>
 </li>
 </ul>
@@ -512,11 +512,12 @@ project.
 <p>
 <span class="underline">Usage</span>: This is the very first command you need to use before using other
 commands, because it is the entrance to all of your projects and the
-only command that can be used outside of a project. The command 
-lists all visited projects. If you first use Projectile, you have to
-visit at least a project supported by Projectile to let it remember
-the location of this project. The next time you won't have to manually
-navigate to that project but jump to it instantly using
+only command that can be used outside of a project, aside from
+<code>helm-projectile-find-file-in-known-projects</code>. The command lists all
+visited projects. If you first use Projectile, you have to visit at
+least a project supported by Projectile to let it remember the
+location of this project. The next time you won't have to manually
+navigate to that project but jump to it instantly using 
 <code>helm-projectile-switch-project</code>.
 </p>
 
@@ -606,6 +607,10 @@ be displayed incrementally.
 
 <li><i>Compile project</i> (<b>C-c</b>): Run a <code>compile</code> command at the project
 root.
+</li>
+
+<li><i>Remove project(s)</i> (<b>M-D</b>): Delete marked projects from the list of
+known projects.
 </li>
 </ul>
 </div>
@@ -904,8 +909,30 @@ similar to <code>Rename files(s)</code> action.
 </div>
 
 <div id="outline-container-sec-6-2" class="outline-3">
-<h3 id="sec-6-2"><a id="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3" name="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3"></a>Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></h3>
+<h3 id="sec-6-2"><a id="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304" name="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304"></a>Command: <code>helm-projectile-find-file-in-known-projects~</code>, <b>C-c p F</b></h3>
 <div class="outline-text-3" id="text-6-2">
+<p>
+This command is another one that can be used outside of any
+project. When executed, it lists all files in all known
+projects. Depends on your style, use this command or
+<code>helm-projectile-switch-project</code> command, when you want to jump to a
+file. Note that this command could be slow to show you the list of
+files if there is a large number of files. To speed it up, it is
+beneficial to enable caching. You will learn about caching at near the
+end of this tutorial. With caching, Projectile won't have to build up
+a list of files again; it simply reuses, and show you the list
+instantly for selecting.
+</p>
+
+<p>
+The action menu is the same as <code>helm-projectile-find-file</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3"><a id="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3" name="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3"></a>Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></h3>
+<div class="outline-text-3" id="text-6-3">
 <p>
 <span class="underline">Usage</span>: Find file based on context at point (do what you mean):
 </p>
@@ -943,9 +970,9 @@ anywhere</a>.
 </div>
 </div>
 
-<div id="outline-container-sec-6-3" class="outline-3">
-<h3 id="sec-6-3"><a id="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b" name="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b"></a>Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></h3>
-<div class="outline-text-3" id="text-6-3">
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4"><a id="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b" name="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b"></a>Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></h3>
+<div class="outline-text-3" id="text-6-4">
 <p>
 <span class="underline">Usage</span>: List available directories in the current project. 
 </p>
@@ -967,9 +994,9 @@ buffer.
 </div>
 </div>
 
-<div id="outline-container-sec-6-4" class="outline-3">
-<h3 id="sec-6-4"><a id="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572" name="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572"></a>Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></h3>
-<div class="outline-text-3" id="text-6-4">
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5"><a id="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572" name="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572"></a>Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></h3>
+<div class="outline-text-3" id="text-6-5">
 <p>
 <span class="underline">Usage</span>: List recently visited files in <b>current project</b>. The command has a
 subset of actions in <code>helm-projectile-find-file</code>, so once you mastered
@@ -979,9 +1006,9 @@ knowledge here.
 </div>
 </div>
 
-<div id="outline-container-sec-6-5" class="outline-3">
-<h3 id="sec-6-5"><a id="ID-74179568-a5b0-4a8f-8f30-b75959d4e190" name="ID-74179568-a5b0-4a8f-8f30-b75959d4e190"></a>Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></h3>
-<div class="outline-text-3" id="text-6-5">
+<div id="outline-container-sec-6-6" class="outline-3">
+<h3 id="sec-6-6"><a id="ID-74179568-a5b0-4a8f-8f30-b75959d4e190" name="ID-74179568-a5b0-4a8f-8f30-b75959d4e190"></a>Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></h3>
+<div class="outline-text-3" id="text-6-6">
 <p>
 <span class="underline">Usage</span>: Switch between files with the same name but different extensions. With
 prefix argument <b>C-u</b>, enable flex-matching that match any file that
@@ -1046,9 +1073,9 @@ current file and other files with same names but different extensions</i>.
 </div>
 </div>
 
-<div id="outline-container-sec-6-6" class="outline-3">
-<h3 id="sec-6-6"><a id="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751" name="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751"></a>Caching</h3>
-<div class="outline-text-3" id="text-6-6">
+<div id="outline-container-sec-6-7" class="outline-3">
+<h3 id="sec-6-7"><a id="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751" name="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751"></a>Caching</h3>
+<div class="outline-text-3" id="text-6-7">
 <p>
 <span class="underline">Usage</span>: In large projects, caching can significantly speedup file and
 directory listings, making it display instantly. Caching is enabled
@@ -1074,9 +1101,9 @@ refresh the whole cache.
 </p>
 </div>
 
-<div id="outline-container-sec-6-6-1" class="outline-4">
-<h4 id="sec-6-6-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a>Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></h4>
-<div class="outline-text-4" id="text-6-6-1">
+<div id="outline-container-sec-6-7-1" class="outline-4">
+<h4 id="sec-6-7-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a>Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></h4>
+<div class="outline-text-4" id="text-6-7-1">
 <p>
 <span class="underline">Usage</span>: As the command name suggests, it invalidates the current cache and
 retrieves everything as new.
@@ -1084,18 +1111,18 @@ retrieves everything as new.
 </div>
 </div>
 
-<div id="outline-container-sec-6-6-2" class="outline-4">
-<h4 id="sec-6-6-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a>Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></h4>
-<div class="outline-text-4" id="text-6-6-2">
+<div id="outline-container-sec-6-7-2" class="outline-4">
+<h4 id="sec-6-7-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a>Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></h4>
+<div class="outline-text-4" id="text-6-7-2">
 <p>
 <span class="underline">Usage</span>: Add the file of current selected buffer to cache.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-6-6-3" class="outline-4">
-<h4 id="sec-6-6-3"><a id="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8" name="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8"></a>Command: <code>projectile-purge-file-from-cache</code></h4>
-<div class="outline-text-4" id="text-6-6-3">
+<div id="outline-container-sec-6-7-3" class="outline-4">
+<h4 id="sec-6-7-3"><a id="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8" name="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8"></a>Command: <code>projectile-purge-file-from-cache</code></h4>
+<div class="outline-text-4" id="text-6-7-3">
 <p>
 <span class="underline">Usage</span>: Remove a file from the cache. Once removed, you won't see it
 appear the next time using file related commands. If you delete a
@@ -1104,9 +1131,9 @@ file, Projectile automatically removes the file from the cache.
 </div>
 </div>
 
-<div id="outline-container-sec-6-6-4" class="outline-4">
-<h4 id="sec-6-6-4"><a id="ID-2cf595ee-dab6-449a-ba49-98094f724ee1" name="ID-2cf595ee-dab6-449a-ba49-98094f724ee1"></a>Command: <code>projectile-purge-dir-from-cache</code></h4>
-<div class="outline-text-4" id="text-6-6-4">
+<div id="outline-container-sec-6-7-4" class="outline-4">
+<h4 id="sec-6-7-4"><a id="ID-2cf595ee-dab6-449a-ba49-98094f724ee1" name="ID-2cf595ee-dab6-449a-ba49-98094f724ee1"></a>Command: <code>projectile-purge-dir-from-cache</code></h4>
+<div class="outline-text-4" id="text-6-7-4">
 <p>
 <span class="underline">Usage</span>: Remove a directory from the cache.
 </p>

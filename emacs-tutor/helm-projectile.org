@@ -199,11 +199,12 @@ project.
 :END:
 _Usage_: This is the very first command you need to use before using other
 commands, because it is the entrance to all of your projects and the
-only command that can be used outside of a project. The command 
-lists all visited projects. If you first use Projectile, you have to
-visit at least a project supported by Projectile to let it remember
-the location of this project. The next time you won't have to manually
-navigate to that project but jump to it instantly using
+only command that can be used outside of a project, aside from
+~helm-projectile-find-file-in-known-projects~. The command lists all
+visited projects. If you first use Projectile, you have to visit at
+least a project supported by Projectile to let it remember the
+location of this project. The next time you won't have to manually
+navigate to that project but jump to it instantly using 
 ~helm-projectile-switch-project~.
 
 [[file:static/helm-projectile/helm-projectile-switch-project.gif][file:static/helm-projectile/helm-projectile-switch-project.gif]]
@@ -264,6 +265,9 @@ Available actions:
 
 - /Compile project/ (*C-c*): Run a ~compile~ command at the project
   root.
+
+- /Remove project(s)/ (*M-D*): Delete marked projects from the list of
+  known projects.
 
 * File management
 :PROPERTIES:
@@ -464,6 +468,23 @@ key.
   ~kill-ring~.
 
 - /Print File/ (*C-c p*, add *C-u* to refresh): Print marked files.
+
+** Command: ~helm-projectile-find-file-in-known-projects~~, *C-c p F*
+:PROPERTIES:
+:ID:       1a36aba8-2070-4f66-b98e-efc66fc2b304
+:END:
+This command is another one that can be used outside of any
+project. When executed, it lists all files in all known
+projects. Depends on your style, use this command or
+~helm-projectile-switch-project~ command, when you want to jump to a
+file. Note that this command could be slow to show you the list of
+files if there is a large number of files. To speed it up, it is
+beneficial to enable caching. You will learn about caching at near the
+end of this tutorial. With caching, Projectile won't have to build up
+a list of files again; it simply reuses, and show you the list
+instantly for selecting.
+
+The action menu is the same as ~helm-projectile-find-file~.
 
 ** Command: ~helm-projectile-find-file-dwim~, *C-c p g*
 :PROPERTIES:
