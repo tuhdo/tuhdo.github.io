@@ -488,7 +488,7 @@ when *C-x o*.
 one. Try creating another window, try *C-x 1*. Only in my
 distribution: *C-x 1* again opens previous window layout.
 
-* SML commands
+* Commands for SML
 :PROPERTIES:
 :ID:       842df7b1-185f-4176-b024-4174e737b28a
 :END:
@@ -526,6 +526,102 @@ Other useful commands
 
   [[file:static/proglang/sml-completion.gif][file:static/proglang/sml-completion.gif]]
 
+* Commands for Racket
+:PROPERTIES:
+:ID:       90426c7f-8ad9-4ad0-a655-c814d07a285b
+:END:
+** Basic navigation for Lisp expressions
+:PROPERTIES:
+:ID:       e2820ba8-56a1-4290-bbd0-2e2a0d193676
+:END:
+- *C-M-f* binds to =forward-sexp=, move forward over a balanced;
+  *C-M-b* binds to =backward-sexp=, move backward over a balanced
+  expression. Demo:
+  
+  [screenshot]
+
+- *C-M-k* binds to =kill-sexp=, kill balanced expression
+  forward. Demo:
+  
+  [[file:static/part3/kill-sexp.gif][file:static/part3/kill-sexp.gif]]
+
+- *C-M-t* binds to =transpose-sexps=, transpose expressions. Demo:
+
+  [[file:static/part3/transpose-sexp.gif][file:static/part3/transpose-sexp.gif]]
+
+- *C-M-<SPC>* or *C-M-@* binds to =mark-sexp=, put mark after
+  following expression. Demo:
+
+  [[file:static/part3/mark-sexp.gif][file:static/part3/mark-sexp.gif]]
+
+  These key bindings not only work for Lisp mode, but for any
+  programming languages as well. You can use *C-M-b* and *C-M-f* to
+  move back and forth between any punctuation pair, or move to the
+  beginning and end of an identifier. You can learn more advanced
+  movements using a package named ParEdit. The movements are described
+  in this [[http://www.emacswiki.org/emacs/PareditCheatsheet][cheatsheet]]. In my prebuilt Emacs configuration for you, it
+  uses =smartparens= package, but =smartparens= also includes all the
+  features of ParEdit.
+
+  Automatic indentation: =aggressive-indent=.
+
+** Geiser commands
+:PROPERTIES:
+:ID:       11eb6563-3eff-4af2-9d60-571dc7b7b747
+:END:
+
+*** What is Geiser?
+:PROPERTIES:
+:ID:       e50fb787-7a14-4c41-a440-829f426a0c25
+:END:
+From the [[http://nongnu.org/geiser/][homepage]]:
+
+Geiser is a collection of Emacs major and minor modes that conspire
+with one or more Scheme interpreters to keep the Lisp Machine Spirit
+alive. It draws inspiration (and a bit more) from environments such as
+Common Lisp’s Slime, Factor’s FUEL, Squeak or Emacs itself, and does
+its best to make Scheme hacking inside Emacs (even more) fun. 
+
+When working with a fully conniving Scheme, Geiser can offer the
+following functionality:
+
+- Form evaluation in the context of the current file’s module.
+- Macro expansion.
+- File/module loading and/or compilation.
+- Namespace-aware identifier completion (including local bindings,
+  names visible in the current module, and module names).
+- Autodoc: the echo area shows information about the signature of the procedure/macro around point automatically.
+- Jump to definition of identifier at point.
+- Access to documentation (including docstrings when the implementation provides it).
+- Listings of identifiers exported by a given module.
+- Listings of callers/callees of procedures (only available in Guile Scheme).
+- Rudimentary support for debugging (when the REPL provides a
+  debugger) and error navigation.
+- Support for multiple, simultaneous REPLs.
+- Support for image display in those Schemes that treat them as first class values.
+
+*** Basic workflow
+:PROPERTIES:
+:ID:       90daf61b-97a8-4fc3-a394-cc7c498c236c
+:END:
+- Split your Emacs in two windows: one for source code, one for REPL
+
+  [screnshot]
+
+- Write some code in source buffer.
+
+  [screenshot]
+
+- Evaluate expressions with *C-x C-e* or compile it. You can evaluate
+  individual expression or a region of expressions.
+
+  [screenshot]
+
+- See result in REPL buffer.
+*** Useful features
+:PROPERTIES:
+:ID:       2199e65b-eddd-460f-89d3-cca5206d822f
+:END:
 * Conclusion
 :PROPERTIES:
 :ID:       97ffd86f-d638-4237-808c-94b139047d0d
