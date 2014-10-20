@@ -564,12 +564,23 @@ Other useful commands
   features of ParEdit.
 
   Automatic indentation: =aggressive-indent=.
-
+** Editing support: You don't have to fight the parentheses
+:PROPERTIES:
+:ID:       f6459f1c-0c36-46e6-b7c5-c404bb69c5d9
+:END:
+*** Automatic indentation
+:PROPERTIES:
+:ID:       95979f90-6518-485f-ae8f-00c9132b738a
+:END:
+- Aggressive Indent
+*** Automatic comment adjust
+:PROPERTIES:
+:ID:       40a0de43-2c0a-44c4-9f27-4b20068f5b9e
+:END:
 ** Geiser commands
 :PROPERTIES:
 :ID:       11eb6563-3eff-4af2-9d60-571dc7b7b747
 :END:
-
 *** What is Geiser?
 :PROPERTIES:
 :ID:       e50fb787-7a14-4c41-a440-829f426a0c25
@@ -605,22 +616,79 @@ following functionality:
 :ID:       90daf61b-97a8-4fc3-a394-cc7c498c236c
 :END:
 - Split your Emacs in two windows: one for source code, one for REPL
-
-  [screnshot]
-
 - Write some code in source buffer.
-
-  [screenshot]
-
 - Evaluate expressions with *C-x C-e* or compile it. You can evaluate
   individual expression or a region of expressions.
-
-  [screenshot]
-
 - See result in REPL buffer.
-*** Useful features
+
+Demo (begins when ~START DEMO~ appears in minibuffer):
+
+[screenshot]
+
+*** Feature showcase
 :PROPERTIES:
 :ID:       2199e65b-eddd-460f-89d3-cca5206d822f
+:END:
+**** Form evaluation in the context of the current file’s module.
+:PROPERTIES:
+:ID:       f44a2558-5325-4514-8108-5b4ed5073df1
+:END:
+
+**** Macro expansion.
+:PROPERTIES:
+:ID:       30e67003-9aaf-45c7-90e5-91baed2b2719
+:END:
+
+**** File/module loading and/or compilation.
+:PROPERTIES:
+:ID:       9a142adc-5659-4bc7-a70b-526e98d69580
+:END:
+
+**** Namespace-aware identifier completion
+:PROPERTIES:
+:ID:       12a89f0f-a618-43d9-b254-1e33c6542331
+:END:
+
+**** Autodoc
+:PROPERTIES:
+:ID:       6e1d7aa7-78ac-458f-9e01-974a418c4644
+:END:
+The echo area shows information about the signature of the
+procedure/macro around point automatically.
+
+**** Jump to definition of identifier at point.
+:PROPERTIES:
+:ID:       3de18238-7758-434b-b7c1-8175524112c3
+:END:
+
+**** Access to documentation (including docstrings when the implementation provides it).
+:PROPERTIES:
+:ID:       912d6020-6f5f-4528-8895-d677e62f7c1a
+:END:
+
+**** Listings of identifiers exported by a given module.
+:PROPERTIES:
+:ID:       28e98d91-3b07-44ad-9ddd-39996c0af556
+:END:
+
+**** Listings of callers/callees of procedures (only available in Guile Scheme).
+:PROPERTIES:
+:ID:       139334df-a664-4f70-ae3d-273df8550046
+:END:
+
+**** Debugging
+:PROPERTIES:
+:ID:       e537b0ee-cbc5-48c8-a6e0-b699b936a68d
+:END:
+
+**** Support for multiple, simultaneous REPLs
+:PROPERTIES:
+:ID:       93f8ad18-d97b-451c-b304-f42ce7affe80
+:END:
+
+**** Support for image display in those Schemes that treat them as first class values.
+:PROPERTIES:
+:ID:       25160aea-0645-47bf-98af-b79f4e73b269
 :END:
 * Conclusion
 :PROPERTIES:
