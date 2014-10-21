@@ -530,6 +530,40 @@ Other useful commands
 :PROPERTIES:
 :ID:       90426c7f-8ad9-4ad0-a655-c814d07a285b
 :END:
+** Editing support: You don't have to fight the parentheses
+:PROPERTIES:
+:ID:       f6459f1c-0c36-46e6-b7c5-c404bb69c5d9
+:END:
+*** Automatic indentation
+:PROPERTIES:
+:ID:       95979f90-6518-485f-ae8f-00c9132b738a
+:END:
+- =aggressive-indent= is a minor mode that keeps your code always
+  indented. It reindents after every command. It is available for Lisp
+  modes (such as Racket, Common Lisp, Emacs Lisp...) in this
+  distribution for the course.
+
+[screenshot]
+
+- You can also run *C-c i* to indents whole buffer. In Lisp modes, you
+  won't need it; but for other programming modes, *C-c i* is always
+  useful.
+*** Automatic comment
+:PROPERTIES:
+:ID:       40a0de43-2c0a-44c4-9f27-4b20068f5b9e
+:END:
+[[https://github.com/remyferre/comment-dwim-2][comment-dwim2]] is a package that provides extended features compare
+with the original command =comment-dwim=. =dwim= stands for =do what i
+mean=; it means that the commands with =dwim= suffix changes it
+behaviors based on context at point. For example, =comment-dwim2=
+comments line at point if it is uncommented; execute again uncomments
+the line and put a comment at end of line; execute again comments the
+whole line; execute again uncomment the line and returns to original
+state and we repeat the whole process again. These behaviors work on
+region as well.
+
+You can click the link to the homepage to see the demos.
+
 ** Basic navigation for Lisp expressions
 :PROPERTIES:
 :ID:       e2820ba8-56a1-4290-bbd0-2e2a0d193676
@@ -562,21 +596,6 @@ Other useful commands
   in this [[http://www.emacswiki.org/emacs/PareditCheatsheet][cheatsheet]]. In my prebuilt Emacs configuration for you, it
   uses =smartparens= package, but =smartparens= also includes all the
   features of ParEdit.
-
-  Automatic indentation: =aggressive-indent=.
-** Editing support: You don't have to fight the parentheses
-:PROPERTIES:
-:ID:       f6459f1c-0c36-46e6-b7c5-c404bb69c5d9
-:END:
-*** Automatic indentation
-:PROPERTIES:
-:ID:       95979f90-6518-485f-ae8f-00c9132b738a
-:END:
-- Aggressive Indent
-*** Automatic comment
-:PROPERTIES:
-:ID:       40a0de43-2c0a-44c4-9f27-4b20068f5b9e
-:END:
 
 ** Geiser commands
 :PROPERTIES:
@@ -618,148 +637,68 @@ following functionality:
 :END:
 - Split your Emacs in two windows: one for source code, one for REPL
 - Write some code in source buffer.
-- Evaluate expressions with *C-x C-e* or compile it. You can evaluate
-  individual expression or a region of expressions.
-- See result in REPL buffer.
+- Evaluate whole buffer and switch to the context of that buffer with
+  *C-c C-a*. When you write a Racket file, you are writing a
+  module. To use definitions in the module, you have to switch to that
+  module. *C-c C-a* automatically evaluates the file of current
+  working buffer and switch context to that module. Note that if you
+  haven't save your buffer, Geiser will use the last saved state.
+- Play with your code in the REPL and see the result instantly.
 
 Demo (begins when ~START DEMO~ appears in minibuffer):
 
 [screenshot]
 
-*** Feature showcase
+*** Programming assistance
 :PROPERTIES:
-:ID:       2199e65b-eddd-460f-89d3-cca5206d822f
+:ID:       30a2abd9-2b55-4a45-8e8d-398e1123c19e
 :END:
-**** Autodoc: =geiser-autodoc-show=
-:PROPERTIES:
-:ID:       6e1d7aa7-78ac-458f-9e01-974a418c4644
-:END:
-The echo area shows information about the signature of the
-procedure/macro around point automatically. It is enabled by default
-when =geiser-mode= is activated.
+Geiser also provides common features found in IDE:
 
-[screenshot]
+- _Autodoc_: The minibuffer shows information about the signature of the
+  function/macro around point automatically. It is enabled by default
+  when =geiser-mode= is activated.
 
-**** Access to documentation
-:PROPERTIES:
-:ID:       912d6020-6f5f-4528-8895-d677e62f7c1a
-:END:
-***** Command: =geiser-doc-symbol-at-point=, *C-c C-d C-d*
-:PROPERTIES:
-:ID:       f978a7a6-c798-48f1-98a6-536d63151a27
-:END:
-_Usage_: See documentation for identifier at point
+  [screenshot]
 
-***** Command: =geiser-doc-module=, *C-c C-d C-m*
-:PROPERTIES:
-:ID:       87526305-c7f8-450c-bc73-71b3c73bec0c
-:END:
-***** Command: =geiser-doc-look-up-manual=, 
-:PROPERTIES:
-:ID:       4beb831a-e246-4496-9b0f-d6ac3ba73a0a
-:END:
-_Usage_: Look up manual for symbol at point
+- _Code completion_: Geiser uses Emacs's default =completion-at-point=
+  command to provide completion candidates. By default, it is bound to
+  =C-M-i= (the equivalent of =M-TAB=); in my Emacs configuration for
+  this guide, I bound it to =TAB= for buffers with Geiser mode for
+  convenience.
 
-DEMO:
+  [screenshot]
 
-[screenshot]
+- _Jump to definition_: You can jump to any symbol at point in a
+  Racket buffer while Geiser REPL is active with *M-.*. To go back to
+  where you were, use *M-,*.
 
-**** Jump to definition of identifier at point.
-:PROPERTIES:
-:ID:       3de18238-7758-434b-b7c1-8175524112c3
-:END:
+- _Open documentation at point_: For any symbol, you can execute *C-c
+  C-d C-d* to open a buffer that has a brief summary of that symbol,
+  along with two buttons for accessing either its actual source code
+  or its HTML documentation in an external browser.
 
-**** Context-sensitve completion
-:PROPERTIES:
-:ID:       12a89f0f-a618-43d9-b254-1e33c6542331
-:END:
+- _More evaluation commands_: These commands works at expression
+  level.
 
-**** Form evaluation in the context of the current file’s module.
-:PROPERTIES:
-:ID:       f44a2558-5325-4514-8108-5b4ed5073df1
-:END:
-***** Command: =geiser-eval-definition=, *C-M-x*
-:PROPERTIES:
-:ID:       e9241492-d43c-4d3f-b197-3733dc2ffff1
-:END:
-***** Command: =geiser-eval-last-sexp=, *C-x C-e*
-:PROPERTIES:
-:ID:       f8f3d091-d395-4ae8-a317-c452c408c1e1
-:END:
-***** Command: =geiser-eval-region=, *C-c C-r*
-:PROPERTIES:
-:ID:       171c2e79-2031-4d4a-8f73-bf34bfb3356a
-:END:
-***** Command: =geiser-eval-buffer=, *C-c C-b*
-:PROPERTIES:
-:ID:       5d824d78-59d7-49fe-8486-29fe129f387f
-:END:
-***** Summary
-:PROPERTIES:
-:ID:       a8cad826-b5db-40f2-89b8-53ce1fb8e0e7
-:END:
+| Key     | Command                  | Description                                        |
+|---------+--------------------------+----------------------------------------------------|
+| C-M-x   | =geiser-eval-definition= | Eval definition around point. For example, if      |
+|         |                          | point is inside a variable or function definition, |
+|         |                          | this command evaluates the whole definition form   |
+|---------+--------------------------+----------------------------------------------------|
+| C-x C-e | =geiser-eval-last-sexp=  | Eval sexp before point                             |
+|---------+--------------------------+----------------------------------------------------|
+| C-c C-r | =geiser-eval-region=     | Eval region                                        |
+|---------+--------------------------+----------------------------------------------------|
 
-| Key     | Command                         | Description                                     |
-|---------+---------------------------------+-------------------------------------------------|
-| C-M-x   | =geiser-eval-definition=        | Eval definition around point.                   |
-|---------+---------------------------------+-------------------------------------------------|
-| C-x C-e | =geiser-eval-last-sexp=         | Eval sexp before point                          |
-|---------+---------------------------------+-------------------------------------------------|
-| C-c C-r | =geiser-eval-region=            | Eval region                                     |
-|---------+---------------------------------+-------------------------------------------------|
-| C-c C-b | =geiser-eval-buffer=            | Eval buffer                                     |
-|---------+---------------------------------+-------------------------------------------------|
-
-***** Alternative commands:
-:PROPERTIES:
-:ID:       d63644ea-75a1-4ea0-be3d-ec46f2bfdf5f
-:END:
-
-| Key     | Command                         | Description                                     |
-|---------+---------------------------------+-------------------------------------------------|
-| C-c M-e | =geiser-eval-definition-and-go= | Eval definition around point and switch to REPL |
-|---------+---------------------------------+-------------------------------------------------|
-| C-c M-r | =geiser-eval-region-and-go=     | Eval region and switch to REPL                  |
-|---------+---------------------------------+-------------------------------------------------|
-| C-c M-b | =geiser-eval-buffer-and-go=     | Eval buffer and switch to REPL                  |
-|---------+---------------------------------+-------------------------------------------------|
-
-**** Inline image display
-:PROPERTIES:
-:ID:       25160aea-0645-47bf-98af-b79f4e73b269
-:END:
-**** Debugging
-:PROPERTIES:
-:ID:       e537b0ee-cbc5-48c8-a6e0-b699b936a68d
-:END:
-
-**** Macro expansion.
-:PROPERTIES:
-:ID:       30e67003-9aaf-45c7-90e5-91baed2b2719
-:END:
-**** File/module loading and/or compilation.
-:PROPERTIES:
-:ID:       9a142adc-5659-4bc7-a70b-526e98d69580
-:END:
-**** Listings of identifiers exported by a given module.
-:PROPERTIES:
-:ID:       28e98d91-3b07-44ad-9ddd-39996c0af556
-:END:
-
-**** Listings of callers/callees of procedures (only available in Guile Scheme).
-:PROPERTIES:
-:ID:       139334df-a664-4f70-ae3d-273df8550046
-:END:
-
-**** Support for multiple, simultaneous REPLs
-:PROPERTIES:
-:ID:       93f8ad18-d97b-451c-b304-f42ce7affe80
-:END:
+These are enough for the Racket part of the course. To learn more
+Geiser features, please refer to [[http://nongnu.org/geiser/][official documentation]].
 
 * Conclusion
 :PROPERTIES:
 :ID:       97ffd86f-d638-4237-808c-94b139047d0d
 :END:
 That's it for the basics. I hope it provides you a much better
-experience with SML for the course. You can learn more about Emacs in
+experience with SML and Geiser for the course. You can learn more about Emacs in
 my [[file:index.org][other guides]].
