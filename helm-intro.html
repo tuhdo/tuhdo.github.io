@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-10-14 T3 00:10 -->
+<!-- 2014-10-23 T5 00:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -1119,12 +1119,109 @@ default.
 </p>
 
 <p>
-<code>helm-semantic-or-imenu</code> works with many modes like C/C++, Python,
-Ruby, Emacs Lisp and Lisp in general, Shell script, Org&#x2026;
+<code>helm-semantic-or-imenu</code> works with many modes like C/C++, Java,
+Python, Ruby, Emacs Lisp and Lisp in general, shell script,
+Org-mode&#x2026;
 </p>
 
 <p>
-<span class="underline">Demo</span>:
+<span class="underline">Usage</span>:
+</p>
+
+<ul class="org-ul">
+<li>Invoke the command (by default, <b>C-c h i</b>).
+</li>
+
+<li>You can use the arrow keys or <b>C-p/C-n</b> to move up and down between
+candidates. You can also use <b>C-&lt;down&gt;</b> and <b>C-&lt;up&gt;</b>; as you move the
+highlighter between tags inside Helm Semantic buffer, point moves to
+the tag location as well.
+</li>
+
+<li>A nice feature of <code>helm-semantic-or-imenu</code> is that whenever you
+activate the command, and if point is inside a type of Semantic
+tags, the highlighter pre-selects that tag in the Helm buffer. This,
+in combination with <b>C-&lt;down&gt;</b> and <b>C-&lt;up&gt;</b> to move between
+definitions in your buffer.
+</li>
+</ul>
+
+<p>
+Helm gives you a finer control: you can move between functions using
+<code>beginning-of-defun</code> (bound to <b>C-M-a</b>) and <code>end-of-defun</code> (bound to
+<b>C-M-e</b>), but it will also move point and scroll your buffer. Using
+<code>helm-semantic-or-imenu</code>, you have similar behaviour and you have more
+choices: either to return back to original position where you invoke
+<code>helm-semantic-or-imenu</code> using <code>C-g</code> because you only need to look up
+function interface (i.e. to see what kinds of parameters a function
+accepts), or jump to the tag location with <code>RET</code>. Currently, only
+Semantic part of <code>helm-semantic-or-imenu</code> is supported. If a buffer
+only has <code>imenu</code> support from the command, you won't be able to use
+this feature.
+</p>
+
+<p>
+<code>helm-semantic-or-imenu</code> provides these types of Semantic tags: 
+</p>
+
+<ul class="org-ul">
+<li><code>Dependencies</code>: the dependencies of the current file as defined by
+the current major mode. For example, <code>Dependencies</code> in C/C++ are
+header files and when execute persistent action on a dependency,
+point moves to the location of that include header file in the
+current  buffer.
+</li>
+
+<li><code>Variables</code>: variables defined in current buffer.
+</li>
+<li><code>Functions</code>: function defined in current buffer
+</li>
+<li><code>Provides</code>: modules that this buffer provides; for example, <code>(provide
+  ...)</code> expression in Emacs Lisp.
+</li>
+</ul>
+
+<p>
+If you want to filter a type of tags, enter caret character <code>^</code>
+(beginning of line in regex) and follow the first character of that
+type. For example, if I want to see only function tags, type <code>^f</code> in
+the prompt.
+</p>
+
+<p>
+<span class="underline">Demo 1</span>:
+</p>
+
+<p>
+DEMO (begin when <code>START DEMO</code> is in minibuffer):
+</p>
+
+<ul class="org-ul">
+<li>First, I use <code>helm-semantic-or-imenu</code> to move to the function
+helm-define-key-with-subkeys and move point there.
+</li>
+
+<li>Then, I start <code>helm-semantic-or-imenu</code> again and
+helm-define-key-with-subkeys is pre-selected.
+</li>
+
+<li>Then, I move point to the variable <code>helm-map</code> and execute
+<code>helm-semantic-or-imenu</code> again on two function: <code>helm-next-source</code>
+and <code>helm-previous-source</code>. This time, instead of showing the
+current semantic tag I'm operating in (which is <code>helm-map</code>), it
+shows the other two tags in Helm Semantic buffer. This is because I
+supplied a prefix argument before running the command.
+
+
+<div class="figure">
+<p><a href="static/part3/helm-semantic-or-imenu-2.gif"><img src="static/part3/helm-semantic-or-imenu-2.gif" alt="helm-semantic-or-imenu-2.gif" /></a>
+</p>
+</div>
+</li>
+</ul>
+
+<p>
+<span class="underline">Demo 2</span>:
 </p>
 
 <p>
@@ -1170,34 +1267,6 @@ fine.
 <p>
 In the demo, you see things like <code>class u16</code> and <code>class u32</code>; that is
 because <code>u16</code> and <code>u32</code> are defined by typedef.
-</p>
-
-<p>
-<code>helm-semantic</code> provides these types of tags: 
-</p>
-
-<ul class="org-ul">
-<li><code>Dependencies</code>: the dependencies of the current file as defined by
-the current major mode. For example, <code>Dependencies</code> in C/C++ are
-header files and when execute persistent action on a dependency,
-point moves to the location of that include header file in the
-current  buffer.
-</li>
-
-<li><code>Variables</code>: variables defined in current buffer.
-</li>
-<li><code>Functions</code>: function defined in current buffer
-</li>
-<li><code>Provides</code>: module that this buffer provides; for example, <code>(provide
-  ...)</code> expression in Emacs Lisp.
-</li>
-</ul>
-
-<p>
-If you want to filter a type of tags, enter caret character <code>^</code>
-(beginning of line in regex) and follow the first character of that
-type. For example, if I want to see only function tags, type <code>^f</code> in
-the prompt.
 </p>
 </div>
 </div>

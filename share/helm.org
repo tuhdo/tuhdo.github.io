@@ -631,10 +631,75 @@ semantic for generating tags, otherwise fall back to =imenu=. If
 point is on a symbol, helm feeds the symbol into input prompt by
 default.
 
-=helm-semantic-or-imenu= works with many modes like C/C++, Python,
-Ruby, Emacs Lisp and Lisp in general, Shell script, Org...
+=helm-semantic-or-imenu= works with many modes like C/C++, Java,
+Python, Ruby, Emacs Lisp and Lisp in general, shell script,
+Org-mode...
 
-_Demo_:
+_Usage_:
+
+- Invoke the command (by default, *C-c h i*).
+
+- You can use the arrow keys or *C-p/C-n* to move up and down between
+  candidates. You can also use *C-<down>* and *C-<up>*; as you move the
+  highlighter between tags inside Helm Semantic buffer, point moves to
+  the tag location as well.
+
+- A nice feature of =helm-semantic-or-imenu= is that whenever you
+  activate the command, and if point is inside a type of Semantic
+  tags, the highlighter pre-selects that tag in the Helm buffer. This,
+  in combination with *C-<down>* and *C-<up>* to move between
+  definitions in your buffer.
+
+Helm gives you a finer control: you can move between functions using
+=beginning-of-defun= (bound to *C-M-a*) and =end-of-defun= (bound to
+*C-M-e*), but it will also move point and scroll your buffer. Using
+=helm-semantic-or-imenu=, you have similar behaviour and you have more
+choices: either to return back to original position where you invoke
+=helm-semantic-or-imenu= using =C-g= because you only need to look up
+function interface (i.e. to see what kinds of parameters a function
+accepts), or jump to the tag location with =RET=. Currently, only
+Semantic part of =helm-semantic-or-imenu= is supported. If a buffer
+only has =imenu= support from the command, you won't be able to use
+this feature.
+
+=helm-semantic-or-imenu= provides these types of Semantic tags: 
+
+- =Dependencies=: the dependencies of the current file as defined by
+  the current major mode. For example, =Dependencies= in C/C++ are
+  header files and when execute persistent action on a dependency,
+  point moves to the location of that include header file in the
+  current  buffer.
+
+- =Variables=: variables defined in current buffer.
+- =Functions=: function defined in current buffer
+- =Provides=: modules that this buffer provides; for example, =(provide
+  ...)= expression in Emacs Lisp.
+
+If you want to filter a type of tags, enter caret character =^=
+(beginning of line in regex) and follow the first character of that
+type. For example, if I want to see only function tags, type =^f= in
+the prompt.
+
+_Demo 1_:
+
+DEMO (begin when =START DEMO= is in minibuffer):
+
+- First, I use =helm-semantic-or-imenu= to move to the function
+  helm-define-key-with-subkeys and move point there.
+
+- Then, I start =helm-semantic-or-imenu= again and
+  helm-define-key-with-subkeys is pre-selected.
+
+- Then, I move point to the variable =helm-map= and execute
+  =helm-semantic-or-imenu= again on two function: =helm-next-source=
+  and =helm-previous-source=. This time, instead of showing the
+  current semantic tag I'm operating in (which is =helm-map=), it
+  shows the other two tags in Helm Semantic buffer. This is because I
+  supplied a prefix argument before running the command.
+
+  [[file:static/part3/helm-semantic-or-imenu-2.gif][file:static/part3/helm-semantic-or-imenu-2.gif]]
+
+_Demo 2_:
 
 Here is =helm-semantic-or-imenu= in action, please notice the
 "pattern: " prompt in the minibuffer:
@@ -664,24 +729,6 @@ fine.
 
 In the demo, you see things like =class u16= and =class u32=; that is
 because =u16= and =u32= are defined by typedef.
-
-=helm-semantic= provides these types of tags: 
-
-- =Dependencies=: the dependencies of the current file as defined by
-  the current major mode. For example, =Dependencies= in C/C++ are
-  header files and when execute persistent action on a dependency,
-  point moves to the location of that include header file in the
-  current  buffer.
-
-- =Variables=: variables defined in current buffer.
-- =Functions=: function defined in current buffer
-- =Provides=: module that this buffer provides; for example, =(provide
-  ...)= expression in Emacs Lisp.
-
-If you want to filter a type of tags, enter caret character =^=
-(beginning of line in regex) and follow the first character of that
-type. For example, if I want to see only function tags, type =^f= in
-the prompt.
 
 * Command: =helm-man-woman=
 :PROPERTIES:
