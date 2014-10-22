@@ -543,7 +543,7 @@ Other useful commands
   modes (such as Racket, Common Lisp, Emacs Lisp...) in this
   distribution for the course.
 
-[screenshot]
+  [[file:static/proglang/aggressive-indent.gif][file:static/proglang/aggressive-indent.gif]]
 
 - You can also run *C-c i* to indents whole buffer. In Lisp modes, you
   won't need it; but for other programming modes, *C-c i* is always
