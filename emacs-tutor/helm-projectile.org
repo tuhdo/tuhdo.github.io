@@ -269,6 +269,11 @@ Available actions:
 - /Remove project(s)/ (*M-D*): Delete marked projects from the list of
   known projects.
 
+  Demo (begins when ~START DEMO~ appears in minibuffer):
+
+  [[file:static/helm-projectile/helm-projectile-remove-project.gif][file:static/helm-projectile/helm-projectile-remove-project.gif]]
+
+
 * File management
 :PROPERTIES:
 :ID:       b217795d-c945-4a63-8f22-ce7eaf7ebc5d
