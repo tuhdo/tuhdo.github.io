@@ -645,10 +645,10 @@ _Usage_:
   the tag location as well.
 
 - A nice feature of =helm-semantic-or-imenu= is that whenever you
-  activate the command, and if point is inside a type of Semantic
-  tags, the highlighter pre-selects that tag in the Helm buffer. This,
-  in combination with *C-<down>* and *C-<up>* to move between
-  definitions in your buffer.
+  activate the command, and if point is inside a type of Semantic tags
+  (such as function definition), the highlighter is positioned at the
+  tag in the Helm buffer. This, in combination with *C-<down>* and
+  *C-<up>* to move between definitions in your buffer.
 
 Helm gives you a finer control: you can move between functions using
 =beginning-of-defun= (bound to *C-M-a*) and =end-of-defun= (bound to
