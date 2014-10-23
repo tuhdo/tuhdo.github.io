@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs for Programming Languages course on Coursera</title>
-<!-- 2014-10-04 T7 21:54 -->
+<!-- 2014-10-24 T6 00:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -233,8 +233,26 @@ alt="hit counter"></a></div></noscript>
 </li>
 </ul>
 </li>
-<li><a href="#sec-3">SML commands</a></li>
-<li><a href="#sec-4">Conclusion</a></li>
+<li><a href="#sec-3">Commands for SML</a></li>
+<li><a href="#sec-4">Commands for Racket</a>
+<ul>
+<li><a href="#sec-4-1">Editing support: You don't have to fight the parentheses</a>
+<ul>
+<li><a href="#sec-4-1-1">Automatic indentation</a></li>
+<li><a href="#sec-4-1-2">Automatic comment</a></li>
+</ul>
+</li>
+<li><a href="#sec-4-2">Basic navigation for Lisp expressions</a></li>
+<li><a href="#sec-4-3">Geiser commands</a>
+<ul>
+<li><a href="#sec-4-3-1">What is Geiser?</a></li>
+<li><a href="#sec-4-3-2">Basic workflow</a></li>
+<li><a href="#sec-4-3-3">Programming assistance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-5">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -1074,7 +1092,7 @@ distribution: <b>C-x 1</b> again opens previous window layout.
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><a id="ID-842df7b1-185f-4176-b024-4174e737b28a" name="ID-842df7b1-185f-4176-b024-4174e737b28a"></a>SML commands</h2>
+<h2 id="sec-3"><a id="ID-842df7b1-185f-4176-b024-4174e737b28a" name="ID-842df7b1-185f-4176-b024-4174e737b28a"></a>Commands for SML</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 You need these three essential commands to work with your SML
@@ -1146,11 +1164,324 @@ little moment, a completion popup appears with suitable candidates.
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-97ffd86f-d638-4237-808c-94b139047d0d" name="ID-97ffd86f-d638-4237-808c-94b139047d0d"></a>Conclusion</h2>
+<h2 id="sec-4"><a id="ID-90426c7f-8ad9-4ad0-a655-c814d07a285b" name="ID-90426c7f-8ad9-4ad0-a655-c814d07a285b"></a>Commands for Racket</h2>
 <div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><a id="ID-f6459f1c-0c36-46e6-b7c5-c404bb69c5d9" name="ID-f6459f1c-0c36-46e6-b7c5-c404bb69c5d9"></a>Editing support: You don't have to fight the parentheses</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-sec-4-1-1" class="outline-4">
+<h4 id="sec-4-1-1"><a id="ID-95979f90-6518-485f-ae8f-00c9132b738a" name="ID-95979f90-6518-485f-ae8f-00c9132b738a"></a>Automatic indentation</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ul class="org-ul">
+<li><code>aggressive-indent</code> is a minor mode that keeps your code always
+indented. It reindents after every command. It is available for Lisp
+modes (such as Racket, Common Lisp, Emacs Lisp&#x2026;) in this
+distribution for the course.
+
+
+<div class="figure">
+<p><a href="static/proglang/aggressive-indent.gif"><img src="static/proglang/aggressive-indent.gif" alt="aggressive-indent.gif" /></a>
+</p>
+</div>
+</li>
+
+<li>You can also run <b>C-c i</b> to indents whole buffer. In Lisp modes, you
+won't need it; but for other programming modes, <b>C-c i</b> is always
+useful.
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-sec-4-1-2" class="outline-4">
+<h4 id="sec-4-1-2"><a id="ID-40a0de43-2c0a-44c4-9f27-4b20068f5b9e" name="ID-40a0de43-2c0a-44c4-9f27-4b20068f5b9e"></a>Automatic comment</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+<a href="https://github.com/remyferre/comment-dwim-2">comment-dwim2</a> is a package that provides extended features compare
+with the original command <code>comment-dwim</code>. <code>dwim</code> stands for <code>do what i
+mean</code>; it means that the commands with <code>dwim</code> suffix changes it
+behaviors based on context at point. For example, <code>comment-dwim2</code>
+comments line at point if it is uncommented; execute again uncomments
+the line and put a comment at end of line; execute again comments the
+whole line; execute again uncomment the line and returns to original
+state and we repeat the whole process again. These behaviors work on
+region as well.
+</p>
+
+<p>
+You can click the link to the homepage to see the demos.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><a id="ID-e2820ba8-56a1-4290-bbd0-2e2a0d193676" name="ID-e2820ba8-56a1-4290-bbd0-2e2a0d193676"></a>Basic navigation for Lisp expressions</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li><b>C-M-f</b> binds to <code>forward-sexp</code>, move forward over a balanced;
+<b>C-M-b</b> binds to <code>backward-sexp</code>, move backward over a balanced
+expression. Demo:
+
+
+<div class="figure">
+<p><a href="static/proglang/forward-backward-parens.gif"><img src="static/proglang/forward-backward-parens.gif" alt="forward-backward-parens.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-k</b> binds to <code>kill-sexp</code>, kill balanced expression
+forward. Demo:
+
+
+<div class="figure">
+<p><a href="static/part3/kill-sexp.gif"><img src="static/part3/kill-sexp.gif" alt="kill-sexp.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-t</b> binds to <code>transpose-sexps</code>, transpose expressions. Demo:
+
+
+<div class="figure">
+<p><a href="static/part3/transpose-sexp.gif"><img src="static/part3/transpose-sexp.gif" alt="transpose-sexp.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><b>C-M-&lt;SPC&gt;</b> or <b>C-M-@</b> binds to <code>mark-sexp</code>, put mark after
+following expression. Demo:
+
+
+<div class="figure">
+<p><a href="static/part3/mark-sexp.gif"><img src="static/part3/mark-sexp.gif" alt="mark-sexp.gif" /></a>
+</p>
+</div>
+
+<p>
+These key bindings not only work for Lisp mode, but for any
+programming languages as well. You can use <b>C-M-b</b> and <b>C-M-f</b> to
+move back and forth between any punctuation pair, or move to the
+beginning and end of an identifier. You can learn more advanced
+movements using a package named ParEdit. The movements are described
+in this <a href="http://www.emacswiki.org/emacs/PareditCheatsheet">cheatsheet</a>. In my prebuilt Emacs configuration for you, it
+uses <code>smartparens</code> package, but <code>smartparens</code> also includes all the
+features of ParEdit.
+</p>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3"><a id="ID-11eb6563-3eff-4af2-9d60-571dc7b7b747" name="ID-11eb6563-3eff-4af2-9d60-571dc7b7b747"></a>Geiser commands</h3>
+<div class="outline-text-3" id="text-4-3">
+</div>
+<div id="outline-container-sec-4-3-1" class="outline-4">
+<h4 id="sec-4-3-1"><a id="ID-e50fb787-7a14-4c41-a440-829f426a0c25" name="ID-e50fb787-7a14-4c41-a440-829f426a0c25"></a>What is Geiser?</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<p>
+From the <a href="http://nongnu.org/geiser/">homepage</a>:
+</p>
+
+<p>
+Geiser is a collection of Emacs major and minor modes that conspire
+with one or more Scheme interpreters to keep the Lisp Machine Spirit
+alive. It draws inspiration (and a bit more) from environments such as
+Common Lisp’s Slime, Factor’s FUEL, Squeak or Emacs itself, and does
+its best to make Scheme hacking inside Emacs (even more) fun. 
+</p>
+
+<p>
+When working with a fully conniving Scheme, Geiser can offer the
+following functionality:
+</p>
+
+<ul class="org-ul">
+<li>Form evaluation in the context of the current file’s module.
+</li>
+<li>Macro expansion.
+</li>
+<li>File/module loading and/or compilation.
+</li>
+<li>Namespace-aware identifier completion (including local bindings,
+names visible in the current module, and module names).
+</li>
+<li>Autodoc: the echo area shows information about the signature of the procedure/macro around point automatically.
+</li>
+<li>Jump to definition of identifier at point.
+</li>
+<li>Access to documentation (including docstrings when the implementation provides it).
+</li>
+<li>Listings of identifiers exported by a given module.
+</li>
+<li>Listings of callers/callees of procedures (only available in Guile Scheme).
+</li>
+<li>Rudimentary support for debugging (when the REPL provides a
+debugger) and error navigation.
+</li>
+<li>Support for multiple, simultaneous REPLs.
+</li>
+<li>Support for image display in those Schemes that treat them as first
+class values.
+</li>
+</ul>
+
+<p>
+This tutorial only offers a subset of these features, enough to mkae
+you comfortable with the course.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-2" class="outline-4">
+<h4 id="sec-4-3-2"><a id="ID-90daf61b-97a8-4fc3-a394-cc7c498c236c" name="ID-90daf61b-97a8-4fc3-a394-cc7c498c236c"></a>Basic workflow</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<ul class="org-ul">
+<li>Split your Emacs in two windows: one for source code, one for REPL
+</li>
+<li>Write some code in source buffer.
+</li>
+<li>Evaluate whole buffer and switch to the context of that buffer with
+<b>C-c C-a</b>. When you write a Racket file, you are writing a
+module. To use definitions in the module, you have to switch to that
+module. <b>C-c C-a</b> automatically evaluates the file of current
+working buffer and switch context to that module. Note that if you
+haven't save your buffer, Geiser will use the last saved state.
+</li>
+<li>Play with your code in the REPL and see the result instantly.
+</li>
+</ul>
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/proglang/geiser-demo.gif"><img src="static/proglang/geiser-demo.gif" alt="geiser-demo.gif" /></a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4-3-3" class="outline-4">
+<h4 id="sec-4-3-3"><a id="ID-30a2abd9-2b55-4a45-8e8d-398e1123c19e" name="ID-30a2abd9-2b55-4a45-8e8d-398e1123c19e"></a>Programming assistance</h4>
+<div class="outline-text-4" id="text-4-3-3">
+<p>
+Geiser also provides common features found in IDE:
+</p>
+
+<ul class="org-ul">
+<li><span class="underline">Autodoc</span>: The minibuffer shows information about the signature of the
+function/macro around point automatically. It is enabled by default
+when <code>geiser-mode</code> is activated.
+
+
+<div class="figure">
+<p><a href="static/proglang/repl-autodoc.png"><img src="static/proglang/repl-autodoc.png" alt="repl-autodoc.png" /></a>
+</p>
+</div>
+</li>
+
+<li><span class="underline">Code completion</span>: Geiser uses Emacs's default <code>completion-at-point</code>
+command to provide completion candidates. By default, it is bound to
+<code>C-M-i</code> (the equivalent of <code>M-TAB</code>); in my Emacs configuration for
+this guide, I bound it to <code>TAB</code> for buffers with Geiser mode for
+convenience.
+</li>
+
+<li><span class="underline">Jump to definition</span>: You can jump to any symbol at point in a
+Racket buffer while Geiser REPL is active with <b>M-.</b>. To go back to
+where you were, use <b>M-,</b>.
+</li>
+
+<li><span class="underline">Open documentation at point</span>: For any symbol, you can execute <b>C-c
+C-d C-d</b> to open a buffer that has a brief summary of that symbol,
+along with two buttons for accessing either its actual source code:
+<code>[source]</code> button or its HTML documentation in an external browser:
+<code>[manual]</code> button.
+
+
+<div class="figure">
+<p><a href="static/proglang/repl-mod.png"><img src="static/proglang/repl-mod.png" alt="repl-mod.png" /></a>
+</p>
+</div>
+</li>
+
+<li><span class="underline">More evaluation commands</span>: These commands works at expression
+level.
+</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">C-M-x</td>
+<td class="left"><code>geiser-eval-definition</code></td>
+<td class="left">Eval definition around point. For example, if</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">point is inside a variable or function definition,</td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">this command evaluates the whole definition form</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">C-x C-e</td>
+<td class="left"><code>geiser-eval-last-sexp</code></td>
+<td class="left">Eval sexp before point</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="left">C-c C-r</td>
+<td class="left"><code>geiser-eval-region</code></td>
+<td class="left">Eval region</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+These are enough for the Racket part of the course. To learn more
+Geiser features, please refer to <a href="http://nongnu.org/geiser/">official documentation</a>.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5"><a id="ID-97ffd86f-d638-4237-808c-94b139047d0d" name="ID-97ffd86f-d638-4237-808c-94b139047d0d"></a>Conclusion</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 That's it for the basics. I hope it provides you a much better
-experience with SML for the course. You can learn more about Emacs in
+experience with SML and Geiser for the course. You can learn more about Emacs in
 my <a href="index.html">other guides</a>.
 </p>
 </div>

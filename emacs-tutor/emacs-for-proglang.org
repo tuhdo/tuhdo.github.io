@@ -572,7 +572,7 @@ You can click the link to the homepage to see the demos.
   *C-M-b* binds to =backward-sexp=, move backward over a balanced
   expression. Demo:
   
-  [screenshot]
+  [[file:static/proglang/forward-backward-parens.gif][file:static/proglang/forward-backward-parens.gif]]
 
 - *C-M-k* binds to =kill-sexp=, kill balanced expression
   forward. Demo:
@@ -629,7 +629,11 @@ following functionality:
 - Rudimentary support for debugging (when the REPL provides a
   debugger) and error navigation.
 - Support for multiple, simultaneous REPLs.
-- Support for image display in those Schemes that treat them as first class values.
+- Support for image display in those Schemes that treat them as first
+  class values.
+
+This tutorial only offers a subset of these features, enough to mkae
+you comfortable with the course.
 
 *** Basic workflow
 :PROPERTIES:
@@ -647,7 +651,7 @@ following functionality:
 
 Demo (begins when ~START DEMO~ appears in minibuffer):
 
-[screenshot]
+[[file:static/proglang/geiser-demo.gif][file:static/proglang/geiser-demo.gif]]
 
 *** Programming assistance
 :PROPERTIES:
@@ -659,7 +663,7 @@ Geiser also provides common features found in IDE:
   function/macro around point automatically. It is enabled by default
   when =geiser-mode= is activated.
 
-  [screenshot]
+  [[file:static/proglang/repl-autodoc.png][file:static/proglang/repl-autodoc.png]]
 
 - _Code completion_: Geiser uses Emacs's default =completion-at-point=
   command to provide completion candidates. By default, it is bound to
@@ -667,16 +671,17 @@ Geiser also provides common features found in IDE:
   this guide, I bound it to =TAB= for buffers with Geiser mode for
   convenience.
 
-  [screenshot]
-
 - _Jump to definition_: You can jump to any symbol at point in a
   Racket buffer while Geiser REPL is active with *M-.*. To go back to
   where you were, use *M-,*.
 
 - _Open documentation at point_: For any symbol, you can execute *C-c
   C-d C-d* to open a buffer that has a brief summary of that symbol,
-  along with two buttons for accessing either its actual source code
-  or its HTML documentation in an external browser.
+  along with two buttons for accessing either its actual source code:
+  =[source]= button or its HTML documentation in an external browser:
+  =[manual]= button.
+
+  [[file:static/proglang/repl-mod.png][file:static/proglang/repl-mod.png]]
 
 - _More evaluation commands_: These commands works at expression
   level.
