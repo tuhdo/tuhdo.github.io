@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs for Programming Languages course on Coursera</title>
-<!-- 2014-10-24 T6 00:51 -->
+<!-- 2014-10-24 T6 01:13 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -1270,7 +1270,48 @@ uses <code>smartparens</code> package, but <code>smartparens</code> also include
 features of ParEdit.
 </p>
 </li>
+
+<li>In my Emacs kit for this course, <b>C-j</b> is bound to
+<code>helm-semantic-or-imenu</code>. It is a convenient way to navigate between
+definitions in your buffer. Whenever you activate the command, and
+if cursor is inside a definition (such as function definition,
+variable definition), the highlighter is positioned at the tag in
+the Helm  buffer. This, in combination with <b>C-&lt;down&gt;</b> and <b>C-&lt;up&gt;</b>
+to move between definitions in your buffer. You can use this command
+to move around buffer effectively.
+</li>
 </ul>
+
+<p>
+The full instructions are in <a href="http://tuhdo.github.io/helm-intro.html#sec-9">helm-semantic-or-imenu section of the
+Helm guide</a>.
+</p>
+
+<p>
+DEMO (begin when START DEMO is in minibuffer):
+</p>
+
+<ul class="org-ul">
+<li>First, I use helm-semantic-or-imenu to move to the function
+helm-define-key-with-subkeys and move point there.
+</li>
+<li>Then, I start helm-semantic-or-imenu again and
+helm-define-key-with-subkeys is pre-selected.
+</li>
+<li>Then, I move point to the variable helm-map and execute
+<code>helm-semantic-or-imenu</code> again on two function: <code>helm-next-source</code>
+and <code>helm-previous-source</code>. This time, instead of showing the
+current definition I'm operating in (which is <code>helm-map</code>), it shows
+the other two definitions in Helm Semantic buffer. This is because
+I supplied a prefix argument before running the command. 
+</li>
+</ul>
+
+
+<div class="figure">
+<p><a href="static/part3/helm-semantic-or-imenu-2.gif"><img src="static/part3/helm-semantic-or-imenu-2.gif" alt="helm-semantic-or-imenu-2.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 

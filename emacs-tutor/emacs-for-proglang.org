@@ -597,6 +597,33 @@ You can click the link to the homepage to see the demos.
   uses =smartparens= package, but =smartparens= also includes all the
   features of ParEdit.
 
+- In my Emacs kit for this course, *C-j* is bound to
+  =helm-semantic-or-imenu=. It is a convenient way to navigate between
+  definitions in your buffer. Whenever you activate the command, and
+  if cursor is inside a definition (such as function definition,
+  variable definition), the highlighter is positioned at the tag in
+  the Helm  buffer. This, in combination with *C-<down>* and *C-<up>*
+  to move between definitions in your buffer. You can use this command
+  to move around buffer effectively.
+
+The full instructions are in [[http://tuhdo.github.io/helm-intro.html#sec-9][helm-semantic-or-imenu section of the
+Helm guide]].
+
+DEMO (begin when START DEMO is in minibuffer):
+
+- First, I use helm-semantic-or-imenu to move to the function
+  helm-define-key-with-subkeys and move point there.
+- Then, I start helm-semantic-or-imenu again and
+  helm-define-key-with-subkeys is pre-selected.
+-  Then, I move point to the variable helm-map and execute
+   =helm-semantic-or-imenu= again on two function: =helm-next-source=
+   and =helm-previous-source=. This time, instead of showing the
+   current definition I'm operating in (which is =helm-map=), it shows
+   the other two definitions in Helm Semantic buffer. This is because
+   I supplied a prefix argument before running the command. 
+
+[[file:static/part3/helm-semantic-or-imenu-2.gif][file:static/part3/helm-semantic-or-imenu-2.gif]]
+
 ** Geiser commands
 :PROPERTIES:
 :ID:       11eb6563-3eff-4af2-9d60-571dc7b7b747
