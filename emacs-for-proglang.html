@@ -4,9 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs for Programming Languages course on Coursera</title>
-<!-- 2014-10-24 T6 01:13 -->
+<!-- 2014-10-24 Fri 10:03 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -1389,7 +1390,11 @@ you comfortable with the course.
 module. To use definitions in the module, you have to switch to that
 module. <b>C-c C-a</b> automatically evaluates the file of current
 working buffer and switch context to that module. Note that if you
-haven't save your buffer, Geiser will use the last saved state.
+haven't save your buffer, Geiser will use the last saved state. You
+can also use <b>C-c C-z</b> to execute current file without switching to
+the REPL. This is useful when you want to write and run test
+continuously, i.e. write a few tests then execute, then write a few
+more and test a few more etc&#x2026;
 </li>
 <li>Play with your code in the REPL and see the result instantly.
 </li>
@@ -1397,6 +1402,13 @@ haven't save your buffer, Geiser will use the last saved state.
 
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+<p>
+In this demo, I executed my test case with <b>C-c C-a</b>. The test
+were sequentially executed and the results were printed on the
+REPL. In case it Racket requires graphics, a Window is popped up as
+you can see in the <code>dan-then-dog</code> function test.
 </p>
 
 

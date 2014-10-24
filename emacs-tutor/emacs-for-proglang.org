@@ -673,10 +673,19 @@ you comfortable with the course.
   module. To use definitions in the module, you have to switch to that
   module. *C-c C-a* automatically evaluates the file of current
   working buffer and switch context to that module. Note that if you
-  haven't save your buffer, Geiser will use the last saved state.
+  haven't save your buffer, Geiser will use the last saved state. You
+  can also use *C-c C-z* to execute current file without switching to
+  the REPL. This is useful when you want to write and run test
+  continuously, i.e. write a few tests then execute, then write a few
+  more and test a few more etc...
 - Play with your code in the REPL and see the result instantly.
 
 Demo (begins when ~START DEMO~ appears in minibuffer):
+
+In this demo, I executed my test case with *C-c C-a*. The test
+were sequentially executed and the results were printed on the
+REPL. In case it Racket requires graphics, a Window is popped up as
+you can see in the =dan-then-dog= function test.
 
 [[file:static/proglang/geiser-demo.gif][file:static/proglang/geiser-demo.gif]]
 
