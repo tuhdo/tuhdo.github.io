@@ -1,0 +1,118 @@
+#+TITLE: Navigate C++ class hierarchy with Ebrowse
+
+=Ebrowse= is a fast parser used to process C++ source files to produce a
+database that contains the class hierarchy that is later processed by
+Emacs to produce a class tree representation. It is somewhat like [[http://www.gnu.org/software/global/][GNU
+Global]], but is built-into Emacs and produce a class tree, so it will
+take longer to process in large source tree.
+
+To generate a class tree for your project, run this command:
+
+#+begin_src shell-script
+  # add more extensions to suit your need
+  find . -name '*.cpp' -or -name '*.h' | ebrowse
+#+end_src
+
+If your project only has hundreds of files, then =Ebrowse= works
+really well. After executing the command, a file named =BROWSE= is
+generated; this is the database that contains the class
+hierarchy. Simply open this file and Emacs automatically recognizes
+the file and process it. After done processing the database, Emacs
+displays an index of all classes in the database in a tree format: if
+a class is derived from a class, it is nested inside the parent
+class.
+
+Emacs provides three ways to interact with =Ebrowse=:
+
+- =Tree= buffer: a buffer that displays the tree.
+- =Member= buffer: a buffer that displays members of each class. You
+  can toggle between declarations and definitions of a class and jump
+  to the location of each in the corresponding source file.
+- =Source= buffer: your code buffer. You can interact =Ebrowse=
+  database like finding and viewing (open for read-only) declaration
+  and definition, open a =Member= buffer of a class that contains the
+  tag at point...
+  
+So, in essence, you have three buffers that can interact with each
+other: =Tree=, =Member= and =Source= buffers.
+
+In this guide, I will use [[http://llvm.org/][LLVM]] source code as an example. You can get
+the source from the download section in LLVM homepage.
+
+* Tree buffer
+:PROPERTIES:
+:ID:       e70c0062-7db5-4a42-a17e-51df0d9461ed
+:END:
+This is how =Tree= buffer look like:
+
+[screenshot]
+
+You can easily jump to a position of a class /in the tree buffer/ by
+pressing */* to get a completion for a list of available classes in
+current tree buffer.
+
+You can jump to a location of a class in the actual source file by
+press *RET* while point is on a class name to jump to the location of
+the class in actual source file. *SPC* works similarly, except only
+for viewing (open source file in read-only mode).
+
+The tree buffer abstracts the filenames of that contain the
+classes. If you want to view /in the tree buffer/ which file a class
+belongs to, press =T s=. To display all the filenames, press =T f=;
+beware that it would take a long time if your project is relatively
+large, so use it only for small project.
+
+*C-k* removes the class the cursor is on and all its derived classes
+from the tree.  The user is asked for confirmation before the deletion
+is actually performed.
+
+*C-x C-s* saves the current tree buffer back into the file. Useful
+when you delete some class. *C-x C-w* also writes back to file but
+prompt user for a name (the same as =Save as= in other editors).
+
+*x* displays statistics for the tree, like number of classes in it,
+number of member functions, etc...
+
+Finally, press *q* to quit the tree buffer. But don't close it yet.
+
+* Member buffer
+:PROPERTIES:
+:ID:       6f21494c-3dd4-461f-998a-4fe95ca5dc30
+:END:
+This is how =Member= buffer look like:
+
+[screenshot]
+
+To enter a member buffer, from a tree buffer, you can run the
+following commands to enter member buffer:
+
+| Key | Binding                                                        |
+|-----+----------------------------------------------------------------|
+| L f | *Command*: =ebrowse-tree-command:show-member-functions=        |
+|     | Show functions in a class (recommended)                        |
+|-----+----------------------------------------------------------------|
+| L v | *Command*: =ebrowse-tree-command:show-member-variables=        |
+|     | Show variables in a class (recommended)                        |
+|-----+----------------------------------------------------------------|
+| L d | *Command*: =ebrowse-tree-command:show-friends=                 |
+|     | Show friendly functions in a class                             |
+|-----+----------------------------------------------------------------|
+| L t | *Command*: =ebrowse-tree-command:show-types=                   |
+|     | Show types in a class (=enum=, and =typedef=                   |
+|-----+----------------------------------------------------------------|
+| L F | *Command*: =ebrowse-tree-command:show-static-member-functions= |
+|     | Show static functions in a class                               |
+|-----+----------------------------------------------------------------|
+| L V | *Command*: =ebrowse-tree-command:show-static-member-variables= |
+|     | Show static variables in a class                               |
+|-----+----------------------------------------------------------------|
+
+You can remember prefix =L= means =List=.
+
+Unfortunately, there's no option to display everything in a class. So,
+let's just display class functions using =L f= as an example:
+
+* Source buffer
+:PROPERTIES:
+:ID:       90ef87ca-db63-4e52-91b0-1033221a4e90
+:END:
