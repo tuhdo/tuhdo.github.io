@@ -412,7 +412,7 @@ the node is a directory, the children of the node are files in that
 directory. One important thing to remember, Speedbar only lists files
 that match =speedbar-file-regexp=, that contains the extensions for
 common programming languages. If you don't see files in your
-programming languages listed, consider adding it the regexp list.
+programming languages listed, consider adding it the regexp list. 
 
 *Basic usage*:
 
@@ -422,6 +422,8 @@ programming languages listed, consider adding it the regexp list.
   that file; if node is a directory, enter that directory; if node is
   a tag in a file, jump to the location of that tag in the file.
 
+- *U* to go up parent directory.
+
 - *n* or *p* moves to next or previous node.
 
 - *M-n* or *M-p* moves to next or previous node at the current level.
@@ -430,6 +432,12 @@ programming languages listed, consider adding it the regexp list.
   also open children of each buffer.
 
 - *f* switches back to file list.
+
+To enable =speedbar= to show all files:
+
+#+begin_src emacs-lisp
+  (setq speedbar-show-unknown-files t)
+#+end_src
 
 ** Package: =sr-speedbar=
 :PROPERTIES:
@@ -450,8 +458,9 @@ Best is to use =sr-speedbar-toggle= only, for simplicity.
 
 =sr-speedbar= gives the following improvements:
 
+- Automatically switches directory tree - when you switch buffer - to
+  the =default-directory= of current buffer.
 - Use an Emacs window instead of frame, make it easier to use.
-- Automatically switches to the directory of the current buffer.
 - *C-x 1* deletes every window except Speedbar, so you won't have to
   open again.
 - You can prevent *C-x o* to jump to =sr-speedbar= window by setting

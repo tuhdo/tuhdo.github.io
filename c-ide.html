@@ -4,9 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-10-14 T3 00:29 -->
+<!-- 2014-11-04 Tue 12:31 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -943,7 +944,7 @@ the node is a directory, the children of the node are files in that
 directory. One important thing to remember, Speedbar only lists files
 that match <code>speedbar-file-regexp</code>, that contains the extensions for
 common programming languages. If you don't see files in your
-programming languages listed, consider adding it the regexp list.
+programming languages listed, consider adding it the regexp list. 
 </p>
 
 <p>
@@ -959,6 +960,9 @@ that file; if node is a directory, enter that directory; if node is
 a tag in a file, jump to the location of that tag in the file.
 </li>
 
+<li><b>U</b> to go up parent directory.
+</li>
+
 <li><b>n</b> or <b>p</b> moves to next or previous node.
 </li>
 
@@ -972,6 +976,16 @@ also open children of each buffer.
 <li><b>f</b> switches back to file list.
 </li>
 </ul>
+
+<p>
+To enable <code>speedbar</code> to show all files:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #37785e;">speedbar-show-unknown-files</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+</pre>
+</div>
 </div>
 
 <div id="outline-container-sec-2-1" class="outline-3">
@@ -1003,9 +1017,10 @@ Best is to use <code>sr-speedbar-toggle</code> only, for simplicity.
 </p>
 
 <ul class="org-ul">
-<li>Use an Emacs window instead of frame, make it easier to use.
+<li>Automatically switches directory tree - when you switch buffer - to
+the <code>default-directory</code> of current buffer.
 </li>
-<li>Automatically switches to the directory of the current buffer.
+<li>Use an Emacs window instead of frame, make it easier to use.
 </li>
 <li><b>C-x 1</b> deletes every window except Speedbar, so you won't have to
 open again.
