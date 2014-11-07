@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-10-31 Fri 17:24 -->
+<!-- 2014-11-07 Fri 09:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -2364,7 +2364,7 @@ No key binding. Let's bind it to a key to be used in Eshell:
 
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span>
           #'<span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
-              <span style="color: #909183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f7e67;">eshell-mode-map</span> <span style="color: #709870;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-l"</span><span style="color: #709870;">)</span>  '<span style="color: #783778;">helm-eshell-history</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+              <span style="color: #909183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f7e67;">eshell-mode-map</span> <span style="color: #709870;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #709870;">)</span>  '<span style="color: #783778;">helm-eshell-history</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2416,8 +2416,8 @@ Similar to <code>helm-eshell-history</code>, but is used for <code>M-x shell</co
 <p>
 Do you ever feel uneasy to operate with the minibuffer history when
 it's getting large? Like, hundreds of history items? If so, Helm can
-help you easily manage a large amount of commands with ease using Helm
-interface.
+help you easily manage a large amount of items in the history list
+with ease using Helm interface.
 </p>
 
 <div class="org-src-container">

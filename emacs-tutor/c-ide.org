@@ -169,7 +169,7 @@ And uncomment this line:
   (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
   (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-  (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-select)
+  (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
   (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
   (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
   (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
@@ -328,7 +328,7 @@ regexp.
 
 =helm-gtags= provides a really nice feature that uses Helm to display
 all available tags in a project and incrementally filtering, and is really 
-fast using =helm-gtags-select=, which is bound to =M-s= in my setup
+fast using =helm-gtags-select=, which is bound to =C-j= in my setup
 above. This is useful when you want to explore tags in unfamiliar
 project. Demo: 
 

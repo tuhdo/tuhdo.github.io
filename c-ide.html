@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-11-04 Tue 12:31 -->
+<!-- 2014-11-07 Fri 09:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -556,7 +556,7 @@ includes the above file in your <code>~/.emacs.d</code>, remember to add
 <span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #4f7e67;">asm-mode-hook</span> '<span style="color: #43783f;">helm-gtags-mode</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c g a"</span><span style="color: #7388d6;">)</span> '<span style="color: #513f78;">helm-gtags-tags-in-this-function</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-s"</span><span style="color: #7388d6;">)</span> '<span style="color: #707e4f;">helm-gtags-select</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-j"</span><span style="color: #7388d6;">)</span> '<span style="color: #707e4f;">helm-gtags-select</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-."</span><span style="color: #7388d6;">)</span> '<span style="color: #5e7837;">helm-gtags-dwim</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-,"</span><span style="color: #7388d6;">)</span> '<span style="color: #78683f;">helm-gtags-pop-stack</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #78683f;">helm-gtags-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c &lt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #7e544f;">helm-gtags-previous-history</span><span style="color: #707183;">)</span>
@@ -825,7 +825,7 @@ regexp.
 <p>
 <code>helm-gtags</code> provides a really nice feature that uses Helm to display
 all available tags in a project and incrementally filtering, and is really 
-fast using <code>helm-gtags-select</code>, which is bound to <code>M-s</code> in my setup
+fast using <code>helm-gtags-select</code>, which is bound to <code>C-j</code> in my setup
 above. This is useful when you want to explore tags in unfamiliar
 project. Demo: 
 </p>

@@ -1273,7 +1273,7 @@ No key binding. Let's bind it to a key to be used in Eshell:
 
   (add-hook 'eshell-mode-hook
             #'(lambda ()
-                (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history)))
+                (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
 #+end_src
 
 _Description_:
@@ -1307,8 +1307,8 @@ _Demo_:
 :END:
 Do you ever feel uneasy to operate with the minibuffer history when
 it's getting large? Like, hundreds of history items? If so, Helm can
-help you easily manage a large amount of commands with ease using Helm
-interface.
+help you easily manage a large amount of items in the history list
+with ease using Helm interface.
 
 #+begin_src emacs-lisp
   (define-key minibuffer-local-map (kbd "C-c C-l") 'helm-minibuffer-history)
