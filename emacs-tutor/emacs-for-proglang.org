@@ -674,7 +674,7 @@ you comfortable with the course.
   module. *C-c C-a* automatically evaluates the file of current
   working buffer and switch context to that module. Note that if you
   haven't save your buffer, Geiser will use the last saved state. You
-  can also use *C-c C-z* to execute current file without switching to
+  can also use *C-c C-b* to execute current file without switching to
   the REPL. This is useful when you want to write and run test
   continuously, i.e. write a few tests then execute, then write a few
   more and test a few more etc...
