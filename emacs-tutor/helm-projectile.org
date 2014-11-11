@@ -704,7 +704,7 @@ when you are in a =helm-projectile-find-file= session:
   fit. You do not need to depend on the fixed layout of physical
   directory structure, that is the logic of someone else.
 
-*** Store virtual directories with Bookmark (or Bookmark+)
+** Store virtual directories with Bookmark (or Bookmark+)
 :PROPERTIES:
 :ID:       b2c9048e-874a-4c99-8f5f-859d43c6abef
 :END:
