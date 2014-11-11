@@ -273,7 +273,6 @@ Available actions:
 
   [[file:static/helm-projectile/helm-projectile-remove-project.gif][file:static/helm-projectile/helm-projectile-remove-project.gif]]
 
-
 * File management
 :PROPERTIES:
 :ID:       b217795d-c945-4a63-8f22-ce7eaf7ebc5d
@@ -644,6 +643,84 @@ file, Projectile automatically removes the file from the cache.
 :ID:       2cf595ee-dab6-449a-ba49-98094f724ee1
 :END:
 _Usage_: Remove a directory from the cache.
+* Virtual directory manager
+:PROPERTIES:
+:ID:       6a2e2a84-947a-4464-a97c-3e42c476cbb7
+:END:
+Now that you know how to manage your project files with Helm and
+Projectile, it's time to explore this cool feature that is exclusive
+to Helm Projectile: Virtual Directory. A virtual directory is just a
+Dired buffer but with files from different directory location
+assembled into one buffer.
+
+*Purpose*: Projectile is excellent for file browsing, and can access
+files anywhere in project. Dired is excellent because it can be used
+as a file browser, as well as by being a normal buffer, it can be
+saved as an entry in Bookmark for future sessions. We can combine get
+the best of both: a logical list of files from anywhere that can be
+saved for use in the future.
+
+The following are actions to be used for managing a virtual directory
+when you are in a =helm-projectile-find-file= session:
+
+- /Create Dired buffer from files/ (*C-c f*): creates a virtual Dired
+  buffer that populates marked files into that Dired buffer. If the
+  current buffer is a Dired buffer, invoking
+  =helm-projectile-find-file= or =helm-projectile-find-dir= also adds
+  another list that presents all the current entries in current Dired
+  buffer. You can create a totally new virtual Dired buffer from these
+  entries as well.
+
+  Demo (begins when ~START DEMO~ appears in minibuffer):
+
+  [[file:static/helm-projectile/helm-projectile-new-virtual-dir.gif][file:static/helm-projectile/helm-projectile-new-virtual-dir.gif]]
+  
+- /Add files to Dired buffer/ (*C-c a*): when the current buffer is an
+  existing Dired buffer, we can add files/directories from
+  =helm-projectile-find-file= and =helm-projectile-find-dir= commands
+  to update the virtual Dired buffer.
+
+  Demo (begins when ~START DEMO~ appears in minibuffer):
+
+  [[file:static/helm-projectile/helm-projectile-add-files-virtual-dir.gif][file:static/helm-projectile/helm-projectile-add-files-virtual-dir.gif]]
+
+- /Remove entry(s) from Dired buffer/ (*C-c d*): This command can only
+  be used when the current buffer is a Dired buffer. When the current
+  buffer is a Dired buffer, activating =helm-projectile-find-file= or
+  =helm-projectile-find-dir= will add another list that presents all
+  entries in the Dired buffer. We can mark entries, then press *C-c d*
+  to delete all marked entries from the current Dired buffer.
+
+  Demo (begins when ~START DEMO~ appears in minibuffer):
+
+  [[file:static/helm-projectile/helm-projectile-delete-files-virtual-dir.gif][file:static/helm-projectile/helm-projectile-delete-files-virtual-dir.gif]]
+
+  These features are useful when you want to groups related files
+  scattered across different directories in your project. For example,
+  you have a feature called =login=. The logic for =login= is in
+  =handle/login.rb=, the gui for login is in =gui/login.rb= and some
+  project libraries that login uses in =lib/=. You want to group these
+  files together for according to any of your logical views as you see
+  fit. You do not need to depend on the fixed layout of physical
+  directory structure, that is the logic of someone else.
+
+*** Store virtual directories with Bookmark (or Bookmark+)
+:PROPERTIES:
+:ID:       b2c9048e-874a-4c99-8f5f-859d43c6abef
+:END:
+Using =Bookmark= (or =Bookmark+=), you can actually save your virtual
+Dired buffers and preserve this knowledge for future reference, when you
+want to quickly review related files to improve or fix bug. You won't
+have to reconnect related files again, and often it takes quite some
+time since you could forget many things. 
+
+If you haven't learned how to use =Bookmark=, learn the basics of it
+with [[http://ergoemacs.org/emacs/bookmark.html][Xah Lee's "Emacs: Using Bookmark Feature" article]]. I recommend
+you to install =Bookmark+= because it offers much more features. For
+example, you can write annotations for (*C-u a* on a bookmark)
+bookmarks in =Org-mode= and read the annotation with =Org-mode= (press
+*a* to open the annotation of a bookmark for reading). To learn all
+about =Bookmark+= features, please refer to  [[http://www.emacswiki.org/BookmarkPlus][Bookmark+ documentation]].
 
 * Buffer management
 :PROPERTIES:
@@ -657,3 +734,51 @@ _Usage_: List all opened buffers in *current project*. The command has a
 similar subset of actions in ~helm-projectile-find-file~, so once you
 mastered the actions in ~helm-projectile-find-file~, except instead of
 opening files, you open buffers instead.
+* Search in project
+:PROPERTIES:
+:ID:       76eb43a0-d82f-47f2-8b6d-d666f6e39c63
+:END:
+** Command: =helm-projectile-grep=, *C-c p s g*
+:PROPERTIES:
+:ID:       39d68114-d7b0-4aa5-9cf8-06964b1ff1c9
+:END:
+This is a replacement command for =projectile-grep= that uses Helm
+interface. When a symbol is at point, this command uses that symbol
+and search at project root for every occurrence of this symbol in all
+non-ignored files in project. If a region is active, use the region
+instead.
+
+Demo (begins when ~START DEMO~ appears in minibuffer):
+
+[[file:static/helm-projectile/helm-projectile-grep.gif][file:static/helm-projectile/helm-projectile-grep.gif]]
+
+You can specify directory to exclude when searching by customize
+either one of these variables:
+
+- =grep-find-ignored-files=
+- =grep-find-ignored-directories=
+- =projectile-globally-ignored-files=
+- =projectile-globally-ignored-directories=
+
+** Command: =helm-projectile-ack=, *C-c p s a*
+:PROPERTIES:
+:ID:       761e52d6-9281-4da5-b716-b2f93c927b74
+:END:
+This is a replacement command for =projectile-ack=. Similar to
+=helm-projectile-grep=, but use =ack= instead. You must have =ack=
+installed to be able to use this command. You can also customize these
+variables to ignore files or directories:
+
+- =grep-find-ignored-files=
+- =grep-find-ignored-directories=
+- =projectile-globally-ignored-files=
+- =projectile-globally-ignored-directories=
+
+** Command: =helm-projectile-ag=, *C-c p s s*
+:PROPERTIES:
+:ID:       3bac6c81-e783-4012-9890-9d8c3d599cfe
+:END:
+This is a replacement command for =projectile-ag=. Similar to
+=helm-projectile-grep=, but use =ag= insetad. You must have =ag= and
+=helm-ag= installed to be able to use this command. Note that this
+command only works with symbol at point, but not region.

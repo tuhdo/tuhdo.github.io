@@ -4,9 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-10-23 T5 00:36 -->
+<!-- 2014-11-11 Tue 13:32 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -152,7 +153,7 @@ href="http://statcounter.com/free-hit-counter/" target="_blank"><img
 class="statcounter" src="http://c.statcounter.com/9874755/0/c2028bb7/1/"
 alt="hit counter"></a></div></noscript>
 <!-- End of StatCounter Code for Default Guide -->
-<h2><a href="index.html">Back</a></h2>
+<h2><a href="index.html">Back to Table of Contents</a></h2>
 </div>
 <div id="content">
 <h1 class="title">Exploring large projects with Projectile and Helm Projectile</h1>
@@ -199,9 +200,25 @@ alt="hit counter"></a></div></noscript>
 </li>
 </ul>
 </li>
-<li><a href="#sec-7">Buffer management</a>
+<li><a href="#sec-7">Virtual directory manager</a>
 <ul>
-<li><a href="#sec-7-1">Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></a></li>
+<li>
+<ul>
+<li><a href="#sec-7-0-1">Store virtual directories with Bookmark (or Bookmark+)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-8">Buffer management</a>
+<ul>
+<li><a href="#sec-8-1">Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></a></li>
+</ul>
+</li>
+<li><a href="#sec-9">Search in project</a>
+<ul>
+<li><a href="#sec-9-1">Command: <code>helm-projectile-grep</code>, <b>C-c p s g</b></a></li>
+<li><a href="#sec-9-2">Command: <code>helm-projectile-ack</code>, <b>C-c p s a</b></a></li>
+<li><a href="#sec-9-3">Command: <code>helm-projectile-ag</code>, <b>C-c p s s</b></a></li>
 </ul>
 </li>
 </ul>
@@ -625,7 +642,6 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 </ul>
 </div>
 </div>
-
 
 <div id="outline-container-sec-6" class="outline-2">
 <h2 id="sec-6"><a id="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d" name="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d"></a>File management</h2>
@@ -1152,19 +1168,212 @@ file, Projectile automatically removes the file from the cache.
 </div>
 </div>
 </div>
-
 <div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><a id="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f" name="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f"></a>Buffer management</h2>
+<h2 id="sec-7"><a id="ID-6a2e2a84-947a-4464-a97c-3e42c476cbb7" name="ID-6a2e2a84-947a-4464-a97c-3e42c476cbb7"></a>Virtual directory manager</h2>
 <div class="outline-text-2" id="text-7">
+<p>
+Now that you know how to manage your project files with Helm and
+Projectile, it's time to explore this cool feature that is exclusive
+to Helm Projectile: Virtual Directory. A virtual directory is just a
+Dired buffer but with files from different directory location
+assembled into one buffer.
+</p>
+
+<p>
+<b>Purpose</b>: Projectile is excellent for file browsing, and can access
+files anywhere in project. Dired is excellent because it can be used
+as a file browser, as well as by being a normal buffer, it can be
+saved as an entry in Bookmark for future sessions. We can combine get
+the best of both: a logical list of files from anywhere that can be
+saved for use in the future.
+</p>
+
+<p>
+The following are actions to be used for managing a virtual directory
+when you are in a <code>helm-projectile-find-file</code> session:
+</p>
+
+<ul class="org-ul">
+<li><i>Create Dired buffer from files</i> (<b>C-c f</b>): creates a virtual Dired
+buffer that populates marked files into that Dired buffer. If the
+current buffer is a Dired buffer, invoking
+<code>helm-projectile-find-file</code> or <code>helm-projectile-find-dir</code> also adds
+another list that presents all the current entries in current Dired
+buffer. You can create a totally new virtual Dired buffer from these
+entries as well.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-new-virtual-dir.gif"><img src="static/helm-projectile/helm-projectile-new-virtual-dir.gif" alt="helm-projectile-new-virtual-dir.gif" /></a>
+</p>
 </div>
-<div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><a id="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6" name="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6"></a>Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></h3>
-<div class="outline-text-3" id="text-7-1">
+</li>
+
+<li><i>Add files to Dired buffer</i> (<b>C-c a</b>): when the current buffer is an
+existing Dired buffer, we can add files/directories from
+<code>helm-projectile-find-file</code> and <code>helm-projectile-find-dir</code> commands
+to update the virtual Dired buffer.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-add-files-virtual-dir.gif"><img src="static/helm-projectile/helm-projectile-add-files-virtual-dir.gif" alt="helm-projectile-add-files-virtual-dir.gif" /></a>
+</p>
+</div>
+</li>
+
+<li><i>Remove entry(s) from Dired buffer</i> (<b>C-c d</b>): This command can only
+be used when the current buffer is a Dired buffer. When the current
+buffer is a Dired buffer, activating <code>helm-projectile-find-file</code> or
+<code>helm-projectile-find-dir</code> will add another list that presents all
+entries in the Dired buffer. We can mark entries, then press <b>C-c d</b>
+to delete all marked entries from the current Dired buffer.
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-delete-files-virtual-dir.gif"><img src="static/helm-projectile/helm-projectile-delete-files-virtual-dir.gif" alt="helm-projectile-delete-files-virtual-dir.gif" /></a>
+</p>
+</div>
+
+<p>
+These features are useful when you want to groups related files
+scattered across different directories in your project. For example,
+you have a feature called <code>login</code>. The logic for <code>login</code> is in
+<code>handle/login.rb</code>, the gui for login is in <code>gui/login.rb</code> and some
+project libraries that login uses in <code>lib/</code>. You want to group these
+files together for according to any of your logical views as you see
+fit. You do not need to depend on the fixed layout of physical
+directory structure, that is the logic of someone else.
+</p>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-7-0-1" class="outline-4">
+<h4 id="sec-7-0-1"><a id="ID-b2c9048e-874a-4c99-8f5f-859d43c6abef" name="ID-b2c9048e-874a-4c99-8f5f-859d43c6abef"></a>Store virtual directories with Bookmark (or Bookmark+)</h4>
+<div class="outline-text-4" id="text-7-0-1">
+<p>
+Using <code>Bookmark</code> (or <code>Bookmark+</code>), you can actually save your virtual
+Dired buffers and preserve this knowledge for future reference, when you
+want to quickly review related files to improve or fix bug. You won't
+have to reconnect related files again, and often it takes quite some
+time since you could forget many things. 
+</p>
+
+<p>
+If you haven't learned how to use <code>Bookmark</code>, learn the basics of it
+with <a href="http://ergoemacs.org/emacs/bookmark.html">Xah Lee's "Emacs: Using Bookmark Feature" article</a>. I recommend
+you to install <code>Bookmark+</code> because it offers much more features. For
+example, you can write annotations for (<b>C-u a</b> on a bookmark)
+bookmarks in <code>Org-mode</code> and read the annotation with <code>Org-mode</code> (press
+<b>a</b> to open the annotation of a bookmark for reading). To learn all
+about <code>Bookmark+</code> features, please refer to  <a href="http://www.emacswiki.org/BookmarkPlus">Bookmark+ documentation</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8"><a id="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f" name="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f"></a>Buffer management</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1"><a id="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6" name="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6"></a>Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></h3>
+<div class="outline-text-3" id="text-8-1">
 <p>
 <span class="underline">Usage</span>: List all opened buffers in <b>current project</b>. The command has a
 similar subset of actions in <code>helm-projectile-find-file</code>, so once you
 mastered the actions in <code>helm-projectile-find-file</code>, except instead of
 opening files, you open buffers instead.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-9" class="outline-2">
+<h2 id="sec-9"><a id="ID-76eb43a0-d82f-47f2-8b6d-d666f6e39c63" name="ID-76eb43a0-d82f-47f2-8b6d-d666f6e39c63"></a>Search in project</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-sec-9-1" class="outline-3">
+<h3 id="sec-9-1"><a id="ID-39d68114-d7b0-4aa5-9cf8-06964b1ff1c9" name="ID-39d68114-d7b0-4aa5-9cf8-06964b1ff1c9"></a>Command: <code>helm-projectile-grep</code>, <b>C-c p s g</b></h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+This is a replacement command for <code>projectile-grep</code> that uses Helm
+interface. When a symbol is at point, this command uses that symbol
+and search at project root for every occurrence of this symbol in all
+non-ignored files in project. If a region is active, use the region
+instead.
+</p>
+
+<p>
+Demo (begins when <code>START DEMO</code> appears in minibuffer):
+</p>
+
+
+<div class="figure">
+<p><a href="static/helm-projectile/helm-projectile-grep.gif"><img src="static/helm-projectile/helm-projectile-grep.gif" alt="helm-projectile-grep.gif" /></a>
+</p>
+</div>
+
+<p>
+You can specify directory to exclude when searching by customize
+either one of these variables:
+</p>
+
+<ul class="org-ul">
+<li><code>grep-find-ignored-files</code>
+</li>
+<li><code>grep-find-ignored-directories</code>
+</li>
+<li><code>projectile-globally-ignored-files</code>
+</li>
+<li><code>projectile-globally-ignored-directories</code>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9-2" class="outline-3">
+<h3 id="sec-9-2"><a id="ID-761e52d6-9281-4da5-b716-b2f93c927b74" name="ID-761e52d6-9281-4da5-b716-b2f93c927b74"></a>Command: <code>helm-projectile-ack</code>, <b>C-c p s a</b></h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+This is a replacement command for <code>projectile-ack</code>. Similar to
+<code>helm-projectile-grep</code>, but use <code>ack</code> instead. You must have <code>ack</code>
+installed to be able to use this command. You can also customize these
+variables to ignore files or directories:
+</p>
+
+<ul class="org-ul">
+<li><code>grep-find-ignored-files</code>
+</li>
+<li><code>grep-find-ignored-directories</code>
+</li>
+<li><code>projectile-globally-ignored-files</code>
+</li>
+<li><code>projectile-globally-ignored-directories</code>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-9-3" class="outline-3">
+<h3 id="sec-9-3"><a id="ID-3bac6c81-e783-4012-9890-9d8c3d599cfe" name="ID-3bac6c81-e783-4012-9890-9d8c3d599cfe"></a>Command: <code>helm-projectile-ag</code>, <b>C-c p s s</b></h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+This is a replacement command for <code>projectile-ag</code>. Similar to
+<code>helm-projectile-grep</code>, but use <code>ag</code> insetad. You must have <code>ag</code> and
+<code>helm-ag</code> installed to be able to use this command. Note that this
+command only works with symbol at point, but not region.
 </p>
 </div>
 </div>
