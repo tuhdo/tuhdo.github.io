@@ -755,10 +755,26 @@ Demo (begins when ~START DEMO~ appears in minibuffer):
 You can specify directory to exclude when searching by customize
 either one of these variables:
 
-- =grep-find-ignored-files=
-- =grep-find-ignored-directories=
-- =projectile-globally-ignored-files=
-- =projectile-globally-ignored-directories=
+- =grep-find-ignored-files=: List of file names which =rgrep= and
+  =lgrep= shall exclude.  =helm-projectile-grep= also uses this
+  variable.
+- =grep-find-ignored-directories=: List of names of sub-directories
+  which =rgrep= shall not recurse into. =helm-projectile-grep= also
+  uses this variable.
+- =projectile-globally-ignored-files=: A list of files globally
+  ignored by Projectile.
+- =projectile-globally-ignored-directories=: A list of directories
+  globally ignored by Projectile.
+
+Finally, if you quit your current =helm-projectile-grep= session with
+current search results and don't want to search things all over again,
+you can save the result with the action =Save results in grep buffer=
+(bound to =<f3>=). Or you can simply resume the previous buffer with
+=helm-resume= (you should bind it to a key. If your follow my Helm
+guide, it is bound to *C-c h b*); if you =helm-projectile-grep= buffer
+is not the most recently used Helm buffer, add *C-u* before running
+=helm-resume= to select it from the list of all previously Helm
+buffers of all ran Helm commands.
 
 ** Command: =helm-projectile-ack=, *C-c p s a*
 :PROPERTIES:
@@ -769,10 +785,20 @@ This is a replacement command for =projectile-ack=. Similar to
 installed to be able to use this command. You can also customize these
 variables to ignore files or directories:
 
-- =grep-find-ignored-files=
-- =grep-find-ignored-directories=
-- =projectile-globally-ignored-files=
-- =projectile-globally-ignored-directories=
+- =grep-find-ignored-files=: List of file names which =rgrep= and
+  =lgrep= shall exclude, and =helm-projectile-ack= also uses this
+  variable.
+- =grep-find-ignored-directories=: List of names of sub-directories
+  which =rgrep= shall not recurse into. =helm-projectile-ack= also uses this
+  variable.
+- =projectile-globally-ignored-files=: A list of files globally
+  ignored by Projectile.
+- =projectile-globally-ignored-directories=: A list of directories
+  globally ignored by Projectile.
+
+Similarly, you can save results in a grep buffer with the action =Save
+results in grep buffer= (bound to =<f3>=), and resume with *C-c h b*
+(add *C-u* to select from the list of all previous Helm sessions).
 
 ** Command: =helm-projectile-ag=, *C-c p s s*
 :PROPERTIES:

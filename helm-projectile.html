@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-11-11 Tue 13:39 -->
+<!-- 2014-11-11 Tue 15:35 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -1327,15 +1327,33 @@ either one of these variables:
 </p>
 
 <ul class="org-ul">
-<li><code>grep-find-ignored-files</code>
+<li><code>grep-find-ignored-files</code>: List of file names which <code>rgrep</code> and
+<code>lgrep</code> shall exclude.  <code>helm-projectile-grep</code> also uses this
+variable.
 </li>
-<li><code>grep-find-ignored-directories</code>
+<li><code>grep-find-ignored-directories</code>: List of names of sub-directories
+which <code>rgrep</code> shall not recurse into. <code>helm-projectile-grep</code> also
+uses this variable.
 </li>
-<li><code>projectile-globally-ignored-files</code>
+<li><code>projectile-globally-ignored-files</code>: A list of files globally
+ignored by Projectile.
 </li>
-<li><code>projectile-globally-ignored-directories</code>
+<li><code>projectile-globally-ignored-directories</code>: A list of directories
+globally ignored by Projectile.
 </li>
 </ul>
+
+<p>
+Finally, if you quit your current <code>helm-projectile-grep</code> session with
+current search results and don't want to search things all over again,
+you can save the result with the action <code>Save results in grep buffer</code>
+(bound to <code>&lt;f3&gt;</code>). Or you can simply resume the previous buffer with
+<code>helm-resume</code> (you should bind it to a key. If your follow my Helm
+guide, it is bound to <b>C-c h b</b>); if you <code>helm-projectile-grep</code> buffer
+is not the most recently used Helm buffer, add <b>C-u</b> before running
+<code>helm-resume</code> to select it from the list of all previously Helm
+buffers of all ran Helm commands.
+</p>
 </div>
 </div>
 
@@ -1350,15 +1368,27 @@ variables to ignore files or directories:
 </p>
 
 <ul class="org-ul">
-<li><code>grep-find-ignored-files</code>
+<li><code>grep-find-ignored-files</code>: List of file names which <code>rgrep</code> and
+<code>lgrep</code> shall exclude, and <code>helm-projectile-ack</code> also uses this
+variable.
 </li>
-<li><code>grep-find-ignored-directories</code>
+<li><code>grep-find-ignored-directories</code>: List of names of sub-directories
+which <code>rgrep</code> shall not recurse into. <code>helm-projectile-ack</code> also uses this
+variable.
 </li>
-<li><code>projectile-globally-ignored-files</code>
+<li><code>projectile-globally-ignored-files</code>: A list of files globally
+ignored by Projectile.
 </li>
-<li><code>projectile-globally-ignored-directories</code>
+<li><code>projectile-globally-ignored-directories</code>: A list of directories
+globally ignored by Projectile.
 </li>
 </ul>
+
+<p>
+Similarly, you can save results in a grep buffer with the action <code>Save
+results in grep buffer</code> (bound to <code>&lt;f3&gt;</code>), and resume with <b>C-c h b</b>
+(add <b>C-u</b> to select from the list of all previous Helm sessions).
+</p>
 </div>
 </div>
 
