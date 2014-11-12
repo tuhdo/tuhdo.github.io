@@ -191,7 +191,7 @@ to help you using Helm productively.
   have to start your navigating session all over again!
 
 - /_Matching mechanism_/: This is a powerful feature in Helm that I
-  hvaen't seen in other packages: out of order matching, *with regular
+  haven't seen in other packages: out of order matching, *with regular
   expression*. That's right, you can enter every search pattern as
   regexp!. A really powerful concept: it enhances explanatory power
   for many things. One of use cases is exploring a new project: using
@@ -876,7 +876,7 @@ set); *<key>*, by defaults, is one of *g*, *i* or *r*:
 | Key            | Binding                       |
 |----------------+-------------------------------|
 | *<prefix> h g* | Command: =helm-info-gnus=     |
-| *<prefix> h r* | Command: =helm-info-at-point= |
+| *<prefix> h i* | Command: =helm-info-at-point= |
 | *<prefix> h r* | Command: =helm-info-emacs=    |
 |----------------+-------------------------------|
 
