@@ -504,7 +504,7 @@ Operating System and the high-level applications.
 :PROPERTIES:
 :ID:       125d8641-5327-4169-94c5-969e06d4bf69
 :END:
-You won't find any language with such a minimal syntax and unifomity,
+You won't find any language with such a minimal syntax and uniformity,
 yet so expressive, since you can choose any language syntax that you
 want to solve your problems in. Some languages also have *homoiconic*
 property, but instead of using just a pair of parentheses, they use
