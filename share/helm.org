@@ -319,8 +319,8 @@ to see content of the kill ring, and it is not pretty.
 
 =helm-show-kill-ring= solves this problem: Helm shows the kill ring in
 a readable format and allows you to narrow down by entering
-sub-strings of candidates. You are lifted the cognitive burden when
-using the default =M-y=.
+sub-strings of candidates. You are freed from the cognitive burden of
+the default *M-y*.
 
 If you follow my Helm configuration, =M-y= binds to
 =helm-show-kill-ring=. Try it and see! Much easier than the default.
