@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</title>
-<!-- 2014-11-17 Mon 10:46 -->
+<!-- 2014-11-20 Thu 14:53 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -245,11 +245,21 @@ History</a>.
 <h3 id="sec-1-3"><a id="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d" name="ID-9a30dadd-d95e-49a9-8690-b6b633d9083d"></a>Basic syntax and semantic</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
-Lisp syntax is minimal and simple. At its core, you only need to
-remember these syntax constructs to use any Lisp:
+Lisp syntax is inherently simple. At its core, this is all that
+required to understand any Lisp:
 </p>
 
-<ol class="org-ol">
+<ul class="org-ul">
+<li>Anything is a list, it's an atom. Atoms are the same as primitives
+in other languages: components that cannot be broken down further
+into smaller pieces. This is data.
+</li>
+
+<li>Anything is not an atom, it's a list that contains atoms. List is
+just anything contained in a pair of parentheses. List can be used
+either as code for processing something or as data to be processed.
+</li>
+
 <li>Data:
 
 <ul class="org-ul">
@@ -346,7 +356,7 @@ list</b> that holds data, similar to List data structure in Java or C++
 to hold data.
 </p>
 </li>
-</ol>
+</ul>
 
 <p>
 <span class="underline">Examples</span>:
@@ -579,11 +589,10 @@ to your needs.
 <p>
 In reality, <code>’(...)</code> is just a syntactic sugar for special form
 <code>(quote ...)</code>. In the end, aside from the atoms, Lisp only has one
-syntax: a pair of parentheses and items in it, along with syntax for
-primitives (number, string, boolean&#x2026;). With Lisp syntax, many things
-are easy to do in Lisp, such as generating code as data and execute it
-later, both in compile time and runtime. In the end, aside from the
-primitives, the only thing that exists in Lisp is a pair of
+syntax: a pair of parentheses and items in it. With Lisp syntax, many
+things are easy to do in Lisp, such as generating code as data and
+execute it later, both in compile time and runtime. In the end, aside
+from the primitives, the only thing that exists in Lisp is a pair of
 parentheses, with things in in it: <code>(...)</code>. This is the only syntax,
 along with the semantics that depends on context: <i>a function form</i>,
 <i>a special form</i> or <i>a macro form</i>; the first item in a form is going
