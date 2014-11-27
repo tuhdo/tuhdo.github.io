@@ -326,7 +326,7 @@ key.
   first; you worry about that later when you already decided exact
   files to open.
 
-- /Find file as root/ (*C-x @*): Another really useful action. With
+- /Find file as root/ (*C-c r*): Another really useful action. With
   this command, you don't have to use [[http://www.gnu.org/software/tramp/#Running-eshell-on-a-remote-host][Tramp syntax]] to open file as
   root. Just browse file to anywhere, and when needed, open it as root
   instantly. 
@@ -335,8 +335,8 @@ key.
 
   [[file:static/helm-projectile/helm-projectile-find-file-as-root.gif][file:static/helm-projectile/helm-projectile-find-file-as-root.gif]]
 
-  In the demo, I opened directory ~/etc~ *after* I move to it. No need
-  to enter Tramp syntax for =sudo=.
+  In the demo, I opened directory ~/etc~ *after* I moved to it. No need
+  to enter Tramp syntax for =sudo= with full path again.
 
 - /Find file other frame/ (*C-c C-o*): Open file in another frame.
 
