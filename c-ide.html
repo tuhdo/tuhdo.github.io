@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-11-11 Tue 13:32 -->
+<!-- 2014-12-08 Mon 10:44 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -293,17 +293,16 @@ demo begins when "START" appears at the bottom:
 </div>
 
 <ul class="org-ul">
-<li>Interactive outline tree using <code>helm-semantic-or-imenu</code>:
-</li>
-</ul>
+<li>Interactive outline tree using <code>moo-jump-local</code> from <a href="https://github.com/abo-abo/function-args">function-args</a>
+  package:
 
 
 <div class="figure">
-<p><a href="static/c-ide/helm-semantic-or-imenu-with-struct.gif"><img src="static/c-ide/helm-semantic-or-imenu-with-struct.gif" alt="helm-semantic-or-imenu-with-struct.gif" /></a>
+<p><a href="static/c-ide/moo-jump-local.gif"><img src="static/c-ide/moo-jump-local.gif" alt="moo-jump-local.gif" /></a>
 </p>
 </div>
+</li>
 
-<ul class="org-ul">
 <li>Static outline tree as a file browser:
 </li>
 </ul>
@@ -730,13 +729,13 @@ can integrate Imenu:
 </div>
 
 <p>
-If you use Helm, use <a href="http://tuhdo.github.io/helm-intro.html#sec-7">helm-semantic-or-imenu</a>. You can use it as an
-outline tree like in other IDEs. Here is a demo:
+If you use Helm, use <code>moo-jump-local</code> from <a href="https://github.com/abo-abo/function-args">function-args</a> package. You
+can use it as an outline tree like in other IDEs. Here is a demo:
 </p>
 
 
 <div class="figure">
-<p><a href="static/part3/helm-semantic-or-imenu.gif"><img src="static/part3/helm-semantic-or-imenu.gif" alt="helm-semantic-or-imenu.gif" /></a>
+<p><a href="static/c-ide/moo-jump-local.gif"><img src="static/c-ide/moo-jump-local.gif" alt="moo-jump-local.gif" /></a>
 </p>
 </div>
 </div>
@@ -1970,7 +1969,7 @@ is not considered a tag.
 <li><code>senator-jump</code> (only available in CEDET bzr), specify a tag to jump
 to. <b>TAB</b> for a list of available Semantic tags in current buffer,
 similar to <b>TAB</b> in <b>M-x</b> in stock Emacs. If you use Helm, use
-<code>helm-semantic-or-imenu</code> instead.
+<code>moo-jump-local</code> from the package <code>function-args</code> instead.
 
 <p>
 Demo (<code>helm-mode</code> is disabled):

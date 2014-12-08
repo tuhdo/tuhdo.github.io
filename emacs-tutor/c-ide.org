@@ -23,9 +23,10 @@ A few demos:
 
 [[file:static/c-ide/helm-gtags-jump-dwim.gif][file:static/c-ide/helm-gtags-jump-dwim.gif]]
 
-- Interactive outline tree using =helm-semantic-or-imenu=:
+- Interactive outline tree using =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]]
+  package:
 
-[[file:static/c-ide/helm-semantic-or-imenu-with-struct.gif][file:static/c-ide/helm-semantic-or-imenu-with-struct.gif]]
+  [[file:static/c-ide/moo-jump-local.gif][file:static/c-ide/moo-jump-local.gif]]
 
 - Static outline tree as a file browser:
 
@@ -271,10 +272,10 @@ can integrate Imenu:
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 #+end_src
 
-If you use Helm, use [[http://tuhdo.github.io/helm-intro.html#sec-7][helm-semantic-or-imenu]]. You can use it as an
-outline tree like in other IDEs. Here is a demo:
+If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. You
+can use it as an outline tree like in other IDEs. Here is a demo:
 
-[[file:static/part3/helm-semantic-or-imenu.gif][file:static/part3/helm-semantic-or-imenu.gif]]
+[[file:static/c-ide/moo-jump-local.gif][file:static/c-ide/moo-jump-local.gif]]
 
 ** Find definitions in project
 :PROPERTIES:
@@ -1126,7 +1127,7 @@ Senator provides commands for navigating by tag.
 - =senator-jump= (only available in CEDET bzr), specify a tag to jump
   to. *TAB* for a list of available Semantic tags in current buffer,
   similar to *TAB* in *M-x* in stock Emacs. If you use Helm, use
-  =helm-semantic-or-imenu= instead.
+  =moo-jump-local= from the package =function-args= instead.
 
   Demo (=helm-mode= is disabled):
 
