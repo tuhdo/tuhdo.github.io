@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code> </title>
-<!-- 2014-11-19 Wed 14:24 -->
+<!-- 2014-12-08 Mon 11:00 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -1268,6 +1268,45 @@ fine.
 In the demo, you see things like <code>class u16</code> and <code>class u32</code>; that is
 because <code>u16</code> and <code>u32</code> are defined by typedef.
 </p>
+
+<p>
+<b>IMPORTANT NOTE</b>: This demo is for demonstration purpose. If you want
+to jump around current C/C++ buffer, you should use <code>moo-jump-local</code>
+command from <a href="https://github.com/abo-abo/function-args">function-args</a> package. It is because currently,
+<code>helm-semantic-or-imenu</code> cannot retrieve properly pointer and
+reference information to display. If you have a definition like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> *<span style="color: #783f5a;">filename</span>;
+</pre>
+</div>
+
+<p>
+Then, it will be displayed like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="color: #a020f0;">const</span> <span style="color: #228b22;">char</span> <span style="color: #783f5a;">filename</span>;
+</pre>
+</div>
+
+<p>
+You lose the pointer information. It is because
+<code>helm-semantic-or-imenu</code> reuse a function from Semantic to retrieve
+formatted text of a tag definition to be displayed, but for some reason
+it does not work properly with anything that is pointer or reference:
+the <code>*</code> and <code>&amp;</code> are stripped. <code>moo-jump-local</code> fixes this problem.
+Here is <code>moo-jump-local</code> demo for C/C++:
+</p>
+
+
+<div class="figure">
+<p><a href="static/c-ide/moo-jump-local.gif"><img src="static/c-ide/moo-jump-local.gif" alt="moo-jump-local.gif" /></a>
+</p>
+</div>
 </div>
 </div>
 

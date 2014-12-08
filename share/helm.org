@@ -729,6 +729,31 @@ fine.
 In the demo, you see things like =class u16= and =class u32=; that is
 because =u16= and =u32= are defined by typedef.
 
+*IMPORTANT NOTE*: This demo is for demonstration purpose. If you want
+to jump around current C/C++ buffer, you should use =moo-jump-local=
+command from [[https://github.com/abo-abo/function-args][function-args]] package. It is because currently,
+=helm-semantic-or-imenu= cannot retrieve properly pointer and
+reference information to display. If you have a definition like this:
+
+#+begin_src c
+  const char *filename;
+#+end_src
+
+Then, it will be displayed like this:
+
+#+begin_src c
+  const char filename;
+#+end_src
+
+You lose the pointer information. It is because
+=helm-semantic-or-imenu= reuse a function from Semantic to retrieve
+formatted text of a tag definition to be displayed, but for some reason
+it does not work properly with anything that is pointer or reference:
+the =*= and =&= are stripped. =moo-jump-local= fixes this problem.
+Here is =moo-jump-local= demo for C/C++:
+
+[[file:static/c-ide/moo-jump-local.gif][file:static/c-ide/moo-jump-local.gif]]
+
 * Command: =helm-man-woman=
 :PROPERTIES:
 :ID:       2578b1bd-7ae9-4250-b701-c9191603404f
