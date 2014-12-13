@@ -1364,7 +1364,7 @@ _Usage_:
 For basic usage, *C-c p h* to run =helm-projectile= and select files
 in your project. Please refer to the [[http://tuhdo.github.io/helm-projectile.html][full guide]].
 
-* Package: =helm-descbind=
+* Package: =helm-descbinds=
 :PROPERTIES:
 :ID:       3a128b01-725f-4142-bd0d-f9bbd4b715cc
 :END:
@@ -1389,7 +1389,7 @@ Additionally you have the following actions
 
 _Installation_:
 
-=M-x list-packages= and select *helm-descbind* package, then install
+=M-x list-packages= and select *helm-descbinds* package, then install
 it. After finish installing, add this code snippet to activate the
 package:
 
