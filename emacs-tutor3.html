@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</title>
-<!-- 2014-11-11 Tue 13:32 -->
+<!-- 2014-12-14 CN 23:50 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -3788,7 +3788,7 @@ package:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">full screen magit-status</span>
 <span style="color: #707183;">(</span><span style="color: #a020f0;">defadvice</span> <span style="color: #0000ff;">magit-status</span> <span style="color: #7388d6;">(</span><span style="color: #7e544f;">around</span> <span style="color: #78683f;">magit-fullscreen</span> <span style="color: #707e4f;">activate</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #5e7837;">window-configuration-to-register</span> <span style="color: #483d8b;">:magit-fullscreen</span><span style="color: #7388d6;">)</span>
-  <span style="color: #4f7e67;">ad-do-</span><span style="color: #4f7e67;">it</span>
+  <span style="color: #4f7e67;">ad-do-it</span>
   <span style="color: #7388d6;">(</span><span style="color: #4f7e67;">delete-other-windows</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span><span style="color: #43783f;">global-unset-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x g"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
@@ -3993,7 +3993,7 @@ Emacs won't be able to load your module.Sample configuration:
   <span style="color: #8b2252;">"Also find all files within a list of files. This even works recursively."</span>
   <span style="color: #7388d6;">(</span><span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span><span style="color: #783f5a;">listp</span> <span style="color: #783f5a;">filename</span><span style="color: #909183;">)</span>
       <span style="color: #909183;">(</span><span style="color: #78683f;">loop</span> <span style="color: #4f7e67;">for</span> <span style="color: #5e7837;">f</span> <span style="color: #513f78;">in</span> <span style="color: #783f5a;">filename</span> <span style="color: #374478;">do</span> <span style="color: #709870;">(</span><span style="color: #7e544f;">find-file-other-window</span> <span style="color: #5e7837;">f</span> <span style="color: #7a4f7e;">wildcards</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span>
-    <span style="color: #4f7e67;">ad-do-</span><span style="color: #4f7e67;">it</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+    <span style="color: #4f7e67;">ad-do-it</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">In Eshell, you can run the commands in M-x</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Here are the aliases to the commands.</span>

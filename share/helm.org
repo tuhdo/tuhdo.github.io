@@ -56,7 +56,6 @@ Extended config:
     (setq helm-google-suggest-use-curl-p t))
 
   (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-        helm-buffers-fuzzy-matching           t ; fuzzy matching buffer names when non--nil
         helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
         helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
         helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
@@ -158,7 +157,7 @@ In a Helm session, if you need help, use *C-c ?*, or refer to this
 manual again. The commands in the key bindings above are good enough
 to help you using Helm productively.
 
-* Why is Helm poweful?
+* Why is Helm powerful?
 :PROPERTIES:
 :ID:       260dfe60-eb43-4d20-b1c4-b51af5133a32
 :END:
@@ -229,6 +228,9 @@ to help you using Helm productively.
   since the source tree contains a large amount of files, and many of
   these files have same prefix.
 
+  Starting from Helm 1.6.5, Helm includes fuzzy matching for many
+  commands and a way for package writer to activate fuzzy matching.
+
 - /Performance/: Helm can work with over 30000 candidates or more no
   problem.
 
@@ -266,7 +268,7 @@ _Key binding_:
 No key binding. We should give it one:
 
 #+begin_src emacs-lisp
-    (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "M-x") 'helm-M-x)
 #+end_src
 
 _Description_:
@@ -284,6 +286,15 @@ entry.
 =helm-M-x= is also better then the default =M-x=, because it provides
 key bindings right next to the commands, and *TAB* provides you the
 built-in documentation of that command in another buffer.
+
+Starting from 1.6.5, =helm-M-x= can fuzzy match candidates, but not
+enabled by default. To enable fuzzy matching, add the following
+setting:
+
+#+begin_src emacs-lisp
+  (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+#+end_src
+
 
 *NOTE*: You have to bind =helm-M-x= to *M-x* manually. Otherwise, you
  still get Helm completion, but using the vanilla *M-x* that does not
@@ -342,6 +353,13 @@ No key binding. We should give it one:
 
 #+begin_src emacs-lisp
     (global-set-key (kbd "C-x b") 'helm-mini)
+#+end_src
+
+To enable fuzzy matching, add the following settings:
+
+#+begin_src emacs-lisp
+  (setq helm-buffers-fuzzy-matching t
+        helm-recentf-fuzzy-match    t)
 #+end_src
 
 =helm-mini= comprises of multiple sources:
@@ -462,7 +480,9 @@ _Similar Commands_:
   recent files from =recentf=, it uses =ido-virtual-buffers=, which is
   a list of recently visited files managed by =ido=. The virtual
   buffers do not contain path in it. Depends on preference, you can
-  use this command in place of =helm-mini=.
+  use this command in place of =helm-mini=. To enable fuzzy matching
+  =ido-virtual-buffers=, if you set =helm-buffers-fuzzy-matching= to
+  =t= already, you also get fuzzy matching for =ido-virtual-buffers=.
 
 * Command: =helm-find-files=
 :PROPERTIES:
@@ -570,7 +590,7 @@ files and directories with *C-c h*. From there, the default action is
 You can use *M-p* and *M-n* to move back and forth between previously
 visited directory.
 
-* Command: =helm-ff-do-grep=, Live grep in Helm
+* Command: =helm-ff-do-grep=, live grep in Helm
 :PROPERTIES:
 :ID:       ded88dfc-ea36-4650-856b-b7e176836f46
 :END:
@@ -633,6 +653,14 @@ default.
 =helm-semantic-or-imenu= works with many modes like C/C++, Java,
 Python, Ruby, Emacs Lisp and Lisp in general, shell script,
 Org-mode...
+
+To enable fuzzy matching for both =Semantic= and =Imenu= listing, add
+the following setting:
+
+#+begin_src emacs-lisp
+  (setq helm-semantic-fuzzy-match t
+        helm-imenu-fuzzy-match    t)
+#+end_src
 
 _Usage_:
 
@@ -839,6 +867,12 @@ If you use =helm-locate= on a large directory and feel the update is
 too sluggish, you can always suspend the live updating with *C-!* and
 resume the live updating with *C-!* later.
 
+To enable fuzzy matching in =helm-locate=, add this setting:
+
+#+begin_src emacs-lisp
+  (setq helm-locate-fuzzy-match t)
+#+end_src
+
 _Demo_:
 
 [[file:static/part3/helm-locate.gif][file:static/part3/helm-locate.gif]]
@@ -887,6 +921,24 @@ _Description_:
 Pre-configured helm to describe commands, functions, variables and
 faces - all in one command!. It is similar to *C-h a* which runs
 =apropos-command=, but interactive includes more than just commands.
+=helm-apropos= comprises of 5 sources:
+
+- *Commands*: Lists all available commands.
+- *Fucntion*: Lists all available functions.
+- *Classes*: Lists all classes created by =defclass=. See [[https://www.gnu.org/software/emacs/manual/html_node/eieio/Building-Classes.html][Building
+  Classes]].
+- *Generic Functions*: Lists all functions created by =defmethod=. See
+  [[https://www.gnu.org/software/emacs/manual/html_node/eieio/Writing-Methods.html#Writing-Methods][Writing Methods]] 
+- *Variables*: Lists all available variables.
+- *Faces*: Lists all available faces.
+- *Helm attributes*: Lists all attributes that you can use to build a
+  Helm source. Useful if you want to write extension with Helm.
+
+To enable fuzzy matching, add this setting:
+
+#+begin_src emacs-lisp
+  (setq helm-apropos-function-list t)
+#+end_src
 
 * Command: =helm-info-*=
 :PROPERTIES:
@@ -925,6 +977,23 @@ You can have more =helm-info-= commands, such as:
 
 Use =M-x helm-info= to see the list of =helm-info-= commands using the
 default info prefix: =<prefix> h= or key bindings of your choice.
+
+* Command: =helm-lisp-completion-at-point=
+_Key binding_:
+
+*<prefix> <tab>* (prefix is *C-x c* by default, or *C-c h* if set).
+
+_Description_:
+
+If you work with Emacs Lisp, this command provides a list of available
+loaded functions in Emacs. To get a list of completions, you first
+have to write a prefix, even just one character. Then execute the
+command and get a list of completion candidates. To enable fuzzy
+matching, add this setting:
+
+#+begin_src emacs-lisp
+  (setq helm-lisp-fuzzy-completion t)
+#+end_src
 
 * Command: =helm-resume=
 :PROPERTIES:
@@ -1050,19 +1119,6 @@ inserts content of highlighting register.
 _Demo_:
 
 [[file:static/part3/helm-registers.gif][file:static/part3/helm-registers.gif]]
-
-* Command: =helm-list-emacs-process=
-:PROPERTIES:
-:ID:       78775761-7c91-4be1-b787-831695dda673
-:END:
-_Key binding_: 
-
-*<prefix> p* (prefix is *C-x c* by default, or *C-c h* if set).
-
-_Description_:
-
-This command lists processes that Emacs is using. *TAB* kills the
-highlighting process.
 
 * Command: =helm-top=
 :PROPERTIES:
