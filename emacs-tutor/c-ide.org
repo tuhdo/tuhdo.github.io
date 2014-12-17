@@ -1378,8 +1378,8 @@ Useful commands for working with C/C++ projects:
 
 [[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
-There are more. You can see all the commands [[https://github.com/bbatsov/projectile#interactive-commands][here]]. Or, simply run *C-c
-p C-h* for a list of commands with *C-c p* prefix.
+There are more, you can find it in [[http://tuhdo.github.io/helm-projectile.html][my Projectile guide]]. You can also
+run *C-c p C-h* for a list of commands with *C-c p* prefix.
 
 * Source code information
 :PROPERTIES:

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2014-12-08 Mon 10:44 -->
+<!-- 2014-12-18 T5 00:16 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -1486,7 +1486,7 @@ Semantic helps you provides completion for Boost:
 </div>
 </div>
 
-<ul class="org-ul"><li><b>Setup Semantic</b><br  /><div class="outline-text-5" id="text-6-4-0-1">
+<ul class="org-ul"><li><a id="sec-6-4-0-1" name="sec-6-4-0-1"></a><a id="ID-22bc4bb9-df93-4702-8b7d-9eb8b038059b" name="ID-22bc4bb9-df93-4702-8b7d-9eb8b038059b"></a><b>Setup Semantic</b><br  /><div class="outline-text-5" id="text-6-4-0-1">
 <p>
 To enable code completion using Semantic, add the following code:
 </p>
@@ -1505,7 +1505,7 @@ To enable code completion using Semantic, add the following code:
 </div>
 </li>
 
-<li><b>Command</b>: <code>semantic-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-2">
+<li><a id="sec-6-4-0-2" name="sec-6-4-0-2"></a><a id="ID-8f24eec1-81f5-445b-bdc7-1b7e27943ce5" name="ID-8f24eec1-81f5-445b-bdc7-1b7e27943ce5"></a><b>Command</b>: <code>semantic-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-2">
 <p>
 This command activates <code>semantic-mode</code>. In Semantic mode, Emacs parses
 the buffers you visit for their semantic content. The parsing looks
@@ -1537,7 +1537,7 @@ you will get your desired output instantly.
 </div>
 </li>
 
-<li><b>Command</b>: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-3">
+<li><a id="sec-6-4-0-3" name="sec-6-4-0-3"></a><a id="ID-668b4f56-2977-4783-b7cb-b5d84a0dd769" name="ID-668b4f56-2977-4783-b7cb-b5d84a0dd769"></a><b>Command</b>: <code>global-semanticdb-minor-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-3">
 <p>
 As mentioned above, Semantic caches parsing result for future
 use. To do that, <code>semanticdb-minor-mode</code> must be activated. In
@@ -1549,7 +1549,7 @@ variable. The default directory is <code>~/.emacs.d/semanticdb</code>.
 </div>
 </li>
 
-<li><b>Command</b>: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-4">
+<li><a id="sec-6-4-0-4" name="sec-6-4-0-4"></a><a id="ID-fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3" name="ID-fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3"></a><b>Command</b>: <code>global-semantic-idle-scheduler-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-4">
 <p>
 When <code>semantic-idle-scheduler-mode</code> is enabled, Emacs periodically
 checks to see if the buffer is out of date, and reparses while the
@@ -1563,7 +1563,7 @@ your source code.
 </p>
 </div>
 </li>
-<li><b>Add more system include paths</b><br  /><div class="outline-text-5" id="text-6-4-0-5">
+<li><a id="sec-6-4-0-5" name="sec-6-4-0-5"></a><a id="ID-5bd738d7-ccc7-412a-8414-45d7cc9e41aa" name="ID-5bd738d7-ccc7-412a-8414-45d7cc9e41aa"></a><b>Add more system include paths</b><br  /><div class="outline-text-5" id="text-6-4-0-5">
 <p>
 By default, Semantic automatically includes some default system
 include paths such as <code>/usr/include</code>, <code>/usr/local/include</code>&#x2026; You can
@@ -1588,7 +1588,7 @@ modes, then ignore the optional mode argument in
 </p>
 </div>
 </li>
-<li>Completion using <code>company-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-6">
+<li><a id="sec-6-4-0-6" name="sec-6-4-0-6"></a><a id="ID-05364ae1-6c0c-48b9-8759-823e70d9f320" name="ID-05364ae1-6c0c-48b9-8759-823e70d9f320"></a>Completion using <code>company-mode</code><br  /><div class="outline-text-5" id="text-6-4-0-6">
 <p>
 <code>companh-mode</code> provides a command called <code>company-semantic</code> that uses
 SemanticDB to retrieve completion candidates. Function interface of
@@ -1602,7 +1602,7 @@ completions.
 </div>
 </li>
 
-<li><b>Package</b>: <code>function-args</code><br  /><div class="outline-text-5" id="text-6-4-0-7">
+<li><a id="sec-6-4-0-7" name="sec-6-4-0-7"></a><a id="ID-3e24664a-c6cc-44d5-b0ea-457a25590d38" name="ID-3e24664a-c6cc-44d5-b0ea-457a25590d38"></a><b>Package</b>: <code>function-args</code><br  /><div class="outline-text-5" id="text-6-4-0-7">
 <p>
 <a href="https://github.com/abo-abo/function-args">function-args</a> is a GNU Emacs package for showing an inline
 arguments hint for the C/C++ function at point.
@@ -2345,8 +2345,8 @@ is a demo:
 </div>
 
 <p>
-There are more. You can see all the commands <a href="https://github.com/bbatsov/projectile#interactive-commands">here</a>. Or, simply run <b>C-c
-p C-h</b> for a list of commands with <b>C-c p</b> prefix.
+There are more, you can find it in <a href="http://tuhdo.github.io/helm-projectile.html">my Projectile guide</a>. You can also
+run <b>C-c p C-h</b> for a list of commands with <b>C-c p</b> prefix.
 </p>
 </div>
 </div>
