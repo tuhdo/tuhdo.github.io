@@ -2587,7 +2587,7 @@ counter is inserted into the buffer, its value is incremented by 1.
 |---------------+-------------------------------------------------------------|
 | *<f3>*        | Command: =kmacro-start-macro-or-insert-counter=             |
 |               | Insert the counter into the buffer and increase the counter |
-|               | by 1. This is only application when a macro is recording    |
+|               | by 1. This is only applicable when a macro is recording     |
 |---------------+-------------------------------------------------------------|
 | *C-x C-k C-i* | Command: =kmacro-insert-counter=                            |
 |               | Insert the counter of current macro into the buffer         |
