@@ -2,9 +2,12 @@
 _Author_:
 
 - Tamas Patrovic (original author), from 2007. At this time, Helm was
-  named =anything=.
-- rubikitch =rubikitch@ruby-lang.org=, from 2008-2011.
-- [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current maintainer). =thierry.volpiatto@gmail.com=, from 2011-present.
+  named =Anything=.
+- rubikitch =rubikitch@ruby-lang.org=, from 2008-2011. Helm was still
+  named =Anything=
+- [[https://github.com/thierryvolpiatto][Thierry Volpiatto]] (current maintainer).
+  =thierry.volpiatto@gmail.com=, from 2011-present. =Anything= was
+  renamed to =Helm= during this period.
   
 _Homepage_: [[https://github.com/emacs-helm/helm][Github]]
 
