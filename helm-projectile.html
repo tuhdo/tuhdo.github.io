@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-11-27 Thu 13:15 -->
+<!-- 2014-12-26 Fri 11:31 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -410,10 +410,11 @@ like exploring the Linux kernel.
 <p>
 This tutorial is about how to use Projectile along with Helm. There
 are other completion systems such as <code>grizzl</code> or <code>ido</code> with <code>flx</code>, both use
-fuzzy finding. Helm also does almost the same thing, except instead of
-fuzzy matching, Helm uses regex matching and provides more features
-beyond matching. If you do not like Helm, just follow this tutorial,
-then change completion system to your preference later.
+fuzzy matching. Helm also does almost the same thing, except that if
+you insert a space anywhere in the prompt, Helm reverts back to its
+old matching behavior: exact matching. Otherwise, Helm uses
+fuzzy-matching by default, and it works with many tens of thousands of
+files.
 </p>
 </div>
 </div>
@@ -427,9 +428,9 @@ You also install Projectile via MELPA and setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">projectile-global-mode</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #707e4f;">projectile-completion-system</span> '<span style="color: #783f5a;">helm</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">helm-projectile-on</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>projectile-global-mode<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>setq projectile-completion-system 'helm<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>helm-projectile-on<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -467,7 +468,7 @@ enable external indexing, add this setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #374478;">projectile-indexing-method</span> '<span style="color: #78683f;">alien</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-indexing-method 'alien<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -486,36 +487,13 @@ speed up the indexing process.
 </p>
 
 <ul class="org-ul">
-<li><code>helm-projectile-switch-project</code>
-</li>
 <li><code>helm-projectile-switch-to-buffer</code>
-</li>
-<li><code>helm-projectile-recentf</code>
 </li>
 <li><code>helm-projectile-find-file</code>
 </li>
-<li><code>helm-projectile-find-dir</code>
+<li><code>helm-projectile-switch-project</code>
 </li>
 </ul>
-
-<p>
-It's really convenient when you have an all-in-one command, so you
-don't have to remember many different key bindings. However, in large
-projects, displaying all listings for commands can be slow.  If you
-work with large projects, displaying all sources in <code>helm-projectile</code>
-can be slow. In that case, you should only use two sources:
-<code>helm-source-projectile-projects</code> and
-<code>helm-source-projectile-files-list</code>. The first display a list of
-projects and the second displays the current files in the selected
-project.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">helm-projectile-sources-list</span> '<span style="color: #7388d6;">(</span><span style="color: #707e4f;">helm-source-projectile-projects</span>
-                                     <span style="color: #374478;">helm-source-projectile-files-list</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
-</pre>
-</div>
 </div>
 </div>
 
@@ -555,7 +533,7 @@ command to be executed after a project is selected. The default is
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">projectile-switch-project-action</span> '<span style="color: #513f78;">helm-projectile-find-file</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-switch-project-action 'helm-projectile-find-file<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -573,7 +551,7 @@ at a time:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">projectile-switch-project-action</span> '<span style="color: #5e7837;">helm-projectile</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-switch-project-action 'helm-projectile<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1061,7 +1039,7 @@ Other file extensions can be customized with the variable
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"hh"</span> <span style="color: #8b2252;">"cc"</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"vert"</span> <span style="color: #8b2252;">"frag"</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"frag"</span> <span style="color: #8b2252;">"vert"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #43783f;">nil</span> <span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">"gpg"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>nil <span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">"gpg"</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">""</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"gpg"</span> <span style="color: #8b2252;">""</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
@@ -1083,8 +1061,8 @@ If you want to add more, for example, to switch between <code>html</code> &lt;-&
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #7e544f;">projectile-other-file-alist</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"html"</span> <span style="color: #8b2252;">"js"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from html -&gt; js</span>
-<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #7e544f;">projectile-other-file-alist</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"js"</span> <span style="color: #8b2252;">"html"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from js -&gt; html</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'projectile-other-file-alist '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"html"</span> <span style="color: #8b2252;">"js"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from html -&gt; js</span>
+<span style="color: #707183;">(</span>add-to-list 'projectile-other-file-alist '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"js"</span> <span style="color: #8b2252;">"html"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from js -&gt; html</span>
 </pre>
 </div>
 
@@ -1107,7 +1085,7 @@ by:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #3f7178;">projectile-enable-caching</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-enable-caching t<span style="color: #707183;">)</span>
 </pre>
 </div>
 

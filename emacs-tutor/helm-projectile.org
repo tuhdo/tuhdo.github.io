@@ -122,10 +122,11 @@ like exploring the Linux kernel.
 
 This tutorial is about how to use Projectile along with Helm. There
 are other completion systems such as ~grizzl~ or ~ido~ with ~flx~, both use
-fuzzy finding. Helm also does almost the same thing, except instead of
-fuzzy matching, Helm uses regex matching and provides more features
-beyond matching. If you do not like Helm, just follow this tutorial,
-then change completion system to your preference later.
+fuzzy matching. Helm also does almost the same thing, except that if
+you insert a space anywhere in the prompt, Helm reverts back to its
+old matching behavior: exact matching. Otherwise, Helm uses
+fuzzy-matching by default, and it works with many tens of thousands of
+files.
 
 * Installation and configuration
 :PROPERTIES:
@@ -172,26 +173,9 @@ speed up the indexing process.
 :END:
 _Usage_: This command, by default, is the combination of these 5 commands:
 
-- ~helm-projectile-switch-project~
 - ~helm-projectile-switch-to-buffer~
-- ~helm-projectile-recentf~
 - ~helm-projectile-find-file~
-- ~helm-projectile-find-dir~
-
-It's really convenient when you have an all-in-one command, so you
-don't have to remember many different key bindings. However, in large
-projects, displaying all listings for commands can be slow.  If you
-work with large projects, displaying all sources in ~helm-projectile~
-can be slow. In that case, you should only use two sources:
-~helm-source-projectile-projects~ and
-~helm-source-projectile-files-list~. The first display a list of
-projects and the second displays the current files in the selected
-project.
-
-#+begin_src emacs-lisp
-  (setq helm-projectile-sources-list '(helm-source-projectile-projects
-                                       helm-source-projectile-files-list))
-#+end_src
+- ~helm-projectile-switch-project~
 
 * Enter project portal: ~helm-projectile-switch-project~, *C-c p p*
 :PROPERTIES:
