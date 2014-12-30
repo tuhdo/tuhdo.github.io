@@ -43,6 +43,7 @@ Minimal config:
 Extended config:
 
 #+begin_src emacs-lisp
+  (require 'helm)
   (require 'helm-config)
 
   ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
