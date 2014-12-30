@@ -750,6 +750,24 @@ either one of these variables:
 - =projectile-globally-ignored-directories=: A list of directories
   globally ignored by Projectile.
 
+For example, if you have a directory like ~personal/backup~ and if you
+want to ignore directory ~backup~, simply add ~backup~ to the
+=grep-find-ignored-directories= or
+=projectile-globally-ignored-directories=. For example, if I use
+=projectile-globally-ignored-directories=, I would do it like this:
+
+#+begin_src emacs-lisp
+  (add-to-list 'projectile-globally-ignored-directories "backup")
+#+end_src
+
+You can also use *C-h v* and select either of the above variables and
+use customize GUI to add your selections.
+
+*NOTE*: For =helm-projectile-grep=, when specifying directories to
+ignore, you must enter only the names of sub-directories, *not its
+full path*, either absolute or relative to current project. In the
+example above, I only add ~backup~, not ~personal/backup~.
+
 Finally, if you quit your current =helm-projectile-grep= session with
 current search results and don't want to search things all over again,
 you can save the result with the action =Save results in grep buffer=
@@ -784,11 +802,32 @@ Similarly, you can save results in a grep buffer with the action =Save
 results in grep buffer= (bound to =<f3>=), and resume with *C-c h b*
 (add *C-u* to select from the list of all previous Helm sessions).
 
+*NOTE*: if you want ~ack~ to ignore files/directories, you *must use
+regex pattern*. Otherwise it won't work.
+
 ** Command: =helm-projectile-ag=, *C-c p s s*
 :PROPERTIES:
 :ID:       3bac6c81-e783-4012-9890-9d8c3d599cfe
 :END:
 This is a replacement command for =projectile-ag=. Similar to
 =helm-projectile-grep=, but use =ag= insetad. You must have =ag= and
-=helm-ag= installed to be able to use this command. Note that this
-command only works with symbol at point, but not region.
+=helm-ag= installed to be able to use this command. This command only
+works with symbol at point, but not region.  You can also customize
+these variables to ignore files or directories:
+
+- =grep-find-ignored-files=: List of file names which =rgrep= and
+  =lgrep= shall exclude, and =helm-projectile-ack= also uses this
+  variable.
+- =grep-find-ignored-directories=: List of names of sub-directories
+  which =rgrep= shall not recurse into. =helm-projectile-ack= also uses this
+  variable.
+- =projectile-globally-ignored-files=: A list of files globally
+  ignored by Projectile.
+- =projectile-globally-ignored-directories=: A list of directories
+  globally ignored by Projectile.
+
+*NOTE*: Unlike =helm-projectile-grep=, you can specify directory with
+ path to ignore. For example, you can only specify sub-directory names
+ to ignore in =helm-projectile-grep=, i.e. ~backup~ not
+ ~personal/backup~, but with =helm-projectile-ag=, either ~backup~ or
+ ~personal/backup~ works fine.

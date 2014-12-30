@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-12-26 Fri 16:30 -->
+<!-- 2014-12-30 Tue 11:45 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -1322,6 +1322,32 @@ globally ignored by Projectile.
 </ul>
 
 <p>
+For example, if you have a directory like <code>personal/backup</code> and if you
+want to ignore directory <code>backup</code>, simply add <code>backup</code> to the
+<code>grep-find-ignored-directories</code> or
+<code>projectile-globally-ignored-directories</code>. For example, if I use
+<code>projectile-globally-ignored-directories</code>, I would do it like this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #784437;">projectile-globally-ignored-directories</span> <span style="color: #8b2252;">"backup"</span><span style="color: #707183;">)</span>
+</pre>
+</div>
+
+<p>
+You can also use <b>C-h v</b> and select either of the above variables and
+use customize GUI to add your selections.
+</p>
+
+<p>
+<b>NOTE</b>: For <code>helm-projectile-grep</code>, when specifying directories to
+ignore, you must enter only the names of sub-directories, <b>not its
+full path</b>, either absolute or relative to current project. In the
+example above, I only add <code>backup</code>, not <code>personal/backup</code>.
+</p>
+
+<p>
 Finally, if you quit your current <code>helm-projectile-grep</code> session with
 current search results and don't want to search things all over again,
 you can save the result with the action <code>Save results in grep buffer</code>
@@ -1367,6 +1393,11 @@ Similarly, you can save results in a grep buffer with the action <code>Save
 results in grep buffer</code> (bound to <code>&lt;f3&gt;</code>), and resume with <b>C-c h b</b>
 (add <b>C-u</b> to select from the list of all previous Helm sessions).
 </p>
+
+<p>
+<b>NOTE</b>: if you want <code>ack</code> to ignore files/directories, you <b>must use
+regex pattern</b>. Otherwise it won't work.
+</p>
 </div>
 </div>
 
@@ -1376,8 +1407,34 @@ results in grep buffer</code> (bound to <code>&lt;f3&gt;</code>), and resume wit
 <p>
 This is a replacement command for <code>projectile-ag</code>. Similar to
 <code>helm-projectile-grep</code>, but use <code>ag</code> insetad. You must have <code>ag</code> and
-<code>helm-ag</code> installed to be able to use this command. Note that this
-command only works with symbol at point, but not region.
+<code>helm-ag</code> installed to be able to use this command. This command only
+works with symbol at point, but not region.  You can also customize
+these variables to ignore files or directories:
+</p>
+
+<ul class="org-ul">
+<li><code>grep-find-ignored-files</code>: List of file names which <code>rgrep</code> and
+<code>lgrep</code> shall exclude, and <code>helm-projectile-ack</code> also uses this
+variable.
+</li>
+<li><code>grep-find-ignored-directories</code>: List of names of sub-directories
+which <code>rgrep</code> shall not recurse into. <code>helm-projectile-ack</code> also uses this
+variable.
+</li>
+<li><code>projectile-globally-ignored-files</code>: A list of files globally
+ignored by Projectile.
+</li>
+<li><code>projectile-globally-ignored-directories</code>: A list of directories
+globally ignored by Projectile.
+</li>
+</ul>
+
+<p>
+<b>NOTE</b>: Unlike <code>helm-projectile-grep</code>, you can specify directory with
+ path to ignore. For example, you can only specify sub-directory names
+ to ignore in <code>helm-projectile-grep</code>, i.e. <code>backup</code> not
+ <code>personal/backup</code>, but with <code>helm-projectile-ag</code>, either <code>backup</code> or
+ <code>personal/backup</code> works fine.
 </p>
 </div>
 </div>
