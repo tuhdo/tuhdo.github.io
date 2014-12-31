@@ -133,9 +133,6 @@ tutorial, only if it isn't made for demonstration.
 :PROPERTIES:
 :ID:       c8f88c3a-ecad-433d-931b-2cca8a4f62ac
 :END:
-The current version is Emacs 24.3; the upcoming Emacs 24.4 when this
-manual was written.
-
 Quote from GNU Emacs homepage:
 
 #+BEGIN_QUOTE
@@ -153,7 +150,7 @@ original Emacs Manual for Twenex; and (the only cartoon RMS has ever
 drawn) the Self-Documenting Extensible Editor.   
 #+END_QUOTE
 
-* "I don't want a complicated editor, I want something simple like Notepad(++)"
+* "I don't want a complicated editor, I want something simple like Notepad"
 :PROPERTIES:
 :ID:       45226aea-d1af-4853-8be9-5dc1ee962973
 :END:
@@ -180,19 +177,20 @@ you can simply highlight the lines and press a shortcut for inserting
 comments.
 
 Many people think that writing program manually is much cooler than
-"amateurs" that use fancy "Integrated Development Environment". I used
+"amateurs" that use fancy =Integrated Development Environment=. I used
 to think like that too, because working in Linux environment requires
 me to understand the underlying working, such as building software
-using Makefile in C/C++, automating with shell script... And this is
-already considered "user friendly" in Linux world, as opposed to click
-the nice little play button in typical IDE. However, I was
-wrong. While working with such tools allow me to understand what's
-going on, I do not need to type in code manually to understand it. If
-you get what a for loop does, typing it character by character is
-tedious and interrupt your thinking.
+using Makefile in C/C++, automating with shell script, installing
+software by compiling... And this is already considered "user
+friendly" in Linux world, as opposed to click the nice little play
+button in typical IDE. However, I was wrong. While working with such
+tools allow me to understand what's going on, I do not need to type in
+code manually to understand it. If you get what a for loop does,
+typing it character by character is tedious and interrupt your
+thinking.
 
 Write code manually won't make you smarter, because when you actually
-type, you  already have something in your head. Typing is just a mere
+type, you already had something in your head. Typing is just a mere
 reflection of your thoughts into the editor. You need to finish typing
 as fast as possible, because the quicker you finish, the quicker you
 can get back to your thinking. Only thoughts matter, and there's no
@@ -200,8 +198,8 @@ value in manually typing the same things thousands of times. I must
 say, =Cut=, =Copy= and =Paste= are really great ideas and great
 automation tools because of their simplicity.
 
-Your job may require you to use an esoteric in-house programming
-language and you don't like it. Having an editor to help you finish
+If Your job may require you to use an esoteric in-house programming
+language and if you don't like it, having an editor to help you finish
 the tasks as soon as possible is a way to make yourself happier.
 
 Typing too much can also lead to RSI. If you manually type code too
