@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>helm-intro</title>
-<!-- 2015-01-05 Mon 13:00 -->
+<!-- 2015-01-05 T2 19:05 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -588,12 +588,16 @@ with these two variable:
 </ul>
 
 <p>
-By default, <code>helm-autoresize-max-height</code> is set to <code>20</code>, which Helm
-candidate buffer has the maximum height of 20 lines. Note that the top
-two lines are used by Helm and one line is used for the modeline at
-the bottom, so that only 17 candidates can be displayed. Similarly,
-<code>helm-autoresize-min-height</code> specifies the minimum height that Helm
-candidate buffer cannot be smaller.
+By default, <code>helm-autoresize-max-height</code> is set to 40, which Helm
+candidate buffer has the maximum height of 40% of current frame
+height. Similarly, <code>helm-autoresize-min-height</code> specifies the minimum
+height that Helm candidate buffer cannot be smaller.
+</p>
+
+<p>
+If you don't want the Helm window to be resized, but a smaller Helm
+window, you can set <code>helm-autoresize-max-height</code> equal to
+<code>helm-autoresize-max-height</code>.
 </p>
 
 <p>

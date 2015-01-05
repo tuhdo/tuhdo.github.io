@@ -278,12 +278,14 @@ with these two variable:
 - =helm-autoresize-max-height=
 - =helm-autoresize-min-height=
 
-By default, =helm-autoresize-max-height= is set to =20=, which Helm
-candidate buffer has the maximum height of 20 lines. Note that the top
-two lines are used by Helm and one line is used for the modeline at
-the bottom, so that only 17 candidates can be displayed. Similarly,
-=helm-autoresize-min-height= specifies the minimum height that Helm
-candidate buffer cannot be smaller.
+By default, =helm-autoresize-max-height= is set to 40, which Helm
+candidate buffer has the maximum height of 40% of current frame
+height. Similarly, =helm-autoresize-min-height= specifies the minimum
+height that Helm candidate buffer cannot be smaller.
+
+If you don't want the Helm window to be resized, but a smaller Helm
+window, you can set =helm-autoresize-max-height= equal to
+=helm-autoresize-max-height=.
 
 If you use [[https://github.com/roman/golden-ratio.el][golden-ratio]], you have to disable its interference with
 Helm window:
