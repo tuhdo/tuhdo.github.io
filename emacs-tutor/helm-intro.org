@@ -298,9 +298,17 @@ Helm window:
   (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 #+end_src
 
-DEMO (begins when ~START DEMO~ appears in minibuffer):
+DEMO 1, when =helm-autoresize-max-height= is not equal to
+=helm-autoresize-min-height= (begins when ~START DEMO~ appears in
+minibuffer):
 
 [[file:static/part3/helm-autoresize-mode.gif][file:static/part3/helm-autoresize-mode.gif]]
+
+DEMO 2, when =helm-autoresize-max-height= is equal to
+=helm-autoresize-min-height= (begins when ~START DEMO~ appears in
+minibuffer):
+
+[[file:static/part3/helm-autoresize-fix.gif][file:static/part3/helm-autoresize-fix.gif]]
 
 * Command: =helm-M-x=
 :PROPERTIES:
