@@ -953,7 +953,7 @@ faces - all in one command!. It is similar to *C-h a* which runs
 To enable fuzzy matching, add this setting:
 
 #+begin_src emacs-lisp
-  (setq helm-apropos-function-list t)
+  (setq helm-apropos-fuzzy-match t)
 #+end_src
 
 * Command: =helm-info-*=
