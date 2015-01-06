@@ -3,8 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>helm-intro</title>
-<!-- 2015-01-05 T2 20:34 -->
+<title>A Package in a league of its own: <code>Helm</code></title>
+<!-- 2015-01-06 Tue 11:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -156,7 +156,7 @@ alt="hit counter"></a></div></noscript>
 <h2><a href="index.html">Back to Table of Contents</a></h2>
 </div>
 <div id="content">
-<h1 class="title">helm-intro</h1>
+<h1 class="title">A Package in a league of its own: <code>Helm</code></h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -196,10 +196,6 @@ alt="hit counter"></a></div></noscript>
 </ul>
 </div>
 </div>
-<p>
-[[]]#+TITLE: A Package in a league of its own: <code>Helm</code>
-</p>
-
 <p>
 <span class="underline">Author</span>:
 </p>
@@ -1512,23 +1508,20 @@ resume the live updating with <b>C-!</b> later.
 <p>
 Similar to <code>helm-find</code>, but use <code>locate</code> command and accepts search
 patterns according to <code>locate</code> input. Use <code>helm-man-woman</code> to read
-<code>locate</code> man page.
+<code>locate</code> man page. In Mac OS, <code>mdfind</code> is used instead. On Windows,
+you need to install <a href="http://www.voidtools.com/">Everything search engine</a>; once you installed
+Everything and make Emacs see the <code>es.exe</code> via PATH environment
+variable, <code>helm-locate</code> will use <code>Everything</code> and work out of the box
+without any configuration.
 </p>
 
 <p>
 To use local database, execute <code>helm-locate</code> with prefix argument
-<code>C-u</code>. You can also customize Helm to use <code>locate</code> with arguments of
-your choice:
+<code>C-u</code>.
 </p>
 
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #7a4f7e;">helm-locate-command</span> <span style="color: #8b2252;">"locate %s -e -A --regex %s"</span><span style="color: #707183;">)</span>
-</pre>
-</div>
-
 <p>
-If you use <code>helm-locate</code> on a large directory and feel the update is
+If you use <code>helm-locate</code> on a large hard drive and feel the update is
 too sluggish, you can always suspend the live updating with <b>C-!</b> and
 resume the live updating with <b>C-!</b> later.
 </p>
@@ -1542,6 +1535,11 @@ To enable fuzzy matching in <code>helm-locate</code>, add this setting:
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">helm-locate-fuzzy-match</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
 </pre>
 </div>
+
+<p>
+Note that it is currently working with <code>locate</code> command in Linux. If
+you are on other platform, don't set it or you won't have any result.
+</p>
 
 <p>
 <span class="underline">Demo</span>:

@@ -1,4 +1,4 @@
-[[]]#+TITLE: A Package in a league of its own: =Helm=
+#+TITLE: A Package in a league of its own: =Helm=
 
 _Author_:
 
@@ -879,17 +879,16 @@ _Description_:
 
 Similar to =helm-find=, but use =locate= command and accepts search
 patterns according to =locate= input. Use =helm-man-woman= to read
-=locate= man page.
+=locate= man page. In Mac OS, =mdfind= is used instead. On Windows,
+you need to install [[http://www.voidtools.com/][Everything search engine]]; once you installed
+Everything and make Emacs see the =es.exe= via PATH environment
+variable, =helm-locate= will use =Everything= and work out of the box
+without any configuration.
 
 To use local database, execute =helm-locate= with prefix argument
-=C-u=. You can also customize Helm to use =locate= with arguments of
-your choice:
+=C-u=.
 
-#+begin_src emacs-lisp
-  (setq helm-locate-command "locate %s -e -A --regex %s")
-#+end_src
-
-If you use =helm-locate= on a large directory and feel the update is
+If you use =helm-locate= on a large hard drive and feel the update is
 too sluggish, you can always suspend the live updating with *C-!* and
 resume the live updating with *C-!* later.
 
@@ -898,6 +897,9 @@ To enable fuzzy matching in =helm-locate=, add this setting:
 #+begin_src emacs-lisp
   (setq helm-locate-fuzzy-match t)
 #+end_src
+
+Note that it is currently working with =locate= command in Linux. If
+you are on other platform, don't set it or you won't have any result.
 
 _Demo_:
 
