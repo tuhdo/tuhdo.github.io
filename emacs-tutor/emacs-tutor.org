@@ -2033,7 +2033,7 @@ character for a command, it means *S-<character>*.
 |-----+--------------------------------------------------------------|
 | =H= | Prompt for a location to create a hard link.                 |
 |-----+--------------------------------------------------------------|
-| =C= | Prompt for a location to create a symbolic link.             |
+| =S= | Prompt for a location to create a symbolic link.             |
 |-----+--------------------------------------------------------------|
 | =M= | Change permission bits of file at point or marked files.     |
 |-----+--------------------------------------------------------------|
