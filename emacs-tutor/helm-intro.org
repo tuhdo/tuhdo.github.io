@@ -1525,7 +1525,7 @@ This chapter summarizes the key bindings introduced in the above chapters.
 | =C-c h g=     | =helm-google-suggest=             | Interactively enter search terms and get results from Google in helm buffer |
 | =C-c h c=     | =helm-color=                      | Lists all available faces                                                   |
 | =C-c h M-:=   | =helm-eval-expression-with-eldoc= | Get instant results for emacs lisp expressions in the helm buffer           |
-| =C-c h C-, =  | =helm-calcul-expression=          | Helm interface to calc                                                      |
+| =C-c h C-=,   | =helm-calcul-expression=          | Helm interface to calc                                                      |
 | =C-c C-l=     | =helm-eshell-history=             | Interface to eshell history                                                 |
 | =C-c C-l=     | =helm-comint-input-ring=          | Interface to shell history                                                  |
 | =C-c C-l=     | =helm-mini-buffer-history=        | Interface to mini-buffer history                                            |
