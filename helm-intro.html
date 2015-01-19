@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code></title>
-<!-- 2015-01-06 Tue 11:29 -->
+<!-- 2015-01-19 Mon 09:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -193,6 +193,7 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-30">Command: <code>helm-mini-buffer-history</code></a></li>
 <li><a href="#sec-31">Package: <code>helm-projectile</code></a></li>
 <li><a href="#sec-32">Package: <code>helm-descbinds</code></a></li>
+<li><a href="#sec-33">Summary of Keybindings</a></li>
 </ul>
 </div>
 </div>
@@ -258,7 +259,7 @@ Minimal config:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-config</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #4f5c7e;">helm-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>helm-mode <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -274,23 +275,23 @@ Extended config:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">The default "C-x c" is quite close to "C-x C-c", which quits Emacs.</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">Changed to "C-c h". Note: We must set "C-c h" globally, because we</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">cannot change `</span><span style="color: #008b8b;">helm-command-prefix-key</span><span style="color: #b22222;">' once `</span><span style="color: #008b8b;">helm-config</span><span style="color: #b22222;">' is loaded.</span>
-<span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h"</span><span style="color: #7388d6;">)</span> '<span style="color: #3f7178;">helm-command-prefix</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #43783f;">global-unset-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x c"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c h"</span><span style="color: #7388d6;">)</span> 'helm-command-prefix<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>global-unset-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-x c"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebind tab to run persistent action</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-i"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-z"</span><span style="color: #7388d6;">)</span>  '<span style="color: #783f5a;">helm-select-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
+<span style="color: #707183;">(</span>define-key helm-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> 'helm-execute-persistent-action<span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebind tab to run persistent action</span>
+<span style="color: #707183;">(</span>define-key helm-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-i"</span><span style="color: #7388d6;">)</span> 'helm-execute-persistent-action<span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
+<span style="color: #707183;">(</span>define-key helm-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-z"</span><span style="color: #7388d6;">)</span>  'helm-select-action<span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
 
-<span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span><span style="color: #4f5c7e;">executable-find</span> <span style="color: #8b2252;">"curl"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #784437;">setq</span> <span style="color: #783778;">helm-google-suggest-use-curl-p</span> <span style="color: #4f5c7e;">t</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span>executable-find <span style="color: #8b2252;">"curl"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>setq helm-google-suggest-use-curl-p t<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #37785e;">helm-split-window-in-side-p</span>           <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
-      <span style="color: #783778;">helm-move-to-line-cycle-in-source</span>     <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source when reaching top or bottom of source.</span>
-      <span style="color: #3f7178;">helm-ff-search-library-in-sexp</span>        <span style="color: #4f5c7e;">t</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
-      <span style="color: #707e4f;">helm-scroll-amount</span>                    <span style="color: #008b8b;">8</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
-      <span style="color: #4f7e67;">helm-ff-file-name-history-use-recentf</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>setq helm-split-window-in-side-p           t <span style="color: #b22222;">; </span><span style="color: #b22222;">open helm buffer inside current window, not occupy whole other window</span>
+      helm-move-to-line-cycle-in-source     t <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source when reaching top or bottom of source.</span>
+      helm-ff-search-library-in-sexp        t <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
+      helm-scroll-amount                    <span style="color: #008b8b;">8</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
+      helm-ff-file-name-history-use-recentf t<span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #4f5c7e;">helm-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>helm-mode <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -404,9 +405,9 @@ use <b>helm-execute-persistent-action</b> more than
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebind tab to do persistent action</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-i"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-execute-persistent-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #43783f;">helm-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-z"</span><span style="color: #7388d6;">)</span>  '<span style="color: #783f5a;">helm-select-action</span><span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>define-key helm-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"&lt;tab&gt;"</span><span style="color: #7388d6;">)</span> 'helm-execute-persistent-action<span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">rebind tab to do persistent action</span>
+<span style="color: #707183;">(</span>define-key helm-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-i"</span><span style="color: #7388d6;">)</span> 'helm-execute-persistent-action<span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">make TAB works in terminal</span>
+<span style="color: #707183;">(</span>define-key helm-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-z"</span><span style="color: #7388d6;">)</span>  'helm-select-action<span style="color: #707183;">)</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">list actions using C-z</span>
 </pre>
 </div>
 
@@ -567,7 +568,7 @@ candidates by enabling <code>helm-autoresize-mode</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #4f7e67;">helm-autoresize-mode</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>helm-autoresize-mode t<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -604,10 +605,10 @@ Helm window:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">pl/helm-alive-p</span> <span style="color: #7388d6;">()</span>
-  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span><span style="color: #5e7837;">boundp</span> '<span style="color: #783f5a;">helm-alive-p</span><span style="color: #909183;">)</span>
-      <span style="color: #909183;">(</span><span style="color: #5e7837;">symbol-value</span> '<span style="color: #783f5a;">helm-alive-p</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">if</span> <span style="color: #909183;">(</span>boundp 'helm-alive-p<span style="color: #909183;">)</span>
+      <span style="color: #909183;">(</span>symbol-value 'helm-alive-p<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">golden-ratio-inhibit-functions</span> '<span style="color: #707e4f;">pl/helm-alive-p</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -650,7 +651,7 @@ No key binding. We should give it one:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-x"</span><span style="color: #7388d6;">)</span> '<span style="color: #7a4f7e;">helm-M-x</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"M-x"</span><span style="color: #7388d6;">)</span> 'helm-M-x<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -686,7 +687,7 @@ setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #374478;">helm-M-x-fuzzy-match</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">optional fuzzy matching for helm-M-x</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq helm-M-x-fuzzy-match t<span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">optional fuzzy matching for helm-M-x</span>
 </pre>
 </div>
 
@@ -726,7 +727,7 @@ No key binding. We should give it one:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"M-y"</span><span style="color: #7388d6;">)</span> '<span style="color: #4f5c7e;">helm-show-kill-ring</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"M-y"</span><span style="color: #7388d6;">)</span> 'helm-show-kill-ring<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -784,7 +785,7 @@ No key binding. We should give it one:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x b"</span><span style="color: #7388d6;">)</span> '<span style="color: #5e7837;">helm-mini</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-x b"</span><span style="color: #7388d6;">)</span> 'helm-mini<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -794,8 +795,8 @@ To enable fuzzy matching, add the following settings:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #783f5a;">helm-buffers-fuzzy-matching</span> <span style="color: #4f5c7e;">t</span>
-      <span style="color: #5e7837;">helm-recentf-fuzzy-match</span>    <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1002,7 +1003,7 @@ use this command in place of <code>helm-mini</code>. To enable fuzzy matching
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x C-f"</span><span style="color: #7388d6;">)</span> '<span style="color: #374478;">helm-find-files</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-x C-f"</span><span style="color: #7388d6;">)</span> 'helm-find-files<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1173,9 +1174,9 @@ setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span><span style="color: #4f5c7e;">executable-find</span> <span style="color: #8b2252;">"ack-grep"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">helm-grep-default-command</span> <span style="color: #8b2252;">"ack-grep -Hn --no-group --no-color %e %p %f"</span>
-        <span style="color: #4f5c7e;">helm-grep-default-recurse-command</span> <span style="color: #8b2252;">"ack-grep -H --no-group --no-color %e %p %f"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #7388d6;">(</span>executable-find <span style="color: #8b2252;">"ack-grep"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>setq helm-grep-default-command <span style="color: #8b2252;">"ack-grep -Hn --no-group --no-color %e %p %f"</span>
+        helm-grep-default-recurse-command <span style="color: #8b2252;">"ack-grep -H --no-group --no-color %e %p %f"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1241,8 +1242,8 @@ the following setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #513f78;">helm-semantic-fuzzy-match</span> <span style="color: #4f5c7e;">t</span>
-      <span style="color: #43783f;">helm-imenu-fuzzy-match</span>    <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1417,7 +1418,7 @@ following code:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #78683f;">helm-sources-using-default-as-input</span> '<span style="color: #4f5c7e;">helm-source-man-pages</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1532,7 +1533,7 @@ To enable fuzzy matching in <code>helm-locate</code>, add this setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #4f7e67;">helm-locate-fuzzy-match</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq helm-locate-fuzzy-match t<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1568,7 +1569,7 @@ convenient key sequence:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h o"</span><span style="color: #7388d6;">)</span> '<span style="color: #37785e;">helm-occur</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c h o"</span><span style="color: #7388d6;">)</span> 'helm-occur<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1651,7 +1652,7 @@ To enable fuzzy matching, add this setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #37785e;">helm-apropos-fuzzy-match</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq helm-apropos-fuzzy-match t<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1767,7 +1768,7 @@ matching, add this setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #784437;">helm-lisp-fuzzy-completion</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq helm-lisp-fuzzy-completion t<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1831,7 +1832,7 @@ better binding, for example:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-h SPC"</span><span style="color: #7388d6;">)</span> '<span style="color: #783f5a;">helm-all-mark-rings</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-h SPC"</span><span style="color: #7388d6;">)</span> 'helm-all-mark-rings<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1959,7 +1960,7 @@ h</b> if set). Let's bind it to something else:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h x"</span><span style="color: #7388d6;">)</span> '<span style="color: #513f78;">helm-register</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c h x"</span><span style="color: #7388d6;">)</span> 'helm-register<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2221,7 +2222,7 @@ set). Let's bind it to something else:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h g"</span><span style="color: #7388d6;">)</span> '<span style="color: #7e544f;">helm-google-suggest</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c h g"</span><span style="color: #7388d6;">)</span> 'helm-google-suggest<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2255,7 +2256,9 @@ session.
 <div class="outline-text-2" id="text-25">
 <p>
 <span class="underline">Key binding</span>:
-n
+</p>
+
+<p>
 <b>&lt;prefix&gt; c</b> (prefix is <b>C-x c</b> by default, or <b>C-c h</b> if set).
 </p>
 
@@ -2412,7 +2415,7 @@ set). <b>C-:</b> is a bit difficult to press, it would be better with:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c h M-:"</span><span style="color: #7388d6;">)</span> '<span style="color: #7e544f;">helm-eval-expression-with-eldoc</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c h M-:"</span><span style="color: #7388d6;">)</span> 'helm-eval-expression-with-eldoc<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2535,9 +2538,9 @@ No key binding. Let's bind it to a key to be used in Eshell:
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-eshell</span><span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #707e4f;">eshell-mode-hook</span>
+<span style="color: #707183;">(</span>add-hook 'eshell-mode-hook
           #'<span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
-              <span style="color: #909183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #4f7e67;">eshell-mode-map</span> <span style="color: #709870;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #709870;">)</span>  '<span style="color: #783778;">helm-eshell-history</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+              <span style="color: #909183;">(</span>define-key eshell-mode-map <span style="color: #709870;">(</span>kbd <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #709870;">)</span>  'helm-eshell-history<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2577,7 +2580,7 @@ Similar to <code>helm-eshell-history</code>, but is used for <code>M-x shell</co
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #513f78;">shell-mode-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #7388d6;">)</span> '<span style="color: #43783f;">helm-comint-input-ring</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>define-key shell-mode-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #7388d6;">)</span> 'helm-comint-input-ring<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2595,7 +2598,7 @@ with ease using Helm interface.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #37785e;">define-key</span> <span style="color: #5e7837;">minibuffer-local-map</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #7388d6;">)</span> '<span style="color: #783f5a;">helm-minibuffer-history</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>define-key minibuffer-local-map <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c C-l"</span><span style="color: #7388d6;">)</span> 'helm-minibuffer-history<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2706,7 +2709,7 @@ package:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">GROUP: Convenience -&gt; Helm -&gt; Helm Descbinds ;;</span>
 <span style="color: #b22222;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
 <span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">helm-descbinds</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #783f5a;">helm-descbinds-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>helm-descbinds-mode<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2718,6 +2721,204 @@ package:
 Enter a prefix key and <b>C-h</b> after it. You will see a list of bindings
 using Helm interface for narrowing.
 </p>
+</div>
+</div>
+
+<div id="outline-container-sec-33" class="outline-2">
+<h2 id="sec-33"><a id="ID-68003d84-9f41-11e4-89d3-123b93f75cba" name="ID-68003d84-9f41-11e4-89d3-123b93f75cba"></a>Summary of Keybindings</h2>
+<div class="outline-text-2" id="text-33">
+
+<p>
+This chapter summarizes the key bindings introduced in the above chapters.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>M-x</code></td>
+<td class="left"><code>helm-M-x</code></td>
+<td class="left">List commands</td>
+</tr>
+
+<tr>
+<td class="left"><code>M-y</code></td>
+<td class="left"><code>helm-show-kill-ring</code></td>
+<td class="left">Shows the content of the kill ring</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-x b</code></td>
+<td class="left"><code>helm-mini</code></td>
+<td class="left">Shows open buffers, recently opened files</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-x C-f</code></td>
+<td class="left"><code>helm-find-files</code></td>
+<td class="left">The helm version for find-file</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-s</code></td>
+<td class="left"><code>helm-ff-run-grep</code></td>
+<td class="left">Run grep from within helm-find-files</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h i</code></td>
+<td class="left"><code>helm-semantic-or-imenu</code></td>
+<td class="left">Helm interface to semantic/imenu</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h m</code></td>
+<td class="left"><code>helm-man-woman</code></td>
+<td class="left">Jump to any man entry</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h /</code></td>
+<td class="left"><code>helm-find</code></td>
+<td class="left">Helm interface to find</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h l</code></td>
+<td class="left"><code>helm-locate</code></td>
+<td class="left">Helm interface to locate</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h o</code></td>
+<td class="left"><code>helm-occur</code></td>
+<td class="left">Similar to occur</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h a</code></td>
+<td class="left"><code>helm-apropos</code></td>
+<td class="left">Describes commands, functions, variables, &#x2026;</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h h g</code></td>
+<td class="left"><code>helm-info-gnus</code></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h h i</code></td>
+<td class="left"><code>helm-info-at-point</code></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h h r</code></td>
+<td class="left"><code>helm-info-emacs</code></td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h &lt;tab&gt;</code></td>
+<td class="left"><code>helm-lisp-completion-at-point</code></td>
+<td class="left">Provides a list of available functions</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h b</code></td>
+<td class="left"><code>helm-resume</code></td>
+<td class="left">Resumes a previous helm session</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-h SPC</code></td>
+<td class="left"><code>helm-all-mark-rings</code></td>
+<td class="left">Views content of local and global mark rings</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h r</code></td>
+<td class="left"><code>helm-regex</code></td>
+<td class="left">Visualizes regex matches</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h x</code></td>
+<td class="left"><code>helm-register</code></td>
+<td class="left">Shows content of registers</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h t</code></td>
+<td class="left"><code>helm-top</code></td>
+<td class="left">Helm interface to top</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h s</code></td>
+<td class="left"><code>helm-surfraw</code></td>
+<td class="left">Command line interface to many web search engines</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h g</code></td>
+<td class="left"><code>helm-google-suggest</code></td>
+<td class="left">Interactively enter search terms and get results from Google in helm buffer</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h c</code></td>
+<td class="left"><code>helm-color</code></td>
+<td class="left">Lists all available faces</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h M-:</code></td>
+<td class="left"><code>helm-eval-expression-with-eldoc</code></td>
+<td class="left">Get instant results for emacs lisp expressions in the helm buffer</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c h C-,</code></td>
+<td class="left"><code>helm-calcul-expression</code></td>
+<td class="left">Helm interface to calc</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c C-l</code></td>
+<td class="left"><code>helm-eshell-history</code></td>
+<td class="left">Interface to eshell history</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c C-l</code></td>
+<td class="left"><code>helm-comint-input-ring</code></td>
+<td class="left">Interface to shell history</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c C-l</code></td>
+<td class="left"><code>helm-mini-buffer-history</code></td>
+<td class="left">Interface to mini-buffer history</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2014-12-30 Tue 11:45 -->
+<!-- 2015-01-19 Mon 09:50 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Tu" />
@@ -185,7 +185,7 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-6-1-5">Miscelaneous</a></li>
 </ul>
 </li>
-<li><a href="#sec-6-2">Command: <code>helm-projectile-find-file-in-known-projects~</code>, <b>C-c p F</b></a></li>
+<li><a href="#sec-6-2">Command: <code>helm-projectile-find-file-in-known-projects</code>, <b>C-c p F</b></a></li>
 <li><a href="#sec-6-3">Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></a></li>
 <li><a href="#sec-6-4">Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></a></li>
 <li><a href="#sec-6-5">Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></a></li>
@@ -217,6 +217,7 @@ alt="hit counter"></a></div></noscript>
 <li><a href="#sec-9-3">Command: <code>helm-projectile-ag</code>, <b>C-c p s s</b></a></li>
 </ul>
 </li>
+<li><a href="#sec-10">Summary of Keybindings</a></li>
 </ul>
 </div>
 </div>
@@ -428,9 +429,9 @@ You also install Projectile via MELPA and setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">projectile-global-mode</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #707e4f;">projectile-completion-system</span> '<span style="color: #783f5a;">helm</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #37785e;">helm-projectile-on</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>projectile-global-mode<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>setq projectile-completion-system 'helm<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>helm-projectile-on<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -468,7 +469,7 @@ enable external indexing, add this setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #374478;">projectile-indexing-method</span> '<span style="color: #78683f;">alien</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-indexing-method 'alien<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -533,7 +534,7 @@ command to be executed after a project is selected. The default is
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">projectile-switch-project-action</span> '<span style="color: #513f78;">helm-projectile-find-file</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-switch-project-action 'helm-projectile-find-file<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -551,7 +552,7 @@ at a time:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #78683f;">projectile-switch-project-action</span> '<span style="color: #5e7837;">helm-projectile</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-switch-project-action 'helm-projectile<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -910,7 +911,7 @@ similar to <code>Rename files(s)</code> action.
 </div>
 
 <div id="outline-container-sec-6-2" class="outline-3">
-<h3 id="sec-6-2"><a id="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304" name="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304"></a>Command: <code>helm-projectile-find-file-in-known-projects~</code>, <b>C-c p F</b></h3>
+<h3 id="sec-6-2"><a id="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304" name="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304"></a>Command: <code>helm-projectile-find-file-in-known-projects</code>, <b>C-c p F</b></h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 This command is another one that can be used outside of any
@@ -1039,7 +1040,7 @@ Other file extensions can be customized with the variable
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"hh"</span> <span style="color: #8b2252;">"cc"</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"vert"</span> <span style="color: #8b2252;">"frag"</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"frag"</span> <span style="color: #8b2252;">"vert"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #43783f;">nil</span> <span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">"gpg"</span><span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>nil <span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">"gpg"</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">""</span><span style="color: #7388d6;">)</span>
   <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"gpg"</span> <span style="color: #8b2252;">""</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
@@ -1061,8 +1062,8 @@ If you want to add more, for example, to switch between <code>html</code> &lt;-&
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #7e544f;">projectile-other-file-alist</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"html"</span> <span style="color: #8b2252;">"js"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from html -&gt; js</span>
-<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #7e544f;">projectile-other-file-alist</span> '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"js"</span> <span style="color: #8b2252;">"html"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from js -&gt; html</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'projectile-other-file-alist '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"html"</span> <span style="color: #8b2252;">"js"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from html -&gt; js</span>
+<span style="color: #707183;">(</span>add-to-list 'projectile-other-file-alist '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"js"</span> <span style="color: #8b2252;">"html"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from js -&gt; html</span>
 </pre>
 </div>
 
@@ -1085,7 +1086,7 @@ by:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #3f7178;">projectile-enable-caching</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-enable-caching t<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1331,7 +1332,7 @@ want to ignore directory <code>backup</code>, simply add <code>backup</code> to 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #784437;">projectile-globally-ignored-directories</span> <span style="color: #8b2252;">"backup"</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'projectile-globally-ignored-directories <span style="color: #8b2252;">"backup"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -1437,6 +1438,119 @@ globally ignored by Projectile.
  <code>personal/backup</code> works fine.
 </p>
 </div>
+</div>
+</div>
+<div id="outline-container-sec-10" class="outline-2">
+<h2 id="sec-10"><a id="ID-68003d84-9f41-11e4-89d3-123b93f75cbb" name="ID-68003d84-9f41-11e4-89d3-123b93f75cbb"></a>Summary of Keybindings</h2>
+<div class="outline-text-2" id="text-10">
+
+<p>
+This chapter summarizes the key bindings introduced in the above chapters.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key Binding</th>
+<th scope="col" class="left">Command</th>
+<th scope="col" class="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><code>C-c p h</code></td>
+<td class="left"><code>helm-projectile</code></td>
+<td class="left">Helm interface to projectile</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p p</code></td>
+<td class="left"><code>helm-projectile-switch-project</code></td>
+<td class="left">Switches to another projectile project</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p f</code></td>
+<td class="left"><code>helm-projectile-find-file</code></td>
+<td class="left">Lists all files in a project</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p F</code></td>
+<td class="left"><code>helm-projectile-find-file-in-known-projects</code></td>
+<td class="left">Find file in all known projects</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p g</code></td>
+<td class="left"><code>helm-projectile-find-file-dwim</code></td>
+<td class="left">Find file based on context at point</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p d</code></td>
+<td class="left"><code>helm-projectile-find-dir</code></td>
+<td class="left">Lists available directories in current project</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p e</code></td>
+<td class="left"><code>helm-projectile-recentf</code></td>
+<td class="left">Lists recently opened files in current project</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p a</code></td>
+<td class="left"><code>helm-projectile-find-other-file</code></td>
+<td class="left">Switch between files with same name but different extensions</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p i</code></td>
+<td class="left"><code>projectile-invalidate-cache</code></td>
+<td class="left">Invalidate cache</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p z</code></td>
+<td class="left"><code>projectile-cache-current-file</code></td>
+<td class="left">Add the file of current selected buffer to cache</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p b</code></td>
+<td class="left"><code>helm-projectile-switch-to-buffer</code></td>
+<td class="left">List all open buffers in current project</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p s g</code></td>
+<td class="left"><code>helm-projectile-grep</code></td>
+<td class="left">Searches for symbol starting from project root</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p s a</code></td>
+<td class="left"><code>helm-projectile-ack</code></td>
+<td class="left">Same as above but using ack</td>
+</tr>
+
+<tr>
+<td class="left"><code>C-c p s s</code></td>
+<td class="left"><code>helm-projectile-ag</code></td>
+<td class="left">Same as above but using ag</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>

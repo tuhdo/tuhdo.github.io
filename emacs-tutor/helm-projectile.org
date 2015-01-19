@@ -854,3 +854,4 @@ This chapter summarizes the key bindings introduced in the above chapters.
 | =C-c p s g= | =helm-projectile-grep=                        | Searches for symbol starting from project root               |
 | =C-c p s a= | =helm-projectile-ack=                         | Same as above but using ack                                  |
 | =C-c p s s= | =helm-projectile-ag=                          | Same as above but using ag                                   |
+|-------------+-----------------------------------------------+--------------------------------------------------------------|
