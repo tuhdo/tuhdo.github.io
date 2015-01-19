@@ -457,7 +457,7 @@ key.
 
 - /Print File/ (*C-c p*, add *C-u* to refresh): Print marked files.
 
-** Command: ~helm-projectile-find-file-in-known-projects~~, *C-c p F*
+** Command: ~helm-projectile-find-file-in-known-projects~, *C-c p F*
 :PROPERTIES:
 :ID:       1a36aba8-2070-4f66-b98e-efc66fc2b304
 :END:
@@ -831,3 +831,26 @@ these variables to ignore files or directories:
  to ignore in =helm-projectile-grep=, i.e. ~backup~ not
  ~personal/backup~, but with =helm-projectile-ag=, either ~backup~ or
  ~personal/backup~ works fine.
+* Summary of Keybindings
+:PROPERTIES:
+:ID:       68003d84-9f41-11e4-89d3-123b93f75cbb
+:END:
+
+This chapter summarizes the key bindings introduced in the above chapters.
+
+| Key Binding | Command                                       | Description                                                  |
+|-------------+-----------------------------------------------+--------------------------------------------------------------|
+| =C-c p h=   | =helm-projectile=                             | Helm interface to projectile                                 |
+| =C-c p p=   | =helm-projectile-switch-project=              | Switches to another projectile project                       |
+| =C-c p f=   | =helm-projectile-find-file=                   | Lists all files in a project                                 |
+| =C-c p F=   | =helm-projectile-find-file-in-known-projects= | Find file in all known projects                              |
+| =C-c p g=   | =helm-projectile-find-file-dwim=              | Find file based on context at point                          |
+| =C-c p d=   | =helm-projectile-find-dir=                    | Lists available directories in current project               |
+| =C-c p e=   | =helm-projectile-recentf=                     | Lists recently opened files in current project               |
+| =C-c p a=   | =helm-projectile-find-other-file=             | Switch between files with same name but different extensions |
+| =C-c p i=   | =projectile-invalidate-cache=                 | Invalidate cache                                             |
+| =C-c p z=   | =projectile-cache-current-file=               | Add the file of current selected buffer to cache             |
+| =C-c p b=   | =helm-projectile-switch-to-buffer=            | List all open buffers in current project                     |
+| =C-c p s g= | =helm-projectile-grep=                        | Searches for symbol starting from project root               |
+| =C-c p s a= | =helm-projectile-ack=                         | Same as above but using ack                                  |
+| =C-c p s s= | =helm-projectile-ag=                          | Same as above but using ag                                   |
