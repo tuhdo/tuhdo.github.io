@@ -112,7 +112,7 @@ And uncomment this line:
 
 * Source code navigation
 :PROPERTIES:
-:ID:       2b850804-a33b-4f37-96fd-5bb4e422dbee
+:ID: source-navigation
 :END:
 ** Prerequisite:
 :PROPERTIES:
@@ -401,7 +401,7 @@ regardless of where you are standing in the project.
   oldest, from top to bottom.
 * Browse source tree with =Speedbar= file browser
 :PROPERTIES:
-:ID:       315bd019-f3b2-4d9e-a4b4-6b9dbfa7abde
+:ID: speedbar
 :END:
 If you want a static outline tree, Emacs also has a more one:
 =Speedbar=. To use Speed bar, =M-x speedbar= and a frame that contains
@@ -481,7 +481,7 @@ children:
 [[file:static/c-ide/sr-speedbar.gif][file:static/c-ide/sr-speedbar.gif]]
 * General completion with =company-mode=
 :PROPERTIES:
-:ID:       26a77004-9171-4b04-bea7-28a6089de586
+:ID: company
 :END:
 =company-mode= is a text completion framework for Emacs. The name
 stands for "complete anything". It uses pluggable back-ends and
@@ -514,7 +514,7 @@ That's the basic. In the later sections, you will configure
 =company-mode= to provide completion candidates.
 * Demo project
 :PROPERTIES:
-:ID:       11373e80-b396-4218-a5c8-cd7a4f146b19
+:ID: demo-project
 :END:
 I uploaded a demo project for you to play with completion feature
 [[https://github.com/tuhdo/c-demo-project][here]]. The project has this structure:
@@ -559,7 +559,7 @@ The files look silly but good enough for our learning purpose.
 
 * OPTION 1: Source code completion using Clang
 :PROPERTIES:
-:ID:       b0c73319-7e93-4a43-a191-46cddf1ec187
+:ID: company-clang
 :END:
 To use =company-mode= with Clang, add this configuration:
 
@@ -662,11 +662,11 @@ local, use =company-c-headers-path-user= and put it in
 
 * OPTION 2: Source code completion using CEDET
 :PROPERTIES:
-:ID:       419c04f5-95b6-4457-83fe-9288361e7bcf
+:ID: cedet
 :END:
 ** What is CEDET?
 :PROPERTIES:
-:ID:       5e06a903-4853-4093-a5b0-b5b28b3a6eaa
+:ID: what-is-cedet
 :END:
 CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
 with the end goal of creating an advanced development environment in
@@ -700,7 +700,7 @@ system header files, but not your project.
 
 ** Why use CEDET?
 :PROPERTIES:
-:ID:       b8922b61-b52a-4690-8626-4ca463dd2f85
+:ID: why-use-cedet
 :END:
 CEDET is simple to setup and portable (right winthin Emacs and written
 entirely with Emacs Lisp). Without CEDET, you have to use external
@@ -731,7 +731,7 @@ workload.
 
 ** Installation
 :PROPERTIES:
-:ID:       d6418a70-0ef0-4e53-895f-cc5f85339392
+:ID: install-cedet
 :END:
 CEDET was merged into Emacs since 23.2. You do not need to install
 CEDET manually. However, you can also use the development repository
@@ -768,7 +768,7 @@ Finally, assume that you placed your newly cloned CEDET in
 
 ** Semantic minor modes
 :PROPERTIES:
-:ID:       e57ff2d7-623a-4feb-91ac-c69487996527
+:ID: semantic-minor-modes
 :END:
 =Semantic= is a package that provides language-aware editing commands
 based on source code parsers. Parsing is a process of analyzing source
@@ -781,7 +781,7 @@ Semantic helps you provides completion for Boost:
 
 **** *Setup Semantic*
 :PROPERTIES:
-:ID:       22bc4bb9-df93-4702-8b7d-9eb8b038059b
+:ID: setup-semantic
 :END:
 To enable code completion using Semantic, add the following code:
 
@@ -797,7 +797,7 @@ To enable code completion using Semantic, add the following code:
 
 **** *Command*: =semantic-mode=
 :PROPERTIES:
-:ID:       8f24eec1-81f5-445b-bdc7-1b7e27943ce5
+:ID: semantic-mode
 :END:
 This command activates =semantic-mode=. In Semantic mode, Emacs parses
 the buffers you visit for their semantic content. The parsing looks
@@ -820,7 +820,7 @@ you will get your desired output instantly.
 
 **** *Command*: =global-semanticdb-minor-mode=
 :PROPERTIES:
-:ID:       668b4f56-2977-4783-b7cb-b5d84a0dd769
+:ID: global-semantic-minor-mode
 :END:
 As mentioned above, Semantic caches parsing result for future
 use. To do that, =semanticdb-minor-mode= must be activated. In
@@ -831,7 +831,7 @@ variable. The default directory is =~/.emacs.d/semanticdb=.
 
 **** *Command*: =global-semantic-idle-scheduler-mode=
 :PROPERTIES:
-:ID:       fb0dd2f4-78c0-4e9c-b9d7-0ec4caa3fde3
+:ID: semantic-idle-scheduler-mode
 :END:
 When =semantic-idle-scheduler-mode= is enabled, Emacs periodically
 checks to see if the buffer is out of date, and reparses while the
@@ -842,7 +842,7 @@ With =semantic-idle-scheduler-mode=, Emacs keeps track live changes of
 your source code.
 **** *Add more system include paths*
 :PROPERTIES:
-:ID:       5bd738d7-ccc7-412a-8414-45d7cc9e41aa
+:ID:  semantic-add-system-includes
 :END:
 By default, Semantic automatically includes some default system
 include paths such as =/usr/include=, =/usr/local/include=... You can
@@ -862,7 +862,7 @@ modes, then ignore the optional mode argument in
 =semantic-add-system-include=.
 **** Completion using =company-mode=
 :PROPERTIES:
-:ID:       05364ae1-6c0c-48b9-8759-823e70d9f320
+:ID: company-semantic
 :END:
 =companh-mode= provides a command called =company-semantic= that uses
 SemanticDB to retrieve completion candidates. Function interface of
@@ -875,7 +875,7 @@ completions.
 
 **** *Package*: =function-args=
 :PROPERTIES:
-:ID:       3e24664a-c6cc-44d5-b0ea-457a25590d38
+:ID:  function-args
 :END:
 [[https://github.com/abo-abo/function-args][function-args]] is a GNU Emacs package for showing an inline
 arguments hint for the C/C++ function at point.
@@ -922,7 +922,7 @@ all commands [[https://github.com/abo-abo/function-args#main-functions][here]].
 
 ** CEDET can do more
 :PROPERTIES:
-:ID:       a4605a59-5c3f-4604-84ce-6f22f15ea8bc
+:ID:  cedet-can-do-more
 :END:
 This guide only covers a portion of CEDET. Since Semantic parses
 source code and creates a database for code  completion, it would be
@@ -971,7 +971,7 @@ source files to get completion candidates.
 
 ** Project management with EDE
 :PROPERTIES:
-:ID:       d837c3b1-b5ca-4871-9b7b-cf5d24b2f8dd
+:ID:  project-management-with-ede
 :END:
 EDE, short for Emacs Development Environment, is a generic interface
 for managing projects. In EDE, a project hierarchy matches a directory
@@ -1093,7 +1093,7 @@ effortlessly.
 
 ** Source code navigation using Senator
 :PROPERTIES:
-:ID:       56164139-be1c-41bd-9e1d-f55335341d80
+:ID: source-code-navigation-using-senator
 :END:
  Senator is a part of CEDET. Senator stands for SEmantic
  NAvigaTOR. Senator provides some useful commands for operating on
@@ -1106,7 +1106,7 @@ effortlessly.
 
 *** Navigation
 :PROPERTIES:
-:ID:       09424bff-048a-41b1-91d5-6b0f692f8c05
+:ID: senator-navigation
 :END:
 
 Senator provides commands for navigating by tag.
@@ -1158,7 +1158,7 @@ point. Leave prompt blank and *RET* to use the default or enter
 another symbol if you change your mind.
 *** Copy/Paste
 :PROPERTIES:
-:ID:       a7861142-010c-4640-9ec7-d201dc918f92
+:ID:  senator-copy-paste
 :END:
 
 - =C-c , M-w= runs =senator-copy-tag=, take the current tag, and place
@@ -1196,7 +1196,7 @@ another symbol if you change your mind.
 
 *** Obsolete commands
 :PROPERTIES:
-:ID:       0545cf56-b2bc-4efa-80aa-eca9911bf32b
+:ID: senator-obsolete-commands
 :END:
 Senator also provides commands for code completion:
 =senator-complete-symbol= and =senator-completion-menu-popup=. Code
@@ -1208,7 +1208,7 @@ completion commands are provided.
 
 ** *Package*: =company-c-headers=
 :PROPERTIES:
-:ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
+:ID: company-c-headers
 :END:
 [[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
 Company. After installing from MELPA, set it up:
@@ -1234,7 +1234,7 @@ local, use =company-c-headers-path-user= and put it in
 =.dir-locals.el=.
 * Navigate system include path
 :PROPERTIES:
-:ID:       b07dd821-77f5-4158-81e2-234d99b54b90
+:ID:  navigate-system-include-path
 :END:
 Up until now we were only navigating code in a project using =GNU
 Global=. How about jumping to *system include headers*? You have a few
@@ -1242,7 +1242,7 @@ options that I know:
 
 ** Using =Semantic= with =semantic-ia-fast-jump= command
 :PROPERTIES:
-:ID:       ecceaa7c-6e0e-477a-b59c-3c636b4afe1d
+:ID: semantic-ia-fast-jump
 :END:
 Semantic provides a jump command based on the parsed tags produced by
 the Semantic C/C++ parser. To jump to any code in system include path,
@@ -1272,7 +1272,7 @@ instantly.
 
 ** Using generated database from =GNU Global=
 :PROPERTIES:
-:ID:       ba935604-930b-4e12-b2a4-673cedc3453b
+:ID:  navigate-system-include-gnu-global
 :END:
 =GNU Global= has an environment variable named =GTAGSLIBPATH=. This
 variable holds GTAGS database of external libraries that your project
@@ -1330,7 +1330,7 @@ are considering to add support for this use case.
 
 * Project management with Projectile
 :PROPERTIES:
-:ID:       c5b93bb9-1b91-4c94-aa55-9a86976ccf88
+:ID:  project-management-with-projectile
 :END:
 =Projectile= is a project interaction library for Emacs. Its goal is to
 provide a nice set of features operating on a project level without
@@ -1383,11 +1383,11 @@ run *C-c p C-h* for a list of commands with *C-c p* prefix.
 
 * Source code information
 :PROPERTIES:
-:ID:       7401e60b-1f91-4697-814c-1e72f395dfdd
+:ID: source-code-information
 :END:
 ** Command: =global-semantic-idle-summary-mode=
 :PROPERTIES:
-:ID:       8d06ed59-5a1a-49eb-8ea6-d3411c35b0fe
+:ID:  global-semantic-idle-summary-mode
 :END:
 This mode, when enabled, displays function interface in the
 minibuffer:
@@ -1407,7 +1407,7 @@ Setup:
 
 ** Command: =global-semantic-stickyfunc-mode=
 :PROPERTIES:
-:ID:       50dc542d-dca8-425d-9646-083ce3ca8ae8
+:ID:  global-semantic-stickyfunc-mode
 :END:
 When enable, this mode shows the function point is currently in at the
 first line of the current buffer. This is useful when you have a very
@@ -1425,7 +1425,7 @@ Setup:
 
 ** Using =ggtags= + =eldoc=
 :PROPERTIES:
-:ID:       81db4e8e-f913-4b5c-87e4-74d90e80aaa9
+:ID:  ggtags-and-eldoc
 :END:
 You can also use =ggtags= for displaying function interface at point
 in minibuffer:
@@ -1437,17 +1437,17 @@ in minibuffer:
 However, it won't have syntax highlighting.
 * Source code documentation
 :PROPERTIES:
-:ID:       8801e667-e274-414e-a195-91a8e308d177
+:ID: source-code-documentation
 :END:
 ** Command: =man=
 :PROPERTIES:
-:ID:       a9d99b08-0599-4d53-83be-9064bcda2d7e
+:ID: documentation-man
 :END:
 To read the documentation for symbol at point or a man entry of your
 choice, invoke =M-x man=.
 ** Command: =helm-man-woman=
 :PROPERTIES:
-:ID:       e4a004f5-8b2d-46c7-b9c4-f9912154745f
+:ID:  documentation-helm-man-woman
 :END:
 If you use Helm, you should be able to use the command
 =helm-man-woman=, which is bound to *C-c h m* if you follow [[http://tuhdo.github.io/helm-intro.html][my Helm
@@ -1456,11 +1456,11 @@ guide]]. The full guide for the command is [[http://tuhdo.github.io/helm-intro.h
 [[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
 * Source code editing
 :PROPERTIES:
-:ID:       0fa2afe0-728c-49f6-86f1-7769cebc5de0
+:ID: source-code-editing
 :END:
 ** Folding
 :PROPERTIES:
-:ID:       48b6ad5f-24e2-41c3-9a44-c1decdde6910
+:ID:  source-code-folding
 :END:
 Emacs has a minor mode called =hs-minor-mode= that allows users to
 fold and hide blocks of text. Blocks are defined by regular
@@ -1507,7 +1507,7 @@ Demo:
 
 ** Narrowing
 :PROPERTIES:
-:ID:       000644fa-84e8-42a2-b780-6ff1b0c84a5a
+:ID: source-code-narrowing
 :END:
 Narrowing means making only a text portion in current buffer
 visible. Narrowing is useful when you want to perform text editing on
@@ -1534,11 +1534,11 @@ Default key bindings:
 
 ** Identation
 :PROPERTIES:
-:ID:       2c98c4cb-0db4-4f27-9b39-d5f972cbe51a
+:ID: source-code-indentation
 :END:
 *** Setup default C style
 :PROPERTIES:
-:ID:       6dd8b948-f101-4a7c-8fd8-9b836474df17
+:ID:  indentation-default-c-style
 :END:
 Emacs offers some popular C coding styles. Select the one suitable for
 you:
@@ -1562,7 +1562,7 @@ you:
 
 *** Setup indentation
 :PROPERTIES:
-:ID:       394da0e4-4995-4583-9b67-2611f3352d3b
+:ID: setup-indentation
 :END:
 By default, Emacs won't indent when press *RET* because the command
 bound to *RET* is newline. You can enable automatic indentation by
@@ -1599,7 +1599,7 @@ To convert between *TAB* and *space*, you also have two commands:
 
 *** Package: =clean-aindent-mode=
 :PROPERTIES:
-:ID:       12c0c0ee-66ea-411b-aa7c-0b437c4bc89d
+:ID: clean-aindent-mode
 :END:
 When you press *RET* to create a newline and got indented by
 =eletric-indent-mode=, you have appropriate whitespace for
@@ -1617,7 +1617,7 @@ View this [[http://www.emacswiki.org/emacs/CleanAutoIndent][Emacswiki page]] for
 
 *** Package: =dtrt-indent=
 :PROPERTIES:
-:ID:       ce57a6b0-79c6-46c2-9fb2-3fb0cb3bd9c0
+:ID: dtrt-indent
 :END:
 A minor mode that guesses the indentation offset originally used for
 creating source code files and transparently adjusts the corresponding
@@ -1652,7 +1652,7 @@ in echo area and might become a constant annoyance.
 
 *** Package: =ws-butler=
 :PROPERTIES:
-:ID:       65c42593-e1b3-4061-8ae8-276f29258d01
+:ID: ws-butler
 :END:
 =ws-butler= helps managing whitespace on every line of code written or
 edited, in an unobtrusive, help you write clean code without noisy
@@ -1679,7 +1679,7 @@ Setup:
 
 ** Code template using =yasnippet=
 :PROPERTIES:
-:ID:       3952aed5-31ed-4715-a892-9f55056fe98d
+:ID:  yasnippet
 :END:
 YASnippet is a template system for Emacs. It allows you to type an
 abbreviation and automatically expand it into function
@@ -1712,7 +1712,7 @@ You can view supported snippets [[https://github.com/AndreaCrotti/yasnippet-snip
 
 ** Package: =smartparens=
 :PROPERTIES:
-:ID:       62b4b86b-222f-4915-834e-b3d79b73f9f0
+:ID: smartparens
 :END:
 =smartparens= is a minor mode that provides many features for
 manipulating pairs. Pair can be simple as parentheses or brackets, or
@@ -1725,13 +1725,20 @@ closing of a pair when user inserts an opening one.
   (require 'smartparens-config)
   (show-smartparens-global-mode +1)
   (smartparens-global-mode 1)
+
+  ;; when you press RET, the curly braces automatically
+  ;; add another newline
+  (sp-with-modes '(c-mode c++-mode)
+    (sp-local-pair "{" nil :post-handlers '(("||\n[i]" "RET")))
+    (sp-local-pair "/*" "*/" :post-handlers '((" | " "SPC")
+                                              ("* ||\n[i]" "RET"))))
 #+end_src
 
 For complete documentation, please refer to [[https://github.com/Fuco1/smartparens/wiki#information-for-new-users][Smartparens manual]].
 
 * Compilation Support
 :PROPERTIES:
-:ID:       28a612e9-d3f2-47be-acbb-91aeb9b32466
+:ID: compilation-support
 :END:
  Compilation mode turns each error message in the buffer into a
  hyperlink. You can click on each error, or execute a key binding like
@@ -1801,11 +1808,11 @@ store window configurations, read it [[file:emacs-tutor.org::*Registers][here]].
 
 * Debugging
 :PROPERTIES:
-:ID:       a13b3e48-d73c-4fc4-97c3-b9f1d5814e63
+:ID: debugging 
 :END:
 ** With GDB Many Windows
 :PROPERTIES:
-:ID:       57c853c1-60f7-4ec7-adc5-9eee095d302e
+:ID: gdb-many-windows
 :END:
 
 Emacs has built-in frontend support for GDB that provides IDE-like
@@ -1898,7 +1905,7 @@ frame.
 
 ** With Grand Unified Debugger - GUD
 :PROPERTIES:
-:ID:       79a0ad5b-3978-48f2-9bcc-f961af81bb36
+:ID: gud-gdb
 :END:
 The *Grand Unified Debugger*, or GUD for short, is an Emacs major mode
 for debugging. It works on top of command line debuggers. GUD handles
