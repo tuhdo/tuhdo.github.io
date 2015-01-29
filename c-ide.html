@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2015-01-24 T7 01:51 -->
+<!-- 2015-01-29 T5 22:39 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="tudo" />
@@ -2223,7 +2223,7 @@ To make <code>GNU Global</code> sees your system headers, follow these steps:
 
 <pre class="src src-sh"><span style="color: #b22222;"># </span><span style="color: #b22222;">Create a directory for holding database, since</span>
 <span style="color: #b22222;"># </span><span style="color: #b22222;">you cannot create a database in your system paths</span>
-mkdir ~/.gtag
+mkdir ~/.gtags
 
 <span style="color: #b22222;"># </span><span style="color: #b22222;">Create symbolic links to your external libraries</span>
 ln -s /usr/include usr-include
@@ -2239,7 +2239,7 @@ The <code>-c</code> option tells GNU Global to generate tag database in compact
 format. It is necessary because if your project contains C++ headers like
 <code>Boost</code>, without <code>-c</code> your GTAGS database can be more than 1 GB. Same
 goes for <code>ctags</code>. The <code>GNU Global</code> devs explained that it is because
-the GTGAS database includes the image of tagged line, and the <code>Boost</code>
+the GTAGS database includes the image of tagged line, and the <code>Boost</code>
 headers have a lot of very long lines.
 </p>
 
