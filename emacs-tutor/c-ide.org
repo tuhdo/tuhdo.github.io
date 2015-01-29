@@ -1298,7 +1298,7 @@ To make =GNU Global= sees your system headers, follow these steps:
 #+begin_src sh
   # Create a directory for holding database, since
   # you cannot create a database in your system paths
-  mkdir ~/.gtag
+  mkdir ~/.gtags
 
   # Create symbolic links to your external libraries
   ln -s /usr/include usr-include
@@ -1312,7 +1312,7 @@ The =-c= option tells GNU Global to generate tag database in compact
 format. It is necessary because if your project contains C++ headers like
 =Boost=, without =-c= your GTAGS database can be more than 1 GB. Same
 goes for =ctags=. The =GNU Global= devs explained that it is because
-the GTGAS database includes the image of tagged line, and the =Boost=
+the GTAGS database includes the image of tagged line, and the =Boost=
 headers have a lot of very long lines.
 
 After all the above steps, restart with a shell loaded with that
