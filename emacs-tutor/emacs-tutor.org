@@ -1,52 +1,52 @@
 #+TITLE: Emacs Mini Manual (PART 1) - THE BASICS
 
-*_Before we start_*: 
+*_Before we start_*:
 
 - Please remember that you can always access a section using the
-  floating table of content at the upper-right corner of your
+  floating table of contents at the upper-right corner of your
   screen.
 
-- Many people asked how can this manual be "mini", since it is pretty
+- Many people asked how this manual can be "mini", since it is pretty
   big for an online single page article. Yes, if this page is exported
   to PDF, it is more than 40 pages. However, this manual is "mini"
   relative to the size of the official Emacs manual, which is more
   than 600 pages. That's why.
 
-- If you find the page is loading to slow for you, you can always
+- If you find the page is loading too slow for you, you can always
   clone the git repo of this mini manual and read it offline:
   https://github.com/tuhdo/tuhdo.github.io
 
 * Why Emacs?
 :PROPERTIES:
-:ID: 
+:ID:
 :ID:       76607dbd-b97c-43dd-975b-3236192408b6
 :END:
 In Emacs, you can do many things aside from editing. Emacs is a
 programming platform, not just another editor in the sense that people
 think. For more details, read the [[*Appendix][Appendix]].
 
-Have a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
+Take a [[http://www.gnu.org/software/emacs/tour/][tour]] from the official Emacs homepage.
 
 Here is my personal tour, *with 3rd party plugins added*. Don't worry
 if your Emacs does not look like the screenshots. You can have
 something like mine and even better, but for now you need to get a
 solid foundation. The screenshots are just for show. Even though,
-after going through this guide, you will be able to browse Linux
+after going through this guide, you will be able to browse the Linux
 kernel source tree with ease.
 
-- Performance: Editing a 39MB C source file with no problem. But
-  well, if your project use really large source file like that, if
-  your favorite editors crash, it's not their fault.
+- Performance: Editing a 39MB C source file with no problem. But well,
+  it's not your favorite editor's fault if it crashes from editing
+  such a large source file.
 
   [[file:static/performance.gif][file:static/performance.gif]]
 
 - Programming:
   - Jump to any header file:
-    
+
     [[file:static/jump_headers.gif][file:static/jump_headers.gif]]
 
   - Autocompletion: Pay attention to completion candidates when
-    ~include <linux/printk.h>~ added and not added.
+    ~include <linux/printk.h>~ is present and when it's not.
 
     [[file:static/auto_complete.gif][file:static/auto_complete.gif]]
 
@@ -77,25 +77,25 @@ kernel source tree with ease.
   [[file:static/live_grep.gif][file:static/live_grep.gif]]
 
 - Quickly select any file in a directory under a Version Control
-  System, for example, Linux kernel. Note that in the demos you may
-  see me type in the commands. You can think of it like the start menu
-  in Windows, but actually those commands can be executed quickly with
-  a shortcut.
+  System, for example from the Linux kernel. Note that in the demos
+  you may see me type in the commands. You can think of it like the
+  start menu in Windows, but those commands can actually be executed
+  quickly with a shortcut.
 
   [[file:static/helm-projectile/helm-projectile-find-files-1.gif][file:static/helm-projectile/helm-projectile-find-files-1.gif]]
 
-- Quickly select any file/directory in previous working session:
+- Quickly select any file/directory from a previous working session:
 
   [[file:static/helm-buffer-list.gif][file:static/helm-buffer-list.gif]]
 
 - Emacs is a PDF Reader: I can search text in the PDF file with
-  highlighting and a table of content side by side. All can be
+  highlighting and a table of contents side by side. All can be
   controlled with keyboard.
 
   [[file:static/emacs-read-pdf.gif][file:static/emacs-read-pdf.gif]]/
 
 Finally, [[http://jtnimoy.net/workviewer.php?q%3D178][Emacs is featured in Tron Legacy]].
-  
+
 * Why this guide?
 :PROPERTIES:
 :ID:       6cbf58f3-6986-4c27-8e04-f25c8bec778a
@@ -104,30 +104,29 @@ Let's look at part of the Emacs manual:
 
 [[file:static/emacs-manual-toc.gif][file:static/emacs-manual-toc.gif]]
 
-All about handling files are inside the =Files= entry, which includes
-how to open files, save files, revert and auto-revert files,comparing
-files..., many things from basic to advance. If you are a new  and
-reading the Emacs manual, you have the burden to actively select what
-you need from the manual to learn to achieve the basic common tasks in
-other editors.
+"All about handling files" is inside the =Files= entry, which includes
+how to open files, save files, revert and auto-revert files, compare
+files..., many things from basic to advanced. If you are a beginner
+reading the Emacs manual, you have to actively search the manual to
+learn how to do the basic common tasks you know from other editors.
 
-If you read the manual cover to cover, it would take a long time
-before you can start using Emacs for basic operations (i.e. open
-files). "Fundamental Editing Commands" section is placed before "Major
-Structures of Emacs" section that contains information about file
-handling. How can you learn to basic editing commands if you don't
-even know how to open a file? The problem with the manual is, it does
-not really organize for new Emacs user to progressively learn Emacs.
+It would take a long time before you can start using Emacs for basic
+operations (e.g. opening files) if you read the manual cover to
+cover. The "Fundamental Editing Commands" section is placed before the
+"Major Structures of Emacs" section that contains information on file
+handling. How can you learn the basic editing commands if you don't
+even know how to open a file? The problem with the manual is that it's
+not organized for a new Emacs user to progressively learn Emacs.
 
-I want to help you to use Emacs efficient in a relative short amount of
-time, probably around a week. This guide is written to lift the burden
-of filtering what you need while know nothing, when you a complete
-beginner. The Emacs manual is excellent, but it would be much easier
-with a solid ground understanding and after using Emacs for a while.
+I want to help you use Emacs efficiently in a relatively short amount
+of time, probably around a week. That's why I wrote this guide
+especially for complete beginners. The Emacs manual is excellent, but
+it would be much easier with a solid ground understanding and after
+using Emacs for a while.
 
-After you finish this guide, it provides a good starting point to
-start using the official Emacs manual. GNU Emacs tour would be a nice
-tutorial, only if it isn't made for demonstration.
+This guide provides a good starting point for the official Emacs
+manual. The GNU Emacs tour would be a nice tutorial, only if it isn't
+made for demonstration.
 
 * A bit of history
 :PROPERTIES:
@@ -147,7 +146,7 @@ and a transcript of his 2002 speech at the International Lisp
 Conference, My Lisp Experiences and the Development of GNU Emacs. Here
 is the cover of the original Emacs Manual for ITS; the cover of the
 original Emacs Manual for Twenex; and (the only cartoon RMS has ever
-drawn) the Self-Documenting Extensible Editor.   
+drawn) the Self-Documenting Extensible Editor.
 #+END_QUOTE
 
 * "I don't want a complicated editor, I want something simple like Notepad"
@@ -157,12 +156,12 @@ drawn) the Self-Documenting Extensible Editor.
 Well, that's your choice. But I suggest that writing code without any
 support is harmful.
 
-If you are a programmer, you should automate things as much as
-possible, when the automation cost does not outweigh the cost of
-doing manually. One /really easy/ way to do this is using a good
-editor that automates many menial and tedious tasks. For example, one
-of the thing that annoys me is using the command *cd* to change into a
-deep directory path like this:
+A programmer should automate things as much as possible if the
+automation cost does not outweigh the cost of doing it manually. One
+/really easy/ way to do this is by using a good editor that automates
+many menial and tedious tasks. For example, one of the things that
+annoy me is using the command *cd* to change into a deep directory
+path like this:
 
 =/path/to/a/very/long/long/long/long/long/long/..../directory/=
 
@@ -170,54 +169,54 @@ In Emacs, if you have a directory under a version control system, you
 can immediately jump to any file quickly, even if it is buried 20
 levels deep (as demonstrated at the beginning).
 
-Or when you want to quickly comment many lines of code but the
-programming language you are using only has single line comment. In
-many editors, you have to comment line by line tediously. In Emacs,
-you can simply highlight the lines and press a shortcut for inserting
-comments.
+Another example is quickly commenting out multiple lines of code in a
+programming language that only supports single line comments. In many
+editors you would have to tediously comment them out line by line. But
+in Emacs you can simply highlight the lines and press a shortcut to
+comment them out.
 
-Many people think that writing program manually is much cooler than
-"amateurs" that use fancy =Integrated Development Environment=. I used
-to think like that too, because working in Linux environment requires
-me to understand the underlying working, such as building software
-using Makefile in C/C++, automating with shell script, installing
-software by compiling... And this is already considered "user
-friendly" in Linux world, as opposed to click the nice little play
-button in typical IDE. However, I was wrong. While working with such
-tools allow me to understand what's going on, I do not need to type in
-code manually to understand it. If you get what a for loop does,
-typing it character by character is tedious and interrupt your
-thinking.
+Many people think that writing programs manually makes them much
+cooler than "amateurs" that use a fancy =Integrated Development
+Environment=. I also used to think like that because working in a
+Linux environment requires understanding of the underlying processes,
+such as building software using a Makefile in C/C++, automating with a
+shell script, installing software by compiling... And this is already
+considered "user friendly" in the Linux world, as opposed to "click
+the nice little play button" in a typical IDE. However, I was
+wrong. While working with such tools allows me to understand what's
+going on, I do not need to type in code manually to understand it. If
+you get what a for loop does, typing it character by character is only
+tedious and interrupts your thinking.
 
-Write code manually won't make you smarter, because when you actually
-type, you already had something in your head. Typing is just a mere
-reflection of your thoughts into the editor. You need to finish typing
-as fast as possible, because the quicker you finish, the quicker you
-can get back to your thinking. Only thoughts matter, and there's no
-value in manually typing the same things thousands of times. I must
-say, =Cut=, =Copy= and =Paste= are really great ideas and great
-automation tools because of their simplicity.
+Writing code manually won't make you smarter, because you did the
+thinking before you started to type. Typing is just a mere reflection
+of your thoughts into the editor. You need to finish typing as fast as
+possible, because the quicker you finish, the quicker you can get back
+to your thinking. Only thoughts matter, and there's no value in
+manually typing the same things thousands of times. I must say, =Cut=,
+=Copy= and =Paste= are really great ideas and great automation tools
+because of their simplicity.
 
-If Your job may require you to use an esoteric in-house programming
+If your job may require you to use an esoteric in-house programming
 language and if you don't like it, having an editor to help you finish
 the tasks as soon as possible is a way to make yourself happier.
 
-Typing too much can also lead to RSI. If you manually type code too
-much, it harms your fingers. At least if you use a handsaw instead of
-a circular saw, you do some physical exercises in the process. 
+Typing too much can also lead to RSI. Manually typing too much code is
+harmful to your fingers. At least if you use a handsaw instead of a
+circular saw, you do some physical exercise in the process.
 
 In Sum:
 
 - Manually typing does not make you smarter. Not in any form.
-- Manually typing does not make you better with programming.
-- Manually typing or do other things (navigate file system, remember
-  changes you made to your files...) wastes your time, if automating is
-  possible. Automate as much as you can.
+- Manually typing does not make you a better programmer.
+- Manually typing or other tedious tasks (navigating the file system,
+  remembering changes you made to your files...) are a waste of time if
+  automating is possible. Automate as much as you can.
 - Good editors help you automate boring tasks.
 - Typing too much potentially leads to RSI.
 
-Your time and memory wasting for manually do tasks, you could have
-save it for something more interesting.
+Instead of wasting your time and memory on tedious tasks, you could
+save it for more interesting things.
 
 * Installation
 :PROPERTIES:
@@ -231,12 +230,12 @@ Easy way to install if you are using Ubuntu: =sudo apt-get install
 emacs=. If you use other Linux distributions, use the package manager
 of your distribution and install Emacs. However, the package manager
 only has the latest stable Emacs; if you want the latest Emacs, build
-from source as the below instructions.
+it from source according to the instructions below.
 
 To use Emacs with GUI:
 
 - Install GTK 3: =sudo apt-get install libgtk-3-dev libgtk-3-common libgtk-3-0=
-- Download [[http://www.gnu.org/software/emacs/][Emacs]]; or if you prefer latest Emacs, get it from source: =git clone http://repo.or.cz/r/emacs.git=
+- Download [[http://www.gnu.org/software/emacs/][Emacs]]; or if you prefer the latest Emacs, get it from source: =git clone http://repo.or.cz/r/emacs.git=
 - If you download from the homepage, unpackage: =tar xvf
   emacs-*.tar.gz=
 - Install GTK: =sudo apt-get install libgtk-3-dev libgtk-3-common
@@ -245,17 +244,17 @@ To use Emacs with GUI:
 - =cd emacs-<version>*=
 - =./autogen.sh=
 - Add prefix and path to where you want to install. This is useful if
-  you work on remote server without root access: =./configure
+  you work on a remote server without root access: =./configure
   --with-x-toolkit=gtk3 [--prefix=/path/to/dir]=
 
   You should use GTKx 3, so you will be able to use true type fonts
-  such as Inconsolata for better Emacs experience.
+  such as Inconsolata for a better Emacs experience.
 - =make=
 - =sudo make install=
 
-If =./configure= tells you the dependencies missing, you should install
-it. Recommended dependency: libtiff, libgiff, libjpeg, libpng, libxml2
-for viewing and browsing web inside Emacs:
+If =./configure= tells you there are dependencies missing, you should
+install them. Recommended dependencies: libtiff, libgiff, libjpeg,
+libpng and libxml2 for viewing and browsing web inside Emacs:
 
 =sudo apt-get install libtiff5-dev libpng12-dev libjpeg-dev libgif-dev
 libgnutls-dev libxml2-dev=
@@ -268,9 +267,9 @@ Using in Terminal only:
 - =sudo make install=
 
 If you don't like to compile Emacs yourself, install from the package
-manager of your Linux distribution. 
+manager of your Linux distribution.
 
-After installation is done, at this line to your *.bashrc* or *.zshrc*:
+After installation is done, add this line to your *.bashrc* or *.zshrc*:
 
 #+begin_src shell-script
   alias em='emacs'
@@ -303,12 +302,12 @@ https://github.com/railwaycat/emacs-mac-port
 :ID:       4e00a8da-dbf0-4156-81e8-c6ed0f5c58f5
 :END:
 Swapping Control and Capslock, in general, is not required to make the
-best out of Emacs, if you at least use regular key PC keyboard or
+best out of Emacs, if you at least use a regular key PC keyboard or
 better. However, it is not nice at all on a laptop keyboard. If you
 use a laptop keyboard for writing code, I strongly recommended to swap
-Control and Capslock for better Emacs experience.
+Control and Capslock for a better Emacs experience.
 
-Swapping Control and Caplock will not only benefit for using Emacs,
+Swapping Control and Caplock will not only benefit your Emacs usage,
 it is beneficial in general, as Control is a much more frequently used
 key than Capslock. Popular shells like Bash or Zsh use Control a lot
 for quick cursor movement.
@@ -317,7 +316,7 @@ for quick cursor movement.
 :PROPERTIES:
 :ID:       eb9ffe1f-f726-4b15-8431-b075e9ba234d
 :END:
-Follow this guide: [[http://www.kodiva.com/post/swapping-caps-lock-and-control-keys][Swapping Capslock and Control keys]]
+   Follow this guide: [[http://www.kodiva.com/post/swapping-caps-lock-and-control-keys][Swapping Capslock and Control keys]]
 ** Linux
 :PROPERTIES:
 :ID:       32a786e9-ae18-4c7b-9d12-1940e4f2d301
@@ -356,8 +355,8 @@ two types of functions in Emacs:
     - *Normal functions*: These are like functions in other
       programming languages, and are used for implementing features in
       Emacs. Users do not need to care about these functions, unless
-      they want to implement something or modifying the
-      implementations.
+      they want to implement something or modify an existing
+      implementation.
 
     - *Commands*: Commands are like functions, but interactive. It
       means, commands are features provided to users and users
@@ -398,7 +397,7 @@ if I say "*C-x C-f* your files", you should replace *C-x C-f* with its
 command like this in your head: "=find-file= your files". All commands
 use verbs, I think, so don't worry. Try to recall the command from the
 key binding; it will help you get used to Emacs quicker. One exception
-though, I only say "press *key*" if *key* is a single character on the
+though: I only say "press *key*" if *key* is a single character on the
 keyboard.
 
 If you see =M-x command=, it means you need to *M-x* and type
@@ -414,7 +413,7 @@ and *C-h* to get a list of commands with that prefix.
 
 For example, *C-x r* is the prefix for /register/ and /bookmark/
 commands in Emacs. However, you forget a specific key binding for a
-command in those features. *C-x r C-h* list all key bindings that have
+command in those features. *C-x r C-h* lists all key bindings that have
 prefix *C-x r*.
 
 Finally, *C-g* executes the command =keyboard-quit=, which cancels anything
@@ -423,7 +422,7 @@ cancel that incorrectly pressed key sequence and start again.
 
 As you gradually learn Emacs, you will see the key bindings are really
 systematically organized and mnemonic. Whenever you see key bindings
-end with *n* and *p*, it usually means *next* and *previous*; *o*
+ending with *n* and *p*, it usually means *next* and *previous*; *o*
 means *open*; *h* means *help*; *C-h* is standard prefix for help
 commands; key bindings such as *o* and *C-o* are frequently used in
 many built-in tools such as /Dired/, /Ibuffer/, /Occur/...
@@ -434,11 +433,11 @@ many built-in tools such as /Dired/, /Ibuffer/, /Occur/...
 :END:
 The key bindings have a few simple and easy to remember rules:
 
-- *C-x* prefix is for default and global bindings that comes with
+- *C-x* prefix is for default and global binding that come with
   Emacs.
 - *C-c* prefix is for users to define.
 - *C-u* is for altering behaviors of commands. That is, one command
-  can behave differently depend on how many *C-u* you pressed
+  can behave differently depending on how many *C-u* you pressed
   first before executing a command. Mostly you just have to hit *C-u*
   once.
 - *C-<number>* like *C-1*, *C-2*... is similar to *C-u*, but passing a
@@ -452,7 +451,7 @@ Most commands can be organized in an easy to remember way. For
 example, command like =helm-do-grep= (the command belongs to =Helm=, a
 3rd party extension to Emacs) can have a key binding like *C-c h
 g*. The *h* stands for =Helm= and *g* stands for =grep=. So, key
-bindings are not difficult to remember. 
+bindings are not difficult to remember.
 
 ** Ask for help - from Emacs
 :PROPERTIES:
@@ -467,7 +466,7 @@ will not list all, so you have to rely on Emacs to get your
 information:
 
 *C-h m* runs =describe-mode= to see all the key bindings
-and documentations of current major mode and minor modes of a buffer.
+and documentation of current major mode and minor modes of a buffer.
 
 *C-h w* runs =where-is= to get which keystrokes invoke a given command.
 
@@ -482,13 +481,13 @@ to know how to use a command.
 *C-h e* runs =view-echo-area-messages=, allow you to see the
 logging of echo area messages.
 
-*C-h v* runs =describe-variable=, and ask you for a variable; you can
+*C-h v* runs =describe-variable=, and asks you for a variable; you can
 *TAB* to complete a variable. This command is important, because aside
-from describing a variable, it allows you to customize the behaviors
+from describing a variable, it allows you to customize the behavior
 of Emacs and 3rd party packages. But for now, you don't need it.
 
 *C-h C-h* runs *help-for-help*. Use this command if you want to see
-list of available help commands. Remember, if you partially remember a
+a list of available help commands. Remember, if you partially remember a
 key binding, just press as much as you can remember and then press
 *C-h*, Emacs will list available commands for that prefix. Prefix *C-h*
 is no exception. *C-h C-h* simply returns all key bindings and
@@ -556,8 +555,8 @@ like this: =file*.c=. Or if you only want to select file with character
 extension =.c.= in it: =*1.c=. Basically, wildcard expression =*=
 accepts anything.
 
-During the exercise, if there's something happens, for example, you
-press the wrong keys and Emacs is behaving weird, just press *C-g*.
+During the exercise, if something happens, for example, you press the
+wrong keys and Emacs is behaving weird, just press *C-g*.
 
 The command you have just executed is for browsing and opening files
 in Emacs, similar to =Open With= in regular editors, except that
@@ -568,17 +567,17 @@ If you use =find-file= to navigate to an existing file in a deep
 directory and press *RET*, it opens that file. Otherwise, if the file
 does not exist and you press *RET*, you create a new file. Woot, two
 features in a single command, so convenient. If you intend to open a
-file at first, but then realizing that you want to create a file
+file at first, but then realize that you want to create a file
 there, =Open With= doesn't allow you to do that. You have to navigate
-all the way there with typical *New File* feature in regular editors.
+all the way back with typical *New File* feature in regular editors.
 
-Another interesting command in Emacs, that is =find-file-at-point=. 
+Another interesting command in Emacs is =find-file-at-point=.
 What this function does is that if you have a path to a directory or
 file under point,  =M-x ffap= opens that directory or file directly!
 
 [[file:static/ffap.gif][file:static/ffap.gif]]
 
-As you see in the screenshot, if for some reason, the directory at
+As you see in the demo, if for some reason, the directory at
 point does not exist, =ffap= tries the parent directory until one
 exist. In the example, only =/home/= exists and got fed into the
 prompt.
@@ -586,12 +585,12 @@ prompt.
 :PROPERTIES:
 :ID:       a1982da3-6c2d-4d8b-bdaf-ab4d9d37e1a7
 :END:
-Emacs has an interesting feature called *Ido*, shorts for
+Emacs has an interesting feature called *Ido*, short for
 *Interactively Do Things*. In essence, *Ido* is a superior interface
-for interactively select things in Emacs compare to plain prompt. 
+to interactively select things in Emacs compared to a plain prompt.
 
 To activate *Ido*, =M-x ido-mode=. Let's open a file with *C-x
-C-f*. Do you find this: 
+C-f*. Do you find this:
 
 [[file:static/find-file-normal.gif][file:static/find-file-normal.gif]]
 
@@ -601,10 +600,10 @@ Or this:
 
 Which is better?
 
-Once enabled, Ido is used for most commands that requires you select
+Once enabled, Ido is used for most commands that require you to select
 something from a list.
 
-A few things to note for when using *Ido*: 
+A few things to note for when using *Ido*:
 
 - If you want to use wildcard expression, you have to temporary revert
   to ordinary =find-file= via *C-f*.
@@ -619,7 +618,7 @@ A few things to note for when using *Ido*:
   *TAB* like ordinary =find-file=.
 
 Regardless, an alternative interface for completion and narrowing
-exists, arguably more powerful, but you have to install 3rd party
+exists, arguably more powerful, but you have to install a 3rd party
 package. The package is called Helm. However, let's stick with *Ido*
 through the rest of this manual.
 
@@ -640,11 +639,11 @@ To kill a buffer, *C-x k*. If you want to kill the current buffer,
 *RET* immediately. Otherwise, type into the prompt the buffer name you
 want to kill.
 
-In the above section, I said that point is in your file,
-well, actually point is not in a file but a buffer. From now on,
-keep file and buffer two separate and distinct concepts. When I say
-file, I refer to physical file and when I say buffer, I refer to the
-temporary content of the file that is being displayed.
+In the previous section I said that point is in your file, well,
+actually point is not in a file but in a buffer. From now on, keep
+file and buffer two separate and distinct concepts. When I say file, I
+refer to physical file and when I say buffer, I refer to the temporary
+content of the file that is being displayed.
 
 *_Exercise_*: Practice *C-x b* to get used to it.
 
@@ -670,14 +669,14 @@ temporary content of the file that is being displayed.
 :ID:       2d67567c-985d-49af-83d1-f36ebda0e20c
 :END:
 Major modes provide specialized facilities for working on a particular
-file type, such as syntax highlighting for a programming language. 
+file type, such as syntax highlighting for a programming language.
 Major modes are mutually exclusive; each buffer has one and only one
 major mode at any time.
 
 Emacs is bundled with many major modes for editing source code in
 different languages: C, C++, Java, Lisp, bash, asm... For example,
 when opening a file with =.c= extension, Emacs automatically
-recognizes it's a C file and select C major mode to highlight the
+recognizes it's a C file and selects the C major mode to highlight the
 buffer properly.
 
 ** Minor mode
@@ -694,7 +693,7 @@ selected major mode.
 :PROPERTIES:
 :ID:       520961cd-e999-4730-a208-dfa8db1c5fa3
 :END:
-So, you learn how to open file and create buffer of that file. 
+So, you learn how to open file and create buffer of that file.
 In other editors, you got something called "tabs". Every time you open a
 file, you get a file tab for selecting an "opening file" (which is called
 buffer in Emacs). It quickly becomes a nuisance once you have lots of
@@ -731,16 +730,16 @@ Let's play with *ibuffer*.
 
 *_Exercise_*:
 
-- First, open many files with different extension. Emacs source you
-  used for installation is an great practice target. If you use a
-  built binary, [[http://ftp.gnu.org/gnu/emacs/emacs-24.3.tar.gz][download it]] and unpackage. Let's assume you
-  download and unpackage it at =~/Downloads/emacs-24.3=.
+- First, open many files with different extensions. The Emacs source
+  you used for installation is an great practice target. If you use a
+  built binary, [[http://ftp.gnu.org/gnu/emacs/emacs-24.3.tar.gz][download it]] and unpackage. Let's assume you download
+  and unpackage it at =~/Downloads/emacs-24.3=.
 
 - *C-x C-f*, navigate to =emacs-24.3/lisp/= and open all Lisp files:
   =*.el=. If you use *Ido*, remember to *C-f* before type into the prompt
 
 - *C-x C-f*, navigate to =emacs-24.3/src/= and open all C files:
-  =*.c=. 
+  =*.c=.
 
 - Open *ibuffer* by *C-x C-b*. You see a huge list of buffers.
 
@@ -749,14 +748,14 @@ Now the fun begins.
 - Suppose that you want to work with C code. */ m* and enter a major
   mode to select buffers that belong to this major mode. Prefix */* in
   *ibuffer* groups filtering commands. *TAB* to see a list of major
-  modes: 
+  modes:
 
   [[file:static/ibuffer-filter-major.gif][file:static/ibuffer-filter-major.gif]]
 
 - Enter =c-mode=.
 
 - Only C buffers remain. But you open buffers in two major modes:
-  =c-mode= and =emacs-lisp-mode=. You can create each group for one by 
+  =c-mode= and =emacs-lisp-mode=. You can create each group for one by
   pressing */ g*, and give the group a name. Only execute */ g* after
   executing any filtering commands.
 
@@ -772,7 +771,7 @@ Now the fun begins.
   to it. *C-o* leaves point on the buffer list. Let's open a buffer
   with *o* and *C-o*. To switch back to the other buffer, do *C-x
   o*. *C-x o* executes =other-window= command, which cycles among the
-  opening buffers (technically the buffers are in Emacs "windows", 
+  opening buffers (technically the buffers are in Emacs "windows",
   and you are cycling "windows", but we will get to that later).
 
 - Either using *C-o* or *o* creates another buffer below, leaving
@@ -880,7 +879,7 @@ directory of buffer of that entry.
 
 To quit =ibuffer=, press *q*.
 
-** Bookmark: save locations across Emacs sessions with
+** Bookmark: save locations across Emacs sessions
 :PROPERTIES:
 :ID:       801bd37d-dd77-4d3d-9925-4980cabaefd7
 :END:
@@ -902,7 +901,7 @@ bookmark too.
 |           | Open the list of all bookmarks.                                               |
 |-----------+-------------------------------------------------------------------------------|
 
-Remember the key bindings is easy. You just need to remember that *C-x
+Remember that key bindings are easy. You just need to remember that *C-x
 r* is the prefix for bookmark related commands. *m* stands for *mark*,
 meaning you *mark* something in some place; *b* stands for bookmark,
 meaning you can switch to any bookmark quickly, similar to *C-x b*
@@ -912,9 +911,9 @@ preserve the bookmarks across Emacs sessions, *C-x r l* to open the
 bookmark list and press *s* to save the list to file.
 
 If you understand how to manage buffers, managing bookmarks is the
-same, with different but similar key bindings. Finally, not only you
-can bookmark buffers that are associated with files, you can bookmark
-non-files buffers too:
+same, with different but similar key bindings. Finally, you cannot
+only bookmark buffers that are associated with files, you can bookmark
+non-file buffers too:
 
 - =Dired= buffers
 - Info buffers
@@ -975,8 +974,8 @@ These key bindings are also used by popular shells such as *bash* or
 - Move upward one line: *C-p* (p stands for *previous*)
 - Move downward one line: *C-n* (n stands for *next*)
 
-The above operations can also be done with arrow keys. if you don't
-like the above key bindings, the arrow keys offers equivalent features.
+The above operations can also be done with arrow keys. If you don't
+like the above key bindings, the arrow keys offer equivalent features.
 
 - Move to beginning of line: *C-a*
 - Move to end of line: *C-e*
@@ -998,8 +997,8 @@ These key bindings are in Emacs only:
 - Move to the nth line: *M-g l* for Emacs < 23.2, *M-g g* for emacs >=
   23.2) (l/g stands for =line=)
 
-Recenter means making the current line point is on the center of
-your screen.
+Recenter means making the current line point the center of your
+screen.
 
 *_Exercise_*: execute the above commands using the key bindings at
 least 10 times or until you remember. You can perform these motion
@@ -1016,12 +1015,12 @@ commands on any buffer.
 
 - *C-M-b* binds to =backward-sexp=, move backward over a balanced
   expression. Demo:
-  
+
   [[file:static/part3/backward-sexp.gif][file:static/part3/backward-sexp.gif]]
 
 - *C-M-k* binds to =kill-sexp=, kill balanced expression
   forward. Demo:
-  
+
   [[file:static/part3/kill-sexp.gif][file:static/part3/kill-sexp.gif]]
 
 - *C-M-t* binds to =transpose-sexps=, transpose expressions. Demo:
@@ -1067,7 +1066,7 @@ comment/uncomment code with *M-;*:
 Dynamic Abbreviations are a completion feature in Emacs, but work for
 text and is context-independent. After you type a word once, if you
 type that word again, you can type it partially and *M-/* to complete
-it. If your type a prefix that has many candidates, *M-/* cycles the
+it. If you type a prefix that has many candidates, *M-/* cycles the
 candidates. This is a really cool feature and you ought to try it.
 
 *_Exercise_*:
@@ -1092,7 +1091,7 @@ If you supply a number, using *C-<number>* - *<number>* can be any
 number - before you *C-y*, to paste the nth entry in the kill
 ring. The most recent entry is 1st entry. *C-1 C-y* is the same as
 *C-y*; *C-2 C-y* is the 2nd most recent entry, make that entry the
-haed of the list and so on...
+head of the list and so on...
 
 Let's play with the kill ring for a while. Open a buffer and insert
 these 3 lines:
@@ -1110,7 +1109,7 @@ Then:
 - *C-y* or *C-1 C-y*, you will see =ccc= got inserted.
 
 - *C-2 C-y*, you will see =bbb= got inserted; *C-y* again, you will
-  see =bbb= got inserted again. =bbb= now becomes head of the list. 
+  see =bbb= got inserted again. =bbb= now becomes head of the list.
 
 - *C-2 C-y*, you will see =aaa= got inserted; *C-y* again, you will
   see =aaa= got inserted again. =aaa= now bedcomes head of the list.
@@ -1123,7 +1122,7 @@ Then:
 - ... and so on ...
 
 *C-<number>* is called prefix argument. Basically it's for altering
-the behavior of you command. You will learn about prefix 
+the behavior of you command. You will learn about prefix
 argument in later section.
 
 Alternatively to the above sequence, you can use *M-y* which runs
@@ -1193,7 +1192,7 @@ like in other text editors.
   *C-x C-x* executes the command =exchange-point-and-mark=, which
   exchanges the point and the mark created when you yank with
   *C-y*. Try and see. When this command is executed, region bounded by
-  the mark and point is activated.  Using *C-x C-x* is really 
+  the mark and point is activated.  Using *C-x C-x* is really
   convenient. Instead of highlighting line by line for =Copy= or
   =Kill=, you can do this:
 
@@ -1215,7 +1214,7 @@ Emacs stores buffer marks in a list, that's why you are able to cycle
 through various marks in the exercise above. You can cycle through the
 list to jump to a mark, or with extension packages, you can have a
 list and interactively select it. *Helm* is an excellent example of
-such extension. We will discuss more on extension packages later.
+such a extension. We will discuss more on extension packages later.
 
 ** Global mark ring
 :PROPERTIES:
@@ -1305,7 +1304,7 @@ through the matches backward.
 =isearch= can be invoked from any valid buffer. You can perform
 =isearch= on =ibuffer=.
 
-*_Exercise_*: 
+*_Exercise_*:
 
 Open a reasonably large text file of your choice for practicing.
 
@@ -1332,7 +1331,7 @@ and so on.
 If you want to search with regexp, *C-u C-s*.
 
 Now you get the basics of Isearch, it has more useful commands that
-are bound to *M-g* prefix key:
+are bound to *M-s* prefix key:
 
 | Key       | Binding                                      |
 |-----------+----------------------------------------------|
@@ -1362,7 +1361,7 @@ are bound to *M-g* prefix key:
 :ID:       e49a59d6-efab-401c-9164-0ae45806e719
 :END:
 Command =occur= lists all line that match a string or a regexp and
-display the search result in a buffer named =*Occur*=. =occur= is
+displays the search result in a buffer named =*Occur*=. =occur= is
 useful in situation where you have a large number of matches and need
 a better tool to manage rather than going back and forth with
 Isearch. For example, you have a match around line 1000, but you are
@@ -1374,7 +1373,7 @@ indeed replace the correct string.
 
 To invoke =occur=, run =M-s o=; if you =M-s o= in Isearch prompt,
 =occur= will get the text currently using. Quite convenient. You can
-use *M-g n* and *M-g p* to go to next/previous matches, or using the
+use *M-g n* and *M-g p* to go to next/previous matches, or use the
 mouse to scroll. If you feel *M-g p* and *M-g n* to go back and forth
 is annoying, you can repeat it using *C-x z* which runs =repeat=:
 
@@ -1445,12 +1444,13 @@ two inputs:
 
 Supply the inputs and *RET*.
 
-Emacs will asks your confirmation to replace a matched string. If you
-want to replace all, press *!* instead of answer yes or no (*Note:* it will replace ocurrences only *beneath* your current point).
+Emacs will ask your confirmation to replace a matched string. If you
+want to replace all, press *!* instead of answer yes or no (*Note:* it
+will replace ocurrences only *beneath* your current point).
 
 If you want to query and replace with regexp, *C-M-%*. *Tip*: this
 command is a bit hard to press; to make it easy, use both of your
-hands: 
+hands:
 
 - It can be that left hand presses *%* (or *S-5*) and right hand presses
   *C-M-*.
@@ -1461,7 +1461,7 @@ hands:
 :PROPERTIES:
 :ID:       49674610-411e-4345-a954-f333bced3969
 :END:
-It is the same as =occur= except it asks user for multiple buffers. 
+It is the same as =occur= except it asks user for multiple buffers.
 
 - =multi-occur= asks for buffers to search. You enter buffer by buffer
   until you give it empty input.
@@ -1557,7 +1557,7 @@ UTF-8 coding system.
 
 If you type text in different human languages, and if the input method is
 on, to the left of the =U= appears the symbol of that language,
-i.e. =\U=, the backslash means =TeX input method=. *C-\* prompts your
+i.e. =\U=, the backslash means =TeX input method=. *C-\* prompts you
 to select a language. After selecting, subsequent *C-\* toggles the
 selected input method on and off. You can set the input method again
 with =M-x set-input-method=.
@@ -1566,13 +1566,13 @@ with =M-x set-input-method=.
 
 - This shows two dashes (‘--’) if the buffer displayed in the window
   has the same contents as the corresponding file on the disk; i.e.,
-  if the buffer is “unmodified”. 
+  if the buffer is “unmodified”.
 - If the buffer is modified, it shows two stars (‘**’). For a
   read-only buffer, it shows ‘%*’ if the buffer is modified, and ‘%%’
   otherwise. You can see that in the picture, the buffer is modified.
 
 =fr= gives the selected frame name. A frame is a Emacs window in your
-OS. For example, these are two Emacs frames: 
+OS. For example, these are two Emacs frames:
 
 [[file:static/frames-gui.gif][file:static/frames-gui.gif]]
 
@@ -1641,21 +1641,21 @@ share the same physical space. You should not be confused between the two.
 :ID:       9d06632d-a923-47ee-8ca2-e2b4a106dad3
 :END:
 
-An application window in operating system is called a *Frame* in
+An application window in a operating system is called a *Frame* in
 Emacs. So, you execute *Emacs* from the command line and open Emacs,
 that's a frame that contains your Emacs session. Emacs can have
 multiple frames to hold different parts of Emacs, such as a separate
-frame to hold the minibuffer. 
+frame to hold the minibuffer.
 
 Personally, I only use a single frame. However, frames can be useful
 if you want to organize buffers into different groups.  For example,
-each frame can be a project: frames F1 holds buffers related to my C
-programming projects, frames F2 holds buffers related to customizing
-Emacs, frame F3 holds buffers related to emails and reading, 
-newsgroups... 
+each frame can be a project: frame F1 holds buffers related to my C
+programming projects, frame F2 holds buffers related to customizing
+Emacs, frame F3 holds buffers related to emails and reading,
+newsgroups...
 
 As stated earlier, multiple frames under the terminal have names
-F1, F2 .... Fn for each frame. 
+F1, F2 .... Fn for each frame.
 
 These are the key bindings for manipulating frames:
 
@@ -1820,8 +1820,8 @@ pass arguments interactively.
 
 *_Exercise_*:
 
-Earlier, you learn motion commands such as *C-f*, *C-b*, *C-p* and
-*C-n*", remember? But, you can only move forward 1 character with
+Earlier, you learned motion commands such as *C-f*, *C-b*, *C-p* and
+*C-n*, remember? But, you can only move forward 1 character with
 *C-f*, move backward 1 character with *C-b*, 1 line upward with *C-p*
 and 1 line downward with *C-n*.
 
@@ -1830,8 +1830,7 @@ Great, instead of executing the commands once (i.e. Move forward 1
 character ...), you repeat the commands 4 times (i.e. Move forward 4
 characters...).
 
-Many of commands allow repeating a command many times with prefix
-arguments. 
+Many commands allow multiple repetitions with prefix arguments.
 
 You can even pass negative prefix arguments. Try executing the above
 commands with *C--4*, that's right, *Control* and *-* and *4* (minus 4). You
@@ -1843,22 +1842,22 @@ their reversed versions, so negative argument is always useful in
 those circumstances.
 
 Now, try executing *C-u 4 C-f*. You will see it does the same thing as
-*C-4 C-f*. Again, why do we need *C-u*? It is because in terminal, you
+*C-4 C-f*. Again, why do we need *C-u*? It is because in a terminal, you
 can not use *Control* with digit keys. *C-u* tells Emacs that you are
 about to enter a numeric argument, and it will be ready to accept the
-input. It's just a different way to do thing. 
+input. It's just a different way to do thing.
 
 If you do not supply any prefix argument, such as you directly execute
 *C-u C-f*, then the numeric argument is default to *4*. Try *C-u
 C-f*, and see that it moves 4 characters forward. Try it a few times
 to get used to.
 
-If you execute *C-u* consecutively, the numeric argument is power
-of 4. If you press *C-u*, the result argument is 4^1; *C-u C-u*, the
-result is *4^2*, which is *16*; *C-u C-u C-u*, the result is *4^3*, or
-*64*. I know it's hard to calculate when you the power is large, but
-there is a plugin that display this calculate and display these
-numbers. That plugin is Helm, but I will discuss later in part 2.
+If you execute *C-u* consecutively, the numeric argument is a power
+of 4. If you press *C-u*, the resulting argument is 4^1; *C-u C-u*,
+the result is *4^2*, which is *16*; *C-u C-u C-u*, the result is
+*4^3*, or *64*. I know large powers are hard to calculate, but there
+is a plugin that displays the calculation and display these
+numbers. That plugin is Helm, but I will discuss that later in part 2.
 
 Why number 4 for *C-u*? I don't know.
 
@@ -1869,7 +1868,7 @@ Why number 4 for *C-u*? I don't know.
 Emacs has a built-in one called Dired, short for
 =(Dir)ectory (Ed)itor=.
 
-This section is a shorten version of Dired in GNU Emacs Manual. After
+This section is a shortened version of Dired in GNU Emacs Manual. After
 you read and practice these commands, read the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html][Dired Manual]] if possible.
 
 *** Enter Dired
@@ -1956,11 +1955,11 @@ C-f* variant.
   your filesystem navigation. Whenever you open a file or directory,
   using Dired or other methods, you have a buffer of that directory.
 
-  At this point, you may feel annoyed that Dired open too many buffers
-  and it will goes out of control at some point. Worry not! That's why
-  you have =ibuffer=.
+  At this point, you may feel annoyed that Dired opens too many
+  buffers and it will go out of control at some point. Worry not!
+  That's why you have =ibuffer=.
 
-- =M-x ibuffer= or =C-x C-b= if you already replace =list-buffers=.
+- =M-x ibuffer= or =C-x C-b= if you've already replaced =list-buffers=.
 - =/ m= and select =dired-mode=. =/ g= and name the group =Dired= and
   you have a separate group for managing directories. No more
   cluttered view with other buffers. You can stop worrying now.
@@ -1977,25 +1976,25 @@ C-f* variant.
   - ....
 
   The layouts of top two directories are common when you have to
-  create patches. Working in normal file manager like File Explorer in
-  Window, you only one directory view. Going back and forth is tedious
-  and inefficient, and you have to remember different directory
-  paths. To make it easy, you have to open multiple File Explorer
-  manually. Under the terminal, you have to create symbolic links for
-  those directories to save you time. However, you still have to
-  manage the links manually, like delete when they are not used, or
-  update when directory the links pointing to are moved.
+  create patches. Working in a normal file manager like File Explorer
+  in Windows, you only have one directory view. Going back and forth
+  is tedious and inefficient, and you have to remember different
+  directory paths. To make it easy, you have to open multiple File
+  Explorer manually. Under the terminal, you have to create symbolic
+  links for those directories to save you time. However, you still
+  have to manage the links manually, like delete when they are not
+  used, or update when directory the links pointing to are moved.
 
   Emacs does it all for you, /automatically/. With this feature, you
   can freely navigate the filesytem without having to remember the
-  working directory to get back later, because You can easily go back
+  working directory to get back later, because you can easily go back
   to it quick and easy.
 
 *** File Marking
 :PROPERTIES:
 :ID:       683038dd-dc69-47d0-8b9c-8c708277a8e5
 :END:
-You flag files for deleting. You mark files for everything else
+You flag files for deletion. You mark files for everything else
 (i.e. copy, move, link files...). There are many marking commands for
 specialized file types. Except for *m*, *% m* and *% g*, all marking
 commands have prefix =*=. I will list the most useful one; you can
@@ -2085,8 +2084,8 @@ character for a command, it means *S-<character>*.
 :PROPERTIES:
 :ID:       c2f3564c-d338-4a08-a37b-a77d040d67a2
 :END:
-Just like using a shell, you can execute command at current directory
-in Dired too. 
+Just like in a shell, you can execute commands in the current
+directory in Dired too.
 
 | Key | Binding                                                     |
 |-----+-------------------------------------------------------------|
@@ -2110,8 +2109,8 @@ in Dired too.
 :PROPERTIES:
 :ID:       adb6cb47-65a4-45a8-b122-c14efa59cec8
 :END:
-This is an excising feature in Dired. In other file explorers, you get
-a tree for browsing your directory. If you have a deep directory
+This is an exciting feature of Dired. In other file explorers, you get
+a tree to browse your directory. If you have a deep directory
 structure, it will quickly become a nuisance.
 
 Dired allows user to insert the content of a directory just below the
@@ -2142,11 +2141,11 @@ a project frequently.
 :ID:       d4060b6d-0cc9-41bc-976e-d33b56b0df6b
 :END:
 When I first heard about registers in Emacs, it scared me. I thought
-"Wow, what is this "register" thing? Am I going to work directly
-with CPU registers?" As it turned out, despite the name "Register",
-it's not something that complicated to understand. Although, Emacs register
-is similar to CPU register in the sense that it allows quick access to
-temporal data.
+"Wow, what is this "register" thing? Am I going to work directly with
+CPU registers?" As it turned out, despite the name "Register", it's
+not something that complicated to understand. Although, an Emacs
+register is similar to a CPU register in the sense that it allows
+quick access to temporal data.
 
 Each register has a name that consists of a single character, which we
 will denote by /r/; /r/ can be a letter (such as ‘a’) or a number (such as
@@ -2154,8 +2153,8 @@ will denote by /r/; /r/ can be a letter (such as ‘a’) or a number (such as
 
 In Emacs, registers are for quick access to things. Things can be a
 position, a piece of text, a rectangle, a number, a file name, or a
-window configuration (yes, you can save how Emacs organizes its screen
-and restore later!).
+window configuration (yes, you can save how Emacs organizes its
+screens and restore it later!).
 
 Saving different types of objects has different key bindings, but to jump
 to a register, you use a single command *C-x r j REG*; *REG* is a
@@ -2168,23 +2167,24 @@ bindings, *C-x r C-h* to get the list of key bindings.
 :PROPERTIES:
 :ID:       840ff6ae-1f2b-4796-9f7f-7cd5db33d879
 :END:
-One of the best use of register. It simply saves your current window
+One of the best uses of registers. It simply saves your current window
 configuration and restores the layout later.
 
 For example, you are viewing four source code buffers, but want to
 open two Dired buffers side by side to for managing files, so you
 close two windows and switch the other two windows to Dired
-buffers. But this makes you lose the perfect layout you are having,
-and later it would be tedious to restore one by one to finally
+buffers. But this makes you lose the perfect layout you had, and later
+it would be tedious to restore the windows one by one to finally
 recreate the original layout you were working with. Then, later, you
-have to do something, you have to break your window configuration, you
-have to manually restore your window configuration again, and have to
-remember exactly which buffers you were working with.
+have to do something else, you have to break your window
+configuration, you have to manually restore your window configuration
+again, and have to remember exactly which buffers you were working
+with.
 
-To free you from this burden, register is the answer. You can save a
-window configuration having four windows displaying four buffers, and
-another one having two Dired buffers for your project. You can switch
-between them easier.
+To free yourself from this burden, register is the answer. You can
+save a window configuration with four windows displaying four buffers,
+and another one having two Dired buffers for your project. You can
+more easily switch between them.
 
 | Key           | Binding                                                                      |
 |---------------+------------------------------------------------------------------------------|
@@ -2270,14 +2270,14 @@ You can also save a region in registers.
 You may wonder, what's the point of storing text into register? Haven't
 you got a kill ring? Here are the reasons:
 
-- As you already know, inserting past contents from the kill ring makes
+- As you already know, inserting past content from the kill ring makes
   the chosen content the head entry. This is inconvenient, and this is
   when registers are handy for storing many pieces of text without
   affecting the kill ring. For example, you read a manual (man page or
   info page), and you want to remember many keywords and paste it
   somewhere later. Registers can help you with this use case.
 
-- You can also use register to save many code template. For example,
+- You can also use registers to save many code templates. For example,
   you can save a for loop template into register *f*, if template into
   register *i*, function definition into register *F*... This is
   really handy when you are learning a new language and keep
@@ -2288,14 +2288,14 @@ you got a kill ring? Here are the reasons:
 
   #+begin_src c++
     auto it = find_if (vertices.begin(), vertices.end(), [&v_idx] (const Vertex& o) -> bool {
-            return o.id == v_idx;
-        });
+	    return o.id == v_idx;
+	});
   #+end_src
 
-  Save it to a register, insert and modify it to fit my current need
-  until I remember it. Much faster than go back to previous source
-  location to look up again, and would be time consuming if your
-  source code is large.
+  I save it to a register, insert and modify it to fit my current need
+  until I remember it. This is much faster than to go back to the
+  previous source location to look it up again, and would be time
+  consuming if your source code is large.
 
 *_Exercise_*:
 
@@ -2382,7 +2382,7 @@ or subtract according to that number.
 |--------------------------+-------------------------------------------|
 
 You can insert the number from a register *REG* with *C-x r i
-REG*. These numbers are handy when using with =Keyboard Macro=.
+REG*. These numbers are handy when used with =Keyboard Macro=.
 
 *_Exercise_*:
 
@@ -2433,8 +2433,8 @@ Copy these lines into a buffer of your choice:
 #+end_src
 
 Now, you want to separate each line into different groups, each group
-contains their own character, line this:
-                        
+contains their own character, like this:
+
 #+BEGIN_HTML
 aaaaa bbbbbbb cccccc dddddd
 #+END_HTML
@@ -2444,7 +2444,7 @@ have to repeat yourself, using macro. Follow these steps:
 
 - Place point at the beginning of the first line.
 - Press *<f3>*.
-- Use C-s to search-and-jump to the beginning of each character group (or C-f if you want something simple) and add whitespace. 
+- Use C-s to search-and-jump to the beginning of each character group (or C-f if you want something simple) and add whitespace.
 - Return to the beginning of next line. Press *<f4>* to finish recording.
 - Continuously press *<f4>* and see Emacs playbacks the whole action
   sequence you've just recorded.
@@ -2456,7 +2456,7 @@ have to repeat yourself, using macro. Follow these steps:
 
 [[file:static/macro.gif][file:static/macro.gif]]
 
-After a macro is defined, it is saved in keyboard macro ring. There is
+After a macro is defined, it is saved in the keyboard macro ring. There is
 only one keyboard macro ring, shared by all buffers. All commands
 which operate on the keyboard macro ring use the same *C-x C-k*
 prefix. Just remember the prefix *C-x C-k* = macro commands, and you
@@ -2478,8 +2478,8 @@ For example, I have this table with some data:
 Basically, each row contains the MAC addresses of Ethernet interfaces
 of a machine in the server cluster at my workplace. The data are
 stored in a plain text file. But then, we want to integrate these data
-inside our YAML file to do other thing. Basically, from the above
-format, I have to transform into this format:
+inside our YAML file to do something else. I have to basically
+transform the data in the above format to the one below:
 
 #+begin_src yaml
   machine 1:
@@ -2489,12 +2489,12 @@ format, I have to transform into this format:
 #+end_src
 
 In the real data file, it contains around 50 entries. Manually
-transform text would be tiresome. Thanks to Emacs, I solved this
-problem with keyboard macro.
+transforming text would be tiresome. Thanks to Emacs, I solved this
+problem with a keyboard macro.
 
 - _Pre-recording setup_:
-  Before recording macro to automate this transformation, we need to
-  proper set things up:
+  Before recording a macro to automate this transformation, we need to
+  properly set things up:
 
   - Create two buffers side by side with *C-x b*. Name the left buffer
     =buf1= and right buffer =buf2=.
@@ -2510,7 +2510,7 @@ problem with keyboard macro.
    Point should be at =buf1=, at the first line of the data.
 
   - Press *<f3>* to start.
-  - *C-SPC* then *M-f*. This mark the word =machine1=. Store this word
+  - *C-SPC* then *M-f*. This marks the word =machine1=. Store this word
     into register =a= with *C-x r s a*.
 
     [[file:static/reg_a.gif][file:static/reg_a.gif]]
@@ -2532,7 +2532,7 @@ problem with keyboard macro.
 
     [[file:static/reg_d.gif][file:static/reg_d.gif]]
 
-  - Switch to the second buffer with *C-x o*:        
+  - Switch to the second buffer with *C-x o*:
   - Insert the register from =a= to =d= according to the template:
 
     [[file:static/insert_buf2_macro.gif][file:static/insert_buf2_macro.gif]]
@@ -2727,7 +2727,7 @@ editing.
 - First, copy this template:
 
 #+begin_src fundamental
-  As a , I want , some reason
+  As a , I want , so that
 #+end_src
 
 - *<f3>* to start recording.
@@ -2800,13 +2800,14 @@ C-k*. For example, you can bind a macro to *C-x C-k 1*, another to
 *_Exercise 2_*: Composite macros
 
 Back to exercise 2 at the beginning of Macro section, do you remember
-you have to create a big macro to convert text structures? Certainly
-it can be done more comfortably by spitting into smaller macros, saves
-these macros into Emacs commands and put in all together in a macro.
+you had to create a big macro to convert text structures? Certainly it
+can be done more comfortably by splitting it into smaller macros,
+saving these macros into Emacs commands and putting them all together
+in a macro.
 
 - _Pre-recording setup_:
-  Before recording macro to automate this transformation, we need to
-  proper set things up:
+  Before recording a macro to automate this transformation, we need to
+  properly set things up:
 
   - Create two buffers side by side with *C-x b*. Name the left buffer
     =buf1= and right buffer =buf2=.
@@ -2819,7 +2820,7 @@ these macros into Emacs commands and put in all together in a macro.
   machine3=(aa:bb:cc:dd:ee:c1 aa:bb:cc:dd:ee:c2 aa:bb:cc:dd:ee:c3)
   machine4=(aa:bb:cc:dd:ee:d1 aa:bb:cc:dd:ee:d2 aa:bb:cc:dd:ee:d3)
   machine5=(aa:bb:cc:dd:ee:e1 aa:bb:cc:dd:ee:e2 aa:bb:cc:dd:ee:e3)
-  machine6=(aa:bb:cc:dd:ee:f1 aa:bb:cc:dd:ee:f2 aa:bb:cc:dd:ee:f3)    
+  machine6=(aa:bb:cc:dd:ee:f1 aa:bb:cc:dd:ee:f2 aa:bb:cc:dd:ee:f3)
 #+end_src
 
     That's set and done. Here is how it should look like:
@@ -2862,7 +2863,7 @@ these macros into Emacs commands and put in all together in a macro.
 
   Let's create the second macro command, =insert-macs=:
 
-  - Switch to the second buffer with *C-x o*:        
+  - Switch to the second buffer with *C-x o*:
   - *<f3>* to start recording.
   - Insert the register from =a= to =d= according to the template:
 
@@ -2907,12 +2908,12 @@ these macros into Emacs commands and put in all together in a macro.
 |                        | Treat the last 300 keystrokes as a keyboard macro |
 |------------------------+---------------------------------------------------|
 
-It is useful to edit a keyboard macro when you run incorrect
+It is useful to edit a keyboard macro when you run an incorrect
 command. Instead of doing the whole thing again, you can edit the
 incorrect part. Note that, do not press *C-g* or you will kill your
 current recording macro; press *<f4>* instead to complete the macro,
-and edit it. After done editing, continue from the previous point
-where you left off with:
+and edit it. After you're done editing, continue from the previous
+point where you left off with:
 
 - *C-u <f3>*: Re-execute last keyboard macro, then append keys to its
   definition.
@@ -2942,15 +2943,15 @@ interactive commands and play with it.
   in a repeatable way. As you can see in the exercises, data are laid
   out in a way that macro can be repeatable naturally: each line is an
   iteration.
-- You can also use macro for almost other things not text in
-  Emacs. For example, you can create a macro than run =find-file= and
+- You can also use a macro for almost anything unrelated to text in
+  Emacs. For example, you can create a macro to run =find-file= and to
   go to =~/Downloads=.
 - Use registers: As you see in the exercises, macro is a fine way to
   store information. You can use registers as a temporary information
   holder and organize those information into an arbitrary structure
   later.
 - Do it slowly and think before you do: Don't rush yourself. Do it
-  slow enough that you are sure when you press some keys and execute
+  slowly enough that you are sure when you press some keys and execute
   some commands, it is correct.
 - Break large macro into smaller macros.
 
@@ -2964,11 +2965,11 @@ improvements.
 Emacs helps you manipulate and edit files stored in version
 control. Emacs supports CVS, Subversion, bzr, git, hg, and other
 systems, but it offers a uniform interface, called VC, regardless of
-the version control system you are using. The nice thing with a
-unified interface is that even if you don't have much knowledge about
-some version control system (VCS), you can still work with that VCS
-quickly, without burden of learning all the little details of a
-particular VCS.
+the version control system you are using. The benefit of a unified
+interface is that even if you aren't familiar with some version
+control system (VCS), you can still work with that VCS quickly,
+without the burden of learning all the little details of a particular
+VCS.
 
 Emacs automatically detects when a file you're editing is under
 version control, and displays something like this in the mode line:
@@ -3010,10 +3011,10 @@ VC provides other commands for version control-related tasks:
 
 You can list more operations with *C-x v C-h*.
 
-If you use git, a more specialized package exsits dedicated
-to Git only: [[https://github.com/magit/magit][Magit]], offer much better features than the general
-interface that Emacs provides, except for some features, such as 
-*C-x v =*, *C-x v ~* and *C-x v u* .
+If you use git, a more specialized package exists dedicated to Git
+only: [[https://github.com/magit/magit][Magit]] offers much better features than the general interface
+that Emacs provides, except for some features, such as *C-x v =*, *C-x
+v ~* and *C-x v u* .
 
 The prefix key bindings for all VC related commands are *C-x v*. The
 above are just a few commands that I found most useful and used
@@ -3041,7 +3042,7 @@ Let's practice this nice Emacs feature.
 In Emacs, you have 3 types of shell commands: =shell=, =term= and
 =eshell=.
 
-I will just quote a very good answer on StackExchange: 
+I will just quote a very good answer on StackExchange:
 
 #+BEGIN_QUOTE
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Shell-Mode.html][shell]] is the oldest of these 3 choices. It uses Emacs's comint-mode to
@@ -3049,20 +3050,20 @@ run a subshell (e.g. bash). In this mode, you're using Emacs to edit a
 command line. The subprocess doesn't see any input until you press
 Enter. Emacs is acting like a dumb terminal. It does support color
 codes, but not things like moving the cursor around, so you can't run
-curses-based applications. 
+curses-based applications.
 
 [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Term-Mode.html][term]] is a terminal emulator written in Emacs Lisp. In this mode, the
 keys you press are sent directly to the subprocess; you're using
 whatever line editing capabilities the shell presents, not Emacs's. It
 also allows you to run programs that use advanced terminal
 capabilities like cursor movement (e.g. you could run nano or less
-inside Emacs). 
+inside Emacs).
 
 [[https://www.gnu.org/software/emacs/manual/html_node/eshell/index.html][eshell]] is a shell implemented directly in Emacs Lisp. You're not
 running bash or any other shell as a subprocess. As a result, the
 syntax is not quite the same as bash or sh. It allows things like
 redirecting the output of a process directly to an Emacs buffer (try
-echo hello >#<buffer results>). 
+echo hello >#<buffer results>).
 #+END_QUOTE
 
 [[http://unix.stackexchange.com/questions/104325/what-is-the-difference-between-shell-eshell-and-term-in-emacs][What is the difference between shell, eshell, and term in Emacs?]]
@@ -3135,7 +3136,7 @@ Paste the following code into the =*scratch*= buffer:
 #+begin_src emacs-lisp
   (require 'package)
   (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	       '("melpa" . "http://melpa.milkbox.net/packages/") t)
 #+end_src
 
 The above code you see is Emacs Lisp.
@@ -3162,9 +3163,9 @@ b*. Paste the following code using *C-y*:
 
 #+begin_src emacs-lisp
   (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
+	    (lambda ()
+	      (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+		(ggtags-mode 1))))
 #+end_src
 
 You may worry that you have to write Emacs Lisp every time you install
@@ -3292,20 +3293,20 @@ You can enjoy exploring the kernel source tree by following these steps:
   project. How convenient!
 
   That's it for *basic* navigation. Yes, it's just the basic. This is
-  just the tip of the ice berg. In Emacs, you have a toolchain called
+  just the tip of the iceberg. In Emacs, you have a toolchain called
   [[http://cedet.sourceforge.net/][CEDET]], short for =Collection of Emacs Development Environment
-  Tools=, offers features such as highlighting, project, smart jump,
-  context-sensitive completion, symbol references, code generation...
-  And Emacs included CEDET by default from Emacs 23.2. CEDET is also a
-  language framework for language writer to create such tools within
-  Emacs for their languages, but currently the best supported language
-  in CEDET is C/C++.
+  Tools=, which offers features such as highlighting, project, smart
+  jump, context-sensitive completion, symbol references, code
+  generation...  And Emacs includes CEDET by default from Emacs
+  23.2. CEDET is also a language framework for language writers to
+  create such tools within Emacs for their languages, but currently
+  the best supported language in CEDET is C/C++.
 
   =ggtags= solves your navigation need, but does not offer the above
   features.  However, with =ggtags= alone, it's far enough for your
   C/C++ projects, thanks to GNU Global for working nicely on large
-  source tree like the Linux kernel.. After all, many people writes
-  C/C++ source code on bare minimum editor and waste a lot of time for
+  source tree like the Linux kernel.. After all, many people write
+  C/C++ source code on a bare minimum editor and waste a lot of time
   doing things manually instead of focusing on their problems.
 
   After this demo, are you convinced now? If you want to harness the
@@ -3316,26 +3317,26 @@ You can enjoy exploring the kernel source tree by following these steps:
 :PROPERTIES:
 :ID:       b6f5eaff-b912-4e00-9835-a3127632b019
 :END:
-To let Emacs automatically loads those configuration, save it to
-either of these three files:
+To let Emacs automatically load your configuration, save it to either
+of these three files:
 
 =~/.emacs=
 =~/.emacs.d/init.el=
 =~/.emacs.d/init=
 
 Now you know how to open and save files, it's time to save your Emacs
-configuration you have been used in =*scratch*= buffer. After you finish
+configuration you have been using in the =*scratch*= buffer. After you finish
 the Linux kernel browsing project, you have these configurations:
 
 #+begin_src emacs-lisp
   (require 'package)
   (add-to-list 'package-archives
-               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+	       '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
   (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
+	    (lambda ()
+	      (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+		(ggtags-mode 1))))
 
 
   (add-hook 'dired-mode-hook 'ggtags-mode)
@@ -3369,11 +3370,11 @@ The steps:
 :ID:       c17a142e-f9a8-4584-989a-e629e3bcd303
 :END:
 That's it. Now you can start using Emacs for many things, from editing
-source code to manage files and read documentations. I hope you find
-my manual useful for helping you get the hang of Emacs in as soon as
-possible, and I am really help if you do.
+source code to managing files and reading documentation. I hope you
+find my manual useful for helping you get the hang of Emacs in as
+little time as possible, and I am really help if you do.
 
-Remeber, this is just the tip of the iceberg. There are more things
+Remember, this is just the tip of the iceberg. There are more things
 Emacs is capable of. If you like, follow my other Emacs manuals on
 specific topics.
 
@@ -3386,14 +3387,14 @@ Finally, thanks to [[http://orgmode.org/worg/][Worg]] for this awesome CSS.
 :PROPERTIES:
 :ID:       b135c9e2-a68c-4461-a711-a92016eeb034
 :END:
-Emacs allows you to do much more than just editing. Emacs is no mere
-editor like others, either in terminal or in GUI. Emacs is a
+Emacs allows you to do much more than just editing. Emacs is not a
+mere editor like others, either in terminal or in GUI. Emacs is a
 development *platform*. Emacs is a *virtual machine* that interprets
 its own [[http://www.emacswiki.org/emacs-ja/ByteCodeEngineering][bytecode]].
 
 You can write all sorts of programs in Emacs to add more features
 using its own language - Emacs Lisp - in an *easy* way. With the
-extensibility, Emacs can do many things: an editor, a file manager, an
+extensibility, Emacs can be  things: an editor, a file manager, an
 email client, a news reader, a shell...
 
 You can think of Emacs as an enhanced interpreter and evaluate any
@@ -3411,10 +3412,10 @@ Emacs and tell Emacs to execute that code. If the code snippet has
 valid syntax, Emacs executes successfully and you will have command to
 print "Hello World" at the bottom of screen.
 
-A great advantage of this approach is, if you want to change
-behaviours of Emacs, you write some Emacs Lisp code and execute and
-see immediate results, right inside Emacs. Emacs is beyond an
-editor. Emacs is a programming platform that has an editor. Don't be
+A great advantage of this approach is, if you want to change the
+behaviour of Emacs, you write some Emacs Lisp code, execute it and
+immediately see the results, right inside Emacs. Emacs is beyond an
+editor. Emacs is a programming platform that has an editor. Don't
 confuse Emacs with other /real editors/, which can *only be used for
 editing*.
 
@@ -3423,7 +3424,7 @@ Emacs, [[http://ergoemacs.github.io/ergoemacs-mode/gradual-adoption.html][Ergoem
 has internal tools and interfaces to external tools for many
 programming languages. Learning Emacs means you can use the same
 editor for different languages. Otherwise, you will have to learn
-different editor when you learn a random language.
+a different editor when you learn a random language.
 ** Other people's "Why Emacs?"
 :PROPERTIES:
 :ID:       2da15989-7cfe-414e-ad39-3c09098bf045
@@ -3446,8 +3447,8 @@ start with Emacs.
 :ID:       b8c9ecfe-46d0-4169-8e58-9270aa72a9a5
 :END:
 Ever heard of a computing system called *Lisp Machine*? I bet many of
-you don't. Me, too, until I started using Emacs and gradually learning
-enough to know such thing ever exist. This old article is an
+you don't. Me, too, until I started using Emacs and gradually learned
+enough to know such a thing ever existed. This old article is an
 interesting read: [[http://emacs.wordpress.com/2007/01/14/the-ghost-in-the-lisp-machine/][The Ghost in the Lisp Machine]]
 
 #+BEGIN_QUOTE
@@ -3511,5 +3512,5 @@ of related systems at the end of the essay: Lisp machines, LOGO,
 MacLisp and Smalltalk. We’re definitely in good company!
 #+END_QUOTE
 
-Emacs is a miniature of a Lisp Machine. You can have a tour in [[http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html][Lisp
-Machine online museum]].
+Emacs is a miniature of a Lisp Machine. You can take a tour at the
+[[http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html][Lisp Machine online museum]].
