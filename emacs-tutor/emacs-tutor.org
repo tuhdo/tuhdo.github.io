@@ -1214,7 +1214,7 @@ Emacs stores buffer marks in a list, that's why you are able to cycle
 through various marks in the exercise above. You can cycle through the
 list to jump to a mark, or with extension packages, you can have a
 list and interactively select it. *Helm* is an excellent example of
-such a extension. We will discuss more on extension packages later.
+such an extension. We will discuss more on extension packages later.
 
 ** Global mark ring
 :PROPERTIES:
@@ -1641,7 +1641,7 @@ share the same physical space. You should not be confused between the two.
 :ID:       9d06632d-a923-47ee-8ca2-e2b4a106dad3
 :END:
 
-An application window in a operating system is called a *Frame* in
+An application window in an operating system is called a *Frame* in
 Emacs. So, you execute *Emacs* from the command line and open Emacs,
 that's a frame that contains your Emacs session. Emacs can have
 multiple frames to hold different parts of Emacs, such as a separate
@@ -3393,8 +3393,8 @@ development *platform*. Emacs is a *virtual machine* that interprets
 its own [[http://www.emacswiki.org/emacs-ja/ByteCodeEngineering][bytecode]].
 
 You can write all sorts of programs in Emacs to add more features
-using its own language - Emacs Lisp - in an *easy* way. With the
-extensibility, Emacs can be  things: an editor, a file manager, an
+using its own language - Emacs Lisp - in an *easy* way. With this
+extensibility, Emacs can be many things: an editor, a file manager, an
 email client, a news reader, a shell...
 
 You can think of Emacs as an enhanced interpreter and evaluate any
