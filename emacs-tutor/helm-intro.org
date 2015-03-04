@@ -204,7 +204,9 @@ to help you using Helm productively.
   architecture. I know that they must have =x86= directory somewhere,
   and the file could contain =main.c= in it, i.e. It can be =main.c=
   or =x86-main.c=. These are the only information I know, so I must
-  confirm whether it is true or not, so I tried it in Helm:
+  confirm whether it is true or not, so I tried it in Helm Projectile
+  (a package that makes use of Helm framework and it does not come with
+  stock Helm. You can read more about it [[http://tuhdo.github.io/helm-projectile.html][in my Helm Projectile guide]]):
 
   [[file:static/helm_projectile.gif][file:static/helm_projectile.gif]]
 
@@ -285,7 +287,7 @@ height that Helm candidate buffer cannot be smaller.
 
 If you don't want the Helm window to be resized, but a smaller Helm
 window, you can set =helm-autoresize-max-height= equal to
-=helm-autoresize-max-height=.
+=helm-autoresize-min-height=.
 
 If you use [[https://github.com/roman/golden-ratio.el][golden-ratio]], you have to disable its interference with
 Helm window:
@@ -516,16 +518,17 @@ The demo above is part of [[https://github.com/emacs-helm/helm#advanced-usage][H
 
 _Similar Commands_:
 
-- =helm-for-files=: this command lists buffers and recent files and
+- =helm-multi-files=: this command lists buffers and recent files and
   files in current directory. However, when no match is found,
   =helm-mini= asks if you want to create a new buffer by highlighting
   the only entry that look like this:
 
   [[file:static/helm-new-file-buffer.gif][file:static/helm-new-file-buffer.gif]]
 
-  while =helm-for-files= starts a =helm-locate= session to search in
-  file system for the desired file. By default, =helm-for-files= binds
-  to  =<prefix> f= (current prefix is *C-c h*).
+  while =helm-multi-files= shows a blank buffer. However, you can
+  start a =helm-locate= session to search the whole file system for
+  the desired file by pressing *C-c p*. By default, =helm-for-files=
+  binds to =<prefix> f= (current prefix is *C-c h*).
 
 - =helm-buffer-list=: similar to =helm-mini=, but instead of listing
   recent files from =recentf=, it uses =ido-virtual-buffers=, which is
