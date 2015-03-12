@@ -745,7 +745,7 @@ If you really want to use the development version with latest feature,
 checkout this branch:
 
 #+begin_src sh
-  bzr checkout bzr://cedet.bzr.sourceforge.net/bzrroot/cedet/code/trunk cedet
+  git clone http://git.code.sf.net/p/cedet/git cedet
 #+end_src
 
 Be sure to place the checked out =cedet= directory in your
@@ -1420,8 +1420,55 @@ position.
 Setup:
 
 #+begin_src emacs-lisp
-  (global-semantic-stickyfunc-mode 1)
+  (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 #+end_src
+
+One of the problem with current =semantic-stickyfunc-mode= is that it
+does not display all parameters that are scattered on multiple lines.
+To solve this problem, we need to redefine
+=semantic-stickyfunc-fetch-stickyline= function. If you don't
+understand, that's ok. Just copy and paste into your init file, it
+will work:
+
+#+begin_src emacs-lisp
+  (defun semantic-stickyfunc-fetch-stickyline ()
+    "Make the function at the top of the current window sticky.
+    Capture its function declaration, and place it in the header line.
+    If there is no function, disable the header line."
+    (save-excursion
+      (goto-char (window-start (selected-window)))
+      (let* ((noshow (bobp))
+             (str
+              (progn
+                (forward-line -1)
+                (end-of-line)
+                ;; Capture this function
+                (let* ((tag (semantic-stickyfunc-tag-to-stick)))
+                  ;; TAG is nil if there was nothing of the appropriate type there.
+                  (if (not tag)
+                      ;; Set it to be the text under the header line
+                      (if noshow
+                          ""
+                        (if semantic-stickyfunc-show-only-functions-p ""
+                          (buffer-substring (point-at-bol) (point-at-eol))
+                          ))
+                    (semantic-format-tag-prototype tag nil t)
+                    ))))
+             (start 0))
+        (while (string-match "%" str start)
+          (setq str (replace-match "%%" t t str 0)
+                start (1+ (match-end 0)))
+          )
+        ;; In 21.4 (or 22.1) the header doesn't expand tabs.  Hmmmm.
+        ;; We should replace them here.
+        ;;
+        ;; This hack assumes that tabs are kept smartly at tab boundaries
+        ;; instead of in a tab boundary where it might only represent 4 spaces.
+        (while (string-match "\t" str start)
+          (setq str (replace-match "        " t t str 0)))
+        str)))
+#+end_src
+
 
 ** Using =ggtags= + =eldoc=
 :PROPERTIES:
