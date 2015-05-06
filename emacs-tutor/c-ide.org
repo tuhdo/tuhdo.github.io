@@ -219,7 +219,7 @@ that is =ggtags-create-tags=; this is recommended way when using
 
   [[file:static/c-ide/kill-func-body.gif][file:static/c-ide/kill-func-body.gif]]
 
-- *C-M-<SPC>* or *C-M-@* rusn =mark-sexp=, put mark after
+- *C-M-<SPC>* or *C-M-@* runs =mark-sexp=, put mark after
   following expression that can be a pair or a symbol. Demo:
 
   [[file:static/c-ide/mark-func-body.gif][file:static/c-ide/mark-func-body.gif]]
