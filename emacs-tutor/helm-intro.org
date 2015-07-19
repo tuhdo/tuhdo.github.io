@@ -25,14 +25,15 @@ modular tool, that's not tied in the trap of backward compatibility.
 
 _Installation_:
 
-You can use [[https://github.com/bbatsov/prelude][Emacs Prelude]] that is already setup properly according to
-this guide to try out Helm and skip the rest of the installation. But
-note that by default, [[https://github.com/bbatsov/prelude][Emacs Prelude]] does not enable Helm. Please
-follow [[https://github.com/bbatsov/prelude#helm][the instructions]] to enable Helm.
+You can use [[https://github.com/bbatsov/prelude][Emacs Prelude]] or [[https://github.com/syl20bnr/spacemacs][Spacemacs]] that is already setup properly. You can
+skip all configuration code in this guide. But note that by default, [[https://github.com/bbatsov/prelude][Emacs
+Prelude]] does not enable Helm. Please follow [[https://github.com/bbatsov/prelude#helm][the instructions]] to enable Helm.
+[[https://github.com/syl20bnr/spacemacs][Spacemacs]] enables Helm by default.
 
-If you have your own Emacs configuration, =M-x list-packages= and
-select *helm* package, then install it. After finish installing, add
-this code snippet to activate the package:
+If you are a Spacemacs user, you don't have to do anything. If you have
+your own Emacs configuration, =M-x list-packages= and select *helm*
+package, then install it. After finish installing, add this
+configuration to activate the package:
 
 Minimal config:
 
@@ -289,8 +290,8 @@ If you don't want the Helm window to be resized, but a smaller Helm
 window, you can set =helm-autoresize-max-height= equal to
 =helm-autoresize-min-height=.
 
-If you use [[https://github.com/roman/golden-ratio.el][golden-ratio]], you have to disable its interference with
-Helm window:
+If you use [[https://github.com/roman/golden-ratio.el][golden-ratio]], you have to disable its interference with Helm window
+(Note: If you are using Spacemacs, you don't have to add this configuration):
 
 #+begin_src emacs-lisp
   (defun pl/helm-alive-p ()
@@ -300,13 +301,13 @@ Helm window:
   (add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 #+end_src
 
-DEMO 1, when =helm-autoresize-max-height= is not equal to
+In DEMO 1, when =helm-autoresize-max-height= is not equal to
 =helm-autoresize-min-height= (begins when ~START DEMO~ appears in
 minibuffer):
 
 [[file:static/part3/helm-autoresize-mode.gif][file:static/part3/helm-autoresize-mode.gif]]
 
-DEMO 2, when =helm-autoresize-max-height= is equal to
+In DEMO 2, when =helm-autoresize-max-height= is equal to
 =helm-autoresize-min-height= (begins when ~START DEMO~ appears in
 minibuffer):
 
@@ -573,6 +574,9 @@ _Description_:
   use *C-l*, Helm goes up one level and the cursor is on the directory
   you've just got out. If you want to go up and have the cursors on
   the parent directory, in Helm prompt, enter =../=. 
+
+- After you go up with *C-l*, you can go back the exact visited directories with
+  *C-r*.
 
 - To create a directory, enter a new name that does not exist in the
   current directory and append =/= at the end. After you created a
