@@ -684,7 +684,6 @@ To open the package manager, =M-x list-package=. You will see a list
 of packages. 
 
 - To navigate the package list down and up using *n* and *p*. 
-- To view information of a package, press *RET*. 
 - To mark a package for install, press *i*.
 - To mark a package for delete, press *d*.
 - To unmark a package, press *u*.
