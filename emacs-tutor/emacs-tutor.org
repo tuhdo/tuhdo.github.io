@@ -988,7 +988,7 @@ These key bindings are in Emacs only:
 - Scroll backward one screen: *M-v*, *page up*
 - Move to the beginning of a sentence: *M-a*
 - Move to the end of a sentence: *M-e*
-- Recenter a screen: *M-l*
+- Recenter a screen: *C-l*
 - Re-position point to the top, middle and bottom of the current
   screen: *M-r*
 - Move to top of the buffer: *M-<*

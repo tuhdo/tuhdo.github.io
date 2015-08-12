@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Emacs Mini Manual (PART 1) - THE BASICS</title>
-<!-- 2015-02-09 T2 12:20 -->
+<!-- 2015-08-12 Wed 10:17 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="tudo" />
+<meta  name="author" content="tuhdo" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -1495,7 +1495,7 @@ replace <code>list-buffers</code> with <code>ibuffer</code> (by placing next dir
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #374478;">global-set-key</span> <span style="color: #7388d6;">(</span><span style="color: #783f5a;">kbd</span> <span style="color: #8b2252;">"C-x C-b"</span><span style="color: #7388d6;">)</span> '<span style="color: #783f5a;">ibuffer</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-x C-b"</span><span style="color: #7388d6;">)</span> 'ibuffer<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2120,7 +2120,7 @@ These key bindings are in Emacs only:
 </li>
 <li>Move to the end of a sentence: <b>M-e</b>
 </li>
-<li>Recenter a screen: <b>M-l</b>
+<li>Recenter a screen: <b>C-l</b>
 </li>
 <li>Re-position point to the top, middle and bottom of the current
 screen: <b>M-r</b>
@@ -4794,9 +4794,9 @@ you are new:
 
 <div class="org-src-container">
 
-<pre class="src src-c++"><span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = find_if <span style="color: #707183;">(</span>vertices.begin<span style="color: #7388d6;">()</span>, vertices.end<span style="color: #7388d6;">()</span>, <span style="color: #7388d6;">[</span>&amp;v_idx<span style="color: #7388d6;">]</span> <span style="color: #7388d6;">(</span><span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #a0522d;">o</span><span style="color: #7388d6;">)</span> -&gt; <span style="color: #228b22;">bool</span> <span style="color: #7388d6;">{</span>
-        <span style="color: #a020f0;">return</span> o.id == v_idx;
-    <span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>;
+<pre class="src src-c++">  <span style="color: #a020f0;">auto</span> <span style="color: #228b22;">it</span> = find_if <span style="color: #707183;">(</span>vertices.begin<span style="color: #7388d6;">()</span>, vertices.end<span style="color: #7388d6;">()</span>, <span style="color: #7388d6;">[</span>&amp;v_idx<span style="color: #7388d6;">]</span> <span style="color: #7388d6;">(</span><span style="color: #a020f0;">const</span> <span style="color: #228b22;">Vertex</span>&amp; <span style="color: #a0522d;">o</span><span style="color: #7388d6;">)</span> -&gt; <span style="color: #228b22;">bool</span> <span style="color: #7388d6;">{</span>
+    <span style="color: #a020f0;">return</span> o.id == v_idx;
+<span style="color: #7388d6;">}</span><span style="color: #707183;">)</span>;
 </pre>
 </div>
 
@@ -5193,10 +5193,10 @@ transform the data in the above format to the one below:
 
 <div class="org-src-container">
 
-<pre class="src src-yaml"><span style="color: #a0522d;">machine 1</span>:
-    <span style="color: #a0522d;">mac1</span>: aa:bb:cc:dd:ee:a1
-    <span style="color: #a0522d;">mac2</span>: aa:bb:cc:dd:ee:a2
-    <span style="color: #a0522d;">mac3</span>: aa:bb:cc:dd:ee:a3
+<pre class="src src-yaml">machine 1:
+    mac1: aa:bb:cc:dd:ee:a1
+    mac2: aa:bb:cc:dd:ee:a2
+    mac3: aa:bb:cc:dd:ee:a3
 </pre>
 </div>
 
@@ -5887,7 +5887,7 @@ Emacs Lisp code inside <code>~/.emacs.d/init.el</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #7e544f;">load-file</span> <span style="color: #8b2252;">"~/.emacs.d/macros"</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>load-file <span style="color: #8b2252;">"~/.emacs.d/macros"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6542,8 +6542,8 @@ Paste the following code into the <code>*scratch*</code> buffer:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">package-archives</span>
-             '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"melpa"</span> <span style="color: #374478;">.</span> <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span><span style="color: #7388d6;">)</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>add-to-list 'package-archives
+       '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"melpa"</span> . <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span><span style="color: #7388d6;">)</span> t<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6581,10 +6581,10 @@ b</b>. Paste the following code using <b>C-y</b>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
-          <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
-            <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span><span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span><span style="color: #709870;">)</span>
-              <span style="color: #709870;">(</span><span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-hook 'c-mode-common-hook
+    <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
+      <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span>derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode<span style="color: #709870;">)</span>
+  <span style="color: #709870;">(</span>ggtags-mode <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6841,16 +6841,16 @@ the Linux kernel browsing project, you have these configurations:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">package</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #7a4f7e;">add-to-list</span> '<span style="color: #5e7837;">package-archives</span>
-             '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"melpa"</span> <span style="color: #374478;">.</span> <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span><span style="color: #7388d6;">)</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>add-to-list 'package-archives
+       '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"melpa"</span> . <span style="color: #8b2252;">"http://melpa.milkbox.net/packages/"</span><span style="color: #7388d6;">)</span> t<span style="color: #707183;">)</span>
 
-<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">c-mode-common-hook</span>
-          <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
-            <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span><span style="color: #783778;">derived-mode-p</span> '<span style="color: #4f7e67;">c-mode</span> '<span style="color: #78683f;">c++-mode</span> '<span style="color: #7e544f;">java-mode</span> '<span style="color: #513f78;">asm-mode</span><span style="color: #709870;">)</span>
-              <span style="color: #709870;">(</span><span style="color: #78683f;">ggtags-mode</span> <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>add-hook 'c-mode-common-hook
+    <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
+      <span style="color: #909183;">(</span><span style="color: #a020f0;">when</span> <span style="color: #709870;">(</span>derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode<span style="color: #709870;">)</span>
+  <span style="color: #709870;">(</span>ggtags-mode <span style="color: #008b8b;">1</span><span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 
-<span style="color: #707183;">(</span><span style="color: #783778;">add-hook</span> '<span style="color: #783f5a;">dired-mode-hook</span> '<span style="color: #78683f;">ggtags-mode</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>add-hook 'dired-mode-hook 'ggtags-mode<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6861,9 +6861,9 @@ If you like Ido, put the following configuration inside your
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #783f5a;">ido-enable-flex-matching</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #784437;">setq</span> <span style="color: #784437;">ido-everywhere</span> <span style="color: #4f5c7e;">t</span><span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #4f7e67;">ido-mode</span> <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq ido-enable-flex-matching t<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>setq ido-everywhere t<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>ido-mode <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6944,8 +6944,8 @@ visible on your screen. To illustrate my point, here is an example:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">hello</span> <span style="color: #7388d6;">()</span>
-  <span style="color: #7388d6;">(</span><span style="color: #78683f;">interactive</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #783f5a;">message</span> <span style="color: #8b2252;">"Hello World"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+  <span style="color: #7388d6;">(</span>interactive<span style="color: #7388d6;">)</span>
+  <span style="color: #7388d6;">(</span>message <span style="color: #8b2252;">"Hello World"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -6991,6 +6991,10 @@ start with Emacs.
 
 <p>
 <a href="http://cs.mcgill.ca/~vfoley1/posts/2014-06-10-why-emacs.html">Why I use Emacs</a> by Vincent Foley-Bourgon.
+</p>
+
+<p>
+<a href="http://gnuvince.wordpress.com/2012/02/19/why-i-still-use-emacs/">Why I Still Use Emacs</a>, also by Vincent Foley-Bourgon.
 </p>
 
 <p>
@@ -7085,7 +7089,8 @@ MacLisp and Smalltalk. We’re definitely in good company!
 </blockquote>
 
 <p>
-Emacs is a miniature of a Lisp Machine.
+Emacs is a miniature of a Lisp Machine. You can take a tour at the
+<a href="http://www.sts.tu-harburg.de/~r.f.moeller/symbolics-info/symbolics.html">Lisp Machine online museum</a>.
 </p>
 </div>
 </div>
