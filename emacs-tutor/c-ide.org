@@ -125,6 +125,9 @@ And uncomment this line:
   install it from the package manager of your OS (Linux distribution
   or Mac OS). For Windows users, download the [[http://adoxa.altervista.org/global/][Win32 port]].
 
+  *Warning*: if you install from a package manager, check that you don't get an
+  outdated version (helm-gtags might not fully work otherwise).
+
 - Install [[https://github.com/leoliu/ggtags][ggtags]]. After installing =ggtags= from MELPA, add this code
   snippet to setup =ggtags= and key bindings:
 
