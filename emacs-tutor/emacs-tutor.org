@@ -1479,8 +1479,7 @@ are colored and clickable, so that you can quickly visit the matched
 location!
 
 =rgrep= recursively greps for =regexp= in =files= in directory tree rooted
-at =dir=. You will be prompted for these three inputs when runs
-=rgrep=.
+at =dir=. You will be prompted for these three inputs when =rgrep= runs.
 
 With *C-u* prefix, you can edit the constructed shell command line
 before it is executed. With two *C-u* prefixes, directly edit and run
