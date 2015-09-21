@@ -1,10 +1,10 @@
-#+TITLE: Emacs Mini Manual (PART 1) - THE BASICS
+#+TITLE: Emacs Mini Manual (PART 1) - THE BASICS//Emacs迷你手册（第一部分） - 基礎篇
 
 *_Before we start_*:
 
 - Please remember that you can always access a section using the
   floating table of contents at the upper-right corner of your
-  screen.
+  screen.請記住，你可以随時通過屏幕右上角的浮動目录打開目录中任何部分。
 
 - Many people asked how this manual can be "mini", since it is pretty
   big for an online single page article. Yes, if this page is exported
