@@ -78,7 +78,7 @@ Extended config:
 After using Helm, you are going to have a big change in the way you
 use Emacs. After getting used to the Helm way, you don't want to leave
 it. However, if you don't like Helm, you can still use Ido, which is
-introduted in later section. Let's learn how to use helm by play with
+introduced in a later section. Let's learn how to use helm by play with
 it.
 
 Completion with Helm is very different with the usual Emacs
