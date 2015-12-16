@@ -560,7 +560,7 @@ For =.c= files, except for =main.c=, all have this template:
 
 The files look silly but good enough for our learning purpose.
 
-* OPTION 1: Source code completion using Clang
+* Source code completion using Clang
 :PROPERTIES:
 :ID: company-clang
 :END:
@@ -636,7 +636,7 @@ Replace =<user>= with your username.
 - Enter any source file and start completion. You will see that
   =company-clang= correctly retrieves completion candidates in those directories.
  
-** *Package*: =company-c-headers=
+* Header file completion with =company-c-headers= package
 :PROPERTIES:
 :ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
 :END:
@@ -663,10 +663,10 @@ After that, you can complete C++ header files. To complete project
 local, use =company-c-headers-path-user= and put it in
 =.dir-locals.el=.
 
-* OPTION 2: Source code completion using CEDET
+* CEDET
 :PROPERTIES:
 :ID: cedet
-:END:
+:END: 
 ** What is CEDET?
 :PROPERTIES:
 :ID: what-is-cedet
@@ -679,27 +679,10 @@ templates . CEDET also provides a framework for working with
 programming languages; support for new programming languages can be
 added and use CEDET to provide IDE-like features.
 
-This tutorial only helps you use CEDET to get completion feature for
-C/C++. Finally, why is this part option? CEDET has a limitation that
-people don't like: Syntax analyzing takes time. Many people don't
-understand this process and assume that CEDET is slow. It is not that
-the fault of CEDET. Because real parsing takes time and such a task,
-while possible using Emacs Lisp, but is too much for current Emacs
-implementation. CEDET does some nice optimizations to speed it up as
-fast as it can: idle parsing, caching and incremental parsing to
-reduce computational time. Consider a project called [[https://github.com/drothlis/clang-ctags#performance][clang-ctags]] using
-Clang to generate tag database: 
-
-#+BEGIN_QUOTE
-"Running clang-ctags over a much larger input, such as the entire llvm
-C/C++ sources (7k files, 1.8 million lines of code) took 98 minutes
-and a peak memory usage of 140MB."
-#+END_QUOTE
-
-The more accurate to analyze the source code, the more time the parser
-needs to spend. *If you don't like to wait, skip this section and use
-=company-clang= instead*. At least you will have completion with
-system header files, but not your project.
+CEDET can give you code completion, but this process takes time and can block
+your Emacs while it is doing so. If you have large project, you may not want to
+use CEDET for code completion. But, you can use CEDET perfectly for utilities
+that work at file scope i.e. refactoring local variables in a function in a file.
 
 ** Why use CEDET?
 :PROPERTIES:
@@ -876,53 +859,6 @@ even if there's no prefix. The original =semantic-ia-complete-symbol=
 requires to have at least one character as a prefix for finding
 completions.
 
-**** *Package*: =function-args=
-:PROPERTIES:
-:ID:  function-args
-:END:
-[[https://github.com/abo-abo/function-args][function-args]] is a GNU Emacs package for showing an inline
-arguments hint for the C/C++ function at point.
-
-Setup:
-
-#+begin_src emacs-lisp
-  (require 'function-args)
-  (fa-config-default)
-  (define-key c-mode-map  [(control tab)] 'moo-complete)
-  (define-key c++-mode-map  [(control tab)] 'moo-complete)
-  (define-key c-mode-map (kbd "M-o")  'fa-show)
-  (define-key c++-mode-map (kbd "M-o")  'fa-show)
-#+end_src
-
-Basic Usage (taken from =function-args= homepage):
-
-- =fa-show=: Show an overlay hint with current function arguments like
-  so:
-
-  [[file:static/c-ide/function-args-demo.gif][file:static/c-ide/function-args-demo.gif]]
-
-  The point position is tracked and the current hint argument is
-  updated accordingly. After you've called it with =M-o=, you can cycle
-  the overloaded functions with =M-n/M-h=. You can dismiss the hint with
-  =M-u= or by editing anywhere outside the function arguments.
-
-- =fa-jump=: While the overlay hint from =fa-show= is active, jump to
-  the current function. The default shortcut is =M-j=. If the overlay
-  isn't active, call whatever was bound to =M-j= before (usually it's
-  =c-indent-new-comment-line=). Demo:
-
-  [[file:static/c-ide/function-args-jump.gif][file:static/c-ide/function-args-jump.gif]]
-
-- =moo-complete= (must install =helm=): It's essentially a
-  c++-specific version of semantic-ia-complete-symbol. It behaves
-  better, because it accounts more for function overloading and
-  inheritance. Also it's prettier (type parts are fontified) and
-  faster (helm is used for completion). You can invoke it with =M-o=
-  by default.
-
-There are a few more commands. You can view all the descriptions for
-all commands [[https://github.com/abo-abo/function-args#main-functions][here]].
-
 ** CEDET can do more
 :PROPERTIES:
 :ID:  cedet-can-do-more
@@ -972,7 +908,122 @@ CEDET is best used with new project, because Semantic parse code as
 you write. As a result, you won't have to wait for parsing unknown
 source files to get completion candidates.
 
-** Project management with EDE
+** Source code navigation using Senator
+:PROPERTIES:
+:ID: source-code-navigation-using-senator
+:END:
+ Senator is a part of CEDET. Senator stands for SEmantic
+ NAvigaTOR. Senator provides some useful commands for operating on
+ semantic tags in SemanticDB. As you can see, another utility makes
+ use of SemanticDB, aside from smart completion. It is like the heart
+ of CEDET: once Semantic fails to parse, tools centered around it fail
+ as well. If such situation happens, you always have a reserved and
+ simpler solution: use GNU Global with =ggtags= or =helm-gtags=
+ frontends. The following commands are provided by Senator:
+
+*** Navigation
+:PROPERTIES:
+:ID: senator-navigation
+:END:
+
+Senator provides commands for navigating by tag.
+
+- *C-c , n* runs =senator-next-tag=, navigate to the next Semantic
+  tag.
+
+- *C-c , p* runs =senator-previous-tag=, navigate to the previous
+  Semantic tag.
+
+  Here is how both of those commands work:
+
+  [[file:static/c-ide/senator-next-previous-tag.gif][file:static/c-ide/senator-next-previous-tag.gif]]
+
+  As you see,the C macro (in the screenshot, its =DECLARE_COMPLETION=)
+  is not considered a tag.
+
+- =senator-jump= (only available in CEDET bzr), specify a tag to jump
+  to. *TAB* for a list of available Semantic tags in current buffer,
+  similar to *TAB* in *M-x* in stock Emacs. If you use Helm, use
+  =moo-jump-local= from the package =function-args= instead.
+
+  Demo (=helm-mode= is disabled):
+
+  [[file:static/c-ide/senator-jump.gif][file:static/c-ide/senator-jump.gif]]
+
+- *C-c , u* runs =senator-go-to-up-reference=, move up one reference
+  level from current tag. An upper reference level of a tag is the
+  source that defines the tag or includes the tag. This is incredibly
+  useful when you want to jump from a function declaration in a class
+  to its definition, or jump to the class that a function belongs to,
+  quickly.
+
+  [[file:static/c-ide/senator-go-to-up-reference.gif][file:static/c-ide/senator-go-to-up-reference.gif]]
+
+  In the demo, I only use =senator-go-to-up-reference= to switch from
+  a declaration, that is =PIC32F42(string Name, short MemorySize);= in
+  =PIC32F42.h= to its implementation in =PIC32F42.c=. *C-c , u* again,
+  point jump is on the class =PIC32F42=, which is the class that the
+  function belongs. Class =PIC32F42= has its parent class
+  =Microcontrller=, and I run *C-c , u* again to move point to
+  =Microcontrller= class. At this point, I cannot move further.
+
+Semantic also provides a useful command for finding all references of
+a tag, that is =semantic-symref=, as demonstrated in previous
+section. On a symbol, *C-c , g* and a prompt appear asking for a tag
+for gathering references, with the default is the symbol at
+point. Leave prompt blank and *RET* to use the default or enter
+another symbol if you change your mind.
+*** Copy/Paste
+:PROPERTIES:
+:ID:  senator-copy-paste
+:END:
+
+- =C-c , M-w= runs =senator-copy-tag=, take the current tag, and place
+  it in the tag ring.
+
+- =C-c , C-w= runs =senator-kill-tag=, take the current tag, place it
+  in the tag ring, and kill it. Killing the tag removes the text for
+  that tag, and places it into the kill ring. Retrieve that text with
+  *C-y*.
+
+  The above commands are basically like normal =M-w= and =C-w=, but are
+  used for tags. For example, run =C-c , C-w= with point inside a
+  function definition kills the whole function body and its
+  interface, or you can kill function parameters, and can be yanked
+  back with *C-y*:
+
+  [[file:static/c-ide/senator-kill-yank-tag.gif][file:static/c-ide/senator-kill-yank-tag.gif]]
+
+  As you see, the function body and its interface is killed and yanked
+  back with *C-y*. You can also see that the function parameter, aside
+  from its name, its type is also removed when the command is executed.
+
+- =C-c , C-y= runs =senator-yank-tag=, yank a tag from the tag
+  ring. The form the tag takes is different depending on where it is
+  being yanked to. For example, in previous example with =C-c , C-w=,
+  when you run *C-y*, it yanks the whole thing including function
+  interface and its body. *C-c , C-y* only yanks the function
+  interface.
+
+  [[file:static/c-ide/senator-yank-tag.gif][file:static/c-ide/senator-yank-tag.gif]]
+
+- =C-c , r= runs =senator-copy-tag-to-register=, copy the current tag
+  into a register. With prefix argument will delete the text of the
+  tag to the kill ring.
+
+*** Obsolete commands
+:PROPERTIES:
+:ID: senator-obsolete-commands
+:END:
+Senator also provides commands for code completion:
+=senator-complete-symbol= and =senator-completion-menu-popup=. Code
+completion provided by Senator is simpler than the actual completion
+provided by =semantic-ia-complete-symbol= command that is used by
+=moo-complete= for a list of candidates with full information, such as
+complete function interface is displayed correctly. These two
+completion commands are provided.
+
+** *(Optional)* Project management with EDE
 :PROPERTIES:
 :ID:  project-management-with-ede
 :END:
@@ -1094,147 +1145,23 @@ other. For our basic usage, we use EDE for smart completion as in
 previous section and Projectile to navigate our project
 effortlessly.
 
-** Source code navigation using Senator
-:PROPERTIES:
-:ID: source-code-navigation-using-senator
-:END:
- Senator is a part of CEDET. Senator stands for SEmantic
- NAvigaTOR. Senator provides some useful commands for operating on
- semantic tags in SemanticDB. As you can see, another utility makes
- use of SemanticDB, aside from smart completion. It is like the heart
- of CEDET: once Semantic fails to parse, tools centered around it fail
- as well. If such situation happens, you always have a reserved and
- simpler solution: use GNU Global with =ggtags= or =helm-gtags=
- frontends. The following commands are provided by Senator:
+* Code refactoring
+You can use this package, [[https://github.com/tuhdo/semantic-refactor][Semantic Refactor]] for refactoring in small scale. The
+package offers the following feature:
 
-*** Navigation
-:PROPERTIES:
-:ID: senator-navigation
-:END:
+- Context-sensitive menu offers appropriate refactoring actions
+- Generate class implementation (also handles nested class and class template)
+- Generate class getters and setters
+- Generate function implementation (also handles function template)
+- Generate function prototype
+- Convert function to function pointer
+- Convert function to function parameter
+- Move semantic units (class, function, variable)
+- Extract function with proper type information
+- Precise local variable rename
 
-Senator provides commands for navigating by tag.
+[[https://github.com/tuhdo/semantic-refactor/blob/master/srefactor-demos/demos.org][Please follow this link for demos]].
 
-- *C-c , n* runs =senator-next-tag=, navigate to the next Semantic
-  tag.
-
-- *C-c , p* runs =senator-previous-tag=, navigate to the previous
-  Semantic tag.
-
-  Here is how both of those commands work:
-
-  [[file:static/c-ide/senator-next-previous-tag.gif][file:static/c-ide/senator-next-previous-tag.gif]]
-
-  As you see,the C macro (in the screenshot, its =DECLARE_COMPLETION=)
-  is not considered a tag.
-
-- =senator-jump= (only available in CEDET bzr), specify a tag to jump
-  to. *TAB* for a list of available Semantic tags in current buffer,
-  similar to *TAB* in *M-x* in stock Emacs. If you use Helm, use
-  =moo-jump-local= from the package =function-args= instead.
-
-  Demo (=helm-mode= is disabled):
-
-  [[file:static/c-ide/senator-jump.gif][file:static/c-ide/senator-jump.gif]]
-
-- *C-c , u* runs =senator-go-to-up-reference=, move up one reference
-  level from current tag. An upper reference level of a tag is the
-  source that defines the tag or includes the tag. This is incredibly
-  useful when you want to jump from a function declaration in a class
-  to its definition, or jump to the class that a function belongs to,
-  quickly.
-
-  [[file:static/c-ide/senator-go-to-up-reference.gif][file:static/c-ide/senator-go-to-up-reference.gif]]
-
-  In the demo, I only use =senator-go-to-up-reference= to switch from
-  a declaration, that is =PIC32F42(string Name, short MemorySize);= in
-  =PIC32F42.h= to its implementation in =PIC32F42.c=. *C-c , u* again,
-  point jump is on the class =PIC32F42=, which is the class that the
-  function belongs. Class =PIC32F42= has its parent class
-  =Microcontrller=, and I run *C-c , u* again to move point to
-  =Microcontrller= class. At this point, I cannot move further.
-
-Semantic also provides a useful command for finding all references of
-a tag, that is =semantic-symref=, as demonstrated in previous
-section. On a symbol, *C-c , g* and a prompt appear asking for a tag
-for gathering references, with the default is the symbol at
-point. Leave prompt blank and *RET* to use the default or enter
-another symbol if you change your mind.
-*** Copy/Paste
-:PROPERTIES:
-:ID:  senator-copy-paste
-:END:
-
-- =C-c , M-w= runs =senator-copy-tag=, take the current tag, and place
-  it in the tag ring.
-
-- =C-c , C-w= runs =senator-kill-tag=, take the current tag, place it
-  in the tag ring, and kill it. Killing the tag removes the text for
-  that tag, and places it into the kill ring. Retrieve that text with
-  *C-y*.
-
-  The above commands are basically like normal =M-w= and =C-w=, but are
-  used for tags. For example, run =C-c , C-w= with point inside a
-  function definition kills the whole function body and its
-  interface, or you can kill function parameters, and can be yanked
-  back with *C-y*:
-
-  [[file:static/c-ide/senator-kill-yank-tag.gif][file:static/c-ide/senator-kill-yank-tag.gif]]
-
-  As you see, the function body and its interface is killed and yanked
-  back with *C-y*. You can also see that the function parameter, aside
-  from its name, its type is also removed when the command is executed.
-
-- =C-c , C-y= runs =senator-yank-tag=, yank a tag from the tag
-  ring. The form the tag takes is different depending on where it is
-  being yanked to. For example, in previous example with =C-c , C-w=,
-  when you run *C-y*, it yanks the whole thing including function
-  interface and its body. *C-c , C-y* only yanks the function
-  interface.
-
-  [[file:static/c-ide/senator-yank-tag.gif][file:static/c-ide/senator-yank-tag.gif]]
-
-- =C-c , r= runs =senator-copy-tag-to-register=, copy the current tag
-  into a register. With prefix argument will delete the text of the
-  tag to the kill ring.
-
-*** Obsolete commands
-:PROPERTIES:
-:ID: senator-obsolete-commands
-:END:
-Senator also provides commands for code completion:
-=senator-complete-symbol= and =senator-completion-menu-popup=. Code
-completion provided by Senator is simpler than the actual completion
-provided by =semantic-ia-complete-symbol= command that is used by
-=moo-complete= for a list of candidates with full information, such as
-complete function interface is displayed correctly. These two
-completion commands are provided.
-
-** *Package*: =company-c-headers=
-:PROPERTIES:
-:ID: company-c-headers
-:END:
-[[https://github.com/randomphrase/company-c-headers][company-c-headers]] provides auto-completion for C/C++ headers using
-Company. After installing from MELPA, set it up:
-
-#+begin_src emacs-lisp
-  (add-to-list 'company-backends 'company-c-headers)
-#+end_src
-
-[[file:static/c-ide/company-c-header.png][file:static/c-ide/company-c-header.png]]
-
-*_IMPORTANT_*: If you want to complete C++ header files, you have to
-add its paths since by default =company-c-headers= only includes these
-two system include paths: =/usr/include/= and
-=/usr/local/include/=. To enable C++ header completion for standard
-libraries, you have to add its path, for example, like this: 
-
-#+begin_src emacs-lisp
-  (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
-#+end_src
-
-After that, you can complete C++ header files. To complete project
-local, use =company-c-headers-path-user= and put it in
-=.dir-locals.el=.
 * Navigate system include path
 :PROPERTIES:
 :ID:  navigate-system-include-path
@@ -1418,7 +1345,9 @@ long function that spreads more than a screen, and you don't have to
 scroll up to read the function name and then scroll down to original
 position.
 
-[[file:static/c-ide/semantic-sticky-func.gif][file:static/c-ide/semantic-sticky-func.gif]]
+[[
+
+https://github.com/tuhdo/semantic-stickyfunc-enhance#features][Please click here for demos]].
 
 Setup:
 
