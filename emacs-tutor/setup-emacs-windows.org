@@ -1,4 +1,4 @@
-#+TITLE: Setup Emacs with PDF Tools and Xwidgets web browser
+#+TITLE: Setup Emacs with PDF Tools and Xwidgets web browser on Windows
 
 Installation instructions:
 
