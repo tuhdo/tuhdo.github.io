@@ -1,4 +1,4 @@
-#+TITLE: Setup PDF Tools and Xwidgets Browser on Windows
+#+TITLE: Setup Emacs with PDF Tools and Xwidgets web browser
 
 Installation instructions:
 
@@ -12,9 +12,8 @@ Installation instructions:
 
 * With PDF reader
 
-Demo:
-
-[[./static/setup-emacs-windows/pdf_tools_windows_latex.gif][./static/setup-emacs-windows/pdf_tools_windows_latex.gif]]
+[[./static/setup-emacs-windows/pdf_tools_windows_latex.gif][DEMO]] (Notice how I press some text in PDF file and Latex buffer jumps to
+corresponding automatically).
 
 First, don’t use MELPA; you must install pdf-tools manually from this
 repository. Then, you need to install Cygwin. The following dependencies are
@@ -39,9 +38,7 @@ Then install Poppler development library:
 - libpoppler-glib-devel (*Lib* category)
 
 Just type the dependency name above and click to choose. For example, enter
-libpoppler-devel into the search box:
-
-[[./static/setup-emacs-windows/cygwin_example_install.png][./static/setup-emacs-windows/cygwin_example_install.png]]
+libpoppler-devel into the search box.
 
 After all dependencies installed, clone =pdf-tools=:
 
@@ -79,9 +76,7 @@ in your init file:
 
 * With Xwidgets browser
 
-Demo:
-
-[[./static/setup-emacs-windows/emacs_xwidgets_windows.png][./static/setup-emacs-windows/emacs_xwidgets_windows.png]]
+[[./static/setup-emacs-windows/emacs_xwidgets_windows.png][DEMO]]
 
 Development libraries for building Emacs that supports Xwidgets:
 
@@ -116,7 +111,7 @@ Finally, set your display:
 
 Then, from your Start Menu, open the X server:
 
-[[./static/setup-emacs-windows/xserver_example.png][./static/setup-emacs-windows/xserver_example.png]]
+[[file:static/setup-emacs-windows/xserver_example.png][file:static/setup-emacs-windows/xserver_example.png]]
 
 Then, run your compiled Emacs 25 from Cygwin terminal:
 
