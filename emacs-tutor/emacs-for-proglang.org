@@ -496,17 +496,20 @@ You need these three essential commands to work with your SML
 assignments. All the demos begin when you see =START= at the bottom:
 
 - *C-c C-s* runs command  =sml-prog-proc-switch-to= 
+
   _Description_: Start SML REPL.
 
   [[file:static/proglang/sml-start-proc.gif][file:static/proglang/sml-start-proc.gif]]
 
 - *C-c C-b* runs command =sml-prog-proc-send-buffer= 
+
   _Description_: Send the current editing buffer to SML REPL for
   evaluation. Here is an example of evaluating an SML test file:
 
   [[file:static/proglang/sml-send-buffer.gif][file:static/proglang/sml-send-buffer.gif]]
 
 - *C-c C-r* runs Command: =sml-prog-proc-send-region= 
+
   _Description_: Similar to =sml-prog-proc-send-buffer=, but instead
   of sending buffer to the REPL, send a highlighted region. This is
   useful when you want to evaluate individual expressions.

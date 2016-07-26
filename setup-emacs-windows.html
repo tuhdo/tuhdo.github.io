@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-07-20 T4 16:10 -->
+<!-- 2016-07-26 Tue 20:25 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Setup Emacs with PDF Tools and Xwidgets web browser on Windows</title>
@@ -289,7 +289,7 @@ in your init file:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>pdf-tools-install<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span><span style="color: #111111;">setq</span> pdf-info-epdfinfo-program <span style="color: #111111;">"/usr/bin/epdfinfo.exe"</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> pdf-info-epdfinfo-program <span style="color: #8b2252;">"/usr/bin/epdfinfo.exe"</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -345,7 +345,7 @@ Finally, set your display:
 
 <div class="org-src-container">
 
-<pre class="src src-sh"><span style="color: #111111; background-color: #fffff8;">echo</span> <span style="color: #111111;">"export DISPLAY=:0.0"</span> &gt;&gt; .bash_profile
+<pre class="src src-sh"><span style="color: #483d8b;">echo</span> <span style="color: #8b2252;">"export DISPLAY=:0.0"</span> &gt;&gt; .bash_profile
 </pre>
 </div>
 
