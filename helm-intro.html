@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-08-14 Sun 14:18 -->
+<!-- 2016-09-14 Wed 11:37 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>A Package in a league of its own: <code>Helm</code></title>
@@ -293,7 +293,26 @@ Extended config:
       helm-move-to-line-cycle-in-source     t <span style="color: #b22222;">; </span><span style="color: #b22222;">move to end or beginning of source when reaching top or bottom of source.</span>
       helm-ff-search-library-in-sexp        t <span style="color: #b22222;">; </span><span style="color: #b22222;">search for library in `</span><span style="color: #008b8b;">require</span><span style="color: #b22222;">' and `</span><span style="color: #008b8b;">declare-function</span><span style="color: #b22222;">' sexp.</span>
       helm-scroll-amount                    <span style="color: #008b8b;">8</span> <span style="color: #b22222;">; </span><span style="color: #b22222;">scroll 8 lines other window using M-&lt;next&gt;/M-&lt;prior&gt;</span>
-      helm-ff-file-name-history-use-recentf t<span style="color: #707183;">)</span>
+      helm-ff-file-name-history-use-recentf t
+      helm-echo-input-in-header-line t<span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">defun</span> <span style="color: #0000ff;">spacemacs//helm-hide-minibuffer-maybe</span> <span style="color: #7388d6;">()</span>
+  <span style="color: #8b2252;">"Hide minibuffer in Helm session if we use the header line as input field."</span>
+  <span style="color: #7388d6;">(</span><span style="color: #a020f0;">when</span> <span style="color: #909183;">(</span><span style="color: #a020f0;">with-helm-buffer</span> helm-echo-input-in-header-line<span style="color: #909183;">)</span>
+    <span style="color: #909183;">(</span><span style="color: #a020f0;">let</span> <span style="color: #709870;">(</span><span style="color: #907373;">(</span>ov <span style="color: #6276ba;">(</span>make-overlay <span style="color: #858580;">(</span>point-min<span style="color: #858580;">)</span> <span style="color: #858580;">(</span>point-max<span style="color: #858580;">)</span> nil nil t<span style="color: #6276ba;">)</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span>overlay-put ov 'window <span style="color: #907373;">(</span>selected-window<span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span>overlay-put ov 'face
+                   <span style="color: #907373;">(</span><span style="color: #a020f0;">let</span> <span style="color: #6276ba;">(</span><span style="color: #858580;">(</span>bg-color <span style="color: #80a880;">(</span>face-background 'default nil<span style="color: #80a880;">)</span><span style="color: #858580;">)</span><span style="color: #6276ba;">)</span>
+                     `<span style="color: #6276ba;">(</span><span style="color: #483d8b;">:background</span> ,bg-color <span style="color: #483d8b;">:foreground</span> ,bg-color<span style="color: #6276ba;">)</span><span style="color: #907373;">)</span><span style="color: #709870;">)</span>
+      <span style="color: #709870;">(</span><span style="color: #a020f0;">setq-local</span> cursor-type nil<span style="color: #709870;">)</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+
+
+<span style="color: #707183;">(</span>add-hook 'helm-minibuffer-set-up-hook
+          'spacemacs//helm-hide-minibuffer-maybe<span style="color: #707183;">)</span>
+
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> helm-autoresize-max-height <span style="color: #008b8b;">0</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> helm-autoresize-min-height <span style="color: #008b8b;">20</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>helm-autoresize-mode <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 
 <span style="color: #707183;">(</span>helm-mode <span style="color: #008b8b;">1</span><span style="color: #707183;">)</span>
 </pre>
