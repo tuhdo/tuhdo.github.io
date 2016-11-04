@@ -3,12 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2015-12-16 Wed 11:06 -->
+<!-- 2016-11-04 Fri 22:29 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>C/C++ Development Environment for Emacs</title>
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="tuhdo" />
+<meta  name="author" content="Tu Do" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -531,7 +531,7 @@ includes the above file in your <code>~/.emacs.d</code>, remember to add
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span>
  helm-gtags-ignore-case t
  helm-gtags-auto-update t
  helm-gtags-use-input-at-cursor t
@@ -719,7 +719,7 @@ can integrate Imenu:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq-local imenu-create-index-function #'ggtags-build-imenu-index<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq-local</span> imenu-create-index-function #'ggtags-build-imenu-index<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -956,7 +956,7 @@ To enable <code>speedbar</code> to show all files:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq speedbar-show-unknown-files t<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> speedbar-show-unknown-files t<span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -1138,7 +1138,7 @@ To use <code>company-mode</code> with Clang, add this configuration:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq company-backends <span style="color: #7388d6;">(</span>delete 'company-semantic company-backends<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> company-backends <span style="color: #7388d6;">(</span>delete 'company-semantic company-backends<span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span>define-key c-mode-map  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span>tab<span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> 'company-complete<span style="color: #707183;">)</span>
 <span style="color: #707183;">(</span>define-key c++-mode-map  <span style="color: #7388d6;">[</span><span style="color: #909183;">(</span>tab<span style="color: #909183;">)</span><span style="color: #7388d6;">]</span> 'company-complete<span style="color: #707183;">)</span>
 </pre>
@@ -1528,7 +1528,7 @@ modes, then ignore the optional mode argument in
 </div></li>
 <li><a id="orgheadline27"></a><a id="company-semantic"></a>Completion using <code>company-mode</code><br  /><div class="outline-text-5" id="text-orgheadline27">
 <p>
-<code>companh-mode</code> provides a command called <code>company-semantic</code> that uses
+<code>company-mode</code> provides a command called <code>company-semantic</code> that uses
 SemanticDB to retrieve completion candidates. Function interface of
 each candidate is shown in the minibuffer. One nice thing of
 <code>company-semantic</code> is that it fixed an issue of original Semantic
@@ -2227,7 +2227,9 @@ scroll up to read the function name and then scroll down to original
 position.
 </p>
 
-<a href="https://github.com/tuhdo/semantic-stickyfunc-enhance#features">Please follow this link for demos</a>.
+<p>
+<a href="https://github.com/tuhdo/semantic-stickyfunc-enhance#features">Please click here for demos</a>.
+</p>
 
 <p>
 Setup:
@@ -2271,7 +2273,7 @@ in minibuffer:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq-local eldoc-documentation-function #'ggtags-eldoc-function<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq-local</span> eldoc-documentation-function #'ggtags-eldoc-function<span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2542,7 +2544,7 @@ you:
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;python&#8221;: What Python developers use for extension modules</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;java&#8221;: The default style for java-mode (see below)</span>
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">&#8220;user&#8221;: When you want to define your own style</span>
-<span style="color: #707183;">(</span>setq
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span>
  c-default-style <span style="color: #8b2252;">"linux"</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">set style to "linux"</span>
  <span style="color: #707183;">)</span>
 </pre>
@@ -2577,13 +2579,13 @@ before committing your code.
 <span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"C-c w"</span><span style="color: #7388d6;">)</span> 'whitespace-mode<span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">show unncessary whitespace that can mess up your diff</span>
-<span style="color: #707183;">(</span>add-hook 'prog-mode-hook <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span> <span style="color: #909183;">(</span>interactive<span style="color: #909183;">)</span> <span style="color: #909183;">(</span>setq show-trailing-whitespace <span style="color: #008b8b;">1</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span>add-hook 'prog-mode-hook <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span> <span style="color: #909183;">(</span><span style="color: #a020f0;">interactive</span><span style="color: #909183;">)</span> <span style="color: #909183;">(</span><span style="color: #a020f0;">setq</span> show-trailing-whitespace <span style="color: #008b8b;">1</span><span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">use space to indent by default</span>
-<span style="color: #707183;">(</span>setq-default indent-tabs-mode nil<span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq-default</span> indent-tabs-mode nil<span style="color: #707183;">)</span>
 
 <span style="color: #b22222;">;; </span><span style="color: #b22222;">set appearance of a tab that is represented by 4 spaces</span>
-<span style="color: #707183;">(</span>setq-default tab-width <span style="color: #008b8b;">4</span><span style="color: #707183;">)</span>
+<span style="color: #707183;">(</span><span style="color: #a020f0;">setq-default</span> tab-width <span style="color: #008b8b;">4</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 
@@ -2667,7 +2669,7 @@ in echo area and might become a constant annoyance.
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq dtrt-indent-verbosity <span style="color: #008b8b;">0</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span> dtrt-indent-verbosity <span style="color: #008b8b;">0</span><span style="color: #707183;">)</span>
 </pre>
 </div>
 </div>
@@ -2886,8 +2888,8 @@ a command:
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>global-set-key <span style="color: #7388d6;">(</span>kbd <span style="color: #8b2252;">"&lt;f5&gt;"</span><span style="color: #7388d6;">)</span> <span style="color: #7388d6;">(</span><span style="color: #a020f0;">lambda</span> <span style="color: #909183;">()</span>
-                               <span style="color: #909183;">(</span>interactive<span style="color: #909183;">)</span>
-                               <span style="color: #909183;">(</span>setq-local compilation-read-command nil<span style="color: #909183;">)</span>
+                               <span style="color: #909183;">(</span><span style="color: #a020f0;">interactive</span><span style="color: #909183;">)</span>
+                               <span style="color: #909183;">(</span><span style="color: #a020f0;">setq-local</span> compilation-read-command nil<span style="color: #909183;">)</span>
                                <span style="color: #909183;">(</span>call-interactively 'compile<span style="color: #909183;">)</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
 </pre>
 </div>
@@ -2967,7 +2969,7 @@ tell Emacs to always use <code>gdb-many-windows</code>:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq
+<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">setq</span>
  <span style="color: #b22222;">;; </span><span style="color: #b22222;">use gdb-many-windows by default</span>
  gdb-many-windows t
 
@@ -3146,15 +3148,15 @@ work with many languages, use <b>GUD</b>.
 
     <div id="disqus_thread"></div>
     <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>

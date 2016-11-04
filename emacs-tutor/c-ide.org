@@ -1345,9 +1345,7 @@ long function that spreads more than a screen, and you don't have to
 scroll up to read the function name and then scroll down to original
 position.
 
-[[
-
-https://github.com/tuhdo/semantic-stickyfunc-enhance#features][Please click here for demos]].
+[[https://github.com/tuhdo/semantic-stickyfunc-enhance#features][Please click here for demos]].
 
 Setup:
 
