@@ -850,7 +850,7 @@ modes, then ignore the optional mode argument in
 :PROPERTIES:
 :ID: company-semantic
 :END:
-=companh-mode= provides a command called =company-semantic= that uses
+=company-mode= provides a command called =company-semantic= that uses
 SemanticDB to retrieve completion candidates. Function interface of
 each candidate is shown in the minibuffer. One nice thing of
 =company-semantic= is that it fixed an issue of original Semantic
