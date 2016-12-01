@@ -167,6 +167,8 @@ alt="hit counter"></a></div></noscript>
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
+<li><a href="#orgheadline0">Introductory demos</a>
+<li><a href="#orgheadline0a">Quick setup</a>
 <li><a href="#orgheadline1">Source code navigation</a>
 <ul>
 <li><a href="#orgheadline2">Prerequisite:</a></li>
@@ -264,10 +266,18 @@ inside Emacs effortlessly, such as jump to definition/references at
 cursor, go back and forth between jumping points, finding any file
 instantly, switching between .h and .c/.cpp.
 </p>
-
+ 
 <p>
-A few demos:
+Please remember that there's a table of content on the top right
+corner and you can use it to navigate this guide. If you feel your
+internet connection is too slow for my guide, you can always clone and
+read it offline: <a href="https://github.com/tuhdo/tuhdo.github.io">https://github.com/tuhdo/tuhdo.github.io</a>
 </p>
+
+<div id="outline-container-orgheadline0" class="outline-2">
+<h2 id="orgheadline0"><a id="introductory-demos"></a>Introductory demos</h2>
+<div class="outline-text-2" id="text-orgheadline0">
+</div>
 
 <ul class="org-ul">
 <li>Switching between .h and .c/.cpp anywhere in the project like Linux
@@ -427,17 +437,16 @@ Interactive outline tree using <code>moo-jump-local</code> from <a href="https:/
 </p>
 </div>
 
+<div id="outline-container-orgheadline0a" class="outline-2">
+<h2 id="orgheadline0a"><a id="quick-setup"></a>Quick setup</h2>
+<div class="outline-text-2" id="text-orgheadline0a">
+</div>
+ 
 <p>
-Please remember that there's a table of content on the top right
-corner and you can use it to navigate this guide. If you feel your
-internet connection is too slow for my guide, you can always clone and
-read it offline: <a href="https://github.com/tuhdo/tuhdo.github.io">https://github.com/tuhdo/tuhdo.github.io</a>
-</p>
-
-<p>
-I added an Emacs repository that is properly configured for
-demonstration purpose. You can clone and play with it and you can
-ignore all the Elisp code for setting up throughout the guide:
+I've prepared an Emacs repository that is properly configured for
+demonstration purposes. You can clone and play with it and you can
+ignore all the Elisp code for setting up throughout the guide. First,
+backup your <code>~/.emacs.d</code> elsewhere. Then:
 </p>
 
 <div class="org-src-container">
@@ -447,10 +456,8 @@ ignore all the Elisp code for setting up throughout the guide:
 </div>
 
 <p>
-Remember to backup your <code>~/.emacs.d</code> elsewhere. In the demo
-repository, I already installed both <code>ggtags</code> and
-<code>helm-gtags</code>. <code>helm-gtags</code> is enabled by default. If you want to use
-<code>ggtags</code>, comment this line in <code>init.el</code>:
+The demo repository can use either <code>helm-gtags</code> (the default), or <code>ggtags</code>.
+If you want to use <code>ggtags</code>, comment this line in <code>init.el</code>:
 </p>
 
 <div class="org-src-container">
@@ -460,6 +467,8 @@ repository, I already installed both <code>ggtags</code> and
 </div>
 
 <p>
+Before using the demo repository
+ 
 If you don't like to use Helm, also uncomment <code>(require 'setup-helm)</code>
 and restart Emacs, because I made some global key bindings to some
 commands that even if <code>helm-mode</code> is disabled, such commands still
@@ -683,7 +692,7 @@ or following function. Demo:
 <p>
 A tag is a name of an entity in source code. An entity can be a
 variable, a method definition, an include-operator&#x2026; A tag contains
-several information such as name of the tag (the name of the variable,
+information such as name of the tag (the name of the variable,
 class, method), location of this tag in source code and which file it
 belongs to. As an example, GNU Global generates three tag databases:
 </p>
