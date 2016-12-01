@@ -266,7 +266,7 @@ inside Emacs effortlessly, such as jump to definition/references at
 cursor, go back and forth between jumping points, finding any file
 instantly, switching between .h and .c/.cpp.
 </p>
- 
+
 <p>
 Please remember that there's a table of content on the top right
 corner and you can use it to navigate this guide. If you feel your
@@ -441,7 +441,7 @@ Interactive outline tree using <code>moo-jump-local</code> from <a href="https:/
 <h2 id="orgheadline0a"><a id="quick-setup"></a>Quick setup</h2>
 <div class="outline-text-2" id="text-orgheadline0a">
 </div>
- 
+
 <p>
 I've prepared an Emacs repository that is properly configured for
 demonstration purposes. You can clone it and play with it without having to
@@ -453,17 +453,17 @@ this may take a while.
 </p>
 
 <ol>
- <li>Backup your <code>~/.emacs.d</code> elsewhere.</li>
- <li>If emacs is not already running, start it.</li>
- <li>Update your melpa database: <code>M-x package-list-packages</code></li>
- <li>Clone the repository into your ~/.emacs.d folder.
+ <li><p>Backup your <code>~/.emacs.d</code> elsewhere.</p></li>
+ <li><p>If emacs is not already running, start it.</p></li>
+ <li><p>Update your melpa database: <code>M-x package-list-packages</code></p></li>
+ <li><p>Clone the repository into your ~/.emacs.d folder.
   <div class="org-src-container">
   <pre class="src src-sh">git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
   </pre>
   </div></li>
- <li>You may possibly want to edit your new <code>~/.emacs.d/init.el</code> file for two options.
+ <li><p>You may possibly want to edit your new <code>~/.emacs.d/init.el</code> file for two options.
   <ol>
-   <li>The demo repository can use either <code>helm-gtags</code> (the default), or <code>ggtags</code>.
+   <li><p>The demo repository can use either <code>helm-gtags</code> (the default), or <code>ggtags</code>.
        If you want to use <code>ggtags</code>, comment this line in <code>init.el</code>:
        <div class="org-src-container">
        <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm-gtags</span><span style="color: #707183;">)</span>
@@ -475,7 +475,7 @@ this may take a while.
        </pre>
        </div>
        </li>
-    <li>The demo uses Helm. If you're not already familiar with Helm, read
+    <li><p>The demo uses Helm. If you're not already familiar with Helm, read
         <a href="http://tuhdo.github.io/helm-intro.html">my guide</a>.
         If you don't want to use Helm, also comment this line in  <code>init.el</code>:
         <div class="org-src-container">
@@ -488,7 +488,7 @@ this may take a while.
 
 That does it! To start using the demo, just type <code>M-x load-file RET init.el</code>.
 
- 
+
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1"><a id="source-navigation"></a>Source code navigation</h2>
 <div class="outline-text-2" id="text-orgheadline1">
@@ -826,10 +826,10 @@ regexp.
 
 <p>
 <code>helm-gtags</code> provides a really nice feature that uses Helm to display
-all available tags in a project and incrementally filtering, and is really 
+all available tags in a project and incrementally filtering, and is really
 fast using <code>helm-gtags-select</code>, which is bound to <code>C-j</code> in my setup
 above. This is useful when you want to explore tags in unfamiliar
-project. Demo: 
+project. Demo:
 </p>
 
 
@@ -849,7 +849,7 @@ project. Demo:
 
 <li>Using <code>helm-gtags</code>: Either run <code>helm-gtags-dwim</code> or
 <code>helm-gtags-find-rtags</code>, bound to <b>C-c g r</b>, which only finds
-references. Note that for <code>helm-gtags-find-rtags</code>: 
+references. Note that for <code>helm-gtags-find-rtags</code>:
 
 <ul class="org-ul">
 <li>if point is inside a function, the prompt will be default to the
@@ -937,7 +937,7 @@ the node is a directory, the children of the node are files in that
 directory. One important thing to remember, Speedbar only lists files
 that match <code>speedbar-file-regexp</code>, that contains the extensions for
 common programming languages. If you don't see files in your
-programming languages listed, consider adding it the regexp list. 
+programming languages listed, consider adding it the regexp list.
 </p>
 
 <p>
@@ -1201,7 +1201,7 @@ absolute path by <b>C-c i</b> at the current path in <code>helm-find-files</code
 
 
 <div class="figure">
-<p><a href="static/c-ide/helm-files-insertion.gif"><img src="static/c-ide/helm-files-insertion.gif" alt="helm-files-insertion.gif" /></a> 
+<p><a href="static/c-ide/helm-files-insertion.gif"><img src="static/c-ide/helm-files-insertion.gif" alt="helm-files-insertion.gif" /></a>
 </p>
 </div>
 
@@ -1280,7 +1280,7 @@ Company. After installing from MELPA, set it up:
 add its paths since by default <code>company-c-headers</code> only includes these
 two system include paths: <code>/usr/include/</code> and
 <code>/usr/local/include/</code>. To enable C++ header completion for standard
-libraries, you have to add its path, for example, like this: 
+libraries, you have to add its path, for example, like this:
 </p>
 
 <div class="org-src-container">
