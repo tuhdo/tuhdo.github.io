@@ -444,47 +444,51 @@ Interactive outline tree using <code>moo-jump-local</code> from <a href="https:/
  
 <p>
 I've prepared an Emacs repository that is properly configured for
-demonstration purposes. You can clone and play with it and you can
-ignore all the Elisp code for setting up throughout the guide. First,
-backup your <code>~/.emacs.d</code> elsewhere. Then:
+demonstration purposes. You can clone it and play with it without having to
+manually copy and paste all the setup Elisp code
+throughout the guide. When installed and run <u>the first time</u>, the demo
+repository will download from melpa, install, and compile all the packages
+it needs. Note that depending on your internet connection and processor speeds,
+this may take a while.
 </p>
 
-<div class="org-src-container">
+<ol>
+ <li>Backup your <code>~/.emacs.d</code> elsewhere.</li>
+ <li>If emacs is not already running, start it.</li>
+ <li>Update your melpa database: <code>M-x package-list-packages</code></li>
+ <li>Clone the repository into your ~/.emacs.d folder.
+  <div class="org-src-container">
+  <pre class="src src-sh">git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
+  </pre>
+  </div></li>
+ <li>You may possibly want to edit your new <code>~/.emacs.d/init.el</code> file for two options.
+  <ol>
+   <li>The demo repository can use either <code>helm-gtags</code> (the default), or <code>ggtags</code>.
+       If you want to use <code>ggtags</code>, comment this line in <code>init.el</code>:
+       <div class="org-src-container">
+       <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm-gtags</span><span style="color: #707183;">)</span>
+       </pre>
+       </div>
+       And uncomment this line:
+       <div class="org-src-container">
+       <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'setup-ggtags)</span>
+       </pre>
+       </div>
+       </li>
+    <li>The demo uses Helm. If you're not already familiar with Helm, read
+        <a href="http://tuhdo.github.io/helm-intro.html">my guide</a>.
+        If you don't want to use Helm, also comment this line in  <code>init.el</code>:
+        <div class="org-src-container">
+        <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm</span><span style="color: #707183;">)</span>
+        </pre>
+        </div>
+        </li>
+  </ol>
+ </ol>
 
-<pre class="src src-sh">git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
-</pre>
-</div>
+That does it! To start using the demo, just type <code>M-x load-file RET init.el</code>.
 
-<p>
-The demo repository can use either <code>helm-gtags</code> (the default), or <code>ggtags</code>.
-If you want to use <code>ggtags</code>, comment this line in <code>init.el</code>:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm-gtags</span><span style="color: #707183;">)</span>
-</pre>
-</div>
-
-<p>
-Before using the demo repository
  
-If you don't like to use Helm, also uncomment <code>(require 'setup-helm)</code>
-and restart Emacs, because I made some global key bindings to some
-commands that even if <code>helm-mode</code> is disabled, such commands still
-uses Helm interface. If you want to learn Helm, follow <a href="http://tuhdo.github.io/helm-intro.html">my guide</a>.
-</p>
-
-<p>
-And uncomment this line:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'setup-ggtags)</span>
-</pre>
-</div>
-
 <div id="outline-container-orgheadline1" class="outline-2">
 <h2 id="orgheadline1"><a id="source-navigation"></a>Source code navigation</h2>
 <div class="outline-text-2" id="text-orgheadline1">
