@@ -453,6 +453,7 @@ this may take a while.
 </p>
 
 <ol>
+ <li><p>Install <a href="http://www.gnu.org/software/global/">GNU Global</a> from your distribution's package manager (Linux / Mac) or from the <a href="http://adoxa.altervista.org/global/">Win32 port</a> (Windows). If none is available, download the sources <a href="http://www.gnu.org/software/global/download.html">here</a> and manually build the package.</p>
  <li><p>Backup your <code>~/.emacs.d</code> elsewhere.</p></li>
  <li><p>If emacs is not already running, start it.</p></li>
  <li><p>Update your melpa database: <code>M-x package-list-packages</code></p></li>
@@ -460,7 +461,7 @@ this may take a while.
   <div class="org-src-container">
   <pre class="src src-sh">git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
   </pre>
-  </div></li>
+  </div></p></li>
  <li><p>You may possibly want to edit your new <code>~/.emacs.d/init.el</code> file for two options.
   <ol>
    <li><p>The demo repository can use either <code>helm-gtags</code> (the default), or <code>ggtags</code>.
@@ -474,7 +475,7 @@ this may take a while.
        <pre class="src src-emacs-lisp"><span style="color: #b22222;">;; </span><span style="color: #b22222;">(require 'setup-ggtags)</span>
        </pre>
        </div>
-       </li>
+       </p></li>
     <li><p>The demo uses Helm. If you're not already familiar with Helm, read
         <a href="http://tuhdo.github.io/helm-intro.html">my guide</a>.
         If you don't want to use Helm, also comment this line in  <code>init.el</code>:
@@ -482,11 +483,11 @@ this may take a while.
         <pre class="src src-emacs-lisp"><span style="color: #707183;">(</span><span style="color: #a020f0;">require</span> '<span style="color: #008b8b;">setup-helm</span><span style="color: #707183;">)</span>
         </pre>
         </div>
-        </li>
+        </p></li>
   </ol>
  </ol>
 
-That does it! To start using the demo, just type <code>M-x load-file RET init.el</code>.
+<p>That does it! To start using the demo, just type <code>M-x load-file RET init.el</code>. Continue reading this guide for its operational directions, without needing to bother to perform any more installations or elisp evaluations.</p>
 
 
 <div id="outline-container-orgheadline1" class="outline-2">
@@ -500,15 +501,9 @@ That does it! To start using the demo, just type <code>M-x load-file RET init.el
 <li>Know how to use <code>package.el</code> and MELPA. If you don't know how to
 use, read the guide <a href="emacs-tutor3.html#MissingReference">How to use Emacs package manager</a>.</li>
 
-<li><p>
-Have <a href="http://www.gnu.org/software/global/">GNU Global</a> installed. Download the source <a href="http://www.gnu.org/software/global/download.html">here</a>, or you can
-install it from the package manager of your OS (Linux distribution
-or Mac OS). For Windows users, download the <a href="http://adoxa.altervista.org/global/">Win32 port</a>.
-</p>
 
-<p>
-<b>Warning</b>: if you install from a package manager, check that you don't get an
-outdated version (helm-gtags might not fully work otherwise).
+ <li><p>Install <a href="http://www.gnu.org/software/global/">GNU Global</a> from your distribution's package manager (Linux / Mac) or from the <a href="http://adoxa.altervista.org/global/">Win32 port</a> (Windows). If none is available, download the sources <a href="http://www.gnu.org/software/global/download.html">here</a> and manually build the package. Do be aware that it is remotely possible that your package manager might install an
+outdated version that might impair some functionality of helm-gtags.
 </p></li>
 
 <li>Install <a href="https://github.com/leoliu/ggtags">ggtags</a>. After installing <code>ggtags</code> from MELPA, add this code
