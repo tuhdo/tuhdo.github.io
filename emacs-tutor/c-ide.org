@@ -83,32 +83,52 @@ internet connection is too slow for my guide, you can always clone and
 read it offline: https://github.com/tuhdo/tuhdo.github.io
 
 I added an Emacs repository that is properly configured for
-demonstration purpose. You can clone and play with it and you can
-ignore all the Elisp code for setting up throughout the guide:
+demonstration purposes. You can clone and play with it without having to
+manually copy and paste all the setup Elisp code throughout the guide. When
+installed and run the _first time_, the demo repository will download from
+MELPA, install and compile all the packages it needs. Note that depending on
+your internet connection and processor speeds, this may take a while.
+
+Steps to install:
+
+- Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux / Mac) or
+  from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available, download the source [[http://www.gnu.org/software/global/download.html][here]]
+  and manually build the package.
+- Backup your <code>~/.emacs.d</code> elsewhere.
+- If emacs is not already running, start it.
+- Update your melpa database: =M-x package-list-packages=.
+- Clone the repository into your ~/.emacs.d folder.
 
 #+begin_src sh
   git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
 #+end_src
 
-Remember to backup your =~/.emacs.d= elsewhere. In the demo
-repository, I already installed both =ggtags= and
-=helm-gtags=. =helm-gtags= is enabled by default. If you want to use
-=ggtags=, comment this line in =init.el=:
+- You may possibly want to edit your new =~/.emacs.d/init.el= file for two
+  options:
 
-#+begin_src emacs-lisp
-  (require 'setup-helm-gtags)
-#+end_src
+  + The demo repository can use either =gtags= (the default), or =ggtags=. If
+    you want to use =ggtags=, comment this line in =init.el=:
 
-If you don't like to use Helm, also uncomment =(require 'setup-helm)=
-and restart Emacs, because I made some global key bindings to some
-commands that even if =helm-mode= is disabled, such commands still
-uses Helm interface. If you want to learn Helm, follow [[http://tuhdo.github.io/helm-intro.html][my guide]].
+    #+BEGIN_SRC emacs-lisp
+      (require 'setup-helm-gtags)
+    #+END_SRC
 
-And uncomment this line:
+    And uncomment this line:
+    
+    #+BEGIN_SRC emacs-lisp
+      ;; (require 'setup-ggtags)
+    #+END_SRC
 
-#+begin_src emacs-lisp
-  ;; (require 'setup-ggtags)
-#+end_src
+  + The demo uses Helm. If you're not already familiar with Helm, read [[http://tuhdo.github.io/helm-intro.html][my guide]].
+    If you don't want to use Helm, also comment this line in =init.el=:
+
+    #+BEGIN_SRC emacs-lisp
+      (require 'setup-helm)
+    #+END_SRC
+
+That does it! To start using the demo, just type =M-x load-file RET init.el=.
+Continue reading this guide for its operational directions, without needing to
+bother to perform any more installations or elisp evaluations.
 
 * Source code navigation
 :PROPERTIES:
@@ -120,13 +140,6 @@ And uncomment this line:
 :END:
 - Know how to use =package.el= and MELPA. If you don't know how to
   use, read the guide [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]].
-
-- Have [[http://www.gnu.org/software/global/][GNU Global]] installed. Download the source [[http://www.gnu.org/software/global/download.html][here]], or you can
-  install it from the package manager of your OS (Linux distribution
-  or Mac OS). For Windows users, download the [[http://adoxa.altervista.org/global/][Win32 port]].
-
-  *Warning*: if you install from a package manager, check that you don't get an
-  outdated version (helm-gtags might not fully work otherwise).
 
 - Install [[https://github.com/leoliu/ggtags][ggtags]]. After installing =ggtags= from MELPA, add this code
   snippet to setup =ggtags= and key bindings:
@@ -247,7 +260,7 @@ that is =ggtags-create-tags=; this is recommended way when using
 :END:
 A tag is a name of an entity in source code. An entity can be a
 variable, a method definition, an include-operator... A tag contains
-several information such as name of the tag (the name of the variable,
+information such as name of the tag (the name of the variable,
 class, method), location of this tag in source code and which file it
 belongs to. As an example, GNU Global generates three tag databases:
 
