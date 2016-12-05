@@ -12,27 +12,21 @@
 (setq org-publish-project-alist
   '(("orgfiles"
       :base-directory  "./"
-      :base-extension "org"
-      :publishing-directory "../"
+      :base-extension  "org"
+      :exclude         "c-ide-irony_bak.org\\|ebrowse.org"
+      :publishing-directory "../docs/"
       :publishing-function org-html-publish-to-html
       :headline-levels 3
       :section-numbers t
-      :with-toc 1
+      :with-toc        1
       :html-head "<link rel=\"stylesheet\"
-                   href=\"./static/worg.css\" type=\"text/css\"/>"
-      :html-preamble t)
-
-     ("images"
+        href=\"./static/worg.css\" type=\"text/css\"/>"
+      :html-preamble   t)
+     ("images+css"
       :base-directory "./"
-      :recursive      t
+      :recursive       t
       :base-extension "jpg\\|gif\\|png"
-      :publishing-directory "../"
+      :include         ("static/worg.css")
+      :publishing-directory "../docs/"
       :publishing-function org-publish-attachment)
-
-     ("other"
-      :base-directory "./"
-      :base-extension "css"
-      :recursive      t
-      :publishing-directory "../"
-      :publishing-function org-publish-attachment)
-     ("website" :components ("orgfiles" "images" "other"))))
+     ("website" :components ("orgfiles" "images+css"))))

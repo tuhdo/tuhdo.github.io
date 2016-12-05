@@ -1,0 +1,11 @@
+Changelog
+
+* Remove cruft files
+
+* Reorganize file structure
+
+* Add ability to publish html from emacs org files
+
+* Corrections / edits to c-ide.org
+
+* Remove javascript statcounter and disqus comments

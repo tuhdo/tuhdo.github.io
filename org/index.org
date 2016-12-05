@@ -1,11 +1,13 @@
-#+TITLE: Table of Contents
+#+TITLE: Emacs Mini Manual
 
-   + [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - THE BASICS]]
-   + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER]]
-   + [[file:emacs-tutor3.org][Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS]]
-   + [[file:c-ide.org][Setup C/C++ Development Environment for Emacs]]
-   + [[file:helm-intro.org][A Package in a league of its own: =Helm=]]
-   + [[file:helm-projectile.org][Exploring large projects with Projectile and Helm Projectile]]
-   + [[file:emacs-for-proglang.org][Emacs for Programming Languages course on Coursera]]
-   + [[file:setup-emacs-windows.org][Setup Emacs with PDF Tools and Xwidgets web browser on Windows]]
++ Pages
+  + [[file:emacs-tutor.org][Emacs Mini Manual (PART 1) - The Basics]]
+  + [[file:emacs-tutor2.org][Emacs Mini Manual (PART 2) - Lisp Primer: Why Parentheses Matter]]
+  + [[file:emacs-tutor3.org][Emacs Mini Manual (PART 3) - Customizing And Extending Emacs]]
+  + [[file:c-ide.org][Setup C/C++ Development Environment for Emacs]]
+  + [[file:helm-intro.org][A Package in a league of its own: =Helm=]]
+  + [[file:helm-projectile.org][Exploring large projects with Projectile and Helm Projectile]]
+  + [[file:emacs-for-proglang.org][Emacs for Programming Languages course on Coursera]]
+  + [[file:setup-emacs-windows.org][Setup Emacs with PDF Tools and Xwidgets web browser on Windows]]
 
+(source: https://boruch-baum.github.io/emacs_mini_manual/)

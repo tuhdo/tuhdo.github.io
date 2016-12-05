@@ -3,30 +3,22 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2016-07-26 Tue 20:25 -->
+<title>Emacs Mini Manual</title>
+<!-- 2016-12-05 Mon 12:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
-<title>Table of Contents</title>
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu Do" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
+  .title  { text-align: center; }
   .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
+  .done   { color: green; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -65,14 +57,15 @@
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara { display: inline; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -94,7 +87,8 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" href="./static/worg.css">
+<link rel="stylesheet"
+        href="./static/worg.css" type="text/css"/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -143,35 +137,39 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="preamble" class="status">
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=9874755;
-var sc_invisible=1;
-var sc_security="c2028bb7";
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="hit counter"
-href="http://statcounter.com/free-hit-counter/" target="_blank"><img
-class="statcounter" src="http://c.statcounter.com/9874755/0/c2028bb7/1/"
-alt="hit counter"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
-</div>
 <div id="content">
-<h1 class="title">Table of Contents</h1>
+<h1 class="title">Emacs Mini Manual</h1>
 <ul class="org-ul">
-<li><a href="emacs-tutor.html">Emacs Mini Manual (PART 1) - THE BASICS</a></li>
-<li><a href="emacs-tutor2.html">Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER</a></li>
-<li><a href="emacs-tutor3.html">Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS</a></li>
-<li><a href="c-ide.html">Setup C/C++ Development Environment for Emacs</a></li>
-<li><a href="helm-intro.html">A Package in a league of its own: <code>Helm</code></a></li>
-<li><a href="helm-projectile.html">Exploring large projects with Projectile and Helm Projectile</a></li>
-<li><a href="emacs-for-proglang.html">Emacs for Programming Languages course on Coursera</a></li>
-<li><a href="setup-emacs-windows.html">Setup Emacs with PDF Tools and Xwidgets web browser on Windows</a></li>
+<li>Pages
+<ul class="org-ul">
+<li><a href="emacs-tutor.html">Emacs Mini Manual (PART 1) - The Basics</a>
+</li>
+<li><a href="emacs-tutor2.html">Emacs Mini Manual (PART 2) - Lisp Primer: Why Parentheses Matter</a>
+</li>
+<li><a href="emacs-tutor3.html">Emacs Mini Manual (PART 3) - Customizing And Extending Emacs</a>
+</li>
+<li><a href="c-ide.html">Setup C/C++ Development Environment for Emacs</a>
+</li>
+<li><a href="helm-intro.html">A Package in a league of its own: <code>Helm</code></a>
+</li>
+<li><a href="helm-projectile.html">Exploring large projects with Projectile and Helm Projectile</a>
+</li>
+<li><a href="emacs-for-proglang.html">Emacs for Programming Languages course on Coursera</a>
+</li>
+<li><a href="setup-emacs-windows.html">Setup Emacs with PDF Tools and Xwidgets web browser on Windows</a>
+</li>
 </ul>
+</li>
+</ul>
+
+<p>
+(source: <a href="https://boruch-baum.github.io/emacs_mini_manual/">https://boruch-baum.github.io/emacs_mini_manual/</a>)
+</p>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2016-12-05 Mon 12:23</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
