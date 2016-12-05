@@ -1,7 +1,8 @@
 Emacs Mini Manual
 =================
 
-1] Viewable at: https://boruch-baum.github.io/emacs_mini_manual/
+1] The manual is viewable at:
+   https://boruch-baum.github.io/emacs_mini_manual/
 
 2] The page names are:
 
@@ -28,3 +29,5 @@ Emacs Mini Manual
    folder. See `org/publish.el' for how to convert them to html.
 
 4] This is a fork of https://github.com/tuhdo/tuhdo.github.io
+
+   + Refer to CHANGELOG file for how I've altered it.
