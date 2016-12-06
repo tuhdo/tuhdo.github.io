@@ -1,3 +1,4 @@
+# c-ide.org -*- mode:org; mode:visual-line; -*-
 #+TITLE: C/C++ Development Environment for Emacs
 
 In this guide, I will help you to setup an efficient working C/C++
@@ -95,9 +96,13 @@ of the emacs IDE and to perform a basic configuration for
 demonstration purposes. When installed and run the _first time_, the
 demo repository will download from MELPA, install and compile all the
 packages it needs. Note that depending on your internet connection and
-processor speeds, this may take a while, but that shouldn't stop you from continuing with this guide; the next section can be followed using a second instance of emacs, and without the IDE components.
+processor speeds, this may take a while, but that shouldn't stop you
+from continuing with this guide; the next section can be followed
+using a second instance of emacs, and without the IDE components.
 
-If you don't wish to use the demo, you can manually install the components, and use the =.el= files of the demo as a reference sample configuration.
+If you don't wish to use the demo, you can manually install the
+components, and use the =.el= files of the demo as a reference sample
+configuration.
 
 Steps to install:
 
@@ -143,47 +148,46 @@ in a second instance of emacs, even without any of the IDE components.
 :PROPERTIES:
 :ID: basic-navigation
 :END:
-Even without any IDE components installed, emacs already has features useful for operating on source code.
+Even without any IDE components installed, emacs already has features
+useful for operating on source code.
 
-- *C-M-f* runs =forward-sexp=, move forward over a balanced
-  expression that can be a pair or a symbol. Demo:
+| Key                    | Binding Function     |                                                                           |
+|------------------------+----------------------+---------------------------------------------------------------------------|
+| *C-M-f*                | =forward-sexp=       | move forward over a balanced  expression that can be a pair or a symbol.  |
+| *C-M-b*                | =backward-sexp=      | move backward over a balanced  expression that can be a pair or a symbol. |
+| *C-M-k*                | =kill-sexp=          | kill balanced expression  forward that can be a pair or a symbol.         |
+| *C-M-<SPC>* or *C-M-@* | =mark-sexp=          | put mark after  following expression that can be a pair or a symbol.      |
+| *C-M-a*                | =beginning-of-defun= | move point to beginning of  a function.                                   |
+| *C-M-e*                | =end-of-defun=       | move point to end of a  function.                                         |
+| *C-M-h*                | =mark-defun=         | put a region around whole current  or following function.                 |
 
-  [[file:static/c-ide/forward-func.gif][file:static/c-ide/forward-func.gif]]
+** Demos
 
-- *C-M-b* runs =backward-sexp=, move backward over a balanced
-  expression that can be a pair or a symbol. Demo:
+#+ATTR_HTML: :border 2 :rules all :frame border
+| *C-M-f* runs =forward-sexp=, to move forward                     |   | *C-M-b* runs =backward-sexp=, to move backward              |
+| over a balanced expression that can be a pair or a symbol.       |   | over a balanced  expression that can be a pair or a symbol. |
+| [[file:static/c-ide/forward-func.gif][file:static/c-ide/forward-func.gif]]                               |   | [[file:static/c-ide/backward-func.gif][file:static/c-ide/backward-func.gif]]                         |
+|                                                                  |   |                                                             |
+| *C-M-k* runs =kill-sexp=, to kill balanced expression            |   | *C-M-<SPC>* or *C-M-@* runs =mark-sexp=, to put mark after  |
+| forward that can be a pair or a symbol.                          |   | following expression that can be a pair or a symbol.        |
+| [[file:static/c-ide/kill-func-body.gif][file:static/c-ide/kill-func-body.gif]]                             |   | [[file:static/c-ide/mark-func-body.gif][file:static/c-ide/mark-func-body.gif]]                        |
+|                                                                  |   |                                                             |
+| *C-M-a* runs =beginning-of-defun=, to move point to beginning of |   | *C-M-e* runs =end-of-defun=, to move point to end of a      |
+| a function.                                                      |   | function.                                                   |
+| [[file:static/c-ide/beginning-of-defun.gif][file:static/c-ide/beginning-of-defun.gif]]                         |   | [[file:static/c-ide/end-of-defun.gif][file:static/c-ide/end-of-defun.gif]]                          |
+|                                                                  |   |                                                             |
+| *C-M-h* runs =mark-defun=, to put a region around whole current  |   |                                                             |
+| or following function.                                           |   |                                                             |
+| [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]                                 |   |                                                             |
 
-  [[file:static/c-ide/backward-func.gif][file:static/c-ide/backward-func.gif]]
-
-- *C-M-k* runs =kill-sexp=, kill balanced expression
-  forward that can be a pair or a symbol. Demo:
-
-  [[file:static/c-ide/kill-func-body.gif][file:static/c-ide/kill-func-body.gif]]
-
-- *C-M-<SPC>* or *C-M-@* runs =mark-sexp=, put mark after
-  following expression that can be a pair or a symbol. Demo:
-
-  [[file:static/c-ide/mark-func-body.gif][file:static/c-ide/mark-func-body.gif]]
-
-- *C-M-a* runs =beginning-of-defun=, which moves point to beginning of
-  a function. Demo:
-
-  [[file:static/c-ide/beginning-of-defun.gif][file:static/c-ide/beginning-of-defun.gif]]
-
-- *C-M-e* runs =end-of-defun=, which moves point to end of a
-  function. Demo:
-
-  [[file:static/c-ide/end-of-defun.gif][file:static/c-ide/end-of-defun.gif]]
-
-- *C-M-h* runs =mark-defun=, which put a region around whole current
-  or following function. Demo:
-
-  [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]
 * Source code navigation
 :PROPERTIES:
 :ID: source-navigation
 :END:
-At this point, we begin using components of our emacs IDE, so if you're using the demo to perform its install, you'll need to wait for that to finish, and to close the second instance of emacs that you were using in the previous section.
+At this point, we begin using components of our emacs IDE, so if
+you're using the demo to perform its install, you'll need to wait for
+that to finish, and to close the second instance of emacs that you
+were using in the previous section.
 ** Package preparation
 :PROPERTIES:
 :ID:       b1292347-d0ed-4421-9905-33f1050883b2
@@ -191,60 +195,13 @@ At this point, we begin using components of our emacs IDE, so if you're using th
 If you didn't use the the demo to install the emacs IDE components,
 you'll now need to install [[http://www.gnu.org/software/global][GNU Global]], and you'll need to install from
 MELPA your choice of either [[https://github.com/leoliu/ggtags][ggtags]] or the pair of packages [[https://github.com/emacs-helm/helm][helm]] +
-[[https://github.com/syohex/emacs-helm-gtags][helm-gtags]].
+[[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. In the demo package, the elisp code used to setup those packages can be found in =setup-helm-tags.el= / =setup-ggtags.el=.
 
-Regardless of whether or not you used the demo, here are some code
-snippets you'll need to get the IDE working the way this guide
-presents it.
-
-- If you chose the defaults, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]].
-
+- If you chose [[https://github.com/leoliu/ggtags][ggtags]], here's an extra setting that might be useful.
 #+begin_src emacs-lisp
-  (setq
-   helm-gtags-ignore-case t
-   helm-gtags-auto-update t
-   helm-gtags-use-input-at-cursor t
-   helm-gtags-pulse-at-cursor t
-   helm-gtags-prefix-key "\C-cg"
-   helm-gtags-suggested-key-mapping t
-   )
-
-  (require 'helm-gtags)
-  ;; Enable helm-gtags-mode
-  (add-hook 'dired-mode-hook 'helm-gtags-mode)
-  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-  (define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
-  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-  (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
-  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-  (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-  (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-#+end_src
-
-- If you chose [[https://github.com/leoliu/ggtags][ggtags]].
-#+begin_src emacs-lisp
-  (require 'ggtags)
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
-
-  (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
-  (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
-  (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
-  (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
-  (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-  (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-
-  (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
-
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 #+end_src
+
 ** Basic concepts of tags
 :PROPERTIES:
 :ID:       b4902a85-f303-4f5f-8c13-1eb3d2d2de73
@@ -1442,28 +1399,14 @@ Setup for C/C++:
 
 Default key bindings:
 
-| Key           | Binding                                    |
-|---------------+--------------------------------------------|
-| *C-c @ C-c*   | Command: =hs-toggle-hiding=                |
-|               | Toggle hiding/showing of a block           |
-|---------------+--------------------------------------------|
-| *C-c @ C-h*   | Command: =hs-hide-block=                   |
-|               | Select current block at point and hide it  |
-|---------------+--------------------------------------------|
-| *C-c @ C-l*   | Command: =hs-hide-level=                   |
-|               | Hide all block with indentation levels     |
-|               | below this block                           |
-|---------------+--------------------------------------------|
-| *C-c @ C-s*   | Command: =hs-show-block=                   |
-|               | Select current block at point and show it. |
-|---------------+--------------------------------------------|
-| *C-c @ C-M-h* | Command: =hs-hide-all=                     |
-|               | Hide all top level blocks, displaying      |
-|               | only first and last lines.                 |
-|---------------+--------------------------------------------|
-| *C-c @ C-M-s* | Command: =hs-show-all=                     |
-|               | Show everything                            |
-|---------------+--------------------------------------------|
+| Key           | Binding            |                                                                  |
+|---------------+--------------------+------------------------------------------------------------------|
+| *C-c @ C-c*   | =hs-toggle-hiding= | Toggle hiding/showing of a block                                 |
+| *C-c @ C-h*   | =hs-hide-block=    | Select current block at point and hide it                        |
+| *C-c @ C-l*   | =hs-hide-level=    | Hide all block with indentation levels below this block          |
+| *C-c @ C-s*   | =hs-show-block=    | Select current block at point and show it.                       |
+| *C-c @ C-M-h* | =hs-hide-all=      | Hide all top level blocks, displaying only first and last lines. |
+| *C-c @ C-M-s* | =hs-show-all=      | Show everything                                                  |
 
 Demo:
 
@@ -1486,17 +1429,11 @@ is changed accidentally.
 
 Default key bindings:
 
-| Key       | Binding                                    |
-|-----------+--------------------------------------------|
-| *C-x n d* | Command: =narrow-to-defun=                 |
-|           | Narrow buffer to current function at point |
-|-----------+--------------------------------------------|
-| *C-x n r* | Command: =narrow-to-region=                |
-| *C-x n n* | Narrow buffer to active region             |
-|-----------+--------------------------------------------|
-| *C-x n w* | Command: =widen=                           |
-|           | Widen buffer                               |
-|-----------+--------------------------------------------|
+| Key       | Binding            |                                            |
+|-----------+--------------------+--------------------------------------------|
+| *C-x n d* | =narrow-to-defun=  | Narrow buffer to current function at point |
+| *C-x n n* | =narrow-to-region= | Narrow buffer to active region             |
+| *C-x n w* | =widen=            | Widen buffer                               |
 
 ** Identation
 :PROPERTIES:
@@ -1715,23 +1652,14 @@ For complete documentation, please refer to [[https://github.com/Fuco1/smartpare
 | Key     | Description                                                                     |
 |---------+---------------------------------------------------------------------------------|
 | *C-o*   | Display matched location, but *do not* switch point to matched buffer           |
-|---------+---------------------------------------------------------------------------------|
 | *M-n*   | Move to next error message, but *do not* visit error location                   |
-|---------+---------------------------------------------------------------------------------|
 | *M-p*   | Move to next previous message, but *do not* visit error location                |
-|---------+---------------------------------------------------------------------------------|
 | *M-g n* | Move to next error message, visit error location                                |
-|---------+---------------------------------------------------------------------------------|
 | *M-g p* | Move to previous error message, visit error location                            |
-|---------+---------------------------------------------------------------------------------|
 | *RET*   | Visit location of error at poiint                                               |
-|---------+---------------------------------------------------------------------------------|
 | *M-{*   | Move point to the next error message or match occurring in a different file     |
-|---------+---------------------------------------------------------------------------------|
 | *M-}*   | Move point to the previous error message or match occurring in a different file |
-|---------+---------------------------------------------------------------------------------|
 | *q*     | Quit =*compilation*= buffer                                                     |
-|---------+---------------------------------------------------------------------------------|
 
 I usually execute the same compilation command many times. It's more
 convenient if Emacs doesn't ask us to confirm every time we re-execute

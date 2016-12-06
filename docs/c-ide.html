@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2016-12-06 Tue 00:24 -->
+<!-- 2016-12-06 Tue 02:28 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -370,11 +370,15 @@ of the emacs IDE and to perform a basic configuration for
 demonstration purposes. When installed and run the <span class="underline">first time</span>, the
 demo repository will download from MELPA, install and compile all the
 packages it needs. Note that depending on your internet connection and
-processor speeds, this may take a while, but that shouldn't stop you from continuing with this guide; the next section can be followed using a second instance of emacs, and without the IDE components.
+processor speeds, this may take a while, but that shouldn't stop you
+from continuing with this guide; the next section can be followed
+using a second instance of emacs, and without the IDE components.
 </p>
 
 <p>
-If you don't wish to use the demo, you can manually install the components, and use the <code>.el</code> files of the demo as a reference sample configuration.
+If you don't wish to use the demo, you can manually install the
+components, and use the <code>.el</code> files of the demo as a reference sample
+configuration.
 </p>
 
 <p>
@@ -448,87 +452,190 @@ in a second instance of emacs, even without any of the IDE components.
 <h2 id="sec-3"><a id="basic-navigation" name="basic-navigation"></a><span class="section-number-2">3</span> Basic source code navigation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Even without any IDE components installed, emacs already has features useful for operating on source code.
+Even without any IDE components installed, emacs already has features
+useful for operating on source code.
 </p>
 
-<ul class="org-ul">
-<li><b>C-M-f</b> runs <code>forward-sexp</code>, move forward over a balanced
-expression that can be a pair or a symbol. Demo:
+<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
 
 
-<div class="figure">
-<p><a href="static/c-ide/forward-func.gif"><img src="static/c-ide/forward-func.gif" alt="forward-func.gif" /></a>
-</p>
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Key</th>
+<th scope="col" class="left">Binding Function</th>
+<th scope="col" class="left">&#xa0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left"><b>C-M-f</b></td>
+<td class="left"><code>forward-sexp</code></td>
+<td class="left">move forward over a balanced  expression that can be a pair or a symbol.</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-b</b></td>
+<td class="left"><code>backward-sexp</code></td>
+<td class="left">move backward over a balanced  expression that can be a pair or a symbol.</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-k</b></td>
+<td class="left"><code>kill-sexp</code></td>
+<td class="left">kill balanced expression  forward that can be a pair or a symbol.</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-&lt;SPC&gt;</b> or <b>C-M-@</b></td>
+<td class="left"><code>mark-sexp</code></td>
+<td class="left">put mark after  following expression that can be a pair or a symbol.</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-a</b></td>
+<td class="left"><code>beginning-of-defun</code></td>
+<td class="left">move point to beginning of  a function.</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-e</b></td>
+<td class="left"><code>end-of-defun</code></td>
+<td class="left">move point to end of a  function.</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-h</b></td>
+<td class="left"><code>mark-defun</code></td>
+<td class="left">put a region around whole current  or following function.</td>
+</tr>
+</tbody>
+</table>
 </div>
-</li>
 
-<li><b>C-M-b</b> runs <code>backward-sexp</code>, move backward over a balanced
-expression that can be a pair or a symbol. Demo:
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Demos</h3>
+<div class="outline-text-3" id="text-3-1">
+<table border="2" cellspacing="2" cellpadding="6" rules="all" frame="border">
 
 
-<div class="figure">
-<p><a href="static/c-ide/backward-func.gif"><img src="static/c-ide/backward-func.gif" alt="backward-func.gif" /></a>
-</p>
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>C-M-f</b> runs <code>forward-sexp</code>, to move forward</td>
+<td class="left">&#xa0;</td>
+<td class="left"><b>C-M-b</b> runs <code>backward-sexp</code>, to move backward</td>
+</tr>
+
+<tr>
+<td class="left">over a balanced expression that can be a pair or a symbol.</td>
+<td class="left">&#xa0;</td>
+<td class="left">over a balanced  expression that can be a pair or a symbol.</td>
+</tr>
+
+<tr>
+<td class="left"><a href="static/c-ide/forward-func.gif"><img src="static/c-ide/forward-func.gif" alt="forward-func.gif" /></a></td>
+<td class="left">&#xa0;</td>
+<td class="left"><a href="static/c-ide/backward-func.gif"><img src="static/c-ide/backward-func.gif" alt="backward-func.gif" /></a></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-k</b> runs <code>kill-sexp</code>, to kill balanced expression</td>
+<td class="left">&#xa0;</td>
+<td class="left"><b>C-M-&lt;SPC&gt;</b> or <b>C-M-@</b> runs <code>mark-sexp</code>, to put mark after</td>
+</tr>
+
+<tr>
+<td class="left">forward that can be a pair or a symbol.</td>
+<td class="left">&#xa0;</td>
+<td class="left">following expression that can be a pair or a symbol.</td>
+</tr>
+
+<tr>
+<td class="left"><a href="static/c-ide/kill-func-body.gif"><img src="static/c-ide/kill-func-body.gif" alt="kill-func-body.gif" /></a></td>
+<td class="left">&#xa0;</td>
+<td class="left"><a href="static/c-ide/mark-func-body.gif"><img src="static/c-ide/mark-func-body.gif" alt="mark-func-body.gif" /></a></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-a</b> runs <code>beginning-of-defun</code>, to move point to beginning of</td>
+<td class="left">&#xa0;</td>
+<td class="left"><b>C-M-e</b> runs <code>end-of-defun</code>, to move point to end of a</td>
+</tr>
+
+<tr>
+<td class="left">a function.</td>
+<td class="left">&#xa0;</td>
+<td class="left">function.</td>
+</tr>
+
+<tr>
+<td class="left"><a href="static/c-ide/beginning-of-defun.gif"><img src="static/c-ide/beginning-of-defun.gif" alt="beginning-of-defun.gif" /></a></td>
+<td class="left">&#xa0;</td>
+<td class="left"><a href="static/c-ide/end-of-defun.gif"><img src="static/c-ide/end-of-defun.gif" alt="end-of-defun.gif" /></a></td>
+</tr>
+
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><b>C-M-h</b> runs <code>mark-defun</code>, to put a region around whole current</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">or following function.</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left"><a href="static/c-ide/mark-defun.gif"><img src="static/c-ide/mark-defun.gif" alt="mark-defun.gif" /></a></td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
 </div>
-</li>
-
-<li><b>C-M-k</b> runs <code>kill-sexp</code>, kill balanced expression
-forward that can be a pair or a symbol. Demo:
-
-
-<div class="figure">
-<p><a href="static/c-ide/kill-func-body.gif"><img src="static/c-ide/kill-func-body.gif" alt="kill-func-body.gif" /></a>
-</p>
-</div>
-</li>
-
-<li><b>C-M-&lt;SPC&gt;</b> or <b>C-M-@</b> runs <code>mark-sexp</code>, put mark after
-following expression that can be a pair or a symbol. Demo:
-
-
-<div class="figure">
-<p><a href="static/c-ide/mark-func-body.gif"><img src="static/c-ide/mark-func-body.gif" alt="mark-func-body.gif" /></a>
-</p>
-</div>
-</li>
-
-<li><b>C-M-a</b> runs <code>beginning-of-defun</code>, which moves point to beginning of
-a function. Demo:
-
-
-<div class="figure">
-<p><a href="static/c-ide/beginning-of-defun.gif"><img src="static/c-ide/beginning-of-defun.gif" alt="beginning-of-defun.gif" /></a>
-</p>
-</div>
-</li>
-
-<li><b>C-M-e</b> runs <code>end-of-defun</code>, which moves point to end of a
-function. Demo:
-
-
-<div class="figure">
-<p><a href="static/c-ide/end-of-defun.gif"><img src="static/c-ide/end-of-defun.gif" alt="end-of-defun.gif" /></a>
-</p>
-</div>
-</li>
-
-<li><b>C-M-h</b> runs <code>mark-defun</code>, which put a region around whole current
-or following function. Demo:
-
-
-<div class="figure">
-<p><a href="static/c-ide/mark-defun.gif"><img src="static/c-ide/mark-defun.gif" alt="mark-defun.gif" /></a>
-</p>
-</div>
-</li>
-</ul>
 </div>
 </div>
+
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4"><a id="source-navigation" name="source-navigation"></a><span class="section-number-2">4</span> Source code navigation</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-At this point, we begin using components of our emacs IDE, so if you're using the demo to perform its install, you'll need to wait for that to finish, and to close the second instance of emacs that you were using in the previous section.
+At this point, we begin using components of our emacs IDE, so if
+you're using the demo to perform its install, you'll need to wait for
+that to finish, and to close the second instance of emacs that you
+were using in the previous section.
 </p>
 </div>
 <div id="outline-container-sec-4-1" class="outline-3">
@@ -538,75 +645,21 @@ At this point, we begin using components of our emacs IDE, so if you're using th
 If you didn't use the the demo to install the emacs IDE components,
 you'll now need to install <a href="http://www.gnu.org/software/global">GNU Global</a>, and you'll need to install from
 MELPA your choice of either <a href="https://github.com/leoliu/ggtags">ggtags</a> or the pair of packages <a href="https://github.com/emacs-helm/helm">helm</a> +
-<a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>.
-</p>
-
-<p>
-Regardless of whether or not you used the demo, here are some code
-snippets you'll need to get the IDE working the way this guide
-presents it.
+<a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>. In the demo package, the elisp code used to setup those packages can be found in <code>setup-helm-tags.el</code> / <code>setup-ggtags.el</code>.
 </p>
 
 <ul class="org-ul">
-<li>If you chose the defaults, <a href="https://github.com/emacs-helm/helm">helm</a> + <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>.
-</li>
-</ul>
-
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq
- helm-gtags-ignore-case t
- helm-gtags-auto-update t
- helm-gtags-use-input-at-cursor t
- helm-gtags-pulse-at-cursor t
- helm-gtags-prefix-key <span style="color: #cdcd00;">"\C-cg"</span>
- helm-gtags-suggested-key-mapping t
- )
-
-(<span style="color: #b4fa70;">require</span> '<span style="color: #e9b2e3;">helm-gtags</span>)
-<span style="color: #cdcd00;">;; </span><span style="color: #cdcd00;">Enable helm-gtags-mode</span>
-(add-hook 'dired-mode-hook 'helm-gtags-mode)
-(add-hook 'eshell-mode-hook 'helm-gtags-mode)
-(add-hook 'c-mode-hook 'helm-gtags-mode)
-(add-hook 'c++-mode-hook 'helm-gtags-mode)
-(add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g c"</span>) 'helm-gtags-create-tags)
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g a"</span>) 'helm-gtags-tags-in-this-function)
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-j"</span>) 'helm-gtags-select)
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"M-."</span>) 'helm-gtags-dwim)
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"M-,"</span>) 'helm-gtags-pop-stack)
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-c &lt;"</span>) 'helm-gtags-previous-history)
-(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-c &gt;"</span>) 'helm-gtags-next-history)
-</pre>
-</div>
-
-<ul class="org-ul">
-<li>If you chose <a href="https://github.com/leoliu/ggtags">ggtags</a>.
+<li>If you chose <a href="https://github.com/leoliu/ggtags">ggtags</a>, here's an extra setting that might be useful.
 </li>
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">(<span style="color: #b4fa70;">require</span> '<span style="color: #e9b2e3;">ggtags</span>)
-(add-hook 'c-mode-common-hook
-          (<span style="color: #b4fa70;">lambda</span> ()
-            (<span style="color: #b4fa70;">when</span> (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-              (ggtags-mode 1))))
-
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g s"</span>) 'ggtags-find-other-symbol)
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g h"</span>) 'ggtags-view-tag-history)
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g r"</span>) 'ggtags-find-reference)
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g f"</span>) 'ggtags-find-file)
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g c"</span>) 'ggtags-create-tags)
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g u"</span>) 'ggtags-update-tags)
-
-(define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"M-,"</span>) 'pop-tag-mark)
-
-(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
+<pre class="src src-emacs-lisp">(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 </pre>
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-4-2" class="outline-3">
 <h3 id="sec-4-2"><a id="ID-b4902a85-f303-4f5f-8c13-1eb3d2d2de73" name="ID-b4902a85-f303-4f5f-8c13-1eb3d2d2de73"></a><span class="section-number-3">4.2</span> Basic concepts of tags</h3>
 <div class="outline-text-3" id="text-4-2">
@@ -2375,10 +2428,12 @@ Setup for C/C++:
 Default key bindings:
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
 
 
 <colgroup>
+<col  class="left" />
+
 <col  class="left" />
 
 <col  class="left" />
@@ -2387,81 +2442,43 @@ Default key bindings:
 <tr>
 <th scope="col" class="left">Key</th>
 <th scope="col" class="left">Binding</th>
+<th scope="col" class="left">&#xa0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="left"><b>C-c @ C-c</b></td>
-<td class="left">Command: <code>hs-toggle-hiding</code></td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
+<td class="left"><code>hs-toggle-hiding</code></td>
 <td class="left">Toggle hiding/showing of a block</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>C-c @ C-h</b></td>
-<td class="left">Command: <code>hs-hide-block</code></td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
+<td class="left"><code>hs-hide-block</code></td>
 <td class="left">Select current block at point and hide it</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>C-c @ C-l</b></td>
-<td class="left">Command: <code>hs-hide-level</code></td>
+<td class="left"><code>hs-hide-level</code></td>
+<td class="left">Hide all block with indentation levels below this block</td>
 </tr>
 
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">Hide all block with indentation levels</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">below this block</td>
-</tr>
-</tbody>
-<tbody>
 <tr>
 <td class="left"><b>C-c @ C-s</b></td>
-<td class="left">Command: <code>hs-show-block</code></td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
+<td class="left"><code>hs-show-block</code></td>
 <td class="left">Select current block at point and show it.</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>C-c @ C-M-h</b></td>
-<td class="left">Command: <code>hs-hide-all</code></td>
+<td class="left"><code>hs-hide-all</code></td>
+<td class="left">Hide all top level blocks, displaying only first and last lines.</td>
 </tr>
 
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">Hide all top level blocks, displaying</td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">only first and last lines.</td>
-</tr>
-</tbody>
-<tbody>
 <tr>
 <td class="left"><b>C-c @ C-M-s</b></td>
-<td class="left">Command: <code>hs-show-all</code></td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
+<td class="left"><code>hs-show-all</code></td>
 <td class="left">Show everything</td>
 </tr>
 </tbody>
@@ -2502,10 +2519,12 @@ is changed accidentally.
 Default key bindings:
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
 
 
 <colgroup>
+<col  class="left" />
+
 <col  class="left" />
 
 <col  class="left" />
@@ -2514,38 +2533,25 @@ Default key bindings:
 <tr>
 <th scope="col" class="left">Key</th>
 <th scope="col" class="left">Binding</th>
+<th scope="col" class="left">&#xa0;</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="left"><b>C-x n d</b></td>
-<td class="left">Command: <code>narrow-to-defun</code></td>
-</tr>
-
-<tr>
-<td class="left">&#xa0;</td>
+<td class="left"><code>narrow-to-defun</code></td>
 <td class="left">Narrow buffer to current function at point</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><b>C-x n r</b></td>
-<td class="left">Command: <code>narrow-to-region</code></td>
 </tr>
 
 <tr>
 <td class="left"><b>C-x n n</b></td>
+<td class="left"><code>narrow-to-region</code></td>
 <td class="left">Narrow buffer to active region</td>
-</tr>
-</tbody>
-<tbody>
-<tr>
-<td class="left"><b>C-x n w</b></td>
-<td class="left">Command: <code>widen</code></td>
 </tr>
 
 <tr>
-<td class="left">&#xa0;</td>
+<td class="left"><b>C-x n w</b></td>
+<td class="left"><code>widen</code></td>
 <td class="left">Widen buffer</td>
 </tr>
 </tbody>
@@ -2845,7 +2851,7 @@ hyperlink. You can click on each error, or execute a key binding like
 The following key bindings are available:
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
 
 
 <colgroup>
@@ -2864,50 +2870,42 @@ The following key bindings are available:
 <td class="left"><b>C-o</b></td>
 <td class="left">Display matched location, but <b>do not</b> switch point to matched buffer</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>M-n</b></td>
 <td class="left">Move to next error message, but <b>do not</b> visit error location</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>M-p</b></td>
 <td class="left">Move to next previous message, but <b>do not</b> visit error location</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>M-g n</b></td>
 <td class="left">Move to next error message, visit error location</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>M-g p</b></td>
 <td class="left">Move to previous error message, visit error location</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>RET</b></td>
 <td class="left">Visit location of error at poiint</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>M-{</b></td>
 <td class="left">Move point to the next error message or match occurring in a different file</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>M-}</b></td>
 <td class="left">Move point to the previous error message or match occurring in a different file</td>
 </tr>
-</tbody>
-<tbody>
+
 <tr>
 <td class="left"><b>q</b></td>
 <td class="left">Quit <code>*compilation*</code> buffer</td>
@@ -3035,7 +3033,7 @@ seen the layout of <code>gdb-many-windows</code> above, you have the following
 buffers visible on your screen (ignore the first row):
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
 
 
 <colgroup>
@@ -3192,7 +3190,7 @@ work with many languages, use <b>GUD</b>.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-06 Tue 00:24</p>
+<p class="date">Created: 2016-12-06 Tue 02:28</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

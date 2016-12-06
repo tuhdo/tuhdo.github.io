@@ -1,5 +1,10 @@
 TODO
 
-* Determine whether ebrowse.org is cruft
+* Determine whether ebrowse.org is cruft.
 
-* Determine whether anything useful is in c-ide-irony_bak.org
+* Determine whether anything useful is in c-ide-irony_bak.org.
+
+* Take all code from the demo repository, incorporate it into the org
+  files of this repository as babel-org source, from which to build
+  the demo. That way the code will always be in sync with the
+  snippets of the org files.
