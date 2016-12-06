@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2016-12-05 Mon 12:21 -->
+<!-- 2016-12-06 Tue 00:24 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -386,29 +386,30 @@ Steps to install:
 Mac) or from the <a href="http://adoxa.altervista.org/global/">Win32 port</a> (Windows). If none is available,
 download the source <a href="http://www.gnu.org/software/global/download.html">here</a> and manually build the package.
 </li>
-<li>Backup your &lt;code&gt;~/.emacs.d&lt;/code&gt; elsewhere.
-</li>
 <li>If emacs is not already running, start it.
 </li>
 <li>Update your MELPA database: <code>M-x package-list-packages</code>. (reference:
 <a href="emacs-tutor3.html">How to use Emacs package manager</a>).
 </li>
-<li>Clone the repository into your ~/.emacs.d folder.
+<li>Get a local copy of the repository.
 </li>
 </ul>
-
 <div class="org-src-container">
 
-<pre class="src src-sh">git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
+<pre class="src src-sh"><span style="color: #cdcd00;"># </span><span style="color: #cdcd00;">Three ways. There are more...</span>
+wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.zip &amp;&amp; unzip master.zip
+wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.tar.gz &amp;&amp; tar -xf master.tar.gz
+git clone --depth=1 https://github.com/Boruch-Baum/emacs-c-ide-demo.git
 </pre>
 </div>
-
 <ul class="org-ul">
+<li>Copy the sub-folder <code>emacs_ide_demo</code>  into your <code>~/.emacs.d/</code> folder.
+</li>
 <li>You may possibly want to make a change to your new
-<code>~/.emacs.d/init.el</code> file. By default, the demo uses <a href="https://github.com/emacs-helm/helm">helm</a>
-(<a href="http://tuhdo.github.io/helm-intro.html">reference</a>) and <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>, which is what I recommend, but if you
-don't want to use <code>helm</code>, the alternative is to use <code>ggtags</code>. Here's
-how to make that change.
+<code>~/.emacs.d/emacs_ide_demo/init.el</code> file. By default, the demo uses
+<a href="https://github.com/emacs-helm/helm">helm</a> (<a href="http://tuhdo.github.io/helm-intro.html">reference</a>) and <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>, but if you don't want to use
+<code>helm</code>, the alternative is to use <code>ggtags</code>. Here's how to make that
+change.
 
 <ul class="org-ul">
 <li>comment these lines in <code>init.el</code>:
@@ -436,7 +437,10 @@ And uncomment this line:
 
 <p>
 That does it! To start using the demo, just type <code>M-x load-file RET
-init.el</code>. As mentioned earlier, the first time you use it, it will perform a series of downloads, installs and compiles, which may take a while, but you can still continue with the next section of this guide in a second instance of emacs, even without any of the IDE components.
+init.el</code>. As mentioned earlier, the first time you use it, it will
+perform a series of downloads, installs and compiles, which may take a
+while, but you can still continue with the next section of this guide
+in a second instance of emacs, even without any of the IDE components.
 </p>
 </div>
 </div>
@@ -567,6 +571,7 @@ presents it.
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
 (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
+(define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g c"</span>) 'helm-gtags-create-tags)
 (define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g a"</span>) 'helm-gtags-tags-in-this-function)
 (define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"C-j"</span>) 'helm-gtags-select)
 (define-key helm-gtags-mode-map (kbd <span style="color: #cdcd00;">"M-."</span>) 'helm-gtags-dwim)
@@ -596,6 +601,8 @@ presents it.
 (define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"C-c g u"</span>) 'ggtags-update-tags)
 
 (define-key ggtags-mode-map (kbd <span style="color: #cdcd00;">"M-,"</span>) 'pop-tag-mark)
+
+(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 </pre>
 </div>
 </div>
@@ -634,52 +641,44 @@ where it is defined.
 </p>
 </div>
 </div>
+
 <div id="outline-container-sec-4-3" class="outline-3">
 <h3 id="sec-4-3"><a id="tag-database-creation" name="tag-database-creation"></a><span class="section-number-3">4.3</span> Tag database creation</h3>
 <div class="outline-text-3" id="text-4-3">
-<ul class="org-ul">
-<li>If you chose the defaults, <a href="https://github.com/emacs-helm/helm">helm</a> + <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>, create a GTAGS
-database by running <code>gtags</code> at your project root in terminal:
-</li>
-</ul>
+<p>
+Were you <span class="underline">not</span> using the emacs (or some other) IDE, the way to
+create a GTAGS database would be to run <code>gtags</code> at your project root in
+terminal:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-shell-script">$ cd /path/to/project/root
 $ gtags
 </pre>
 </div>
-<ul class="org-ul">
-<li>If you chose <a href="https://github.com/leoliu/ggtags">ggtags</a>, the recommended method for tag creation is to
-use its own emacs command <code>ggtags-create-tags</code>.
-</li>
-<li>After running either command, a few files will be created:
-</li>
-</ul>
-<div class="org-src-container">
+<p>
+With the emacs IDE, configured as recommended with the snippets above,
+just type <code>C-c g c</code>, which will run either the <code>helm-gtags-create-tags</code> or <code>ggtags-create-tags</code> emacs command.
+</p>
 
-<pre class="src src-shell-script">$ ls G*
-GPATH   GRTAGS  GTAGS
-</pre>
-</div>
-<ul class="org-ul">
-<li><b>GTAGS</b>: definition database
-</li>
-<li><b>GRTAGS</b>: reference database
-</li>
-<li><b>GPATH</b>: path name database
-</li>
-</ul>
+<p>
+Just to be certain that the database was created, type <code>M-! ls G*</code> to have emacs run the shelll command <code>ls G*</code> and display the output in a dedicated window. You should see the three files GPATH, GRTAGS, and GTAGS.
+</p>
 </div>
 </div>
 <div id="outline-container-sec-4-4" class="outline-3">
 <h3 id="sec-4-4"><a id="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96" name="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96"></a><span class="section-number-3">4.4</span> Find definitions in current buffer</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
-The Imenu facility offers a way to find the major definitions, such as
-function definitions, variable definitions in a file by name. <code>ggtags</code>
-can integrate Imenu:
+The emacs <b>imenu</b> facility offers a way to find a file's major
+definitions, (eg. function, variables) by name. <code>ggtags</code> can integrate
+<b>imenu</b>:
 </p>
 
+<p>
+In the code snippet above, we integrated it into the emacs IDE as
+follows:
+</p>
 <div class="org-src-container">
 
 <pre class="src src-emacs-lisp">(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
@@ -687,7 +686,7 @@ can integrate Imenu:
 </div>
 
 <p>
-If you use Helm, use <code>moo-jump-local</code> from <a href="https://github.com/abo-abo/function-args">function-args</a> package. You
+If you use Helm, use <code>moo-jump-local</code> from <a href="https://github.com/abo-abo/function-args">function-args</a> package. (But helm seems to have imenu integration now). You
 can use it as an outline tree like in other IDEs. Here is a demo:
 </p>
 
@@ -3193,7 +3192,7 @@ work with many languages, use <b>GUD</b>.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-05 Mon 12:21</p>
+<p class="date">Created: 2016-12-06 Tue 00:24</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

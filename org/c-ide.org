@@ -104,21 +104,22 @@ Steps to install:
 - Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux /
   Mac) or from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available,
   download the source [[http://www.gnu.org/software/global/download.html][here]] and manually build the package.
-- Backup your <code>~/.emacs.d</code> elsewhere.
 - If emacs is not already running, start it.
 - Update your MELPA database: =M-x package-list-packages=. (reference:
   [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]]).
-- Clone the repository into your ~/.emacs.d folder.
-
-#+begin_src sh
-  git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
-#+end_src
-
+- Get a local copy of the repository.
+#+BEGIN_SRC sh
+# Three ways. There are more...
+wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.zip && unzip master.zip
+wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.tar.gz && tar -xf master.tar.gz
+git clone --depth=1 https://github.com/Boruch-Baum/emacs-c-ide-demo.git
+#+END_SRC
+- Copy the sub-folder =emacs_ide_demo=  into your =~/.emacs.d/= folder.
 - You may possibly want to make a change to your new
-  =~/.emacs.d/init.el= file. By default, the demo uses [[https://github.com/emacs-helm/helm][helm]]
-  ([[http://tuhdo.github.io/helm-intro.html][reference]]) and [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], which is what I recommend, but if you
-  don't want to use =helm=, the alternative is to use =ggtags=. Here's
-  how to make that change.
+  =~/.emacs.d/emacs_ide_demo/init.el= file. By default, the demo uses
+  [[https://github.com/emacs-helm/helm][helm]] ([[http://tuhdo.github.io/helm-intro.html][reference]]) and [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], but if you don't want to use
+  =helm=, the alternative is to use =ggtags=. Here's how to make that
+  change.
 
   + comment these lines in =init.el=:
 
@@ -134,7 +135,10 @@ Steps to install:
     #+END_SRC
 
 That does it! To start using the demo, just type =M-x load-file RET
-init.el=. As mentioned earlier, the first time you use it, it will perform a series of downloads, installs and compiles, which may take a while, but you can still continue with the next section of this guide in a second instance of emacs, even without any of the IDE components.
+init.el=. As mentioned earlier, the first time you use it, it will
+perform a series of downloads, installs and compiles, which may take a
+while, but you can still continue with the next section of this guide
+in a second instance of emacs, even without any of the IDE components.
 * Basic source code navigation
 :PROPERTIES:
 :ID: basic-navigation
@@ -213,6 +217,7 @@ presents it.
   (add-hook 'c++-mode-hook 'helm-gtags-mode)
   (add-hook 'asm-mode-hook 'helm-gtags-mode)
 
+  (define-key helm-gtags-mode-map (kbd "C-c g c") 'helm-gtags-create-tags)
   (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
   (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
   (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
@@ -237,6 +242,8 @@ presents it.
   (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
 
   (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+
+  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 #+end_src
 ** Basic concepts of tags
 :PROPERTIES:
@@ -260,39 +267,37 @@ specified.
 
 A reference of a tag is where a tag is used in a source tree, but not
 where it is defined.
+
 ** Tag database creation
 :PROPERTIES:
 :ID:  tag-database-creation
 :END:
-- If you chose the defaults, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], create a GTAGS
-  database by running =gtags= at your project root in terminal:
+Were you _not_ using the emacs (or some other) IDE, the way to
+create a GTAGS database would be to run =gtags= at your project root in
+terminal:
 #+begin_src shell-script
   $ cd /path/to/project/root
   $ gtags
 #+end_src
-- If you chose [[https://github.com/leoliu/ggtags][ggtags]], the recommended method for tag creation is to
-  use its own emacs command =ggtags-create-tags=.
-- After running either command, a few files will be created:
-#+begin_src shell-script
-  $ ls G*
-  GPATH   GRTAGS  GTAGS
-#+end_src
-  - *GTAGS*: definition database
-  - *GRTAGS*: reference database
-  - *GPATH*: path name database
+With the emacs IDE, configured as recommended with the snippets above,
+just type =C-c g c=, which will run either the =helm-gtags-create-tags= or =ggtags-create-tags= emacs command.
+
+Just to be certain that the database was created, type =M-! ls G*= to have emacs run the shelll command =ls G*= and display the output in a dedicated window. You should see the three files GPATH, GRTAGS, and GTAGS.
 ** Find definitions in current buffer
 :PROPERTIES:
 :ID:       3a64c7a4-e8a5-42b9-9476-28dff9e5cb96
 :END:
-The Imenu facility offers a way to find the major definitions, such as
-function definitions, variable definitions in a file by name. =ggtags=
-can integrate Imenu:
+The emacs *imenu* facility offers a way to find a file's major
+definitions, (eg. function, variables) by name. =ggtags= can integrate
+*imenu*:
 
+In the code snippet above, we integrated it into the emacs IDE as
+follows:
 #+begin_src emacs-lisp
   (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
 #+end_src
 
-If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. You
+If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. (But helm seems to have imenu integration now). You
 can use it as an outline tree like in other IDEs. Here is a demo:
 
 [[file:static/c-ide/moo-jump-local.gif][file:static/c-ide/moo-jump-local.gif]]

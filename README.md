@@ -1,16 +1,16 @@
 Emacs Mini Manual
 =================
 
-1] The manual is viewable at:
+1. The manual is viewable at:
    https://boruch-baum.github.io/emacs_mini_manual/
 
-2] The page names are:
+2. The page names are:
 
-  * Emacs Mini Manual (PART 1) - THE BASICS
+  * Emacs Mini Manual (Part 1) - The Basics
 
-  * Emacs Mini Manual (PART 2) - LISP PRIMER: WHY PARENTHESES MATTER
+  * Emacs Mini Manual (Part 2) - Lisp Primer: Why Parentheses Matter
 
-  * Emacs Mini Manual (PART 3) - CUSTOMIZING AND EXTENDING EMACS
+  * Emacs Mini Manual (Part 3) - Customizing And Extending Emacs
 
   * Setup C/C++ Development Environment for Emacs
 
@@ -25,9 +25,9 @@ Emacs Mini Manual
 
   * Setup Emacs with PDF Tools and Xwidgets web browser on Windows
 
-3] The pages are produced from emacs org files, which are in the `org'
+3. The pages are produced from emacs org files, which are in the `org'
    folder. See `org/publish.el' for how to convert them to html.
 
-4] This is a fork of https://github.com/tuhdo/tuhdo.github.io
+4. This is a fork of https://github.com/tuhdo/tuhdo.github.io
 
    + Refer to CHANGELOG file for how I've altered it.

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>A Package in a league of its own: <code>Helm</code></title>
-<!-- 2016-12-05 Mon 12:20 -->
+<!-- 2016-12-06 Tue 00:24 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -277,7 +277,7 @@ Extended config:
 
 (<span style="color: #b4fa70;">defun</span> <span style="color: #00cdcd;">spacemacs//helm-hide-minibuffer-maybe</span> ()
   <span style="color: #cdcd00;">"Hide minibuffer in Helm session if we use the header line as input field."</span>
-  (<span style="color: #b4fa70;">when</span> (<span style="color: #b4fa70;">with-helm-buffer</span> helm-echo-input-in-header-line)
+  (<span style="color: #b4fa70;">when</span> (with-helm-buffer helm-echo-input-in-header-line)
     (<span style="color: #b4fa70;">let</span> ((ov (make-overlay (point-min) (point-max) nil nil t)))
       (overlay-put ov 'window (selected-window))
       (overlay-put ov 'face
@@ -2932,7 +2932,7 @@ This chapter summarizes the key bindings introduced in the above chapters.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-05 Mon 12:20</p>
+<p class="date">Created: 2016-12-06 Tue 00:24</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
