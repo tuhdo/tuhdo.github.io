@@ -1,3 +1,4 @@
+# c-ide.org -*- mode:org; mode:visual-line; -*-
 #+TITLE: C/C++ Development Environment for Emacs
 
 In this guide, I will help you to setup an efficient working C/C++
@@ -9,7 +10,16 @@ inside Emacs effortlessly, such as jump to definition/references at
 cursor, go back and forth between jumping points, finding any file
 instantly, switching between .h and .c/.cpp.
 
-A few demos:
+Please remember that there's a table of content on the top right
+corner and you can use it to navigate this guide. If you feel your
+internet connection is too slow for my guide, you can always clone and
+read it offline: https://github.com/tuhdo/tuhdo.github.io
+
+* Introductory demos
+:PROPERTIES:
+:ID: introductory-demos
+:END:
+Here are some visual examples of the emacs IDE in action:
 
 - Switching between .h and .c/.cpp anywhere in the project like Linux
   kernel. If more than one file exists, it displays a list of
@@ -18,7 +28,7 @@ A few demos:
 
 [[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
-- Jump around Linux kernel source with ease using =helm-gtags=. The
+- Jumping around Linux kernel source with ease using =helm-gtags=. The
   demo begins when "START" appears at the bottom:
 
 [[file:static/c-ide/helm-gtags-jump-dwim.gif][file:static/c-ide/helm-gtags-jump-dwim.gif]]
@@ -77,192 +87,155 @@ A few demos:
 
 [[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
 
-Please remember that there's a table of content on the top right
-corner and you can use it to navigate this guide. If you feel your
-internet connection is too slow for my guide, you can always clone and
-read it offline: https://github.com/tuhdo/tuhdo.github.io
+* Setup
+:PROPERTIES:
+:ID: setup
+:END:
+** Quick setup
+:PROPERTIES:
+:ID: quick-setup
+:END:
 
-I added an Emacs repository that is properly configured for
-demonstration purposes. You can clone and play with it without having to
-manually copy and paste all the setup Elisp code throughout the guide. When
-installed and run the _first time_, the demo repository will download from
-MELPA, install and compile all the packages it needs. Note that depending on
-your internet connection and processor speeds, this may take a while.
+I've prepared a github repository (URL below) with the configuration
+files to properly install and configure the components of the emacs
+IDE, and with a sample C project to play with. When installed and run
+the _first time_, the demo repository will download from MELPA,
+install and compile all the packages it needs. Note that depending on
+your internet connection and processor speeds, this may take a while,
+but that shouldn't stop you from continuing with this guide; the next
+section can be followed using a second instance of emacs, and without
+the IDE components.
 
-Steps to install:
+If you don't wish to use the github repository, you can manually
+install the components, and use the =.el= files of the demo as a
+reference sample configuration.
 
-- Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux / Mac) or
-  from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available, download the source [[http://www.gnu.org/software/global/download.html][here]]
-  and manually build the package.
-- Backup your <code>~/.emacs.d</code> elsewhere.
+Steps to install the 'quick setup':
+
+- Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux /
+  Mac) or from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available,
+  download the source [[http://www.gnu.org/software/global/download.html][here]] and manually build the package.
 - If emacs is not already running, start it.
-- Update your melpa database: =M-x package-list-packages=.
-- Clone the repository into your ~/.emacs.d folder.
+- Update your MELPA database: =M-x package-list-packages=. (reference:
+  [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]]).
+- Get a local copy of the repository.
+#+BEGIN_SRC sh
+# Three ways. There are more...
+wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.zip && unzip master.zip
+wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.tar.gz && tar -xf master.tar.gz
+git clone --depth=1 https://github.com/Boruch-Baum/emacs-c-ide-demo.git
+#+END_SRC
+- Copy the sub-folder =emacs_ide_demo_config= into your =~/.emacs.d/=
+  folder.
+- The other sub-folder, =emacs_ide_demo_project= has a sample skeleton
+  project. Use it in place or copy it elsewhere as convenient.
+- You may possibly want to make a change to your new
+  =~/.emacs.d/emacs_ide_demo_config/init.el= file. By default, the
+  demo uses [[https://github.com/emacs-helm/helm][helm]] ([[http://tuhdo.github.io/helm-intro.html][reference]]) and [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], but if you don't want to
+  use =helm=, the alternative is to use =ggtags=. Here's how to make
+  that change.
 
-#+begin_src sh
-  git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
-#+end_src
-
-- You may possibly want to edit your new =~/.emacs.d/init.el= file for two
-  options:
-
-  + The demo repository can use either =gtags= (the default), or =ggtags=. If
-    you want to use =ggtags=, comment this line in =init.el=:
+  + comment these lines in =init.el=:
 
     #+BEGIN_SRC emacs-lisp
+      (require 'setup-helm)
       (require 'setup-helm-gtags)
     #+END_SRC
 
     And uncomment this line:
-    
+
     #+BEGIN_SRC emacs-lisp
       ;; (require 'setup-ggtags)
     #+END_SRC
 
-  + The demo uses Helm. If you're not already familiar with Helm, read [[http://tuhdo.github.io/helm-intro.html][my guide]].
-    If you don't want to use Helm, also comment this line in =init.el=:
+- =M-x load-library RET emacs_ide_init=
 
-    #+BEGIN_SRC emacs-lisp
-      (require 'setup-helm)
-    #+END_SRC
+As mentioned earlier, the first time you load the library, it will
+perform a series of downloads, installs and compiles, which may take a
+while, but you can still continue with the next section of this guide
+in a second instance of emacs, even without any of the IDE components.
 
-That does it! To start using the demo, just type =M-x load-file RET init.el=.
-Continue reading this guide for its operational directions, without needing to
-bother to perform any more installations or elisp evaluations.
+** Not-so-quick setup
+:PROPERTIES:
+:ID: not-so-quick-setup
+:END:
+
+If your operating system distribution has already prepared all or some of the emacs IDE components as packages, then it stands to reason that it recommends you use those instead of downloading from MELPA.
+
+You can use your distribution's package manager to install any components so prepared, and afterwards perform the 'quick setup' instructions above.
+
+If you use your distribution's package manager to install any components AFTER performing the 'quick setup', you will need to then manually delete the initially downloaded library from your =~/.emacs.d/elpa= folder.
+
+The emacs ide components are:
++ TODO
+
+Let's use debian as an example linux distribution. At the time of this writing, debian had packaged the following components:
++ TODO
+
+* Basic source code navigation
+:PROPERTIES:
+:ID: basic-navigation
+:END:
+Even without any IDE components installed, emacs already has features
+useful for operating on source code.
+
+#+ATTR_HTML: :align center
+| Key                    | Binding Function     |                                                                           |
+|------------------------+----------------------+---------------------------------------------------------------------------|
+| *C-M-f*                | =forward-sexp=       | move forward over a balanced  expression that can be a pair or a symbol.  |
+| *C-M-b*                | =backward-sexp=      | move backward over a balanced  expression that can be a pair or a symbol. |
+| *C-M-k*                | =kill-sexp=          | kill balanced expression  forward that can be a pair or a symbol.         |
+| *C-M-<SPC>* or *C-M-@* | =mark-sexp=          | put mark after  following expression that can be a pair or a symbol.      |
+| *C-M-a*                | =beginning-of-defun= | move point to beginning of  a function.                                   |
+| *C-M-e*                | =end-of-defun=       | move point to end of a  function.                                         |
+| *C-M-h*                | =mark-defun=         | put a region around whole current  or following function.                 |
+
+** Demos
+
+#+ATTR_HTML: :border 2 :rules all :frame border
+| *C-M-f* runs =forward-sexp=, to move forward                     |   | *C-M-b* runs =backward-sexp=, to move backward              |
+| over a balanced expression that can be a pair or a symbol.       |   | over a balanced  expression that can be a pair or a symbol. |
+| [[file:static/c-ide/forward-func.gif][file:static/c-ide/forward-func.gif]]                               |   | [[file:static/c-ide/backward-func.gif][file:static/c-ide/backward-func.gif]]                         |
+|                                                                  |   |                                                             |
+| *C-M-k* runs =kill-sexp=, to kill balanced expression            |   | *C-M-<SPC>* or *C-M-@* runs =mark-sexp=, to put mark after  |
+| forward that can be a pair or a symbol.                          |   | following expression that can be a pair or a symbol.        |
+| [[file:static/c-ide/kill-func-body.gif][file:static/c-ide/kill-func-body.gif]]                             |   | [[file:static/c-ide/mark-func-body.gif][file:static/c-ide/mark-func-body.gif]]                        |
+|                                                                  |   |                                                             |
+| *C-M-a* runs =beginning-of-defun=, to move point to beginning of |   | *C-M-e* runs =end-of-defun=, to move point to end of a      |
+| a function.                                                      |   | function.                                                   |
+| [[file:static/c-ide/beginning-of-defun.gif][file:static/c-ide/beginning-of-defun.gif]]                         |   | [[file:static/c-ide/end-of-defun.gif][file:static/c-ide/end-of-defun.gif]]                          |
+|                                                                  |   |                                                             |
+| *C-M-h* runs =mark-defun=, to put a region around whole current  |   |                                                             |
+| or following function.                                           |   |                                                             |
+| [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]                                 |   |                                                             |
 
 * Source code navigation
 :PROPERTIES:
 :ID: source-navigation
 :END:
-** Prerequisite:
+At this point, we begin using components of our emacs IDE, so if
+you're using the demo to perform its install, you'll need to wait for
+that to finish, and to close the second instance of emacs that you
+were using in the previous section.
+** Package preparation
 :PROPERTIES:
 :ID:       b1292347-d0ed-4421-9905-33f1050883b2
 :END:
-- Know how to use =package.el= and MELPA. If you don't know how to
-  use, read the guide [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]].
+If you didn't use the the demo to install the emacs IDE components,
+you'll now need to install [[http://www.gnu.org/software/global][GNU Global]], and you'll need to install from
+MELPA your choice of either [[https://github.com/leoliu/ggtags][ggtags]] or the pair of packages [[https://github.com/emacs-helm/helm][helm]] +
+[[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. In the demo package, the elisp code used to setup those packages can be found in =setup-helm-tags.el= / =setup-ggtags.el=.
 
-- Install [[https://github.com/leoliu/ggtags][ggtags]]. After installing =ggtags= from MELPA, add this code
-  snippet to setup =ggtags= and key bindings:
-
-#+begin_src emacs-lisp
-  (require 'ggtags)
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
-
-  (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
-  (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
-  (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
-  (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
-  (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-  (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-
-  (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
-#+end_src
-
-- Or, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. Helm is awesome and if you are going to use
-  Helm, please read the [[http://tuhdo.github.io/helm-intro.html][Helm guide]]. Remember to setup =Helm= before
-  using =helm-gtags=. You can use this [[https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el][sample configuration]]. When
-  includes the above file in your =~/.emacs.d=, remember to add
-  =(require 'setup-helm)= to your =init.el=.
-
-#+begin_src emacs-lisp
-  (setq
-   helm-gtags-ignore-case t
-   helm-gtags-auto-update t
-   helm-gtags-use-input-at-cursor t
-   helm-gtags-pulse-at-cursor t
-   helm-gtags-prefix-key "\C-cg"
-   helm-gtags-suggested-key-mapping t
-   )
-
-  (require 'helm-gtags)
-  ;; Enable helm-gtags-mode
-  (add-hook 'dired-mode-hook 'helm-gtags-mode)
-  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-  (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
-  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-  (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-  (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-#+end_src
-
-Before using the =ggtags= or =helm-gtags=, remember to create a GTAGS
-database by running =gtags= at your project root in terminal:
-
-#+begin_src shell-script
-  $ cd /path/to/project/root
-  $ gtags
-#+end_src
-
-After this, a few files are created:
-
-#+begin_src shell-script
-  $ ls G*
-  GPATH   GRTAGS  GTAGS
-#+end_src
-
-- *GTAGS*: definition database
-- *GRTAGS*: reference database
-- *GPATH*: path name database
- 
-If you use =ggtags=, you have a command for creating GTAGS database,
-that is =ggtags-create-tags=; this is recommended way when using
-=ggtags=, to let it know where the project root is.
-
-** Basic movements
-:PROPERTIES:
-:ID:       45f1bb42-08e5-43b9-8ea9-7b5e1124f89e
-:END:
-- *C-M-f* runs =forward-sexp=, move forward over a balanced
-  expression that can be a pair or a symbol. Demo:
-
-  [[file:static/c-ide/forward-func.gif][file:static/c-ide/forward-func.gif]]
-
-- *C-M-b* runs =backward-sexp=, move backward over a balanced
-  expression that can be a pair or a symbol. Demo:
-
-  [[file:static/c-ide/backward-func.gif][file:static/c-ide/backward-func.gif]]
-
-- *C-M-k* runs =kill-sexp=, kill balanced expression
-  forward that can be a pair or a symbol. Demo:
-
-  [[file:static/c-ide/kill-func-body.gif][file:static/c-ide/kill-func-body.gif]]
-
-- *C-M-<SPC>* or *C-M-@* runs =mark-sexp=, put mark after
-  following expression that can be a pair or a symbol. Demo:
-
-  [[file:static/c-ide/mark-func-body.gif][file:static/c-ide/mark-func-body.gif]]
-
-- *C-M-a* runs =beginning-of-defun=, which moves point to beginning of
-  a function. Demo:
-
-  [[file:static/c-ide/beginning-of-defun.gif][file:static/c-ide/beginning-of-defun.gif]]
-
-- *C-M-e* runs =end-of-defun=, which moves point to end of a
-  function. Demo:
-
-  [[file:static/c-ide/end-of-defun.gif][file:static/c-ide/end-of-defun.gif]]
-
-- *C-M-h* runs =mark-defun=, which put a region around whole current
-  or following function. Demo:
-
-  [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]
-** Basic concepts of tag
+** Basic concepts of tags
 :PROPERTIES:
 :ID:       b4902a85-f303-4f5f-8c13-1eb3d2d2de73
 :END:
-A tag is a name of an entity in source code. An entity can be a
-variable, a method definition, an include-operator... A tag contains
-information such as name of the tag (the name of the variable,
-class, method), location of this tag in source code and which file it
-belongs to. As an example, GNU Global generates three tag databases:
+Source code navigation done by IDEs employs a concept called =tags=, a
+term for an entity in source code. An entity can be a variable, a
+method definition, an include-operator... A tag contains information
+such as name of the tag (the name of the variable, class, method),
+location of this tag in source code and which file it belongs to. As
+an example, GNU Global generates three tag databases:
 
 - *GTAGS*: definition database
 - *GRTAGS*: reference database
@@ -276,20 +249,29 @@ specified.
 A reference of a tag is where a tag is used in a source tree, but not
 where it is defined.
 
+** Tag database creation
+:PROPERTIES:
+:ID:  tag-database-creation
+:END:
+Were you _not_ using the emacs (or some other) IDE, the way to
+create a GTAGS database would be to run =gtags= at your project root in
+terminal:
+#+begin_src shell-script
+  $ cd /path/to/project/root
+  $ gtags
+#+end_src
+With the emacs IDE, configured as recommended with the snippets above,
+just type =C-c g c=, which will run either the =helm-gtags-create-tags= or =ggtags-create-tags= emacs command.
+
+Just to be certain that the database was created, type =M-! ls G*= to have emacs run the shelll command =ls G*= and display the output in a dedicated window. You should see the three files GPATH, GRTAGS, and GTAGS.
 ** Find definitions in current buffer
 :PROPERTIES:
 :ID:       3a64c7a4-e8a5-42b9-9476-28dff9e5cb96
 :END:
-The Imenu facility offers a way to find the major definitions, such as
-function definitions, variable definitions in a file by name. =ggtags=
-can integrate Imenu:
 
-#+begin_src emacs-lisp
-  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
-#+end_src
-
-If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. You
-can use it as an outline tree like in other IDEs. Here is a demo:
+If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. (But
+helm seems to have imenu integration now). You can use it as an
+outline tree like in other IDEs. Here is a demo:
 
 [[file:static/c-ide/moo-jump-local.gif][file:static/c-ide/moo-jump-local.gif]]
 
@@ -331,7 +313,7 @@ s= to invoke Isearch on candidate buffer list.
   =M-.= runs =helm-gtags-dwim=, which behaves the same as
   =ggtags-find-tag-dwim=. Similarly, you jump back to original
   location by using =M-,=, which runs =tags-loop-continue= (Emacs
-  default). 
+  default).
 
 #+BEGIN_CENTER
 [[file:static/c-ide/helm-gtags-definitions.png][file:static/c-ide/helm-gtags-definitions.png]]
@@ -344,10 +326,10 @@ blank space. A prompt asks you for tag pattern, which is a
 regexp.
 
 =helm-gtags= provides a really nice feature that uses Helm to display
-all available tags in a project and incrementally filtering, and is really 
+all available tags in a project and incrementally filtering, and is really
 fast using =helm-gtags-select=, which is bound to =C-j= in my setup
 above. This is useful when you want to explore tags in unfamiliar
-project. Demo: 
+project. Demo:
 
 [[file:static/c-ide/helm-gtags-select.gif][file:static/c-ide/helm-gtags-select.gif]]
 
@@ -360,7 +342,7 @@ project. Demo:
 
 - Using =helm-gtags=: Either run =helm-gtags-dwim= or
   =helm-gtags-find-rtags=, bound to *C-c g r*, which only finds
-  references. Note that for =helm-gtags-find-rtags=: 
+  references. Note that for =helm-gtags-find-rtags=:
 
   - if point is inside a function, the prompt will be default to the
     function name.
@@ -429,7 +411,7 @@ the node is a directory, the children of the node are files in that
 directory. One important thing to remember, Speedbar only lists files
 that match =speedbar-file-regexp=, that contains the extensions for
 common programming languages. If you don't see files in your
-programming languages listed, consider adding it the regexp list. 
+programming languages listed, consider adding it the regexp list.
 
 *Basic usage*:
 
@@ -606,7 +588,7 @@ You have two commands for completing C/C++ code:
     ((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
                                          "-I/home/<user>/project_root/include2/")))))
   #+end_src
-  
+
 If you put a file with a special name .dir-locals.el in a directory,
 Emacs will read it when it visits any file in that directory or any of
 its subdirectories, and apply the settings it specifies to the file’s
@@ -615,7 +597,7 @@ Per-Directory Local Variables]]. If you use Helm, you can easily insert
 absolute path by *C-c i* at the current path in =helm-find-files=
 (bound to *C-x C-f* by default in my demo =.emacs.d= at the beginning):
 
-[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]] 
+[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]]
 
 In the above example, =nil= means apply the settings to any file or
 sub-directory visited. If =non-nil=, you have to specify a major mode
@@ -648,7 +630,7 @@ Replace =<user>= with your username.
 
 - Enter any source file and start completion. You will see that
   =company-clang= correctly retrieves completion candidates in those directories.
- 
+
 * Header file completion with =company-c-headers= package
 :PROPERTIES:
 :ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
@@ -666,7 +648,7 @@ Company. After installing from MELPA, set it up:
 add its paths since by default =company-c-headers= only includes these
 two system include paths: =/usr/include/= and
 =/usr/local/include/=. To enable C++ header completion for standard
-libraries, you have to add its path, for example, like this: 
+libraries, you have to add its path, for example, like this:
 
 #+begin_src emacs-lisp
   (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
@@ -679,23 +661,24 @@ local, use =company-c-headers-path-user= and put it in
 * CEDET
 :PROPERTIES:
 :ID: cedet
-:END: 
+:END:
 ** What is CEDET?
 :PROPERTIES:
 :ID: what-is-cedet
 :END:
-CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
-with the end goal of creating an advanced development environment in
-Emacs. CEDET includes common features such as intelligent completion,
-source code navigation, project management, code generation with
-templates . CEDET also provides a framework for working with
-programming languages; support for new programming languages can be
-added and use CEDET to provide IDE-like features.
+CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools
+written with the end goal of creating an advanced development
+environment in Emacs. CEDET includes common features such as
+intelligent completion, source code navigation, project management,
+code generation with templates . CEDET also provides a framework for
+working with programming languages; support for new programming
+languages can be added and use CEDET to provide IDE-like features.
 
-CEDET can give you code completion, but this process takes time and can block
-your Emacs while it is doing so. If you have large project, you may not want to
-use CEDET for code completion. But, you can use CEDET perfectly for utilities
-that work at file scope i.e. refactoring local variables in a function in a file.
+CEDET can give you code completion, but this process takes time and
+can block your Emacs while it is doing so. If you have large project,
+you may not want to use CEDET for code completion. But, you can use
+CEDET perfectly for utilities that work at file scope i.e. refactoring
+local variables in a function in a file.
 
 ** Why use CEDET?
 :PROPERTIES:
@@ -736,9 +719,9 @@ CEDET was merged into Emacs since 23.2. You do not need to install
 CEDET manually. However, you can also use the development repository
 that contains latest bug fixes and more features. Nevertheless, the
 built-in Emacs is still adequate for daily usage and convenient for
-trying out before actually cloning and use the development
-version. Skip this section if you only want to try Emacs. Come back
-later if you really like it.
+trying out before actually cloning and use the development version.
+Skip this section if you only want to try Emacs. Come back later if
+you really like it.
 
 If you really want to use the development version with latest feature,
 checkout this branch:
@@ -1432,29 +1415,15 @@ Setup for C/C++:
 #+end_src
 
 Default key bindings:
-
-| Key           | Binding                                    |
-|---------------+--------------------------------------------|
-| *C-c @ C-c*   | Command: =hs-toggle-hiding=                |
-|               | Toggle hiding/showing of a block           |
-|---------------+--------------------------------------------|
-| *C-c @ C-h*   | Command: =hs-hide-block=                   |
-|               | Select current block at point and hide it  |
-|---------------+--------------------------------------------|
-| *C-c @ C-l*   | Command: =hs-hide-level=                   |
-|               | Hide all block with indentation levels     |
-|               | below this block                           |
-|---------------+--------------------------------------------|
-| *C-c @ C-s*   | Command: =hs-show-block=                   |
-|               | Select current block at point and show it. |
-|---------------+--------------------------------------------|
-| *C-c @ C-M-h* | Command: =hs-hide-all=                     |
-|               | Hide all top level blocks, displaying      |
-|               | only first and last lines.                 |
-|---------------+--------------------------------------------|
-| *C-c @ C-M-s* | Command: =hs-show-all=                     |
-|               | Show everything                            |
-|---------------+--------------------------------------------|
+#+ATTR_HTML: :align center
+| Key           | Binding            |                                                                  |
+|---------------+--------------------+------------------------------------------------------------------|
+| *C-c @ C-c*   | =hs-toggle-hiding= | Toggle hiding/showing of a block                                 |
+| *C-c @ C-h*   | =hs-hide-block=    | Select current block at point and hide it                        |
+| *C-c @ C-l*   | =hs-hide-level=    | Hide all block with indentation levels below this block          |
+| *C-c @ C-s*   | =hs-show-block=    | Select current block at point and show it.                       |
+| *C-c @ C-M-h* | =hs-hide-all=      | Hide all top level blocks, displaying only first and last lines. |
+| *C-c @ C-M-s* | =hs-show-all=      | Show everything                                                  |
 
 Demo:
 
@@ -1476,18 +1445,12 @@ can safely remove all those =printf= and be certain that nothing else
 is changed accidentally.
 
 Default key bindings:
-
-| Key       | Binding                                    |
-|-----------+--------------------------------------------|
-| *C-x n d* | Command: =narrow-to-defun=                 |
-|           | Narrow buffer to current function at point |
-|-----------+--------------------------------------------|
-| *C-x n r* | Command: =narrow-to-region=                |
-| *C-x n n* | Narrow buffer to active region             |
-|-----------+--------------------------------------------|
-| *C-x n w* | Command: =widen=                           |
-|           | Widen buffer                               |
-|-----------+--------------------------------------------|
+#+ATTR_HTML: :align center
+| Key       | Binding            |                                            |
+|-----------+--------------------+--------------------------------------------|
+| *C-x n d* | =narrow-to-defun=  | Narrow buffer to current function at point |
+| *C-x n n* | =narrow-to-region= | Narrow buffer to active region             |
+| *C-x n w* | =widen=            | Widen buffer                               |
 
 ** Identation
 :PROPERTIES:
@@ -1702,27 +1665,18 @@ For complete documentation, please refer to [[https://github.com/Fuco1/smartpare
  *RET* to jump to the location of that error.
 
  The following key bindings are available:
-
+#+ATTR_HTML: :align center
 | Key     | Description                                                                     |
 |---------+---------------------------------------------------------------------------------|
 | *C-o*   | Display matched location, but *do not* switch point to matched buffer           |
-|---------+---------------------------------------------------------------------------------|
 | *M-n*   | Move to next error message, but *do not* visit error location                   |
-|---------+---------------------------------------------------------------------------------|
 | *M-p*   | Move to next previous message, but *do not* visit error location                |
-|---------+---------------------------------------------------------------------------------|
 | *M-g n* | Move to next error message, visit error location                                |
-|---------+---------------------------------------------------------------------------------|
 | *M-g p* | Move to previous error message, visit error location                            |
-|---------+---------------------------------------------------------------------------------|
 | *RET*   | Visit location of error at poiint                                               |
-|---------+---------------------------------------------------------------------------------|
 | *M-{*   | Move point to the next error message or match occurring in a different file     |
-|---------+---------------------------------------------------------------------------------|
 | *M-}*   | Move point to the previous error message or match occurring in a different file |
-|---------+---------------------------------------------------------------------------------|
 | *q*     | Quit =*compilation*= buffer                                                     |
-|---------+---------------------------------------------------------------------------------|
 
 I usually execute the same compilation command many times. It's more
 convenient if Emacs doesn't ask us to confirm every time we re-execute
@@ -1765,7 +1719,7 @@ store window configurations, read it [[file:emacs-tutor.org::*Registers][here]].
 
 * Debugging
 :PROPERTIES:
-:ID: debugging 
+:ID: debugging
 :END:
 ** With GDB Many Windows
 :PROPERTIES:
@@ -1843,7 +1797,7 @@ Each cell coressponds to the following commands:
 
 - =gdb-display-threads-buffer= (Cell 6): Display running threads in
   your programs. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Threads-Buffer.html#Threads-Buffer][GNU Manual - Threads Buffer]] and
-  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Multithreaded-Debugging.html#Multithreaded-Debugging][Multithreaded Debugging]] for usage of the buffer. 
+  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Multithreaded-Debugging.html#Multithreaded-Debugging][Multithreaded Debugging]] for usage of the buffer.
 
 There are two useful commands that are not visible in
 =gdb-many-windows=:

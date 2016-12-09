@@ -4,10 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Exploring large projects with Projectile and Helm Projectile</title>
-<!-- 2015-01-19 Mon 09:50 -->
+<!-- 2016-12-06 Tue 01:42 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Tu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -88,7 +87,8 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" href="./static/worg.css">
+<link rel="stylesheet"
+        href="./static/worg.css" type="text/css"/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -137,87 +137,22 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="preamble" class="status">
-<!-- Start of StatCounter Code for Default Guide -->
-<script type="text/javascript">
-var sc_project=9874755;
-var sc_invisible=1;
-var sc_security="c2028bb7";
-var scJsHost = (("https:" == document.location.protocol) ?
-"https://secure." : "http://www.");
-document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
-"statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript><div class="statcounter"><a title="hit counter"
-href="http://statcounter.com/free-hit-counter/" target="_blank"><img
-class="statcounter" src="http://c.statcounter.com/9874755/0/c2028bb7/1/"
-alt="hit counter"></a></div></noscript>
-<!-- End of StatCounter Code for Default Guide -->
-<h2><a href="index.html">Back to Table of Contents</a></h2>
-</div>
 <div id="content">
 <h1 class="title">Exploring large projects with Projectile and Helm Projectile</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Demos</a>
-<ul>
-<li><a href="#sec-1-1">Select and open multiple files</a></li>
-<li><a href="#sec-1-2">Open file at point anywhere</a></li>
-<li><a href="#sec-1-3">Copy files anywhere</a></li>
-<li><a href="#sec-1-4">Delete files anywhere</a></li>
-<li><a href="#sec-1-5">Switch between current file and other files with same names but different extensions</a></li>
-</ul>
-</li>
-<li><a href="#sec-2">What is Projectile?</a></li>
-<li><a href="#sec-3">Installation and configuration</a></li>
-<li><a href="#sec-4">All-in-one command: <code>helm-projectile</code>, <b>C-c p h</b></a></li>
-<li><a href="#sec-5">Enter project portal: <code>helm-projectile-switch-project</code>, <b>C-c p p</b></a></li>
-<li><a href="#sec-6">File management</a>
-<ul>
-<li><a href="#sec-6-1">Command: <code>helm-projectile-find-file</code>, <b>C-c p f</b></a>
-<ul>
-<li><a href="#sec-6-1-1">Open</a></li>
-<li><a href="#sec-6-1-2">Move and Rename</a></li>
-<li><a href="#sec-6-1-3">Copy and Delete</a></li>
-<li><a href="#sec-6-1-4">Search and Replace</a></li>
-<li><a href="#sec-6-1-5">Miscelaneous</a></li>
-</ul>
-</li>
-<li><a href="#sec-6-2">Command: <code>helm-projectile-find-file-in-known-projects</code>, <b>C-c p F</b></a></li>
-<li><a href="#sec-6-3">Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></a></li>
-<li><a href="#sec-6-4">Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></a></li>
-<li><a href="#sec-6-5">Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></a></li>
-<li><a href="#sec-6-6">Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></a></li>
-<li><a href="#sec-6-7">Caching</a>
-<ul>
-<li><a href="#sec-6-7-1">Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></a></li>
-<li><a href="#sec-6-7-2">Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></a></li>
-<li><a href="#sec-6-7-3">Command: <code>projectile-purge-file-from-cache</code></a></li>
-<li><a href="#sec-6-7-4">Command: <code>projectile-purge-dir-from-cache</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#sec-7">Virtual directory manager</a>
-<ul>
-<li><a href="#sec-7-1">Store virtual directories with Bookmark (or Bookmark+)</a></li>
-</ul>
-</li>
-<li><a href="#sec-8">Buffer management</a>
-<ul>
-<li><a href="#sec-8-1">Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></a></li>
-</ul>
-</li>
-<li><a href="#sec-9">Search in project</a>
-<ul>
-<li><a href="#sec-9-1">Command: <code>helm-projectile-grep</code>, <b>C-c p s g</b></a></li>
-<li><a href="#sec-9-2">Command: <code>helm-projectile-ack</code>, <b>C-c p s a</b></a></li>
-<li><a href="#sec-9-3">Command: <code>helm-projectile-ag</code>, <b>C-c p s s</b></a></li>
-</ul>
-</li>
-<li><a href="#sec-10">Summary of Keybindings</a></li>
+<li><a href="#sec-1">1. Demos</a></li>
+<li><a href="#sec-2">2. What is Projectile?</a></li>
+<li><a href="#sec-3">3. Installation and configuration</a></li>
+<li><a href="#sec-4">4. All-in-one command: <code>helm-projectile</code>, <b>C-c p h</b></a></li>
+<li><a href="#sec-5">5. Enter project portal: <code>helm-projectile-switch-project</code>, <b>C-c p p</b></a></li>
+<li><a href="#sec-6">6. File management</a></li>
+<li><a href="#sec-7">7. Virtual directory manager</a></li>
+<li><a href="#sec-8">8. Buffer management</a></li>
+<li><a href="#sec-9">9. Search in project</a></li>
+<li><a href="#sec-10">10. Summary of Keybindings</a></li>
 </ul>
 </div>
 </div>
@@ -226,11 +161,11 @@ Let's start with a few demos.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><a id="ID-0d349662-dba2-423b-bd99-d23c9f45cb3a" name="ID-0d349662-dba2-423b-bd99-d23c9f45cb3a"></a>Demos</h2>
+<h2 id="sec-1"><a id="ID-0d349662-dba2-423b-bd99-d23c9f45cb3a" name="ID-0d349662-dba2-423b-bd99-d23c9f45cb3a"></a><span class="section-number-2">1</span> Demos</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 <div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><a id="ID-9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d" name="ID-9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d"></a>Select and open multiple files</h3>
+<h3 id="sec-1-1"><a id="ID-9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d" name="ID-9fef8c0b-1123-4bd1-9a35-b6ae1636cc1d"></a><span class="section-number-3">1.1</span> Select and open multiple files</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
@@ -250,7 +185,7 @@ In the demo, a few files are narrowed and marked, then opened. I ran
 </div>
 
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><a id="ID-ddf35ac3-6090-4f49-a358-8085ad30000f" name="ID-ddf35ac3-6090-4f49-a358-8085ad30000f"></a>Open file at point anywhere</h3>
+<h3 id="sec-1-2"><a id="ID-ddf35ac3-6090-4f49-a358-8085ad30000f" name="ID-ddf35ac3-6090-4f49-a358-8085ad30000f"></a><span class="section-number-3">1.2</span> Open file at point anywhere</h3>
 <div class="outline-text-3" id="text-1-2">
 
 <p>
@@ -283,7 +218,7 @@ history in Helm, so no need to type anything.
 </div>
 
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><a id="ID-67488464-03a4-4312-acd0-0850841067cf" name="ID-67488464-03a4-4312-acd0-0850841067cf"></a>Copy files anywhere</h3>
+<h3 id="sec-1-3"><a id="ID-67488464-03a4-4312-acd0-0850841067cf" name="ID-67488464-03a4-4312-acd0-0850841067cf"></a><span class="section-number-3">1.3</span> Copy files anywhere</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
@@ -308,7 +243,7 @@ displayed at the lower Dired buffer of <code>~/test</code>.
 </div>
 
 <div id="outline-container-sec-1-4" class="outline-3">
-<h3 id="sec-1-4"><a id="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5" name="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5"></a>Delete files anywhere</h3>
+<h3 id="sec-1-4"><a id="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5" name="ID-96a4698b-c043-4bdb-9a45-2415ad1d3bb5"></a><span class="section-number-3">1.4</span> Delete files anywhere</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
@@ -328,7 +263,7 @@ project files are always at your finger tip for you to delete!
 </div>
 
 <div id="outline-container-sec-1-5" class="outline-3">
-<h3 id="sec-1-5"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a>Switch between current file and other files with same names but different extensions</h3>
+<h3 id="sec-1-5"><a id="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0" name="ID-37f4d587-ab1f-417b-a949-b7e5ac6041c0"></a><span class="section-number-3">1.5</span> Switch between current file and other files with same names but different extensions</h3>
 <div class="outline-text-3" id="text-1-5">
 
 <p>
@@ -370,7 +305,7 @@ files contains "aaaa".
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><a id="ID-eb1ca7ff-0aa6-499b-91ff-42f1f4003784" name="ID-eb1ca7ff-0aa6-499b-91ff-42f1f4003784"></a>What is Projectile?</h2>
+<h2 id="sec-2"><a id="ID-eb1ca7ff-0aa6-499b-91ff-42f1f4003784" name="ID-eb1ca7ff-0aa6-499b-91ff-42f1f4003784"></a><span class="section-number-2">2</span> What is Projectile?</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 From the homepage:
@@ -421,7 +356,7 @@ files.
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h2 id="sec-3"><a id="ID-c85c6d2f-d00d-41ef-8f07-3d52d23c92a6" name="ID-c85c6d2f-d00d-41ef-8f07-3d52d23c92a6"></a>Installation and configuration</h2>
+<h2 id="sec-3"><a id="ID-c85c6d2f-d00d-41ef-8f07-3d52d23c92a6" name="ID-c85c6d2f-d00d-41ef-8f07-3d52d23c92a6"></a><span class="section-number-2">3</span> Installation and configuration</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 You also install Projectile via MELPA and setup:
@@ -429,9 +364,9 @@ You also install Projectile via MELPA and setup:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>projectile-global-mode<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>setq projectile-completion-system 'helm<span style="color: #707183;">)</span>
-<span style="color: #707183;">(</span>helm-projectile-on<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 </pre>
 </div>
 
@@ -453,7 +388,7 @@ Projectile has two modes of operation - one is portable and is
 implemented in Emacs Lisp(therefore it's native to Emacs and is known
 as the native indexing method) and the other relies on external
 commands like find, git, etc to obtain the list of files in a
-project. 
+project.
 </p>
 
 <p>
@@ -469,7 +404,7 @@ enable external indexing, add this setting:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-indexing-method 'alien<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">(setq projectile-indexing-method 'alien)
 </pre>
 </div>
 
@@ -481,7 +416,7 @@ speed up the indexing process.
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h2 id="sec-4"><a id="ID-cd4cc853-affb-4b2a-a894-55a583c9b756" name="ID-cd4cc853-affb-4b2a-a894-55a583c9b756"></a>All-in-one command: <code>helm-projectile</code>, <b>C-c p h</b></h2>
+<h2 id="sec-4"><a id="ID-cd4cc853-affb-4b2a-a894-55a583c9b756" name="ID-cd4cc853-affb-4b2a-a894-55a583c9b756"></a><span class="section-number-2">4</span> All-in-one command: <code>helm-projectile</code>, <b>C-c p h</b></h2>
 <div class="outline-text-2" id="text-4">
 <p>
 <span class="underline">Usage</span>: This command, by default, is the combination of these 5 commands:
@@ -499,7 +434,7 @@ speed up the indexing process.
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
-<h2 id="sec-5"><a id="ID-8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded" name="ID-8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded"></a>Enter project portal: <code>helm-projectile-switch-project</code>, <b>C-c p p</b></h2>
+<h2 id="sec-5"><a id="ID-8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded" name="ID-8ed44f1d-2b07-4c3d-b11b-f6e72f5eeded"></a><span class="section-number-2">5</span> Enter project portal: <code>helm-projectile-switch-project</code>, <b>C-c p p</b></h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <span class="underline">Usage</span>: This is the very first command you need to use before using other
@@ -509,7 +444,7 @@ only command that can be used outside of a project, aside from
 visited projects. If you first use Projectile, you have to visit at
 least a project supported by Projectile to let it remember the
 location of this project. The next time you won't have to manually
-navigate to that project but jump to it instantly using 
+navigate to that project but jump to it instantly using
 <code>helm-projectile-switch-project</code>.
 </p>
 
@@ -534,14 +469,14 @@ command to be executed after a project is selected. The default is
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-switch-project-action 'helm-projectile-find-file<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">(setq projectile-switch-project-action 'helm-projectile-find-file)
 </pre>
 </div>
 
 <p>
 Even better, you should bind it to <code>helm-projectile</code>. When the action
 is <code>helm-projectile</code>, this can be done: <b>open files in other
-projects without ever leaving current working project</b>. It is 
+projects without ever leaving current working project</b>. It is
 achieved by opening another <code>helm-projectile</code> session, but for
 another project, because <code>helm-projectile</code> always includes a list of
 projects, and makes <code>helm-projectile</code> list files in that project.
@@ -552,7 +487,7 @@ at a time:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-switch-project-action 'helm-projectile<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">(setq projectile-switch-project-action 'helm-projectile)
 </pre>
 </div>
 
@@ -619,14 +554,14 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 </div>
 
 <div id="outline-container-sec-6" class="outline-2">
-<h2 id="sec-6"><a id="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d" name="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d"></a>File management</h2>
+<h2 id="sec-6"><a id="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d" name="ID-b217795d-c945-4a63-8f22-ce7eaf7ebc5d"></a><span class="section-number-2">6</span> File management</h2>
 <div class="outline-text-2" id="text-6">
 </div>
 <div id="outline-container-sec-6-1" class="outline-3">
-<h3 id="sec-6-1"><a id="ID-d5bf76c1-08af-4429-83bf-18615cbafb95" name="ID-d5bf76c1-08af-4429-83bf-18615cbafb95"></a>Command: <code>helm-projectile-find-file</code>, <b>C-c p f</b></h3>
+<h3 id="sec-6-1"><a id="ID-d5bf76c1-08af-4429-83bf-18615cbafb95" name="ID-d5bf76c1-08af-4429-83bf-18615cbafb95"></a><span class="section-number-3">6.1</span> Command: <code>helm-projectile-find-file</code>, <b>C-c p f</b></h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
-<span class="underline">Usage</span>: This command lists all files in a project for users to narrow 
+<span class="underline">Usage</span>: This command lists all files in a project for users to narrow
 down to wanted files. Some frequently used actions that cover open,
 rename, copy, delete,search and other miscelaneous operations. Once
 you mastered the actions of <code>helm-projectile-find-file</code>, you master
@@ -647,7 +582,7 @@ key.
 </div>
 
 <div id="outline-container-sec-6-1-1" class="outline-4">
-<h4 id="sec-6-1-1"><a id="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d" name="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d"></a>Open</h4>
+<h4 id="sec-6-1-1"><a id="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d" name="ID-400557f8-b7a0-4ea7-9744-3d9d3356867d"></a><span class="section-number-4">6.1.1</span> Open</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <ul class="org-ul">
 <li><i>Find File</i> (default action bound to <b>RET</b>): open files; if multiple
@@ -690,7 +625,7 @@ files to open.
 <li><i>Find file as root</i> (<b>C-c r</b>): Another really useful action. With
 this command, you don't have to use <a href="http://www.gnu.org/software/tramp/#Running-eshell-on-a-remote-host">Tramp syntax</a> to open file as
 root. Just browse file to anywhere, and when needed, open it as root
-instantly. 
+instantly.
 
 <p>
 Demo (begins when <code>START DEMO</code> appears in minibuffer):
@@ -730,7 +665,7 @@ selected file type.
 </div>
 
 <div id="outline-container-sec-6-1-2" class="outline-4">
-<h4 id="sec-6-1-2"><a id="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55" name="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55"></a>Move and Rename</h4>
+<h4 id="sec-6-1-2"><a id="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55" name="ID-df231b0d-9a59-45b0-9b29-6f47ff19ff55"></a><span class="section-number-4">6.1.2</span> Move and Rename</h4>
 <div class="outline-text-4" id="text-6-1-2">
 <ul class="org-ul">
 <li><i>Rename file(s)</i> (<b>M-R</b>): Rename marked files. To mark files, press
@@ -784,7 +719,7 @@ Demo (begins when <code>START DEMO</code> appears in minibuffer):
 </div>
 
 <div id="outline-container-sec-6-1-3" class="outline-4">
-<h4 id="sec-6-1-3"><a id="ID-0276d133-1547-4c46-a598-324add5eeb27" name="ID-0276d133-1547-4c46-a598-324add5eeb27"></a>Copy and Delete</h4>
+<h4 id="sec-6-1-3"><a id="ID-0276d133-1547-4c46-a598-324add5eeb27" name="ID-0276d133-1547-4c46-a598-324add5eeb27"></a><span class="section-number-4">6.1.3</span> Copy and Delete</h4>
 <div class="outline-text-4" id="text-6-1-3">
 <ul class="org-ul">
 <li><i>Copy file(s)</i> (<b>M-C</b>): similar to <code>Rename File(s)</code> action but copy
@@ -804,7 +739,7 @@ the beginning: <a href="http://tuhdo.github.io/helm-projectile.html#sec-1-3">Del
 </div>
 
 <div id="outline-container-sec-6-1-4" class="outline-4">
-<h4 id="sec-6-1-4"><a id="ID-bb0e3512-f3f1-42c2-80ec-50d47fc7ba57" name="ID-bb0e3512-f3f1-42c2-80ec-50d47fc7ba57"></a>Search and Replace</h4>
+<h4 id="sec-6-1-4"><a id="ID-bb0e3512-f3f1-42c2-80ec-50d47fc7ba57" name="ID-bb0e3512-f3f1-42c2-80ec-50d47fc7ba57"></a><span class="section-number-4">6.1.4</span> Search and Replace</h4>
 <div class="outline-text-4" id="text-6-1-4">
 
 <ul class="org-ul">
@@ -827,7 +762,7 @@ on.
 </div>
 
 <div id="outline-container-sec-6-1-5" class="outline-4">
-<h4 id="sec-6-1-5"><a id="ID-3822d245-6836-469d-bc2f-45a0a6e4b941" name="ID-3822d245-6836-469d-bc2f-45a0a6e4b941"></a>Miscelaneous</h4>
+<h4 id="sec-6-1-5"><a id="ID-3822d245-6836-469d-bc2f-45a0a6e4b941" name="ID-3822d245-6836-469d-bc2f-45a0a6e4b941"></a><span class="section-number-4">6.1.5</span> Miscelaneous</h4>
 <div class="outline-text-4" id="text-6-1-5">
 <ul class="org-ul">
 <li><i>Insert as org link</i> (<b>C-c @</b>): Insert the current file that
@@ -911,7 +846,7 @@ similar to <code>Rename files(s)</code> action.
 </div>
 
 <div id="outline-container-sec-6-2" class="outline-3">
-<h3 id="sec-6-2"><a id="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304" name="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304"></a>Command: <code>helm-projectile-find-file-in-known-projects</code>, <b>C-c p F</b></h3>
+<h3 id="sec-6-2"><a id="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304" name="ID-1a36aba8-2070-4f66-b98e-efc66fc2b304"></a><span class="section-number-3">6.2</span> Command: <code>helm-projectile-find-file-in-known-projects</code>, <b>C-c p F</b></h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 This command is another one that can be used outside of any
@@ -933,7 +868,7 @@ The action menu is the same as <code>helm-projectile-find-file</code>.
 </div>
 
 <div id="outline-container-sec-6-3" class="outline-3">
-<h3 id="sec-6-3"><a id="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3" name="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3"></a>Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></h3>
+<h3 id="sec-6-3"><a id="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3" name="ID-5fcd616f-a139-4c0a-a4ff-5e2c435d08a3"></a><span class="section-number-3">6.3</span> Command: <code>helm-projectile-find-file-dwim</code>, <b>C-c p g</b></h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 <span class="underline">Usage</span>: Find file based on context at point (do what you mean):
@@ -973,10 +908,10 @@ anywhere</a>.
 </div>
 
 <div id="outline-container-sec-6-4" class="outline-3">
-<h3 id="sec-6-4"><a id="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b" name="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b"></a>Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></h3>
+<h3 id="sec-6-4"><a id="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b" name="ID-ff87062c-1e31-4601-89fb-19df0dd01e7b"></a><span class="section-number-3">6.4</span> Command: <code>helm-projectile-find-dir</code>, <b>C-c p d</b></h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
-<span class="underline">Usage</span>: List available directories in the current project. 
+<span class="underline">Usage</span>: List available directories in the current project.
 </p>
 
 <p>
@@ -997,7 +932,7 @@ buffer.
 </div>
 
 <div id="outline-container-sec-6-5" class="outline-3">
-<h3 id="sec-6-5"><a id="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572" name="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572"></a>Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></h3>
+<h3 id="sec-6-5"><a id="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572" name="ID-e6e3eb34-1de4-4d4c-875d-47e94503f572"></a><span class="section-number-3">6.5</span> Command: <code>helm-projectile-recentf</code>, <b>C-c p e</b></h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 <span class="underline">Usage</span>: List recently visited files in <b>current project</b>. The command has a
@@ -1009,7 +944,7 @@ knowledge here.
 </div>
 
 <div id="outline-container-sec-6-6" class="outline-3">
-<h3 id="sec-6-6"><a id="ID-74179568-a5b0-4a8f-8f30-b75959d4e190" name="ID-74179568-a5b0-4a8f-8f30-b75959d4e190"></a>Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></h3>
+<h3 id="sec-6-6"><a id="ID-74179568-a5b0-4a8f-8f30-b75959d4e190" name="ID-74179568-a5b0-4a8f-8f30-b75959d4e190"></a><span class="section-number-3">6.6</span> Command: <code>helm-projectile-find-other-file</code>, <b>C-c p a</b></h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 <span class="underline">Usage</span>: Switch between files with the same name but different extensions. With
@@ -1026,23 +961,23 @@ Other file extensions can be customized with the variable
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp">'<span style="color: #707183;">(</span><span style="color: #7388d6;">(</span><span style="color: #8b2252;">"cpp"</span> <span style="color: #8b2252;">"h"</span> <span style="color: #8b2252;">"hpp"</span> <span style="color: #8b2252;">"ipp"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"ipp"</span> <span style="color: #8b2252;">"h"</span> <span style="color: #8b2252;">"hpp"</span> <span style="color: #8b2252;">"cpp"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"hpp"</span> <span style="color: #8b2252;">"h"</span> <span style="color: #8b2252;">"ipp"</span> <span style="color: #8b2252;">"cpp"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"cxx"</span> <span style="color: #8b2252;">"hxx"</span> <span style="color: #8b2252;">"ixx"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"ixx"</span> <span style="color: #8b2252;">"cxx"</span> <span style="color: #8b2252;">"hxx"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"hxx"</span> <span style="color: #8b2252;">"ixx"</span> <span style="color: #8b2252;">"cxx"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"c"</span> <span style="color: #8b2252;">"h"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"m"</span> <span style="color: #8b2252;">"h"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"mm"</span> <span style="color: #8b2252;">"h"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"h"</span> <span style="color: #8b2252;">"c"</span> <span style="color: #8b2252;">"cpp"</span> <span style="color: #8b2252;">"ipp"</span> <span style="color: #8b2252;">"hpp"</span> <span style="color: #8b2252;">"m"</span> <span style="color: #8b2252;">"mm"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"cc"</span> <span style="color: #8b2252;">"hh"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"hh"</span> <span style="color: #8b2252;">"cc"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"vert"</span> <span style="color: #8b2252;">"frag"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"frag"</span> <span style="color: #8b2252;">"vert"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span>nil <span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">"gpg"</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"lock"</span> <span style="color: #8b2252;">""</span><span style="color: #7388d6;">)</span>
-  <span style="color: #7388d6;">(</span><span style="color: #8b2252;">"gpg"</span> <span style="color: #8b2252;">""</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">'((<span style="color: #cdcd00;">"cpp"</span> <span style="color: #cdcd00;">"h"</span> <span style="color: #cdcd00;">"hpp"</span> <span style="color: #cdcd00;">"ipp"</span>)
+  (<span style="color: #cdcd00;">"ipp"</span> <span style="color: #cdcd00;">"h"</span> <span style="color: #cdcd00;">"hpp"</span> <span style="color: #cdcd00;">"cpp"</span>)
+  (<span style="color: #cdcd00;">"hpp"</span> <span style="color: #cdcd00;">"h"</span> <span style="color: #cdcd00;">"ipp"</span> <span style="color: #cdcd00;">"cpp"</span>)
+  (<span style="color: #cdcd00;">"cxx"</span> <span style="color: #cdcd00;">"hxx"</span> <span style="color: #cdcd00;">"ixx"</span>)
+  (<span style="color: #cdcd00;">"ixx"</span> <span style="color: #cdcd00;">"cxx"</span> <span style="color: #cdcd00;">"hxx"</span>)
+  (<span style="color: #cdcd00;">"hxx"</span> <span style="color: #cdcd00;">"ixx"</span> <span style="color: #cdcd00;">"cxx"</span>)
+  (<span style="color: #cdcd00;">"c"</span> <span style="color: #cdcd00;">"h"</span>)
+  (<span style="color: #cdcd00;">"m"</span> <span style="color: #cdcd00;">"h"</span>)
+  (<span style="color: #cdcd00;">"mm"</span> <span style="color: #cdcd00;">"h"</span>)
+  (<span style="color: #cdcd00;">"h"</span> <span style="color: #cdcd00;">"c"</span> <span style="color: #cdcd00;">"cpp"</span> <span style="color: #cdcd00;">"ipp"</span> <span style="color: #cdcd00;">"hpp"</span> <span style="color: #cdcd00;">"m"</span> <span style="color: #cdcd00;">"mm"</span>)
+  (<span style="color: #cdcd00;">"cc"</span> <span style="color: #cdcd00;">"hh"</span>)
+  (<span style="color: #cdcd00;">"hh"</span> <span style="color: #cdcd00;">"cc"</span>)
+  (<span style="color: #cdcd00;">"vert"</span> <span style="color: #cdcd00;">"frag"</span>)
+  (<span style="color: #cdcd00;">"frag"</span> <span style="color: #cdcd00;">"vert"</span>)
+  (nil <span style="color: #cdcd00;">"lock"</span> <span style="color: #cdcd00;">"gpg"</span>)
+  (<span style="color: #cdcd00;">"lock"</span> <span style="color: #cdcd00;">""</span>)
+  (<span style="color: #cdcd00;">"gpg"</span> <span style="color: #cdcd00;">""</span>))
 </pre>
 </div>
 
@@ -1062,8 +997,8 @@ If you want to add more, for example, to switch between <code>html</code> &lt;-&
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'projectile-other-file-alist '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"html"</span> <span style="color: #8b2252;">"js"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from html -&gt; js</span>
-<span style="color: #707183;">(</span>add-to-list 'projectile-other-file-alist '<span style="color: #7388d6;">(</span><span style="color: #8b2252;">"js"</span> <span style="color: #8b2252;">"html"</span><span style="color: #7388d6;">)</span><span style="color: #707183;">)</span> <span style="color: #b22222;">;; </span><span style="color: #b22222;">switch from js -&gt; html</span>
+<pre class="src src-emacs-lisp">(add-to-list 'projectile-other-file-alist '(<span style="color: #cdcd00;">"html"</span> <span style="color: #cdcd00;">"js"</span>)) <span style="color: #cdcd00;">;; </span><span style="color: #cdcd00;">switch from html -&gt; js</span>
+(add-to-list 'projectile-other-file-alist '(<span style="color: #cdcd00;">"js"</span> <span style="color: #cdcd00;">"html"</span>)) <span style="color: #cdcd00;">;; </span><span style="color: #cdcd00;">switch from js -&gt; html</span>
 </pre>
 </div>
 
@@ -1076,7 +1011,7 @@ current file and other files with same names but different extensions</i>.
 </div>
 
 <div id="outline-container-sec-6-7" class="outline-3">
-<h3 id="sec-6-7"><a id="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751" name="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751"></a>Caching</h3>
+<h3 id="sec-6-7"><a id="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751" name="ID-5a69b97f-e61f-4633-b6c8-9dc6cc1ac751"></a><span class="section-number-3">6.7</span> Caching</h3>
 <div class="outline-text-3" id="text-6-7">
 <p>
 <span class="underline">Usage</span>: In large projects, caching can significantly speedup file and
@@ -1086,7 +1021,7 @@ by:
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>setq projectile-enable-caching t<span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">(setq projectile-enable-caching t)
 </pre>
 </div>
 
@@ -1104,7 +1039,7 @@ refresh the whole cache.
 </div>
 
 <div id="outline-container-sec-6-7-1" class="outline-4">
-<h4 id="sec-6-7-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a>Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></h4>
+<h4 id="sec-6-7-1"><a id="ID-e33dd757-4594-466a-b194-ceba73f16b44" name="ID-e33dd757-4594-466a-b194-ceba73f16b44"></a><span class="section-number-4">6.7.1</span> Command: <code>projectile-invalidate-cache</code>, <b>C-c p i</b></h4>
 <div class="outline-text-4" id="text-6-7-1">
 <p>
 <span class="underline">Usage</span>: As the command name suggests, it invalidates the current cache and
@@ -1114,7 +1049,7 @@ retrieves everything as new.
 </div>
 
 <div id="outline-container-sec-6-7-2" class="outline-4">
-<h4 id="sec-6-7-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a>Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></h4>
+<h4 id="sec-6-7-2"><a id="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91" name="ID-ca3915b7-2dc7-49c4-bd7a-194121936f91"></a><span class="section-number-4">6.7.2</span> Command: <code>projectile-cache-current-file</code>, <b>C-c p z</b></h4>
 <div class="outline-text-4" id="text-6-7-2">
 <p>
 <span class="underline">Usage</span>: Add the file of current selected buffer to cache.
@@ -1123,7 +1058,7 @@ retrieves everything as new.
 </div>
 
 <div id="outline-container-sec-6-7-3" class="outline-4">
-<h4 id="sec-6-7-3"><a id="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8" name="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8"></a>Command: <code>projectile-purge-file-from-cache</code></h4>
+<h4 id="sec-6-7-3"><a id="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8" name="ID-d8adeaa5-2937-4d4e-a591-dfcf9e8aa8e8"></a><span class="section-number-4">6.7.3</span> Command: <code>projectile-purge-file-from-cache</code></h4>
 <div class="outline-text-4" id="text-6-7-3">
 <p>
 <span class="underline">Usage</span>: Remove a file from the cache. Once removed, you won't see it
@@ -1134,7 +1069,7 @@ file, Projectile automatically removes the file from the cache.
 </div>
 
 <div id="outline-container-sec-6-7-4" class="outline-4">
-<h4 id="sec-6-7-4"><a id="ID-2cf595ee-dab6-449a-ba49-98094f724ee1" name="ID-2cf595ee-dab6-449a-ba49-98094f724ee1"></a>Command: <code>projectile-purge-dir-from-cache</code></h4>
+<h4 id="sec-6-7-4"><a id="ID-2cf595ee-dab6-449a-ba49-98094f724ee1" name="ID-2cf595ee-dab6-449a-ba49-98094f724ee1"></a><span class="section-number-4">6.7.4</span> Command: <code>projectile-purge-dir-from-cache</code></h4>
 <div class="outline-text-4" id="text-6-7-4">
 <p>
 <span class="underline">Usage</span>: Remove a directory from the cache.
@@ -1144,7 +1079,7 @@ file, Projectile automatically removes the file from the cache.
 </div>
 </div>
 <div id="outline-container-sec-7" class="outline-2">
-<h2 id="sec-7"><a id="ID-6a2e2a84-947a-4464-a97c-3e42c476cbb7" name="ID-6a2e2a84-947a-4464-a97c-3e42c476cbb7"></a>Virtual directory manager</h2>
+<h2 id="sec-7"><a id="ID-6a2e2a84-947a-4464-a97c-3e42c476cbb7" name="ID-6a2e2a84-947a-4464-a97c-3e42c476cbb7"></a><span class="section-number-2">7</span> Virtual directory manager</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Now that you know how to manage your project files with Helm and
@@ -1236,14 +1171,14 @@ directory structure, that is the logic of someone else.
 </div>
 
 <div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><a id="ID-b2c9048e-874a-4c99-8f5f-859d43c6abef" name="ID-b2c9048e-874a-4c99-8f5f-859d43c6abef"></a>Store virtual directories with Bookmark (or Bookmark+)</h3>
+<h3 id="sec-7-1"><a id="ID-b2c9048e-874a-4c99-8f5f-859d43c6abef" name="ID-b2c9048e-874a-4c99-8f5f-859d43c6abef"></a><span class="section-number-3">7.1</span> Store virtual directories with Bookmark (or Bookmark+)</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Using <code>Bookmark</code> (or <code>Bookmark+</code>), you can actually save your virtual
 Dired buffers and preserve this knowledge for future reference, when you
 want to quickly review related files to improve or fix bug. You won't
 have to reconnect related files again, and often it takes quite some
-time since you could forget many things. 
+time since you could forget many things.
 </p>
 
 <p>
@@ -1260,11 +1195,11 @@ about <code>Bookmark+</code> features, please refer to  <a href="http://www.emac
 </div>
 
 <div id="outline-container-sec-8" class="outline-2">
-<h2 id="sec-8"><a id="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f" name="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f"></a>Buffer management</h2>
+<h2 id="sec-8"><a id="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f" name="ID-bc663b21-afa1-4635-9a80-2852d44c8f7f"></a><span class="section-number-2">8</span> Buffer management</h2>
 <div class="outline-text-2" id="text-8">
 </div>
 <div id="outline-container-sec-8-1" class="outline-3">
-<h3 id="sec-8-1"><a id="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6" name="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6"></a>Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></h3>
+<h3 id="sec-8-1"><a id="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6" name="ID-d6eea79b-d77a-43e0-84ef-a5d7a157f7b6"></a><span class="section-number-3">8.1</span> Command: <code>helm-projectile-switch-to-buffer</code>, <b>C-c p b</b></h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 <span class="underline">Usage</span>: List all opened buffers in <b>current project</b>. The command has a
@@ -1276,11 +1211,11 @@ opening files, you open buffers instead.
 </div>
 </div>
 <div id="outline-container-sec-9" class="outline-2">
-<h2 id="sec-9"><a id="ID-76eb43a0-d82f-47f2-8b6d-d666f6e39c63" name="ID-76eb43a0-d82f-47f2-8b6d-d666f6e39c63"></a>Search in project</h2>
+<h2 id="sec-9"><a id="ID-76eb43a0-d82f-47f2-8b6d-d666f6e39c63" name="ID-76eb43a0-d82f-47f2-8b6d-d666f6e39c63"></a><span class="section-number-2">9</span> Search in project</h2>
 <div class="outline-text-2" id="text-9">
 </div>
 <div id="outline-container-sec-9-1" class="outline-3">
-<h3 id="sec-9-1"><a id="ID-39d68114-d7b0-4aa5-9cf8-06964b1ff1c9" name="ID-39d68114-d7b0-4aa5-9cf8-06964b1ff1c9"></a>Command: <code>helm-projectile-grep</code>, <b>C-c p s g</b></h3>
+<h3 id="sec-9-1"><a id="ID-39d68114-d7b0-4aa5-9cf8-06964b1ff1c9" name="ID-39d68114-d7b0-4aa5-9cf8-06964b1ff1c9"></a><span class="section-number-3">9.1</span> Command: <code>helm-projectile-grep</code>, <b>C-c p s g</b></h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 This is a replacement command for <code>projectile-grep</code> that uses Helm
@@ -1332,7 +1267,7 @@ want to ignore directory <code>backup</code>, simply add <code>backup</code> to 
 
 <div class="org-src-container">
 
-<pre class="src src-emacs-lisp"><span style="color: #707183;">(</span>add-to-list 'projectile-globally-ignored-directories <span style="color: #8b2252;">"backup"</span><span style="color: #707183;">)</span>
+<pre class="src src-emacs-lisp">(add-to-list 'projectile-globally-ignored-directories <span style="color: #cdcd00;">"backup"</span>)
 </pre>
 </div>
 
@@ -1363,7 +1298,7 @@ buffers of all ran Helm commands.
 </div>
 
 <div id="outline-container-sec-9-2" class="outline-3">
-<h3 id="sec-9-2"><a id="ID-761e52d6-9281-4da5-b716-b2f93c927b74" name="ID-761e52d6-9281-4da5-b716-b2f93c927b74"></a>Command: <code>helm-projectile-ack</code>, <b>C-c p s a</b></h3>
+<h3 id="sec-9-2"><a id="ID-761e52d6-9281-4da5-b716-b2f93c927b74" name="ID-761e52d6-9281-4da5-b716-b2f93c927b74"></a><span class="section-number-3">9.2</span> Command: <code>helm-projectile-ack</code>, <b>C-c p s a</b></h3>
 <div class="outline-text-3" id="text-9-2">
 <p>
 This is a replacement command for <code>projectile-ack</code>. Similar to
@@ -1403,7 +1338,7 @@ regex pattern</b>. Otherwise it won't work.
 </div>
 
 <div id="outline-container-sec-9-3" class="outline-3">
-<h3 id="sec-9-3"><a id="ID-3bac6c81-e783-4012-9890-9d8c3d599cfe" name="ID-3bac6c81-e783-4012-9890-9d8c3d599cfe"></a>Command: <code>helm-projectile-ag</code>, <b>C-c p s s</b></h3>
+<h3 id="sec-9-3"><a id="ID-3bac6c81-e783-4012-9890-9d8c3d599cfe" name="ID-3bac6c81-e783-4012-9890-9d8c3d599cfe"></a><span class="section-number-3">9.3</span> Command: <code>helm-projectile-ag</code>, <b>C-c p s s</b></h3>
 <div class="outline-text-3" id="text-9-3">
 <p>
 This is a replacement command for <code>projectile-ag</code>. Similar to
@@ -1441,7 +1376,7 @@ globally ignored by Projectile.
 </div>
 </div>
 <div id="outline-container-sec-10" class="outline-2">
-<h2 id="sec-10"><a id="ID-68003d84-9f41-11e4-89d3-123b93f75cbb" name="ID-68003d84-9f41-11e4-89d3-123b93f75cbb"></a>Summary of Keybindings</h2>
+<h2 id="sec-10"><a id="ID-68003d84-9f41-11e4-89d3-123b93f75cbb" name="ID-68003d84-9f41-11e4-89d3-123b93f75cbb"></a><span class="section-number-2">10</span> Summary of Keybindings</h2>
 <div class="outline-text-2" id="text-10">
 
 <p>
@@ -1555,21 +1490,9 @@ This chapter summarizes the key bindings introduced in the above chapters.
 </div>
 </div>
 <div id="postamble" class="status">
-
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+<p class="date">Created: 2016-12-06 Tue 01:42</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>
