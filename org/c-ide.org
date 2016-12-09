@@ -87,24 +87,30 @@ Here are some visual examples of the emacs IDE in action:
 
 [[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
 
-* Quick setup
+* Setup
+:PROPERTIES:
+:ID: setup
+:END:
+** Quick setup
 :PROPERTIES:
 :ID: quick-setup
 :END:
-I've prepared an Emacs repository to properly install the components
-of the emacs IDE and to perform a basic configuration for
-demonstration purposes. When installed and run the _first time_, the
-demo repository will download from MELPA, install and compile all the
-packages it needs. Note that depending on your internet connection and
-processor speeds, this may take a while, but that shouldn't stop you
-from continuing with this guide; the next section can be followed
-using a second instance of emacs, and without the IDE components.
 
-If you don't wish to use the demo, you can manually install the
-components, and use the =.el= files of the demo as a reference sample
-configuration.
+I've prepared a github repository (URL below) with the configuration
+files to properly install and configure the components of the emacs
+IDE, and with a sample C project to play with. When installed and run
+the _first time_, the demo repository will download from MELPA,
+install and compile all the packages it needs. Note that depending on
+your internet connection and processor speeds, this may take a while,
+but that shouldn't stop you from continuing with this guide; the next
+section can be followed using a second instance of emacs, and without
+the IDE components.
 
-Steps to install:
+If you don't wish to use the github repository, you can manually
+install the components, and use the =.el= files of the demo as a
+reference sample configuration.
+
+Steps to install the 'quick setup':
 
 - Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux /
   Mac) or from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available,
@@ -119,12 +125,15 @@ wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.zip && unzip
 wget https://github.com/Boruch-Baum/emacs-c-ide-demo/archive/master.tar.gz && tar -xf master.tar.gz
 git clone --depth=1 https://github.com/Boruch-Baum/emacs-c-ide-demo.git
 #+END_SRC
-- Copy the sub-folder =emacs_ide_demo=  into your =~/.emacs.d/= folder.
+- Copy the sub-folder =emacs_ide_demo_config= into your =~/.emacs.d/=
+  folder.
+- The other sub-folder, =emacs_ide_demo_project= has a sample skeleton
+  project. Use it in place or copy it elsewhere as convenient.
 - You may possibly want to make a change to your new
-  =~/.emacs.d/emacs_ide_demo/init.el= file. By default, the demo uses
-  [[https://github.com/emacs-helm/helm][helm]] ([[http://tuhdo.github.io/helm-intro.html][reference]]) and [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], but if you don't want to use
-  =helm=, the alternative is to use =ggtags=. Here's how to make that
-  change.
+  =~/.emacs.d/emacs_ide_demo_config/init.el= file. By default, the
+  demo uses [[https://github.com/emacs-helm/helm][helm]] ([[http://tuhdo.github.io/helm-intro.html][reference]]) and [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], but if you don't want to
+  use =helm=, the alternative is to use =ggtags=. Here's how to make
+  that change.
 
   + comment these lines in =init.el=:
 
@@ -139,11 +148,30 @@ git clone --depth=1 https://github.com/Boruch-Baum/emacs-c-ide-demo.git
       ;; (require 'setup-ggtags)
     #+END_SRC
 
-That does it! To start using the demo, just type =M-x load-file RET
-init.el=. As mentioned earlier, the first time you use it, it will
+- =M-x load-library RET emacs_ide_init=
+
+As mentioned earlier, the first time you load the library, it will
 perform a series of downloads, installs and compiles, which may take a
 while, but you can still continue with the next section of this guide
 in a second instance of emacs, even without any of the IDE components.
+
+** Not-so-quick setup
+:PROPERTIES:
+:ID: not-so-quick-setup
+:END:
+
+If your operating system distribution has already prepared all or some of the emacs IDE components as packages, then it stands to reason that it recommends you use those instead of downloading from MELPA.
+
+You can use your distribution's package manager to install any components so prepared, and afterwards perform the 'quick setup' instructions above.
+
+If you use your distribution's package manager to install any components AFTER performing the 'quick setup', you will need to then manually delete the initially downloaded library from your =~/.emacs.d/elpa= folder.
+
+The emacs ide components are:
++ TODO
+
+Let's use debian as an example linux distribution. At the time of this writing, debian had packaged the following components:
++ TODO
+
 * Basic source code navigation
 :PROPERTIES:
 :ID: basic-navigation
@@ -151,6 +179,7 @@ in a second instance of emacs, even without any of the IDE components.
 Even without any IDE components installed, emacs already has features
 useful for operating on source code.
 
+#+ATTR_HTML: :align center
 | Key                    | Binding Function     |                                                                           |
 |------------------------+----------------------+---------------------------------------------------------------------------|
 | *C-M-f*                | =forward-sexp=       | move forward over a balanced  expression that can be a pair or a symbol.  |
@@ -197,11 +226,6 @@ you'll now need to install [[http://www.gnu.org/software/global][GNU Global]], a
 MELPA your choice of either [[https://github.com/leoliu/ggtags][ggtags]] or the pair of packages [[https://github.com/emacs-helm/helm][helm]] +
 [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. In the demo package, the elisp code used to setup those packages can be found in =setup-helm-tags.el= / =setup-ggtags.el=.
 
-- If you chose [[https://github.com/leoliu/ggtags][ggtags]], here's an extra setting that might be useful.
-#+begin_src emacs-lisp
-  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
-#+end_src
-
 ** Basic concepts of tags
 :PROPERTIES:
 :ID:       b4902a85-f303-4f5f-8c13-1eb3d2d2de73
@@ -244,18 +268,10 @@ Just to be certain that the database was created, type =M-! ls G*= to have emacs
 :PROPERTIES:
 :ID:       3a64c7a4-e8a5-42b9-9476-28dff9e5cb96
 :END:
-The emacs *imenu* facility offers a way to find a file's major
-definitions, (eg. function, variables) by name. =ggtags= can integrate
-*imenu*:
 
-In the code snippet above, we integrated it into the emacs IDE as
-follows:
-#+begin_src emacs-lisp
-  (setq-local imenu-create-index-function #'ggtags-build-imenu-index)
-#+end_src
-
-If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. (But helm seems to have imenu integration now). You
-can use it as an outline tree like in other IDEs. Here is a demo:
+If you use Helm, use =moo-jump-local= from [[https://github.com/abo-abo/function-args][function-args]] package. (But
+helm seems to have imenu integration now). You can use it as an
+outline tree like in other IDEs. Here is a demo:
 
 [[file:static/c-ide/moo-jump-local.gif][file:static/c-ide/moo-jump-local.gif]]
 
@@ -650,18 +666,19 @@ local, use =company-c-headers-path-user= and put it in
 :PROPERTIES:
 :ID: what-is-cedet
 :END:
-CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
-with the end goal of creating an advanced development environment in
-Emacs. CEDET includes common features such as intelligent completion,
-source code navigation, project management, code generation with
-templates . CEDET also provides a framework for working with
-programming languages; support for new programming languages can be
-added and use CEDET to provide IDE-like features.
+CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools
+written with the end goal of creating an advanced development
+environment in Emacs. CEDET includes common features such as
+intelligent completion, source code navigation, project management,
+code generation with templates . CEDET also provides a framework for
+working with programming languages; support for new programming
+languages can be added and use CEDET to provide IDE-like features.
 
-CEDET can give you code completion, but this process takes time and can block
-your Emacs while it is doing so. If you have large project, you may not want to
-use CEDET for code completion. But, you can use CEDET perfectly for utilities
-that work at file scope i.e. refactoring local variables in a function in a file.
+CEDET can give you code completion, but this process takes time and
+can block your Emacs while it is doing so. If you have large project,
+you may not want to use CEDET for code completion. But, you can use
+CEDET perfectly for utilities that work at file scope i.e. refactoring
+local variables in a function in a file.
 
 ** Why use CEDET?
 :PROPERTIES:
@@ -702,9 +719,9 @@ CEDET was merged into Emacs since 23.2. You do not need to install
 CEDET manually. However, you can also use the development repository
 that contains latest bug fixes and more features. Nevertheless, the
 built-in Emacs is still adequate for daily usage and convenient for
-trying out before actually cloning and use the development
-version. Skip this section if you only want to try Emacs. Come back
-later if you really like it.
+trying out before actually cloning and use the development version.
+Skip this section if you only want to try Emacs. Come back later if
+you really like it.
 
 If you really want to use the development version with latest feature,
 checkout this branch:
@@ -1398,7 +1415,7 @@ Setup for C/C++:
 #+end_src
 
 Default key bindings:
-
+#+ATTR_HTML: :align center
 | Key           | Binding            |                                                                  |
 |---------------+--------------------+------------------------------------------------------------------|
 | *C-c @ C-c*   | =hs-toggle-hiding= | Toggle hiding/showing of a block                                 |
@@ -1428,7 +1445,7 @@ can safely remove all those =printf= and be certain that nothing else
 is changed accidentally.
 
 Default key bindings:
-
+#+ATTR_HTML: :align center
 | Key       | Binding            |                                            |
 |-----------+--------------------+--------------------------------------------|
 | *C-x n d* | =narrow-to-defun=  | Narrow buffer to current function at point |
@@ -1648,7 +1665,7 @@ For complete documentation, please refer to [[https://github.com/Fuco1/smartpare
  *RET* to jump to the location of that error.
 
  The following key bindings are available:
-
+#+ATTR_HTML: :align center
 | Key     | Description                                                                     |
 |---------+---------------------------------------------------------------------------------|
 | *C-o*   | Display matched location, but *do not* switch point to matched buffer           |

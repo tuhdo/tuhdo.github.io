@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>C/C++ Development Environment for Emacs</title>
-<!-- 2016-12-06 Tue 02:28 -->
+<!-- 2016-12-09 Fri 12:23 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <style type="text/css">
@@ -88,7 +88,7 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet"
-        href="./static/worg.css" type="text/css"/>
+          href="./static/worg.css" type="text/css"/>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -144,7 +144,7 @@ for the JavaScript code in this tag.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1. Introductory demos</a></li>
-<li><a href="#sec-2">2. Quick setup</a></li>
+<li><a href="#sec-2">2. Setup</a></li>
 <li><a href="#sec-3">3. Basic source code navigation</a></li>
 <li><a href="#sec-4">4. Source code navigation</a></li>
 <li><a href="#sec-5">5. Browse source tree with <code>Speedbar</code> file browser</a></li>
@@ -362,27 +362,33 @@ demo begins when "START" appears at the bottom:
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><a id="quick-setup" name="quick-setup"></a><span class="section-number-2">2</span> Quick setup</h2>
+<h2 id="sec-2"><a id="setup" name="setup"></a><span class="section-number-2">2</span> Setup</h2>
 <div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><a id="quick-setup" name="quick-setup"></a><span class="section-number-3">2.1</span> Quick setup</h3>
+<div class="outline-text-3" id="text-2-1">
+
 <p>
-I've prepared an Emacs repository to properly install the components
-of the emacs IDE and to perform a basic configuration for
-demonstration purposes. When installed and run the <span class="underline">first time</span>, the
-demo repository will download from MELPA, install and compile all the
-packages it needs. Note that depending on your internet connection and
-processor speeds, this may take a while, but that shouldn't stop you
-from continuing with this guide; the next section can be followed
-using a second instance of emacs, and without the IDE components.
+I've prepared a github repository (URL below) with the configuration
+files to properly install and configure the components of the emacs
+IDE, and with a sample C project to play with. When installed and run
+the <span class="underline">first time</span>, the demo repository will download from MELPA,
+install and compile all the packages it needs. Note that depending on
+your internet connection and processor speeds, this may take a while,
+but that shouldn't stop you from continuing with this guide; the next
+section can be followed using a second instance of emacs, and without
+the IDE components.
 </p>
 
 <p>
-If you don't wish to use the demo, you can manually install the
-components, and use the <code>.el</code> files of the demo as a reference sample
-configuration.
+If you don't wish to use the github repository, you can manually
+install the components, and use the <code>.el</code> files of the demo as a
+reference sample configuration.
 </p>
 
 <p>
-Steps to install:
+Steps to install the 'quick setup':
 </p>
 
 <ul class="org-ul">
@@ -407,13 +413,17 @@ git clone --depth=1 https://github.com/Boruch-Baum/emacs-c-ide-demo.git
 </pre>
 </div>
 <ul class="org-ul">
-<li>Copy the sub-folder <code>emacs_ide_demo</code>  into your <code>~/.emacs.d/</code> folder.
+<li>Copy the sub-folder <code>emacs_ide_demo_config</code> into your <code>~/.emacs.d/</code>
+  folder.
+</li>
+<li>The other sub-folder, <code>emacs_ide_demo_project</code> has a sample skeleton
+project. Use it in place or copy it elsewhere as convenient.
 </li>
 <li>You may possibly want to make a change to your new
-<code>~/.emacs.d/emacs_ide_demo/init.el</code> file. By default, the demo uses
-<a href="https://github.com/emacs-helm/helm">helm</a> (<a href="http://tuhdo.github.io/helm-intro.html">reference</a>) and <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>, but if you don't want to use
-<code>helm</code>, the alternative is to use <code>ggtags</code>. Here's how to make that
-change.
+<code>~/.emacs.d/emacs_ide_demo_config/init.el</code> file. By default, the
+demo uses <a href="https://github.com/emacs-helm/helm">helm</a> (<a href="http://tuhdo.github.io/helm-intro.html">reference</a>) and <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>, but if you don't want to
+use <code>helm</code>, the alternative is to use <code>ggtags</code>. Here's how to make
+that change.
 
 <ul class="org-ul">
 <li>comment these lines in <code>init.el</code>:
@@ -437,17 +447,55 @@ And uncomment this line:
 </li>
 </ul>
 </li>
+
+<li><code>M-x load-library RET emacs_ide_init</code>
+</li>
 </ul>
 
 <p>
-That does it! To start using the demo, just type <code>M-x load-file RET
-init.el</code>. As mentioned earlier, the first time you use it, it will
+As mentioned earlier, the first time you load the library, it will
 perform a series of downloads, installs and compiles, which may take a
 while, but you can still continue with the next section of this guide
 in a second instance of emacs, even without any of the IDE components.
 </p>
 </div>
 </div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><a id="not-so-quick-setup" name="not-so-quick-setup"></a><span class="section-number-3">2.2</span> Not-so-quick setup</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<p>
+If your operating system distribution has already prepared all or some of the emacs IDE components as packages, then it stands to reason that it recommends you use those instead of downloading from MELPA.
+</p>
+
+<p>
+You can use your distribution's package manager to install any components so prepared, and afterwards perform the 'quick setup' instructions above.
+</p>
+
+<p>
+If you use your distribution's package manager to install any components AFTER performing the 'quick setup', you will need to then manually delete the initially downloaded library from your <code>~/.emacs.d/elpa</code> folder.
+</p>
+
+<p>
+The emacs ide components are:
+</p>
+<ul class="org-ul">
+<li>TODO
+</li>
+</ul>
+
+<p>
+Let's use debian as an example linux distribution. At the time of this writing, debian had packaged the following components:
+</p>
+<ul class="org-ul">
+<li>TODO
+</li>
+</ul>
+</div>
+</div>
+</div>
+
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><a id="basic-navigation" name="basic-navigation"></a><span class="section-number-2">3</span> Basic source code navigation</h2>
 <div class="outline-text-2" id="text-3">
@@ -456,7 +504,7 @@ Even without any IDE components installed, emacs already has features
 useful for operating on source code.
 </p>
 
-<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -522,7 +570,7 @@ useful for operating on source code.
 <div id="outline-container-sec-3-1" class="outline-3">
 <h3 id="sec-3-1"><span class="section-number-3">3.1</span> Demos</h3>
 <div class="outline-text-3" id="text-3-1">
-<table border="2" cellspacing="2" cellpadding="6" rules="all" frame="border">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
 
 
 <colgroup>
@@ -647,16 +695,6 @@ you'll now need to install <a href="http://www.gnu.org/software/global">GNU Glob
 MELPA your choice of either <a href="https://github.com/leoliu/ggtags">ggtags</a> or the pair of packages <a href="https://github.com/emacs-helm/helm">helm</a> +
 <a href="https://github.com/syohex/emacs-helm-gtags">helm-gtags</a>. In the demo package, the elisp code used to setup those packages can be found in <code>setup-helm-tags.el</code> / <code>setup-ggtags.el</code>.
 </p>
-
-<ul class="org-ul">
-<li>If you chose <a href="https://github.com/leoliu/ggtags">ggtags</a>, here's an extra setting that might be useful.
-</li>
-</ul>
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
-</pre>
-</div>
 </div>
 </div>
 
@@ -722,25 +760,11 @@ Just to be certain that the database was created, type <code>M-! ls G*</code> to
 <div id="outline-container-sec-4-4" class="outline-3">
 <h3 id="sec-4-4"><a id="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96" name="ID-3a64c7a4-e8a5-42b9-9476-28dff9e5cb96"></a><span class="section-number-3">4.4</span> Find definitions in current buffer</h3>
 <div class="outline-text-3" id="text-4-4">
-<p>
-The emacs <b>imenu</b> facility offers a way to find a file's major
-definitions, (eg. function, variables) by name. <code>ggtags</code> can integrate
-<b>imenu</b>:
-</p>
 
 <p>
-In the code snippet above, we integrated it into the emacs IDE as
-follows:
-</p>
-<div class="org-src-container">
-
-<pre class="src src-emacs-lisp">(setq-local imenu-create-index-function #'ggtags-build-imenu-index)
-</pre>
-</div>
-
-<p>
-If you use Helm, use <code>moo-jump-local</code> from <a href="https://github.com/abo-abo/function-args">function-args</a> package. (But helm seems to have imenu integration now). You
-can use it as an outline tree like in other IDEs. Here is a demo:
+If you use Helm, use <code>moo-jump-local</code> from <a href="https://github.com/abo-abo/function-args">function-args</a> package. (But
+helm seems to have imenu integration now). You can use it as an
+outline tree like in other IDEs. Here is a demo:
 </p>
 
 
@@ -1338,20 +1362,21 @@ local, use <code>company-c-headers-path-user</code> and put it in
 <h3 id="sec-10-1"><a id="what-is-cedet" name="what-is-cedet"></a><span class="section-number-3">10.1</span> What is CEDET?</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
-CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools written
-with the end goal of creating an advanced development environment in
-Emacs. CEDET includes common features such as intelligent completion,
-source code navigation, project management, code generation with
-templates . CEDET also provides a framework for working with
-programming languages; support for new programming languages can be
-added and use CEDET to provide IDE-like features.
+CEDET is a (C)ollection of (E)macs (D)evelopment (E)nvironment (T)ools
+written with the end goal of creating an advanced development
+environment in Emacs. CEDET includes common features such as
+intelligent completion, source code navigation, project management,
+code generation with templates . CEDET also provides a framework for
+working with programming languages; support for new programming
+languages can be added and use CEDET to provide IDE-like features.
 </p>
 
 <p>
-CEDET can give you code completion, but this process takes time and can block
-your Emacs while it is doing so. If you have large project, you may not want to
-use CEDET for code completion. But, you can use CEDET perfectly for utilities
-that work at file scope i.e. refactoring local variables in a function in a file.
+CEDET can give you code completion, but this process takes time and
+can block your Emacs while it is doing so. If you have large project,
+you may not want to use CEDET for code completion. But, you can use
+CEDET perfectly for utilities that work at file scope i.e. refactoring
+local variables in a function in a file.
 </p>
 </div>
 </div>
@@ -1412,9 +1437,9 @@ CEDET was merged into Emacs since 23.2. You do not need to install
 CEDET manually. However, you can also use the development repository
 that contains latest bug fixes and more features. Nevertheless, the
 built-in Emacs is still adequate for daily usage and convenient for
-trying out before actually cloning and use the development
-version. Skip this section if you only want to try Emacs. Come back
-later if you really like it.
+trying out before actually cloning and use the development version.
+Skip this section if you only want to try Emacs. Come back later if
+you really like it.
 </p>
 
 <p>
@@ -2427,8 +2452,7 @@ Setup for C/C++:
 <p>
 Default key bindings:
 </p>
-
-<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -2518,8 +2542,7 @@ is changed accidentally.
 <p>
 Default key bindings:
 </p>
-
-<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -2850,8 +2873,7 @@ hyperlink. You can click on each error, or execute a key binding like
 <p>
 The following key bindings are available:
 </p>
-
-<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides" align="center">
 
 
 <colgroup>
@@ -3033,7 +3055,7 @@ seen the layout of <code>gdb-many-windows</code> above, you have the following
 buffers visible on your screen (ignore the first row):
 </p>
 
-<table border="2" cellspacing="2" cellpadding="6" rules="groups" frame="none">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -3190,7 +3212,7 @@ work with many languages, use <b>GUD</b>.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2016-12-06 Tue 02:28</p>
+<p class="date">Created: 2016-12-09 Fri 12:23</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.5.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
