@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-12-17 CN 21:43 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Peek definition with Emacs frame</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Tu Hoang Do" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="./static/worg.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="preamble" class="status">
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=9874755;
+var sc_invisible=1;
+var sc_security="c2028bb7";
+var scJsHost = (("https:" == document.location.protocol) ?
+"https://secure." : "http://www.");
+document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+
+"statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript><div class="statcounter"><a title="hit counter"
+href="http://statcounter.com/free-hit-counter/" target="_blank"><img
+class="statcounter" src="http://c.statcounter.com/9874755/0/c2028bb7/1/"
+alt="hit counter"></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+<h2><a href="index.html">Back to Table of Contents</a></h2>
+</div>
+<div id="content">
+<h1 class="title">Peek definition with Emacs frame</h1>
+<p>
+In many IDEs, peek definition is a feature that opens a definition (of a
+function, a class, a symbol, etc) in a popup window without leaving the current
+buffer. Most of the time, jumping into a definition, then jump back, is
+enough, so why bother leaving the current buffer to reload a whole new buffer,
+then go back for another reload. This is distracting. 
+</p>
+
+<p>
+An example of peek definition:
+</p>
+
+<p>
+<a href="static/peek-definition-vs.png"><img src="static/peek-definition-vs.png" alt="peek-definition-vs.png" /></a>
+(Source: Microsoft)
+</p>
+
+<p>
+I already searched for an alternative in Emacs, but apparently, all the
+solutions that involve a popup is slow and lacking. The space for displaying
+text is limited, and there is no font locking. You can't even search, or if it
+does, search is difficult and slow.
+</p>
+
+<p>
+Recently, while jumping around code definitions, I lost track of the original
+buffer I start the jump chain, e.g. I started at file1.c, then jumped to
+file2.c, file3.h, file4.c, and so on, until I forgot that I started at <code>file1.c</code>
+(<code>file1.c</code> can be a long and hard to remember name). It makes me want to do this
+whole code hopping process in another separated frame/buffer instead of messing
+with my current buffer. I tried improved the process:
+</p>
+
+<ul class="org-ul">
+<li><b>Using a different buffer</b>: Initially, I create another buffer and start from
+there. However, it is usually the case that the other buffer is also a useful buffer.</li>
+
+<li><b>Using a different workspace</b>: I am using <a href="https://github.com/wasamasa/eyebrowse">eyebrowse</a>, a package that can create a
+whole new workspace and save the previous window configuration as another
+workspace. Effectively, you can switch between different window configurations
+with ease. This solution quickly becomes cumbersome, because I must remember
+which workspace is for browsing code, not to mention it is quite common for me
+to create 5 other workspaces for other purposes. It quickly becomes a burden
+to manage the workspaces.</li>
+</ul>
+
+<p>
+It is at this point that I suddenly remember frames. That's right, Emacs frames!
+It is perfect for this use case. I can do whatever I want in this frame, and
+when done, simply close it with <code>C-x 5 0</code>. With frames, the number of my
+workspaces (using eyebrowse) is kept at a manageable number.
+</p>
+
+<p>
+But wait, if an Emacs frame is small enough, isn't it the same as a popup
+window, but with every feature of a buffer (syntax highlighting, code jumping,
+etc) available? Not to mention, making a frame is much more lightweight than
+other popup solutions.
+</p>
+
+<p>
+At this point, implementing a peek definition in Emacs is
+simply automating these steps:
+</p>
+
+<ol class="org-ol">
+<li>Find the absolute position of the current beginning of the symbol at point,
+in pixels.</li>
+<li>Create a new invisible frame, with the current buffer in it.</li>
+<li>Position the new frame right under the beginning of the symbol at point.</li>
+<li>Jump to the symbol at point.</li>
+<li>Make frame visible again.</li>
+</ol>
+
+<p>
+That's all for a peek definition popup:
+</p>
+
+
+<div class="figure">
+<p><a href="static/peek-definition-emacs.gif"><img src="static/peek-definition-emacs.gif" alt="peek-definition-emacs.gif" /></a>
+</p>
+</div>
+
+<p>
+In the example, I used <code>rtags-find-symbol-at-point</code> function for jumping. But
+you can use any function that finds a definition, as long as it jumps to a
+buffer. Finally, here is the code:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(<span style="color: #0000FF;">defun</span> <span style="color: #006699;">rtags-peek-definition</span> ()
+  <span style="color: #036A07;">"Peek at definition at point using rtags."</span>
+  (<span style="color: #0000FF;">interactive</span>)
+  (<span style="color: #0000FF;">let</span> ((func (<span style="color: #0000FF;">lambda</span> ()
+                (rtags-find-symbol-at-point)
+                (rtags-location-stack-forward))))
+    (rtags-start-process-unless-running)
+    (make-peek-frame func)))
+
+(<span style="color: #0000FF;">defun</span> <span style="color: #006699;">make-peek-frame</span> (find-definition-function <span style="color: #6434A3;">&amp;rest</span> args)
+  <span style="color: #036A07;">"Make a new frame for peeking definition"</span>
+  (<span style="color: #0000FF;">when</span> (<span style="color: #0000FF;">or</span> (not (<span style="color: #0000FF;">rtags-called-interactively-p</span>)) (rtags-sandbox-id-matches))
+    (<span style="color: #0000FF;">let</span> (summary
+          doc-frame
+          x y
+          <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+          <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">1. Find the absolute position of the current beginning of the symbol at point, ;;</span>
+          <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">in pixels.                                                                     ;;</span>
+          <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+          (abs-pixel-pos (<span style="color: #0000FF;">save-excursion</span>
+                           (beginning-of-thing 'symbol)
+                           (window-absolute-pixel-position))))
+      (<span style="color: #0000FF;">setq</span> x (car abs-pixel-pos))
+      <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">(setq y (cdr abs-pixel-pos))</span>
+      (<span style="color: #0000FF;">setq</span> y (+ (cdr abs-pixel-pos) (frame-char-height)))
+
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">2. Create a new invisible frame, with the current buffer in it. ;;</span>
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      (<span style="color: #0000FF;">setq</span> doc-frame (make-frame '((minibuffer . nil)
+                                    (name . <span style="color: #008000;">"*RTags Peek*"</span>)
+                                    (width . <span style="color: #D0372D;">80</span>)
+                                    (visibility . nil)
+                                    (height . <span style="color: #D0372D;">15</span>))))
+
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">3. Position the new frame right under the beginning of the symbol at point. ;;</span>
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      (set-frame-position doc-frame x y)
+
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">4. Jump to the symbol at point. ;;</span>
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      (<span style="color: #0000FF;">with-selected-frame</span> doc-frame
+        (apply find-definition-function args)
+        (read-only-mode)
+        (<span style="color: #0000FF;">when</span> semantic-stickyfunc-mode (semantic-stickyfunc-mode <span style="color: #D0372D;">-1</span>))
+        (recenter-top-bottom <span style="color: #D0372D;">0</span>))
+
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      <span style="color: #8D8D84;">;; </span><span style="color: #8D8D84; font-style: italic;">5. Make frame visible again ;;</span>
+      <span style="color: #8D8D84;">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</span>
+      (make-frame-visible doc-frame))))
+</pre>
+</div>
+
+<p>
+Then, bind the new command to a key and try it out:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(global-set-key (kbd <span style="color: #008000;">"C-c p"</span>) 'rtags-peek-definition)
+</pre>
+</div>
+
+<p>
+To close the peek frame, simply use <code>C-x 5 0</code> (runs <code>delete-frame</code> command). You
+can bind it to another key to close frame easier, e.g. <code>f12</code> key.
+</p>
+
+<p>
+The more I use Emacs, the more I start realizing how useful frames
+are. Especially with Emacs 26 onward, there is an option to remove a frame from
+OS taskbar, effectively you cannot use Alt+Tab to switch to any child frame
+created in Emacs. With this feature, you can create many Emacs frames without
+creating a mess that renders Alt+tab unusable. Perhaps it is the time to embrace
+the frames.
+</p>
+</div>
+<div id="postamble" class="status">
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'emacs-tutor'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+</body>
+</html>
