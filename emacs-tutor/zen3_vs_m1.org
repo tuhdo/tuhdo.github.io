@@ -29,7 +29,7 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
   
   Ryzen 5800x is faster than M1 in most tasks by a large margin.
 
-  [[file:static/5800x_m1_charts/Java Renaissance Benchmarks.png][file:static/5800x_m1_charts/Java Renaissance Benchmarks.png]]
+  [[file:static/5800x_m1_charts/JavaRenaissanceBenchmarks.png][file:static/5800x_m1_charts/JavaRenaissanceBenchmarks.png]]
 
   
 * Java SciMark 2.0 (Higher is better)
@@ -38,14 +38,14 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
   others, the 5800X is slightly faster, with the exception of =Monte
   Carlo Integraton= scored 2.7% lower than M1.
   
-  [[file:static/5800x_m1_charts/Java SciMark 2.0 Benchmarks (NIST).png][file:static/5800x_m1_charts/Java SciMark 2.0 Benchmarks (NIST).png]]
+  [[file:static/5800x_m1_charts/JavaSciMarkBenchmarks.png][file:static/5800x_m1_charts/JavaSciMarkBenchmarks.png]]
 
 * Java DaCapo (Less is better)
 
   5800X is mostly faster by a significant margin, except for the H2O
   benchmark which is more than twice slower.
 
-  [[file:static/5800x_m1_charts/Java DaCapo Benchmarks (309e1fa).png][file:static/5800x_m1_charts/Java DaCapo Benchmarks (309e1fa).png]]
+  [[file:static/5800x_m1_charts/Java_DaCapo_Benchmarks_(309e1fa).png][file:static/5800x_m1_charts/Java_DaCapo_Benchmarks_(309e1fa).png]]
 
 * Python PyPerformance (Less is better)
   
@@ -59,9 +59,9 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
   slightly faster. Probably a faster Python implementation like PyPy
   can highlight the differences better.
   
-  [[file:static/5800x_m1_charts/PyPerformance Benchmarks.png][file:static/5800x_m1_charts/PyPerformance Benchmarks.png]]
+  [[file:static/5800x_m1_charts/PyPerformanceBenchmarks.png][file:static/5800x_m1_charts/PyPerformanceBenchmarks.png]]
 
-  [[file:static/5800x_m1_charts/PyPerformance Benchmarks (Total Seconds Elapsed).png][file:static/5800x_m1_charts/PyPerformance Benchmarks (Total Seconds Elapsed).png]]
+  [[file:static/5800x_m1_charts/PyPerformanceBenchmarksTotal).png][file:static/5800x_m1_charts/PyPerformanceBenchmarksTotal.png]]
 
 * Go (golang.org/x/benchmarks - Less is better)
 
@@ -74,21 +74,21 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
 
   The 5800X performs significantly better in all benchmarks:
   
-  [[file:static/5800x_m1_charts/Redis v6.0.9 Benchmark (1,000,000 Requests).png][file:static/5800x_m1_charts/Redis v6.0.9 Benchmark (1,000,000 Requests).png]]
+  [[file:static/5800x_m1_charts/Redis.png][file:static/5800x_m1_charts/Redis.png]]
 
 * JavaScript Web Tooling Benchmark (v8) (Higher is better)
   
   The 5800X is significatnly faster in most benchmarks:
   
-  [[file:static/5800x_m1_charts/JavaScript Web Tooling Benchmark (v8).png][file:static/5800x_m1_charts/JavaScript Web Tooling Benchmark (v8).png]]
+  [[file:static/5800x_m1_charts/JavaScriptWebToolingBenchmark.png][file:static/5800x_m1_charts/JavaScriptWebToolingBenchmark.png]]
 
 * JavaScript Octane 2.0 (Higher is better)
 
   Same story as above: 
 
-  [[file:static/5800x_m1_charts/JavaScript Octane 2.0.png][file:static/5800x_m1_charts/JavaScript Octane 2.0.png]]
+  [[file:static/5800x_m1_charts/JavaScriptOctane.png][file:static/5800x_m1_charts/JavaScriptOctane.png]]
 
-  [[file:static/5800x_m1_charts/JavaScript Octane 2.0 Overall.png][file:static/5800x_m1_charts/JavaScript Octane 2.0 Overall.png]]
+  [[file:static/5800x_m1_charts/JavaScriptOctaneOverall.png][file:static/5800x_m1_charts/JavaScriptOctaneOverall.png]]
 
 * Conclusion
   
