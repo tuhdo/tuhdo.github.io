@@ -16,14 +16,18 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
 
 * Test System
 
-  - CPU: Ryzen 5800X (8 cores 16 threads) tuned (Curve Optimizer set to -25)
-  - RAM: 64 GB DDR4 overclocked to 3733 MHz, stress testing 24 hours stable
-  - OS: ClearLinux stock, =scaling_available_governors= set to =performance=.
+  - *CPU*: Ryzen 5800X (8 cores 16 threads) tuned (Curve Optimizer set to -25)
+  - *RAM*: 64 GB DDR4 overclocked to 3733 MHz, stress testing 24 hours stable
+  - *OS*: stock ClearLinux 34000 , =scaling_available_governors= set to =performance=.
 
   =Curve Optimizer= is a new way to undervolt Ryzen 5000 CPUs. Settings
   to -25, the CPUs can dynamically undervolt from 75 mV - 125 mV depends
   on current CPU loads. Because voltage is lower, temperature is lowered
   and max boost can sustain longer. 
+
+  As for RAM, JEDEC defines the maximum frequency is 3200 CL20-22-22
+  @1.2V. Anything faster is considered overclocked, e.g. 4266 MT/s. So, it's
+  fine for a bit of RAM OC.
 
 * Java Renaissance (Less is better)
   
@@ -31,7 +35,6 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
 
   [[file:static/5800x_m1_charts/JavaRenaissanceBenchmarks.png][file:static/5800x_m1_charts/JavaRenaissanceBenchmarks.png]]
 
-  
 * Java SciMark 2.0 (Higher is better)
 
   In the =SOR= benchmark, the 5800X is more than twice as fast. For
@@ -89,6 +92,19 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
   [[file:static/5800x_m1_charts/JavaScriptOctane.png][file:static/5800x_m1_charts/JavaScriptOctane.png]]
 
   [[file:static/5800x_m1_charts/JavaScriptOctaneOverall.png][file:static/5800x_m1_charts/JavaScriptOctaneOverall.png]]
+
+* Bonus: Geekbench5 socre on Linux
+- Single-core: 1876
+- Multi-core: 12339
+
+Link: https://browser.geekbench.com/v5/cpu/5378737
+
+On Windows, the score is 1718 and 11229 respectively:
+https://browser.geekbench.com/v5/cpu/5350515
+
+So, if a benchmark is available on both Windows and Linux, it is recommended to
+bench it on Linux for maximizing x86 CPU performance when compared to a CPU with
+a different architecture. 
 
 * Conclusion
   
