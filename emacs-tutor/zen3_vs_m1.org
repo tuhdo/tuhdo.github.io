@@ -1,0 +1,106 @@
+#+TITLE: Ryzen 5800X vs Apple M1: Programming-focused benchmarks
+
+Apple is making all the rage with the recent M1 SoC released on Mac
+Mini, MacBook Air and MacBook Pro. Benchmarks were done and amont
+them, [[https://tech.ssut.me/apple-m1-chip-benchmarks-focused-on-the-real-world-programming/][this article]] attracted my attention as it is focused on
+programming. It performed various micro-benchmarks on various popular
+programming languages (no C/C++/Rust though, sadly but that's fine
+nevertheles). The data depicted that older x86 CPUs were no match for
+M1 and it is correct. However, there is one major flaw: the author did
+not perform benchmarks on Ryzen 5000 series CPUs, yet concluded that
+x86 CPU is no match for M1. I was curious whether it's true and
+decided to run the same sets of benchmarks on my newly AMD Ryzen
+5800X.
+
+All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3mHL2fZZfZdJ8S4/edit?usp=sharing][test data are here]].
+
+* Test System
+
+  - CPU: Ryzen 5800X (8 cores 16 threads) tuned (Curve Optimizer set to -25)
+  - RAM: 64 GB DDR4 overclocked to 3733 MHz, stress testing 24 hours stable
+  - OS: ClearLinux stock, =scaling_available_governors= set to =performance=.
+
+  =Curve Optimizer= is a new way to undervolt Ryzen 5000 CPUs. Settings
+  to -25, the CPUs can dynamically undervolt from 75 mV - 125 mV depends
+  on current CPU loads. Because voltage is lower, temperature is lowered
+  and max boost can sustain longer. 
+
+* Java Renaissance (Less is better)
+  
+  Ryzen 5800x is faster than M1 in most tasks by a large margin.
+
+  [[file:static/5800x_m1_charts/Java Renaissance Benchmarks.png][file:static/5800x_m1_charts/Java Renaissance Benchmarks.png]]
+
+  
+* Java SciMark 2.0 (Higher is better)
+
+  In the =SOR= benchmark, the 5800X is more than twice as fast. For
+  others, the 5800X is slightly faster, with the exception of =Monte
+  Carlo Integraton= scored 2.7% lower than M1.
+  
+  [[file:static/5800x_m1_charts/Java SciMark 2.0 Benchmarks (NIST).png][file:static/5800x_m1_charts/Java SciMark 2.0 Benchmarks (NIST).png]]
+
+* Java DaCapo (Less is better)
+
+  5800X is mostly faster by a significant margin, except for the H2O
+  benchmark which is more than twice slower.
+
+  [[file:static/5800x_m1_charts/Java DaCapo Benchmarks (309e1fa).png][file:static/5800x_m1_charts/Java DaCapo Benchmarks (309e1fa).png]]
+
+* Python PyPerformance (Less is better)
+  
+  In this benchmark, the following benchmarks are ommited as I could not run successfully: 
+
+  - sqlalchemy_declarative
+  - sqlalchemy_imperative
+  - sqlite_synth
+
+  Overall, the execution time is roughly the same, with the 5800X
+  slightly faster. Probably a faster Python implementation like PyPy
+  can highlight the differences better.
+  
+  [[file:static/5800x_m1_charts/PyPerformance Benchmarks.png][file:static/5800x_m1_charts/PyPerformance Benchmarks.png]]
+
+  [[file:static/5800x_m1_charts/PyPerformance Benchmarks (Total Seconds Elapsed).png][file:static/5800x_m1_charts/PyPerformance Benchmarks (Total Seconds Elapsed).png]]
+
+* Go (golang.org/x/benchmarks - Less is better)
+
+  The 5800X performs significantly better in all benchmarks, around
+  30% faster in most benchmarks and some are twice as fast.
+
+  [[file:static/5800x_m1_charts/golang.org_x_benchmarks.png][file:static/5800x_m1_charts/golang.org_x_benchmarks.png]]
+
+* Redis
+
+  The 5800X performs significantly better in all benchmarks:
+  
+  [[file:static/5800x_m1_charts/Redis v6.0.9 Benchmark (1,000,000 Requests).png][file:static/5800x_m1_charts/Redis v6.0.9 Benchmark (1,000,000 Requests).png]]
+
+* JavaScript Web Tooling Benchmark (v8) (Higher is better)
+  
+  The 5800X is significatnly faster in most benchmarks:
+  
+  [[file:static/5800x_m1_charts/JavaScript Web Tooling Benchmark (v8).png][file:static/5800x_m1_charts/JavaScript Web Tooling Benchmark (v8).png]]
+
+* JavaScript Octane 2.0 (Higher is better)
+
+  Same story as above: 
+
+  [[file:static/5800x_m1_charts/JavaScript Octane 2.0.png][file:static/5800x_m1_charts/JavaScript Octane 2.0.png]]
+
+  [[file:static/5800x_m1_charts/JavaScript Octane 2.0 Overall.png][file:static/5800x_m1_charts/JavaScript Octane 2.0 Overall.png]]
+
+* Conclusion
+  
+  While M1 is indeed very powerful for its size, when comparing it to
+  the high-end x86 desktop, it is still slower. To conclude that it
+  performs better than the existing x86 CPUs, is a mistake. Zen 3 CPUs
+  are manufactured on 7nm TSMC process with 12nm IO Dies from Global
+  Foundry, so power consumption certainly does take a hit, but is
+  acceptable on a desktop platform where the upper limit could be as
+  high as 300W. 
+
+  The future Ryzen CPU still got more room to grow with the future
+  5nm, 3nm and 2nm from TSMC along with CPU architectural changes. For
+  that reason, x86 is still a formidable opponent for non-x86 ISAs in
+  a forseeable future.
