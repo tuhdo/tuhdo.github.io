@@ -116,7 +116,13 @@ a different architecture.
   acceptable on a desktop platform where the upper limit could be as
   high as 300W. 
 
-  The future Ryzen CPU still got more room to grow with the future
-  5nm, 3nm and 2nm from TSMC along with CPU architectural changes. For
-  that reason, x86 is still a formidable opponent for non-x86 ISAs in
-  a forseeable future.
+  The future Ryzen CPU still got more room to grow with the future 5nm, 3nm and
+  2nm from TSMC along with CPU architectural changes. If Intel could somehow be
+  successful with their 10nm and 7nm processes, Intel CPUs could still enjoy the
+  same grow and maybe even better. But, a big if, that is.  At least AMD got
+  TSMC on their side.
+
+  For that reason, x86 is still a formidable opponent for non-x86 ISAs in a
+  forseeable future. I expect the same with Intel CPU, even the up-coming 14nm
+  CPU Rocket Lake to get similar performance to zen 3 despite the obscene power
+  draw.
