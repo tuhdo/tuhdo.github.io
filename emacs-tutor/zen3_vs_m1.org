@@ -93,7 +93,7 @@ All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3m
 
   [[file:static/5800x_m1_charts/JavaScriptOctaneOverall.png][file:static/5800x_m1_charts/JavaScriptOctaneOverall.png]]
 
-* Bonus: Geekbench5 socre on Linux
+* Bonus: Geekbench5 score on Linux
 - Single-core: 1876
 - Multi-core: 12339
 
