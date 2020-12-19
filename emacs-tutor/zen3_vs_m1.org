@@ -12,9 +12,22 @@ x86 CPU is no match for M1. I was curious whether it's true and
 decided to run the same sets of benchmarks on my newly AMD Ryzen
 5800X.
 
+Even though the 5800X is compared and seems unfair to the M1, please keep in
+mind that for single-threaded tasks, a single core doesn't consume all 95W TDP
+headroom of the CPU. Based on Anandtech's analysis, a single 5800X core only
+consumes 17.3W at 4850 MHz: 
+
+[[file:static/percore_5800x.png][file:static/percore_5800x.png]]
+
+Further, a 45W [[https://videocardz.com/newz/amd-ryzen-9-5900hx-spotted-with-4-7-ghz-boost-clock-much-faster-than-ryzen-9-4900hs][5900HX is recently spotted]], which should deliver around 90% the
+performance of this 5800X since it could reach at least 4.7 Ghz on boost.
+
 All the [[https://docs.google.com/spreadsheets/d/1ypHbdetVvEF4SwKcVpEqv0cPWw9i3mHL2fZZfZdJ8S4/edit?usp=sharing][test data are here]].
 
 * Test System
+
+For the M1, in the original article, a Mac Mini M1 was used and all binaries
+were natively compiled. No Rosetta 2 involved.
 
   - *CPU*: Ryzen 5800X (8 cores 16 threads) tuned (Curve Optimizer set to -25)
   - *RAM*: 64 GB DDR4 overclocked to 3733 MHz, stress testing 24 hours stable
