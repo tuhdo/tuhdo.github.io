@@ -38,10 +38,6 @@ were natively compiled. No Rosetta 2 involved.
   on current CPU loads. Because voltage is lower, temperature is lowered
   and max boost can sustain longer. 
 
-  As for RAM, JEDEC defines the maximum frequency is 3200 CL20-22-22
-  @1.2V. Anything faster is considered overclocked, e.g. 4266 MT/s. So, it's
-  fine for a bit of RAM OC.
-
 * Java Renaissance (Less is better)
   
   Ryzen 5800x is faster than M1 in most tasks by a large margin.
