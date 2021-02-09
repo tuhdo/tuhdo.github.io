@@ -9,7 +9,16 @@ inside Emacs effortlessly, such as jump to definition/references at
 cursor, go back and forth between jumping points, finding any file
 instantly, switching between .h and .c/.cpp.
 
-A few demos:
+Please remember that there's a table of content on the top right
+corner and you can use it to navigate this guide. If you feel your
+internet connection is too slow for my guide, you can always clone and
+read it offline: https://github.com/tuhdo/tuhdo.github.io
+
+* Introductory demos
+:PROPERTIES:
+:ID: introductory-demos
+:END:
+Here are some visual examples of the emacs IDE in action:
 
 - Switching between .h and .c/.cpp anywhere in the project like Linux
   kernel. If more than one file exists, it displays a list of
@@ -18,7 +27,7 @@ A few demos:
 
 [[file:static/c-ide/projectile-find-other-file.gif][file:static/c-ide/projectile-find-other-file.gif]]
 
-- Jump around Linux kernel source with ease using =helm-gtags=. The
+- Jumping around Linux kernel source with ease using =helm-gtags=. The
   demo begins when "START" appears at the bottom:
 
 [[file:static/c-ide/helm-gtags-jump-dwim.gif][file:static/c-ide/helm-gtags-jump-dwim.gif]]
@@ -77,149 +86,61 @@ A few demos:
 
 [[file:static/part3/helm-man-woman.gif][file:static/part3/helm-man-woman.gif]]
 
-Please remember that there's a table of content on the top right
-corner and you can use it to navigate this guide. If you feel your
-internet connection is too slow for my guide, you can always clone and
-read it offline: https://github.com/tuhdo/tuhdo.github.io
+* Quick setup
+:PROPERTIES:
+:ID: quick-setup
+:END:
+I've prepared an Emacs repository to properly install the components
+of the emacs IDE and to perform a basic configuration for
+demonstration purposes. When installed and run the _first time_, the
+demo repository will download from MELPA, install and compile all the
+packages it needs. Note that depending on your internet connection and
+processor speeds, this may take a while, but that shouldn't stop you from continuing with this guide; the next section can be followed using a second instance of emacs, and without the IDE components.
 
-I added an Emacs repository that is properly configured for
-demonstration purposes. You can clone and play with it without having to
-manually copy and paste all the setup Elisp code throughout the guide. When
-installed and run the _first time_, the demo repository will download from
-MELPA, install and compile all the packages it needs. Note that depending on
-your internet connection and processor speeds, this may take a while.
+If you don't wish to use the demo, you can manually install the components, and use the =.el= files of the demo as a reference sample configuration.
 
 Steps to install:
 
-- Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux / Mac) or
-  from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available, download the source [[http://www.gnu.org/software/global/download.html][here]]
-  and manually build the package.
+- Install [[http://www.gnu.org/software/global][GNU Global]] from your distribution's package manager (Linux /
+  Mac) or from the [[http://adoxa.altervista.org/global/][Win32 port]] (Windows). If none is available,
+  download the source [[http://www.gnu.org/software/global/download.html][here]] and manually build the package.
 - Backup your <code>~/.emacs.d</code> elsewhere.
 - If emacs is not already running, start it.
-- Update your melpa database: =M-x package-list-packages=.
+- Update your MELPA database: =M-x package-list-packages=. (reference:
+  [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]]).
 - Clone the repository into your ~/.emacs.d folder.
 
 #+begin_src sh
   git clone https://github.com/tuhdo/emacs-c-ide-demo.git ~/.emacs.d
 #+end_src
 
-- You may possibly want to edit your new =~/.emacs.d/init.el= file for two
-  options:
+- You may possibly want to make a change to your new
+  =~/.emacs.d/init.el= file. By default, the demo uses [[https://github.com/emacs-helm/helm][helm]]
+  ([[http://tuhdo.github.io/helm-intro.html][reference]]) and [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], which is what I recommend, but if you
+  don't want to use =helm=, the alternative is to use =ggtags=. Here's
+  how to make that change.
 
-  + The demo repository can use either =gtags= (the default), or =ggtags=. If
-    you want to use =ggtags=, comment this line in =init.el=:
+  + comment these lines in =init.el=:
 
     #+BEGIN_SRC emacs-lisp
+      (require 'setup-helm)
       (require 'setup-helm-gtags)
     #+END_SRC
 
     And uncomment this line:
-    
+
     #+BEGIN_SRC emacs-lisp
       ;; (require 'setup-ggtags)
     #+END_SRC
 
-  + The demo uses Helm. If you're not already familiar with Helm, read [[http://tuhdo.github.io/helm-intro.html][my guide]].
-    If you don't want to use Helm, also comment this line in =init.el=:
-
-    #+BEGIN_SRC emacs-lisp
-      (require 'setup-helm)
-    #+END_SRC
-
-That does it! To start using the demo, just type =M-x load-file RET init.el=.
-Continue reading this guide for its operational directions, without needing to
-bother to perform any more installations or elisp evaluations.
-
-* Source code navigation
+That does it! To start using the demo, just type =M-x load-file RET
+init.el=. As mentioned earlier, the first time you use it, it will perform a series of downloads, installs and compiles, which may take a while, but you can still continue with the next section of this guide in a second instance of emacs, even without any of the IDE components.
+* Basic source code navigation
 :PROPERTIES:
-:ID: source-navigation
+:ID: basic-navigation
 :END:
-** Prerequisite:
-:PROPERTIES:
-:ID:       b1292347-d0ed-4421-9905-33f1050883b2
-:END:
-- Know how to use =package.el= and MELPA. If you don't know how to
-  use, read the guide [[file:emacs-tutor3.org::*How%20to%20use%20Emacs%20package%20manager][How to use Emacs package manager]].
+Even without any IDE components installed, emacs already has features useful for operating on source code.
 
-- Install [[https://github.com/leoliu/ggtags][ggtags]]. After installing =ggtags= from MELPA, add this code
-  snippet to setup =ggtags= and key bindings:
-
-#+begin_src emacs-lisp
-  (require 'ggtags)
-  (add-hook 'c-mode-common-hook
-            (lambda ()
-              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
-                (ggtags-mode 1))))
-
-  (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
-  (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
-  (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
-  (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
-  (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-  (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
-
-  (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
-#+end_src
-
-- Or, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]]. Helm is awesome and if you are going to use
-  Helm, please read the [[http://tuhdo.github.io/helm-intro.html][Helm guide]]. Remember to setup =Helm= before
-  using =helm-gtags=. You can use this [[https://github.com/tuhdo/emacs-c-ide-demo/blob/master/custom/setup-helm.el][sample configuration]]. When
-  includes the above file in your =~/.emacs.d=, remember to add
-  =(require 'setup-helm)= to your =init.el=.
-
-#+begin_src emacs-lisp
-  (setq
-   helm-gtags-ignore-case t
-   helm-gtags-auto-update t
-   helm-gtags-use-input-at-cursor t
-   helm-gtags-pulse-at-cursor t
-   helm-gtags-prefix-key "\C-cg"
-   helm-gtags-suggested-key-mapping t
-   )
-
-  (require 'helm-gtags)
-  ;; Enable helm-gtags-mode
-  (add-hook 'dired-mode-hook 'helm-gtags-mode)
-  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'asm-mode-hook 'helm-gtags-mode)
-
-  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
-  (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
-  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
-  (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-  (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-#+end_src
-
-Before using the =ggtags= or =helm-gtags=, remember to create a GTAGS
-database by running =gtags= at your project root in terminal:
-
-#+begin_src shell-script
-  $ cd /path/to/project/root
-  $ gtags
-#+end_src
-
-After this, a few files are created:
-
-#+begin_src shell-script
-  $ ls G*
-  GPATH   GRTAGS  GTAGS
-#+end_src
-
-- *GTAGS*: definition database
-- *GRTAGS*: reference database
-- *GPATH*: path name database
- 
-If you use =ggtags=, you have a command for creating GTAGS database,
-that is =ggtags-create-tags=; this is recommended way when using
-=ggtags=, to let it know where the project root is.
-
-** Basic movements
-:PROPERTIES:
-:ID:       45f1bb42-08e5-43b9-8ea9-7b5e1124f89e
-:END:
 - *C-M-f* runs =forward-sexp=, move forward over a balanced
   expression that can be a pair or a symbol. Demo:
 
@@ -254,15 +175,79 @@ that is =ggtags-create-tags=; this is recommended way when using
   or following function. Demo:
 
   [[file:static/c-ide/mark-defun.gif][file:static/c-ide/mark-defun.gif]]
-** Basic concepts of tag
+* Source code navigation
+:PROPERTIES:
+:ID: source-navigation
+:END:
+At this point, we begin using components of our emacs IDE, so if you're using the demo to perform its install, you'll need to wait for that to finish, and to close the second instance of emacs that you were using in the previous section.
+** Package preparation
+:PROPERTIES:
+:ID:       b1292347-d0ed-4421-9905-33f1050883b2
+:END:
+If you didn't use the the demo to install the emacs IDE components,
+you'll now need to install [[http://www.gnu.org/software/global][GNU Global]], and you'll need to install from
+MELPA your choice of either [[https://github.com/leoliu/ggtags][ggtags]] or the pair of packages [[https://github.com/emacs-helm/helm][helm]] +
+[[https://github.com/syohex/emacs-helm-gtags][helm-gtags]].
+
+Regardless of whether or not you used the demo, here are some code
+snippets you'll need to get the IDE working the way this guide
+presents it.
+
+- If you chose the defaults, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]].
+
+#+begin_src emacs-lisp
+  (setq
+   helm-gtags-ignore-case t
+   helm-gtags-auto-update t
+   helm-gtags-use-input-at-cursor t
+   helm-gtags-pulse-at-cursor t
+   helm-gtags-prefix-key "\C-cg"
+   helm-gtags-suggested-key-mapping t
+   )
+
+  (require 'helm-gtags)
+  ;; Enable helm-gtags-mode
+  (add-hook 'dired-mode-hook 'helm-gtags-mode)
+  (add-hook 'eshell-mode-hook 'helm-gtags-mode)
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  (add-hook 'asm-mode-hook 'helm-gtags-mode)
+
+  (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+  (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
+  (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+  (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+  (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+  (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+#+end_src
+
+- If you chose [[https://github.com/leoliu/ggtags][ggtags]].
+#+begin_src emacs-lisp
+  (require 'ggtags)
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+                (ggtags-mode 1))))
+
+  (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+  (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+  (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+  (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+  (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+  (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)
+
+  (define-key ggtags-mode-map (kbd "M-,") 'pop-tag-mark)
+#+end_src
+** Basic concepts of tags
 :PROPERTIES:
 :ID:       b4902a85-f303-4f5f-8c13-1eb3d2d2de73
 :END:
-A tag is a name of an entity in source code. An entity can be a
-variable, a method definition, an include-operator... A tag contains
-information such as name of the tag (the name of the variable,
-class, method), location of this tag in source code and which file it
-belongs to. As an example, GNU Global generates three tag databases:
+Source code navigation done by IDEs employs a concept called =tags=, a
+term for an entity in source code. An entity can be a variable, a
+method definition, an include-operator... A tag contains information
+such as name of the tag (the name of the variable, class, method),
+location of this tag in source code and which file it belongs to. As
+an example, GNU Global generates three tag databases:
 
 - *GTAGS*: definition database
 - *GRTAGS*: reference database
@@ -275,7 +260,26 @@ specified.
 
 A reference of a tag is where a tag is used in a source tree, but not
 where it is defined.
-
+** Tag database creation
+:PROPERTIES:
+:ID:  tag-database-creation
+:END:
+- If you chose the defaults, [[https://github.com/emacs-helm/helm][helm]] + [[https://github.com/syohex/emacs-helm-gtags][helm-gtags]], create a GTAGS
+  database by running =gtags= at your project root in terminal:
+#+begin_src shell-script
+  $ cd /path/to/project/root
+  $ gtags
+#+end_src
+- If you chose [[https://github.com/leoliu/ggtags][ggtags]], the recommended method for tag creation is to
+  use its own emacs command =ggtags-create-tags=.
+- After running either command, a few files will be created:
+#+begin_src shell-script
+  $ ls G*
+  GPATH   GRTAGS  GTAGS
+#+end_src
+  - *GTAGS*: definition database
+  - *GRTAGS*: reference database
+  - *GPATH*: path name database
 ** Find definitions in current buffer
 :PROPERTIES:
 :ID:       3a64c7a4-e8a5-42b9-9476-28dff9e5cb96
@@ -331,7 +335,7 @@ s= to invoke Isearch on candidate buffer list.
   =M-.= runs =helm-gtags-dwim=, which behaves the same as
   =ggtags-find-tag-dwim=. Similarly, you jump back to original
   location by using =M-,=, which runs =tags-loop-continue= (Emacs
-  default). 
+  default).
 
 #+BEGIN_CENTER
 [[file:static/c-ide/helm-gtags-definitions.png][file:static/c-ide/helm-gtags-definitions.png]]
@@ -344,10 +348,10 @@ blank space. A prompt asks you for tag pattern, which is a
 regexp.
 
 =helm-gtags= provides a really nice feature that uses Helm to display
-all available tags in a project and incrementally filtering, and is really 
+all available tags in a project and incrementally filtering, and is really
 fast using =helm-gtags-select=, which is bound to =C-j= in my setup
 above. This is useful when you want to explore tags in unfamiliar
-project. Demo: 
+project. Demo:
 
 [[file:static/c-ide/helm-gtags-select.gif][file:static/c-ide/helm-gtags-select.gif]]
 
@@ -360,7 +364,7 @@ project. Demo:
 
 - Using =helm-gtags=: Either run =helm-gtags-dwim= or
   =helm-gtags-find-rtags=, bound to *C-c g r*, which only finds
-  references. Note that for =helm-gtags-find-rtags=: 
+  references. Note that for =helm-gtags-find-rtags=:
 
   - if point is inside a function, the prompt will be default to the
     function name.
@@ -429,7 +433,7 @@ the node is a directory, the children of the node are files in that
 directory. One important thing to remember, Speedbar only lists files
 that match =speedbar-file-regexp=, that contains the extensions for
 common programming languages. If you don't see files in your
-programming languages listed, consider adding it the regexp list. 
+programming languages listed, consider adding it the regexp list.
 
 *Basic usage*:
 
@@ -606,7 +610,7 @@ You have two commands for completing C/C++ code:
     ((nil . ((company-clang-arguments . ("-I/home/<user>/project_root/include1/"
                                          "-I/home/<user>/project_root/include2/")))))
   #+end_src
-  
+
 If you put a file with a special name .dir-locals.el in a directory,
 Emacs will read it when it visits any file in that directory or any of
 its subdirectories, and apply the settings it specifies to the file’s
@@ -615,7 +619,7 @@ Per-Directory Local Variables]]. If you use Helm, you can easily insert
 absolute path by *C-c i* at the current path in =helm-find-files=
 (bound to *C-x C-f* by default in my demo =.emacs.d= at the beginning):
 
-[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]] 
+[[file:static/c-ide/helm-files-insertion.gif][file:static/c-ide/helm-files-insertion.gif]]
 
 In the above example, =nil= means apply the settings to any file or
 sub-directory visited. If =non-nil=, you have to specify a major mode
@@ -648,7 +652,7 @@ Replace =<user>= with your username.
 
 - Enter any source file and start completion. You will see that
   =company-clang= correctly retrieves completion candidates in those directories.
- 
+
 * Header file completion with =company-c-headers= package
 :PROPERTIES:
 :ID:       6e05e8a5-04a3-4279-bf99-22fd627c0e92
@@ -666,7 +670,7 @@ Company. After installing from MELPA, set it up:
 add its paths since by default =company-c-headers= only includes these
 two system include paths: =/usr/include/= and
 =/usr/local/include/=. To enable C++ header completion for standard
-libraries, you have to add its path, for example, like this: 
+libraries, you have to add its path, for example, like this:
 
 #+begin_src emacs-lisp
   (add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/")
@@ -679,7 +683,7 @@ local, use =company-c-headers-path-user= and put it in
 * CEDET
 :PROPERTIES:
 :ID: cedet
-:END: 
+:END:
 ** What is CEDET?
 :PROPERTIES:
 :ID: what-is-cedet
@@ -1765,7 +1769,7 @@ store window configurations, read it [[file:emacs-tutor.org::*Registers][here]].
 
 * Debugging
 :PROPERTIES:
-:ID: debugging 
+:ID: debugging
 :END:
 ** With GDB Many Windows
 :PROPERTIES:
@@ -1843,7 +1847,7 @@ Each cell coressponds to the following commands:
 
 - =gdb-display-threads-buffer= (Cell 6): Display running threads in
   your programs. Please refer to [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Threads-Buffer.html#Threads-Buffer][GNU Manual - Threads Buffer]] and
-  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Multithreaded-Debugging.html#Multithreaded-Debugging][Multithreaded Debugging]] for usage of the buffer. 
+  [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Multithreaded-Debugging.html#Multithreaded-Debugging][Multithreaded Debugging]] for usage of the buffer.
 
 There are two useful commands that are not visible in
 =gdb-many-windows=:
